@@ -22,6 +22,16 @@ class Api::V1::SubscribersController < ActionController::API
         end
     end
 
+    # GET /subscribers/fb/:facebook_id
+    def show_facebook_id
+        @subscriber = Subscriber.where(facebook_id: params[:facebook_id]).first
+        if  !@subscriber.nil?
+            render json: {status: 'SUCCESS', message: 'Required subscriber', data: @subscriber}, status: 200
+        else
+            render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
+        end
+    end
+
     # POST /subscribers/
     def create 
         sub = Subscriber.new(subscriber_params)

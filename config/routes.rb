@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do 
     namespace 'v1' do 
+      get '/subscribers/fb/:facebook_id' => 'subscribers#show_facebook_id'
       resources :subscribers do 
-        get '/firstname' => 'subscribers#firstname'
         get '/get/props/last/:x/days' => 'subscribers#props_x_days'
         get '/send/props/last/:x/days' => 'subscribers#send_props_x_days'
         get '/send/props/morning' => 'subscribers#send_props_morning'
