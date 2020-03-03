@@ -6,11 +6,16 @@ class SubscribersController < ApplicationController
 
   def edit
     @subscriber = Subscriber.find(params[:id])
+    @areas = Area.all
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
+    SelectedArea.where(subscriber: @subscriber).destroy_all
     if @subscriber.update(subscriber_params)
+      params[:selected_area].each do |area_id|
+        SelectedArea.create(subscriber:@subscriber, area_id:area_id)
+      end
       flash[:success] = "Les informations ont été mises à jour"
     else 
       flash[:danger] = []
