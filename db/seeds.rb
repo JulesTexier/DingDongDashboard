@@ -3,7 +3,6 @@ Property.destroy_all
 Area.destroy_all
 SelectedArea.destroy_all
 
-require 'faker'
 
 # AREA REFERENCES
 i= 1 

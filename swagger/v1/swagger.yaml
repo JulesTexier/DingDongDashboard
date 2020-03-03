@@ -1,0 +1,75 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/subscribers":
+    post:
+      summary: Creates a subscriber
+      tags:
+      - Subscriber
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: subscriber
+        in: body
+        schema:
+          type: object
+          properties:
+            firstname:
+              type: string
+            lastname:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+            facebook_id:
+              type: string
+          required:
+          - firstname
+          - facebook_id
+      responses:
+        '200':
+          description: subscriber created
+  "/api/v1/subscribers/{id}":
+    get:
+      summary: Retrieves a subscriber
+      tags:
+      - Subscriber
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      responses:
+        '200':
+          description: name found
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              photo_url:
+                type: string
+              status:
+                type: string
+            required:
+            - id
+            - firstname
+            - facebook_id
+        '404':
+          description: pet not found
+securityDefinitions:
+  JWT:
+    description: the jwt for API auth
+    type: apiKey
+    name: Authorization
+    in: header

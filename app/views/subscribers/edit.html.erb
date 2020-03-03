@@ -1,0 +1,54 @@
+
+<h2>Modifier mes informations</h2>
+
+<%= form_for @subscriber, url: subscriber_path(@subscriber) do |f| %>
+    <p>
+        <%= f.label :firstname %><br>
+        <%= f.text_field :firstname %>
+    </p>
+
+    <p>
+        <%= f.label :lastname %><br>
+        <%= f.text_field :lastname %>
+    </p>
+
+    <p>
+        <%= f.label :email %><br>
+        <%= f.email_field :email %>
+    </p>
+
+    <p>
+        <%= f.label :phone %><br>
+        <%= f.text_field :phone %>
+    </p>
+
+    <p>
+        <%= f.label :max_price %><br>
+        <%= f.number_field :max_price %>
+    </p>
+
+    <p>
+        <%= f.label :min_surface %><br>
+        <%= f.number_field :min_surface %>
+    </p>
+
+    <p>
+        <%= f.label :min_rooms_number %><br>
+        <%= f.number_field :min_rooms_number %>
+    </p>
+
+    <p>
+        <%= f.label :min_floor %><br>
+        <%= f.number_field :min_floor %>
+    </p>
+
+    <p>
+        <%= f.label :min_elevator_floor %><br>
+        <%= f.number_field :min_elevator_floor %>
+    </p>
+
+
+
+    <%= f.submit "Valider mes critères" %>
+  </p>
+<% end %>
