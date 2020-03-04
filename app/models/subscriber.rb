@@ -46,8 +46,9 @@ class Subscriber < ApplicationRecord
         test_rooms_number = is_matching_property_rooms_number(property)
         test_floor = is_matching_property_floor(property)
         test_elevator = is_matching_property_elevator_floor(property)
+        test_areas = is_matching_property_area(property)
 
-        test_price && test_surface && test_rooms_number && test_floor && test_elevator ? true : false
+        test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
     end
 
     def get_x_last_props(max_number)
@@ -98,6 +99,14 @@ class Subscriber < ApplicationRecord
         end
         return props_to_send
     end
+
+    def get_areas
+        areas = []
+        self.areas.each do |area|
+            areas.push(area.name)
+        end
+        return areas
+    end
     
     private 
     
@@ -131,6 +140,10 @@ class Subscriber < ApplicationRecord
         else 
             return true
         end
+    end
+
+    def is_matching_property_area(property)
+        self.get_areas.include?(property.area) ? true : false
     end
 
 
