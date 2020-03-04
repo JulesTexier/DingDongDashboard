@@ -15,8 +15,12 @@ class Api::V1::SubscribersController < ActionController::API
     # GET /subscribers/:id
     def show
         begin
-            @subscriber = Subscriber.find(params[:id])
-            render json: {status: 'SUCCESS', message: 'Required subscriber', data: @subscriber}, status: 200
+            subscriber = Subscriber.find(params[:id])
+            data = subscriber.as_json
+            data[:areas_list] = subscriber.get_areas_list
+            data[:districts_list] = subscriber.get_districts_list
+            data[:edit_path] = subscriber.get_edit_path
+            render json: {status: 'SUCCESS', message: 'Required subscriber', data: data}, status: 200
         rescue ActiveRecord::RecordNotFound
             render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
         end

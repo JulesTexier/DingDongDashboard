@@ -1,3 +1,5 @@
+require 'dotenv/load'
+
 class Subscriber < ApplicationRecord
 
     validates :facebook_id, presence: true
@@ -15,7 +17,7 @@ class Subscriber < ApplicationRecord
 
     # Rajouter le is_actove: true par défaut
 
-    def areas_list
+    def get_areas_list
         list = ""
         self.areas.each do |area|
             list = list + ";" + area.name
@@ -24,7 +26,7 @@ class Subscriber < ApplicationRecord
         return list
     end
 
-    def districts_list
+    def get_districts_list
         list = ""
         self.districts.each do |district|
             list = list + ";" + district.name
@@ -32,6 +34,11 @@ class Subscriber < ApplicationRecord
         list[0] = ''
         return list
     end
+
+    def get_edit_path
+        return ENV['BASE_URL'] + 'subscribers/' + self.id.to_s + '/edit'
+    end
+
 
     def is_matching_property?(property)
         test_price = is_matching_property_price(property)
