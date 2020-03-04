@@ -24,6 +24,13 @@ default: &default
 development:
   <<: *default
   database: giant_cat_development
+  # host: SG-dingdong-498-pgsql-master.servers.mongodirector.com
+  # port: 5432
+  # database: giant_puma_test
+  # username: test00
+  # password: 9xcwS%k9z8s"a^RvGb4iG
+  # sslmode: verify-full
+  # sslrootcert : config/pg.crt
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
