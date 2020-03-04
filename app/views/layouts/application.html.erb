@@ -19,7 +19,12 @@
 
   <body  style="background-color: #f7fafc">
     <div class="container">
-        <%= yield %>
+    <%if flash[:success] %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:success] %>
+      </div>
+    <%end%>
+      <%= yield %>
     </div>
 
     <!-- Optional JavaScript -->

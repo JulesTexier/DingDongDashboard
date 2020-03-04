@@ -1,29 +1,31 @@
 <%= form_for @subscriber, url: subscriber_path(@subscriber) do |f| %>
 
-    <nav class="navbar navbar-light fixed-top bg-primary d-flex justify-content-center">
+    <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
             <%= f.submit "Enregistrer mes critères 🚀", class: "btn btn-outline-light", style:"font-weight:600" %>
         </div>
     </nav>
     
-        <h5 class="mb-3" style="color: #525f7f; font-weight:400; margin-top:5em;">📍 Arrondissements ? *</h5>
+        <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
+
     
         <div class="d-flex flex-wrap">
                 <% @areas.each do |area| %>
                     <div 
-                        class="form-check mr-3 <%=area.name%>" 
+                        class="form-check mr-3 <%=area.name%> d-flex" 
                         onclick="changeColor(className)"
                         <% if @subscriber.areas.include?(area) %> 
                         style="color:#57b894"
                         <%end%>
-                    >
-                            <%= check_box_tag 'selected_area[]', 
-                                area.id, 
-                                @subscriber.areas.include?(area) ? true : nil,
-                                class: "form-check-input",
-                                id: area.name
-                            %>
-                            <label class="form-check-label" for="<%=area.name%>">
+                    >       <div>
+                                <%= check_box_tag 'selected_area[]', 
+                                    area.id, 
+                                    @subscriber.areas.include?(area) ? true : nil,
+                                    class: "form-check-input",
+                                    id: area.name
+                                %>
+                            </div>
+                            <label class="form-check-label mb-2" for="<%=area.name%>">
                                 <%= area.name %>
                             </label>
     
@@ -36,7 +38,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">€</span>
             </div>
-            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", :required => true %>
+            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", min:"10000", max:"10000000", :required => true %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
@@ -44,27 +46,24 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">m2</span>
             </div>
-            <%= f.number_field :min_surface, class: "form-control", placeholder:"Ex : 30", :required => true   %>
+            <%= f.number_field :min_surface, type:"number", class: "form-control", placeholder:"Ex : 30", min:"8", max:"400", :required => true   %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡 Nombre de pièces minimum ? *</h5>
         <div class="input-group mb-3">
-            <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", :required => true   %>
+            <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", min:"1", max:"6", :required => true   %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🎢 Étage minimum ?</h5>
         <div class="input-group mb-3">
-            <%= f.number_field :min_floor, class: "form-control", placeholder:"Ex : 1"  %>
+            <%= f.number_field :min_floor, class: "form-control", placeholder:"Ex : 1", min:"0", max:"8" %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🚠 Ascenseur à partir de quel étage ?</h5>
-        <div class="input-group mb-3">
-            <%= f.number_field :min_elevator_floor, class: "form-control", placeholder:"Ex : 3"  %>
+        <h5 class="mt-4 mb-6" style="color: #525f7f; font-weight:400">🚠 Ascenseur à partir de quel étage ?</h5>
+        <div class="input-group" style="margin-bottom:4.5rem">
+            <%= f.number_field :min_elevator_floor, class: "form-control", placeholder:"Ex : 3", min:"0", max:"8"  %>
         </div>
-    
-        <div class="d-flex justify-content-center mt-4 mb-6">
-            <%= f.submit "Enregistrer mes critères 🚀", class: "btn btn-primary", style:"font-weight:600" %>
-        </div>
+
         <div class="d-flex justify-content-center mt-4 mb-6">
         -------- 🔔--------
         </div>
