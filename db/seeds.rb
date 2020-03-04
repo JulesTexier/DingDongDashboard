@@ -73,7 +73,7 @@ end
     p = Property.new 
     p.price = rand(200000..1000000)
     p.surface = (p.price / rand(9..14)).to_i
-    p.area = Area.order(Arel.sql('RANDOM()')).first
+    p.area = Area.order(Arel.sql('RANDOM()')).first.name
     p.title = "Magnifique bien, Paris #{p.area}"
     p.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mauris est, venenatis aliquam mi et, blandit aliquam enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Vestibulum luctus convallis ex, in volutpat felis volutpat tristique. In ullamcorper fringilla nunc, sed rutrum mi ullamcorper vitae. Aenean in euismod velit, nec faucibus neque. Etiam pulvinar sem purus, et eleifend sapien lacinia in. Aliquam imperdiet leo mi, in ultrices purus tempus placerat. Integer accumsan est nec orci aliquam pulvinar. Mauris tempor, ligula id euismod euismod, neque libero blandit sapien, eu fringilla nisi elit et lorem. "
     p.rooms_number = rand(1..3)
