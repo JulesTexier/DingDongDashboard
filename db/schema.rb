@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_28_174702) do
+ActiveRecord::Schema.define(version: 2020_03_04_114435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_174702) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["area_id"], name: "index_selected_areas_on_area_id"
+    t.index ["subscriber_id", "area_id"], name: "index_selected_areas_on_subscriber_id_and_area_id", unique: true
     t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
   end
 
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_174702) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["district_id"], name: "index_selected_districts_on_district_id"
+    t.index ["subscriber_id", "district_id"], name: "index_selected_districts_on_subscriber_id_and_district_id", unique: true
     t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
