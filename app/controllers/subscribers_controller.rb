@@ -10,11 +10,6 @@ class SubscribersController < ApplicationController
   end
 
   def update
-
-    puts "*************"
-    puts params
-    puts "*************"
-
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
     if @subscriber.update(subscriber_params)
