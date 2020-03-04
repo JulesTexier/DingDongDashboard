@@ -16,7 +16,7 @@ class SubscribersController < ApplicationController
       params[:selected_area].each do |area_id|
         SelectedArea.create(subscriber:@subscriber, area_id:area_id)
       end
-      flash[:success] = "Les informations ont été mises à jour"
+      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre et cliquez sur '👌C'est fait' pour continuer."
     else 
       flash[:danger] = []
       @user.errors.full_messages.each do |message|
