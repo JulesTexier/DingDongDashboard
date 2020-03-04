@@ -71,7 +71,7 @@ class Manychat
     
     # This method is building a json_gallery of cards for each property with the first image of each property 
     def create_gallery_card(properties, subscriber = nil)
-       
+        properties.length > 10 ? properties = properties[0..9] : nil
         elements = []
         properties.each do |property|
             buttons = []
