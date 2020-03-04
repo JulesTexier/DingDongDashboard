@@ -78,7 +78,8 @@ class Manychat
         if subscriber.nil?
             buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
         else
-            webhook = ENV['BASE_URL'] + "api/v1/subscribers/#{subscriber.id}/send/props/#{property.id}/details"
+            webhook = ENV['BASE_URL'] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+            puts webhook
             buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
         end
             elements.push(create_message_element_hash(property.get_title, property.get_short_description, "https://via.placeholder.com/150", property.link, buttons))
@@ -118,11 +119,12 @@ class Manychat
             elements = []
             properties.each do |property|
                 buttons = []
-                webhook_1 = ENV['BASE_URL'] + "api/v1/subscribers/#{subscriber.id}/send/props/#{property.id}/details"
+                webhook_1 = ENV['BASE_URL'] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
                 buttons.push(create_dynamic_button_hash("🙋 En voir plus", webhook_1, "GET"))
 
                 favorite = Favorite.where(subscriber: subscriber, property: property).first
                 webhook_2 = ENV['BASE_URL'] + "api/v1/favorites/#{favorite.id}"
+                puts webhook_2
                 buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
 
                 elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.images.first.url, property.link, buttons))
@@ -221,7 +223,7 @@ class Manychat
         btn[:url] = webhook
         btn[:method] = method
         header = {} 
-        header[:Authorization] = ENV['MESSENGER_BOT_TOKEN']
+        header[:Authorization] = 'Bearer ' + ENV['BEARER_TOKEN']
         btn[:headers] = header
         btn[:payload] = body
         return btn

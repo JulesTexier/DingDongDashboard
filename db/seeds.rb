@@ -68,7 +68,7 @@ Subscriber.all.each do |sub|
 end
 
 # Properties
-30.times do 
+100.times do 
 
     p = Property.new 
     p.price = rand(200000..1000000)
