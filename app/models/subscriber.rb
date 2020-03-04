@@ -102,20 +102,20 @@ class Subscriber < ApplicationRecord
     private 
     
     def is_matching_property_price(property)
-       property.price <= self.max_price ?  true :  false
+       (property.price <= self.max_price ?  true :  false) if !self.max_price.nil?
     end
 
     def is_matching_property_surface(property)
-        property.surface >= self.min_surface ?  true :  false
+        (property.surface >= self.min_surface ?  true :  false) if !self.min_surface.nil?
     end
 
     def is_matching_property_rooms_number(property)
-        property.rooms_number.to_i >= self.min_rooms_number  ?  true :  false
+        (property.rooms_number.to_i >= self.min_rooms_number  ?  true :  false) if !self.min_rooms_number.nil?
     end
 
     def is_matching_property_floor(property)
         if !property.floor.nil?
-            property.floor.to_i >= self.min_floor  ?  true :  false
+           (property.floor.to_i >= self.min_floor  ?  true :  false) if !self.min_floor.nil?
         else 
             return true
         end
@@ -126,7 +126,7 @@ class Subscriber < ApplicationRecord
             if property.has_elevator 
                 return  true 
             else 
-                property.floor.to_i >= self.min_elevator_floor  ?  true :  false
+                (property.floor.to_i >= self.min_elevator_floor  ?  true :  false) if !self.min_elevator_floor.nil?
             end
         else 
             return true
