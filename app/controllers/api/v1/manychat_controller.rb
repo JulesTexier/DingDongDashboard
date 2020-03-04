@@ -20,6 +20,18 @@ class Api::V1::ManychatController < ApplicationController
         end
     end
 
+    #GET /manychat/s/:subscriber_id/send/last/:x/props
+    # Send X lasts properties that match Subscriber criteria
+    def get_x_last_props
+        begin
+            subscriber = Subscriber.find(params[:subscriber_id])
+            props = subscriber.get_x_last_props(params[:x])
+            props.length > 0 ? (render json: send_multiple_properties(subscriber, props) ) : (render json: {status: 'ERROR', message: 'There is no latest props for this subscriber', data: nil}, status: 404)
+        rescue ActiveRecord::RecordNotFound
+            render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
+        end
+    end
+
     #GET /subscribers/:subscriber_id/send/props/morning
     # Send properties that match Subscriber criteria during past night
     def send_props_morning

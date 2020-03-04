@@ -50,7 +50,7 @@ class Subscriber < ApplicationRecord
         props.each  do |prop|
             self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
 
-            props_to_send.length == max_number ? break : nil
+            props_to_send.length == max_number.to_i ? break : nil
         end
         return props_to_send
     end
