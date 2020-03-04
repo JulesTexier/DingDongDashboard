@@ -1,4 +1,5 @@
 class Api::V1::ManychatController < ApplicationController
+    protect_from_forgery with: :null_session
 
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
@@ -7,6 +8,20 @@ class Api::V1::ManychatController < ApplicationController
 
     before_action :authentificate
 
+
+    # POST  (update subscriber) /manychat/s/:subscriber_id/update
+    def update_subscriber
+        begin
+            subscriber = Subscriber.find(params[:subscriber_id])
+             if subscriber.update(subscriber_params)
+                render json: {status: 'SUCCESS', message: 'Subscriber updated', data: subscriber}, status: 200
+             else 
+                render json: {status: 'ERROR', message: 'Subscriber not updated', data: nil}, status: 500
+            end
+        rescue ActiveRecord::RecordNotFound
+            render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
+        end
+    end
 
     #GET /manychat/s/:subscriber_id/send/props/last/:x/days
     # Send properties that match Subscriber criteria in the last X days
@@ -107,6 +122,10 @@ class Api::V1::ManychatController < ApplicationController
         else 
             return {status: 'ERROR', message: 'A error occur in manychat call', data: response[1]}, status: 500
         end
+    end
+
+    def subscriber_params
+        params.permit(:firstname, :lastname, :email, :phone, :facebook_id, :is_active)
     end
 
 end

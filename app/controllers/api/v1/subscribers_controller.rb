@@ -83,61 +83,11 @@ class Api::V1::SubscribersController < ActionController::API
         end
     end
 
-    # #GET /subscribers/:subscriber_id/send/props/morning
-    # # Send properties that match Subscriber criteria during past night
-    # def send_props_morning
-    #     begin
-    #         @subscriber = Subscriber.find(params[:subscriber_id])
-    #         props = @subscriber.get_morning_props
-    #         props.length > 0 ? (render json: send_multiple_properties(@subscriber, props) ): (render json: {status: 'ERROR', message: 'There is no morning for this subscriber', data: nil}, status: 404)
-    #     rescue ActiveRecord::RecordNotFound
-    #         render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
-    #     end
-    # end
-
-    # #GET /subscribers/:subscriber_id/send/props/:property_id/details
-    # # Send a property details to a subscriber
-    # def send_prop_details
-    #     begin
-    #         @subscriber = Subscriber.find(params[:subscriber_id])
-    #         begin
-    #             property = Property.find(params[:property_id])
-
-    #             m = Manychat.new
-    #             response = m.send_property_info_post_interaction(@subscriber, property)
-    #             puts response
-
-    #             if response[0]
-    #                 render json: {status: 'SUCCESS', message: "Property sent to subscriber", data: response[1]}, status: 200
-    #             else
-    #                 render json: {status: 'ERROR', message: 'A error occur in manychat call', data: response[1]}, status: 500
-    #             end
-    #         rescue ActiveRecord::RecordNotFound
-    #             render json: {status: 'ERROR', message: 'Property not found', data: nil}, status: 404
-    #         end
-    #     rescue ActiveRecord::RecordNotFound
-    #         render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
-    #     end
-    # end
-
-    # #GET /subscribers/:subscriber_id/props/favorites
-    # # Send properties that match Subscriber criteria during past night
-    # def send_props_favorites
-    #     begin
-    #         @subscriber = Subscriber.find(params[:subscriber_id])
-    #         props = @subscriber.fav_properties
-    #         props.length > 0 ? (render json: send_multiple_properties(@subscriber, props) ) : (render json: {status: 'ERROR', message: 'There is no favorites for this subscriber', data: nil}, status: 404)
-    #     rescue ActiveRecord::RecordNotFound
-    #         render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
-    #     end
-    # end
-
-
 
     private
 
     def subscriber_params
-        params.permit(:firstname, :lastname, :email, :phone, :facebook_id)
+        params.permit(:firstname, :lastname, :email, :phone, :facebook_id, :is_active)
     end
 
     def authentificate
