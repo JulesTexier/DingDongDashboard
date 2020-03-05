@@ -82,7 +82,7 @@ class Manychat
             puts webhook
             buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
         end
-            elements.push(create_message_element_hash(property.get_title, property.get_short_description, "https://via.placeholder.com/150", property.link, buttons))
+            elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
             elements.length === 10 ? break : nil
         end
 
@@ -302,7 +302,7 @@ class Manychat
     #----------------
     # This method is sending to a subscriber the json_data via ManyChat API 
     def send_content(subscriber, message_array)
-
+        puts message_array
         json_data = create_final_json(subscriber, message_array).to_json
 
         request = Typhoeus::Request.new(

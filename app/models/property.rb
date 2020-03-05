@@ -22,6 +22,14 @@ class Property < ApplicationRecord
         return self.property_images
     end
 
+    def get_cover
+        if self.images.empty? 
+            return "https://hellodingdong.com/placeholder.jpg"
+        else
+            return self.images.first.url
+        end
+    end
+
     def get_title
         return "🏠 " + self.price.to_s + "€ - " + self.surface.to_s + "m2 - " + self.area
     end
