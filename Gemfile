@@ -39,6 +39,12 @@ gem 'typhoeus', '~> 1.1'
 # Rspec Testing
 gem 'rspec-rails', '~> 3.5'
 
+# Scrapping gems
+gem 'nokogiri'
+gem 'watir'
+gem 'webdriver-user-agent'
+gem 'mechanize'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -54,6 +60,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "table_print"
   gem 'rb-readline'
+  gem 'pry', '~> 0.12.2'
 end
 
 group :test do
