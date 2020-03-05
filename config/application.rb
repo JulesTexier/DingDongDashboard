@@ -10,8 +10,8 @@ module GiantCat
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.assets.initialize_on_precompile = false
-    config.assets.enabled = false
+    # config.assets.initialize_on_precompile = false
+    # config.assets.enabled = false
 
 
 
