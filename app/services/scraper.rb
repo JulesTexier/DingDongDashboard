@@ -1,4 +1,3 @@
-require_relative '../../lib/ext/string.rb'
 require 'nokogiri'
 require 'open-uri'
 
