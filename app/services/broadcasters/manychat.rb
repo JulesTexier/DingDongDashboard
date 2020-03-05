@@ -302,7 +302,7 @@ class Manychat
     #----------------
     # This method is sending to a subscriber the json_data via ManyChat API 
     def send_content(subscriber, message_array)
-
+        puts message_array
         json_data = create_final_json(subscriber, message_array).to_json
 
         request = Typhoeus::Request.new(
