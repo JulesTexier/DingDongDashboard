@@ -1,3 +1,6 @@
+
+DEFAULT_IMG_URL = "https://hellodingdong.com/placeholder.jpg"
+
 class Property < ApplicationRecord
 
     # after_save :broadcast
@@ -18,8 +21,30 @@ class Property < ApplicationRecord
 
     has_many :property_images
 
-    def images
-        return self.property_images
+    def get_images
+        default_img = {}
+        default_img[:url] = DEFAULT_IMG_URL
+
+        if self.property_images.count == 0 
+            return [default_img] 
+        else 
+            images = []
+            self.property_images.each do |pi|
+                images.push(pi.to_hash)
+            end
+            return images
+        end
+    end
+
+    def get_cover
+        default_img = {}
+        default_img[:url] = DEFAULT_IMG_URL
+
+        if self.images.empty? 
+            return default_image[:url]
+        else
+            return self.images.first.url
+        end
     end
 
     def get_title
@@ -29,7 +54,7 @@ class Property < ApplicationRecord
     def get_short_description
         description = ''
         self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
-        self.districts != [] ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
+        self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
         self.rooms_number > 1 ? description += "\u000A🛏️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
         self.floor != nil ? description = description + "\u000A🏨 " + "Etage : " + self.floor.to_s : nil
         self.has_elevator ? description = description + "\u000A↕ Avec ascenseur" : nil
