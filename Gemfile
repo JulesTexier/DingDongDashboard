@@ -42,9 +42,6 @@ gem 'rspec-rails', '~> 3.5'
 
 # Scrapping gems
 gem 'nokogiri'
-gem 'watir'
-gem 'webdriver-user-agent'
-gem 'mechanize'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
