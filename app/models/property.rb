@@ -1,6 +1,6 @@
 class Property < ApplicationRecord
 
-    after_save :broadcast
+    # after_save :broadcast
 
     validates :price, presence: true
     validates :surface, presence: true
