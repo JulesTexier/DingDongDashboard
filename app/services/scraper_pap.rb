@@ -39,7 +39,7 @@ class ScraperPap < Scraper
       flat_data[:area] = prop[:area]
       flat_data[:rooms_number] = prop[:rooms_number]
       flat_data[:price] = prop[:price]
-      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.item-tags.margin-bottom-20').specific_trim("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
+      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.item-tags.margin-bottom-20').specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
       flat_data[:description] = access_xml_text(html, 'div.item-description').specific_trim_scrp("\n\t\r").strip
       flat_data[:flat_type] = regex_gen(access_xml_text(html, 'h1.item-title'), '((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)').capitalize
       flat_data[:floor] = perform_floor_regex(flat_data[:description])
