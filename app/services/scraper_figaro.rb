@@ -22,7 +22,7 @@ class ScraperFigaro < Scraper
           hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
         rescue StandardError => e 
           puts "\nError for #{@source}, skip this one."
-          puts "It could be a bad link or a bad xml extraction.\n\n"
+          puts "It could be a bad link, a bad xml extraction or a new website unscrappable yet.\n\n"
           next
         end
       end

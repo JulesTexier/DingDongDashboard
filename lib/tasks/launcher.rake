@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), '../../config/environment')
+
 namespace :scraper do
     desc "This take does something useful!"
   
