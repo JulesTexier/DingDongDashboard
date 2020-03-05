@@ -3,4 +3,8 @@
 
 require_relative 'config/application'
 
+# load tasks from folder 'tasks'
+Dir.glob('tasks/*.rake').each { |r| load r}
+Dir.glob('tasks/**/*.rake').each { |r| load r}
+
 Rails.application.load_tasks

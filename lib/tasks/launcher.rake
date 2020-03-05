@@ -1,6 +1,3 @@
-# require File.join(File.dirname(__FILE__), '../../config/environment')
-require_relative '../../config/application'
-
 namespace :scraper do
     desc "This take does something useful!"
   
