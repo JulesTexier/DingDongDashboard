@@ -124,12 +124,12 @@ class Scraper
   end
 
   def perform_floor_regex(str)
-    floor = str.remove_acc.convert_numerals.floors_str
-    return floor.to_int unless floor.nil?
+    floor = str.remove_acc_scrp.convert_numerals.floors_str_scrp
+    return floor.to_int_scrp unless floor.nil?
   end
 
   def perform_elevator_regex(str)
-    elevator = str.remove_acc.elevator_str
+    elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
   #######################

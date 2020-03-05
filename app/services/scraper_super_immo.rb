@@ -15,10 +15,10 @@ class ScraperSuperImmo < Scraper
         begin
           hashed_property = {}
           hashed_property[:link] = "https://superimmo.com" + access_xml_link(item, 'p > a', 'href')[0].to_s
-          hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d)?)(.)m²').to_float_to_int
+          hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d)?)(.)m²').to_float_to_int_scrp
           hashed_property[:area] = regex_gen(item.text, '(75)$*\d+{3}')
-          hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int
-          hashed_property[:price] = regex_gen(item.text, '(\d)(.*)(€)').to_int
+          hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:price] = regex_gen(item.text, '(\d)(.*)(€)').to_int_scrp
           hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
         rescue StandardError => e 
           puts "\nError for #{@source}, skip this one."
@@ -39,7 +39,7 @@ class ScraperSuperImmo < Scraper
       flat_data[:area] = prop[:area]
       flat_data[:rooms_number] = prop[:rooms_number]
       flat_data[:price] = prop[:price]
-      flat_data[:bedrooms_number] = regex_gen(access_xml_text(html, 'h1'), '(\d+)(.?)(chambre(s?))').to_int
+      flat_data[:bedrooms_number] = regex_gen(access_xml_text(html, 'h1'), '(\d+)(.?)(chambre(s?))').to_int_scrp
       flat_data[:description] = access_xml_text(html, 'p.description').strip
       flat_data[:flat_type] = access_xml_text(html, '#itemprop-appartements')
       flat_data[:agency_name] = access_xml_text(html, 'header > div.media-body > b')

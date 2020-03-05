@@ -15,10 +15,10 @@ class ScraperLogicImmo < Scraper
         begin
           hashed_property = {}
           hashed_property[:link] = access_xml_link_matchdata(item, 'div.offer-details-location > a', 'href', 'https://www.lux-residence.com/')[0].to_s
-          hashed_property[:surface] = access_xml_text(item, ' div.offer-details-caracteristik > a > span.offer-details-caracteristik--area > span').to_int
+          hashed_property[:surface] = access_xml_text(item, ' div.offer-details-caracteristik > a > span.offer-details-caracteristik--area > span').to_int_scrp
           hashed_property[:area] = regex_gen(access_xml_text(item, 'div.offer-details-location'), '(75)$*\d+{3}')
-          hashed_property[:rooms_number] = access_xml_text(item, 'div.offer-details-caracteristik > a > span.offer-details-caracteristik--rooms > span').to_int
-          hashed_property[:price] = regex_gen(access_xml_text(item, 'div.offer-details-price > p.offer-price > span'), '(\d)(.*)(€)').to_int
+          hashed_property[:rooms_number] = access_xml_text(item, 'div.offer-details-caracteristik > a > span.offer-details-caracteristik--rooms > span').to_int_scrp
+          hashed_property[:price] = regex_gen(access_xml_text(item, 'div.offer-details-price > p.offer-price > span'), '(\d)(.*)(€)').to_int_scrp
           hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
         rescue StandardError => e 
           puts "\nError for #{@source}, skip this one."
@@ -39,9 +39,9 @@ class ScraperLogicImmo < Scraper
       flat_data[:area] = prop[:area]
       flat_data[:rooms_number] = prop[:rooms_number]
       flat_data[:price] = prop[:price]
-      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.unstyled.flex').specific_trim("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int
-      flat_data[:description] = access_xml_text(html, 'div.offer-description-text').specific_trim("\n").gsub('Être rappelé', '').gsub('Demander une visite', '').gsub("Obtenir l'adresse", '').strip
-      flat_data[:flat_type] = access_xml_text(html, '#js-faToaster > div > div.leftZone.clearfix > div.cell.type').specific_trim("\n\s")
+      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.unstyled.flex').specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
+      flat_data[:description] = access_xml_text(html, 'div.offer-description-text').specific_trim_scrp("\n").gsub('Être rappelé', '').gsub('Demander une visite', '').gsub("Obtenir l'adresse", '').strip
+      flat_data[:flat_type] = access_xml_text(html, '#js-faToaster > div > div.leftZone.clearfix > div.cell.type').specific_trim_scrp("\n\s")
       flat_data[:agency_name] = access_xml_text(html, 'span.agency-name')
       flat_data[:floor] = perform_floor_regex(flat_data[:description])
       flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])

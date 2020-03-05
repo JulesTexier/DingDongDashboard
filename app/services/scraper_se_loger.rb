@@ -39,12 +39,12 @@ class ScraperSeLoger < Scraper
         if html.text.match(/#{regex_brackets}/i).is_a? MatchData
           first_part = html.text.split('JSON.parse("')[1]
           second_part = first_part.split('");window["tags"]')[0]
-          seloger_json = JSON.parse(second_part.decode_json)
+          seloger_json = JSON.parse(second_part.decode_json_scrp)
           json.push(seloger_json)
         elsif html.text.match(/#{regex_no_brackets}/i).is_a? MatchData
           first_part = html.text.split('JSON.parse("')[1]
           second_part = first_part.split(';window.tags =')[0]
-          seloger_json = JSON.parse(second_part.decode_json)
+          seloger_json = JSON.parse(second_part.decode_json_scrp)
           json.push(seloger_json)
         end
       end
@@ -54,7 +54,7 @@ class ScraperSeLoger < Scraper
     def extract_each_flat(item)
       if item.keys[0] === 'id'
         hashed_property = {}
-        hashed_property[:price] = item['pricing']['price'].to_int
+        hashed_property[:price] = item['pricing']['price'].to_int_scrp
         hashed_property[:images] = []
         item['photos'].each do |img|
           hashed_property[:images].push(img.gsub('/400/visuels', '/800/visuels'))
@@ -66,9 +66,9 @@ class ScraperSeLoger < Scraper
           surface_regex = '\d(.)*m²'
           rooms_regex = '\d(.)*p'
           bedrooms_regex = '\d(.)*ch'
-          hashed_property[:surface] = infos.to_int if infos.match(surface_regex)
-          hashed_property[:rooms_number] = infos.to_int if infos.match(rooms_regex)
-          hashed_property[:bedrooms_number] = infos.to_int if infos.match(bedrooms_regex)
+          hashed_property[:surface] = infos.to_int_scrp if infos.match(surface_regex)
+          hashed_property[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
+          hashed_property[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
         end
         hashed_property[:flat_type] = item['estateType']
         hashed_property[:agency_name] = item['contact']['contactName']

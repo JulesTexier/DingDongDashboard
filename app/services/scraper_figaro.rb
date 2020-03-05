@@ -15,10 +15,10 @@ class ScraperFigaro < Scraper
         begin
           hashed_property = {}
           hashed_property[:link] = "https://immobilier.lefigaro.fr" + access_xml_link(item, 'a.js-link-ei', 'href')[0].to_s
-          hashed_property[:surface] = regex_gen(access_xml_text(item, 'h2'), '(\d+(,?)(\d)?)(.)m2').to_float_to_int
-          hashed_property[:area] = access_xml_text(item, 'h2 > a > span').area_translator
-          hashed_property[:rooms_number] = regex_gen(access_xml_text(item, 'h2'), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int
-          hashed_property[:price] = regex_gen(access_xml_text(item, 'span.price-label'), '(\d)(.*)(€)').to_int
+          hashed_property[:surface] = regex_gen(access_xml_text(item, 'h2'), '(\d+(,?)(\d)?)(.)m2').to_float_to_int_scrp
+          hashed_property[:area] = access_xml_text(item, 'h2 > a > span').area_translator_scrp
+          hashed_property[:rooms_number] = regex_gen(access_xml_text(item, 'h2'), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:price] = regex_gen(access_xml_text(item, 'span.price-label'), '(\d)(.*)(€)').to_int_scrp
           hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
         rescue StandardError => e 
           puts "\nError for #{@source}, skip this one."
@@ -39,8 +39,8 @@ class ScraperFigaro < Scraper
       flat_data[:area] = prop[:area]
       flat_data[:rooms_number] = prop[:rooms_number]
       flat_data[:price] = prop[:price]
-      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.unstyled.flex').specific_trim("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int
-      flat_data[:description] = access_xml_text(html, 'p.description.js-description').specific_trim("\n").strip
+      flat_data[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, 'ul.unstyled.flex').specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
+      flat_data[:description] = access_xml_text(html, 'p.description.js-description').specific_trim_scrp("\n").strip
       flat_data[:flat_type] = regex_gen(access_xml_text(html, 'div.container-h1 > h1'), '((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)')
       flat_data[:agency_name] = access_xml_text(html, 'span.agency-name')
       flat_data[:floor] = perform_floor_regex(flat_data[:description])
