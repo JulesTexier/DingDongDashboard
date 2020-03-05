@@ -28,11 +28,11 @@ class Manychat
     # This method is sending a gallery of all the images of a property + The text description (i.e. : internal chatbot Property Show use)
     def send_property_info_post_interaction(subscriber, property)
         first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property)))
-        # if first_call[0]
-        #     return handle_manychat_response(send_content(subscriber, create_show_text_card(property)))
-        # else
+        if first_call[0]
+            return handle_manychat_response(send_content(subscriber, create_show_text_card(property)))
+        else
             return first_call
-        # end
+        end
     end
 
     # This method send a gallery of a favorites properties of a subscriber 
