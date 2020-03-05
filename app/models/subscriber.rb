@@ -107,6 +107,14 @@ class Subscriber < ApplicationRecord
         end
         return areas
     end
+
+    def self.active
+      self.where(is_active: true)
+    end
+
+    def self.facebook_id(facebook_id)
+      self.where(facebook_id: facebook_id)
+    end
     
     private 
     
