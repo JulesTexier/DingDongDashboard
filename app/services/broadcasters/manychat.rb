@@ -82,7 +82,7 @@ class Manychat
             puts webhook
             buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
         end
-            elements.push(create_message_element_hash(property.get_title, property.get_short_description, "https://via.placeholder.com/150", property.link, buttons))
+            elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
             elements.length === 10 ? break : nil
         end
 
