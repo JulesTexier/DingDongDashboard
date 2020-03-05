@@ -132,9 +132,9 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  #######################
+  #############################
   ## PUBLIC DATABASE METHODS ##
-  #######################
+  #############################
 
   def is_already_exists(hashed_property)
     response = false
@@ -143,6 +143,9 @@ class Scraper
       surface: hashed_property[:surface],
       rooms_number: hashed_property[:rooms_number],
       area: hashed_property[:area]
+    ).where(
+      'created_at >= :five', 
+      :five => Time.now - 7.days
     )
     response = true if properties.length > 0
   end
