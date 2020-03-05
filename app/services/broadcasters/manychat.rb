@@ -127,7 +127,7 @@ class Manychat
                 puts webhook_2
                 buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
 
-                elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.images.first.url, property.link, buttons))
+                elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_images.first[:url], property.link, buttons))
                 elements.length === 10 ? break : nil
             end
 
@@ -146,11 +146,14 @@ class Manychat
     # This method is bulding a json_gallery card of all images of a property
     def create_gallery_images_property(property)
         elements = []
-        property.images.each do |img|
-            elements.push(create_message_element_hash(property.get_title, property.get_short_description, img.url, property.link))
+        property.get_images.each do |img|
+            puts 'HASH : '  
+            puts img
+            puts 'Image : ' + img[:url]
+            elements.push(create_message_element_hash(property.get_title, property.get_short_description, img[:url], property.link))
             elements.length === 10 ? break : nil
         end
-
+        puts elements
         message_array = []
         message_array.push(create_message_card_hash("cards", elements, "square"))
 
@@ -302,6 +305,7 @@ class Manychat
     #----------------
     # This method is sending to a subscriber the json_data via ManyChat API 
     def send_content(subscriber, message_array)
+        puts "*******"
         puts message_array
         json_data = create_final_json(subscriber, message_array).to_json
 
