@@ -91,7 +91,7 @@ class Api::V1::ManychatController < ApplicationController
         begin
             subscriber = Subscriber.find(params[:subscriber_id])
             props = subscriber.fav_properties
-            render json: send_multiple_properties_favorites(subscriber, props)
+            render json: send_multiple_properties_favorites(subscriber)
         rescue ActiveRecord::RecordNotFound
             render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
         end
@@ -115,11 +115,11 @@ class Api::V1::ManychatController < ApplicationController
         end
     end
 
-    def send_multiple_properties_favorites(subscriber, properties)
+    def send_multiple_properties_favorites(subscriber)
         m = Manychat.new
-        response = m.send_favorites_gallery_properties_card(subscriber, properties)
+        response = m.send_favorites_gallery_properties_card(subscriber)
         if response[0]
-            return {status: 'SUCCESS', message: "#{properties.length} propert(y)(ies) sent to subscriber", data: response[1]}, status: 200
+            return {status: 'SUCCESS', message: "#{subscriber.fav_properties.length} propert(y)(ies) sent to subscriber", data: response[1]}, status: 200
         else 
             return {status: 'ERROR', message: 'A error occur in manychat call', data: response[1]}, status: 500
         end
