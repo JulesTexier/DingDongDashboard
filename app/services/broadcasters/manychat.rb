@@ -155,9 +155,11 @@ class Manychat
   # This method is bulding a json_gallery card of all images of a property
   def create_gallery_images_property(property)
     elements = []
+    photo_counter = 1
     property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, img["url"], property.link))
+      elements.push(create_message_element_hash("Photo #{photo_counter} sur #{property.get_images.count}", "", img["url"], property.link))
       elements.length === 10 ? break : nil
+      photo_counter += 1
     end
     puts elements
     message_array = []
@@ -169,7 +171,8 @@ class Manychat
   # This method is building a json_text of the description of the property
   def create_show_text_card(property, subscriber = nil)
     buttons = []
-    buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+    # buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+    buttons.push(create_share_button_hash("⬆️ Partager l'annonce"))
     if property.contact_number != nil && property.contact_number != "N/C"
       property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
@@ -181,7 +184,7 @@ class Manychat
     message_array = []
     message_hash = {}
     message_hash[:type] = "text"
-    message_hash[:text] = property.get_long_description
+    message_hash[:text] = property.get_attribues_description
     message_hash[:buttons] = buttons
 
     message_array.push(message_hash)
@@ -259,6 +262,12 @@ class Manychat
   #----------------
   # buttons
   #----------------
+  def create_share_button_hash
+    btn = {}
+    btn[:type] = "share"
+    return btn
+  end
+
   def create_url_button_hash(caption, url)
     btn = {}
     btn[:type] = "url"
