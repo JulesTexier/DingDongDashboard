@@ -39,7 +39,7 @@ class Manychat
 
   # This method send a gallery of a favorites properties of a subscriber
   def send_favorites_gallery_properties_card(subscriber, properties)
-    return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(properties, subscriber)))
+    return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(subscriber)))
   end
 
   # This method send message after a property has been added to favorites
@@ -152,6 +152,20 @@ class Manychat
     return message_array
   end
 
+  # This method is bulding a json_gallery card of all images of a property
+  def create_gallery_images_property(property)
+    elements = []
+    property.get_images.each do |img|
+      elements.push(create_message_element_hash(property.get_title, property.get_short_description, img["url"], property.link))
+      elements.length === 10 ? break : nil
+    end
+    puts elements
+    message_array = []
+    message_array.push(create_message_card_hash("cards", elements, "square"))
+
+    return message_array
+  end
+
   # This method is building a json_text of the description of the property
   def create_show_text_card(property, subscriber = nil)
     buttons = []
@@ -176,76 +190,33 @@ class Manychat
   end
 
   # This method is building a json_gallery of cards for each property in fav of a subscriber
-  def create_favorites_gallery_card(properties, subscriber)
-    if properties.length > 0
+  def create_favorites_gallery_card(subscriber)
+    favs = subscriber.favorites
+    message_array = []
+    if favs.length > 0
       elements = []
-      properties.each do |property|
+      favs.each do |fav|
+        property = fav.property
         buttons = []
-        buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link)) 
-        if property.contact_number != nil && property.contact_number != "N/C"
-            property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
-            buttons.push(create_call_button_hash(caption, property.contact_number))
-        end
-        webhook_fav = ENV['BASE_URL'] + "api/v1/favorites/"
-        body_fav = {subscriber_id: subscriber.id, property_id: property.id}
-        buttons.push(create_dynamic_button_hash("⭐ Mettre en favoris", webhook_fav, "POST", body_fav))
+        # 1st btn : See more
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
+        # 2nd btn : Remove from fav
+        webhook_delete_fav = ENV['BASE_URL'] + "api/v1/favorites/#{fav.id}"
+        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
 
-        message_array = []
-        message_hash = {}
-        message_hash[:type] = "text"
-        message_hash[:text] = property.get_attribues_description
-        message_hash[:buttons] = buttons
-
-        message_array.push(message_hash)
-
-        return message_array
-    end
-
-        favorite = Favorite.where(subscriber: subscriber, property: property).first
-        webhook_2 = ENV["BASE_URL"] + "api/v1/favorites/#{favorite.id}"
-        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
-
-
-    # This method is bulding a json_gallery card of all images of a property
-    def create_gallery_images_property(property)
-        elements = []
-        img_compteur = 1
-        property.get_images.each do |img|
-            elements.push(create_message_element_hash( "Photo #{img_compteur} sur #{property.get_images.count}", "", img['url'], property.link))
-            img_compteur += 1
-            elements.length === 10 ? break : nil
-        end
-        puts elements
-        message_array = []
+        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
+        
         message_array.push(create_message_card_hash("cards", elements, "square"))
+      end
 
-        return message_array
-    end
-      message_array = []
-      message_array.push(create_message_card_hash("cards", elements, "square"))
     else
-      message_array = []
-      text = "Oops, tu n'as aucune annonce en favori..."
+      text = "Oops, tu n'as aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
     end
 
     return message_array
   end
-
-  # This method is bulding a json_gallery card of all images of a property
-  def create_gallery_images_property(property)
-    elements = []
-    property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, img["url"], property.link))
-      elements.length === 10 ? break : nil
-    end
-    puts elements
-    message_array = []
-    message_array.push(create_message_card_hash("cards", elements, "square"))
-
-    return message_array
-  end
-
 
   # Getter method for default quick_replies menu
   def get_default_qr
