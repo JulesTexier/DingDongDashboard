@@ -42,10 +42,10 @@ class Property < ApplicationRecord
 
     def get_cover
         default_img = {}
-        default_img[:url] = DEFAULT_IMG_URL
+        default_img['url'] = DEFAULT_IMG_URL
 
         if self.images.empty? 
-            return default_image[:url]
+            return default_img['url']
         else
             return self.images.first.url
         end
