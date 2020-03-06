@@ -114,36 +114,35 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
-  # This method prepare a message view for a property that can be included in a card or a gallery of cards 
-	def create_property_element(property, subscriber = nil)
-		buttons = []
+  # This method prepare a message view for a property that can be included in a card or a gallery of cards
+  def create_property_element(property, subscriber = nil)
+    buttons = []
     if subscriber.nil?
       buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
     else
-			webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-			buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
+      webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+      buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
     end
 
     return create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons)
-
-	end
+  end
 
   # This method is building a single json_card for a property with the first image of the property
   def create_property_card(property, subscriber = nil)
-		message_array = []
-		elements = []
-		elements.push(create_property_element(property, subscriber))
+    message_array = []
+    elements = []
+    elements.push(create_property_element(property, subscriber))
     message_array.push(create_message_card_hash("cards", elements, "square"))
-		return message_array
+    return message_array
   end
 
   # This method is building a json_gallery of cards for each property with the first image of each property
   def create_gallery_card(properties, subscriber = nil)
     properties.length > 10 ? properties = properties[0..9] : nil
-		
-		elements = []
+
+    elements = []
     properties.each do |property|
-			elements.push(create_property_element(property, subscriber))
+      elements.push(create_property_element(property, subscriber))
     end
 
     message_array = []
@@ -205,13 +204,11 @@ class Manychat
         webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
         buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
         # 2nd btn : Remove from fav
-        webhook_delete_fav = ENV['BASE_URL'] + "api/v1/favorites/#{fav.id}"
+        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
         buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
         elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
       end
       message_array.push(create_message_card_hash("cards", elements, "square"))
-
-
     else
       text = "Oops, tu n'as aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
@@ -225,31 +222,32 @@ class Manychat
     qr = [{
       "type": "flow",
       "caption": "🏠 5 annonces",
-      "target": "content20200217174711_881728",
+      "target": ENV["QR_ADS"],
     },
           {
       "type": "flow",
-      "caption": "💸 Crédit",
-      "target": "content20200218154133_249216",
-    }, {
+      "caption": "🔎 Mes critères",
+      "target": ENV["QR_CRITERIA"],
+    },
+          {
       "type": "flow",
-      "caption": "🔨Travaux",
-      "target": "content20200220114201_128307",
+      "caption": "💸 Prêt",
+      "target": ENV["QR_LOAN"],
     },
           {
       "type": "flow",
       "caption": "🏘️ Estimation",
-      "target": "content20200218153050_985402",
+      "target": ENV["QR_ESTIM"],
     },
           {
       "type": "flow",
       "caption": "💡 Conseil",
-      "target": "content20200217174711_881728",
+      "target": ENV["QR_ADVICE"],
     },
           {
       "type": "flow",
       "caption": "⛔ Stop",
-      "target": "system_unsubscribe20200210180528_020203",
+      "target": ENV["QR_UNSUBS"],
     }]
     return qr
   end
