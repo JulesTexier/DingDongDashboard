@@ -58,11 +58,9 @@ class Property < ApplicationRecord
     def get_attribues_description
         description = ''
         self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
-        self.surface > 0 ? description = description + "\u000A📏 " + self.surface.to_s + " m2" : nil
-        self.area != nil ? description = description + "\u000A🏘️ " + self.area : nil
-        description += self.get_short_description
-        description += "+ de détails en cliquant sur les photos"
-        
+        self.surface > 0 ? description = description + "\u000A📐 " + self.surface.to_s + " m2" : nil
+        self.area != nil ? description = description + "\u000A📌 " + self.area : nil
+        description += self.get_short_description        
         return description
     end
 
@@ -70,9 +68,9 @@ class Property < ApplicationRecord
         description = ''
         self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
         self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
-        self.rooms_number > 1 ? description += "\u000A🛏️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
-        self.floor != nil ? description = description + "\u000A🏨 " + "Etage : " + self.floor.to_s : nil
-        self.has_elevator ? description = description + "\u000A↕ Avec ascenseur" : nil
+        self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
+        self.floor != nil ? description = description + "\u000A↕ " + "Etage : " + self.floor.to_s : nil
+        self.has_elevator ? description = description + "\u000A🚠 Avec ascenseur" : nil
 
         return description
     end
