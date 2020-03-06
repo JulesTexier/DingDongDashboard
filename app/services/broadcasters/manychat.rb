@@ -114,39 +114,36 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
-  # This method is building a single json_card for a property with the first image of the property
-  def create_property_card(property, subscriber = nil)
-    buttons = []
+# This method prepare a message view for a property that can be included in a card or a gallery of cards 
+	def create_property_element(property, subscriber = nil)
+		buttons = []
     if subscriber.nil?
       buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
     else
-        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
+			webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+			buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
     end
 
-    elements = []
-    elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
+    return create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons)
 
-    message_array = []
+	end
+
+  # This method is building a single json_card for a property with the first image of the property
+  def create_property_card(property, subscriber = nil)
+		message_array = []
+		elements = []
+		elements.push(create_property_element(property, subscriber))
     message_array.push(create_message_card_hash("cards", elements, "square"))
-
-    return message_array
+		return message_array
   end
 
   # This method is building a json_gallery of cards for each property with the first image of each property
   def create_gallery_card(properties, subscriber = nil)
     properties.length > 10 ? properties = properties[0..9] : nil
-    elements = []
+		
+		elements = []
     properties.each do |property|
-      buttons = []
-      if subscriber.nil?
-        buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
-      else
-        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
-      end
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
-      elements.length === 10 ? break : nil
+			elements.push(create_property_element(property, subscriber))
     end
 
     message_array = []
