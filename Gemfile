@@ -42,6 +42,9 @@ gem 'rspec-rails', '~> 3.5'
 # Scrapping gems
 gem 'nokogiri'
 
+# Better db print
+gem "table_print"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -55,7 +58,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "table_print"
   gem 'rb-readline'
   gem 'pry', '~> 0.12.2'
 end
