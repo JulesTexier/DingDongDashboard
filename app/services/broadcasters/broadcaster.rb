@@ -8,16 +8,22 @@ class Broadcaster
 
 
   # Actual logic : Run every X minutes and process a batch of unprocessed new scrapped properties 
-  def new_broadcast
-      properties = self.get_unprocessed_properties
-      properties.each do |prop|
-          subscribers = prop.get_matching_subscribers
-          subscribers.each do |sub|
-              @manychat_client.send_single_property_card(sub, prop)
-          end
-          prop.has_been_processed = true 
-          prop.save
+  def new_properties
+    properties_counter = 0
+    subscribers_counter = 0
+    
+    properties = get_unprocessed_properties
+    properties_counter = properties.length
+    properties.each do |prop|
+      subscribers = prop.get_matching_subscribers
+      subscribers_counter += subscribers.length
+      subscribers.each do |sub|
+          @manychat_client.send_single_property_card(sub, prop)
       end
+      prop.has_been_processed = true 
+      prop.save
+    end
+    return [properties_counter, subscribers_counter]
   end
   
 
