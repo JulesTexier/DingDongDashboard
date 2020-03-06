@@ -156,7 +156,7 @@ class Manychat
                 puts webhook_2
                 buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
 
-                elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_images.first[:url], property.link, buttons))
+                elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_images.first['url'], property.link, buttons))
                 elements.length === 10 ? break : nil
             end
 
@@ -176,10 +176,7 @@ class Manychat
     def create_gallery_images_property(property)
         elements = []
         property.get_images.each do |img|
-            puts 'HASH : '  
-            puts img
-            puts 'Image : ' + img[:url]
-            elements.push(create_message_element_hash(property.get_title, property.get_short_description, img[:url], property.link))
+            elements.push(create_message_element_hash(property.get_title, property.get_short_description, img['url'], property.link))
             elements.length === 10 ? break : nil
         end
         puts elements
