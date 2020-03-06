@@ -61,7 +61,7 @@ class Property < ApplicationRecord
         self.surface > 0 ? description = description + "\u000A📐 " + self.surface.to_s + " m2" : nil
         self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i + " €/m2" : nil
         self.area != nil ? description = description + "\u000A📌 " + self.area : nil
-        description = description + "\u000A⏱️ Postée le " + self.created_at.strftime("%-d/%-m à %-dh%-d").to_s
+        description = description + "\u000A⏱️ Postée le " + self.created_at.strftime("%d/%m à %H:%M")
         description += self.get_short_description        
         return description
     end
