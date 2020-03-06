@@ -120,8 +120,8 @@ class Manychat
     if subscriber.nil?
       buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
     else
-      webhook = ENV["BASE_URL"] + "api/v1/subscribers/#{subscriber.id}/send/props/#{property.id}/details"
-      buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
     end
 
     elements = []
@@ -143,7 +143,6 @@ class Manychat
         buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
       else
         webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        puts webhook
         buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
       end
       elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
