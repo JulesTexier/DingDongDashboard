@@ -185,17 +185,46 @@ class Manychat
       elements = []
       properties.each do |property|
         buttons = []
-        webhook_1 = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        buttons.push(create_dynamic_button_hash("🙋 En voir plus", webhook_1, "GET"))
+        buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link)) 
+        if property.contact_number != nil && property.contact_number != "N/C"
+            property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
+            buttons.push(create_call_button_hash(caption, property.contact_number))
+        end
+        webhook_fav = ENV['BASE_URL'] + "api/v1/favorites/"
+        body_fav = {subscriber_id: subscriber.id, property_id: property.id}
+        buttons.push(create_dynamic_button_hash("⭐ Mettre en favoris", webhook_fav, "POST", body_fav))
+
+        message_array = []
+        message_hash = {}
+        message_hash[:type] = "text"
+        message_hash[:text] = property.get_attribues_description
+        message_hash[:buttons] = buttons
+
+        message_array.push(message_hash)
+
+        return message_array
+    end
 
         favorite = Favorite.where(subscriber: subscriber, property: property).first
         webhook_2 = ENV["BASE_URL"] + "api/v1/favorites/#{favorite.id}"
         buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
 
-        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_images.first["url"], property.link, buttons))
-        elements.length === 10 ? break : nil
-      end
 
+    # This method is bulding a json_gallery card of all images of a property
+    def create_gallery_images_property(property)
+        elements = []
+        img_compteur = 1
+        property.get_images.each do |img|
+            elements.push(create_message_element_hash( "Photo #{img_compteur} sur #{property.get_images.count}", "", img['url'], property.link))
+            img_compteur += 1
+            elements.length === 10 ? break : nil
+        end
+        puts elements
+        message_array = []
+        message_array.push(create_message_card_hash("cards", elements, "square"))
+
+        return message_array
+    end
       message_array = []
       message_array.push(create_message_card_hash("cards", elements, "square"))
     else
