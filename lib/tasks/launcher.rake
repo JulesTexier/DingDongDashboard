@@ -29,7 +29,7 @@ namespace :subscriber do
 
   task :reactivation do
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    Subscriber.new.reactivate_inactive_subscribers
+    Manychat.new.reactivate_inactive_subscribers
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The Reactivation script took #{ending - starting} seconds to run"
   end
