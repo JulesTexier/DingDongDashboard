@@ -155,9 +155,11 @@ class Manychat
   # This method is bulding a json_gallery card of all images of a property
   def create_gallery_images_property(property)
     elements = []
+    photo_counter = 1
     property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, img["url"], property.link))
+      elements.push(create_message_element_hash("Photo #{photo_counter} sur #{property.get_images.count}", "", img["url"], property.link))
       elements.length === 10 ? break : nil
+      photo_counter += 1
     end
     puts elements
     message_array = []
@@ -181,7 +183,7 @@ class Manychat
     message_array = []
     message_hash = {}
     message_hash[:type] = "text"
-    message_hash[:text] = property.get_long_description
+    message_hash[:text] = property.get_attribues_description
     message_hash[:buttons] = buttons
 
     message_array.push(message_hash)
