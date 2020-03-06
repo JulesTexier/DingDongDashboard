@@ -172,7 +172,7 @@ class Manychat
     buttons = []
     buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
     if property.contact_number != nil && property.contact_number != "N/C"
-      property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
+      property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
     end
     webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
