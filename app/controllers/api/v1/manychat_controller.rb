@@ -52,6 +52,7 @@ class Api::V1::ManychatController < ApplicationController
     def send_props_morning
         begin
             subscriber = Subscriber.find(params[:subscriber_id])
+            subscriber.update(is_active: true)
             props = subscriber.get_morning_props
             props.length > 0 ? (render json: send_multiple_properties(subscriber, props) ): (render json: {status: 'ERROR', message: 'There is no morning props for this subscriber', data: nil}, status: 404)
         rescue ActiveRecord::RecordNotFound

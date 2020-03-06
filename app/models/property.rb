@@ -55,6 +55,14 @@ class Property < ApplicationRecord
         return "🏠 " + self.price.to_s + "€ - " + self.surface.to_s + "m2 - " + self.area
     end
 
+    def get_attribues_description
+        description = ''
+        self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
+        self.surface > 0 ? description = description + "\u000A📏 " + self.surface.to_s + " m2" : nil
+        self.area != nil ? description = description + "\u000A🏘️ " + self.area : nil
+        description += self.get_short_description
+    end
+
     def get_short_description
         description = ''
         self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil

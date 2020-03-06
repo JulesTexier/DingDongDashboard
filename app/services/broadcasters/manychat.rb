@@ -162,12 +162,12 @@ class Manychat
         end
         webhook_fav = ENV['BASE_URL'] + "api/v1/favorites/"
         body_fav = {subscriber_id: subscriber.id, property_id: property.id}
-        buttons.push(create_dynamic_button_hash("⭐ Ajouter aux favoris", webhook_fav, "POST", body_fav))
+        buttons.push(create_dynamic_button_hash("⭐ Mettre en favoris", webhook_fav, "POST", body_fav))
 
         message_array = []
         message_hash = {}
         message_hash[:type] = "text"
-        message_hash[:text] = property.get_long_description
+        message_hash[:text] = property.get_attribues_description
         message_hash[:buttons] = buttons
 
         message_array.push(message_hash)
@@ -208,8 +208,10 @@ class Manychat
     # This method is bulding a json_gallery card of all images of a property
     def create_gallery_images_property(property)
         elements = []
+        img_compteur = 1
         property.get_images.each do |img|
-            elements.push(create_message_element_hash(property.get_title, property.get_short_description, img['url'], property.link))
+            elements.push(create_message_element_hash( "Photo #{img_compteur} sur #{property.get_images.count}", "", img['url'], property.link))
+            img_compteur += 1
             elements.length === 10 ? break : nil
         end
         puts elements
