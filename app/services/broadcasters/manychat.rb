@@ -35,10 +35,41 @@ class Manychat
         end
     end
 
+    # ------ 
+    # FAVORITE MANAGEMENT
+    # ------ 
+    
     # This method send a gallery of a favorites properties of a subscriber 
     def send_favorites_gallery_properties_card(subscriber, properties)
         return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(properties, subscriber)))
     end
+
+    # This method send message after a property has been added to favorites
+    def send_message_post_fav_added(subscriber, msg)
+        if msg == "success"
+            text = "L'annonce a été ajoutée à tes favoris !"
+            response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+        else
+            text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été ajoutée à tes favoris"
+            response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+        end
+        return response 
+    end
+
+    # This method send message after a favory has been removed
+    def send_message_post_fav_deleted(subscriber, msg)
+        if msg == "success"
+            text = "L'annonce a été supprimée de tes favoris !"
+            response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+        else
+            text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été supprimée de des favoris"
+            response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+        end
+        return response 
+    end
+
+
+
 
     #This method send a basic message with a dynamic button to a subscriber
     def send_dynamic_button_message(subscriber, btn_caption, webhook, method, text, body)
