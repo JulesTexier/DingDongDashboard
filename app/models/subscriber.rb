@@ -39,6 +39,24 @@ class Subscriber < ApplicationRecord
         return ENV['BASE_URL'] + 'subscribers/' + self.id.to_s + '/edit'
     end
 
+    def reactivate_inactive_subscribers
+      manychat_client = Manychat.new
+      inactive_subscribers = Subscriber.inactive
+      inactive_subscribers.each do |inactive_subscriber|
+        mc_sub_infos = manychat_client.fetch_subscriber_mc_infos(inactive_subscriber)
+        inactive_subscriber.update(is_active: true) if inactive_subscriber.has_interacted(mc_sub_infos[1]['data'], 3)
+      end
+    end
+
+    def has_interacted(mc_sub_infos, day_range)
+      response = false
+      last_interaction = Time.parse(mc_sub_infos['last_interaction'])
+      if Time.now < last_interaction + day_range.days && mc_sub_infos['status'] == 'active'
+        response = true
+      end
+      return response
+    end
+
 
     def is_matching_property?(property)
         test_price = is_matching_property_price(property)
@@ -110,6 +128,10 @@ class Subscriber < ApplicationRecord
 
     def self.active
       self.where(is_active: true)
+    end
+
+    def self.inactive
+      self.where(is_active: false)
     end
 
     def self.facebook_id(facebook_id)
