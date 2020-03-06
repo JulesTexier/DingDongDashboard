@@ -61,6 +61,7 @@ class Property < ApplicationRecord
         self.surface > 0 ? description = description + "\u000A📏 " + self.surface.to_s + " m2" : nil
         self.area != nil ? description = description + "\u000A🏘️ " + self.area : nil
         description += self.get_short_description
+        description += "+ de détail en cliquant sur les photos"
     end
 
     def get_short_description

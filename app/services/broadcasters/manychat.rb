@@ -171,7 +171,8 @@ class Manychat
   # This method is building a json_text of the description of the property
   def create_show_text_card(property, subscriber = nil)
     buttons = []
-    buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+    # buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+    buttons.push(create_share_button_hash("⬆️ Partager l'annonce"))
     if property.contact_number != nil && property.contact_number != "N/C"
       property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
@@ -261,6 +262,12 @@ class Manychat
   #----------------
   # buttons
   #----------------
+  def create_share_button_hash
+    btn = {}
+    btn[:type] = "share"
+    return btn
+  end
+
   def create_url_button_hash(caption, url)
     btn = {}
     btn[:type] = "url"
