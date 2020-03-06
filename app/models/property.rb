@@ -21,6 +21,10 @@ class Property < ApplicationRecord
 
     has_many :property_images
 
+    def images
+      return self.property_images
+    end
+
     def get_images
         default_img = {}
         default_img[:url] = DEFAULT_IMG_URL

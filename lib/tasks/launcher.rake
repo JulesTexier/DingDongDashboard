@@ -15,10 +15,10 @@ namespace :scraper do
     end
   
     task :premium do 
-      puts "We are Launching SeLoger / Meilleurs Agents / LBC"
       starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       ScraperLeBonCoin.new.extract_first_page
       ScraperSeLoger.new.extract_first_page
+      ScraperMeilleursAgents.new.extract_first_page
       ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       puts "The Premium Scraper script took #{ending - starting} seconds to run"
     end
@@ -27,11 +27,14 @@ namespace :scraper do
   namespace :broadcast do 
     desc "This is a task for broadcasting messages to our users."
   
-    task :regular do 
+    task :death_window do 
       puts "We are launching a basic broadcast with new properties"
     end
   
     task :good_morning do 
-      puts "We are broadcasting a good morning message"
+      starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      Broadcaster.new.good_morning
+      ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      puts "The Good Morning Broadcaster script took #{ending - starting} seconds to run"
     end
   end 

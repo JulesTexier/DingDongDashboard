@@ -40,7 +40,36 @@ class Manychat
         return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(properties, subscriber)))
     end
 
-   
+    #This method send a basic message with a dynamic button to a subscriber
+    def send_dynamic_button_message(subscriber, btn_caption, webhook, method, text, body)
+        return handle_manychat_response(send_content(subscriber, create_dynamic_text_card(btn_caption, webhook, method, text, body)))
+    end
+
+    #This method fetch ManyChat infos from every subscriber who is is_active: true
+    #Timer set every 10 requests so ManyChat doesn't block us with <TOO MANY REQUEST>
+    def fetch_subscriber_mc_infos(subscriber)
+        request = Typhoeus::Request.new(
+            "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=#{subscriber.facebook_id}",
+            method: :get,
+            headers: { 'Content-type' => "application/json", 'Authorization' => self.token }
+        )
+        request.run
+        return handle_manychat_response(request.response)
+    end
+
+    #This method evaluate if a subscriber is 72hours past its last interaction
+    #If so, we update him to is_active: false
+    def is_last_interaction_borderline(mc_subs_infos)
+        response = false
+        a = Time.parse(mc_subs_infos['last_interaction']) + (72*60*60)
+        b = Time.now
+        if a < b
+            sub = Subscriber.where(facebook_id: mc_subs_infos['id'])
+            sub.update(is_active: false)
+            response = true
+        end
+        return response
+    end 
 
     private
 
@@ -157,6 +186,19 @@ class Manychat
         message_array = []
         message_array.push(create_message_card_hash("cards", elements, "square"))
 
+        return message_array
+    end
+
+    # This method is bulding a simple json card of a dynamic button with a caption
+    def create_dynamic_text_card(btn_caption, webhook, method, text, body = {} )
+        buttons = []
+        buttons.push(create_dynamic_button_hash(btn_caption, webhook, method, body))
+        message_array = []
+        message_hash = {}
+        message_hash[:type] = "text"
+        message_hash[:text] = text
+        message_hash[:buttons] = buttons
+        message_array.push(message_hash)
         return message_array
     end
     
@@ -317,20 +359,18 @@ class Manychat
         )
         request.run
         response = request.response
-        # puts response.options[:response_code]
-        # puts response.options[:response_body]
         return response
     end
 
     def handle_manychat_response(response)
-        status = response.options[:response_code].to_i
-        body = JSON.parse(response.options[:response_body])
+      status = response.options[:response_code].to_i
+      body = JSON.parse(response.options[:response_body])
 
-        if status == 200 || status == 204
-            return [true, body] 
-        else
-            return [false, body]
-        end
-    end
+      if status == 200 || status == 204
+          return [true, body] 
+      else
+          return [false, body]
+      end
+  end
 
 end

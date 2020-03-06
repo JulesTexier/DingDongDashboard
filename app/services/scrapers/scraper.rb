@@ -132,9 +132,9 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  #######################
+  #############################
   ## PUBLIC DATABASE METHODS ##
-  #######################
+  #############################
 
   def is_already_exists(hashed_property)
     response = false
@@ -143,6 +143,9 @@ class Scraper
       surface: hashed_property[:surface],
       rooms_number: hashed_property[:rooms_number],
       area: hashed_property[:area]
+    ).where(
+      'created_at >= :five', 
+      :five => Time.now - 7.days
     )
     response = true if properties.length > 0
   end
@@ -163,6 +166,17 @@ class Scraper
     is_already_exists(hashed_property) || is_dirty_property(hashed_property) ? false : true
   end
 
+  def is_it_late
+    response = false
+    a = Time.parse('22:00:00 +0100')
+    b = Time.parse('09:00:00 +0100')
+    c = Time.now.getlocal("+01:00")
+    if c > a || c < b
+      response = true
+    end
+    return response
+  end
+
   private
 
   ##############################
@@ -170,8 +184,7 @@ class Scraper
   ##############################
 
   def insert_property(prop_hash)
-    ##FRED TODO -> J'ai besoin d'un puts d'insertion, le mien n'est pas correcte, j'ai besoin des infos de postgresql
-    ##Si la property rollback, mon puts en ligne 179 n'a du coup aucun sens => Il faudrait le supprimer :)
+    prop_hash[:has_been_processed] = true if is_it_late
     if prop = Property.create(prop_hash.except(:images))
       puts "\nInsertion of a property from #{prop_hash[:source]}: "
       puts prop.get_title
