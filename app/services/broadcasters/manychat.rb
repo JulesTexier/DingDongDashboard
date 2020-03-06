@@ -114,7 +114,7 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
-# This method prepare a message view for a property that can be included in a card or a gallery of cards 
+  # This method prepare a message view for a property that can be included in a card or a gallery of cards 
 	def create_property_element(property, subscriber = nil)
 		buttons = []
     if subscriber.nil?
@@ -246,18 +246,6 @@ class Manychat
     return message_array
   end
 
-  # This method is bulding a simple json card of a dynamic button with a caption
-  def create_dynamic_text_card(btn_caption, webhook, method, text, body = {})
-    buttons = []
-    buttons.push(create_dynamic_button_hash(btn_caption, webhook, method, body))
-    message_array = []
-    message_hash = {}
-    message_hash[:type] = "text"
-    message_hash[:text] = text
-    message_hash[:buttons] = buttons
-    message_array.push(message_hash)
-    return message_array
-  end
 
   # Getter method for default quick_replies menu
   def get_default_qr
@@ -359,6 +347,22 @@ class Manychat
     message[:type] = "text"
     message[:text] = text
     return message
+  end
+
+  #----------------
+  # cards
+  #----------------
+  # This method is bulding a simple json card of a dynamic button with a caption
+  def create_dynamic_text_card(btn_caption, webhook, method, text, body = {})
+    buttons = []
+    buttons.push(create_dynamic_button_hash(btn_caption, webhook, method, body))
+    message_array = []
+    message_hash = {}
+    message_hash[:type] = "text"
+    message_hash[:text] = text
+    message_hash[:buttons] = buttons
+    message_array.push(message_hash)
+    return message_array
   end
 
   #----------------
