@@ -125,7 +125,7 @@ class Manychat
     end
 
     elements = []
-    elements.push(create_message_element_hash(property.get_title, property.get_short_description, "https://via.placeholder.com/150", property.link, buttons))
+    elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
 
     message_array = []
     message_array.push(create_message_card_hash("cards", elements, "square"))
