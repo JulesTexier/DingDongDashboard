@@ -172,7 +172,7 @@ class Manychat
   def create_show_text_card(property, subscriber = nil)
     buttons = []
     # buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
-    buttons.push(create_share_button_hash("⬆️ Partager l'annonce"))
+    buttons.push(create_share_button_hash)
     if property.contact_number != nil && property.contact_number != "N/C"
       property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
