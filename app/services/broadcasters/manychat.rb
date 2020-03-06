@@ -38,7 +38,7 @@ class Manychat
   # ------
 
   # This method send a gallery of a favorites properties of a subscriber
-  def send_favorites_gallery_properties_card(subscriber, properties)
+  def send_favorites_gallery_properties_card(subscriber)
     return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(subscriber)))
   end
 
@@ -194,8 +194,9 @@ class Manychat
   def create_favorites_gallery_card(subscriber)
     favs = subscriber.favorites
     message_array = []
+
+    elements = []
     if favs.length > 0
-      elements = []
       favs.each do |fav|
         property = fav.property
         buttons = []
@@ -205,11 +206,9 @@ class Manychat
         # 2nd btn : Remove from fav
         webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
         buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
-
         elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
-
-        message_array.push(create_message_card_hash("cards", elements, "square"))
       end
+      message_array.push(create_message_card_hash("cards", elements, "square"))
     else
       text = "Oops, tu n'as aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
