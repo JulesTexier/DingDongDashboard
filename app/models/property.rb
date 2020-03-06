@@ -27,14 +27,14 @@ class Property < ApplicationRecord
 
     def get_images
         default_img = {}
-        default_img[:url] = DEFAULT_IMG_URL
+        default_img['url'] = DEFAULT_IMG_URL
 
         if self.property_images.count == 0 
             return [default_img] 
         else 
             images = []
             self.property_images.each do |pi|
-                images.push(pi.to_hash)
+                images.push(pi.as_json)
             end
             return images
         end

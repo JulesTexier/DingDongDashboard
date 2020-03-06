@@ -166,7 +166,7 @@ class Scraper
     is_already_exists(hashed_property) || is_dirty_property(hashed_property) ? false : true
   end
 
-  def is_it_late
+  def is_it_night?
     response = false
     a = Time.parse('22:00:00 +0100')
     b = Time.parse('09:00:00 +0100')
@@ -184,7 +184,7 @@ class Scraper
   ##############################
 
   def insert_property(prop_hash)
-    prop_hash[:has_been_processed] = true if is_it_late
+    prop_hash[:has_been_processed] = true if is_it_night?
     if prop = Property.create(prop_hash.except(:images))
       puts "\nInsertion of a property from #{prop_hash[:source]}: "
       puts prop.get_title
