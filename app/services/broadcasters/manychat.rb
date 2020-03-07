@@ -38,8 +38,8 @@ class Manychat
   # ------
 
   # This method send a gallery of a favorites properties of a subscriber
-  def send_favorites_gallery_properties_card(subscriber, properties)
-    return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(properties, subscriber)))
+  def send_favorites_gallery_properties_card(subscriber)
+    return handle_manychat_response(send_content(subscriber, create_favorites_gallery_card(subscriber)))
   end
 
   # This method send message after a property has been added to favorites
@@ -114,18 +114,36 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
-  # This method is building a single json_card for a property with the first image of the property
-  def create_property_card(property, subscriber = nil)
+  # This method prepare a message view for a property that can be included in a card or a gallery of cards
+  def create_property_element(property, subscriber = nil)
     buttons = []
     if subscriber.nil?
-      buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+      buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
     else
-      webhook = ENV["BASE_URL"] + "api/v1/subscribers/#{subscriber.id}/send/props/#{property.id}/details"
+      webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
       buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
     end
 
+    return create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons)
+  end
+
+  # This method is building a single json_card for a property with the first image of the property
+  def create_property_card(property, subscriber = nil)
+    message_array = []
     elements = []
-    elements.push(create_message_element_hash(property.get_title, property.get_short_description, "https://via.placeholder.com/150", property.link, buttons))
+    elements.push(create_property_element(property, subscriber))
+    message_array.push(create_message_card_hash("cards", elements, "square"))
+    return message_array
+  end
+
+  # This method is building a json_gallery of cards for each property with the first image of each property
+  def create_gallery_card(properties, subscriber = nil)
+    properties.length > 10 ? properties = properties[0..9] : nil
+
+    elements = []
+    properties.each do |property|
+      elements.push(create_property_element(property, subscriber))
+    end
 
     message_array = []
     message_array.push(create_message_card_hash("cards", elements, "square"))
@@ -133,23 +151,16 @@ class Manychat
     return message_array
   end
 
-  # This method is building a json_gallery of cards for each property with the first image of each property
-  def create_gallery_card(properties, subscriber = nil)
-    properties.length > 10 ? properties = properties[0..9] : nil
+  # This method is bulding a json_gallery card of all images of a property
+  def create_gallery_images_property(property)
     elements = []
-    properties.each do |property|
-      buttons = []
-      if subscriber.nil?
-        buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
-      else
-        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        puts webhook
-        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
-      end
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
+    photo_counter = 1
+    property.get_images.each do |img|
+      elements.push(create_message_element_hash("Photo #{photo_counter} sur #{property.get_images.count}", "", img["url"], property.link))
       elements.length === 10 ? break : nil
+      photo_counter += 1
     end
-
+    puts elements
     message_array = []
     message_array.push(create_message_card_hash("cards", elements, "square"))
 
@@ -159,19 +170,19 @@ class Manychat
   # This method is building a json_text of the description of the property
   def create_show_text_card(property, subscriber = nil)
     buttons = []
-    buttons.push(create_url_button_hash("Voir sur #{property.source}", property.link))
+    buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
     if property.contact_number != nil && property.contact_number != "N/C"
-      property.provider == "Particulier" ? caption = "Appeler le particulier" : caption = "Appeler l'agence"
+      property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
     end
     webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
     body_fav = { subscriber_id: subscriber.id, property_id: property.id }
-    buttons.push(create_dynamic_button_hash("⭐ Ajouter aux favoris", webhook_fav, "POST", body_fav))
+    buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
 
     message_array = []
     message_hash = {}
     message_hash[:type] = "text"
-    message_hash[:text] = property.get_long_description
+    message_hash[:text] = property.get_attribues_description
     message_hash[:buttons] = buttons
 
     message_array.push(message_hash)
@@ -180,57 +191,29 @@ class Manychat
   end
 
   # This method is building a json_gallery of cards for each property in fav of a subscriber
-  def create_favorites_gallery_card(properties, subscriber)
-    if properties.length > 0
-      elements = []
-      properties.each do |property|
+  def create_favorites_gallery_card(subscriber)
+    favs = subscriber.favorites
+    message_array = []
+
+    elements = []
+    if favs.length > 0
+      favs.each do |fav|
+        property = fav.property
         buttons = []
-        webhook_1 = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-        buttons.push(create_dynamic_button_hash("🙋 En voir plus", webhook_1, "GET"))
-
-        favorite = Favorite.where(subscriber: subscriber, property: property).first
-        webhook_2 = ENV["BASE_URL"] + "api/v1/favorites/#{favorite.id}"
-        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_2, "DELETE"))
-
-        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_images.first["url"], property.link, buttons))
-        elements.length === 10 ? break : nil
+        # 1st btn : See more
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+        buttons.push(create_dynamic_button_hash("🙋 En savoir plus", webhook, "GET"))
+        # 2nd btn : Remove from fav
+        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
+        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
+        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
       end
-
-      message_array = []
       message_array.push(create_message_card_hash("cards", elements, "square"))
     else
-      message_array = []
-      text = "Oops, tu n'as aucune annonce en favori..."
+      text = "Oops, tu n'as aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
     end
 
-    return message_array
-  end
-
-  # This method is bulding a json_gallery card of all images of a property
-  def create_gallery_images_property(property)
-    elements = []
-    property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.get_short_description, img["url"], property.link))
-      elements.length === 10 ? break : nil
-    end
-    puts elements
-    message_array = []
-    message_array.push(create_message_card_hash("cards", elements, "square"))
-
-    return message_array
-  end
-
-  # This method is bulding a simple json card of a dynamic button with a caption
-  def create_dynamic_text_card(btn_caption, webhook, method, text, body = {})
-    buttons = []
-    buttons.push(create_dynamic_button_hash(btn_caption, webhook, method, body))
-    message_array = []
-    message_hash = {}
-    message_hash[:type] = "text"
-    message_hash[:text] = text
-    message_hash[:buttons] = buttons
-    message_array.push(message_hash)
     return message_array
   end
 
@@ -239,31 +222,32 @@ class Manychat
     qr = [{
       "type": "flow",
       "caption": "🏠 5 annonces",
-      "target": "content20200217174711_881728",
+      "target": ENV["QR_ADS"],
     },
           {
       "type": "flow",
-      "caption": "💸 Crédit",
-      "target": "content20200218154133_249216",
-    }, {
+      "caption": "🔎 Mes critères",
+      "target": ENV["QR_CRITERIA"],
+    },
+          {
       "type": "flow",
-      "caption": "🔨Travaux",
-      "target": "content20200220114201_128307",
+      "caption": "💸 Prêt",
+      "target": ENV["QR_LOAN"],
     },
           {
       "type": "flow",
       "caption": "🏘️ Estimation",
-      "target": "content20200218153050_985402",
+      "target": ENV["QR_ESTIM"],
     },
           {
       "type": "flow",
       "caption": "💡 Conseil",
-      "target": "content20200217174711_881728",
+      "target": ENV["QR_ADVICE"],
     },
           {
       "type": "flow",
       "caption": "⛔ Stop",
-      "target": "system_unsubscribe20200210180528_020203",
+      "target": ENV["QR_UNSUBS"],
     }]
     return qr
   end
@@ -275,6 +259,12 @@ class Manychat
   #----------------
   # buttons
   #----------------
+  def create_share_button_hash
+    btn = {}
+    btn[:type] = "share"
+    return btn
+  end
+
   def create_url_button_hash(caption, url)
     btn = {}
     btn[:type] = "url"
@@ -334,6 +324,22 @@ class Manychat
     message[:type] = "text"
     message[:text] = text
     return message
+  end
+
+  #----------------
+  # cards
+  #----------------
+  # This method is bulding a simple json card of a dynamic button with a caption
+  def create_dynamic_text_card(btn_caption, webhook, method, text, body = {})
+    buttons = []
+    buttons.push(create_dynamic_button_hash(btn_caption, webhook, method, body))
+    message_array = []
+    message_hash = {}
+    message_hash[:type] = "text"
+    message_hash[:text] = text
+    message_hash[:buttons] = buttons
+    message_array.push(message_hash)
+    return message_array
   end
 
   #----------------

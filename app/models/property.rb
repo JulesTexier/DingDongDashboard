@@ -42,10 +42,10 @@ class Property < ApplicationRecord
 
     def get_cover
         default_img = {}
-        default_img[:url] = DEFAULT_IMG_URL
+        default_img['url'] = DEFAULT_IMG_URL
 
         if self.images.empty? 
-            return default_image[:url]
+            return default_img['url']
         else
             return self.images.first.url
         end
@@ -55,13 +55,24 @@ class Property < ApplicationRecord
         return "🏠 " + self.price.to_s + "€ - " + self.surface.to_s + "m2 - " + self.area
     end
 
+    def get_attribues_description
+        description = ''
+        self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
+        self.surface > 0 ? description = description + "\u000A📐 " + self.surface.to_s + " m2" : nil
+        self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i.to_s + " €/m2" : nil
+        self.area != nil ? description = description + "\u000A📌 " + self.area : nil
+        description = description + "\u000A⏱️ Postée le " + self.created_at.strftime("%d/%m").to_s + " à " + self.created_at.strftime("%H:%M").to_s
+        description += self.get_short_description        
+        return description
+    end
+
     def get_short_description
         description = ''
         self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
         self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
-        self.rooms_number > 1 ? description += "\u000A🛏️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
-        self.floor != nil ? description = description + "\u000A🏨 " + "Etage : " + self.floor.to_s : nil
-        self.has_elevator ? description = description + "\u000A↕ Avec ascenseur" : nil
+        self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
+        self.floor != nil ? description = description + "\u000A↕ " + "Etage : " + self.floor.to_s : nil
+        self.has_elevator ? description = description + "\u000A🚠 Avec ascenseur" : nil
 
         return description
     end
