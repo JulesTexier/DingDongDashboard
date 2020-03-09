@@ -34,9 +34,6 @@ class Broadcaster
       matched_props = []
       properties.each do |prop|
         matched_props.push(prop) if sub.is_matching_property?(prop)
-        matched_props.push(prop) if sub.is_matching_property?(prop)
-        matched_props.push(prop) if sub.is_matching_property?(prop)
-        matched_props.push(prop) if sub.is_matching_property?(prop)
       end
       if matched_props.length > 0
        @manychat_client.send_gallery_properties_card(sub, matched_props)
