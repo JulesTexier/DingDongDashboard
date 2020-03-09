@@ -20,6 +20,7 @@ namespace :scraper do
     puts "Launching Dynamic Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    ScraperOrpi.new.extract_first_page
     ScraperBienIci.new.extract_first_page
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Dynamic Scraper script took #{ending - starting} seconds to run"

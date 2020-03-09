@@ -65,9 +65,17 @@ class String
   end
 
   def elevator_str_scrp
-    regex_lift = "(avec ascenseur|sans ascenseur)"
+    regex_lift = "(avec ascenseur)"
     has_a_lift = self.match(/#{regex_lift}/i)
-    has_a_lift.is_a?(MatchData) ? lift = true : lift = false
+    regex_no_lift = "(sans ascenseur)"
+    has_no_lift = self.match(/#{regex_lift}/i)
+    if has_a_lift.is_a?(MatchData)
+      lift = true
+    elsif has_no_lift.is_a?(MatchData)
+      lift = false
+    else
+      lift = nil
+    end
     return lift
   end
 
