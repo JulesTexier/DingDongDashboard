@@ -25,12 +25,7 @@ class Manychat
 
   # This method is sending a gallery of all the images of a property + The text description (i.e. : internal chatbot Property Show use)
   def send_property_info_post_interaction(subscriber, property)
-    first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property)))
-    if first_call[0]
-      return handle_manychat_response(send_content(subscriber, create_show_text_card(property, subscriber)))
-    else
-      return first_call
-    end
+    first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
   end
 
   # ------
@@ -152,11 +147,21 @@ class Manychat
   end
 
   # This method is bulding a json_gallery card of all images of a property
-  def create_gallery_images_property(property)
+  def create_gallery_images_property(property, subscriber = nil)
+    buttons = []
+    buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
+    if property.contact_number != nil && property.contact_number != "N/C"
+      property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
+      buttons.push(create_call_button_hash(caption, property.contact_number))
+    end
+    webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
+    body_fav = { subscriber_id: subscriber.id, property_id: property.id }
+    buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
+    
     elements = []
     photo_counter = 1
     property.get_images.each do |img|
-      elements.push(create_message_element_hash("Photo #{photo_counter} sur #{property.get_images.count}", "", img["url"], property.link))
+      elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, img["url"], property.link, buttons))
       elements.length === 10 ? break : nil
       photo_counter += 1
     end
