@@ -1,6 +1,7 @@
 require "nokogiri"
 require "open-uri"
 require "dotenv/load"
+require "watir"
 
 class Scraper
   def enrich_then_insert(hashed_properties)
@@ -35,10 +36,11 @@ class Scraper
 
   def fetch_dynamic_page(url, waiting_class)
     browser = Watir::Browser.new :chrome, headless: true
-    browser.ignore_exceptions = true
     browser.goto url
-    browser.link(class: waiting_class).wait_until(&:present?)
+    browser.div(class: waiting_class).wait_until(&:present?)
     page = Nokogiri::HTML.parse(browser.html)
+    browser.close
+    return page
   end
 
   def fetch_captcha_page(url)
