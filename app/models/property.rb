@@ -52,16 +52,16 @@ class Property < ApplicationRecord
     end
 
     def get_title
-        return "🏠 " + self.price.to_s + "€ - " + self.surface.to_s + "m2 - " + self.area
+        return "🏠 " + self.price.to_s + "€ - " + self.surface.to_s + "m2 - " + get_pretty_area
     end
 
     def get_attribues_description
         description = ''
-        self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
-        self.surface > 0 ? description = description + "\u000A📐 " + self.surface.to_s + " m2" : nil
+        description = description + "\u000A⏱️ Postée le " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
+        # self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
+        # self.surface > 0 ? description = description + " - 📐 " + self.surface.to_s + " m2" : nil
         self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i.to_s + " €/m2" : nil
         self.area != nil ? description = description + "\u000A📌 " + self.area : nil
-        description = description + "\u000A⏱️ Postée le " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
         description += self.get_short_description        
         return description
     end
@@ -77,10 +77,28 @@ class Property < ApplicationRecord
         return description
     end
 
+    def manychat_show_description
+        description = ''
+        self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + "p" : nil
+        self.floor != nil ? description = description + " - ↕ Et.  " + self.floor.to_s : nil
+        self.has_elevator ? description = description + " - 🚠 Asc" : nil
+        description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
+
+    end
+
     def get_long_description
         description = ''
         self.description != "N/C" && !self.description.nil? ? description = "Description 💬 :\u000A" + self.description[0..600] + " ..." : nil
         return description
+    end
+
+    def get_pretty_area
+        if self.area[3..3] == "0"
+            self.area[4..4] == "1" ? pretty_area = "1er" : pretty_area = "#{self.area[4..4]}ème"
+        else
+            pretty_area = "#{self.area[3..4]}ème"
+        end 
+        return pretty_area
     end
 
     def get_matching_subscribers
