@@ -37,7 +37,6 @@ class Broadcaster
       end
       if matched_props.length > 0
        @manychat_client.send_gallery_properties_card(sub, matched_props)
-       @manychat_client.send_gallery_properties_card(sub, matched_props) 
        if matched_props.length < 10
 
        elsif matched_props.length >= 10 && matched_props.length < 20
