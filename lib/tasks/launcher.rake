@@ -38,13 +38,13 @@ end
 namespace :broadcast do
   desc "This is a task for broadcasting messages to our users."
 
-  task :new_properties do
+  task :new_properties_gallery do
     puts "This will broadcast new scraped properties to active subscribers"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    data = Broadcaster.new.new_properties
+    Broadcaster.new.new_properties_gallery
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The new_properties broadcast script took #{ending - starting} seconds to run"
-    puts "The new_properties broadcast script sent #{data[0]} properties for a total of #{data[1]} sendings"
+    # puts "The new_properties broadcast script sent #{data[0]} properties for a total of #{data[1]} sendings"
   end
 
   task :good_morning do

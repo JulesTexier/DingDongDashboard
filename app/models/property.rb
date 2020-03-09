@@ -127,5 +127,9 @@ class Property < ApplicationRecord
         end
     end
 
+    def self.unprocessed
+        self.where(has_been_processed: false)
+      end
+
 
 end
