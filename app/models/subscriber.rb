@@ -140,22 +140,30 @@ class Subscriber < ApplicationRecord
   end
 
   def is_matching_property_floor(property)
-    if !property.floor.nil?
-      (property.floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
-    else
+    if self.min_floor.nil?
       return true
+    else
+      if !property.floor.nil?
+        (property.floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
+      else
+        return true
+      end
     end
   end
 
   def is_matching_property_elevator_floor(property)
-    if !property.has_elevator.nil?
-      if property.has_elevator
-        return true
-      else
-        (property.floor.to_i < self.min_elevator_floor ? true : false) if !self.min_elevator_floor.nil?
-      end
+    if self.min_elevator_floor.nil?
+      return true 
     else
-      return true
+      if !property.has_elevator.nil?
+        if property.has_elevator
+          return true
+        else
+          property.floor.to_i < self.min_elevator_floor ? true : false
+        end
+      else
+        return true
+      end
     end
   end
 
