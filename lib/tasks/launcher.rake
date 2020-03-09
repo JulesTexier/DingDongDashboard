@@ -4,6 +4,8 @@ namespace :scraper do
   desc "Raketasks for scrapers."
 
   task :regular do
+    puts "Launching Regular Scraper"
+    puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     ScraperPap.new.extract_first_page
     ScraperFigaro.new.extract_first_page
@@ -11,16 +13,27 @@ namespace :scraper do
     ScraperLogicImmo.new.extract_first_page
     ScraperSuperImmo.new.extract_first_page
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    puts "The Regular Scraper script took #{ending - starting} seconds to run"
+    puts "\nThe Regular Scraper script took #{ending - starting} seconds to run"
+  end
+
+  task :dynamic do
+    puts "Launching Dynamic Scraper"
+    puts "...\n\n"
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    ScraperBienIci.new.extract_first_page
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "\nThe Dynamic Scraper script took #{ending - starting} seconds to run"
   end
 
   task :premium do
+    puts "Launching Premium Scraper"
+    puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     ScraperLeBonCoin.new.extract_first_page
     ScraperSeLoger.new.extract_first_page
     ScraperMeilleursAgents.new.extract_first_page
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    puts "The Premium Scraper script took #{ending - starting} seconds to run"
+    puts "\nThe Premium Scraper script took #{ending - starting} seconds to run"
   end
 end
 
