@@ -152,7 +152,7 @@ class Subscriber < ApplicationRecord
       if property.has_elevator
         return true
       else
-        (property.floor.to_i >= self.min_elevator_floor ? true : false) if !self.min_elevator_floor.nil?
+        (property.floor.to_i < self.min_elevator_floor ? true : false) if !self.min_elevator_floor.nil?
       end
     else
       return true

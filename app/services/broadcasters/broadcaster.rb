@@ -12,7 +12,7 @@ class Broadcaster
     properties_counter = 0
     subscribers_counter = 0
     
-    properties = get_unprocessed_properties
+    properties = Property.unprocessed
     properties_counter = properties.length
     properties.each do |prop|
       subscribers = prop.get_matching_subscribers
@@ -24,6 +24,38 @@ class Broadcaster
       prop.save
     end
     return [properties_counter, subscribers_counter]
+  end
+
+  def new_properties_gallery 
+    properties = Property.unprocessed
+    subscribers = Subscriber.active
+
+    subscribers.each do |sub|
+      matched_props = []
+      properties.each do |prop|
+        matched_props.push(prop) if sub.is_matching_property?(prop)
+      end
+      if matched_props.length > 0
+       @manychat_client.send_gallery_properties_card(sub, matched_props)
+       if matched_props.length < 10
+
+       elsif matched_props.length >= 10 && matched_props.length < 20
+        @manychat_client.send_gallery_properties_card(sub, matched_props[0..9])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[10..19])
+
+       elsif matched_props.length >= 20 && matched_props.length < 30
+        @manychat_client.send_gallery_properties_card(sub, matched_props[0..9])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[10..19])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[20..29])
+       end
+
+      end
+
+      puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}" 
+    end
+
+    update_processed_properties(properties)
+
   end
   
 
