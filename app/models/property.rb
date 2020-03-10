@@ -47,7 +47,7 @@ class Property < ApplicationRecord
     else
       return self.images.first.url
     end
-end
+	end
 
   def manychat_show_description
     description = ''
