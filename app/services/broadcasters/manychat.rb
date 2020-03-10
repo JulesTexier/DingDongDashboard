@@ -156,7 +156,7 @@ class Manychat
     end
 
     message_array = []
-    message_array.push(create_message_card_hash("cards", elements, "square"))
+    message_array.push(create_message_card_hash("cards", elements, "horizontal"))
 
     return message_array
   end
