@@ -14,7 +14,7 @@ class ScraperOrpi < Scraper
       begin
         hashed_property = {}
         hashed_property[:link] = "https://www.orpi.com" + access_xml_link(item, "a.u-link-unstyled.c-overlay__link", "href")[0].to_s
-        hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "a.u-link-unstyled.c-overlay__link").specific_trim_scrp("\n\r\t"), '(\d+(,?)(\d)?)(.)m').to_int_scrp
+        hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "a.u-link-unstyled.c-overlay__link").specific_trim_scrp("\n\r\t"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = "750" + access_xml_text(item, "p.u-mt-sm").tr("^0-9", "")
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "a.u-link-unstyled.c-overlay__link"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div:nth-child(1) > div:nth-child(2)"), '(\d)(.*)(€)').to_int_scrp
