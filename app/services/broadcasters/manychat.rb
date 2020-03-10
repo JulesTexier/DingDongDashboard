@@ -260,7 +260,7 @@ class Manychat
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
         # 2nd btn : Remove from fav
         webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
-        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
+        buttons.push(create_dynamic_button_hash("💔 Retirer des favoris", webhook_delete_fav, "DELETE"))
 
         elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, buttons))
         elements.length == 10 ? break : nil
