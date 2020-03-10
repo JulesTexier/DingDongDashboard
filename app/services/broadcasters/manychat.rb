@@ -23,6 +23,11 @@ class Manychat
     return handle_manychat_response(send_content(subscriber, create_gallery_card(properties, subscriber)))
   end
 
+  # This method send a gallery of a bunch of properties card to subscriber (i.e. : latest properties, morning properties ....)
+  def send_gallery_properties_card_with_header(subscriber, properties)
+    return handle_manychat_response(send_content(subscriber, create_gallery_card_with_header(properties, subscriber)))
+  end
+
   # This method is sending a gallery of all the images of a property + The text description (i.e. : internal chatbot Property Show use)
   def send_property_info_post_interaction(subscriber, property)
     first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
@@ -109,6 +114,16 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
+  def create_header_gallery_element(number_of_properties)
+    title = "🍾 "
+    number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
+    subtitle = "Fais défiler pour les découvrir ! ️↪️"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/#{number_of_properties}.png"
+    action_url = "https://hellodingdong.com/"
+    create_message_element_hash(title, subtitle, image_url, action_url, buttons_array = [])
+    
+  end
+
   # This method prepare a message view for a property that can be included in a card or a gallery of cards
   def create_property_element(property, subscriber = nil)
     buttons = []
@@ -133,7 +148,7 @@ class Manychat
 
   # This method is building a json_gallery of cards for each property with the first image of each property
   def create_gallery_card(properties, subscriber = nil)
-    properties.length > 10 ? properties = properties[0..9] : nil
+    properties.length > 9 ? properties = properties[0..9] : nil
 
     elements = []
     properties.each do |property|
@@ -142,6 +157,22 @@ class Manychat
 
     message_array = []
     message_array.push(create_message_card_hash("cards", elements, "square"))
+
+    return message_array
+  end
+
+  # This method is building a json_gallery of cards for each property with the first image of each property with a header card
+  def create_gallery_card_with_header(properties, subscriber = nil)
+    properties.length > 9 ? properties = properties[0..8] : nil
+
+    elements = []
+    elements.push(create_header_gallery_element(properties.length))
+    properties.each do |property|
+      elements.push(create_property_element(property, subscriber))
+    end
+
+    message_array = []
+    message_array.push(create_message_card_hash("cards", elements, "horizontal"))
 
     return message_array
   end
@@ -302,7 +333,7 @@ class Manychat
   #----------------
   # elements
   #----------------
-  def create_message_element_hash(title, subtitle, image_url, action_url, buttons_array = [])
+  def create_message_element_hash(title, subtitle, image_url, action_url = "", buttons_array = [])
     element = {}
     element[:title] = title
     element[:subtitle] = subtitle
