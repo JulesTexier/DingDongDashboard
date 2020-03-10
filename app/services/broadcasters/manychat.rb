@@ -119,25 +119,25 @@ class Manychat
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
     number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
     image_url = "https://www.hellodingdong.com/content/gallery/rectangle/new_properties/#{number_of_properties}.png"
-    action_url = "https://hellodingdong.com/"
-    create_header_gallery_element(title, subtitle, image_url,  action_url)
+    # action_url = "https://hellodingdong.com/"
+    create_header_gallery_element(title, subtitle, image_url)
   end
 
   def create_header_gallery_element_last_properties(number_of_properties)
     title = "🌟 "
     number_of_properties == 1 ? title += "Voici ta dernière annonce !" : title += "Voici tes #{number_of_properties} dernières annonces !"
     number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
-    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_properties/#{number_of_properties}.png"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_properties/#{number_of_properties}.jpg"
     action_url = "https://hellodingdong.com/"
-    create_header_gallery_element(title, subtitle, image_url,  action_url)
+    create_header_gallery_element(title, subtitle, image_url)
   end
 
   def create_header_gallery_element_favorites
     title = "❤️ Favoris"
     subtitle = "Retrouve ici tous tes favoris! ️↪️"
-    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/favoris/favoris.png"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/favorites/favoris.jpg"
     action_url = "https://hellodingdong.com/"
-    create_header_gallery_element(title, subtitle, image_url,  action_url)
+    create_header_gallery_element(title, subtitle, image_url)
   end
 
   
@@ -152,7 +152,7 @@ class Manychat
       buttons.push(create_dynamic_button_hash("🙋 Voir plus", webhook, "GET"))
     end
 
-    return create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, property.link, buttons)
+    return create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, buttons)
   end
 
   # This method is building a single json_card for a property with the first image of the property
@@ -211,7 +211,7 @@ class Manychat
     elements = []
     photo_counter = 1
     property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, img["url"], property.link, buttons))
+      elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, img["url"], buttons))
       elements.length === 10 ? break : nil
       photo_counter += 1
     end
@@ -261,7 +261,8 @@ class Manychat
         # 2nd btn : Remove from fav
         webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
         buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
-        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
+
+        elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, buttons))
         elements.length == 10 ? break : nil
       end
       message_array.push(create_message_card_hash("cards", elements, "horizontal"))
@@ -315,12 +316,12 @@ class Manychat
   #----------------
   # header for gallery
   #----------------
-  def create_header_gallery_element(title, subtitle, image_url,  action_url, buttons_array = [])
+  def create_header_gallery_element(title, subtitle, image_url, buttons_array = [])
     title = title
     subtitle = subtitle
     image_url = image_url
-    action_url = action_url
-    create_message_element_hash(title, subtitle, image_url, action_url, buttons_array)
+    # action_url = action_url
+    create_message_element_hash(title, subtitle, image_url, buttons_array)
   end
 
   #----------------
@@ -365,12 +366,12 @@ class Manychat
   #----------------
   # elements
   #----------------
-  def create_message_element_hash(title, subtitle, image_url, action_url = "", buttons_array = [])
+  def create_message_element_hash(title, subtitle, image_url, buttons_array = [])
     element = {}
     element[:title] = title
     element[:subtitle] = subtitle
     element[:image_url] = image_url
-    element[:action_url] = action_url
+    # element[:action_url] = action_url
     element[:buttons] = buttons_array
     return element
   end
