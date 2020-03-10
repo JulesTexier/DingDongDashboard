@@ -24,8 +24,8 @@ class Manychat
   end
 
   # This method send a gallery of a bunch of properties card to subscriber (i.e. : latest properties, morning properties ....)
-  def send_gallery_properties_card_with_header(subscriber, properties)
-    return handle_manychat_response(send_content(subscriber, create_gallery_card_with_header(properties, subscriber)))
+  def send_gallery_properties_card_with_header(template, subscriber, properties)
+    return handle_manychat_response(send_content(subscriber, create_gallery_card_with_header(template, properties, subscriber)))
   end
 
   # This method is sending a gallery of all the images of a property + The text description (i.e. : internal chatbot Property Show use)
@@ -114,15 +114,33 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
-  def create_header_gallery_element(number_of_properties)
+  def create_header_gallery_element_new_properties(number_of_properties)
     title = "🍾 "
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
-    subtitle = "Fais défiler pour les découvrir ! ️↪️"
-    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/#{number_of_properties}.png"
+    number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/new_properties/#{number_of_properties}.png"
     action_url = "https://hellodingdong.com/"
-    create_message_element_hash(title, subtitle, image_url, action_url, buttons_array = [])
-    
+    create_header_gallery_element(title, subtitle, image_url,  action_url)
   end
+
+  def create_header_gallery_element_last_properties(number_of_properties)
+    title = "🌟 "
+    number_of_properties == 1 ? title += "Voici ta dernière annonce !" : title += "Voici tes #{number_of_properties} dernières annonces !"
+    number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_properties/#{number_of_properties}.png"
+    action_url = "https://hellodingdong.com/"
+    create_header_gallery_element(title, subtitle, image_url,  action_url)
+  end
+
+  def create_header_gallery_element_favorites
+    title = "❤️ Favoris"
+    subtitle = "Retrouve ici tous tes favoris! ️↪️"
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/favoris/favoris.png"
+    action_url = "https://hellodingdong.com/"
+    create_header_gallery_element(title, subtitle, image_url,  action_url)
+  end
+
+  
 
   # This method prepare a message view for a property that can be included in a card or a gallery of cards
   def create_property_element(property, subscriber = nil)
@@ -162,11 +180,12 @@ class Manychat
   end
 
   # This method is building a json_gallery of cards for each property with the first image of each property with a header card
-  def create_gallery_card_with_header(properties, subscriber = nil)
+  def create_gallery_card_with_header(template, properties, subscriber = nil)
     properties.length > 9 ? properties = properties[0..8] : nil
 
     elements = []
-    elements.push(create_header_gallery_element(properties.length))
+    elements.push(create_header_gallery_element_new_properties(properties.length)) if template === "new_properties"
+    elements.push(create_header_gallery_element_last_properties(properties.length)) if template === "last_properties"
     properties.each do |property|
       elements.push(create_property_element(property, subscriber))
     end
@@ -232,6 +251,7 @@ class Manychat
     message_array = []
 
     elements = []
+    elements.push(create_header_gallery_element_favorites)
     if favs.length > 0
       favs.each do |fav|
         property = fav.property
@@ -242,8 +262,9 @@ class Manychat
         webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
         buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
         elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, property.link, buttons))
+        elements.length == 10 ? break : nil
       end
-      message_array.push(create_message_card_hash("cards", elements, "square"))
+      message_array.push(create_message_card_hash("cards", elements, "horizontal"))
     else
       text = "Oops, tu n'as aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
@@ -290,6 +311,17 @@ class Manychat
   ##################################################################
   # STANDARD MANYCHAT COMPONENTS (Building unofficial ManyChat gem)
   ##################################################################
+
+  #----------------
+  # header for gallery
+  #----------------
+  def create_header_gallery_element(title, subtitle, image_url,  action_url, buttons_array = [])
+    title = title
+    subtitle = subtitle
+    image_url = image_url
+    action_url = action_url
+    create_message_element_hash(title, subtitle, image_url, action_url, buttons_array)
+  end
 
   #----------------
   # buttons
