@@ -12,17 +12,17 @@ class SubscribersController < ApplicationController
   def update
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
-    if @subscriber.update(subscriber_params)
+    if @subscriber.update(subscriber_params) && !params[:selected_area].nil?
       params[:selected_area].each do |area_id|
         SelectedArea.create(subscriber:@subscriber, area_id:area_id)
       end
-      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre et cliquez sur '👌C'est fait' pour continuer."
+      flash[:success] = "Les critères sont enregistrés ! Ferme cette fenêtre pour continuer."
     else 
-      flash[:danger] = []
-      @user.errors.full_messages.each do |message|
-        flash[:danger] << message
-      end
-      flash[:danger] = flash[:danger].join(" & ")
+      flash[:danger] = "Sélectionne des arrondissements..."
+      # @subscriber.errors.full_messages.each do |message|
+      #   flash[:danger] << message
+      # end
+      # flash[:danger] = flash[:danger].join(" & ")
     end
     redirect_to edit_subscriber_path
   end
