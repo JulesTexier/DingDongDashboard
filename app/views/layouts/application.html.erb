@@ -24,6 +24,11 @@
         <%= flash[:success] %>
       </div>
     <%end%>
+    <%if flash[:danger] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:danger] %>
+      </div>
+    <%end%>
       <%= yield %>
     </div>
 

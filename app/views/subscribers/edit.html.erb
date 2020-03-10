@@ -2,11 +2,28 @@
 
     <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
-            <%= f.submit "Enregistrer mes critères 🚀", class: "btn btn-outline-light", style:"font-weight:600" %>
+            <%= f.submit "Enregistrer mes critères 🚀", 
+                class: "btn btn-outline-light", 
+                style:"font-weight:600"
+            %>
         </div>
     </nav>
     
         <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
+
+   
+        <div class="d-flex flex-wrap">
+            <div class="form-check mr-3">
+                <input 
+                    type="checkbox" 
+                    id="tous" 
+                    class="form-check-input"
+                    onclick="selectAll(className)"
+                >
+                <label for="tous">Tous / Aucun</label>
+            </div>
+        </div>
+
 
     
         <div class="d-flex flex-wrap">
@@ -72,19 +89,38 @@
     
     
     
-    <script>
+<script>
     
     function changeColor(className) {
       let item = document.getElementsByClassName(className)[0]
-      let checkboxValue = item.children[0].checked
+      let label = item.children[1]
+      let checkboxValue = item.children[0].children[0].checked
     
       if(checkboxValue){ 
-          item.style.color = "#57b894"
+          label.style.color = "#57b894"
         }
       else{
-          item.style.color = "black"
+          label.style.color = "black"
         }
-    
-      console.log(item, checkboxValue);
     }
-    </script>
+
+
+    function selectAll(className) {
+        let all_items = document.getElementsByClassName(className)
+
+        if(all_items[0].checked){
+            for(i=1; i < 21; i++){
+                all_items[i].checked = true;
+                all_items[i].parentNode.nextElementSibling.style.color = "#57b894"
+            }
+        }
+        else{
+            for(i=1; i < 21; i++){
+                all_items[i].checked = false;
+                all_items[i].parentNode.nextElementSibling.style.color = "black"
+            }
+        }
+    }
+
+
+</script>
