@@ -51,10 +51,16 @@ class Property < ApplicationRecord
 
   def manychat_show_description
     description = ''
-    self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + "p" : nil
-    self.floor != nil ? description = description + " ↕ Et.  " + self.floor.to_s : nil
-    self.has_elevator ? description = description + " 🚠 Asc" : nil
+    self.rooms_number > 1 ? description += "\u000A🛋️ " + self.rooms_number.to_s + "p" : nil
+    self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
+    self.has_elevator ? description = description + "   🚠 Asc" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
+  end
+
+  def manychat_show_description_with_title
+    description = ''
+    description += self.get_title
+    description += self.manychat_show_description
   end
 
   def get_title
