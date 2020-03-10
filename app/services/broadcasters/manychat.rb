@@ -151,7 +151,6 @@ class Manychat
       webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
       buttons.push(create_dynamic_button_hash("🙋 Voir plus", webhook, "GET"))
     end
-
     return create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, buttons)
   end
 
@@ -210,8 +209,9 @@ class Manychat
     
     elements = []
     photo_counter = 1
+    property.get_images.count <=10 ? total_pic = property.get_images.count : total_pic = 10
     property.get_images.each do |img|
-      elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, img["url"], buttons))
+      elements.push(create_message_element_hash("📷 Photo #{photo_counter}/#{total_pic}", property.manychat_show_description_with_title, img["url"], buttons))
       elements.length === 10 ? break : nil
       photo_counter += 1
     end
@@ -260,7 +260,7 @@ class Manychat
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
         # 2nd btn : Remove from fav
         webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
-        buttons.push(create_dynamic_button_hash("⛔ Retirer des favoris", webhook_delete_fav, "DELETE"))
+        buttons.push(create_dynamic_button_hash("💔 Retirer des favoris", webhook_delete_fav, "DELETE"))
 
         elements.push(create_message_element_hash(property.get_title, property.get_short_description, property.get_cover, buttons))
         elements.length == 10 ? break : nil
