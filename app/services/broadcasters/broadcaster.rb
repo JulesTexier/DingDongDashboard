@@ -36,17 +36,17 @@ class Broadcaster
         matched_props.push(prop) if sub.is_matching_property?(prop)
       end
       if matched_props.length > 0
-       @manychat_client.send_gallery_properties_card_with_header(sub, matched_props)
-       if matched_props.length < 10
+       @manychat_client.create_gallery_card_with_header_new_properties(sub, matched_props)
+       if matched_props.length < 9
 
-       elsif matched_props.length >= 10 && matched_props.length < 20
-        @manychat_client.send_gallery_properties_card_with_header(sub, matched_props[0..9])
-        @manychat_client.send_gallery_properties_card_with_header(sub, matched_props[10..19])
+       elsif matched_props.length >= 9 && matched_props.length < 19
+        @manychat_client.create_gallery_card_with_header_new_properties(sub, matched_props[0..8])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[9..18])
 
-       elsif matched_props.length >= 20 && matched_props.length < 30
-        @manychat_client.send_gallery_properties_card_with_header(sub, matched_props[0..9])
-        @manychat_client.send_gallery_properties_card_with_header(sub, matched_props[10..19])
-        @manychat_client.send_gallery_properties_card_with_header(sub, matched_props[20..29])
+       elsif matched_props.length >= 19 && matched_props.length < 29
+        @manychat_client.create_gallery_card_with_header_new_properties(sub, matched_props[0..8])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[9..18])
+        @manychat_client.send_gallery_properties_card(sub, matched_props[19..28])
        end
 
       end

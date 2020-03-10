@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning"
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details"
       get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites"
-      get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#get_x_last_props"
+      get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props"
     end
   end
 

@@ -36,11 +36,11 @@ class Api::V1::ManychatController < ApplicationController
 
   #GET /manychat/s/:subscriber_id/send/last/:x/props
   # Send X lasts properties that match Subscriber criteria
-  def get_x_last_props
+  def send_x_last_props
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       props = subscriber.get_x_last_props(params[:x])
-      props.length > 0 ? (render json: send_multiple_properties(subscriber, props)) : (render json: { status: "ERROR", message: "There is no latest props for this subscriber", data: nil }, status: 404)
+      props.length > 0 ? (render json: send_multiple_properties(subscriber, props, "last_properties")) : (render json: { status: "ERROR", message: "There is no latest props for this subscriber", data: nil }, status: 404)
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -102,9 +102,13 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  def send_multiple_properties(subscriber, properties)
+  def send_multiple_properties(subscriber, properties, template = nil)
     m = Manychat.new
-    response = m.send_gallery_properties_card(subscriber, properties)
+    if !template.nil?
+        response = m.send_gallery_properties_card_with_header(template,subscriber, properties)
+    else 
+        response = m.send_gallery_properties_card(subscriber, properties)
+    end
     if response[0]
       return { status: "SUCCESS", message: "#{properties.length} propert(y)(ies) sent to subscriber", data: response[1] }, status: 200
     else
