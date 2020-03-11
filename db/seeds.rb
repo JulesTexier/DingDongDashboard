@@ -9,15 +9,10 @@ MONGODB_CONN_URL='mongodb://staging00:6rgsPeTykgy4VTrz@SG-ClusterDD-24238.server
 
 Subscriber.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("subscribers")
-Property.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!("properties")
 Area.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("areas")
 SelectedArea.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("selected_areas")
-PropertyImage.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!("property_images")
-
 
 # AREA REFERENCES
 i = 1
