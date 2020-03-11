@@ -35,7 +35,7 @@ end
 
 # Subscribers
 
-subs_to_copy = @tiger[:subscribers].find({is_active: true, type: "to_buy", facebook_id: "2827641220632020" })
+subs_to_copy = @tiger[:subscribers].find({is_active: true, type: "to_buy"})
 puts "#{subs_to_copy.count} à copier"
 
 subs_to_copy.each do |sub_to_copy|
