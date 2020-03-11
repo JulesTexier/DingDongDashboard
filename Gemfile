@@ -47,6 +47,9 @@ gem "table_print"
 # RSPEC
 gem "rspec-rails", "~> 3.5"
 
+# Mongo gem for migration purpose
+gem 'mongo', '~> 2.7'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,7 +65,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rb-readline"
   gem "pry", "~> 0.12.2"
-  gem 'mongo', '~> 2.7'
 end
 
 group :test do
