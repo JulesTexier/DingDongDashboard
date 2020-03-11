@@ -23,14 +23,12 @@ default: &default
 
 development:
   <<: *default
-  database: giant_cat_development
-  # host: SG-dingdong-498-pgsql-master.servers.mongodirector.com
-  # port: 5432
-  # database: giant_puma_test
-  # username: test00
-  # password: 9xcwS%k9z8s"a^RvGb4iG
-  # sslmode: verify-full
-  # sslrootcert : config/pg.crt
+  # database: giant_cat_development
+  host: kandula.db.elephantsql.com
+  port: 5432
+  database: xfwzvnqn
+  username: xfwzvnqn
+  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -64,7 +62,13 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: giant_cat_test
+  # database: giant_cat_test
+  host: kandula.db.elephantsql.com
+  port: 5432
+  database: xfwzvnqn
+  username: xfwzvnqn
+  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
+
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -95,4 +99,3 @@ production:
   database: glnjufeb
   username: glnjufeb
   password: T69nyTegc_mQvWJ-KKXv9plNQzAZidb3
-
