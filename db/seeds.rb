@@ -83,42 +83,44 @@ subs_to_copy.each do |sub_to_copy|
     response = JSON.parse(get_infos_request.response.options[:response_body])
 
     # Je loop dans le hash et récupère les datas des custom_fields
-    response["data"]["custom_fields"].each do |cusfield|
-      # Dés que j'atteins un custom field dont le nom est "ID"
-      # je fais une requete pour updaté son custom field fiavec sa nouvelle ID
-      # puts cusfield = cusfield[]
-      if cusfield["name"] == "id"
-        body_request = {}
-        # Je fais un hash ISO manychat
-        body_request[:subscriber_id] = sub.facebook_id
-        body_request[:field_name] = "id"
-        body_request[:field_value] = sub.id.to_s ## <- TA NEW ID
-        puts body_request.to_json
-        # Je fais la requete post de set Custom Field
-        set_custom_field_request = Typhoeus::Request.new(
-          "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
-          method: :post,
-          body: body_request.to_json,
-          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
-        )
-        set_custom_field_request.run
-        # puts JSON.parse(set_custom_field_request.response.options[:response_body])
+    if !response["data"].nil?
+      response["data"]["custom_fields"].each do |cusfield|
+        # Dés que j'atteins un custom field dont le nom est "ID"
+        # je fais une requete pour updaté son custom field fiavec sa nouvelle ID
+        # puts cusfield = cusfield[]
+        if cusfield["name"] == "id"
+          body_request = {}
+          # Je fais un hash ISO manychat
+          body_request[:subscriber_id] = sub.facebook_id
+          body_request[:field_name] = "id"
+          body_request[:field_value] = sub.id.to_s ## <- TA NEW ID
+          puts body_request.to_json
+          # Je fais la requete post de set Custom Field
+          set_custom_field_request = Typhoeus::Request.new(
+            "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
+            method: :post,
+            body: body_request.to_json,
+            headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
+          )
+          set_custom_field_request.run
+          # puts JSON.parse(set_custom_field_request.response.options[:response_body])
 
-        body_request = {}
-        # Je fais un hash ISO manychat
-        body_request[:subscriber_id] = sub.facebook_id
-        body_request[:field_name] = "criteria_page"
-        body_request[:field_value] = "https://giant-cat.herokuapp.com/subscribers/#{sub.id.to_s}/edit" ## <- TA NEW ID
-        puts body_request.to_json
-        # Je fais la requete post de set Custom Field
-        set_custom_field_request = Typhoeus::Request.new(
-          "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
-          method: :post,
-          body: body_request.to_json,
-          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
-        )
-        set_custom_field_request.run
+          body_request = {}
+          # Je fais un hash ISO manychat
+          body_request[:subscriber_id] = sub.facebook_id
+          body_request[:field_name] = "criteria_page"
+          body_request[:field_value] = "https://giant-cat.herokuapp.com/subscribers/#{sub.id.to_s}/edit" ## <- TA NEW ID
+          puts body_request.to_json
+          # Je fais la requete post de set Custom Field
+          set_custom_field_request = Typhoeus::Request.new(
+            "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
+            method: :post,
+            body: body_request.to_json,
+            headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
+          )
+          set_custom_field_request.run
 
+        end
       end
     end
 
