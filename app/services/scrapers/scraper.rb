@@ -65,6 +65,24 @@ class Scraper
     end
   end
 
+  def fetch_many_pages(url, page_nbr, xml_first_page)
+    i = 1
+    xml = []
+    page_nbr.times do
+      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
+      i += 1
+    end
+    return xml.flatten
+  end
+
+  ###########################
+  ## GENERIC LOGIC METHOD  ##
+  ###########################
+
+  def page_nbr_to_url(url, page_nbr)
+    url.gsub("[[PAGE_NUMBER]]", page_nbr.to_s)
+  end
+
   ###########################
   ## XML ACCESSORS METHODS ##
   ###########################
@@ -146,10 +164,17 @@ class Scraper
       rooms_number: hashed_property[:rooms_number],
       area: hashed_property[:area],
     ).where(
-      "created_at >= :five",
-      :five => Time.now - 7.days,
+      "created_at >= :seven",
+      :seven => Time.now - 7.days,
     )
     response = true if properties.length > 0
+  end
+
+  def is_already_exists_by_link(link)
+    response = false
+    prop_by_link = Property.where(link: link).where("created_at >= :seven", :seven => Time.now - 7.days)
+    response = true if prop_by_link.length > 0
+    return response
   end
 
   def is_dirty_property(hashed_property)
