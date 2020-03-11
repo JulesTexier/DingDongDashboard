@@ -65,6 +65,16 @@ test:
   # database: giant_cat_test
   host: kandula.db.elephantsql.com
   port: 5432
+  database: xfwzvnqn
+  username: xfwzvnqn
+  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
+
+
+  # Setting up staging env
+  staging:
+  <<: *default
+  host: kandula.db.elephantsql.com
+  port: 5432
   database: hpfynktd
   username: hpfynktd
   password: WO5Cxfu5wt7kvj6PHKOASsmI2FUemzi5
