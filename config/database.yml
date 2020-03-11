@@ -87,6 +87,12 @@ test:
 #
 production:
   <<: *default
-  database: giant_cat_production
-  username: giant_cat
-  password: <%= ENV['GIANT_CAT_DATABASE_PASSWORD'] %>
+  # database: giant_cat_production
+  # username: giant_cat
+  # password: <%= ENV['GIANT_CAT_DATABASE_PASSWORD'] %>
+  host: kandula.db.elephantsql.com
+  port: 5432
+  database: glnjufeb
+  username: glnjufeb
+  password: T69nyTegc_mQvWJ-KKXv9plNQzAZidb3
+
