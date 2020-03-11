@@ -24,13 +24,11 @@ default: &default
 development:
   <<: *default
   # database: giant_cat_development
-  host: SG-dingdong-498-pgsql-master.servers.mongodirector.com
+  host: kandula.db.elephantsql.com
   port: 5432
-  database: giant_puma_test
-  username: test00
-  password: 9xcwS%k9z8s"a^RvGb4iG
-  sslmode: verify-full
-  sslrootcert : config/pg.crt
+  database: xfwzvnqn
+  username: xfwzvnqn
+  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -65,13 +63,11 @@ development:
 test:
   <<: *default
   # database: giant_cat_test
-  host: SG-dingdong-498-pgsql-master.servers.mongodirector.com
+  host: kandula.db.elephantsql.com
   port: 5432
-  database: giant_puma_staging
-  username: staging00
-  password: r@vSNugG&9$3.:b
-  sslmode: verify-full
-  sslrootcert : config/pg.crt
+  database: hpfynktd
+  username: hpfynktd
+  password: WO5Cxfu5wt7kvj6PHKOASsmI2FUemzi5
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -97,10 +93,8 @@ production:
   # database: giant_cat_production
   # username: giant_cat
   # password: <%= ENV['GIANT_CAT_DATABASE_PASSWORD'] %>
-  host: SG-dingdong-498-pgsql-master.servers.mongodirector.com
+  host: kandula.db.elephantsql.com
   port: 5432
-  database: giant_puma_production
-  username: production00
-  password: mnY)W,mZ]():|U"u7#/ba
-  sslmode: verify-full
-  sslrootcert : config/pg.crt
+  database: glnjufeb
+  username: glnjufeb
+  password: T69nyTegc_mQvWJ-KKXv9plNQzAZidb3
