@@ -108,7 +108,7 @@ subs_to_copy.each do |sub_to_copy|
         # Je fais un hash ISO manychat
         body_request[:subscriber_id] = sub.facebook_id
         body_request[:field_name] = "criteria_page"
-        body_request[:field_value] = "https://giant-cat-staging.herokuapp.com/subscribers/#{sub.id.to_s}/edit" ## <- TA NEW ID
+        body_request[:field_value] = "https://giant-cat.herokuapp.com/subscribers/#{sub.id.to_s}/edit" ## <- TA NEW ID
         puts body_request.to_json
         # Je fais la requete post de set Custom Field
         set_custom_field_request = Typhoeus::Request.new(
