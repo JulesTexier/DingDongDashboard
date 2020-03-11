@@ -1,3 +1,12 @@
+require 'mongo'
+require 'typhoeus'
+
+MONGODB_CA_CERT = "./sg.crt"
+options = { ssl:true, ssl_verify: true, :ssl_ca_cert => MONGODB_CA_CERT }
+MONGODB_CONN_URL='mongodb://staging00:6rgsPeTykgy4VTrz@SG-ClusterDD-24238.servers.mongodirector.com:49409,SG-ClusterDD-24239.servers.mongodirector.com:49409,SG-ClusterDD-24240.servers.mongodirector.com:49409/giant-tiger-staging?replicaSet=RS-ClusterDD-0&ssl=true'
+@tiger = Mongo::Client.new(MONGODB_CONN_URL, options)
+
+
 Subscriber.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("subscribers")
 Property.destroy_all
@@ -8,6 +17,7 @@ SelectedArea.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("selected_areas")
 PropertyImage.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("property_images")
+
 
 # AREA REFERENCES
 i = 1
@@ -28,58 +38,109 @@ i = 10
   puts a.id
 end
 
-# Subscribers for testing purposes
-firtnames = ["Fred", "Nico", "Max", "Etienne", "Greg"]
-lastnames = ["Bnd", "Fndz", "Segrelove", "Peta", "Rouxel"]
-facebook_ids = ["3558864844155233", "4063399583673869", "3022625814434770", "2770916956355819", "2945536708841977"]
-max_prices = [500000, 450000, 300000, 600000, 1000000]
-min_surfaces = [50, 45, 30, 60, 100]
-min_rooms_numbers = [2, 2, 2, 3, 3]
-min_floors = [0, 1, 0, 2, 4]
-min_elevator_floors = [3, 3, 3, 3, 3]
+# Subscribers
 
-i = 0
-5.times do
-  s = Subscriber.new
-  s.firstname = firtnames[i]
-  s.lastname = lastnames[i]
-  s.facebook_id = facebook_ids[i]
-  s.max_price = max_prices[i]
-  s.min_surface = min_surfaces[i]
-  s.min_rooms_number = min_rooms_numbers[i]
-  s.min_floor = min_floors[i]
-  s.min_elevator_floor = min_elevator_floors[i]
+subs_to_copy = @tiger[:subscribers].find({is_active: true, type: "to_buy"})
+puts "#{subs_to_copy.count} à copier"
 
-  s.save
+subs_to_copy.each do |sub_to_copy|
+  # sub_to_copy = subs_to_copy.first
+  sub = Subscriber.new
+  sub.firstname = sub_to_copy['firstname']
+  sub.lastname = sub_to_copy['lastname']
+  sub.email = sub_to_copy['email']
+  sub.phone = sub_to_copy['phone']
+  sub.facebook_id = sub_to_copy['facebook_id']
+  sub.is_active = sub_to_copy['is_active']
+  sub.created_at = sub_to_copy['created_at']
+  sub.max_price = sub_to_copy['search_criteria'][0]['buy_price_max']
+  sub.min_surface = sub_to_copy['search_criteria'][0]['surface_min']
+  sub.min_rooms_number = sub_to_copy['search_criteria'][0]['rooms_number']
+  sub.min_floor = sub_to_copy['search_criteria'][0]['min_floor']
+  sub.min_elevator_floor = sub_to_copy['search_criteria'][0]['min_floor_elevator']
 
-  i += 1
-end
 
-# Selected Area
-Subscriber.all.each do |sub|
-  1.times do
+  sub.save
+
+  puts "*"*10
+  sub_to_copy['search_criteria'][0]['areas'].each do |area|
+    # puts area
     sa = SelectedArea.new
-    sa.area = Area.order(Arel.sql("RANDOM()")).first
+    # puts sub
     sa.subscriber = sub
-    sa.save
+    sa.area = Area.where(name: area).first
+    sa.save!
   end
+
+  puts "*"*10
+  puts sub.facebook_id
+
+    ## J'appelle GetInfos de ManyChat en get pour avoir les informations d'un subscriber via son facebook_id
+    get_infos_request = Typhoeus::Request.new(
+      "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=#{sub.facebook_id}",
+      method: :get,
+      headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8"  },
+    )
+    get_infos_request.run
+
+    # puts get_infos_request.to_s
+
+    response = JSON.parse(get_infos_request.response.options[:response_body])
+
+    # Je loop dans le hash et récupère les datas des custom_fields
+    response["data"]["custom_fields"].each do |cusfield|
+      # Dés que j'atteins un custom field dont le nom est "ID"
+      # je fais une requete pour updaté son custom field fiavec sa nouvelle ID
+      # puts cusfield = cusfield[]
+      if cusfield["name"] == "id"
+        body_request = {}
+        # Je fais un hash ISO manychat
+        body_request[:subscriber_id] = sub.facebook_id
+        body_request[:field_name] = "id"
+        body_request[:field_value] = sub.id.to_s ## <- TA NEW ID
+        puts body_request.to_json
+        # Je fais la requete post de set Custom Field
+        set_custom_field_request = Typhoeus::Request.new(
+          "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
+          method: :post,
+          body: body_request.to_json,
+          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8" },
+        )
+        set_custom_field_request.run
+        # puts JSON.parse(set_custom_field_request.response.options[:response_body])
+
+        body_request = {}
+        # Je fais un hash ISO manychat
+        body_request[:subscriber_id] = sub.facebook_id
+        body_request[:field_name] = "criteria_page"
+        body_request[:field_value] = "https://giant-cat-staging.herokuapp.com/subscribers/#{sub.id.to_s}/edit" ## <- TA NEW ID
+        puts body_request.to_json
+        # Je fais la requete post de set Custom Field
+        set_custom_field_request = Typhoeus::Request.new(
+          "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
+          method: :post,
+          body: body_request.to_json,
+          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8" },
+        )
+        set_custom_field_request.run
+
+      end
+    end
+
+  # sub_to_copy['search_criteria'][0]['areas'].each do |area|
+  #   sa = SelectedArea.new(subscriber: s, area: Area.all.first)
+  #   # sa = SelectedArea.new(subscriber: s, area: Area.where(name: area).first)
+	#   sa.save
+  # end
+
+
+  # if sub_to_copy['favorites'].length > 0
+  #   f = Favorite.new 
+  #   f.subscriber = s
+  # end
+
 end
 
-# Properties
-100.times do
-  p = Property.new
-  p.price = rand(200000..1000000)
-  p.surface = (p.price / rand(9..14)).to_i
-  p.area = Area.order(Arel.sql("RANDOM()")).first.name
-  p.title = "Magnifique bien, Paris #{p.area}"
-  p.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mauris est, venenatis aliquam mi et, blandit aliquam enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Vestibulum luctus convallis ex, in volutpat felis volutpat tristique. In ullamcorper fringilla nunc, sed rutrum mi ullamcorper vitae. Aenean in euismod velit, nec faucibus neque. Etiam pulvinar sem purus, et eleifend sapien lacinia in. Aliquam imperdiet leo mi, in ultrices purus tempus placerat. Integer accumsan est nec orci aliquam pulvinar. Mauris tempor, ligula id euismod euismod, neque libero blandit sapien, eu fringilla nisi elit et lorem. "
-  p.rooms_number = rand(1..3)
-  p.link = "https://leboncoin.fr"
-  p.source = ["LeBonCoin", "SeLoger", "SuperImmo", "PAP"].sample
-  p.source == "PAP" ? p.provider = "Particulier" : p.provider = ["Agence", "Particulier", "N/A"].sample
-  p.floor = [0, 1, 2, 3, 4, 5, nil, nil, nil].sample
-  p.has_elevator = [true, false, nil, nil, nil].sample
-  p.contact_number = ["0600000000", "N/C"].sample
-
-  p.save
+def update_manychat(subscriber)
+  
 end

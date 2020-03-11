@@ -62,6 +62,7 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rb-readline"
   gem "pry", "~> 0.12.2"
+  gem 'mongo', '~> 2.7'
 end
 
 group :test do
