@@ -3,7 +3,7 @@ require 'typhoeus'
 
 MONGODB_CA_CERT = "./sg.crt"
 options = { ssl:true, ssl_verify: true, :ssl_ca_cert => MONGODB_CA_CERT }
-MONGODB_CONN_URL='mongodb://staging00:6rgsPeTykgy4VTrz@SG-ClusterDD-24238.servers.mongodirector.com:49409,SG-ClusterDD-24239.servers.mongodirector.com:49409,SG-ClusterDD-24240.servers.mongodirector.com:49409/giant-tiger-staging?replicaSet=RS-ClusterDD-0&ssl=true'
+MONGODB_CONN_URL='mongodb://production00:PgxSkzjHvnpAdWR2@SG-ClusterDD-24238.servers.mongodirector.com:49409,SG-ClusterDD-24239.servers.mongodirector.com:49409,SG-ClusterDD-24240.servers.mongodirector.com:49409/giant-tiger-production?replicaSet=RS-ClusterDD-0&ssl=true'
 @tiger = Mongo::Client.new(MONGODB_CONN_URL, options)
 
 
@@ -35,7 +35,7 @@ end
 
 # Subscribers
 
-subs_to_copy = @tiger[:subscribers].find({is_active: true, type: "to_buy"})
+subs_to_copy = @tiger[:subscribers].find({is_active: true, type: "to_buy", facebook_id: "2827641220632020" })
 puts "#{subs_to_copy.count} à copier"
 
 subs_to_copy.each do |sub_to_copy|
@@ -74,7 +74,7 @@ subs_to_copy.each do |sub_to_copy|
     get_infos_request = Typhoeus::Request.new(
       "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=#{sub.facebook_id}",
       method: :get,
-      headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8"  },
+      headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21"  },
     )
     get_infos_request.run
 
@@ -99,7 +99,7 @@ subs_to_copy.each do |sub_to_copy|
           "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
           method: :post,
           body: body_request.to_json,
-          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8" },
+          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
         )
         set_custom_field_request.run
         # puts JSON.parse(set_custom_field_request.response.options[:response_body])
@@ -115,7 +115,7 @@ subs_to_copy.each do |sub_to_copy|
           "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
           method: :post,
           body: body_request.to_json,
-          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 93323:2a21d906a553fb6bb3e7cb3101bd3ff8" },
+          headers: { "Content-type" => "application/json", "Authorization" => "Bearer 32033:830388137d55fee675e37f80a21dde21" },
         )
         set_custom_field_request.run
 
