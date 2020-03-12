@@ -350,7 +350,7 @@ class Manychat
     btn[:type] = "url"
     btn[:caption] = caption
     btn[:url] = url
-    btn[:webview_size] = "full"
+    # btn[:webview_size] = "full"
     return btn
   end
 
