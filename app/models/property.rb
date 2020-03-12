@@ -17,6 +17,9 @@ class Property < ApplicationRecord
   has_many :property_districts
   has_many :districts, through: :property_districts
 
+  has_many :property_subways
+  has_many :subways, through: :property_subways
+
   has_many :property_images
 
   def images
@@ -47,10 +50,10 @@ class Property < ApplicationRecord
     else
       return self.images.first.url
     end
-	end
+  end
 
   def manychat_show_description
-    description = ''
+    description = ""
     self.rooms_number > 1 ? description += "🛋️ " + self.rooms_number.to_s + "p" : nil
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
@@ -58,7 +61,7 @@ class Property < ApplicationRecord
   end
 
   def manychat_show_description_with_title
-    description = ''
+    description = ""
     description += self.get_title + "\u000A"
     description += self.manychat_show_description
   end
@@ -88,7 +91,6 @@ class Property < ApplicationRecord
 
     return description
   end
-
 
   def get_long_description
     description = ""
