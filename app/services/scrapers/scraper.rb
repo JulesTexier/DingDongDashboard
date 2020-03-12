@@ -8,6 +8,7 @@ class Scraper
     hashed_properties.each do |hashed_property|
       property = insert_property(hashed_property)
       insert_property_images(hashed_property[:images], property) unless property.nil?
+      insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
   end
 
@@ -152,6 +153,21 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
+  # We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
+  # We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
+  # And the we send it in an array for insertion.
+  def perform_subway_regex(str)
+    subways = JSON.parse(File.read("./db/data/subways.json"))
+    subways_ids = []
+    subways["stations"].each do |subway|
+      if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
+        s = Subway.where(name: subway["metro"]).limit(1)
+        subways_ids.push(s.ids[0])
+      end
+    end
+    return subways_ids.uniq
+  end
+
   #############################
   ## PUBLIC DATABASE METHODS ##
   #############################
@@ -224,5 +240,11 @@ class Scraper
       PropertyImage.create(property_id: prop.id, url: img)
     end
     prop.images.length > 0 ? nil : PropertyImage.create(property: prop)
+  end
+
+  def insert_property_subways(subway_ids, prop)
+    subway_ids.each do |subway_id|
+      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if PropertySubway.where(property_id: prop.id, subway_id: subway_id).empty?
+    end
   end
 end
