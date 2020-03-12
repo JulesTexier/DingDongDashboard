@@ -127,9 +127,7 @@ class Manychat
     title = "🌟 "
     number_of_properties == 1 ? title += "Voici ta dernière annonce !" : title += "Voici tes #{number_of_properties} dernières annonces !"
     number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
-    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_x_properties/#{number_of_properties}.jpg"
-    puts "*"*10
-    puts image_url
+    image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_x_props/#{number_of_properties}.jpg"
     action_url = "https://hellodingdong.com/"
     create_header_gallery_element(title, subtitle, image_url)
   end
