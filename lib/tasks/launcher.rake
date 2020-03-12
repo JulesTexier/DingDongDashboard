@@ -36,6 +36,15 @@ namespace :scraper do
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Premium Scraper script took #{ending - starting} seconds to run"
   end
+
+  task :small_site do
+    puts "Launching Small Shitty Website Scraper"
+    puts "...\n\n"
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    ScraperKmi.new(6).extract_first_page
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
+  end
 end
 
 namespace :subscriber do
