@@ -120,7 +120,9 @@ class Manychat
 
   def create_no_props_msg(subscriber, template = nil)
     text = "😕 Oops, aucune annonce ne correspond ..."
-    text = "Aucune annonce récente ne répond à tes critères de recherche 😕. \u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️" if template == "last_properties"
+    text = "Aucune annonce récente ne répond à tes critères de recherche 😕." if template == "last_properties"
+    text = "Aucune annonce correspondant à tes critères n'est tombée cette nuit 😕." if template == "morning_properties"
+    text += "\u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
     return [create_message_text_hash(text)]
   end
   
