@@ -8,7 +8,7 @@ class ScraperMeilleursAgents < Scraper
   end
 
   def extract_first_page
-    xml = fetch_first_page(@url, @xml_first_page, "Captcha")
+    xml = fetch_main_page(@url, @xml_first_page, "Captcha")
     if !xml[0].to_s.strip.empty?
       hashed_properties = []
       xml.each do |item|

@@ -8,7 +8,7 @@ class ScraperCentury < Scraper
   end
 
   def extract_first_page
-    xml = fetch_first_page(@url, @xml_first_page)
+    xml = fetch_main_page(@url, @xml_first_page)
     hashed_properties = []
     xml.each do |item|
       begin

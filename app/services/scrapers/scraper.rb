@@ -16,12 +16,12 @@ class Scraper
   ## HTML FETCH METHODS ##
   ########################
 
-  def fetch_first_page(url, xml_first_page, type = "Static", waiting_class = nil)
+  def fetch_main_page(url, xml_first_page, type = "Static", waiting_class = nil, wait = 0)
     case type
     when "Static"
       html = fetch_static_page(url)
     when "Dynamic"
-      html = fetch_dynamic_page(url, waiting_class)
+      html = fetch_dynamic_page(url, waiting_class, wait)
     when "Captcha"
       html = fetch_captcha_page(url)
     else
@@ -35,9 +35,10 @@ class Scraper
     return page
   end
 
-  def fetch_dynamic_page(url, waiting_class)
+  def fetch_dynamic_page(url, waiting_class, wait)
     browser = Watir::Browser.new :chrome, headless: true
     browser.goto url
+    sleep wait
     browser.div(class: waiting_class).wait_until(&:present?)
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
