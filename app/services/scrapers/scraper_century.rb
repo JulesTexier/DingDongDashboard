@@ -43,6 +43,7 @@ class ScraperCentury < Scraper
     flat_data[:agency_name] = access_xml_text(html, "span.agency-name")
     flat_data[:floor] = perform_floor_regex(flat_data[:description])
     flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
+    flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
     flat_data[:images] = access_xml_link_matchdata_src(html, "a.fancybox", "href", "(#popupReseauxSociauxAG)", "https://www.century21.fr")

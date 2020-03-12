@@ -44,6 +44,7 @@ class ScraperBienIci < Scraper
     flat_data[:flat_type] = regex_gen(access_xml_text(html, "div.titleInside h1"), "Achat(.)(\w+)").gsub("Achat ", "").capitalize
     flat_data[:floor] = perform_floor_regex(flat_data[:description])
     flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
+    flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
     flat_data[:images] = access_xml_link(html, "div.w > img", "src")
