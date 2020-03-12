@@ -17,6 +17,9 @@ class Property < ApplicationRecord
   has_many :property_districts
   has_many :districts, through: :property_districts
 
+  has_many :property_subways
+  has_many :subways, through: :property_subways
+
   has_many :property_images
 
   def images
@@ -47,18 +50,19 @@ class Property < ApplicationRecord
     else
       return self.images.first.url
     end
-	end
+  end
 
   def manychat_show_description
-    description = ''
+    description = ""
     self.rooms_number >= 1 ? description += "🛋️ " + self.rooms_number.to_s + "p" : nil
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
+    !self.subways.empty? ? description = description + "   Ⓜ️ #{self.get_subways_lines.join(', ')}" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
   end
 
   def manychat_show_description_with_title
-    description = ''
+    description = ""
     description += self.get_title + "\u000A"
     description += self.manychat_show_description
   end
@@ -67,34 +71,33 @@ class Property < ApplicationRecord
     return "🏠 " + self.get_pretty_price + "€ - " + self.surface.to_s + "m2 - " + get_pretty_area
   end
 
-  def get_attribues_description
-    description = ""
-    description = description + "\u000A⏱️ Postée le " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
-    # self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
-    # self.surface > 0 ? description = description + " - 📐 " + self.surface.to_s + " m2" : nil
-    self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i.to_s + " €/m2" : nil
-    self.area != nil ? description = description + "\u000A📌 " + self.area : nil
-    description += self.get_short_description
-    return description
-  end
+  # def get_attribues_description
+  #   description = ""
+  #   description = description + "\u000A⏱️ Postée le " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
+  #   # self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
+  #   # self.surface > 0 ? description = description + " - 📐 " + self.surface.to_s + " m2" : nil
+  #   self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i.to_s + " €/m2" : nil
+  #   self.area != nil ? description = description + "\u000A📌 " + self.area : nil
+  #   description += self.get_short_description
+  #   return description
+  # end
 
-  def get_short_description
-    description = ""
-    self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
-    self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
-    self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
-    self.floor != nil ? description = description + "\u000A↕ " + "Etage : " + self.floor.to_s : nil
-    self.has_elevator ? description = description + "\u000A🚠 Avec ascenseur" : nil
+  # def get_short_description
+  #   description = ""
+  #   self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
+  #   self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
+  #   self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
+  #   self.floor != nil ? description = description + "\u000A↕ " + "Etage : " + self.floor.to_s : nil
+  #   self.has_elevator ? description = description + "\u000A🚠 Avec ascenseur" : nil
 
-    return description
-  end
+  #   return description
+  # end
 
-
-  def get_long_description
-    description = ""
-    self.description != "N/C" && !self.description.nil? ? description = "Description 💬 :\u000A" + self.description[0..600] + " ..." : nil
-    return description
-  end
+  # def get_long_description
+  #   description = ""
+  #   self.description != "N/C" && !self.description.nil? ? description = "Description 💬 :\u000A" + self.description[0..600] + " ..." : nil
+  #   return description
+  # end
 
   def get_pretty_area
     if self.area[3..3] == "0"
@@ -103,6 +106,16 @@ class Property < ApplicationRecord
       pretty_area = "#{self.area[3..4]}ème"
     end
     return pretty_area
+  end
+
+  def get_subways_lines
+    lines = []
+    self.subways.each do |subway|
+      puts arr = subway.line.tr('[', '').tr(']', '').tr('"', '').split(',')
+      # puts arr.class?
+      lines.concat arr
+    end
+    lines.uniq
   end
 
   def get_pretty_price

@@ -1,31 +1,35 @@
-class ScraperCentury < Scraper
+class ScraperGreenAcres < Scraper
   attr_accessor :url, :properties, :source, :xml_first_page
 
   def initialize
-    @url = "https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/page-1/"
-    @source = "Century21"
-    @xml_first_page = "div.contentAnnonce"
+    @url = "https://www.green-acres.fr/fr/prog_show_properties.html?searchQuery=order-date_d-lg-fr-cn-fr-i-24-hab_appartement-on-hab_house-on-city_id-dp_75"
+    @source = "GreenAcres"
+    @xml_first_page = "figure"
   end
 
   def extract_first_page
     xml = fetch_first_page(@url, @xml_first_page)
+    puts xml
     hashed_properties = []
     xml.each do |item|
       begin
         hashed_property = {}
-        hashed_property[:link] = "https://www.century21.fr" + access_xml_link(item, "div.zone-text-loupe a", "href")[0].to_s
-        hashed_property[:surface] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "div.zone-text-loupe > a > h3"), '(75)$*\d+{3}')
-        hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-        hashed_property[:price] = regex_gen(access_xml_text(item, "div.price"), '(\d)(.*)(€)').to_int_scrp
+        hashed_property[:link] = "https://www.green-acres.fr" + access_xml_link(item, "a", "href")[0].to_s
+        hashed_property[:surface] = access_xml_text(item, "div.item-details > ul > li.details-component.in-meters.align-center").tr("\r\n\t", "").to_int_scrp
+        hashed_property[:area] = access_xml_raw(item, "span.advert-location-text-4")
+        hashed_property[:rooms_number] = access_xml_text(item, "div.item-details > ul > li.details-component.align-center")
+        hashed_property[:price] = access_xml_text(item, "p.item-price").to_int_scrp
+        puts JSON.pretty_generate(hashed_property)
         hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
+        puts item
+        puts e.message
         next
       end
     end
-    enrich_then_insert(hashed_properties)
+    # enrich_then_insert(hashed_properties)
   end
 
   private

@@ -43,6 +43,7 @@ class ScraperPap < Scraper
     flat_data[:flat_type] = regex_gen(access_xml_text(html, "h1.item-title"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
     flat_data[:floor] = perform_floor_regex(flat_data[:description])
     flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
+    flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
     flat_data[:provider] = "Particulier"
     flat_data[:source] = @source
     flat_data[:images] = access_xml_link(html, "div.owl-thumbs.sm-hidden img", "src")
