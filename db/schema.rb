@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_071606) do
+ActiveRecord::Schema.define(version: 2020_03_12_123628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(version: 2020_03_12_071606) do
     t.index ["property_id"], name: "index_property_images_on_property_id"
   end
 
+  create_table "property_subways", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "subway_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id", "subway_id"], name: "index_property_subways_on_property_id_and_subway_id", unique: true
+    t.index ["property_id"], name: "index_property_subways_on_property_id"
+    t.index ["subway_id"], name: "index_property_subways_on_subway_id"
+  end
+
   create_table "selected_areas", force: :cascade do |t|
     t.bigint "subscriber_id"
     t.bigint "area_id"
@@ -135,6 +145,13 @@ ActiveRecord::Schema.define(version: 2020_03_12_071606) do
     t.integer "min_rooms_number"
     t.integer "min_floor", default: 0
     t.integer "min_elevator_floor"
+  end
+
+  create_table "subways", force: :cascade do |t|
+    t.string "name"
+    t.string "line", default: "{}"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "favorites", "properties"
