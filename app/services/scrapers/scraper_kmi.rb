@@ -1,14 +1,13 @@
 class ScraperKmi < Scraper
-  attr_accessor :url, :properties, :source, :xml_first_page, :page_extraction_nbr
+  attr_accessor :url, :properties, :source, :xml_first_page
 
-  def initialize(page_extraction_nbr)
-    @page_extraction_nbr = page_extraction_nbr
+  def initialize
     @url = "https://www.cabinet-kmi.com/recherche-avancee/page/[[PAGE_NUMBER]]?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
     @source = "KMI"
     @xml_first_page = "div.property_listing"
   end
 
-  def extract_first_page
+  def extract_many_pages(page_extraction_nbr)
     xml = fetch_many_pages(url, page_extraction_nbr, @xml_first_page)
     hashed_properties = []
     xml.each do |item|
