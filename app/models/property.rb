@@ -57,6 +57,7 @@ class Property < ApplicationRecord
     self.rooms_number >= 1 ? description += "🛋️ " + self.rooms_number.to_s + "p" : nil
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
+    !self.subways.empty? ? description = description + "   Ⓜ️ #{self.get_subways_lines.join(', ')}" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
   end
 
@@ -105,6 +106,16 @@ class Property < ApplicationRecord
       pretty_area = "#{self.area[3..4]}ème"
     end
     return pretty_area
+  end
+
+  def get_subways_lines
+    lines = []
+    self.subways.each do |subway|
+      puts arr = subway.line.tr('[', '').tr(']', '').tr('"', '').split(',')
+      # puts arr.class?
+      lines.concat arr
+    end
+    lines.uniq
   end
 
   def get_pretty_price
