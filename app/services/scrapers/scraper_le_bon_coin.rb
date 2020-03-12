@@ -8,7 +8,7 @@ class ScraperLeBonCoin < Scraper
   end
 
   def extract_first_page
-    xml = fetch_first_page(@url, @xml_first_page, "Captcha")
+    xml = fetch_main_page(@url, @xml_first_page, "Captcha")
     if !xml[0].to_s.strip.empty?
       json = extract_json(xml)
       hashed_properties = []
@@ -39,10 +39,11 @@ class ScraperLeBonCoin < Scraper
     html_array.each do |html|
       begin
         first_part = html.text.split("window.__REDIAL_PROPS__ = [null,null,null,null,null,")[1]
-        second_part = first_part.split("</script>")[0].gsub('"status":"ready"}]', 'status":"ready"}')
-        json.push(JSON.parse(second_part.tr("\r\n", "")))
+        second_part = first_part.split("</script>")[0]
+        json.push(JSON.parse(second_part.strip.chop))
       rescue JSON::ParserError => e
         puts "\nOupsiedoodle, #{@source} is giving us bad json."
+        puts e.message
         next
       end
     end
