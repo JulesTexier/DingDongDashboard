@@ -1,0 +1,55 @@
+<h1>Dashboard</h1>
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col"><h2>🏠 Properties</h2></th>
+      <th scope="col">➕Nouvelles annonces</th>
+      <th scope="col">📈 Evolution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">24h</th>
+      <td><%= @properties_last_24h.count %></td>
+      <td><%= @growth24h_props %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">Semaine</th>
+      <td><%= @properties_last_1w.count %></td>
+      <td><%= @growth1w_props %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">Mois</th>
+      <td><%= @properties_last_1m.count %></td>
+      <td><%= @growth1m_props %> %</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col"><h2>👤 Subscribers</h2></th>
+      <th scope="col">➕ Nouveaux subscribers</th>
+      <th scope="col">📈 Evolution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">24h</th>
+      <td><%= @subs_last_24h.count %></td>
+      <td><%= @growth24h_subs %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">Semaine</th>
+      <td><%= @subs_last_1w.count %></td>
+      <td><%= @growth1w_subs %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">Mois</th>
+      <td><%= @subs_last_1m.count %></td>
+      <td><%= @growth1m_subs %> %</td>
+    </tr>
+  </tbody>
+</table>
