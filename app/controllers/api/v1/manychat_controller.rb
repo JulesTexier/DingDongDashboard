@@ -40,7 +40,7 @@ class Api::V1::ManychatController < ApplicationController
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       props = subscriber.get_x_last_props(params[:x])
-      props.length > 0 ? (render json: send_multiple_properties(subscriber, props, "last_properties")) : (render json: { status: "ERROR", message: "There is no latest props for this subscriber", data: nil }, status: 404)
+      props.length > 0 ? (render json: send_multiple_properties(subscriber, props, "last_properties")) : (render json: send_no_props(subscriber, "last_properties"))
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -53,7 +53,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
       props = subscriber.get_morning_props
-      props.length > 0 ? (render json: send_multiple_properties(subscriber, props)) : (render json: { status: "ERROR", message: "There is no morning props for this subscriber", data: nil }, status: 404)
+      props.length > 0 ? (render json: send_multiple_properties(subscriber, props)) : (render json: send_no_props(subscriber, "morning_properties"))
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -99,6 +99,16 @@ class Api::V1::ManychatController < ApplicationController
   def authentificate
     authenticate_or_request_with_http_token do |token, options|
       ActiveSupport::SecurityUtils.secure_compare(token, TOKEN)
+    end
+  end
+
+  def send_no_props(subscriber, template = nil)
+    m = Manychat.new
+    response = m.send_no_props_msg(subscriber, template)
+    if response[0]
+      return { status: "SUCCESS", message: "No matching props, but a message has been sent to subscriber", data: response[1] }, status: 200
+    else
+      return { status: "ERROR", message: "A error occur in manychat call", data: response[1] }, status: 500
     end
   end
 
