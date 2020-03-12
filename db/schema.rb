@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_183843) do
+ActiveRecord::Schema.define(version: 2020_03_12_071606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_183843) do
     t.integer "min_surface"
     t.integer "min_rooms_number"
     t.integer "min_floor", default: 0
-    t.string "min_elevator_floor"
+    t.integer "min_elevator_floor"
   end
 
   add_foreign_key "favorites", "properties"

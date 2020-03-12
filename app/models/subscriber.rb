@@ -159,7 +159,7 @@ class Subscriber < ApplicationRecord
         if property.has_elevator
           return true
         else
-          property.floor.to_i < self.min_elevator_floor ? true : false
+          property.floor.to_i < self.min_elevator_floor.to_i ? true : false
         end
       else
         return true
