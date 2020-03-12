@@ -1,0 +1,1523 @@
+{
+  "stations":
+    [
+    {
+        "metro": "Abbesses",
+        "ligne": ["12"]
+    }, 
+    {
+        "metro": "Alésia",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Alexandre Dumas",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Alma - Marceau",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Anatole France",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Anvers",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Argentine",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Arts et Métiers",
+        "ligne": ["3", "11"]
+    }, 
+    
+    {
+        "metro": "Assemblée Nationale",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Aubervilliers - Pantin - Quatre Chemins",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Avenue Émile Zola",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Avron",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Bagneux",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Balard",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Barbès - Rochechouart",
+        "ligne": ["2", "4"]
+    }, 
+    
+    {
+        "metro": "Basilique de Saint-Denis",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Bastille",
+        "ligne": ["1", "5"]
+    }, 
+    
+    {
+        "metro": "Bel-Air",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Belleville",
+        "ligne": ["2", "11"]
+    }, 
+    
+    {
+        "metro": "Bérault",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Bercy",
+        "ligne": ["6", "14"]
+    }, 
+    
+    {
+        "metro": "Bibliothèque François Mitterrand",
+        "ligne": ["14"]
+    }, 
+    
+    {
+        "metro": "Billancourt",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Bir-Hakeim",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Blanche",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Bobigny - Pablo Picasso",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Bobigny - Pantin - Raymond Queneau",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Boissière",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Bolivar",
+        "ligne": ["7bis"]
+    }, 
+    
+    {
+        "metro": "Bonne Nouvelle",
+        "ligne": ["8", "9"]
+    }, 
+    
+    {
+        "metro": "Botzaris",
+        "ligne": ["7bis"]
+    }, 
+    
+    {
+        "metro": "Boulogne - Jean Jaurès",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Boulogne - Pont de Saint-Cloud",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Boucicaut",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Bourse",
+        "ligne": [3]
+    }, 
+    
+    {
+        "metro": "Bréguet - Sabin",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Brochant",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Buttes Chaumont",
+        "ligne": ["7bis"]
+    }, 
+    
+    {
+        "metro": "Buzenval",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Cadet",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Cambronne",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Campo Formio",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Cardinal Lemoine",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Carrefour Pleyel",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Censier - Daubenton",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Champs-Élysées - Clemenceau",
+        "ligne": [1, "13"]
+    }, 
+    
+    {
+        "metro": "Chardon Lagache",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Charenton - Écoles",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Charles de Gaulle - Étoile",
+        "ligne": ["1", "2"]
+    }, 
+    
+    {
+        "metro": "Charles Michels",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Charonne",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Château d'Eau",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Château de Vincennes",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Château-Landon",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Château Rouge",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Châtelet",
+        "ligne": ["1", "4", "7", "11", "14"]
+    }, 
+    
+    {
+        "metro": "Châtillon - Montrouge",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Chaussée d'Antin - La Fayette",
+        "ligne": ["7", "9"]
+    }, 
+    
+    {
+        "metro": "Chemin Vert",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Chevaleret",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Metro Cité",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Cluny - La Sorbonne",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Colonel Fabien",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Metro Commerce",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Concorde",
+        "ligne": ["1", "8", "12"]
+    }, 
+    
+    {
+        "metro": "Convention",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Corentin Cariou",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Corentin Celton",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Corvisart",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Cour Saint-Émilion",
+        "ligne": ["14"]
+    }, 
+    
+    {
+        "metro": "Courcelles",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Couronnes",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Créteil - L'Échat",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Créteil - Préfecture",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Créteil - Université",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Crimée",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Croix de Chavaux",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Danube",
+        "ligne": ["7bis"]
+    }, 
+    
+    {
+        "metro": "Daumesnil",
+        "ligne": ["6", "8"]
+    }, 
+    
+    {
+        "metro": "Denfert-Rochereau",
+        "ligne": ["4", "6"]
+    }, 
+    
+    {
+        "metro": "Dugommier",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Dupleix",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Duroc",
+        "ligne": ["10", "13"]
+    }, 
+    
+    {
+        "metro": "École Militaire",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "École Vétérinaire de Maisons-Alfort",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Edgar Quinet",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Église d'Auteuil",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Église de Pantin",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Esplanade de La Défense",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Étienne Marcel",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Europe",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Exelmans",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Faidherbe - Chaligny",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Falguière",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Félix Faure",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Filles du Calvaire",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Fort d'Aubervilliers",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Franklin D. Roosevelt",
+        "ligne": ["1", "9"]
+    }, 
+    
+    {
+        "metro": "Front Populaire",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Gabriel Péri",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Gaîté",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Gallieni",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Gambetta",
+        "ligne": ["3", "3bis"]
+    }, 
+    
+    {
+        "metro": "Gare d'Austerlitz",
+        "ligne": ["5", "10"]
+    }, 
+    
+    {
+        "metro": "Gare de l'Est",
+        "ligne": ["4", "5"]
+    }, 
+    
+    {
+        "metro": "Gare de Lyon",
+        "ligne": ["1", "14"]
+    }, 
+    
+    {
+        "metro": "Gare du Nord",
+        "ligne": ["4", "5"]
+    }, 
+    
+    {
+        "metro": "Garibaldi",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "George V",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Glacière",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Goncourt",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Grands Boulevards",
+        "ligne": ["8", "9"]
+    }, 
+    
+    {
+        "metro": "Guy Môquet",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Havre - Caumartin",
+        "ligne": ["3", "9"]
+    }, 
+    
+    {
+        "metro": "Hoche",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Hôtel de Ville",
+        "ligne": ["1", "11"]
+    }, 
+    
+    {
+        "metro": "Iéna",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Invalides",
+        "ligne": ["8", "13"]
+    }, 
+    
+    {
+        "metro": "Jacques Bonsergent",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Jasmin",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Jaurès",
+        "ligne": ["2", "5", "7bis"]
+    }, 
+    
+    {
+        "metro": "Javel - André Citroën",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Jourdain",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Jules Joffrin",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Jussieu",
+        "ligne": ["7", "10"]
+    }, 
+    
+    {
+        "metro": "Kléber",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "La Chapelle",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "La Courneuve",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "La Défense - Grande Arche",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "La Fourche",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "La Motte-Picquet - Grenelle",
+        "ligne": ["6", "8", "10"]
+    }, 
+    
+    {
+        "metro": "La Muette",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "La Tour-Maubourg",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Lamarck - Caulaincourt",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Laumière",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Le Kremlin-Bicêtre",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Le Peletier",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Ledru-Rollin",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Les Agnettes",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Les Courtilles",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Les Gobelins",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Les Halles",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Les Sablons",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Liberté",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Liège",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Louis Blanc",
+        "ligne": ["7", "7bis"]
+    }, 
+    
+    {
+        "metro": "Louise Michel",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Lourmel",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Louvre - Rivoli",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Mabillon",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Madeleine",
+        "ligne": ["8", "12", "14"]
+    }, 
+    
+    {
+        "metro": "Mairie d'Issy",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Mairie d'Ivry",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Mairie de Clichy",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Mairie de Montreuil",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Mairie de Montrouge",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Mairie de Saint-Ouen",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Mairie des Lilas",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Maison Blanche",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Maisons-Alfort - Les Juilliottes",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Maisons-Alfort - Stade",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Malakoff - Plateau de Vanves",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Malakoff - Rue Étienne Dolet",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Malesherbes",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Maraîchers",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Marcadet - Poissonniers",
+        "ligne": ["4", "12"]
+    }, 
+    
+    {
+        "metro": "Marcel Sembat",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Marx Dormoy",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Maubert-Mutualité",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Ménilmontant",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Michel Bizot",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Michel-Ange - Auteuil",
+        "ligne": ["9", "10"]
+    }, 
+    
+    {
+        "metro": "Michel-Ange - Molitor",
+        "ligne": ["9", "10"]
+    }, 
+    
+    {
+        "metro": "Mirabeau",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Miromesnil",
+        "ligne": ["9", "13"]
+    }, 
+    
+    {
+        "metro": "Monceau",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Montgallet",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Montparnasse - Bienvenüe",
+        "ligne": ["4", "6", "12", "13"]
+    }, 
+    
+    {
+        "metro": "Mouton-Duvernet",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Nation",
+        "ligne": ["1", "2", "6", "9"]
+    }, 
+    
+    {
+        "metro": "Nationale",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Notre-Dame-de-Lorette",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Notre-Dame-des-Champs",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Oberkampf",
+        "ligne": ["5", "9"]
+    }, 
+    
+    {
+        "metro": "Odéon",
+        "ligne": ["4", "10"]
+    }, 
+    
+    {
+        "metro": "Olympiades",
+        "ligne": ["14"]
+    }, 
+    
+    {
+        "metro": "Opéra",
+        "ligne": ["3", "7"]
+    }, 
+    
+    {
+        "metro": "Ourcq",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Palais Royal - Musée du Louvre",
+        "ligne": ["1", "7"]
+    }, 
+    
+    {
+        "metro": "Parmentier",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Passy",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Pasteur",
+        "ligne": ["6", "12"]
+    }, 
+    
+    {
+        "metro": "Pelleport",
+        "ligne": ["3bis"]
+    }, 
+    
+    {
+        "metro": "Père Lachaise",
+        "ligne": ["2", "3"]
+    }, 
+    
+    {
+        "metro": "Pereire",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Pernety",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Philippe Auguste",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Picpus",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Pierre et Marie Curie",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Pigalle",
+        "ligne": ["2", "12"]
+    }, 
+    
+    {
+        "metro": "Place d'Italie",
+        "ligne": ["5", "6"]
+    }, 
+    
+    {
+        "metro": "Place de Clichy",
+        "ligne": ["2", "13"]
+    }, 
+    
+    {
+        "metro": "Place des Fêtes",
+        "ligne": ["7bis", "11"]
+    }, 
+    
+    {
+        "metro": "Place Monge",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Plaisance",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Pointe du Lac",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Poissonnière",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Pont de Levallois - Bécon",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Pont de Neuilly",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Pont de Sèvres",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Pont Marie",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Pont Neuf",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Porte d'Auteuil",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Porte d'Italie",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Porte d'Ivry",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Porte d'Orléans",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Porte Dauphine",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Porte de Bagnolet",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Porte de Champerret",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Porte de Charenton",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Porte de Choisy",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Porte de Clichy",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Porte de Clignancourt",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Porte de la Chapelle",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Porte de la Villette",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Porte de Montreuil",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Porte de Pantin",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Porte de Saint-Cloud",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Porte de Saint-Ouen",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Porte de Vanves",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Porte de Versailles",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Porte de Vincennes",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Porte des Lilas",
+        "ligne": ["3bis", "11"]
+    }, 
+    
+    {
+        "metro": "Porte Dorée",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Porte Maillot",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Pré Saint-Gervais",
+        "ligne": ["7bis"]
+    }, 
+    
+    {
+        "metro": "Pyramides",
+        "ligne": ["7", "14"]
+    }, 
+    
+    {
+        "metro": "Pyrénées",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Quai de la Gare",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Quai de la Rapée",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Quatre-Septembre",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Rambuteau",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Ranelagh",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Raspail",
+        "ligne": ["4", "6"]
+    }, 
+    
+    {
+        "metro": "Réaumur - Sébastopol",
+        "ligne": ["3", "4"]
+    }, 
+    
+    {
+        "metro": "Rennes",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "République",
+        "ligne": ["3", "5", "8", "9", "11"]
+    }, 
+    
+    {
+        "metro": "Reuilly - Diderot",
+        "ligne": ["1", "8"]
+    }, 
+    
+    {
+        "metro": "Richard-Lenoir",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Richelieu - Drouot",
+        "ligne": ["8", "9"]
+    }, 
+    
+    {
+        "metro": "Riquet",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Robespierre",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Rome",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Rue de la Pompe",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Rue des Boulets",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Rue du Bac",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Rue Saint-Maur",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Saint-Ambroise",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Saint-Augustin",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Saint-Denis - Porte de Paris",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Saint-Denis - Université",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Saint-Fargeau",
+        "ligne": ["3bis"]
+    }, 
+    
+    {
+        "metro": "Saint-François-Xavier",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Saint-Georges",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Saint-Germain-des-Prés",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Saint-Jacques",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Saint-Lazare",
+        "ligne": ["3", "12", "13", "14"]
+    }, 
+    
+    {
+        "metro": "Saint-Mandé",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Saint-Marcel",
+        "ligne": ["5"]
+    }, 
+    
+    {
+        "metro": "Saint-Michel",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Saint-Paul",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Saint-Philippe du Roule",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Saint-Placide",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Saint-Sébastien - Froissart",
+        "ligne": ["8"]
+    }, 
+    
+    {
+        "metro": "Saint-Sulpice",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Ségur",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Sentier",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Sèvres - Babylone",
+        "ligne": ["10", "12"]
+    }, 
+    
+    {
+        "metro": "Sèvres - Lecourbe",
+        "ligne": ["6"]
+    }, 
+    
+    {
+        "metro": "Simplon",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Solférino",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Stalingrad",
+        "ligne": ["2", "5"]
+    }, 
+    
+    {
+        "metro": "Strasbourg - Saint-Denis",
+        "ligne": ["4", "8"]
+    }, 
+    
+    {
+        "metro": "Sully - Morland",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Télégraphe",
+        "ligne": ["11"]
+    }, 
+    
+    {
+        "metro": "Temple",
+        "ligne": ["3"]
+    }, 
+    
+    {
+        "metro": "Ternes",
+        "ligne": ["2"]
+    }, 
+    
+    {
+        "metro": "Tolbiac",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Trinité - d'Estienne d'Orves",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Trocadéro",
+        "ligne": ["6", "9"]
+    }, 
+    
+    {
+        "metro": "Tuileries",
+        "ligne": ["1"]
+    }, 
+    
+    {
+        "metro": "Vaneau",
+        "ligne": ["10"]
+    }, 
+    
+    {
+        "metro": "Varenne",
+        "ligne": ["13"]
+    }, 
+    
+    {
+        "metro": "Vaugirard",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Vavin",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Verdun-Sud",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Victor Hugo",
+        "ligne": ["4"]
+    }, 
+    
+    {
+        "metro": "Villejuif - Léo Lagrange",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Villejuif - Louis Aragon",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Villejuif - Paul Vaillant-Couturier",
+        "ligne": ["7"]
+    }, 
+    
+    {
+        "metro": "Villiers",
+        "ligne": ["2", "3"]
+    }, 
+    
+    {
+        "metro": "Volontaires",
+        "ligne": ["12"]
+    }, 
+    
+    {
+        "metro": "Voltaire",
+        "ligne": ["9"]
+    }, 
+    
+    {
+        "metro": "Wagram",
+        "ligne": ["3"]
+    }
+  ]
+}
