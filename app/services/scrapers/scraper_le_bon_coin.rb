@@ -50,37 +50,41 @@ class ScraperLeBonCoin < Scraper
   end
 
   def extract_each_flat(item)
-    hashed_property = {}
+    flat_data = {}
 
     item["attributes"].each do |element|
       case element["key"]
       when "square"
-        hashed_property[:surface] = element["value"].to_i
+        flat_data[:surface] = element["value"].to_i
       when "rooms"
-        hashed_property[:rooms_number] = element["value_label"].to_i
+        flat_data[:rooms_number] = element["value_label"].to_i
       when "real_estate_type"
-        hashed_property[:flat_type] = element["value_label"]
+        flat_data[:flat_type] = element["value_label"]
       end
     end
 
-    !item["url"].nil? ? hashed_property[:link] = item["url"].gsub(" u002F", "/").gsub("\s", "") : nil
-    !item["body"].nil? ? hashed_property[:description] = item["body"].tr("\n", "") : nil
-    !item["location"]["zipcode"].nil? ? hashed_property[:area] = item["location"]["zipcode"] : nil
-    !item["price"].nil? ? hashed_property[:price] = item["price"][0].to_i : nil
+    !item["url"].nil? ? flat_data[:link] = item["url"].gsub(" u002F", "/").gsub("\s", "") : nil
+    !item["body"].nil? ? flat_data[:description] = item["body"].tr("\n", "") : nil
+    !item["location"]["zipcode"].nil? ? flat_data[:area] = item["location"]["zipcode"] : nil
+    !item["price"].nil? ? flat_data[:price] = item["price"][0].to_i : nil
 
-    hashed_property[:images] = []
+    !flat_data[:description].nil? ? flat_data[:floor] = perform_floor_regex(flat_data[:description]) : nil
+    !flat_data[:description].nil? ? flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description]) : nil
+    !flat_data[:description].nil? ? flat_data[:subway_ids] = perform_subway_regex(flat_data[:description]) : nil
+
+    flat_data[:images] = []
     if !item["images"]["urls_large"].nil?
-      hashed_property[:images] = item["images"]["urls_large"]
+      flat_data[:images] = item["images"]["urls_large"]
     elsif !item["images"]["urls"].nil?
-      hashed_property[:images] = item["images"]["urls"]
+      flat_data[:images] = item["images"]["urls"]
     end
 
-    hashed_property[:source] = @source
+    flat_data[:source] = @source
 
     case item["owner"]["type"]
-    when "pro"; hashed_property[:provider] = "Agence"
-    when "private"; hashed_property[:provider] = "Particulier"
-    else; hashed_property[:provider] = "N/C"     end
-    return hashed_property
+    when "pro"; flat_data[:provider] = "Agence"
+    when "private"; flat_data[:provider] = "Particulier"
+    else; flat_data[:provider] = "N/C"     end
+    return flat_data
   end
 end

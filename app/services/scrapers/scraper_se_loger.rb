@@ -52,32 +52,32 @@ class ScraperSeLoger < Scraper
 
   def extract_each_flat(item)
     if item.keys[0] === "id"
-      hashed_property = {}
-      hashed_property[:price] = item["pricing"]["price"].to_int_scrp
-      hashed_property[:images] = []
+      flat_data = {}
+      flat_data[:price] = item["pricing"]["price"].to_int_scrp
+      flat_data[:images] = []
       item["photos"].each do |img|
-        hashed_property[:images].push(img.gsub("/400/visuels", "/800/visuels"))
+        flat_data[:images].push(img.gsub("/400/visuels", "/800/visuels"))
       end
-      hashed_property[:area] = item["zipCode"]
-      hashed_property[:description] = item["description"] + " ... - #{hashed_property[:area_district]}"
-      hashed_property[:link] = item["classifiedURL"]
+      flat_data[:area] = item["zipCode"]
+      flat_data[:description] = item["description"] + " ... - #{flat_data[:area_district]}"
+      flat_data[:link] = item["classifiedURL"]
       item["tags"].each do |infos|
         surface_regex = '\d(.)*m²'
         rooms_regex = '\d(.)*p'
         bedrooms_regex = '\d(.)*ch'
-        hashed_property[:surface] = infos.to_int_scrp if infos.match(surface_regex)
-        hashed_property[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
-        hashed_property[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
+        flat_data[:surface] = infos.to_int_scrp if infos.match(surface_regex)
+        flat_data[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
+        flat_data[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
       end
-      hashed_property[:flat_type] = item["estateType"]
-      hashed_property[:agency_name] = item["contact"]["contactName"]
-      hashed_property[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
-      puts hashed_property[:contact_number]
-      hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-      hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-      hashed_property[:source] = @source
-      hashed_property[:provider] = "Agence"
-      return hashed_property
+      flat_data[:flat_type] = item["estateType"]
+      flat_data[:agency_name] = item["contact"]["contactName"]
+      flat_data[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
+      flat_data[:floor] = perform_floor_regex(flat_data[:description])
+      flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
+      flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
+      flat_data[:source] = @source
+      flat_data[:provider] = "Agence"
+      return flat_data
     end
   end
 end

@@ -1,14 +1,13 @@
 class ScraperKmi < Scraper
-  attr_accessor :url, :properties, :source, :xml_first_page, :page_extraction_nbr
+  attr_accessor :url, :properties, :source, :xml_first_page
 
-  def initialize(page_extraction_nbr)
-    @page_extraction_nbr = page_extraction_nbr
+  def initialize
     @url = "https://www.cabinet-kmi.com/recherche-avancee/page/[[PAGE_NUMBER]]?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
     @source = "KMI"
     @xml_first_page = "div.property_listing"
   end
 
-  def extract_first_page
+  def extract_many_pages(page_extraction_nbr)
     xml = fetch_many_pages(url, page_extraction_nbr, @xml_first_page)
     hashed_properties = []
     xml.each do |item|
@@ -54,6 +53,7 @@ class ScraperKmi < Scraper
     flat_data[:contact_number] = access_xml_text(html, "div.agent_unit > div:nth-child(2) > div:nth-child(3)").convert_phone_nbr_scrp
     flat_data[:floor] = perform_floor_regex(flat_data[:description])
     flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
+    flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
     flat_data[:images] = access_xml_link(html, "div.multi_image_slider_image", "style")
