@@ -8,10 +8,10 @@ MONGODB_CONN_URL='mongodb://production00:PgxSkzjHvnpAdWR2@SG-ClusterDD-24238.ser
 
 
 
-good = ['2827641220632020', '2958957867501201']
+# good = ['2827641220632020', '2958957867501201']
 
 
-target = subs = @tiger[:subscribers].find(is_active: true, type:"to_buy", favorites: { '$exists' => true, '$not' => {'$size'=> 0}} ).sort(_id: -1)
+target = subs = @tiger[:subscribers].find(is_active: true, type:"to_buy", favorites: { '$exists' => true, '$not' => {'$size'=> 0}} )
 # target = subs = @tiger[:subscribers].find(is_active: true, type:"to_buy", facebook_id: { '$in' => good} ).sort(_id: -1)
 
 
@@ -60,9 +60,9 @@ puts "#{total_props_id.length} unic properties"
 # ==========================
 total_props_hist = []
 
-time = Time.parse('22:00:00 +0100')
+time = Time.parse('08:00:00 +0100')
 borne_inf = BSON::ObjectId.from_time(time - (15*24*60*60))
-borne_sup = BSON::ObjectId.from_time(time - (12*60*60))
+borne_sup = BSON::ObjectId.from_time(time - (30*60*60))
 
 hist_properties = @tiger[:scrapped_properties].find(
       type: 'to_buy',
