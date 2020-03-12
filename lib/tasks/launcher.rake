@@ -12,6 +12,7 @@ namespace :scraper do
     ScraperCentury.new.extract_first_page
     ScraperLogicImmo.new.extract_first_page
     ScraperSuperImmo.new.extract_first_page
+    ScraperImax.new.extract_first_page
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Regular Scraper script took #{ending - starting} seconds to run"
   end
