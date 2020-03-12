@@ -28,6 +28,10 @@ class Manychat
     return handle_manychat_response(send_content(subscriber, create_gallery_card_with_header(template, properties, subscriber)))
   end
 
+  def send_no_props_msg(subscriber, template)
+    return handle_manychat_response(send_content(subscriber, create_no_props_msg(subscriber, template)))
+  end
+
   # This method is sending a gallery of all the images of a property + The text description (i.e. : internal chatbot Property Show use)
   def send_property_info_post_interaction(subscriber, property)
     first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
@@ -114,6 +118,12 @@ class Manychat
   # [DING DONG x MANYCHAT] COMPONENTS
   ###################################
 
+  def create_no_props_msg(subscriber, template = nil)
+    text = "😕 Oops, aucune annonce ne correspond ..."
+    text = "Aucune annonce récente ne répond à tes critères de recherche 😕. \u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️" if template == "last_properties"
+    return [create_message_text_hash(text)]
+  end
+  
   def create_header_gallery_element_new_properties(number_of_properties)
     title = "🍾 "
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
