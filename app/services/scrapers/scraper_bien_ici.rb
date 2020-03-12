@@ -8,7 +8,7 @@ class ScraperBienIci < Scraper
   end
 
   def extract_first_page
-    xml = fetch_first_page(@start_url, @xml_first_page, "Dynamic", "detailsContainer")
+    xml = fetch_main_page(@start_url, @xml_first_page, "Dynamic", "detailsContainer")
     hashed_properties = []
     xml.each do |item|
       begin
@@ -33,7 +33,7 @@ class ScraperBienIci < Scraper
 
   def extract_each_flat(prop)
     flat_data = {}
-    html = fetch_dynamic_page(prop[:link], "detailedSheetContainer")
+    html = fetch_dynamic_page(prop[:link], "detailedSheetContainer", 0)
     flat_data[:link] = prop[:link]
     flat_data[:surface] = prop[:surface]
     flat_data[:area] = prop[:area]
