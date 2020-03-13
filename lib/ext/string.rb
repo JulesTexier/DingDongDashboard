@@ -1,6 +1,11 @@
 class String
 
   ## CHARACTER METHODS
+
+  def clean_img_link_https
+    "https:"+ self if self[0..1] == "//"
+  end
+
   def to_int_scrp
     self.tr("^0-9", "").to_i
   end
