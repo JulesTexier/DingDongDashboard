@@ -175,16 +175,12 @@ class Scraper
 
   def is_already_exists(hashed_property)
     response = false
-    properties = Property.where(
-      price: hashed_property[:price],
-      surface: hashed_property[:surface],
-      rooms_number: hashed_property[:rooms_number],
-      area: hashed_property[:area],
-    ).where(
+    properties = Property.where(hashed_property.except(:link)).where(
       "created_at >= :seven",
       :seven => Time.now - 7.days,
     )
     response = true if properties.length > 0
+    return response
   end
 
   def is_already_exists_by_link(link)
