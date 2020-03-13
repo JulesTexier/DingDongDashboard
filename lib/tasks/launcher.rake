@@ -46,6 +46,7 @@ namespace :scraper do
     ScraperKmi.new.extract_many_pages(6)
     ScraperImax.new.extract_first_page
     ScraperEfficity.new.extract_first_page
+    ScraperGreenAcres.new.extract_first_page
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end
