@@ -41,6 +41,7 @@ namespace :scraper do
     puts "Launching Small Shitty Website Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    # ScraperGuyHoquet.new.extract_first_page
     ScraperKmi.new.extract_many_pages(6)
     ScraperImax.new.extract_first_page
     ScraperEfficity.new.extract_first_page
