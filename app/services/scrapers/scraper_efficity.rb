@@ -48,7 +48,7 @@ class ScraperEfficity < Scraper
     flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
-    flat_data[:images] = access_xml_link(html, "picture source", "srcset")
+    flat_data[:images] = access_xml_link(html, ".cbp-lightbox", "href")
     flat_data[:images].collect! {|img| img.clean_img_link_https}
     return flat_data
   end
