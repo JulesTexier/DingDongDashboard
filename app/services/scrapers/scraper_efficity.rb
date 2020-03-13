@@ -9,7 +9,6 @@ class ScraperEfficity < Scraper
 
   def extract_first_page
     xml = fetch_main_page(@url, @xml_first_page)
-    puts xml.count
     hashed_properties = []
     xml.each do |item|
       begin
@@ -18,10 +17,8 @@ class ScraperEfficity < Scraper
         hashed_property[:link] = "https://www.efficity.com" + access_xml_link(item, "a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = regex_gen(access_xml_text(item,'a > figcaption > h3 > span > span'), '(75)$*\d+{3}')
-        # hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, 'a > div > div > strong > span'), '(\d)(.*)(€)').to_int_scrp
-        # hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
-        hashed_properties.push(extract_each_flat(hashed_property))
+        hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
@@ -29,8 +26,7 @@ class ScraperEfficity < Scraper
       end
     end
     puts "*"*10
-    puts hashed_properties
-    # enrich_then_insert(hashed_properties)
+    enrich_then_insert(hashed_properties)
   end
 
   private
