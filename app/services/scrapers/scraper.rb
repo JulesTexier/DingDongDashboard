@@ -8,7 +8,7 @@ class Scraper
     hashed_properties.each do |hashed_property|
       property = insert_property(hashed_property)
       insert_property_images(hashed_property[:images], property) unless property.nil?
-      insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
+      # insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
   end
 
@@ -167,6 +167,13 @@ class Scraper
       end
     end
     return subways_ids.uniq
+  end
+
+  def get_type_flat(str)
+    flat_type = "N/C"
+    flat_type =  "Appartement" if str.downcase.include? "appartement"
+    flat_type =  "Maison" if str.downcase!.include? "maison"
+    return  flat_type
   end
 
   #############################

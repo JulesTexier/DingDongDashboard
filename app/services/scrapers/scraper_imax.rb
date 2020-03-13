@@ -48,7 +48,6 @@ class ScraperImax < Scraper
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
     flat_data[:images] = access_xml_link(html, "div.nivoSlider > a", "href")
-    puts JSON.pretty_generate(flat_data)
     return flat_data
   end
 end
