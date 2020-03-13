@@ -14,7 +14,13 @@ class ScraperMeilleursAgents < Scraper
       xml.each do |item|
         begin
           hashed_property = extract_each_flat(item)
-          hashed_properties.push(hashed_property) if is_property_clean(hashed_property)
+          property_checker_hash = {}
+          property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
+          property_checker_hash[:surface] = hashed_property[:surface]
+          property_checker_hash[:price] = hashed_property[:price]
+          property_checker_hash[:area] = hashed_property[:area]
+          property_checker_hash[:link] = hashed_property[:link]
+          hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
