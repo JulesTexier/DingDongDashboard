@@ -18,9 +18,8 @@ class ScraperFoncia < Scraper
         hashed_property[:area] = regex_gen(access_xml_text(item, "p.TeaserOffer-loc"), '(75)$*\d+{3}')
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.MiniData-row"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "strong.TeaserOffer-price-num"), '(\d)(.*)( *)(€)').to_int_scrp
-        hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h3.TeaserOffer-title"), '((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)')
+        hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h3.TeaserOffer-title"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
         hashed_properties.push(extract_each_flat(hashed_property)) if is_property_clean(hashed_property)
-       puts JSON.pretty_generate(hashed_properties)
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
@@ -28,7 +27,6 @@ class ScraperFoncia < Scraper
       end
     end
     enrich_then_insert(hashed_properties)
-
   end
 
   private
@@ -47,7 +45,7 @@ class ScraperFoncia < Scraper
     flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
     flat_data[:provider] = "Agence"
     flat_data[:source] = @source
-    flat_data[:images] = access_xml_link(html, "li.OfferSlider-main-item > img","src")
+    flat_data[:images] = access_xml_link(html, "li.OfferSlider-main-item > img", "src")
     return flat_data
   end
 end
