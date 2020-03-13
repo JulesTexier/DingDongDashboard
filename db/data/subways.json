@@ -1477,12 +1477,12 @@
     
     {
         "metro": "Verdun-Sud",
-        "ligne": ["4"]
+        "ligne": ["4", "5"]
     }, 
     
     {
         "metro": "Victor Hugo",
-        "ligne": ["4"]
+        "ligne": ["2"]
     }, 
     
     {
