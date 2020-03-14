@@ -1,13 +1,60 @@
 
+<h2 class="mt-5" >24 last hours</h2>
 <table class="table mt-5">
   <thead>
     <tr>
-      <th scope="col"><h2> Sources</h2></th>
-      <th scope="col"> Annonces </th>
-      <th scope="col"> Proportion</th>
+      <th scope="col">🔎 Sources (<%= @data24h.count  %>)</th>
+      <th scope="col"> 24h - Annonces (<%= @total24h%>)</th>
+      <th scope="col"> 24h - Proportion</th>
     </tr>
   </thead>
   <tbody>
+  
+  <% @data24h.each do |doc| %>
+    <tr>
+      <th scope="row"><%= doc[:source] %></th>
+      <td><%= doc[:count] %></td>
+      <td><%= ((doc[:count].to_f / @total24h.to_f) * 100).to_i %> % </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2 class="mt-5">Last month</h2>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">🔎 Sources (<%= @data1m.count  %>)</th>
+      <th scope="col"> 1m - Annonces (<%= @total1m%>)</th>
+      <th scope="col"> 1m - Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+<% @data1m.each do |doc| %>
+    <tr>
+      <th scope="row"><%= doc[:source] %></th>
+      <td><%= doc[:count] %></td>
+      <td><%= ((doc[:count].to_f / @total1m.to_f) * 100).to_i %> % </td>
+    </tr>
+  <% end %>
+
+
+  </tbody>
+  </table>
+  
+
+  <h2 class="mt-5">All time</h2>
+  <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">🔎 Sources (<%= @data.count  %>)</th>
+      <th scope="col"> All - Annonces (<%= @total%>)</th>
+      <th scope="col"> All - Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+
   <% @data.each do |doc| %>
     <tr>
       <th scope="row"><%= doc[:source] %></th>
@@ -15,5 +62,7 @@
       <td><%= ((doc[:count].to_f / @total.to_f) * 100).to_i %> % </td>
     </tr>
   <% end %>
+  
   </tbody>
-</table>
+  </table>
+  
