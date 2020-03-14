@@ -33,5 +33,6 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   # put '/subscribers/:id', to "subcribers#update"
   get "/dashboard/" => "static_pages#dashboard"
+  get "/dashboard/properties" => "static_pages#properties"
 
 end
