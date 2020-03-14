@@ -1,0 +1,19 @@
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col"><h2> Sources</h2></th>
+      <th scope="col"> Annonces </th>
+      <th scope="col"> Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @data.each do |doc| %>
+    <tr>
+      <th scope="row"><%= doc[:source] %></th>
+      <td><%= doc[:count] %></td>
+      <td><%= ((doc[:count].to_f / @total.to_f) * 100).to_i %> % </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

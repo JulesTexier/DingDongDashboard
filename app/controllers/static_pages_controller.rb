@@ -28,4 +28,14 @@ class StaticPagesController < ApplicationController
         @subs_last_2w = Subscriber.where('created_at > ?', 2.weeks.ago)
         (@subs_last_2w.count - @subs_last_1w.count) != 0 ? @growth1w_subs = (@subs_last_1w.count * 100 ) / (@subs_last_2w.count - @subs_last_1w.count) - 100 : "N/A"
     end
+
+    def properties 
+        @total = Property.all.count
+
+        sites = Property.distinct.pluck(:source)
+        @data = []
+        sites.each do |source|
+            @data.push({source: source, count: Property.where(source: source).count})
+        end
+    end
 end
