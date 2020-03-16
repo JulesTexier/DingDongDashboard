@@ -1,3 +1,4 @@
+<%= line_chart Property.where(source: "SeLoger").group_by_day(:created_at).count %>
 
 <h2 class="mt-5" >24 last hours</h2>
 <table class="table mt-5">
