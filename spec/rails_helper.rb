@@ -2,11 +2,7 @@
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 
-<<<<<<< HEAD
 require File.expand_path("../config/environment", __dir__)
-=======
-require File.expand_path('../config/environment', __dir__)
->>>>>>> v1-testing-models
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -40,10 +36,6 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
-<<<<<<< HEAD
-=======
-
->>>>>>> v1-testing-models
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -71,17 +63,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> v1-testing-models
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
   end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> v1-testing-models
