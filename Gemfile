@@ -81,6 +81,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
+  gem "nyan-cat-formatter"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
