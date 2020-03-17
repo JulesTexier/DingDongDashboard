@@ -45,7 +45,6 @@ gem "nokogiri"
 gem "table_print"
 
 # RSPEC
-gem "rspec-rails", "~> 3.5"
 
 # Mongo gem for migration purpose
 gem 'mongo', '~> 2.7'
@@ -57,6 +56,11 @@ gem 'groupdate'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem "minitest-rails", "~> 6.0.0"
+
 end
 
 group :development do
