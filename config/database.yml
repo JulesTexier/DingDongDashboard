@@ -62,7 +62,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  url: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
+  database: giant_cat_test
+  # url: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
   # host: kandula.db.elephantsql.com
   # port: 5432
   # database: wtbduoav
