@@ -1,8 +1,12 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
-  validates :facebook_id, presence: true
-  # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
+  validates_uniqueness_of :facebook_id, :case_sensitive => false
+  validates :facebook_id, presence: true 
+  validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
+  validates :phone, presence: true 
+  validates :firstname, presence: true 
+  validates :lastname, presence: true 
 
   has_many :selected_areas
   has_many :areas, through: :selected_areas
@@ -12,8 +16,6 @@ class Subscriber < ApplicationRecord
 
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
-
-  # Rajouter le is_actove: true par défaut
 
   def get_areas_list
     list = ""
