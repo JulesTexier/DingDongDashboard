@@ -31,23 +31,23 @@ class StaticPagesController < ApplicationController
 
     def properties 
         @total = Property.all.count
-        @total1m = Property.where('created_at > ?', 30.days.ago).count
-        @total24h = Property.where('created_at > ?', 24.hours.ago).count
+        # @total1m = Property.where('created_at > ?', 30.days.ago).count
+        # @total24h = Property.where('created_at > ?', 24.hours.ago).count
 
-        sites = Property.distinct.pluck(:source)
+        # sites = Property.distinct.pluck(:source)
         @data = []
         sites.each do |source|
             @data.push({source: source, count: Property.where(source: source).count})
         end
 
-        @data24h = []
-        sites.each do |source|
-            @data24h.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 24.hours.ago).count})
-        end
+        # @data24h = []
+        # sites.each do |source|
+        #     @data24h.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 24.hours.ago).count})
+        # end
 
-        @data1m = []
-        sites.each do |source|
-            @data1m.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 30.days.ago).count})
-        end
+        # @data1m = []
+        # sites.each do |source|
+        #     @data1m.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 30.days.ago).count})
+        # end
     end
 end
