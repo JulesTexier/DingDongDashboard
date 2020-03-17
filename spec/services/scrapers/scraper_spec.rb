@@ -26,8 +26,58 @@ RSpec.describe Scraper, type: :service do
         expect(@s.is_already_exists(@good_hashed_property)).to be_in([true, false])
       end
 
-      it "should return true" do
-        expect(@s.is_already_exists(@p)).to eq(true)
+      # it "should return true" do
+      #   expect(@s.is_already_exists(@p)).to eq(true)
+      # end
+    end
+  end
+
+  describe "GENERIC METHODS" do
+    before(:each) do
+      @s = Scraper.new
+    end
+    context "testing simple gsub for many pages methods" do
+      it "should be equal to something else" do
+        expect(@s.page_nbr_to_url("salut-[[PAGE_NUMBER]]", 1)).to eq("salut-1")
+        expect(@s.page_nbr_to_url("salut-[[PAGE_NUMBER]]", 129)).to eq("salut-129")
+        expect(@s.page_nbr_to_url("salut-[[PAGE_NUMBER]]", "1")).to eq("salut-1")
+        expect(@s.page_nbr_to_url("salut-[[PAGE_NUMBER]]", 123721)).to be_a(String)
+        expect(@s.page_nbr_to_url("salut-[[PAGE_NUMBER]]", 123721)).not_to be_a(NilClass)
+      end
+    end
+  end
+
+  describe "XML ACCESSORS METHODS" do
+    before(:each) do
+      @s = Scraper.new
+      @ssi = ScraperSuperImmo.new
+      @html = @ssi.fetch_static_page(@ssi.url)
+    end
+    context "access_xml_text" do
+      it "should return a string" do
+        expect(@s.access_xml_text(@html, "body")).to be_a(String)
+        expect(@s.access_xml_text(@html, "body")).not_to be_a(Array)
+      end
+
+      context "access_xml_raw" do
+        it "should return an array" do
+          expect(@s.access_xml_raw(@html, "body")).to be_a(Array)
+          expect(@s.access_xml_raw(@html, "body")).not_to be_a(String)
+        end
+      end
+
+      context "access_xml_link" do
+        it "should return an array" do
+          expect(@s.access_xml_link(@html, "p > a", "href")).to be_a(Array)
+          expect(@s.access_xml_link(@html, "p > a", "href")[0].to_s).to be_a(String)
+        end
+      end
+
+      context "access_xml_array_to_text" do
+        it "should return an array" do
+          expect(@s.access_xml_array_to_text(@html, "p > a")).to be_a(String)
+          expect(@s.access_xml_array_to_text(@html, "p > a")).not_to be_a(Array)
+        end
       end
     end
   end
