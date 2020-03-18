@@ -79,7 +79,8 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem "nyan-cat-formatter"
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
-  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'rspec-rails', '~> 4.0.0.rc1'
+  gem 'rails-controller-testing'
   gem 'factory_bot_rails'
 end
 
