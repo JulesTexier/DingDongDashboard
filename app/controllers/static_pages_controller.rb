@@ -50,4 +50,34 @@ class StaticPagesController < ApplicationController
         #     @data1m.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 30.days.ago).count})
         # end
     end
+
+    def stats
+        @properties = Property.all 
+        @subscribers = Subscriber.all
+        nb_ads = []
+        @subscribers.each do |sub|
+            c = 0
+            @properties.each do |p|
+                if sub.is_matching_property?(p)
+                    c += 1
+                end
+            nb_ads.push(c)
+            end
+        end
+        @moyenne = (nb_ads.inject{ |sum, el| sum + el }.to_f / nb_ads.size).to_i
+
+        date = Date.parse('february 1 2020')
+        @properties_feb = Property.where('created_at > ?', date)
+        nb_ads_feb = []
+        @subscribers.each do |sub|
+            d = 0
+            @properties_feb.each do |p|
+                if sub.is_matching_property?(p)
+                    d += 1
+                end
+                nb_ads_feb.push(d)
+            end
+        end
+        @moyenne_feb = (nb_ads_feb.inject{ |sum, el| sum + el }.to_f / nb_ads_feb.size).to_i
+    end
 end
