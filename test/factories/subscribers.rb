@@ -8,5 +8,11 @@ FactoryBot.define do
     min_surface { 25 }
     min_rooms_number { 1 }
     facebook_id { "fb000001" }
+
+    factory :subscriber_fred do 
+      facebook_id {'2827641220632020'}
+    end
+
+
   end
 end
