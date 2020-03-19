@@ -2,8 +2,6 @@ DEFAULT_IMG_URL = "https://hellodingdong.com/placeholder.jpg"
 
 class Property < ApplicationRecord
 
-  # after_save :broadcast
-
   validates :price, presence: true
   validates :surface, presence: true
   validates :rooms_number, presence: true

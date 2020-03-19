@@ -1,14 +1,20 @@
 class ScraperLeBonCoin < Scraper
-  attr_accessor :url, :properties, :source, :xml_first_page
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max"
     @source = "LeBonCoin"
-    @xml_first_page = "body"
+    @main_page_cls = "body"
+    @type = "Captcha"
+    @waiting_cls = nil
+    @multi_page = false
+    @page_nbr = 1
+    @properties = []
   end
 
-  def extract_first_page
-    xml = fetch_main_page(@url, @xml_first_page, "Captcha")
+  def launch(limit = nil)
+    i = 0
+    xml = fetch_main_page(self)
     if !xml[0].to_s.strip.empty?
       json = extract_json(xml)
       hashed_properties = []
@@ -22,22 +28,24 @@ class ScraperLeBonCoin < Scraper
             property_checker_hash[:price] = hashed_property[:price]
             property_checker_hash[:area] = hashed_property[:area]
             property_checker_hash[:link] = hashed_property[:link]
+            @properties.push(hashed_property) ##testing purpose
             hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
           rescue StandardError => e
             puts "\nError for #{@source}, skip this one."
             puts "It could be a bad link or a bad xml extraction.\n\n"
-            puts e.message
-            puts e.backtrace
             next
           end
         end
         enrich_then_insert(hashed_properties)
+        i += 1
+        break if i == limit
       else
         puts "Error Parsing JSON.\n\n"
       end
     else
       puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
+    return @properties
   end
 
   private
@@ -45,6 +53,7 @@ class ScraperLeBonCoin < Scraper
   def extract_json(html_array)
     json = []
     html_array.each do |html|
+      puts html
       begin
         first_part = html.text.split("window.__REDIAL_PROPS__ = [null,null,null,null,null,")[1]
         second_part = first_part.split("</script>")[0]
