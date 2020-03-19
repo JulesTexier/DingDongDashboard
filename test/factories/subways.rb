@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :subway do
-    name { "Subway stop" }
-    line { "{}" }
+    id { 1 }
+    name { "Wagram" }
+    line { ["3"] }
   end
 end
