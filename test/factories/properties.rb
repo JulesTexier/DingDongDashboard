@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :property do
-    price { 600000 }
-    surface { 60 }
-    rooms_number { 1 }
-    area { "75010" }
+    price { 301000 }
+    surface { 46 }
+    rooms_number { 2 }
+    area { "75018" }
     source { "Ding Dong" }
     link { "https://hellodingdong.com" }
   end
