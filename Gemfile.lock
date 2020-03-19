@@ -78,12 +78,9 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     database_cleaner (1.8.3)
-<<<<<<< HEAD
     database_cleaner-active_record (1.8.0)
       activerecord
       database_cleaner (~> 1.8.0)
-=======
->>>>>>> master
     diff-lcs (1.3)
     dotenv (2.7.5)
     erubi (1.9.0)
@@ -121,26 +118,15 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-<<<<<<< HEAD
-    mongo (2.11.3)
-=======
-    minitest-rails (6.0.1)
-      minitest (~> 5.10)
-      railties (~> 6.0.0)
     mongo (2.11.4)
->>>>>>> master
       bson (>= 4.4.2, < 5.0.0)
     msgpack (1.3.3)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-<<<<<<< HEAD
     nyan-cat-formatter (0.12.0)
       rspec (>= 2.99, >= 2.14.2, < 4)
-    pg (1.2.2)
-=======
     pg (1.2.3)
->>>>>>> master
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -296,11 +282,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   chartkick
-<<<<<<< HEAD
   database_cleaner-active_record
-=======
-  database_cleaner
->>>>>>> master
   dotenv
   factory_bot_rails
   groupdate
