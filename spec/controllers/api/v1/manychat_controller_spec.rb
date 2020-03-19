@@ -45,9 +45,6 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
 
     describe "send last X properties to a subscriber" do
       context "#send_x_last_props" do
-        # before :all do
-        #   @sub = FactoryBot.create(:subscriber_fred)
-        # end
         it "should contain an authorization token" do
           get :send_x_last_props, params: { subscriber_id: @sub.id, x: 1 }
           expect(response.body).to eq("HTTP Token: Access denied.\n")
@@ -78,9 +75,6 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
     describe "send morning properties to a subscriber" do
       context "#send_props_morning" do
         context "DD response side" do
-          # before :all do
-          #   @sub = FactoryBot.create(:subscriber_fred)
-          # end
           it "should contain an authorization token" do
             get :send_props_morning, params: { subscriber_id: @sub.id }
             expect(response.body).to eq("HTTP Token: Access denied.\n")
@@ -111,9 +105,6 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
 
     describe "A subscriber should receive his favorites" do
       context "#send_favorites" do
-        # before :all do
-        #   @sub = FactoryBot.create(:subscriber_fred)
-        # end
         it "should contain an authorization token" do
           get :send_props_favorites, params: { subscriber_id: @sub.id }
           expect(response.body).to eq("HTTP Token: Access denied.\n")
