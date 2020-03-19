@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_123628) do
+ActiveRecord::Schema.define(version: 2020_03_19_131247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_03_12_123628) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "has_elevator"
+    t.text "images", default: [], array: true
   end
 
   create_table "property_districts", force: :cascade do |t|
