@@ -12,14 +12,17 @@ RSpec.describe ScraperKmi, type: :service do
   end
 
   it "should return an array of hashes" do
-    expect(@s.properties.first).to have_key(:has_elevator)
-    expect(@s.properties.first).to have_key(:price)
-    expect(@s.properties.first).to have_key(:rooms_number)
-    expect(@s.properties.first).to have_key(:surface)
-    expect(@s.properties.first).to have_key(:floor)
-    expect(@s.properties.first).to have_key(:area)
-    expect(@s.properties.first).to have_key(:description)
-    expect(@s.properties.first).to have_key(:source)
+    properties = @s.properties
+    properties.each do |property|
+      expect(property).to have_key(:has_elevator)
+      expect(property).to have_key(:price)
+      expect(property).to have_key(:rooms_number)
+      expect(property).to have_key(:surface)
+      expect(property).to have_key(:floor)
+      expect(property).to have_key(:area)
+      expect(property).to have_key(:description)
+      expect(property).to have_key(:source)
+    end
   end
 
   it "should return an hash with specific type of data" do
