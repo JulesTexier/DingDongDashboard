@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperSuperImmo, type: :service do
+RSpec.describe ScraperPap, type: :service do
   before(:all) do
-    @s = ScraperSuperImmo.new
+    @s = ScraperPap.new
     @limit = 3
     @s.launch(@limit)
   end
