@@ -7,11 +7,11 @@ namespace :scraper do
     puts "Launching Regular Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperPap.new.extract_first_page
-    ScraperFigaro.new.extract_first_page
-    ScraperCentury.new.extract_first_page
-    ScraperLogicImmo.new.extract_first_page
-    ScraperSuperImmo.new.extract_first_page
+    ScraperPap.new.launch
+    ScraperFigaro.new.launch
+    ScraperCentury.new.launch
+    ScraperLogicImmo.new.launch
+    ScraperSuperImmo.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Regular Scraper script took #{ending - starting} seconds to run"
   end
@@ -20,8 +20,8 @@ namespace :scraper do
     puts "Launching Dynamic Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperOrpi.new.extract_first_page
-    ScraperBienIci.new.extract_first_page
+    ScraperOrpi.new.launch
+    ScraperBienIci.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Dynamic Scraper script took #{ending - starting} seconds to run"
   end
@@ -30,9 +30,9 @@ namespace :scraper do
     puts "Launching Premium Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperLeBonCoin.new.extract_first_page
-    ScraperSeLoger.new.extract_first_page
-    ScraperMeilleursAgents.new.extract_first_page
+    ScraperLeBonCoin.new.launch
+    ScraperSeLoger.new.launch
+    ScraperMeilleursAgents.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Premium Scraper script took #{ending - starting} seconds to run"
   end
@@ -41,12 +41,12 @@ namespace :scraper do
     puts "Launching Small Shitty Website Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperGuyHoquet.new.extract_first_page
-    ScraperFoncia.new.extract_first_page
-    ScraperKmi.new.extract_many_pages(6)
-    ScraperImax.new.extract_first_page
-    ScraperEfficity.new.extract_first_page
-    ScraperGreenAcres.new.extract_first_page
+    ScraperGuyHoquet.new.launch
+    ScraperFoncia.new.launch
+    ScraperKmi.new.launch
+    ScraperImax.new.launch
+    ScraperEfficity.new.launch
+    ScraperGreenAcres.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end
@@ -72,7 +72,6 @@ namespace :broadcast do
     Broadcaster.new.new_properties_gallery
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The new_properties broadcast script took #{ending - starting} seconds to run"
-    # puts "The new_properties broadcast script sent #{data[0]} properties for a total of #{data[1]} sendings"
   end
 
   task :good_morning do
@@ -80,5 +79,15 @@ namespace :broadcast do
     Broadcaster.new.good_morning
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The Good Morning Broadcaster script took #{ending - starting} seconds to run"
+  end
+end
+
+namespace :test do
+  desc "This runs test"
+  task :services do
+    RSpec::Core::RakeTask.new(:spec) do |t|
+      t.pattern = "spec/services/*/_spec.rb"
+    end
+    Rake::Task["spec"].execute
   end
 end
