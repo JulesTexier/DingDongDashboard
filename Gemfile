@@ -78,7 +78,7 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem "nyan-cat-formatter"
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'database_cleaner-active_record'
   gem 'rspec-rails', '~> 4.0.0.rc1'
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
