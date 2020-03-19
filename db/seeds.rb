@@ -1,10 +1,14 @@
-require "json"
+total = Property.all.count
+properties = Property.all
+i = 0
 
-Subway.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!("subways")
-
-obj = JSON.parse(File.read("./db/data/subways.json"))
-obj["stations"].each do |hsh|
-  puts "***"
-  puts Subway.create(name: hsh["metro"], line: hsh["ligne"])
+properties.each do |property|
+  property_images = PropertyImage.where(property_id: property.id)
+  images = []
+  property_images.each do |property_image|
+    images.push(property_image.url)
+  end
+  property.update(images: images)
+  i += 1
+  puts "Property #{i} / #{total}"
 end
