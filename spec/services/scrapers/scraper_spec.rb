@@ -4,31 +4,54 @@ RSpec.describe Scraper, type: :service do
   describe "PUBLIC_DATABASE_METHODS" do
     before(:each) do
       @s = Scraper.new
-      @good_hashed_property = {}
-      @good_hashed_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
-      @good_hashed_property[:provider] = "Agence"
-      @good_hashed_property[:has_been_processed] = false
-      @good_hashed_property[:flat_type] = "Appartement"
-      @good_hashed_property[:rooms_number] = 2
-      @good_hashed_property[:price] = 501000
-      @good_hashed_property[:source] = "SuperImmo"
-      @good_hashed_property[:area] = "75018"
-      @good_hashed_property[:surface] = 46
-      @good_hashed_property[:description] = "Super appartement ma couille"
-      @good_hashed_property[:floor] = nil
-      @good_hashed_property[:has_elevator] = nil
+      @property = FactoryBot.create(:property)
+      FactoryBot.create(:subway)
 
-      @p = Property.last
+      @already_existing_property = {}
+      @already_existing_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
+      @already_existing_property[:rooms_number] = 2
+      @already_existing_property[:price] = 301000
+      @already_existing_property[:area] = "75018"
+      @already_existing_property[:surface] = 46
+
+      @new_property = {}
+      @new_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
+      @new_property[:rooms_number] = 3
+      @new_property[:price] = 411000
+      @new_property[:area] = "75015"
+      @new_property[:surface] = 46
+
+      @shit_property = {}
+      @shit_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
+      @shit_property[:rooms_number] = 3
+      @shit_property[:price] = 411000
+      @shit_property[:area] = "75015"
+      @shit_property[:surface] = 1600
     end
 
-    context "is_already_exists(hashed_property)" do
-      it "should always return a boolean" do
-        expect(@s.is_already_exists(@good_hashed_property)).to be_in([true, false])
+    context "is_already_exists + is_property_clean + is_dirty_property with 3 differents cases" do
+      it "shoud be a true false methods" do
+        expect(@s.is_already_exists(@already_existing_property)).to be_in([true, false])
+        expect(@s.is_dirty_property(@already_existing_property)).to be_in([true, false])
+        expect(@s.is_property_clean(@already_existing_property)).to be_in([true, false])
       end
 
-      # it "should return true" do
-      #   expect(@s.is_already_exists(@p)).to eq(true)
-      # end
+      it "should return true for already_existing_property and false for new_property" do
+        expect(@s.is_already_exists(@already_existing_property)).to eq(true)
+        expect(@s.is_already_exists(@new_property)).to eq(false)
+      end
+
+      it "should return false for new and already existing prop, a true for shit property" do
+        expect(@s.is_dirty_property(@already_existing_property)).to eq(false)
+        expect(@s.is_dirty_property(@new_property)).to eq(false)
+        expect(@s.is_dirty_property(@shit_property)).to eq(true)
+      end
+
+      it "should be true for new property, false for already existing and shit property" do
+        expect(@s.is_property_clean(@already_existing_property)).to eq(false)
+        expect(@s.is_property_clean(@shit_property)).to eq(false)
+        expect(@s.is_property_clean(@new_property)).to eq(true)
+      end
     end
   end
 
@@ -130,6 +153,39 @@ RSpec.describe Scraper, type: :service do
         expect(@s.perform_subway_regex("Nothing")).to be_a(Array)
         expect(@s.perform_subway_regex("Nothing")).to eq([])
       end
+
+      it "should send us array with 1 if desc contains subway station" do
+        FactoryBot.create(:subway)
+        expect(@s.perform_subway_regex("Wagram")).to be_a(Array)
+        expect(@s.perform_subway_regex("Wagram")).to eq([1])
+        expect(@s.perform_subway_regex("Wagram")).to be_a(Array)
+        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).not_to eq([1, 1, 1])
+        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).to eq([1])
+      end
+
+      it "should send us empty array if no probent results if there is subway inside database" do
+        FactoryBot.create(:subway)
+        expect(@s.perform_subway_regex("Nothing")).to be_a(Array)
+        expect(@s.perform_subway_regex("Nothing")).to eq([])
+        expect(@s.perform_subway_regex("Nothing Nothing Nothing")).to eq([])
+      end
+    end
+  end
+
+  describe "FETCH METHODS" do
+    before(:each) do
+      @s = Scraper.new
+      @si = ScraperSuperImmo.new
+      @skmi = ScraperKmi.new
+      @sbi = ScraperBienIci.new
+    end
+
+    it "should return a Nokogori element'" do
+      expect(@s.fetch_static_page(@si.url)).to be_a(Nokogiri::HTML::Document)
+    end
+
+    it "should return an array of Nokogiri Elements" do
+      expect(@s.fetch_many_pages(@skmi.url, 1, @skmi.main_page_cls)).to be_a(Array)
     end
   end
 end
