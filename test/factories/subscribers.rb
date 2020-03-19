@@ -13,6 +13,10 @@ FactoryBot.define do
       facebook_id {'2827641220632020'}
     end
 
+    factory :subscriber_dummy_fb_id do 
+      facebook_id {1234}
+    end
+
 
   end
 end
