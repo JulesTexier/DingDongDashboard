@@ -132,6 +132,58 @@ class String
     end
   end
 
+  ################################################
+  ## TRANSLATE AREA FOR CALLIMMO
+  ################################################
+  def area_translator_scrp_bis
+    area_regex = '(\d+)(er|eme)'
+    area = self.match(/#{area_regex}/i).to_s
+    case area
+    when "1ER"
+      return "75001"
+    when "2EME"
+      return "75002"
+    when "3EME"
+      return "75003"
+    when "4EME"
+      return "75004"
+    when "5EME"
+      return "75005"
+    when "6EME"
+      return "75006"
+    when "7EME"
+      return "75007"
+    when "8EME"
+      return "75008"
+    when "9EME"
+      return "75009"
+    when "10EME"
+      return "75010"
+    when "11EME"
+      return "75011"
+    when "12EME"
+      return "75012"
+    when "13EME"
+      return "75013"
+    when "14EME"
+      return "75014"
+    when "15EME"
+      return "75015"
+    when "16EME"
+      return "75016"
+    when "17EME"
+      return "75017"
+    when "18EME"
+      return "75018"
+    when "19EME"
+      return "75019"
+    when "20EME"
+      return "75020"
+    else
+      return "N/C"
+    end
+  end
+
   ############################################
   ## STRING METHODS FOR SELOGER WEIRD JSON ##
   ############################################
