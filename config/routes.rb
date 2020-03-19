@@ -9,10 +9,6 @@ Rails.application.routes.draw do
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
-        # get '/send/props/last/:x/days' => 'subscribers#send_props_x_days'
-        # get '/send/props/morning' => 'subscribers#send_props_morning'
-        # get '/send/props/:property_id/details' => 'subscribers#send_prop_details'
-        # get '/send/props/favorites' => 'subscribers#send_props_favorites'
       end
 
       resources :properties, only: [:show, :index]
