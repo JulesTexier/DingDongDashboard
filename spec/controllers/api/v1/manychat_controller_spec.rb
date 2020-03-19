@@ -23,12 +23,16 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
           post :update_subscriber, params: {subscriber_id: 9999}
           expect(response).to have_http_status(404)
         end
-        it "update subscriber firstname" do
+        it 'should update subscriber' do 
           request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
-          sub = @sub
-          sub.firstname = 'Paul'
-          post :update_subscriber, params: {subscriber_id: @sub.id, subscriber: sub}
-          expect(@sub.firstname).to eq('Paul')
+          sub = @sub 
+          sub.firstname = "John"
+          params = {
+            subscriber_id: @sub.id,
+            subscriber: sub
+          }
+          post :update_subscriber, params: params
+          expect(@sub.firstname).to eq("John")
         end
       end
     end
