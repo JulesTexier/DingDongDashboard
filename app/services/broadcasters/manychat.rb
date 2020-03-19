@@ -125,7 +125,7 @@ class Manychat
     text += "\u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
     return [create_message_text_hash(text)]
   end
-  
+
   def create_header_gallery_element_new_properties(number_of_properties)
     title = "🍾 "
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
@@ -151,8 +151,6 @@ class Manychat
     action_url = "https://hellodingdong.com/"
     create_header_gallery_element(title, subtitle, image_url)
   end
-
-  
 
   # This method prepare a message view for a property that can be included in a card or a gallery of cards
   def create_property_element(property, subscriber = nil)
@@ -218,12 +216,12 @@ class Manychat
     webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
     body_fav = { subscriber_id: subscriber.id, property_id: property.id }
     buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
-    
+
     elements = []
     photo_counter = 1
-    property.get_images.count <=10 ? total_pic = property.get_images.count : total_pic = 10
-    property.get_images.each do |img|
-      elements.push(create_message_element_hash("📷 Photo #{photo_counter}/#{total_pic}", property.manychat_show_description_with_title, img["url"], buttons))
+    property.images.count <= 10 ? total_pic = property.images.count : total_pic = 10
+    property.images.each do |img|
+      elements.push(create_message_element_hash("📷 Photo #{photo_counter}/#{total_pic}", property.manychat_show_description_with_title, img, buttons))
       elements.length === 10 ? break : nil
       photo_counter += 1
     end
