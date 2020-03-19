@@ -172,7 +172,7 @@
     
     {
         "metro": "Bourse",
-        "ligne": [3]
+        "ligne": ["3"]
     }, 
     
     {
@@ -227,7 +227,7 @@
     
     {
         "metro": "Champs-Élysées - Clemenceau",
-        "ligne": [1, "13"]
+        "ligne": ["1", "13"]
     }, 
     
     {

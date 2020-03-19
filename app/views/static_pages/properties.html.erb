@@ -1,0 +1,24 @@
+<h2 class="mt-5" >24 last hours</h2>
+
+  <h2 class="mt-5">All time</h2>
+  <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">🔎 Sources (<%= @data.count  %>)</th>
+      <th scope="col"> All - Annonces (<%= @total%>)</th>
+      <th scope="col"> All - Proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @data.each do |doc| %>
+    <tr>
+      <th scope="row"><%= doc[:source] %></th>
+      <td><%= doc[:count] %></td>
+      <td><%= ((doc[:count].to_f / @total.to_f) * 100).to_i %> % </td>
+    </tr>
+  <% end %>
+  
+  </tbody>
+  </table>
+  

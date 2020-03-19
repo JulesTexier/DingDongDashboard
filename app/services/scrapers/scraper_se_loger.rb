@@ -1,14 +1,20 @@
 class ScraperSeLoger < Scraper
-  attr_accessor :url, :properties, :source, :xml_first_page
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0"
     @source = "SeLoger"
-    @xml_first_page = "script"
+    @main_page_cls = "script"
+    @type = "Captcha"
+    @waiting_cls = nil
+    @multi_page = false
+    @page_nbr = 1
+    @properties = []
   end
 
-  def extract_first_page
-    xml = fetch_main_page(@url, @xml_first_page, "Captcha")
+  def launch(limit = nil)
+    i = 0
+    xml = fetch_main_page(self)
     if !xml[0].to_s.strip.empty?
       json = extract_json(xml)
       hashed_properties = []
@@ -21,6 +27,7 @@ class ScraperSeLoger < Scraper
           property_checker_hash[:price] = hashed_property[:price]
           property_checker_hash[:area] = hashed_property[:area]
           property_checker_hash[:link] = hashed_property[:link]
+          @properties.push(hashed_property) ##testing purpose
           hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
@@ -29,9 +36,12 @@ class ScraperSeLoger < Scraper
         end
       end
       enrich_then_insert(hashed_properties)
+      i += 1
+      break if i == limit
     else
       puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
+    return @properties
   end
 
   private

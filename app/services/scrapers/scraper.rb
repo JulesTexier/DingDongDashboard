@@ -1,7 +1,7 @@
-require "nokogiri"
-require "open-uri"
-require "dotenv/load"
-require "watir"
+# require "nokogiri"
+# require "open-uri"
+# require "dotenv/load"
+# require "watir"
 
 class Scraper
   def enrich_then_insert(hashed_properties)
@@ -12,22 +12,32 @@ class Scraper
     end
   end
 
+  def enrich_then_insert_v2(hashed_property)
+    property = insert_property(hashed_property)
+    insert_property_images(hashed_property[:images], property) unless property.nil?
+    insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
+  end
+
   ########################
   ## HTML FETCH METHODS ##
   ########################
 
-  def fetch_main_page(url, xml_first_page, type = "Static", waiting_class = nil, wait = 0)
-    case type
-    when "Static"
-      html = fetch_static_page(url)
-    when "Dynamic"
-      html = fetch_dynamic_page(url, waiting_class, wait)
-    when "Captcha"
-      html = fetch_captcha_page(url)
+  def fetch_main_page(args)
+    if !args.multi_page
+      case args.type
+      when "Static"
+        html = fetch_static_page(args.url)
+      when "Dynamic"
+        html = fetch_dynamic_page(args.url, args.waiting_cls, wait = 0)
+      when "Captcha"
+        html = fetch_captcha_page(args.url)
+      else
+        puts "Error"
+      end
+      card = access_xml_raw(html, args.main_page_cls)
     else
-      puts "Error"
+      card = fetch_many_pages(args.url, args.page_nbr, args.main_page_cls)
     end
-    card = access_xml_raw(html, xml_first_page)
   end
 
   def fetch_static_page(url)
@@ -169,6 +179,13 @@ class Scraper
     return subways_ids.uniq
   end
 
+  def get_type_flat(str)
+    flat_type = "N/C"
+    flat_type = "Appartement" if str.downcase.include? "appartement"
+    flat_type = "Maison" if str.downcase!.include? "maison"
+    return flat_type
+  end
+
   #############################
   ## PUBLIC DATABASE METHODS ##
   #############################
@@ -225,9 +242,12 @@ class Scraper
 
   def insert_property(prop_hash)
     prop_hash[:has_been_processed] = true if is_it_night?
-    if prop = Property.create(prop_hash.except(:images))
-      puts "\nInsertion of a property from #{prop_hash[:source]}: "
-      puts prop.get_title
+    prop = Property.create(prop_hash.except(:images))
+    if prop.save
+      unless Rails.env.test?
+        puts "\nInsertion of a property from #{prop_hash[:source]}: "
+        puts prop.get_title
+      end
       return prop
     end
   end
