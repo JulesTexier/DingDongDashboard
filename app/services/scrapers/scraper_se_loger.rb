@@ -26,9 +26,11 @@ class ScraperSeLoger < Scraper
           property_checker_hash[:price] = hashed_property[:price]
           property_checker_hash[:area] = hashed_property[:area]
           property_checker_hash[:link] = hashed_property[:link]
-          @properties.push(hashed_property) ##testing purpose
-          enrich_then_insert_v2(hashed_property) if is_property_clean(property_checker_hash)
-          i += 1
+          if is_property_clean(property_checker_hash)
+            @properties.push(hashed_property)
+            enrich_then_insert_v2(hashed_property)
+            i += 1
+          end
           break if i == limit
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
@@ -79,7 +81,7 @@ class ScraperSeLoger < Scraper
         surface_regex = '\d(.)*m²'
         rooms_regex = '\d(.)*p'
         bedrooms_regex = '\d(.)*ch'
-        flat_data[:surface] = infos.to_int_scrp if infos.match(surface_regex)
+        flat_data[:surface] = infos.to_float_to_int_scrp if infos.match(surface_regex)
         flat_data[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
         flat_data[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
       end
