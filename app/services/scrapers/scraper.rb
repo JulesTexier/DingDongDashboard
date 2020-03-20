@@ -7,14 +7,12 @@ class Scraper
   def enrich_then_insert(hashed_properties)
     hashed_properties.each do |hashed_property|
       property = insert_property(hashed_property)
-      insert_property_images(hashed_property[:images], property) unless property.nil?
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
   end
 
   def enrich_then_insert_v2(hashed_property)
     property = insert_property(hashed_property)
-    insert_property_images(hashed_property[:images], property) unless property.nil?
     insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
   end
 
@@ -242,7 +240,7 @@ class Scraper
 
   def insert_property(prop_hash)
     prop_hash[:has_been_processed] = true if is_it_night?
-    prop = Property.create(prop_hash.except(:images))
+    prop = Property.create(prop_hash)
     if prop.save
       unless Rails.env.test?
         puts "\nInsertion of a property from #{prop_hash[:source]}: "
@@ -252,12 +250,12 @@ class Scraper
     end
   end
 
-  def insert_property_images(image_array, prop)
-    image_array.each do |img|
-      PropertyImage.create(property_id: prop.id, url: img)
-    end
-    prop.images.length > 0 ? nil : PropertyImage.create(property: prop)
-  end
+  # def insert_property_images(image_array, prop)
+  #   image_array.each do |img|
+  #     PropertyImage.create(property_id: prop.id, url: img)
+  #   end
+  #   prop.images.length > 0 ? nil : PropertyImage.create(property: prop)
+  # end
 
   def insert_property_subways(subway_ids, prop)
     subway_ids.each do |subway_id|
