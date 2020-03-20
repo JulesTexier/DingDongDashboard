@@ -13,7 +13,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     services:
@@ -37,6 +37,7 @@ jobs:
       env:
         DATABASE_URL: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
         RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY }}
       run: 
         sudo apt-get -yqq install libpq-dev
         gem install bundler
