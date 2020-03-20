@@ -29,16 +29,15 @@ class ScraperLeBonCoin < Scraper
             property_checker_hash[:area] = hashed_property[:area]
             property_checker_hash[:link] = hashed_property[:link]
             @properties.push(hashed_property) ##testing purpose
-            hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
+            enrich_then_insert_v2(hashed_property) if is_property_clean(property_checker_hash)
+            i += 1
+            break if i == limit
           rescue StandardError => e
             puts "\nError for #{@source}, skip this one."
             puts "It could be a bad link or a bad xml extraction.\n\n"
             next
           end
         end
-        enrich_then_insert(hashed_properties)
-        i += 1
-        break if i == limit
       else
         puts "Error Parsing JSON.\n\n"
       end
@@ -53,7 +52,6 @@ class ScraperLeBonCoin < Scraper
   def extract_json(html_array)
     json = []
     html_array.each do |html|
-      puts html
       begin
         first_part = html.text.split("window.__REDIAL_PROPS__ = [null,null,null,null,null,")[1]
         second_part = first_part.split("</script>")[0]
