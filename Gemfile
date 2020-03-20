@@ -54,7 +54,6 @@ gem "chartkick"
 gem "groupdate"
 gem "rspec-rails", "~> 4.0.0.rc1"
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -82,6 +81,7 @@ group :test do
   gem "webdrivers"
   gem "shoulda-matchers", "~> 3.1", ">= 3.1.1"
   gem "database_cleaner"
+  gem "rspec-retry"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
