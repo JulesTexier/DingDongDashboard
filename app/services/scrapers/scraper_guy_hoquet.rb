@@ -10,7 +10,7 @@ class ScraperGuyHoquet < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
-    @wait = 2
+    @wait = 3
   end
 
   def launch(limit = nil)
