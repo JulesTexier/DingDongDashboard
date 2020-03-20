@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v1
+    
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.5.X
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: install
+    - name: Build and run test
+      env:
+        DATABASE_URL: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
+        RAILS_ENV: test
+      run: 
+        sudo apt-get -yqq install libpq-dev
+        gem install bundler
+        bundle install --job 4 --retry 3
+        bundle exec rails db:prepare
+        bundle exec rails test    
