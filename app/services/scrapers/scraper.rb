@@ -1,7 +1,4 @@
-# require "nokogiri"
-# require "open-uri"
-# require "dotenv/load"
-# require "watir"
+require "dotenv/load"
 
 class Scraper
   def enrich_then_insert(hashed_properties)
