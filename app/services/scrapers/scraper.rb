@@ -26,7 +26,7 @@ class Scraper
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
-        html = fetch_dynamic_page(args.url, args.waiting_cls, wait = 0)
+        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait)
       when "Captcha"
         html = fetch_captcha_page(args.url)
       else
