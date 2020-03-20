@@ -98,4 +98,5 @@ subs_to_copy.each do |sub_to_copy|
 				end
 			end
 		end
+	end
 		
