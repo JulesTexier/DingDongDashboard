@@ -18,7 +18,7 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
-      - name: Build and run tests
+      - name: Build
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
           RAILS_ENV: test
@@ -28,4 +28,8 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
-          bundle exec rails test
+      - name: Run Rspec 
+        run: COVERAGE=true bundle exec rspec  --require rails_helper
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:@localhost:5432/test
