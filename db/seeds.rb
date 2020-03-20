@@ -57,7 +57,7 @@ subs_to_copy.each do |sub_to_copy|
 
     response = JSON.parse(get_infos_request.response.options[:response_body])
 
-		if !response["data"].nil? do
+		if !response["data"].nil? 
 			# Je loop dans le hash et récupère les datas des custom_fields
 			response["data"]["custom_fields"].each do |cusfield|
 				# Dés que j'atteins un custom field dont le nom est "ID"
