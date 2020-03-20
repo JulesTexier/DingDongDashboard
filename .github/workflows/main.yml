@@ -9,22 +9,12 @@ jobs:
       db:
         image: postgres:11
         ports: ['5432:5432']
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      redis:
-        image: redis
-        ports: ['6379:6379']
-        options: --entrypoint redis-server
-
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
+          ruby-version: 2.5.x
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
