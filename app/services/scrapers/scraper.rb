@@ -1,7 +1,4 @@
-# require "nokogiri"
-# require "open-uri"
-# require "dotenv/load"
-# require "watir"
+require "dotenv/load"
 
 class Scraper
   def enrich_then_insert(hashed_properties)
@@ -26,7 +23,7 @@ class Scraper
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
-        html = fetch_dynamic_page(args.url, args.waiting_cls, wait = 0)
+        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait)
       when "Captcha"
         html = fetch_captcha_page(args.url)
       else

@@ -11,6 +11,10 @@ RSpec.describe ScraperBienIci, type: :service do
     expect(@s.properties.count).to be == @limit
   end
 
+  it "should return a count of 3 property with its source inside database" do
+    expect(Property.where(source: @s.source).count).to be === @limit
+  end
+
   it "should return an array of hashes" do
     properties = @s.properties
     properties.each do |property|

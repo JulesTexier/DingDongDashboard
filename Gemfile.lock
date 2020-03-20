@@ -184,6 +184,8 @@ GEM
       rspec-expectations (~> 3.9)
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
+    rspec-retry (0.6.2)
+      rspec-core (> 3.3)
     rspec-support (3.9.2)
     rswag (2.2.0)
       rswag-api (= 2.2.0)
@@ -287,6 +289,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.1)
   rb-readline
   rspec-rails (~> 4.0.0.rc1)
+  rspec-retry
   rswag
   sass-rails (>= 6)
   selenium-webdriver
@@ -304,6 +307,3 @@ DEPENDENCIES
 
 RUBY VERSION
    ruby 2.5.7p206
-
-BUNDLED WITH
-   1.16.6
