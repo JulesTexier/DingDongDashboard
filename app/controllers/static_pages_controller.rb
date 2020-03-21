@@ -83,4 +83,11 @@ class StaticPagesController < ApplicationController
     @number_days = DateTime.now.mjd - date.mjd
     @moyenne_feb = (@nb_ads_feb.inject { |sum, el| sum + el }.to_f / @nb_ads_feb.size).to_i
   end
+
+  def chart
+    @subscriber = Subscriber.all
+    respond_to do |format|
+      format.html
+    end
+  end
 end
