@@ -23,8 +23,7 @@
       ],
       "addons": [
         {
-        "plan": "heroku-postgresql",
-        "as": "giant_cat_test"
+        "plan": "heroku-postgresql:in-dyno"
         }
       ],
       "scripts":
