@@ -21,14 +21,9 @@
       "buildpacks": [
         { "url": "heroku/ruby" }
       ],
-      "addons": [
-        {
-        "plan": "heroku-postgresql:in-dyno"
-        }
-      ],
+      "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
-          "test-setup": "",
           "test": "bundle exec rspec -fd"
         }
     }
