@@ -85,9 +85,7 @@ class StaticPagesController < ApplicationController
   end
 
   def chart
-    @subscriber = Subscriber.all
-    respond_to do |format|
-      format.html
-    end
+    @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
+    
   end
 end
