@@ -1,0 +1,37 @@
+{
+  "name": "Ding Dong app",
+  "description": "The famous app of hellodingdong.com",
+  "env": {
+  },
+  "formation": {
+    "test": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "environments": {
+    "test": {
+      "buildpacks": [
+        { "url": "heroku/ruby" }
+      ],
+      "addons": [
+        {
+        "plan": "heroku-postgresql",
+        "as": "giant_cat_test"
+        }
+      ],
+      "scripts":
+        {
+          "test-setup": "",
+          "test": "bundle exec rspec -fd"
+        }
+    }
+  }
+}
