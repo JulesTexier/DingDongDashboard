@@ -32,8 +32,6 @@ gem "watir-rails"
 
 gem "dotenv"
 
-# Swagger gem
-gem "rswag"
 
 # Send HTTP REST requests
 gem "typhoeus", "~> 1.1"
