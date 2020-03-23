@@ -18,12 +18,16 @@
   ],
   "environments": {
     "test": {
+      "env": {
+        "WD_CHROME_PATH": "/app/.apt/usr/bin/google-chrome-stable"
+      },
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
           // "test": "bundle exec rspec -fd"
           // "test": "bundle exec rspec spec/models/subscriber_spec.rb"
-          "test": "bundle exec rspec spec/services/scrapers/scraper_bien_ici_spec.rb" 
+          "configure-web-driver" : "bundle exec rake webdrivers:chromedriver:update WD_CHROME_PATH=/app/.apt/usr/bin/google-chrome-stable",
+          "rspec": "bundle exec rspec spec/services/scrapers/scraper_bien_ici_spec.rb" 
         }
     }
   }
