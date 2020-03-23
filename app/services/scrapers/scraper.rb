@@ -1,16 +1,11 @@
 require "dotenv/load"
 
 class Scraper
-  def enrich_then_insert(hashed_properties)
-    hashed_properties.each do |hashed_property|
+  def enrich_then_insert_v2(hashed_property)
+    if !is_already_exists_by_desc(hashed_property)
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
-  end
-
-  def enrich_then_insert_v2(hashed_property)
-    property = insert_property(hashed_property)
-    insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
   end
 
   ########################
@@ -185,7 +180,7 @@ class Scraper
   ## PUBLIC DATABASE METHODS ##
   #############################
 
-  def is_already_exists(hashed_property)
+  def is_already_exists_by_time(hashed_property)
     response = false
     properties = Property.where(hashed_property.except(:link)).where(
       "created_at >= :seven",
@@ -195,9 +190,26 @@ class Scraper
     return response
   end
 
+  def is_already_exists_by_desc(hashed_property)
+    response = false
+
+    desc = hashed_property[:description][0..50].remove_acc_scrp.tr("\s", "")
+    properties = Property.where(
+      surface: hashed_property[:surface],
+      price: hashed_property[:price],
+      area: hashed_property[:area],
+      rooms_number: hashed_property[:rooms_number],
+    )
+
+    properties.each do |property|
+      response = true if property.description[0..50].remove_acc_scrp.tr("\s", "") == desc
+    end
+    return response
+  end
+
   def is_already_exists_by_link(link)
     response = false
-    prop_by_link = Property.where(link: link).where("created_at >= :seven", :seven => Time.now - 7.days)
+    prop_by_link = Property.where(link: link)
     response = true if prop_by_link.length > 0
     return response
   end
@@ -215,7 +227,7 @@ class Scraper
   end
 
   def is_property_clean(hashed_property)
-    is_already_exists(hashed_property) || is_dirty_property(hashed_property) ? false : true
+    is_already_exists_by_time(hashed_property) || is_dirty_property(hashed_property) || is_already_exists_by_link(hashed_property[:link]) ? false : true
   end
 
   def is_it_night?
@@ -246,13 +258,6 @@ class Scraper
       return prop
     end
   end
-
-  # def insert_property_images(image_array, prop)
-  #   image_array.each do |img|
-  #     PropertyImage.create(property_id: prop.id, url: img)
-  #   end
-  #   prop.images.length > 0 ? nil : PropertyImage.create(property: prop)
-  # end
 
   def insert_property_subways(subway_ids, prop)
     subway_ids.each do |subway_id|
