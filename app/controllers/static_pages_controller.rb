@@ -83,4 +83,9 @@ class StaticPagesController < ApplicationController
     @number_days = DateTime.now.mjd - date.mjd
     @moyenne_feb = (@nb_ads_feb.inject { |sum, el| sum + el }.to_f / @nb_ads_feb.size).to_i
   end
+
+  def chart
+    @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
+    
+  end
 end

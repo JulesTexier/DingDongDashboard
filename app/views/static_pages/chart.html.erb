@@ -1,0 +1,9 @@
+<h1>Subscribers chart</h1>
+
+<h2> New subscribers created by day</h2>
+<%= line_chart Subscriber.group_by_day(:created_at).count%>
+<br>
+
+
+<h2> New properties scrapped by day</h2>
+<%= line_chart Property.group_by_day(:created_at).count%>
