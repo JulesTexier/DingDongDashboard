@@ -45,7 +45,7 @@ class Scraper
       headless: true
     }
     # if !ENV['GOOGLE_CHROME_SHIM'].nil?
-      chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+      chrome_bin = ENV.fetch(ENV['GOOGLE_CHROME_SHIM'], nil)
       opts.merge!( options: {binary: chrome_bin})
     # end 
     browser = Watir::Browser.new :chrome, opts
