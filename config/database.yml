@@ -70,6 +70,11 @@ test:
   # username: wtbduoav
   # password: YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF
 
+<% if ENV['CI'] == 'true' %>
+test:
+  <<: *default
+  url: postgres://nxbdzijnepyouq:557bdec0d44b82e6d865b26a4f4a8fc81c364be8ad29159b045243c88c73e186@ec2-3-229-210-93.compute-1.amazonaws.com:5432/d5a2o0854imo6m
+<% else %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
