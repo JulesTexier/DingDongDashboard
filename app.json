@@ -26,7 +26,8 @@
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
-          "test": "bundle exec rspec -fd"
+          // "test": "bundle exec rspec -fd"
+          "test": "bundle exec rspec spec/models/subscriber_spec.rb"
         }
     }
   }
