@@ -43,12 +43,7 @@ class Scraper
   def fetch_dynamic_page(url, waiting_class, wait)
     opts = {
       headless: true,
-      options: {binary: '/app/.apt/usr/bin/google-chrome-stable'}
     }
-    # if !ENV['GOOGLE_CHROME_SHIM'].nil?
-      # chrome_bin = ENV.fetch(ENV['GOOGLE_CHROME_SHIM'], nil)
-      # opts.merge!( options: {binary: '/app/.apt/usr/bin/google-chrome-stable'})
-    # end 
     browser = Watir::Browser.new :chrome, opts
     browser.goto url
     sleep wait
