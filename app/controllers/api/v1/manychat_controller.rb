@@ -53,7 +53,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
       props = subscriber.get_morning_props
-      props.length > 0 ? (render json: send_multiple_properties(subscriber, props)) : (render json: send_no_props(subscriber, "morning_properties"))
+      props.length > 0 ? (render json: send_multiple_properties(subscriber, props, "morning_properties")) : (render json: send_no_props(subscriber, "morning_properties"))
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
