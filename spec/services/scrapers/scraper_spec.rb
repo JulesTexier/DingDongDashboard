@@ -4,11 +4,39 @@ RSpec.describe Scraper, type: :service do
   describe "PUBLIC_DATABASE_METHODS" do
     before(:each) do
       @s = Scraper.new
-      @property = FactoryBot.create(:property)
+
+      ## ALREADY EXISTS LOGICS
+      @old_property = FactoryBot.create(:property, created_at: Time.now - 25.days, price: 600000, surface: 60)
+
+      ## Example for Old_property insertion with already_exists methods and same link
+      ## This property is the same as @old_property, but should not be inserted in database
+      ## Because it has the same link, the same description and the same attributes basically
+      ## Even if @old_property has been inserted a long time ago
+      @c = {}
+      @c[:link] = "https://hellodingdong.com"
+      @c[:rooms_number] = 2
+      @c[:price] = 600000
+      @c[:area] = "75018"
+      @c[:surface] = 60
+      @c[:description] = "Ici c'est vraiment un super endroit ahhaha"
+
+      ## Counter example for description and different links
+      ## This property is the same as @old_property, but the link, the description and the TimeFrame is different
+      ## So it can insert the database
+      @d = {}
+      @d[:link] = "https://hellodingdong.com/ici_cest_un_nouveau_lien"
+      @d[:rooms_number] = 2
+      @d[:price] = 600000
+      @d[:area] = "75018"
+      @d[:surface] = 60
+      @d[:description] = "On update la desc lol :) :) Ici c'est vraiment un super endroit ahhaha"
+
+      ## Already Exists Hash for generic purposes
       FactoryBot.create(:subway)
+      @property = FactoryBot.create(:property)
 
       @already_existing_property = {}
-      @already_existing_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
+      @already_existing_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-azejznakjeha"
       @already_existing_property[:rooms_number] = 2
       @already_existing_property[:price] = 301000
       @already_existing_property[:area] = "75018"
@@ -30,15 +58,38 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "is_already_exists + is_property_clean + is_dirty_property with 3 differents cases" do
+      ##On veut tester si une property scrapé a été insérée en base il y a 10 jours
+      it "is already created but 10 days ago, therefor should return false" do
+        expect(@s.is_already_exists_by_time(@c)).to eq(false)
+      end
+
+      it "is already created in base, 10 days ago, but should return true because it is the same link" do
+        expect(@s.is_already_exists_by_link(@c[:link])).to eq(true)
+        expect(@s.is_already_exists_by_link(@d[:link])).to eq(false)
+      end
+
+      it "has the same description as a property already created so it should return true" do
+        expect(@s.is_already_exists_by_desc(@c)).to eq(true)
+        expect(@s.is_already_exists_by_desc(@d)).to eq(false)
+      end
+
+      it "is the same property but is out of our validator range" do
+        expect(@s.is_property_clean(@d)).to eq(true)
+      end
+
+      it "is the same property but is inside our validator range" do
+        expect(@s.is_property_clean(@c)).to eq(false)
+      end
+
       it "shoud be a true false methods" do
-        expect(@s.is_already_exists(@already_existing_property)).to be_in([true, false])
+        expect(@s.is_already_exists_by_time(@already_existing_property)).to be_in([true, false])
         expect(@s.is_dirty_property(@already_existing_property)).to be_in([true, false])
         expect(@s.is_property_clean(@already_existing_property)).to be_in([true, false])
       end
 
       it "should return true for already_existing_property and false for new_property" do
-        expect(@s.is_already_exists(@already_existing_property)).to eq(true)
-        expect(@s.is_already_exists(@new_property)).to eq(false)
+        expect(@s.is_already_exists_by_time(@already_existing_property)).to eq(true)
+        expect(@s.is_already_exists_by_time(@new_property)).to eq(false)
       end
 
       it "should return false for new and already existing prop, a true for shit property" do
