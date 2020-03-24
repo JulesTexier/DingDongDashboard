@@ -1,3 +1,3 @@
 <h1>Evolution du prix par mois</h1>
 
-<%= line_chart @chart_data, min: 5000, max: 25000, height: "700px" %>
+<%= line_chart @chart_data, min: 5000, max: 25000, height: "700px", xtitle: "# semaine", ytitle: "Prix au m2", suffix: " €/m2", thousands: " "  %>
