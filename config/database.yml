@@ -23,12 +23,12 @@ default: &default
 
 development:
   <<: *default
-  database: giant_cat_development
-  # host: kandula.db.elephantsql.com
-  # port: 5432
-  # database: xfwzvnqn
-  # username: xfwzvnqn
-  # password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
+  # database: giant_cat_development
+  host: kandula.db.elephantsql.com
+  port: 5432
+  database: xfwzvnqn
+  username: xfwzvnqn
+  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -63,13 +63,13 @@ development:
 
 test:
   <<: *default
-  # database: giant_cat_test
-  url: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
-  host: kandula.db.elephantsql.com
-  port: 5432
-  database: wtbduoav
-  username: wtbduoav
-  password: YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF
+  database: giant_cat_test
+  # url: postgres://wtbduoav:YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF@kandula.db.elephantsql.com:5432/wtbduoav
+  # host: kandula.db.elephantsql.com
+  # port: 5432
+  # database: wtbduoav
+  # username: wtbduoav
+  # password: YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
