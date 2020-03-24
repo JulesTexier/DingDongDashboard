@@ -133,57 +133,16 @@ class String
   end
 
   ################################################
-  ## TRANSLATE AREA, MAINLY FOR MORISS ##
+  ## TRANSLATE AREA, WHEN FORMAT Paris-03
   ################################################
-  def area_translator_number
-    area_regex = '(\d+){2}'
-    area = self.match(/#{area_regex}/i).to_s
-    case area
-    when "01"
-      return "75001"
-    when "02"
-      return "75002"
-    when "03"
-      return "75003"
-    when "04"
-      return "75004"
-    when "05"
-      return "75005"
-    when "06"
-      return "75006"
-    when "07"
-      return "75007"
-    when "08"
-      return "75008"
-    when "09"
-      return "75009"
-    when "10ème"
-      return "75010"
-    when "11"
-      return "75011"
-    when "12"
-      return "75012"
-    when "13"
-      return "75013"
-    when "14"
-      return "75014"
-    when "15"
-      return "75015"
-    when "16"
-      return "75016"
-    when "17"
-      return "75017"
-    when "18"
-      return "75018"
-    when "19"
-      return "75019"
-    when "20"
-      return "75020"
-    else
-      return "N/C"
+  def district_generator
+    if self.length == 2
+      return "750#{self}"
+    elsif self.length == 1
+      return "7500#{self}"
     end
   end
-
+  
   ############################################
   ## STRING METHODS FOR SELOGER WEIRD JSON ##
   ############################################
