@@ -132,12 +132,9 @@ class String
     end
   end
 
-<<<<<<< HEAD
   ################################################
   ## TRANSLATE AREA, WHEN FORMAT Paris-03
   ################################################
-=======
->>>>>>> master
   def district_generator
     if self.length == 2
       return "750#{self}"
@@ -145,11 +142,7 @@ class String
       return "7500#{self}"
     end
   end
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> master
   ############################################
   ## STRING METHODS FOR SELOGER WEIRD JSON ##
   ############################################
