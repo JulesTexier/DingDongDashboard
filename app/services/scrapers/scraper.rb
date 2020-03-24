@@ -196,7 +196,6 @@ class Scraper
   def is_already_exists_by_desc(hashed_property)
     response = false
 
-    desc = hashed_property[:description][0..50].remove_acc_scrp.tr("\s", "")
     properties = Property.where(
       surface: hashed_property[:surface],
       price: hashed_property[:price],
@@ -205,7 +204,7 @@ class Scraper
     )
 
     properties.each do |property|
-      response = true if property.description[0..50].remove_acc_scrp.tr("\s", "") == desc
+      response = desc_comparator(property.description, hashed_property[:description])
     end
     return response
   end
@@ -240,6 +239,39 @@ class Scraper
     c = Time.now.getlocal("+01:00")
     if c > a || c < b
       response = true
+    end
+    return response
+  end
+
+  def desc_comparator(desc, desc_to_compare)
+    response = false
+    str1 = desc.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    min = [str1.length, str2.length].min
+    if min > 20
+      if str1.length == min
+        short_string = str1
+        long_string = str2
+      else
+        short_string = str2
+        long_string = str1
+      end
+      if min > 50
+        min = 50
+        x = short_string.length - min
+      else
+        x = short_string.length - min + 1
+      end
+      i = 0
+      array = []
+      x.times do
+        j = i + min
+        array.push(short_string[i..j])
+        i += 1
+      end
+      array.each do |papouz|
+        response = true if long_string.include?(papouz)
+      end
     end
     return response
   end
