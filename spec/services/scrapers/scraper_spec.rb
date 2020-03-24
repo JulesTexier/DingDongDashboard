@@ -18,7 +18,7 @@ RSpec.describe Scraper, type: :service do
       @c[:price] = 600000
       @c[:area] = "75018"
       @c[:surface] = 60
-      @c[:description] = "Ici c'est vraiment un super endroit ahhaha"
+      @c[:description] = "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets, moulures, cheminée. 1er étage vue sur l’église. À rafraichir. EXCLUSIVITÉ ACOPA."
 
       ## Counter example for description and different links
       ## This property is the same as @old_property, but the link, the description and the TimeFrame is different
@@ -29,7 +29,16 @@ RSpec.describe Scraper, type: :service do
       @d[:price] = 600000
       @d[:area] = "75018"
       @d[:surface] = 60
-      @d[:description] = "On update la desc lol :) :) Ici c'est vraiment un super endroit ahhaha"
+      @d[:description] = "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets."
+
+      ## This property is slightly different, the description is way more different so unfortunately it should pass and be inserted
+      @e = {}
+      @e[:link] = "https://hellodingdong.com/ici_cest_un_nouveau_lien"
+      @e[:rooms_number] = 2
+      @e[:price] = 600000
+      @e[:area] = "75018"
+      @e[:surface] = 60
+      @e[:description] = "A 51 yards de Jules Joffrin, je suis un agent qui casse les couilles, j'adore l'immobilier"
 
       ## Already Exists Hash for generic purposes
       FactoryBot.create(:subway)
@@ -70,15 +79,23 @@ RSpec.describe Scraper, type: :service do
 
       it "has the same description as a property already created so it should return true" do
         expect(@s.is_already_exists_by_desc(@c)).to eq(true)
-        expect(@s.is_already_exists_by_desc(@d)).to eq(false)
+        expect(@s.is_already_exists_by_desc(@d)).to eq(true)
       end
 
-      it "is the same property but is out of our validator range" do
+      it "is the same property but is in of our validator range but can't be inserted because of description likeness" do
+        expect(@s.desc_comparator(@d[:description], @old_property.description)).to eq(true)
         expect(@s.is_property_clean(@d)).to eq(true)
+        expect(@s.is_already_exists_by_desc(@d)).to eq(true)
       end
 
       it "is the same property but is inside our validator range" do
         expect(@s.is_property_clean(@c)).to eq(false)
+      end
+
+      it "is a different property but with the sames attributes, therefor can be inserted" do
+        expect(@s.is_property_clean(@e)).to eq(true)
+        expect(@s.is_already_exists_by_desc(@e)).to eq(false)
+        expect(@s.desc_comparator(@e[:description], @old_property.description)).to eq(false)
       end
 
       it "shoud be a true false methods" do
