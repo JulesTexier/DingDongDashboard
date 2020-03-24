@@ -17,7 +17,6 @@ class ScraperSeLoger < Scraper
     xml = fetch_main_page(self)
     if !xml[0].to_s.strip.empty?
       json = extract_json(xml)
-      hashed_properties = []
       json["cards"]["list"].each do |item|
         begin
           hashed_property = extract_each_flat(item)
@@ -27,17 +26,18 @@ class ScraperSeLoger < Scraper
           property_checker_hash[:price] = hashed_property[:price]
           property_checker_hash[:area] = hashed_property[:area]
           property_checker_hash[:link] = hashed_property[:link]
-          @properties.push(hashed_property) ##testing purpose
-          hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
+          if is_property_clean(property_checker_hash) && hashed_property[:agency_name] != "Ding Dong"
+            @properties.push(hashed_property)
+            enrich_then_insert_v2(hashed_property)
+            i += 1
+          end
+          break if i == limit
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
           next
         end
       end
-      enrich_then_insert(hashed_properties)
-      i += 1
-      break if i == limit
     else
       puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
@@ -81,7 +81,7 @@ class ScraperSeLoger < Scraper
         surface_regex = '\d(.)*m²'
         rooms_regex = '\d(.)*p'
         bedrooms_regex = '\d(.)*ch'
-        flat_data[:surface] = infos.to_int_scrp if infos.match(surface_regex)
+        flat_data[:surface] = infos.to_float_to_int_scrp if infos.match(surface_regex)
         flat_data[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
         flat_data[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
       end
