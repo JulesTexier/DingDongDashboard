@@ -7,12 +7,11 @@ namespace :scraper do
     puts "Launching Regular Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperLaforet.new.launch
-    # ScraperPap.new.launch
-    # ScraperFigaro.new.launch
-    # ScraperCentury.new.launch
-    # ScraperLogicImmo.new.launch
-    # ScraperSuperImmo.new.launch
+    ScraperPap.new.launch
+    ScraperFigaro.new.launch
+    ScraperCentury.new.launch
+    ScraperLogicImmo.new.launch
+    ScraperSuperImmo.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Regular Scraper script took #{ending - starting} seconds to run"
   end
