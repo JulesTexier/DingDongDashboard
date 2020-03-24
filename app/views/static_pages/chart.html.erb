@@ -11,5 +11,18 @@
 <%= line_chart Property.group_by_day(:created_at).count%>
 
 <h3> Sources</h3>
-<%= pie_chart Property.group(:source).count %>
+<% 
+  date =Date.parse(Time.now.to_s)  
+  props = Property.where(created_at:date.midnight..date.end_of_day )
+%>
+
+<%= pie_chart props.group(:source).count, title: "Biens scrapés aujourd'hui (#{props.count})" %>
+
+
+<%= pie_chart Property.all.group(:source).count, title: "Biens scrapés depuis le début (#{Property.all.count})" %>
+
+<%= line_chart [
+  {name: "Today", data: props.group(:source).count},
+  {name: "All time", data: Property.all.group(:source).count}
+] %>
 
