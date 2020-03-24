@@ -1,3 +1,5 @@
+require 'csv'
+
 class StaticPagesController < ApplicationController
   def dashboard
 
@@ -85,7 +87,81 @@ class StaticPagesController < ApplicationController
   end
 
   def chart
-    @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
-    
+    # @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
+
+    # @csv = CSV.read("app/services/broadcasters/data/logs.csv")
+
+    # @data = []
+    # @csv.each do |line|
+    #   hash_data = {}
+    #   hash_data["subscriber"] = line[1]
+    #   hash_data["nb_props"] = line[2]
+    #   @data.push(hash_data)
+    # end    
   end
+
+  def property_price
+    props = Property.where("surface > 0 AND price > 0").select(:surface, :price, :area, :created_at).order('created_at ASC')
+    colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
+    averages = []
+    areas = Area.all.pluck(:name)
+    areas.each_with_index do |area, area_index|
+      averages[area_index] = []
+      averages[area_index][0] = area
+      averages[area_index][1] = []
+      averages[area_index][2] = colors[area_index]
+      props_xx = props.reject { |prop| prop.area != area }.group_by { |prop| prop.created_at.month}
+      props_xx.each do |key, value| 
+        # byebug
+        props_xx.fetch(key).each_with_index do |prop_xx, index|
+          if prop_xx.surface.to_i > 0
+            props_xx.fetch(key)[index] = (prop_xx.price/prop_xx.surface.round(2)) 
+          else 
+            props_xx.fetch(key).delete(index)
+          end
+        end
+        if props_xx.fetch(key).size > 0
+          average_price = (props_xx.fetch(key).inject{ |sum, el| sum + el }.to_f / props_xx.fetch(key).size).round(0) 
+          #  Insert data
+          averages[area_index][1].push([Date::MONTHNAMES[key],average_price])
+        end
+        
+      end
+
+
+    end
+    @chart_data = []
+    averages.each do |area|
+      area_hash = {}
+      area_hash[:name] = area[0]
+      area_hash[:data] = area[1]
+      area_hash[:color] = area[2]
+      @chart_data.push(area_hash)
+    end
+
+
+    # props_17 = props.reject { |prop| prop.area != "75017" }.group_by { |prop| prop.created_at.month}
+    # averages_17 = []
+    # props_17.each do |key, value| 
+    #   puts key
+    #   props_17.fetch(key).each_with_index do |prop_17, index|
+    #     if prop_17.surface.to_i > 0
+    #       props_17.fetch(key)[index] = (prop_17.price/prop_17.surface.round(2)) 
+    #     else 
+    #       props_17.fetch(key).delete(index)
+    #     end
+    #   end
+    #   if props_17.fetch(key).size > 0
+    #     average_price = (props_17.fetch(key).inject{ |sum, el| sum + el }.to_f / props_17.fetch(key).size).round(0) 
+    #   end
+    #   averages_17.push([Date::MONTHNAMES[key],average_price])
+    # end
+
+    # byebug
+    # puts averages_17
+  end
+
 end
