@@ -3,7 +3,7 @@ class String
   ## CHARACTER METHODS
 
   def clean_img_link_https
-    "https:"+ self if self[0..1] == "//"
+    "https:" + self if self[0..1] == "//"
   end
 
   def to_int_scrp
@@ -92,51 +92,59 @@ class String
   ## TRANSLATE AREA, MAINLY FOR MEILLEURSAGENTS ##
   ################################################
   def area_translator_scrp
-    area_regex = '(\d+)*(er|(è|e)me)'
+    area_regex = '(\d+)(.?)(er|(è|e)me)'
     area = self.match(/#{area_regex}/i).to_s
     case area
-    when "1er"
+    when "1er", "1ER"
       return "75001"
-    when "2ème"
+    when "2ème", "2EME"
       return "75002"
-    when "3ème"
+    when "3ème", "3EME"
       return "75003"
-    when "4ème"
+    when "4ème", "4EME"
       return "75004"
-    when "5ème"
+    when "5ème", "5EME"
       return "75005"
-    when "6ème"
+    when "6ème", "6EME"
       return "75006"
-    when "7ème"
+    when "7ème", "7EME"
       return "75007"
-    when "8ème"
+    when "8ème", "8EME"
       return "75008"
-    when "9ème"
+    when "9ème", "9EME"
       return "75009"
-    when "10ème"
+    when "10ème", "10EME"
       return "75010"
-    when "11ème"
+    when "11ème", "11EME"
       return "75011"
-    when "12ème"
+    when "12ème", "12EME"
       return "75012"
-    when "13ème"
+    when "13ème", "13EME"
       return "75013"
-    when "14ème"
+    when "14ème", "14EME"
       return "75014"
-    when "15ème"
+    when "15ème", "15EME"
       return "75015"
-    when "16ème"
+    when "16ème", "16EME"
       return "75016"
-    when "17ème"
+    when "17ème", "17EME"
       return "75017"
-    when "18ème"
+    when "18ème", "18EME"
       return "75018"
-    when "19ème"
+    when "19ème", "19EME"
       return "75019"
-    when "20ème"
+    when "20ème", "20EME"
       return "75020"
     else
       return "N/C"
+    end
+  end
+
+  def district_generator
+    if self.length == 2
+      return "750#{self}"
+    elsif self.length == 1
+      return "7500#{self}"
     end
   end
 

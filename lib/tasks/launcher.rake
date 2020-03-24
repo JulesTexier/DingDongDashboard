@@ -7,11 +7,12 @@ namespace :scraper do
     puts "Launching Regular Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperPap.new.launch
-    ScraperFigaro.new.launch
-    ScraperCentury.new.launch
-    ScraperLogicImmo.new.launch
-    ScraperSuperImmo.new.launch
+    ScraperLaforet.new.launch
+    # ScraperPap.new.launch
+    # ScraperFigaro.new.launch
+    # ScraperCentury.new.launch
+    # ScraperLogicImmo.new.launch
+    # ScraperSuperImmo.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Regular Scraper script took #{ending - starting} seconds to run"
   end
@@ -41,13 +42,15 @@ namespace :scraper do
     puts "Launching Small Shitty Website Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    # ScraperGuyHoquet.new.launch
-    # ScraperFoncia.new.launch
-    # ScraperKmi.new.launch
-    # ScraperImax.new.launch
-    # ScraperEfficity.new.launch
-    # ScraperGreenAcres.new.launch
+
+    ScraperGuyHoquet.new.launch
+    ScraperFoncia.new.launch
+    ScraperKmi.new.launch
+    ScraperImax.new.launch
+    ScraperEfficity.new.launch
+    ScraperGreenAcres.new.launch
     ScraperLesParisiennesImmo.new.launch
+
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end
@@ -73,6 +76,7 @@ namespace :broadcast do
     Broadcaster.new.new_properties_gallery
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The new_properties broadcast script took #{ending - starting} seconds to run"
+    # puts "The new_properties broadcast script sent #{data[0]} properties for a total of #{data[1]} sendings"
   end
 
   task :good_morning do

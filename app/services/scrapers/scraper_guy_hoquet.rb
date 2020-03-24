@@ -1,15 +1,16 @@
 class ScraperGuyHoquet < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait
 
   def initialize
     @url = "https://www.guy-hoquet.com/biens/result#1&p=1&t=3&f10=1&f20=75_c2&f30=appartement,maison"
     @source = "Guy Hoquet"
-    @main_page_cls = "#properties-container > div > div.section-content.section-slick  > div"
+    @main_page_cls = "div.resultat-item"
     @type = "Dynamic"
-    @waiting_cls = "resultat-item"
+    @waiting_cls = ["launcher-icon", "animate"]
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @wait = 3
   end
 
   def launch(limit = nil)

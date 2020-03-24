@@ -1,0 +1,33 @@
+{
+  "name": "Ding Dong app",
+  "description": "The famous app of hellodingdong.com",
+  "env": {
+  },
+  "formation": {
+    "test": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [
+    { "url": "heroku/ruby" },
+    { "url": "https://github.com/heroku/heroku-buildpack-google-chrome"},
+    { "url": "https://github.com/heroku/heroku-buildpack-chromedriver"}
+  ],
+  "environments": {
+    "test": {
+      "env": {
+        "WD_CHROME_PATH": "/app/.apt/usr/bin/google-chrome-stable",
+        "BEE_API": "JS5YI3NJN7GG22GKYLYZGD94LE0HJ6I9G6THYL5TZ2MW024W94DCGSMQQ00RGT4ERGMG2SNJPE8KW8ZJ"
+      },
+      "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
+      "scripts":
+        {
+          "configure-web-driver" : "bundle e  xec rake webdrivers:chromedriver:update WD_CHROME_PATH=/app/.apt/usr/bin/google-chrome-stable",
+          "rspec": "bundle exec rspec spec/services/scrapers/scraper_bien_ici_spec.rb" 
+        }
+    }
+  }
+}

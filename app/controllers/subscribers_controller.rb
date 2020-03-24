@@ -32,5 +32,6 @@ class SubscribersController < ApplicationController
   def subscriber_params
     params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor)
   end 
+  
 
 end
