@@ -107,13 +107,15 @@ class StaticPagesController < ApplicationController
 		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
 		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
     averages = []
+    averages[0] = ["", [["01",0],["02",0],["03",0],["04",0],["05",0],["06",0],["07",0],["08",0],["09",0],["10",0],["11",0],["12",0]], "#ffffff" ]    
     areas = Area.all.pluck(:name)
     areas.each_with_index do |area, area_index|
+      area_index += 1
       averages[area_index] = []
       averages[area_index][0] = area
       averages[area_index][1] = []
       averages[area_index][2] = colors[area_index]
-      props_xx = props.reject { |prop| prop.area != area }.group_by { |prop| prop.created_at.month}
+      props_xx = props.reject { |prop| prop.area != area }.group_by { |prop| prop.created_at.strftime('%W')}
       props_xx.each do |key, value| 
         # byebug
         props_xx.fetch(key).each_with_index do |prop_xx, index|
@@ -126,7 +128,7 @@ class StaticPagesController < ApplicationController
         if props_xx.fetch(key).size > 0
           average_price = (props_xx.fetch(key).inject{ |sum, el| sum + el }.to_f / props_xx.fetch(key).size).round(0) 
           #  Insert data
-          averages[area_index][1].push([Date::MONTHNAMES[key],average_price])
+          averages[area_index][1].push([key,average_price])
         end
         
       end
