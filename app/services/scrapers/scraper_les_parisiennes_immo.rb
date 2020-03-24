@@ -8,7 +8,7 @@ class ScraperLesParisiennesImmo < Scraper
       @type = "Static"
       @waiting_cls = nil
       @multi_page = true
-      @page_nbr = 6
+      @page_nbr = 1
       @properties = []
     end
   
