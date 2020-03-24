@@ -36,7 +36,10 @@ class Scraper
   end
 
   def fetch_dynamic_page(url, waiting_class, wait)
-    browser = Watir::Browser.new :chrome, headless: true
+    opts = {
+      headless: true,
+    }
+    browser = Watir::Browser.new :chrome, opts
     browser.goto url
     sleep wait
     browser.div(class: waiting_class).wait_until(&:present?)

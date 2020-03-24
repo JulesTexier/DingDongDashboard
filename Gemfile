@@ -45,6 +45,8 @@ gem "nokogiri"
 gem "table_print"
 
 # RSPEC
+gem "rspec-retry"
+
 
 # Mongo gem for migration purpose
 gem "mongo", "~> 2.7"
@@ -81,7 +83,6 @@ group :test do
   gem "webdrivers"
   gem "shoulda-matchers", "~> 3.1", ">= 3.1.1"
   gem "database_cleaner"
-  gem "rspec-retry"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
