@@ -1,5 +1,5 @@
 class ScraperBienIci < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.bienici.com/recherche/achat/paris-75000?tri=publication-desc"

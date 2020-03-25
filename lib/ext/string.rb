@@ -140,6 +140,9 @@ class String
     end
   end
 
+  ################################################
+  ## TRANSLATE AREA, WHEN FORMAT Paris-03
+  ################################################
   def district_generator
     if self.length == 2
       return "750#{self}"
