@@ -37,5 +37,6 @@ Rails.application.routes.draw do
   get "/dashboard/stats" => "static_pages#stats"
   get "/dashboard/chart" => "static_pages#chart"
   get "/dashboard/price" => "static_pages#property_price"
+  get "/dashboard/source" => "static_pages#sources"
 
 end
