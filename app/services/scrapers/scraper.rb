@@ -18,7 +18,7 @@ class Scraper
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
-        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait)
+        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
       else
@@ -35,17 +35,48 @@ class Scraper
     return page
   end
 
-  def fetch_dynamic_page(url, waiting_class, wait)
+  def fetch_dynamic_page(url, waiting_class, wait, *click_args)
     opts = {
       headless: true,
     }
     browser = Watir::Browser.new :chrome, opts
     browser.goto url
     sleep wait
+    click_those_btns(browser, click_args) unless click_args.nil?
     browser.div(class: waiting_class).wait_until(&:present?)
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
     return page
+  end
+
+  ######################################
+  ## WATIR INTERACTIVE CLICKS METHODS ##
+  ######################################
+
+  def click_those_btns(browser, click_args)
+    click_args.each do |click_arg|
+      click_this_element(browser, click_arg)
+      sleep 1
+    end
+  end
+
+  def click_this_element(browser, click_arg)
+    case click_arg[:element]
+    when "div"
+      browser.div(click_arg[:values]).click
+    when "li"
+      browser.li(click_arg[:values]).click
+    when "button"
+      browser.button(click_arg[:values]).click
+    when "a"
+      browser.a(click_arg[:values]).click
+    when "span"
+      browser.span(click_arg[:values]).click
+    when "option"
+      browser.option(click_arg[:values]).click
+    else
+      puts "Error on Click_this_btn"
+    end
   end
 
   def fetch_captcha_page(url)
