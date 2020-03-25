@@ -26,7 +26,7 @@ class ScraperMorissImmobilier < Scraper
           hashed_property[:rooms_number] = access_xml_text(item, "div.inforoom_unit_type4 > span").to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.listing_unit_price_wrapper").to_int_scrp
           hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h4 > a"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
-          if is_property_clean(hashed_property)
+          if is_property_clean(hashed_property) && !hashed_property[:area].nil?
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.wpestate_property_description > p").specific_trim_scrp("\n").strip
             hashed_property[:agency_name] = access_xml_text(html, "div.agent_unit > div > h4 > a")
@@ -47,6 +47,8 @@ class ScraperMorissImmobilier < Scraper
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
+          puts e.message
+          puts e.backtrace
           next
         end
       end
