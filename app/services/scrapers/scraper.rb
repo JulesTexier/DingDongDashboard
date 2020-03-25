@@ -42,7 +42,7 @@ class Scraper
     browser = Watir::Browser.new :chrome, opts
     browser.goto url
     sleep wait
-    # click_those_btns(browser, click_args) unless click_args.nil?
+    click_those_btns(browser, click_args) unless click_args.nil?
     browser.div(class: waiting_class).wait_until(&:present?)
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
