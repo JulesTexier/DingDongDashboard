@@ -30,7 +30,7 @@ class Property < ApplicationRecord
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
     description = description + "  💰#{(self.price/self.surface).round(0)}" 
-    description += " €/m2" if description.length < 16
+    description += " €/m2" if description.length < 25
     !self.subways.empty? ? description = description + "\u000AⓂ️ #{self.get_subways_full}" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
   end
