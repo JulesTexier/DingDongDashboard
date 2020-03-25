@@ -1,3 +1,5 @@
+require 'csv'
+
 class StaticPagesController < ApplicationController
   def dashboard
 
@@ -29,25 +31,46 @@ class StaticPagesController < ApplicationController
   end
 
   def properties
-    @total = Property.all.count
-    # @total1m = Property.where('created_at > ?', 30.days.ago).count
-    # @total24h = Property.where('created_at > ?', 24.hours.ago).count
+    
 
-    # sites = Property.distinct.pluck(:source)
-    @data = []
-    sites.each do |source|
-      @data.push({ source: source, count: Property.where(source: source).count })
+    # Evolution par sources
+    @max = 0
+    props = Property.where("created_at > ? ", Time.parse("29 february 2020")).select(:source, :created_at).order('created_at ASC')
+    colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
+    averages = []
+    averages[0] = ["", [["W08",0],["W09",0],["W10",0],["W11",0],["W12",0]], "#ffffff" ]    
+    # sources = ["SeLoger"]
+    sources = Property.all.pluck(:source).uniq!
+    sources.each_with_index do |source, source_index|
+      source_index += 1
+      averages[source_index] = []
+      averages[source_index][0] = source
+      averages[source_index][1] = []
+      averages[source_index][2] = colors[source_index]
+      props_xx = props.reject { |prop| prop.source != source }.group_by { |source| source.created_at.strftime('%W')}
+      props_xx.each do |key, value| 
+        total_props_in_period = value.length
+        @max = total_props_in_period if total_props_in_period > @max
+        averages[source_index][1].push(["W"+key,total_props_in_period])        
+      end
+
+
+    end 
+
+
+    @chart_data = []
+    @max += 10
+  
+    averages.each do |source|
+      source_hash = {}
+      source_hash[:name] = source[0]
+      source_hash[:data] = source[1]
+      source_hash[:color] = source[2]
+      @chart_data.push(source_hash)
     end
-
-    # @data24h = []
-    # sites.each do |source|
-    #     @data24h.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 24.hours.ago).count})
-    # end
-
-    # @data1m = []
-    # sites.each do |source|
-    #     @data1m.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 30.days.ago).count})
-    # end
   end
 
   def stats
@@ -85,7 +108,102 @@ class StaticPagesController < ApplicationController
   end
 
   def chart
-    @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
-    
+    # @data =  [["2020-01-14",4], ["2020-01-14",3],["2020-01-15",0],["2020-01-16",0]]
+
+    # @csv = CSV.read("app/services/broadcasters/data/logs.csv")
+
+    # @data = []
+    # @csv.each do |line|
+    #   hash_data = {}
+    #   hash_data["subscriber"] = line[1]
+    #   hash_data["nb_props"] = line[2]
+    #   @data.push(hash_data)
+    # end    
   end
+
+  def property_price
+    props = Property.where("surface > 0 AND price > 0").select(:surface, :price, :area, :created_at).order('created_at ASC')
+    colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
+    averages = []
+    averages[0] = ["", [["01",0],["02",0],["03",0],["04",0],["05",0],["06",0],["07",0],["08",0],["09",0],["10",0],["11",0],["12",0]], "#ffffff" ]    
+    areas = Area.all.pluck(:name)
+    areas.each_with_index do |area, area_index|
+      area_index += 1
+      averages[area_index] = []
+      averages[area_index][0] = area
+      averages[area_index][1] = []
+      averages[area_index][2] = colors[area_index]
+      props_xx = props.reject { |prop| prop.area != area }.group_by { |prop| prop.created_at.strftime('%W')}
+      props_xx.each do |key, value| 
+        # byebug
+        props_xx.fetch(key).each_with_index do |prop_xx, index|
+          if prop_xx.surface.to_i > 0
+            props_xx.fetch(key)[index] = (prop_xx.price/prop_xx.surface.round(2)) 
+          else 
+            props_xx.fetch(key).delete(index)
+          end
+        end
+        if props_xx.fetch(key).size > 0
+          average_price = (props_xx.fetch(key).inject{ |sum, el| sum + el }.to_f / props_xx.fetch(key).size).round(0) 
+          #  Insert data
+          averages[area_index][1].push([key,average_price])
+        end
+        
+      end
+
+
+    end
+    @chart_data = []
+    averages.each do |area|
+      area_hash = {}
+      area_hash[:name] = area[0]
+      area_hash[:data] = area[1]
+      area_hash[:color] = area[2]
+      @chart_data.push(area_hash)
+    end
+  end
+
+  def sources
+    @max = 0
+    props = Property.where("created_at > ? ", Time.parse("29 february 2020")).select(:source, :created_at).order('created_at ASC')
+    colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
+    averages = []
+    averages[0] = ["", [["W08",0],["W09",0],["W10",0],["W11",0],["W12",0]], "#ffffff" ]    
+    # sources = ["SeLoger"]
+    sources = Property.all.pluck(:source).uniq!
+    sources.each_with_index do |source, source_index|
+      source_index += 1
+      averages[source_index] = []
+      averages[source_index][0] = source
+      averages[source_index][1] = []
+      averages[source_index][2] = colors[source_index]
+      props_xx = props.reject { |prop| prop.source != source }.group_by { |source| source.created_at.strftime('%W')}
+      props_xx.each do |key, value| 
+        total_props_in_period = value.length
+        @max = total_props_in_period if total_props_in_period > @max
+        averages[source_index][1].push(["W"+key,total_props_in_period])        
+      end
+
+
+    end 
+
+
+    @chart_data = []
+    @max += 10
+  
+    averages.each do |source|
+      source_hash = {}
+      source_hash[:name] = source[0]
+      source_hash[:data] = source[1]
+      source_hash[:color] = source[2]
+      @chart_data.push(source_hash)
+    end
+  end
+
 end

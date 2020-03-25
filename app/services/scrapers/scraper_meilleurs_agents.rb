@@ -54,6 +54,7 @@ class ScraperMeilleursAgents < Scraper
     hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
     hashed_property[:surface] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
     hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '\d(.)*(pi(è|e)ce(s?))').to_float_to_int_scrp
+    hashed_property[:rooms_number] = 1 if hashed_property[:flat_type] == "Studio"
     hashed_property[:price] = access_xml_text(item, "div.listing-price.margin-bottom").to_int_scrp
     hashed_property[:has_elevator] = nil
     hashed_property[:floor] = nil

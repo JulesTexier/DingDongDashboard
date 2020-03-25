@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe ScraperSeLoger, type: :service do
+RSpec.describe ScraperLeBonCoin, type: :service do
   describe "it should succeed with 3 retries", :retry => 3, :retry_wait => 10 do
     before(:all) do
-      @s = ScraperSeLoger.new
+      @s = ScraperLeBonCoin.new
     end
 
     it "should return a nokogiri element" do

@@ -160,6 +160,9 @@ class Manychat
     else
       if direct_source
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
+        webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
+        body_fav = { subscriber_id: subscriber.id, property_id: property.id }
+        buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
       else
         webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
         buttons.push(create_dynamic_button_hash("🙋 Voir plus", webhook, "GET"))
@@ -200,7 +203,7 @@ class Manychat
     elements.push(create_header_gallery_element_new_properties(properties.length)) if template === "new_properties"
     elements.push(create_header_gallery_element_last_properties(properties.length)) if template === "last_properties"
     properties.each do |property|
-      template === "morning_properties" ? direct_link = true : direct_link = false
+      template === "morning_properties" || "last_properties" ? direct_link = true : direct_link = false
       elements.push(create_property_element(property, subscriber, direct_link))
     end
 
