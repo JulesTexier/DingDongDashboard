@@ -2,6 +2,10 @@ class String
 
   ## CHARACTER METHODS
 
+  def transform_litteral_numbers 
+    return self.downcase.gsub(' un ', " 1 ").gsub(' deux ', " 2 ").gsub(' trois ', " 3 ").gsub(' quatre ', " 4 ").gsub(' cinq ', " 5 ").gsub(' six ', " 6 ").gsub(' sept ', " 7 ").gsub(' huit ', " 8 ").gsub(' neuf ', " 9 ")
+  end
+
   def clean_img_link_https
     "https:" + self if self[0..1] == "//"
   end
@@ -87,6 +91,7 @@ class String
       return "7500#{self}"
     end
   end
+
 
   ################################################
   ## TRANSLATE AREA, MAINLY FOR MEILLEURSAGENTS ##
