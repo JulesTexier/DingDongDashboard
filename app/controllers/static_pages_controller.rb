@@ -31,25 +31,46 @@ class StaticPagesController < ApplicationController
   end
 
   def properties
-    @total = Property.all.count
-    # @total1m = Property.where('created_at > ?', 30.days.ago).count
-    # @total24h = Property.where('created_at > ?', 24.hours.ago).count
+    
 
-    # sites = Property.distinct.pluck(:source)
-    @data = []
-    sites.each do |source|
-      @data.push({ source: source, count: Property.where(source: source).count })
+    # Evolution par sources
+    @max = 0
+    props = Property.where("created_at > ? ", Time.parse("29 february 2020")).select(:source, :created_at).order('created_at ASC')
+    colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC']
+    averages = []
+    averages[0] = ["", [["W08",0],["W09",0],["W10",0],["W11",0],["W12",0]], "#ffffff" ]    
+    # sources = ["SeLoger"]
+    sources = Property.all.pluck(:source).uniq!
+    sources.each_with_index do |source, source_index|
+      source_index += 1
+      averages[source_index] = []
+      averages[source_index][0] = source
+      averages[source_index][1] = []
+      averages[source_index][2] = colors[source_index]
+      props_xx = props.reject { |prop| prop.source != source }.group_by { |source| source.created_at.strftime('%W')}
+      props_xx.each do |key, value| 
+        total_props_in_period = value.length
+        @max = total_props_in_period if total_props_in_period > @max
+        averages[source_index][1].push(["W"+key,total_props_in_period])        
+      end
+
+
+    end 
+
+
+    @chart_data = []
+    @max += 10
+  
+    averages.each do |source|
+      source_hash = {}
+      source_hash[:name] = source[0]
+      source_hash[:data] = source[1]
+      source_hash[:color] = source[2]
+      @chart_data.push(source_hash)
     end
-
-    # @data24h = []
-    # sites.each do |source|
-    #     @data24h.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 24.hours.ago).count})
-    # end
-
-    # @data1m = []
-    # sites.each do |source|
-    #     @data1m.push({source: source, count: Property.where('source = ? AND created_at > ?', source, 30.days.ago).count})
-    # end
   end
 
   def stats

@@ -1,24 +1,27 @@
-<h2 class="mt-5" >24 last hours</h2>
+<!-- Image and text -->
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    Statistiques sur les annonces scrapées
+  </a>
+</nav>
 
-  <h2 class="mt-5">All time</h2>
-  <table class="table mt-5">
-  <thead>
-    <tr>
-      <th scope="col">🔎 Sources (<%= @data.count  %>)</th>
-      <th scope="col"> All - Annonces (<%= @total%>)</th>
-      <th scope="col"> All - Proportion</th>
-    </tr>
-  </thead>
-  <tbody>
+<h3 class="mt-5"> Annonces scrapées par jour</h3>
+<%= line_chart Property.group_by_day(:created_at).count%>
 
-  <% @data.each do |doc| %>
-    <tr>
-      <th scope="row"><%= doc[:source] %></th>
-      <td><%= doc[:count] %></td>
-      <td><%= ((doc[:count].to_f / @total.to_f) * 100).to_i %> % </td>
-    </tr>
-  <% end %>
-  
-  </tbody>
-  </table>
-  
+<h3 class="mt-5"> Répartition des sources</h3>
+<% 
+  date =Date.parse(Time.now.to_s)  
+  props = Property.where(created_at:date.midnight..date.end_of_day )
+%>
+
+<div class="row">
+  <div class="col-6">  
+    <%= pie_chart props.group(:source).count, title: "Biens scrapés aujourd'hui (#{props.count})" %>
+  </div>
+  <div class="col-6">  
+    <%= pie_chart Property.all.group(:source).count, title: "Biens scrapés depuis le début (#{Property.all.count})" %>
+  </div>
+</div>
+
+<h3 class="mt-5"> Evolution des sources par semaine</h3>
+<%= line_chart @chart_data, min: 0, max: @max, height: "700px", xtitle: "# semaine", ytitle: "Nb d'annonces", suffix: "", thousands: " "  %>
