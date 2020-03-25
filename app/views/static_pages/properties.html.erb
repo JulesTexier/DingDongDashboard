@@ -6,7 +6,7 @@
 </nav>
 
 <h3 class="mt-5"> Annonces scrapées par jour</h3>
-<%= line_chart Property.group_by_day(:created_at).count%>
+<%= line_chart Property.where('created_at > ?', Time.parse('26 february 2020')).group_by_day(:created_at).count%>
 
 <h3 class="mt-5"> Répartition des sources</h3>
 <% 
