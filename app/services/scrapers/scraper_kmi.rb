@@ -32,6 +32,7 @@ class ScraperKmi < Scraper
               hashed_property[:rooms_number] = access_xml_text(item, "div.property_listing_details > span.inforoom").to_int_scrp + 1
             end
           end
+
           if is_property_clean(hashed_property)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div#description").tr("\n\t", "").strip
@@ -48,7 +49,7 @@ class ScraperKmi < Scraper
               img.gsub!("background-image:url(", "").chop!
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            #enrich_then_insert_v2(hashed_property)
             i += 1
             break if i == limit
           end
