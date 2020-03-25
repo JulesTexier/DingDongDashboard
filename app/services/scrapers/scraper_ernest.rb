@@ -1,0 +1,52 @@
+class ScraperErnest < Scraper
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+
+  def initialize
+    @url = "http://www.ernest-et-associes.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_34=0&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75"
+    @source = "Ernest et associés"
+    @main_page_cls = "div.content_liste_vente"
+    @type = "Static"
+    @waiting_cls = nil
+    @multi_page = false
+    @page_nbr = 1
+    @properties = []
+  end
+
+  def launch(limit = nil)
+    i = 0
+    fetch_main_page(self).each do |item|
+      begin
+        hashed_property = {}
+        byebug
+
+        hashed_property[:link] = "http://www.ernest-et-associes.com" + access_xml_link(item,".content_liste_vente_voir > a","href")[0].to_s.gsub("..","")
+        # hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
+        # hashed_property[:area] = regex_gen(item.text, '(75)$*\d+{3}')
+        # hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+        # hashed_property[:price] = regex_gen(item.text, '(\d)(.*)(€)').to_int_scrp
+        # if is_property_clean(hashed_property)
+        #   html = fetch_static_page(hashed_property[:link])
+        #   hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "h1"), '(\d+)(.?)(chambre(s?))').to_int_scrp
+        #   hashed_property[:description] = access_xml_text(html, "p.description").strip
+        #   hashed_property[:flat_type] = access_xml_text(html, "#itemprop-appartements")
+        #   hashed_property[:agency_name] = access_xml_text(html, "header > div.media-body > b")
+        #   hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
+        #   hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+        #   hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+        #   hashed_property[:provider] = "Agence"
+        #   hashed_property[:source] = @source
+        #   hashed_property[:images] = access_xml_link(html, "a.fancybox img", "src")
+        #   @properties.push(hashed_property) ##testing purpose
+        #   enrich_then_insert_v2(hashed_property)
+        #   i += 1
+        #   break if i == limit
+        # end
+      rescue StandardError => e
+        puts "\nError for #{@source}, skip this one."
+        puts "It could be a bad link or a bad xml extraction.\n\n"
+        next
+      end
+    end
+    return @properties
+  end
+end
