@@ -1,5 +1,5 @@
 class ScraperBienIci < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.bienici.com/recherche/achat/paris-75000?tri=publication-desc"
@@ -35,8 +35,10 @@ class ScraperBienIci < Scraper
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
           hashed_property[:images] = access_xml_link(html, "div.w > img", "src")
+          puts hashed_property[:link]
+          puts hashed_property[:images]
           @properties.push(hashed_property) ##testing purpose
-          enrich_then_insert_v2(hashed_property)
+          # enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
