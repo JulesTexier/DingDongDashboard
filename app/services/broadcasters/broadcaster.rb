@@ -78,6 +78,7 @@ class Broadcaster
               btn_caption = '🚀 Continuer !'
               body = {}
               body[:is_active] = true
+              body[:message] = 'reactivation'
               @manychat_client.send_dynamic_button_message(sub, btn_caption, webhook, 'post', text, body)
           else
               puts "No warning Good Morning Message for #{sub[:facebook_id]}."

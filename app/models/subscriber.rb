@@ -170,6 +170,7 @@ class Subscriber < ApplicationRecord
   end
 
   def is_matching_property_area(property)
-    self.get_areas.include?(property.area) ? true : false
+    property.area == "75116" ? p_area = "75016" : p_area =  property.area
+    self.get_areas.include?(p_area) ? true : false
   end
 end
