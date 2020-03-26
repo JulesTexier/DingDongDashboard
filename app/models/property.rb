@@ -1,13 +1,15 @@
 DEFAULT_IMG_URL = "https://hellodingdong.com/placeholder.jpg"
 
 class Property < ApplicationRecord
-
   validates :price, presence: true
   validates :surface, presence: true
   validates :rooms_number, presence: true
   validates :area, presence: true
   validates :source, presence: true
   validates :link, presence: true, format: { with: /https?:\/\/[\S]+/i, message: "link format is not valid" }
+
+  validate :image_array_validator
+  validate :image_link_validator
 
   has_many :favorites
   has_many :fans, through: :favorites, source: :subscriber
@@ -18,36 +20,8 @@ class Property < ApplicationRecord
   has_many :property_subways
   has_many :subways, through: :property_subways
 
-  has_many :property_images
-
-  def images
-    return self.property_images
-  end
-
-  def get_images
-    default_img = {}
-    default_img["url"] = DEFAULT_IMG_URL
-
-    if self.property_images.count == 0
-      return [default_img]
-    else
-      images = []
-      self.property_images.each do |pi|
-        images.push(pi.as_json)
-      end
-      return images
-    end
-  end
-
   def get_cover
-    default_img = {}
-    default_img["url"] = DEFAULT_IMG_URL
-
-    if self.images.empty?
-      return default_img["url"]
-    else
-      return self.images.first.url
-    end
+    self.images[0]
   end
 
   def manychat_show_description
@@ -55,6 +29,8 @@ class Property < ApplicationRecord
     self.rooms_number >= 1 ? description += "🛋️ " + self.rooms_number.to_s + "p" : nil
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
+    description = description + "  💰#{(self.price/self.surface).round(0)}" 
+    description += " €/m2" if description.length < 25
     !self.subways.empty? ? description = description + "\u000AⓂ️ #{self.get_subways_full}" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
   end
@@ -69,34 +45,6 @@ class Property < ApplicationRecord
     return "🏠 " + self.get_pretty_price + "€ - " + self.surface.to_s + "m2 - " + get_pretty_area
   end
 
-  # def get_attribues_description
-  #   description = ""
-  #   description = description + "\u000A⏱️ Postée le " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
-  #   # self.price > 0 ? description = description + "\u000A💰 " + self.price.to_s + " €" : nil
-  #   # self.surface > 0 ? description = description + " - 📐 " + self.surface.to_s + " m2" : nil
-  #   self.surface > 0 && self.price > 0 ? description = description + "\u000A💡 " + (self.price / self.surface).to_i.to_s + " €/m2" : nil
-  #   self.area != nil ? description = description + "\u000A📌 " + self.area : nil
-  #   description += self.get_short_description
-  #   return description
-  # end
-
-  # def get_short_description
-  #   description = ""
-  #   self.street != "N/C" && self.street != nil ? description = description + "📍 " + self.street : nil
-  #   self.districts.count > 0 ? description = description + "\u000A🏙️ " + self.districts.map(&:name).join(", ") : nil
-  #   self.rooms_number > 1 ? description += "\u000A🛋️  " + self.rooms_number.to_s + " pièces" : description += description = "\u000A🛏️  " + self.rooms_number.to_s + " pièce"
-  #   self.floor != nil ? description = description + "\u000A↕ " + "Etage : " + self.floor.to_s : nil
-  #   self.has_elevator ? description = description + "\u000A🚠 Avec ascenseur" : nil
-
-  #   return description
-  # end
-
-  # def get_long_description
-  #   description = ""
-  #   self.description != "N/C" && !self.description.nil? ? description = "Description 💬 :\u000A" + self.description[0..600] + " ..." : nil
-  #   return description
-  # end
-
   def get_pretty_area
     if self.area[3..3] == "0"
       self.area[4..4] == "1" ? pretty_area = "1er" : pretty_area = "#{self.area[4..4]}ème"
@@ -109,7 +57,7 @@ class Property < ApplicationRecord
   def get_subways_lines
     lines = []
     self.subways.each do |subway|
-      puts arr = subway.line.tr('[', '').tr(']', '').tr('"', '').split(',')
+      puts arr = subway.line.tr("[", "").tr("]", "").tr('"', "").split(",")
       lines.concat arr
     end
     lines.uniq
@@ -120,7 +68,7 @@ class Property < ApplicationRecord
     lines_arr = []
     self.subways.each do |subway|
       stops.push(subway.name)
-      lines_arr.concat subway.line.tr('[', '').tr(']', '').tr('"', '').tr(' ', '').split(',')
+      lines_arr.concat subway.line.tr("[", "").tr("]", "").tr('"', "").tr(" ", "").split(",")
     end
     lines_arr = lines_arr.uniq
     final_string = stops.join(", ") + " (" + lines_arr.join(",") + ")"
@@ -175,5 +123,19 @@ class Property < ApplicationRecord
 
   def self.unprocessed
     self.where(has_been_processed: false)
+  end
+
+  private
+
+  def image_array_validator
+    self.images.push(DEFAULT_IMG_URL) if self.images.blank?
+  end
+
+  def image_link_validator
+    correct_image = []
+    self.images.each do |image|
+      correct_image.push(image) if image.match(/https?:\/\/[\S]+/i).is_a?(MatchData)
+    end
+    self.images = correct_image
   end
 end

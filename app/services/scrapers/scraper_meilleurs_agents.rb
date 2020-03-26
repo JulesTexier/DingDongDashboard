@@ -26,17 +26,18 @@ class ScraperMeilleursAgents < Scraper
           property_checker_hash[:price] = hashed_property[:price]
           property_checker_hash[:area] = hashed_property[:area]
           property_checker_hash[:link] = hashed_property[:link]
-          @properties.push(hashed_property) ##testing purpose
-          hashed_properties.push(hashed_property) if is_property_clean(property_checker_hash)
+          if is_property_clean(property_checker_hash)
+            @properties.push(hashed_property)
+            enrich_then_insert_v2(hashed_property)
+            i += 1
+          end
+          break if i == limit
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
           next
         end
       end
-      enrich_then_insert(hashed_properties)
-      i += 1
-      break if i == limit
     else
       puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
@@ -53,7 +54,10 @@ class ScraperMeilleursAgents < Scraper
     hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
     hashed_property[:surface] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
     hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '\d(.)*(pi(è|e)ce(s?))').to_float_to_int_scrp
+    hashed_property[:rooms_number] = 1 if hashed_property[:flat_type] == "Studio"
     hashed_property[:price] = access_xml_text(item, "div.listing-price.margin-bottom").to_int_scrp
+    hashed_property[:has_elevator] = nil
+    hashed_property[:floor] = nil
     hashed_property[:source] = @source
     hashed_property[:provider] = "Agence"
     hashed_property[:description] = "Aouch! Ding Dong n'est pas en mesure de vous fournir une description pour ce bien."

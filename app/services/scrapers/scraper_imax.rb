@@ -1,5 +1,5 @@
 class ScraperImax < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.imax.fr/recherche,basic.htm?tri=d_px&idtt=2#ci=750109,750109,750116,750116,750117,750117,750118,750118&idqfix=1&idtt=2&idtypebien=1,2&lang=fr&pres=prestige&pxmax=Max&pxmin=Min&surf_terrainmax=Max&surf_terrainmin=Min"
@@ -10,6 +10,7 @@ class ScraperImax < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @wait = 5
   end
 
   def launch(limit = nil)
@@ -41,8 +42,6 @@ class ScraperImax < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
-        puts e.message
-        puts e.backtrace
         next
       end
     end

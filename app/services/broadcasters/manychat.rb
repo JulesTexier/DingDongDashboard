@@ -125,7 +125,7 @@ class Manychat
     text += "\u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
     return [create_message_text_hash(text)]
   end
-  
+
   def create_header_gallery_element_new_properties(number_of_properties)
     title = "🍾 "
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
@@ -152,16 +152,21 @@ class Manychat
     create_header_gallery_element(title, subtitle, image_url)
   end
 
-  
-
   # This method prepare a message view for a property that can be included in a card or a gallery of cards
-  def create_property_element(property, subscriber = nil)
+  def create_property_element(property, subscriber = nil, direct_source = false)
     buttons = []
     if subscriber.nil?
       buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
     else
-      webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
-      buttons.push(create_dynamic_button_hash("🙋 Voir plus", webhook, "GET"))
+      if direct_source
+        buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
+        webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
+        body_fav = { subscriber_id: subscriber.id, property_id: property.id }
+        buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
+      else
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
+        buttons.push(create_dynamic_button_hash("🙋 Voir plus", webhook, "GET"))
+      end
     end
     return create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, buttons)
   end
@@ -198,7 +203,8 @@ class Manychat
     elements.push(create_header_gallery_element_new_properties(properties.length)) if template === "new_properties"
     elements.push(create_header_gallery_element_last_properties(properties.length)) if template === "last_properties"
     properties.each do |property|
-      elements.push(create_property_element(property, subscriber))
+      template === "morning_properties" || "last_properties" ? direct_link = true : direct_link = false
+      elements.push(create_property_element(property, subscriber, direct_link))
     end
 
     message_array = []
@@ -218,12 +224,12 @@ class Manychat
     webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
     body_fav = { subscriber_id: subscriber.id, property_id: property.id }
     buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
-    
+
     elements = []
     photo_counter = 1
-    property.get_images.count <=10 ? total_pic = property.get_images.count : total_pic = 10
-    property.get_images.each do |img|
-      elements.push(create_message_element_hash("📷 Photo #{photo_counter}/#{total_pic}", property.manychat_show_description_with_title, img["url"], buttons))
+    property.images.count <= 10 ? total_pic = property.images.count : total_pic = 10
+    property.images.each do |img|
+      elements.push(create_message_element_hash("📷 Photo #{photo_counter}/#{total_pic}", property.manychat_show_description_with_title, img, buttons))
       elements.length === 10 ? break : nil
       photo_counter += 1
     end

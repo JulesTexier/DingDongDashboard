@@ -1,5 +1,5 @@
 class ScraperBienIci < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.bienici.com/recherche/achat/paris-75000?tri=publication-desc"
@@ -10,6 +10,7 @@ class ScraperBienIci < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @wait = 0
   end
 
   def launch(limit = nil)
@@ -23,7 +24,7 @@ class ScraperBienIci < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "span.generatedTitleWithHighlight"), '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
         hashed_property[:rooms_number] = 1 if regex_gen(access_xml_array_to_text(item, "span.generatedTitleWithHighlight"), "(S|s)tudio") == "Studio"
         hashed_property[:price] = regex_gen(access_xml_text(item, "span.thePrice"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if is_property_clean(hashed_property) && !hashed_property[:link].match(/(depuis-mise-en-avant=oui|visiteonline-)/i).is_a?(MatchData)
           html = fetch_dynamic_page(hashed_property[:link], "detailedSheetContainer", 0)
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "div.allDetails").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.descriptionContent").specific_trim_scrp("\n\t\r").strip
@@ -42,6 +43,8 @@ class ScraperBienIci < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
+        puts e.message
+        puts e.backtrace
         next
       end
     end

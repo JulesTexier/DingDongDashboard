@@ -1,21 +1,11 @@
-# require "nokogiri"
-# require "open-uri"
-# require "dotenv/load"
-# require "watir"
+require "dotenv/load"
 
 class Scraper
-  def enrich_then_insert(hashed_properties)
-    hashed_properties.each do |hashed_property|
+  def enrich_then_insert_v2(hashed_property)
+    if !is_already_exists_by_desc(hashed_property)
       property = insert_property(hashed_property)
-      insert_property_images(hashed_property[:images], property) unless property.nil?
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
-  end
-
-  def enrich_then_insert_v2(hashed_property)
-    property = insert_property(hashed_property)
-    insert_property_images(hashed_property[:images], property) unless property.nil?
-    insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
   end
 
   ########################
@@ -28,7 +18,7 @@ class Scraper
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
-        html = fetch_dynamic_page(args.url, args.waiting_cls, wait = 0)
+        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
       else
@@ -45,14 +35,55 @@ class Scraper
     return page
   end
 
-  def fetch_dynamic_page(url, waiting_class, wait)
-    browser = Watir::Browser.new :chrome, headless: true
+  def fetch_dynamic_page(url, waiting_class, wait, *click_args)
+    opts = {
+      headless: true,
+    }
+    browser = Watir::Browser.new :chrome, opts
     browser.goto url
     sleep wait
+    click_those_btns(browser, click_args) unless click_args.nil?
     browser.div(class: waiting_class).wait_until(&:present?)
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
     return page
+  end
+
+  ######################################
+  ## WATIR INTERACTIVE CLICKS METHODS ##
+  ######################################
+
+  ##############################
+  ## PENDING METHODS BECAUSE ##
+  ## IT DOESNT WORK YET      ##
+  #############################
+
+  def click_those_btns(browser, click_args)
+    click_args.each do |click_arg|
+      sleep 1
+      click_this_element(browser, click_arg)
+    end
+  end
+
+  def click_this_element(browser, click_arg)
+    case click_arg[:element]
+    when "div"
+      browser.div(click_arg[:values]).click
+    when "li"
+      browser.li(click_arg[:values]).click
+    when "button"
+      browser.button(click_arg[:values]).click
+    when "a"
+      browser.a(click_arg[:values]).click
+    when "span"
+      browser.span(click_arg[:values]).click
+    when "option"
+      browser.option(click_arg[:values]).click
+    when "select"
+      browser.select(click_arg[:values]).click
+    else
+      puts "Error on Click_this_btn"
+    end
   end
 
   def fetch_captcha_page(url)
@@ -190,7 +221,7 @@ class Scraper
   ## PUBLIC DATABASE METHODS ##
   #############################
 
-  def is_already_exists(hashed_property)
+  def is_already_exists_by_time(hashed_property)
     response = false
     properties = Property.where(hashed_property.except(:link)).where(
       "created_at >= :seven",
@@ -200,9 +231,25 @@ class Scraper
     return response
   end
 
+  def is_already_exists_by_desc(hashed_property)
+    response = false
+
+    properties = Property.where(
+      surface: hashed_property[:surface],
+      price: hashed_property[:price],
+      area: hashed_property[:area],
+      rooms_number: hashed_property[:rooms_number],
+    )
+
+    properties.each do |property|
+      response = desc_comparator(property.description, hashed_property[:description])
+    end
+    return response
+  end
+
   def is_already_exists_by_link(link)
     response = false
-    prop_by_link = Property.where(link: link).where("created_at >= :seven", :seven => Time.now - 7.days)
+    prop_by_link = Property.where(link: link)
     response = true if prop_by_link.length > 0
     return response
   end
@@ -220,7 +267,7 @@ class Scraper
   end
 
   def is_property_clean(hashed_property)
-    is_already_exists(hashed_property) || is_dirty_property(hashed_property) ? false : true
+    is_already_exists_by_time(hashed_property) || is_dirty_property(hashed_property) || is_already_exists_by_link(hashed_property[:link]) ? false : true
   end
 
   def is_it_night?
@@ -234,6 +281,39 @@ class Scraper
     return response
   end
 
+  def desc_comparator(desc, desc_to_compare)
+    response = false
+    str1 = desc.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    min = [str1.length, str2.length].min
+    if min > 20
+      if str1.length == min
+        short_string = str1
+        long_string = str2
+      else
+        short_string = str2
+        long_string = str1
+      end
+      if min > 50
+        min = 50
+        x = short_string.length - min
+      else
+        x = short_string.length - min + 1
+      end
+      i = 0
+      array = []
+      x.times do
+        j = i + min
+        array.push(short_string[i..j])
+        i += 1
+      end
+      array.each do |papouz|
+        response = true if long_string.include?(papouz)
+      end
+    end
+    return response
+  end
+
   private
 
   ##############################
@@ -242,7 +322,7 @@ class Scraper
 
   def insert_property(prop_hash)
     prop_hash[:has_been_processed] = true if is_it_night?
-    prop = Property.create(prop_hash.except(:images))
+    prop = Property.create(prop_hash)
     if prop.save
       unless Rails.env.test?
         puts "\nInsertion of a property from #{prop_hash[:source]}: "
@@ -250,13 +330,6 @@ class Scraper
       end
       return prop
     end
-  end
-
-  def insert_property_images(image_array, prop)
-    image_array.each do |img|
-      PropertyImage.create(property_id: prop.id, url: img)
-    end
-    prop.images.length > 0 ? nil : PropertyImage.create(property: prop)
   end
 
   def insert_property_subways(subway_ids, prop)
