@@ -6,7 +6,7 @@ RSpec.describe Subscriber, type: :model do
   describe Subscriber do
     describe "model" do
       it "has a valid factory" do
-        expect(build(:subscriber)).to be_valid
+        expect(build(:subscriber_dummy_fb_id)).to be_valid
       end
 
       context "validations" do
@@ -22,7 +22,7 @@ RSpec.describe Subscriber, type: :model do
 
       context "default values" do
         it "should define user as active by default" do
-          subscriber = FactoryBot.create(:subscriber)
+          subscriber = FactoryBot.create(:subscriber_dummy_fb_id)
           expect(subscriber.is_active).to eq(true)
           expect(subscriber.min_floor).to eq(0)
         end

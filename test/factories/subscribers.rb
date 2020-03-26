@@ -14,7 +14,7 @@ FactoryBot.define do
     end
 
     factory :subscriber_dummy_fb_id do 
-      facebook_id {1234}
+      facebook_id {rand(10..99).to_s + rand(10..99).to_s + rand(10..99).to_s + rand(10..99).to_s}
     end
 
 
