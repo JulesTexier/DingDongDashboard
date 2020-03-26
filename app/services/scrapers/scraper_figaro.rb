@@ -38,12 +38,13 @@ class ScraperFigaro < Scraper
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name").tr("\n\t", "")
             hashed_property[:images] = access_xml_link(html, "a.image-link.default-image-background", "href")
           end
+          hashed_property[:rooms_number] = 1 if hashed_property[:flat_type] == "studio"
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
-          @properties << hashed_property ##testing purpose
+          @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit

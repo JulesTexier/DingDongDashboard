@@ -2,15 +2,14 @@ class ScraperDeferla < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
-    @url = "https://deferla.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&investissement=0&type_lot%5B%5D=Appartement&type_lot%5B%5D=Atelier&type_lot%5B%5D=Immeuble&type_lot%5B%5D=Loft&type_lot%5B%5D=Maison&type_lot%5B%5D=Terrain&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&nb_chambre=&surface=&budget_min=&budget_max=&page=[[PAGE_NUMBER]]&vendus=0&submit_search_0="
+    @url = "https://deferla.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&investissement=0&type_lot%5B%5D=Appartement&type_lot%5B%5D=Atelier&type_lot%5B%5D=Immeuble&type_lot%5B%5D=Loft&type_lot%5B%5D=Maison&type_lot%5B%5D=Terrain&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&nb_chambre=&surface=&budget_min=&budget_max=&page=1&vendus=0&submit_search_0=&page=[[PAGE_NUMBER]]"
     @source = "Deferla"
     @main_page_cls = "div.property"
-    @type = "Dynamic"
-    @waiting_cls = "input-group"
-    @multi_page = false
-    @page_nbr = 1
+    @type = "Static"
+    @waiting_cls = "properties-grid"
+    @multi_page = true
+    @page_nbr = 3
     @wait = 0
-    @click_args = [{ element: "select", values: { name: "tri" } }, { element: "option", values: { text: "Annonces récentes d'abord" } }]
     @properties = []
   end
 
@@ -23,7 +22,7 @@ class ScraperDeferla < Scraper
         hashed_property[:surface] = regex_gen(access_xml_text(item, "h4 > a"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = regex_gen(access_xml_text(item, "p.localisation > b"), '(75)$*\d+{3}')
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4 > a"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-        hashed_property[:price] = regex_gen(access_xml_text(item, "h4.text-right > a"), '(\d)(.*)( *)(€)').to_int_scrp + 102
+        hashed_property[:price] = access_xml_text(item, "h4.text-right > a").to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h4 > a"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
         if is_property_clean(hashed_property)
           html = fetch_static_page(hashed_property[:link])
