@@ -10,7 +10,7 @@ FactoryBot.define do
     facebook_id { "fb000001" }
 
     factory :subscriber_fred do 
-      facebook_id {'2827641220632020'}
+      facebook_id {'3558864844155233'}
     end
 
     factory :subscriber_dummy_fb_id do 
