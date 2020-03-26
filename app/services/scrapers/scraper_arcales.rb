@@ -26,7 +26,6 @@ class ScraperArcales < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           if is_property_clean(hashed_property)
             html = fetch_static_page(hashed_property[:link])
-            
             hashed_property[:description] = access_xml_text(html, "div.mainContent > div:nth-child(2) > div:nth-child(1) > p").strip
             hashed_property[:agency_name] = "Arcales"
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
@@ -40,7 +39,6 @@ class ScraperArcales < Scraper
               i += 1
               break if i == limit
           end
-        puts JSON.pretty_generate(hashed_property)
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
