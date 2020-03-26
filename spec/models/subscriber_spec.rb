@@ -68,6 +68,12 @@ RSpec.describe Subscriber, type: :model do
             @property.has_elevator = true
             expect(@subscriber.is_matching_property?(@property)).to eq(true)
           end
+
+          it "should match when user wants 75016 and property is 75116" do 
+            @subscriber.areas << Area.new(name: "75016")
+            @property.area = "75116"
+            expect(@subscriber.is_matching_property?(@property)).to eq(true)
+          end
         end
 
         context "floor is equal to min_elevator_floor and elevator is true" do
