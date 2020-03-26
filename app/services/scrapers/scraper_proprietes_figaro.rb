@@ -37,7 +37,6 @@ class ScraperProprietesFigaro < Scraper
             i += 1
             break if i == limit
           end
-        puts JSON.pretty_generate(hashed_property)
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
