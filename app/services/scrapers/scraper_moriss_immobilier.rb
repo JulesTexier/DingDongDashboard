@@ -2,13 +2,13 @@ class ScraperMorissImmobilier < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
-    @url = "https://www.morissimmobilier.com/recherche-immobiliere-avancee/page/1/?advanced_city=&surface-min=0&nb-chambres-min=0&budget-max=10000000"
+    @url = "https://www.morissimmobilier.com/recherche-immobiliere-avancee/page/[[PAGE_NUMBER]]/?advanced_city&surface-min=0&nb-chambres-min=0&budget-max=10000000"
     @source = "MorissImmobilier"
     @main_page_cls = "div.property_listing"
-    @type = "Dynamic"
+    @type = "Static"
     @waiting_cls = "carousel-inner"
-    @multi_page = false
-    @page_nbr = 1
+    @multi_page = true
+    @page_nbr = 13
     @wait = 0
     @click_args = [{ element: "div", values: { id: "a_filter_order" } }, { element: "li", values: { text: "Le plus récent d'abord" } }]
     @properties = []
