@@ -21,8 +21,8 @@
       "env": {
         "WD_CHROME_PATH": "/app/.apt/usr/bin/google-chrome-stable",
         "BEE_API": "JS5YI3NJN7GG22GKYLYZGD94LE0HJ6I9G6THYL5TZ2MW024W94DCGSMQQ00RGT4ERGMG2SNJPE8KW8ZJ",
-        "MANYCHAT_BOT_ID": "",
-        "MANYCHAT_TOKEN": "",
+        "MANYCHAT_BOT_ID": "93323",
+        "MANYCHAT_TOKEN": "2a21d906a553fb6bb3e7cb3101bd3ff8",
         "MESSENGER_BOT_TOKEN": "MB-GAyUxj97bQYL3zTwWyTVetYWwKCn",
         "BEARER_TOKEN": "DD-nFMdxvgGEXdpEs7whj",
         "QR_ADS": "content20200304091552_500728",
