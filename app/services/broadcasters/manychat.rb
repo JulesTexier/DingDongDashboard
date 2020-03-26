@@ -51,6 +51,9 @@ class Manychat
     if msg == "success"
       text = "L'annonce a été ajoutée à tes favoris !"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+    elsif msg == "error_already_exists"
+      text = "L'annonce est déjà dans tes favoris !"
+      response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     else
       text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été ajoutée à tes favoris"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
