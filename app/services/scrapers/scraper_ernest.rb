@@ -44,7 +44,6 @@ class ScraperErnest < Scraper
               hashed_property[:images].push(img.gsub("..", "http://www.ernest-et-associes.com"))
             end
           end
-          puts JSON.pretty_generate(hashed_property)
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
