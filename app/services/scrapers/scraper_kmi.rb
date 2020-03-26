@@ -1,14 +1,16 @@
 class ScraperKmi < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :click_args, :wait
 
   def initialize
     @url = "https://www.cabinet-kmi.com/recherche-avancee/page/[[PAGE_NUMBER]]?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
     @source = "KMI"
     @main_page_cls = "div.property_listing"
     @type = "Static"
-    @waiting_cls = nil
+    @waiting_cls = "carousel-inner"
     @multi_page = true
     @page_nbr = 6
+    @wait = 0
+    @click_args = [{ element: "div", values: { class: "order_filter_single" } }, { element: "li", values: { text: "Le plus récent d'abord" } }]
     @properties = []
   end
 
@@ -30,6 +32,7 @@ class ScraperKmi < Scraper
               hashed_property[:rooms_number] = access_xml_text(item, "div.property_listing_details > span.inforoom").to_int_scrp + 1
             end
           end
+
           if is_property_clean(hashed_property)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div#description").tr("\n\t", "").strip

@@ -1,5 +1,5 @@
 class ScraperBienIci < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.bienici.com/recherche/achat/paris-75000?tri=publication-desc"
@@ -43,6 +43,8 @@ class ScraperBienIci < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
+        puts e.message
+        puts e.backtrace
         next
       end
     end

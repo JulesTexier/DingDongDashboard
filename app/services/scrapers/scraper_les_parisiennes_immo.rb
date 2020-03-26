@@ -1,5 +1,5 @@
 class ScraperLesParisiennesImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.lesparisiennesimmo.com/recherche/[[PAGE_NUMBER]]"
@@ -8,7 +8,8 @@ class ScraperLesParisiennesImmo < Scraper
     @type = "Static"
     @waiting_cls = nil
     @multi_page = true
-    @page_nbr = 7
+    @wait = 0
+    @page_nbr = 6
     @properties = []
   end
 
@@ -46,7 +47,6 @@ class ScraperLesParisiennesImmo < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
-        puts e.message
         next
       end
     end

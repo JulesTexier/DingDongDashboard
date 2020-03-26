@@ -1,12 +1,12 @@
 class ScraperOrpi < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.orpi.com/recherche/buy?transaction=buy&resultUrl=&realEstateTypes%5B0%5D=maison&realEstateTypes%5B1%5D=appartement&locations%5B0%5D%5Bvalue%5D=paris&locations%5B0%5D%5Blabel%5D=Paris&agency=&minSurface=10&maxSurface=400&nbRooms%5B0%5D=1&nbRooms%5B1%5D=2&nbRooms%5B2%5D=3&nbRooms%5B3%5D=4&nbRooms%5B4%5D=5&nbRooms%5B5%5D=6&newBuild=true&oldBuild=true&minPrice=100000&maxPrice=6000000&sort=date-down&layoutType=list&nbBedrooms=&page=&minLotSurface=&maxLotSurface=&minStoryLocation=&maxStoryLocation="
     @source = "Orpi"
     @main_page_cls = "div.c-box__inner.c-box__inner--sm"
     @type = "Dynamic"
-    @waiting_cls = "o-grid"
+    @waiting_cls = "u-mt-md"
     @multi_page = false
     @page_nbr = 1
     @properties = []
