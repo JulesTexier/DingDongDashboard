@@ -2,15 +2,14 @@ class ScraperLesParisiennesImmo < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
-    @url = "https://www.lesparisiennesimmo.com/recherche/"
+    @url = "https://www.lesparisiennesimmo.com/recherche/[[PAGE_NUMBER]]"
     @source = "Les Parisiennes"
     @main_page_cls = "ul.listingUL > li"
-    @type = "Dynamic"
+    @type = "Static"
     @waiting_cls = nil
-    @multi_page = false
+    @multi_page = true
     @wait = 0
-    @click_args = [{ element: "button", values: { title: "Localisation" } }, { element: "span", values: { text: "Toute la ville - Paris" } }, { element: "button", values: { text: "Rechercher" } }, { element: "button", values: { text: "Date" } }]
-    @page_nbr = 1
+    @page_nbr = 6
     @properties = []
   end
 
