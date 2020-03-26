@@ -10,7 +10,7 @@ class ScraperAssasImmo < Scraper
       @multi_page = false
       @page_nbr = 1
       @properties = []
-      @wait = 5
+      @wait = 1
     end
   
     def launch(limit = nil)
@@ -26,12 +26,12 @@ class ScraperAssasImmo < Scraper
           hashed_property[:area] = regex_gen(hashed_property[:link], '(paris-(.)(\d+))').tr('^0-9', '')
 
           if is_property_clean(hashed_property)
-            html = fetch_dynamic_page(hashed_property[:link], 'cycle', 3)
+            html = fetch_dynamic_page(hashed_property[:link], 'cycle', @wait)
             hashed_property[:description] = access_xml_text(html, "p.descriptif").strip
             hashed_property[:agency_name] = "Assas Immobilier"
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            # hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "img.autoScale", "src")
@@ -42,7 +42,6 @@ class ScraperAssasImmo < Scraper
             i += 1
             break if i == limit
           end
-          puts JSON.pretty_generate(hashed_property)
         rescue StandardError => e
           puts "\nError for #{@source}, skip this one."
           puts "It could be a bad link or a bad xml extraction.\n\n"
