@@ -42,7 +42,6 @@ class ScraperDeliquietImmobilier < Scraper
           hashed_property[:images] = []
           raw_images.each { |x| hashed_property[:images].push(regex_gen(x.attributes["style"].value, '(url)\((.)*\)').gsub("url('..", "http://www.deliquiet-immobilier.com").gsub("')", "")) }
           @properties.push(hashed_property) ##testing purpose
-          puts JSON.pretty_generate(hashed_property)
           enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
