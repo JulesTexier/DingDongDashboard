@@ -37,6 +37,11 @@ class Manychat
     first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
   end
 
+  # This methd is sending a simple text message to subscriber 
+  def send_text_message(subscriber, message)
+    handle_manychat_response(send_content(subscriber,[create_message_text_hash(message)]))
+  end
+
   # ------
   # FAVORITE MANAGEMENT
   # ------
