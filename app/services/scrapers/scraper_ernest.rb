@@ -18,10 +18,10 @@ class ScraperErnest < Scraper
       begin
         hashed_property = {}
         next if access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a").downcase.include?("vendu")
-        hashed_property[:link] = "http://www.ernest-et-associes.com" + access_xml_link(item,".content_liste_vente_voir > a","href")[0].to_s.gsub("..","")
-        hashed_property[:surface] = regex_gen(access_xml_text(item,".description_annonce"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
+        hashed_property[:link] = "http://www.ernest-et-associes.com" + access_xml_link(item, ".content_liste_vente_voir > a", "href")[0].to_s.gsub("..", "")
+        hashed_property[:surface] = regex_gen(access_xml_text(item, ".description_annonce"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a").area_translator_scrp
-        hashed_property[:rooms_number] = regex_gen(access_xml_text(item,".description_annonce"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+        hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".description_annonce"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = access_xml_text(item, ".content_liste_prix").strip.to_int_scrp
         if is_property_clean(hashed_property)
           html = fetch_static_page(hashed_property[:link])
@@ -29,7 +29,7 @@ class ScraperErnest < Scraper
           hashed_property[:surface] = regex_gen(card, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp if hashed_property[:surface] == 0
           hashed_property[:rooms_number] = regex_gen(card.remove_acc_scrp, 'Piece(s*) : \d*').to_int_scrp if hashed_property[:rooms_number] == 0
           hashed_property[:bedrooms_number] = regex_gen(card, 'Chambre(s*) : \d*').to_int_scrp
-          hashed_property[:flat_type] = get_type_flat(regex_gen(card, 'Type : (.)*Ville'))
+          hashed_property[:flat_type] = get_type_flat(regex_gen(card, "Type : (.)*Ville"))
           hashed_property[:description] = access_xml_text(html, ".content_details_description").strip
           hashed_property[:agency_name] = @source
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
@@ -40,10 +40,11 @@ class ScraperErnest < Scraper
           hashed_property[:images] = []
           raw_images = access_xml_link(html, ".slides > li > a", "href")
           raw_images.each do |img|
-            if img.include?('../office8/ernest_et_associes') 
-              hashed_property[:images].push(img.gsub('..','http://www.ernest-et-associes.com'))
+            if img.include?("../office8/ernest_et_associes")
+              hashed_property[:images].push(img.gsub("..", "http://www.ernest-et-associes.com"))
             end
           end
+          puts JSON.pretty_generate(hashed_property)
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
