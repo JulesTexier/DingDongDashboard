@@ -39,7 +39,6 @@ class ScraperLaResidence < Scraper
           hashed_property[:source] = @source
           hashed_property[:images] = access_xml_link(html, ".swiper-slide3 > a > img", "src")
           @properties.push(hashed_property) ##testing purpose
-          puts JSON.pretty_generate(hashed_property)
           enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
