@@ -37,6 +37,11 @@ class Manychat
     first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
   end
 
+  # This methd is sending a simple text message to subscriber 
+  def send_text_message(subscriber, message)
+    handle_manychat_response(send_content(subscriber,[create_message_text_hash(message)]))
+  end
+
   # ------
   # FAVORITE MANAGEMENT
   # ------
@@ -50,6 +55,9 @@ class Manychat
   def send_message_post_fav_added(subscriber, msg)
     if msg == "success"
       text = "L'annonce a été ajoutée à tes favoris !"
+      response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
+    elsif msg == "error_already_exists"
+      text = "L'annonce est déjà dans tes favoris !"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     else
       text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été ajoutée à tes favoris"
