@@ -40,8 +40,6 @@ class Scraper
       headless: true,
     }
     browser = Watir::Browser.new :chrome, opts
-    browser.window.resize_to(1920, 1080)
-    browser.window.maximize
     browser.goto url
     sleep wait
     click_those_btns(browser, click_args) unless click_args.nil?
@@ -54,6 +52,11 @@ class Scraper
   ######################################
   ## WATIR INTERACTIVE CLICKS METHODS ##
   ######################################
+
+  ##############################
+  ## PENDING METHODS BECAUSE ##
+  ## IT DOESNT WORK YET      ##
+  #############################
 
   def click_those_btns(browser, click_args)
     click_args.each do |click_arg|

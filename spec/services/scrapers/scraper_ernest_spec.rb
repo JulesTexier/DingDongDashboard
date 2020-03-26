@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperMorissImmobilier, type: :service do
+RSpec.describe ScraperErnest, type: :service do
   before(:all) do
-    @s = ScraperMorissImmobilier.new
+    @s = ScraperErnest.new
     @limit = 3
     @s.launch(@limit)
   end

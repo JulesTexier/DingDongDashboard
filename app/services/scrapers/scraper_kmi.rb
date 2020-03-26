@@ -2,13 +2,13 @@ class ScraperKmi < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :click_args, :wait
 
   def initialize
-    @url = "https://www.cabinet-kmi.com/recherche-avancee/page/1?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
+    @url = "https://www.cabinet-kmi.com/recherche-avancee/page/[[PAGE_NUMBER]]?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
     @source = "KMI"
     @main_page_cls = "div.property_listing"
-    @type = "Dynamic"
+    @type = "Static"
     @waiting_cls = "carousel-inner"
-    @multi_page = false
-    @page_nbr = 1
+    @multi_page = true
+    @page_nbr = 6
     @wait = 0
     @click_args = [{ element: "div", values: { class: "order_filter_single" } }, { element: "li", values: { text: "Le plus récent d'abord" } }]
     @properties = []
@@ -49,7 +49,7 @@ class ScraperKmi < Scraper
               img.gsub!("background-image:url(", "").chop!
             end
             @properties.push(hashed_property) ##testing purpose
-            #enrich_then_insert_v2(hashed_property)
+            enrich_then_insert_v2(hashed_property)
             i += 1
             break if i == limit
           end
