@@ -1,12 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SubscribersController, type: :controller do
+  describe "GET #edit" do
+    before do
+      sub = FactoryBot.create(:subscriber_dummy_fb_id)
+      get :edit, params: { id: sub.id }
+    end
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+    it "renders the edit template" do
+      expect(response).to render_template("edit")
+    end
 
-  # describe "GET #edit" do
-  #   it "returns http success" do
-  #     get :edit
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-
+  end
 end
