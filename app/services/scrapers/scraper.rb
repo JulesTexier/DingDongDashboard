@@ -40,6 +40,8 @@ class Scraper
       headless: false,
     }
     browser = Watir::Browser.new :chrome, opts
+    browser.window.resize_to(1920, 1080)
+    browser.window.maximize
     browser.goto url
     sleep wait
     click_those_btns(browser, click_args) unless click_args.nil?
@@ -55,8 +57,8 @@ class Scraper
 
   def click_those_btns(browser, click_args)
     click_args.each do |click_arg|
-      click_this_element(browser, click_arg)
       sleep 1
+      click_this_element(browser, click_arg)
     end
   end
 
@@ -72,6 +74,10 @@ class Scraper
       browser.a(click_arg[:values]).click
     when "span"
       browser.span(click_arg[:values]).click
+    when "option"
+      browser.option(click_arg[:values]).click
+    when "select"
+      browser.select(click_arg[:values]).click
     else
       puts "Error on Click_this_btn"
     end
