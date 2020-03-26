@@ -243,6 +243,7 @@ class Scraper
 
     properties.each do |property|
       response = desc_comparator(property.description, hashed_property[:description])
+      break if response
     end
     return response
   end
