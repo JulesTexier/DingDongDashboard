@@ -1,5 +1,4 @@
 require "dotenv/load"
-require "typhoeus"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
