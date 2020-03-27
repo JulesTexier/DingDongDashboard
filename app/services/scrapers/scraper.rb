@@ -88,11 +88,10 @@ class Scraper
     request = Typhoeus::Request.new(
       url,
       method: :post,
-      headers: http_request[:headers],
-      body: http_request[:body],
+      headers: http_request[0],
+      body: http_request[1]
     )
     request.run
-    byebug
     return Nokogiri::HTML(request.response.body)
   end
 
