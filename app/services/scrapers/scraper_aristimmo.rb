@@ -19,7 +19,6 @@ class ScraperAristimmo < Scraper
   def launch(limit = nil)
     i = 0
     fetch_main_page(self).each do |item|
-      byebug
       begin
         hashed_property = {}
         hashed_property[:link] = "https://www.aristimmo.com" + access_xml_link(item, '.bienTitle > h1 > a','href')[0].to_s
