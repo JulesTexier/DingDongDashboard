@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ScraperKmi, type: :service do
   before(:all) do
     @s = ScraperKmi.new
-    @limit = 3
+    @limit = 2
     @s.launch(@limit)
   end
 
