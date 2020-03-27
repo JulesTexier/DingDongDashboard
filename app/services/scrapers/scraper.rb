@@ -89,7 +89,7 @@ class Scraper
       url,
       method: :post,
       headers: http_request[0],
-      body: http_request[1]
+      body: http_request[1],
     )
     request.run
     return Nokogiri::HTML(request.response.body)
@@ -257,6 +257,7 @@ class Scraper
 
     properties.each do |property|
       response = desc_comparator(property.description, hashed_property[:description])
+      break if response
     end
     return response
   end
