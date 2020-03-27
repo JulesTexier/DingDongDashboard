@@ -21,6 +21,8 @@ class Scraper
         html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
+      when "HTTPRequest"
+        html = fetch_http_page(args.url, args.http_request)
       else
         puts "Error"
       end
@@ -47,6 +49,49 @@ class Scraper
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
     return page
+  end
+
+  def fetch_captcha_page(url)
+    uri = URI("https://app.scrapingbee.com/api/v1/")
+    params = { :api_key => ENV["BEE_API"], :url => url, :premium_proxy => true, :country_code => "us" }
+    uri.query = URI.encode_www_form(params)
+    attempt_count = 0
+    max_attempts = 3
+    begin
+      attempt_count += 1
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
+      res = Net::HTTP.get_response(uri)
+      raise ScrappingBeeError unless res.code == "200"
+    rescue
+      puts "Trying again for #{source} - #{res.code}\n\n"
+      sleep 1
+      retry if attempt_count < max_attempts
+    else
+      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
+      page = Nokogiri::HTML.parse(res.body)
+      return page
+    end
+  end
+
+  def fetch_many_pages(url, page_nbr, xml_first_page)
+    i = 1
+    xml = []
+    page_nbr.times do
+      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
+      i += 1
+    end
+    return xml.flatten
+  end
+
+  def fetch_http_page(url, http_request)
+    request = Typhoeus::Request.new(
+      url,
+      method: :post,
+      headers: http_request[0],
+      body: http_request[1],
+    )
+    request.run
+    return Nokogiri::HTML(request.response.body)
   end
 
   ######################################
@@ -84,38 +129,6 @@ class Scraper
     else
       puts "Error on Click_this_btn"
     end
-  end
-
-  def fetch_captcha_page(url)
-    uri = URI("https://app.scrapingbee.com/api/v1/")
-    params = { :api_key => ENV["BEE_API"], :url => url, :premium_proxy => true, :country_code => "us" }
-    uri.query = URI.encode_www_form(params)
-    attempt_count = 0
-    max_attempts = 3
-    begin
-      attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
-      res = Net::HTTP.get_response(uri)
-      raise ScrappingBeeError unless res.code == "200"
-    rescue
-      puts "Trying again for #{source} - #{res.code}\n\n"
-      sleep 1
-      retry if attempt_count < max_attempts
-    else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
-      page = Nokogiri::HTML.parse(res.body)
-      return page
-    end
-  end
-
-  def fetch_many_pages(url, page_nbr, xml_first_page)
-    i = 1
-    xml = []
-    page_nbr.times do
-      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
-      i += 1
-    end
-    return xml.flatten
   end
 
   ###########################
@@ -243,6 +256,7 @@ class Scraper
 
     properties.each do |property|
       response = desc_comparator(property.description, hashed_property[:description])
+      break if response
     end
     return response
   end

@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe ScraperKmi, type: :service do
+RSpec.describe ScraperAristimmo, type: :service do
   before(:all) do
-    @s = ScraperKmi.new
-    @limit = 2
+    @s = ScraperAristimmo.new
+    @limit = 3
     @s.launch(@limit)
   end
 
