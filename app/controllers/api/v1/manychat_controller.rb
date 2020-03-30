@@ -10,7 +10,6 @@ class Api::V1::ManychatController < ApplicationController
 
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
   def update_subscriber
-    byebug
     begin
       subscriber = Subscriber.find(subscriber_params[:subscriber_id])
       if subscriber.update(subscriber_params.except(:subscriber_id, :message))
