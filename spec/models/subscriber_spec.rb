@@ -15,8 +15,8 @@ RSpec.describe Subscriber, type: :model do
           should validate_uniqueness_of(:facebook_id).case_insensitive
           should validate_presence_of(:facebook_id)
           should validate_presence_of(:firstname)
-          should validate_presence_of(:email)
-          should validate_presence_of(:phone)
+          # should validate_presence_of(:email)
+          # should validate_presence_of(:phone)
         end
       end
 
