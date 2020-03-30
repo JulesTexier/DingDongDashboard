@@ -22,7 +22,7 @@ class ScraperLogicImmo < Scraper
         hashed_property[:area] = regex_gen(access_xml_text(item, "div.offer-details-location"), '(75)$*\d+{3}')
         hashed_property[:rooms_number] = access_xml_text(item, "div.offer-details-caracteristik > a > span.offer-details-caracteristik--rooms > span").to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.offer-details-price > p.offer-price > span"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.unstyled.flex").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.offer-description-text").specific_trim_scrp("\n").gsub("Être rappelé", "").gsub("Demander une visite", "").gsub("Obtenir l'adresse", "").strip

@@ -25,7 +25,7 @@ class ScraperIad < Scraper
         hashed_property[:rooms_number] = access_xml_text(item, ".c-offer__footer.row > div:nth-child(2)").strip.to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, ".c-offer__price").strip, '(\d)(.*)(€)').to_int_scrp
 
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, ".offer__description > p").strip
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, ".offer__information-2").strip.gsub(" ", "").gsub(/[^[:print:]]/, ""), 'chambre(s?)(\d)*').to_int_scrp
