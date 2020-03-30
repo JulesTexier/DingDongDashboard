@@ -23,7 +23,7 @@ class ScraperOrpi < Scraper
         hashed_property[:area] = "750" + access_xml_text(item, "p.u-mt-sm").tr("^0-9", "")
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "a.u-link-unstyled.c-overlay__link"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div:nth-child(1) > div:nth-child(2)"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "div#collapse-details-panel").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.o-container > p:nth-child(2)").specific_trim_scrp("\n\r").strip

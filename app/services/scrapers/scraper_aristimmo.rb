@@ -1,4 +1,4 @@
-require 'typhoeus'
+require "typhoeus"
 
 class ScraperAristimmo < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request
@@ -12,8 +12,7 @@ class ScraperAristimmo < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
-    @http_request =  [{}, {"Sort[field]" => "dateenr", "Sort[order]" => "ASC"}]
-
+    @http_request = [{}, { "Sort[field]" => "dateenr", "Sort[order]" => "ASC" }]
   end
 
   def launch(limit = nil)
@@ -21,31 +20,31 @@ class ScraperAristimmo < Scraper
     fetch_main_page(self).each do |item|
       begin
         hashed_property = {}
-        hashed_property[:link] = "https://www.aristimmo.com" + access_xml_link(item, '.bienTitle > h1 > a','href')[0].to_s
-        title = access_xml_text(item, '.bienTitle > h2').strip.gsub(' ','').gsub(/[^[:print:]]/, "")
+        hashed_property[:link] = "https://www.aristimmo.com" + access_xml_link(item, ".bienTitle > h1 > a", "href")[0].to_s
+        title = access_xml_text(item, ".bienTitle > h2").strip.gsub(" ", "").gsub(/[^[:print:]]/, "")
         hashed_property[:surface] = regex_gen(title, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = regex_gen(title, '(75)$*\d+{3}')
         hashed_property[:rooms_number] = regex_gen(title, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = item.at("//span[@itemprop = 'price']").children[0].to_s.to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          details = access_xml_text(html, '#dataContent').strip.gsub(' ','').gsub(/[^[:print:]]/, "")
+          details = access_xml_text(html, "#dataContent").strip.gsub(" ", "").gsub(/[^[:print:]]/, "")
           hashed_property[:bedrooms_number] = regex_gen(details, '(chambre\(s\))(\d+)').to_int_scrp
           hashed_property[:description] = html.at("//p[@itemprop = 'description']").children[0].to_s
           hashed_property[:flat_type] = get_type_flat(title)
           hashed_property[:agency_name] = @source
           hashed_property[:floor] = regex_gen(details, '(Etage)(\d+)').to_int_scrp
           hashed_property[:has_elevator] = nil
-          elevator_raw = regex_gen(details, 'Ascenseur(OUI|NON)').gsub('Ascenseur', '')
-          elevator_raw == 'OUI' ? hashed_property[:has_elevator] = true : nil 
-          elevator_raw == 'NON' ? hashed_property[:has_elevator] = false : nil 
+          elevator_raw = regex_gen(details, "Ascenseur(OUI|NON)").gsub("Ascenseur", "")
+          elevator_raw == "OUI" ? hashed_property[:has_elevator] = true : nil
+          elevator_raw == "NON" ? hashed_property[:has_elevator] = false : nil
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
           hashed_property[:images] = []
-          raw_images = access_xml_link(html, '.imageGallery> li > img', 'src')
+          raw_images = access_xml_link(html, ".imageGallery> li > img", "src")
           raw_images.each do |img|
-            hashed_property[:images].push('https:' + img)
+            hashed_property[:images].push("https:" + img)
           end
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)

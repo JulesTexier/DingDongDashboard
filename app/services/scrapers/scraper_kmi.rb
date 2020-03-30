@@ -34,7 +34,7 @@ class ScraperKmi < Scraper
             end
           end
 
-          if is_property_clean(hashed_property)
+          if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div#description").tr("\n\t", "").strip
             hashed_property[:flat_type] = regex_gen(access_xml_text(html, "div.property_categs"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
