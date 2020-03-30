@@ -234,6 +234,62 @@ class Scraper
   ## PUBLIC DATABASE METHODS ##
   #############################
 
+  ## On fait plusieurs check à la suite pour déterminer si une property vue en main_page
+  ## mérite d'aller en sa show, par soucis de performance
+  def go_to_prop?(prop, time)
+    if !is_prop_fake?(prop) ## on check si la property n'est pas une prop de merde (>5000m2, arnaque, garage, province)
+      if is_link_in_db?(prop[:link]) ## on check si la prop est en base avec son lien
+        false ## on ne va pas dans le show car on est sûr de l'avoir en base
+      else ## elle n'existe pas donc on va regarder avec son triptique
+        filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## on garde que les arguments non nil du quadruplé
+        if filtered_prop.length > 2 ## on vérifie qu'on a au moins 3 arguments
+          if !does_prop_exists?(filtered_prop, time) ## on a assez d'argument donc on va voir si elle existe
+            true ## ON VA DANS LA SHOOOOW
+          end
+        else ## pas assez d'argument pour tester on va checker la show
+          true
+        end
+      end
+    else
+      false ## la prop est fake donc on ne va pas dans la show
+    end
+  end
+
+  def does_prop_exists?(prop, time)
+    props = Property.where(
+      prop,
+      "created_at >= :time",
+      :time => Time.now - time.days,
+    )
+    if props.count == 0
+      false ## aucun match
+    else
+      true ## on a un match dans notre periode de temps (time), on considère que c'est la même
+    end
+  end
+
+  def is_link_in_db?(link)
+    props = Property.where(link: link)
+    if props.count == 0
+      false ## pas de property avec ce lien en bdd
+    else
+      true ## on a un match de property avec ce lien
+    end
+  end
+
+  def is_prop_fake?(prop)
+    if !prop[:price].nil? && prop[:price] != 0 && !prop[:surface].nil? && prop[:surface] != 0
+      sqm = prop[:price] / prop[:surface]
+      if sqm < 5000
+        true ## this property is fake
+      else
+        false ## this property is not fake
+      end
+    else
+      true ## not enough informations, it shouldnt be processed
+    end
+  end
+
   def is_already_exists_by_time(hashed_property)
     response = false
     properties = Property.where(hashed_property.except(:link)).where(
@@ -286,9 +342,9 @@ class Scraper
 
   def is_it_night?
     response = false
-    a = Time.parse("22:00:00 +0100")
-    b = Time.parse("09:00:00 +0100")
-    c = Time.now.getlocal("+01:00")
+    a = Time.parse("22:00:00 +0200")
+    b = Time.parse("09:00:00 +0200")
+    c = Time.now.getlocal("+02:00")
     if c > a || c < b
       response = true
     end
