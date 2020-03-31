@@ -208,10 +208,10 @@ class Manychat
     properties.length > 9 ? properties = properties[0..8] : nil
 
     elements = []
-    elements.push(create_header_gallery_element_new_properties(properties.length)) if template === "new_properties"
-    elements.push(create_header_gallery_element_last_properties(properties.length)) if template === "last_properties"
+    elements.push(create_header_gallery_element_new_properties(properties.length)) if template == "new_properties"
+    elements.push(create_header_gallery_element_last_properties(properties.length)) if template == "last_properties"
     properties.each do |property|
-      template === "morning_properties" || "last_properties" ? direct_link = true : direct_link = false
+      template == "morning_properties" || "last_properties" ? direct_link = true : direct_link = false
       elements.push(create_property_element(property, subscriber, direct_link))
     end
 

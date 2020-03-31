@@ -22,7 +22,7 @@ class ScraperGuyHoquet < Scraper
         hashed_property[:rooms_number] = access_xml_text(item, "div.actions > span:nth-child(1)").to_float_to_int_scrp
         hashed_property[:surface] = regex_gen(access_xml_text(item, "div.actions > span:nth-child(2)"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.price"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:area] = regex_gen(html.text, '(75)$*\d+{3}')
           hashed_property[:description] = access_xml_text(html, "span.description-more").strip
@@ -43,6 +43,7 @@ class ScraperGuyHoquet < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
+        puts e.message
         next
       end
     end

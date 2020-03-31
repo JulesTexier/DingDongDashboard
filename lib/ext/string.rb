@@ -152,6 +152,8 @@ class String
       return "750#{self}"
     elsif self.length == 1
       return "7500#{self}"
+    else
+      return "N/C"
     end
   end
 

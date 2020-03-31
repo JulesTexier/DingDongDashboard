@@ -23,7 +23,7 @@ class ScraperLaResidence < Scraper
         hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, ".vignetteBienTexte"), '(\d+)(.?)(chambre(s?))').to_float_to_int_scrp
         hashed_property[:rooms_number] = hashed_property[:bedrooms_number] + 1
         hashed_property[:price] = access_xml_text(item, ".vignetteBienPrixFAI").to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:rooms_number] = regex_gen(access_xml_text(html, ".ficheAffaireWrapper> h1").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           if hashed_property[:rooms_number] == 1

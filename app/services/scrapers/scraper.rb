@@ -2,7 +2,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !is_already_exists_by_desc(hashed_property)
+    if !is_already_exists_by_desc?(hashed_property)
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     end
@@ -21,6 +21,8 @@ class Scraper
         html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
+      when "HTTPRequest"
+        html = fetch_http_page(args.url, args.http_request)
       else
         puts "Error"
       end
@@ -47,6 +49,58 @@ class Scraper
     page = Nokogiri::HTML.parse(browser.html)
     browser.close
     return page
+  end
+
+  def fetch_captcha_page(url)
+    uri = URI("https://app.scrapingbee.com/api/v1/")
+    params = { :api_key => ENV["BEE_API"], :url => url, :premium_proxy => true, :country_code => "us" }
+    uri.query = URI.encode_www_form(params)
+    attempt_count = 0
+    max_attempts = 3
+    begin
+      attempt_count += 1
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
+      res = Net::HTTP.get_response(uri)
+      raise ScrappingBeeError unless res.code == "200"
+    rescue
+      puts "Trying again for #{source} - #{res.code}\n\n"
+      sleep 1
+      retry if attempt_count < max_attempts
+    else
+      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
+      page = Nokogiri::HTML.parse(res.body)
+      return page
+    end
+  end
+
+  def fetch_many_pages(url, page_nbr, xml_first_page)
+    i = 1
+    xml = []
+    page_nbr.times do
+      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
+      i += 1
+    end
+    return xml.flatten
+  end
+
+  def fetch_http_page(url, http_request)
+    request = Typhoeus::Request.new(
+      url,
+      method: :post,
+      headers: http_request[0],
+      body: http_request[1],
+    )
+    request.run
+    return Nokogiri::HTML(request.response.body)
+  end
+
+  def fetch_json(args)
+    request = Typhoeus::Request.new(
+      args.url,
+      method: :get,
+    )
+    response = request.run
+    return JSON.parse(response.body)
   end
 
   ######################################
@@ -84,38 +138,6 @@ class Scraper
     else
       puts "Error on Click_this_btn"
     end
-  end
-
-  def fetch_captcha_page(url)
-    uri = URI("https://app.scrapingbee.com/api/v1/")
-    params = { :api_key => ENV["BEE_API"], :url => url, :premium_proxy => true, :country_code => "us" }
-    uri.query = URI.encode_www_form(params)
-    attempt_count = 0
-    max_attempts = 3
-    begin
-      attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
-      res = Net::HTTP.get_response(uri)
-      raise ScrappingBeeError unless res.code == "200"
-    rescue
-      puts "Trying again for #{source} - #{res.code}\n\n"
-      sleep 1
-      retry if attempt_count < max_attempts
-    else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
-      page = Nokogiri::HTML.parse(res.body)
-      return page
-    end
-  end
-
-  def fetch_many_pages(url, page_nbr, xml_first_page)
-    i = 1
-    xml = []
-    page_nbr.times do
-      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
-      i += 1
-    end
-    return xml.flatten
   end
 
   ###########################
@@ -221,17 +243,45 @@ class Scraper
   ## PUBLIC DATABASE METHODS ##
   #############################
 
-  def is_already_exists_by_time(hashed_property)
-    response = false
-    properties = Property.where(hashed_property.except(:link)).where(
-      "created_at >= :seven",
-      :seven => Time.now - 7.days,
-    )
-    response = true if properties.length > 0
-    return response
+  ## On fait plusieurs check à la suite pour déterminer si une property vue en main_page
+  ## mérite d'aller en sa show, par soucis de performance
+  def go_to_prop?(prop, time)
+    if !is_prop_fake?(prop) ## on check si la property n'est pas une prop de merde (>5000m2, arnaque, garage, province)
+      if is_link_in_db?(prop) ## on check si la prop est en base avec son lien
+        false ## on ne va pas dans le show car on est sûr de l'avoir en base
+      else ## elle n'existe pas donc on va regarder avec son triptique
+        filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## on garde que les arguments non nil du quadruplé
+        if filtered_prop.length > 2 ## on vérifie qu'on a au moins 3 arguments
+          does_prop_exists?(filtered_prop, time) ? false : true ## on ne va pas dans la show si la prop existe, sinon on y va enfin
+        else ## pas assez d'argument pour tester donc au revoir
+          false
+        end
+      end
+    else
+      false ## la prop est fake donc on ne va pas dans la show
+    end
   end
 
-  def is_already_exists_by_desc(hashed_property)
+  def does_prop_exists?(prop, time)
+    props = Property.where(prop).where("created_at >= ?", time.days.ago)
+    props.count == 0 ? false : true
+  end
+
+  def is_link_in_db?(prop)
+    props = Property.where(link: prop[:link].strip)
+    props.count == 0 ? false : true
+  end
+
+  def is_prop_fake?(prop)
+    if !prop[:price].nil? && prop[:price].to_i != 0 && !prop[:surface].nil? && prop[:surface].to_i != 0
+      sqm = prop[:price].to_i / prop[:surface].to_i
+      sqm < 5000 ? true : false
+    else
+      true ## not enough informations, it shouldnt be processed
+    end
+  end
+
+  def is_already_exists_by_desc?(hashed_property)
     response = false
 
     properties = Property.where(
@@ -243,43 +293,25 @@ class Scraper
 
     properties.each do |property|
       response = desc_comparator(property.description, hashed_property[:description])
+      break if response
     end
     return response
-  end
-
-  def is_already_exists_by_link(link)
-    response = false
-    prop_by_link = Property.where(link: link)
-    response = true if prop_by_link.length > 0
-    return response
-  end
-
-  def is_dirty_property(hashed_property)
-    response = false
-    if !hashed_property[:price].nil? && !hashed_property[:surface].nil? && hashed_property[:surface] != 0
-      sqm = hashed_property[:price].to_i / hashed_property[:surface].to_i
-      if sqm < 5000
-        response = true
-      end
-    end
-    response = true if hashed_property[:link].to_s.strip.empty?
-    return response
-  end
-
-  def is_property_clean(hashed_property)
-    is_already_exists_by_time(hashed_property) || is_dirty_property(hashed_property) || is_already_exists_by_link(hashed_property[:link]) ? false : true
   end
 
   def is_it_night?
     response = false
-    a = Time.parse("22:00:00 +0100")
-    b = Time.parse("09:00:00 +0100")
-    c = Time.now.getlocal("+01:00")
+    a = Time.parse("22:00:00 +0200")
+    b = Time.parse("09:00:00 +0200")
+    c = Time.now.getlocal("+02:00")
     if c > a || c < b
       response = true
     end
     return response
   end
+
+  #############################
+  ## ALGORYTHMIC DESCRIPTION ##
+  #############################
 
   def desc_comparator(desc, desc_to_compare)
     response = false
@@ -294,8 +326,8 @@ class Scraper
         short_string = str2
         long_string = str1
       end
-      if min > 50
-        min = 50
+      if min > 45
+        min = 45
         x = short_string.length - min
       else
         x = short_string.length - min + 1
