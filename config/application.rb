@@ -24,5 +24,8 @@ module GiantCat
       "#{Rails.root}/app/services/broadcasters",
       "#{Rails.root}/app/services/scrapers"
     ]
+
+    config.active_job.queue_adapter = :sidekiq
+
   end
 end
