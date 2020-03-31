@@ -56,6 +56,8 @@ namespace :scraper do
     ScraperParisMontmartreImmobilier.new.launch
     ScraperLaResidence.new.launch
     ScraperArcales.new.launch
+    ScraperHosman.new.launch
+    ScraperStephanePlaza.new.launch
     ScraperIad.new.launch
     ScraperProprioo.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
