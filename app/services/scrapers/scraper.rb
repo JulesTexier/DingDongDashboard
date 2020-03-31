@@ -94,6 +94,15 @@ class Scraper
     return Nokogiri::HTML(request.response.body)
   end
 
+  def fetch_json(args)
+    request = Typhoeus::Request.new(
+      args.url,
+      method: :get,
+    )
+    response = request.run
+    return JSON.parse(response.body)
+  end
+
   ######################################
   ## WATIR INTERACTIVE CLICKS METHODS ##
   ######################################
