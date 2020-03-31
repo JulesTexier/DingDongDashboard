@@ -2,9 +2,10 @@ class ScrapSmallSitesWorker
   include Sidekiq::Worker
 
   def perform(klass)
-    puts klass
     scraper = klass.constantize.new
-    puts scraper
+    puts "----"
+    puts "Starting to scrap new properties from #{scraper.source} website"
+    puts "----"
     scraper.launch
   end
 
