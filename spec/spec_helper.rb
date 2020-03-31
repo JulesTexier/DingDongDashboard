@@ -14,6 +14,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "rspec/retry"
+require "webmock/rspec"
+require "vcr"
+
+VCR.configure do |config|
+  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.hook_into :webmock # or :fakeweb
+  config.allow_http_connections_when_no_cassette = true
+end
 
 RSpec.configure do |config|
   config.verbose_retry = true
