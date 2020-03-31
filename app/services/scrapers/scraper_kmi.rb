@@ -49,8 +49,6 @@ class ScraperKmi < Scraper
             hashed_property[:images].each do |img|
               img.gsub!("background-image:url(", "").chop!
             end
-            puts hashed_property
-            puts "*" * 100
             @properties.push(hashed_property) ##testing purpose
             enrich_then_insert_v2(hashed_property)
             i += 1
