@@ -41,10 +41,8 @@ namespace :scraper do
     puts "Launching Small Shitty Website Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-
     ScraperProprietesFigaro.new.launch
     ScraperMorissImmobilier.new.launch
-    ScraperGuyHoquet.new.launch
     ScraperFoncia.new.launch
     ScraperKmi.new.launch
     ScraperImax.new.launch
