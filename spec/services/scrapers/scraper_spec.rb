@@ -1,124 +1,151 @@
 require "rails_helper"
 
 RSpec.describe Scraper, type: :service do
-  describe "PUBLIC_DATABASE_METHODS" do
-    before(:each) do
-      @s = Scraper.new
-
-      ## ALREADY EXISTS LOGICS
-      @old_property = FactoryBot.create(:property, created_at: Time.now - 25.days, price: 600000, surface: 60)
-
-      ## Example for Old_property insertion with already_exists methods and same link
-      ## This property is the same as @old_property, but should not be inserted in database
-      ## Because it has the same link, the same description and the same attributes basically
-      ## Even if @old_property has been inserted a long time ago
-      @c = {}
-      @c[:link] = "https://hellodingdong.com"
-      @c[:rooms_number] = 2
-      @c[:price] = 600000
-      @c[:area] = "75018"
-      @c[:surface] = 60
-      @c[:description] = "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets, moulures, cheminée. 1er étage vue sur l’église. À rafraichir. EXCLUSIVITÉ ACOPA."
-
-      ## Counter example for description and different links
-      ## This property is the same as @old_property, but the link, the description and the TimeFrame is different
-      ## So it can insert the database
-      @d = {}
-      @d[:link] = "https://hellodingdong.com/ici_cest_un_nouveau_lien"
-      @d[:rooms_number] = 2
-      @d[:price] = 600000
-      @d[:area] = "75018"
-      @d[:surface] = 60
-      @d[:description] = "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets."
-
-      ## This property is slightly different, the description is way more different so unfortunately it should pass and be inserted
-      @e = {}
-      @e[:link] = "https://hellodingdong.com/ici_cest_un_nouveau_lien"
-      @e[:rooms_number] = 2
-      @e[:price] = 600000
-      @e[:area] = "75018"
-      @e[:surface] = 60
-      @e[:description] = "A 51 yards de Jules Joffrin, je suis un agent qui casse les couilles, j'adore l'immobilier"
-
-      ## Already Exists Hash for generic purposes
-      FactoryBot.create(:subway)
-      @property = FactoryBot.create(:property)
-
-      @already_existing_property = {}
-      @already_existing_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-azejznakjeha"
-      @already_existing_property[:rooms_number] = 2
-      @already_existing_property[:price] = 301000
-      @already_existing_property[:area] = "75018"
-      @already_existing_property[:surface] = 46
-
-      @new_property = {}
-      @new_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
-      @new_property[:rooms_number] = 3
-      @new_property[:price] = 411000
-      @new_property[:area] = "75015"
-      @new_property[:surface] = 46
-
-      @shit_property = {}
-      @shit_property[:link] = "https://superimmo.com/annonces/achat-appartement-46m-paris-18eme-75018-xj51qh"
-      @shit_property[:rooms_number] = 3
-      @shit_property[:price] = 411000
-      @shit_property[:area] = "75015"
-      @shit_property[:surface] = 1600
+  describe "PUBLIC_DATABASE_METHODS UPDATED" do
+    context "Testing is_prop_fake?(prop) to see if there is pb with the property without checking DB" do
+      before(:all) do
+        @s = Scraper.new
+      end
+      it "should return true if price is 0 and surface nil" do
+        expect(@s.is_prop_fake?({ price: 0, surface: nil })).to eq(true)
+      end
+      it "should return true if each attributes is equal to 0 and random integer respectively" do
+        expect(@s.is_prop_fake?({ price: 0, surface: 20 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 20, surface: 0 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 0 })).to eq(true)
+      end
+      it "should return true if each attributes is string and not integer" do
+        expect(@s.is_prop_fake?({ price: "0", surface: "20" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "20", surface: "0" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "0", surface: "0" })).to eq(true)
+      end
+      it "should return true if price is nil and surface nil" do
+        expect(@s.is_prop_fake?({ price: nil, surface: nil })).to eq(true)
+      end
+      it "should return true if we try to divide with or by 0" do
+        expect(@s.is_prop_fake?({ price: 3000000, surface: 0 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 230 })).to eq(true)
+      end
+      it "should return true if the €/m2 is under 5000" do
+        expect(@s.is_prop_fake?({ price: 20000, surface: 20 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 2000000, surface: 2000 })).to eq(true)
+      end
+      it "should return false if the €/m2 is over 5000, so the test pass" do
+        expect(@s.is_prop_fake?({ price: 400000, surface: 20 })).to eq(false)
+      end
     end
 
-    context "is_already_exists + is_property_clean + is_dirty_property with 3 differents cases" do
-      ##On veut tester si une property scrapé a été insérée en base il y a 10 jours
-      it "is already created but 10 days ago, therefor should return false" do
-        expect(@s.is_already_exists_by_time(@c)).to eq(false)
+    context "Testing is_link_in_db?(prop) to see if the property already exists in DB by its link" do
+      before(:all) do
+        @s = Scraper.new
+        FactoryBot.create(:property, link: "https://google.com")
       end
 
-      it "is already created in base, 10 days ago, but should return true because it is the same link" do
-        expect(@s.is_already_exists_by_link(@c[:link])).to eq(true)
-        expect(@s.is_already_exists_by_link(@d[:link])).to eq(false)
+      it "should return true because it already exists" do
+        expect(@s.is_link_in_db?({ :link => "https://google.com" })).to eq(true)
+        expect(@s.is_link_in_db?({ :link => "https://google.com    " })).to eq(true)
+        expect(@s.is_link_in_db?({ :link => "            https://google.com    " })).to eq(true)
       end
 
-      it "has the same description as a property already created so it should return true" do
-        expect(@s.is_already_exists_by_desc(@c)).to eq(true)
-        expect(@s.is_already_exists_by_desc(@d)).to eq(true)
+      it "should return false because the link is different" do
+        expect(@s.is_link_in_db?({ :link => "https://google.com/lmao" })).to eq(false)
+        expect(@s.is_link_in_db?({ :link => "https://lmfao.com" })).to eq(false)
+        expect(@s.is_link_in_db?({ :link => "htps://lmfao.com" })).to eq(false)
+      end
+    end
+
+    context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
+      before(:each) do
+        @s = Scraper.new
+        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @prop = { area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
       end
 
-      it "is the same property but is in of our validator range but can't be inserted because of description likeness" do
+      it "should return true because the two properties are the same" do
+        expect(@s.does_prop_exists?(@prop.except(:area), 7)).to eq(true)
+        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 7)).to eq(true)
+        expect(@s.does_prop_exists?(@prop.except(:surface), 7)).to eq(true)
+        expect(@s.does_prop_exists?(@prop.except(:price), 7)).to eq(true)
+      end
+
+      it "should return false because the two properties are the same, but the timeframe is outside the property created_at" do
+        expect(@s.does_prop_exists?(@prop, 3)).to eq(false)
+        expect(@s.does_prop_exists?(@prop, 4)).to eq(false)
+        expect(@s.does_prop_exists?(@prop, 6)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:area), 3)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:area), 4)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:area), 6)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 3)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 4)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 6)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:price), 3)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:price), 4)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:price), 6)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:surface), 3)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:surface), 4)).to eq(false)
+        expect(@s.does_prop_exists?(@prop.except(:surface), 6)).to eq(false)
+      end
+    end
+
+    context "Testing go_to_prop?(prop, time)" do
+      before(:each) do
+        @s = Scraper.new
+        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+      end
+
+      it "should return false because @prop is the same as a property inside DB" do
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+      end
+
+      it "should return false because price or surface is nil or equal to 0" do
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: nil, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: 0, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 0, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: "23", price: "0", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: "400000", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+      end
+
+      it "should return false because link is the same has a property inside DB" do
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "     https://google.com    " }, 7)).to eq(false)
+      end
+
+      it "should return true because the property isnt the same, and the timeframe is out of reach of property inside DB and link is different but arguments are the same" do
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 5)).to eq(true)
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 4)).to eq(true)
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 3)).to eq(true)
+      end
+
+      it "should return true because price is different and therefore link is different and out of timeframe" do
+        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 390000, rooms_number: 1, link: "https://google.com/new_link/" }, 7)).to eq(true)
+      end
+    end
+
+    context "Testing desc_comparator" do
+      before(:each) do
+        @s = Scraper.new
+        @old_property = FactoryBot.create(:property, created_at: Time.now - 25.days, price: 600000, surface: 60)
+        @c = { description: "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets, moulures, cheminée. 1er étage vue sur l’église. À rafraichir. EXCLUSIVITÉ ACOPA." }
+        @d = { description: "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets." }
+        @e = { description: "A 51 yards de Jules Joffrin, je suis un agent qui casse les couilles, j'adore l'immobilier" }
+      end
+
+      it "is the same property but is in of our validator range but can't be inserted because of description similarities" do
         expect(@s.desc_comparator(@d[:description], @old_property.description)).to eq(true)
-        expect(@s.is_property_clean(@d)).to eq(true)
-        expect(@s.is_already_exists_by_desc(@d)).to eq(true)
-      end
-
-      it "is the same property but is inside our validator range" do
-        expect(@s.is_property_clean(@c)).to eq(false)
       end
 
       it "is a different property but with the sames attributes, therefor can be inserted" do
-        expect(@s.is_property_clean(@e)).to eq(true)
-        expect(@s.is_already_exists_by_desc(@e)).to eq(false)
         expect(@s.desc_comparator(@e[:description], @old_property.description)).to eq(false)
       end
 
-      it "shoud be a true false methods" do
-        expect(@s.is_already_exists_by_time(@already_existing_property)).to be_in([true, false])
-        expect(@s.is_dirty_property(@already_existing_property)).to be_in([true, false])
-        expect(@s.is_property_clean(@already_existing_property)).to be_in([true, false])
+      it "should return true because the descriptions are the same" do
+        expect(@s.desc_comparator(@c[:description], @d[:description])).to eq(true)
       end
 
-      it "should return true for already_existing_property and false for new_property" do
-        expect(@s.is_already_exists_by_time(@already_existing_property)).to eq(true)
-        expect(@s.is_already_exists_by_time(@new_property)).to eq(false)
-      end
-
-      it "should return false for new and already existing prop, a true for shit property" do
-        expect(@s.is_dirty_property(@already_existing_property)).to eq(false)
-        expect(@s.is_dirty_property(@new_property)).to eq(false)
-        expect(@s.is_dirty_property(@shit_property)).to eq(true)
-      end
-
-      it "should be true for new property, false for already existing and shit property" do
-        expect(@s.is_property_clean(@already_existing_property)).to eq(false)
-        expect(@s.is_property_clean(@shit_property)).to eq(false)
-        expect(@s.is_property_clean(@new_property)).to eq(true)
+      it "should return false because the descriptions arnt the same" do
+        expect(@s.desc_comparator(@d[:description], @e[:description])).to eq(false)
       end
     end
   end

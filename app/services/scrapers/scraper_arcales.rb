@@ -24,7 +24,7 @@ class ScraperArcales < Scraper
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-xs-12.col-sm-5.panel-heading > ul > li:nth-child(2) > span:nth-child(2) > span:nth-child(1)"), '(\d)(.*)').to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "div.mainContent > div:nth-child(2) > div:nth-child(1) > p").strip
           hashed_property[:agency_name] = "Arcales"

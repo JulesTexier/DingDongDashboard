@@ -22,7 +22,7 @@ class ScraperPap < Scraper
         hashed_property[:area] = regex_gen(access_xml_text(item, "div.col-right > p.item-description"), '(75)$*\d+{3}')
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-right > a.item-title > span.item-price"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.item-tags.margin-bottom-20").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.item-description").specific_trim_scrp("\n\t\r").strip
