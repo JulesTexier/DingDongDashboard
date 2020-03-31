@@ -82,6 +82,8 @@ group :test do
   gem "database_cleaner-active_record"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
+  gem "webmock"
+  gem "vcr"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
