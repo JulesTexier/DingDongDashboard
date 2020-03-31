@@ -4,18 +4,20 @@ RSpec.describe ScraperEngelVoelkers, type: :service do
   before(:all) do
     @s = ScraperEngelVoelkers.new
     @limit = 3
-    @s.launch(@limit)
   end
 
-  it "should return an number of scraped properties" do
+  it "should launch and return proper number of properties" do
+    VCR.use_cassette("engel_voelkers") do
+      expect(@s.launch(@limit)).to be_a(Array)
+      expect(Property.where(source: @s.source).count).to be == @limit
+    end
+  end
+
+  it "should return array with proper number of properties" do
     expect(@s.properties.count).to be == @limit
   end
 
-  it "should return a count of 3 property with its source inside database" do
-    expect(Property.where(source: @s.source).count).to be === @limit
-  end
-
-  it "should return an array of hashes" do
+  it "should return the right keys" do
     properties = @s.properties
     properties.each do |property|
       expect(property).to have_key(:has_elevator)
@@ -29,7 +31,7 @@ RSpec.describe ScraperEngelVoelkers, type: :service do
     end
   end
 
-  it "should return an hash with specific type of data" do
+  it "should return proper class for each keys" do
     properties = @s.properties
     properties.each do |property|
       expect(property[:has_elevator]).to be_in([true, false, nil])
