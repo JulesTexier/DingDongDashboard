@@ -20,7 +20,7 @@ class ScraperImmobilierSurMesure < Scraper
           hashed_property[:surface] = regex_gen(access_xml_text(item, "a > p:nth-child(3)"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "a > p:nth-child(2)"), '(\d)(.*)').to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "a > p:nth-child(4)"), '(Pi(è|e)ce(s?) :)(.?)(\d+)').tr("^0-9", "").to_float_to_int_scrp
-          if is_property_clean(hashed_property)
+          if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = regex_gen(access_xml_text(html, "div.infos-long > h2"), '(\d+)').district_generator
             hashed_property[:description] = access_xml_text(html, ".text-bien > p").strip
