@@ -84,13 +84,13 @@ class String
     return lift
   end
 
-  def district_generator
-    if self.length == 2
-      return "750#{self}"
-    elsif self.length == 1
-      return "7500#{self}"
-    end
-  end
+  # def district_generator
+  #   if self.length == 2
+  #     return "750#{self}"
+  #   elsif self.length == 1
+  #     return "7500#{self}"
+  #   end
+  # end
 
   ################################################
   ## TRANSLATE AREA, MAINLY FOR MEILLEURSAGENTS ##
@@ -152,6 +152,8 @@ class String
       return "750#{self}"
     elsif self.length == 1
       return "7500#{self}"
+    else
+      return "N/C"
     end
   end
 

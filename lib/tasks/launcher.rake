@@ -44,7 +44,6 @@ namespace :scraper do
 
     # ScraperProprietesFigaro.new.launch
     # ScraperMorissImmobilier.new.launch
-    # ScraperGuyHoquet.new.launch
     # ScraperFoncia.new.launch
     # ScraperKmi.new.launch
     # ScraperImax.new.launch
@@ -58,7 +57,13 @@ namespace :scraper do
     # ScraperParisMontmartreImmobilier.new.launch
     # ScraperLaResidence.new.launch
     # ScraperArcales.new.launch
+    # ScraperEngelVoelkers.new.launch
+    # ScraperHosman.new.launch
+    # ScraperStephanePlaza.new.launch
+    # ScraperIad.new.launch
+    # ScraperProprioo.new.launch
     ScraperImmobilierSurMesure.new.launch
+
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end

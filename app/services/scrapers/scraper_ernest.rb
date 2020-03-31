@@ -23,7 +23,7 @@ class ScraperErnest < Scraper
         hashed_property[:area] = access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a").area_translator_scrp
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".description_annonce"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = access_xml_text(item, ".content_liste_prix").strip.to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           card = access_xml_text(html, "#content_details")
           hashed_property[:surface] = regex_gen(card, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp if hashed_property[:surface] == 0
