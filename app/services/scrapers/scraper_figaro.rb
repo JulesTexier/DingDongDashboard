@@ -55,5 +55,6 @@ class ScraperFigaro < Scraper
         next
       end
     end
+    return @properties
   end
 end
