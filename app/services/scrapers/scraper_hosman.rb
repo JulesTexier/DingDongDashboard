@@ -23,10 +23,10 @@ class ScraperHosman < Scraper
         hashed_property[:rooms_number] = property["room_number"]
         hashed_property[:price] = property["sale"]["price"]
         hashed_property[:floor] = property["floor"]
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          hashed_property[:description] = access_xml_text(html, 'div.container:nth-child(2)').strip.gsub("l\'oeil de l'expert","").gsub(/[^[:print:]]/, "").gsub('\n','')
-          hashed_property[:flat_type] =  get_type_flat(hashed_property[:description])
+          hashed_property[:description] = access_xml_text(html, "div.container:nth-child(2)").strip.gsub("l\'oeil de l'expert", "").gsub(/[^[:print:]]/, "").gsub('\n', "")
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
           hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:agency_name] = @source
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
@@ -47,6 +47,4 @@ class ScraperHosman < Scraper
     end
     return @properties
   end
-  
-
 end

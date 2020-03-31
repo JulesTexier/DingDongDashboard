@@ -19,23 +19,23 @@ class ScraperStephanePlaza < Scraper
       begin
         hashed_property = {}
         hashed_property[:link] = "https://www.stephaneplazaimmobilier.com/immobilier-acheter/" + property["id"].to_s + "/" + property["slug"].to_s + "?token=" + token
-        hashed_property[:surface] = regex_gen(property["properties"]["surface"] , '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = property["properties"]["codePostal"] 
-        hashed_property[:rooms_number] = property["properties"]["room"] 
+        hashed_property[:surface] = regex_gen(property["properties"]["surface"], '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
+        hashed_property[:area] = property["properties"]["codePostal"]
+        hashed_property[:rooms_number] = property["properties"]["room"]
         hashed_property[:price] = property["price"].to_int_scrp
-        if is_property_clean(hashed_property)
-          hashed_property[:bedrooms_number] = property["properties"]["bedroom"] 
+        if go_to_prop?(hashed_property, 7)
+          hashed_property[:bedrooms_number] = property["properties"]["bedroom"]
           hashed_property[:description] = property["description"]
-          if property["type"] == "1" 
+          if property["type"] == "1"
             hashed_property[:flat_type] = "Appartmement"
-          elsif property["type"] == "2" 
+          elsif property["type"] == "2"
             hashed_property[:flat_type] = "Maison"
           else
             hashed_property[:flat_type] = "N/C"
           end
           hashed_property[:agency_name] = @source
-          hashed_property[:floor] = property["properties"]["floor"] 
-          hashed_property[:has_elevator] = property["properties"]["lift"] 
+          hashed_property[:floor] = property["properties"]["floor"]
+          hashed_property[:has_elevator] = property["properties"]["lift"]
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source

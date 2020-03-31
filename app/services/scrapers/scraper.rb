@@ -12,15 +12,6 @@ class Scraper
   ## HTML FETCH METHODS ##
   ########################
 
-  def fetch_json(args)
-    request = Typhoeus::Request.new(
-      args.url,
-      method: :get
-    )
-    response = request.run
-    return JSON.parse(response.body)
-  end
-
   def fetch_main_page(args)
     if !args.multi_page
       case args.type
@@ -101,6 +92,15 @@ class Scraper
     )
     request.run
     return Nokogiri::HTML(request.response.body)
+  end
+
+  def fetch_json(args)
+    request = Typhoeus::Request.new(
+      args.url,
+      method: :get,
+    )
+    response = request.run
+    return JSON.parse(response.body)
   end
 
   ######################################
