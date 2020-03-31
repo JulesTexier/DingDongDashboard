@@ -42,8 +42,6 @@ class ScraperParisMontmartreImmobilier < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
-        puts e.message
-        puts e.backtrace
         next
       end
     end
