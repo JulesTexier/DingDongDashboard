@@ -16,6 +16,10 @@ class ScrapSmallSitesWorker
   end
 
   def self.scrapers
-   return [ScraperEfficity.new, ScraperSuperImmo.new]
+    instances = []
+    SmallSites.constants.each do |element|
+      instances.push(SmallSites.const_get(element).new)
+    end
+   return instances
   end
 end
