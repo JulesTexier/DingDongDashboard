@@ -1,24 +1,25 @@
 class ScraperStephanePlaza < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_type
 
   def initialize
     @url = "https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=75&sort=date_desc&limit=15"
     @source = "Stephane Plaza"
     @main_page_cls = ""
-    @type = ""
+    @type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @http_type = "get_json"
   end
 
   def launch(limit = nil)
     i = 0
-    token = fetch_json(self)["token"]
-    fetch_json(self)["results"].each do |property|
+    json = fetch_main_page(self)
+    json["results"].each do |property|
       begin
         hashed_property = {}
-        hashed_property[:link] = "https://www.stephaneplazaimmobilier.com/immobilier-acheter/" + property["id"].to_s + "/" + property["slug"].to_s + "?token=" + token
+        hashed_property[:link] = "https://www.stephaneplazaimmobilier.com/immobilier-acheter/" + property["id"].to_s + "/" + property["slug"].to_s + "?token=" + json["token"]
         hashed_property[:surface] = regex_gen(property["properties"]["surface"], '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = property["properties"]["codePostal"]
         hashed_property[:rooms_number] = property["properties"]["room"]
