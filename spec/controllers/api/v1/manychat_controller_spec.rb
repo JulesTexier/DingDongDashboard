@@ -61,14 +61,14 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
           expect(response).to have_http_status(404)
           expect(JSON.parse(response.body)["message"]).to eq("Subscriber not found")
         end
-        it 'should return Manychat error "subscriber not found"' do
-          sub = FactoryBot.create(:subscriber_dummy_fb_id)
-          request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
-          post :send_props_morning, params: { subscriber_id: sub.id }
-          expect(response).to have_http_status(406)
-          expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
-          expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
-        end
+        # it 'should return Manychat error "subscriber not found"' do
+        #   sub = FactoryBot.create(:subscriber_dummy_fb_id)
+        #   request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
+        #   post :send_props_morning, params: { subscriber_id: sub.id }
+        #   expect(response).to have_http_status(406)
+        #   expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
+        #   expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
+        # end
       end
     end
 
@@ -80,25 +80,25 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
             expect(response.body).to eq("HTTP Token: Access denied.\n")
           end
 
-          it "should have 200 https status" do
-            request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
-            get :send_props_morning, params: { subscriber_id: @sub.id }
-            expect(response).to have_http_status(:success)
-          end
+          # it "should have 200 https status" do
+          #   request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
+          #   get :send_props_morning, params: { subscriber_id: @sub.id }
+          #   expect(response).to have_http_status(:success)
+          # end
           it "should respond 404 status id subscriber is not found" do
             request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
             post :send_props_morning, params: { subscriber_id: 9999 }
             expect(response).to have_http_status(404)
             expect(JSON.parse(response.body)["message"]).to eq("Subscriber not found")
           end
-          it 'should return Manychat error "subscriber not found"' do
-            sub = FactoryBot.create(:subscriber_dummy_fb_id)
-            request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
-            post :send_props_morning, params: { subscriber_id: sub.id }
-            expect(response).to have_http_status(406)
-            expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
-            expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
-          end
+          # it 'should return Manychat error "subscriber not found"' do
+          #   sub = FactoryBot.create(:subscriber_dummy_fb_id)
+          #   request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
+          #   post :send_props_morning, params: { subscriber_id: sub.id }
+          #   expect(response).to have_http_status(406)
+          #   expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
+          #   expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
+          # end
         end
       end
     end
@@ -121,14 +121,14 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
           expect(response).to have_http_status(404)
           expect(JSON.parse(response.body)["message"]).to eq("Subscriber not found")
         end
-        it 'should return Manychat error "subscriber not found"' do
-          sub = FactoryBot.create(:subscriber_dummy_fb_id)
-          request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
-          post :send_props_favorites, params: { subscriber_id: sub.id }
-          expect(response).to have_http_status(406)
-          expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
-          expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
-        end
+        # it 'should return Manychat error "subscriber not found"' do
+        #   sub = FactoryBot.create(:subscriber_dummy_fb_id)
+        #   request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
+        #   post :send_props_favorites, params: { subscriber_id: sub.id }
+        #   expect(response).to have_http_status(406)
+        #   expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
+        #   expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
+        # end
       end
     end
   end
