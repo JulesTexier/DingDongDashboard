@@ -24,7 +24,9 @@ class Scraper
       when "HTTPRequest"
         case args.http_type
         when "get_json"
-          json = fetch_json(args.url)
+          json = fetch_json_get(args.url)
+        when "post_json"
+          json = fetch_json_post(args.url, args.http_request)
         when "post"
           html = fetch_http_page(args.url, args.http_request)
         end
@@ -89,7 +91,18 @@ class Scraper
     return Nokogiri::HTML(request.response.body)
   end
 
-  def fetch_json(url)
+  def fetch_json_post(url, http_request)
+    request = Typhoeus::Request.new(
+      url,
+      method: :post,
+      headers: http_request[0],
+      body: http_request[1],
+    )
+    response = request.run
+    return JSON.parse(response.body)
+  end
+
+  def fetch_json_get(url)
     request = Typhoeus::Request.new(
       url,
       method: :get,
