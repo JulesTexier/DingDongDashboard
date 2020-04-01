@@ -11,7 +11,7 @@ class ScraperOrpi < Scraper
     @page_nbr = 1
     @properties = []
     @wait = 0,
-    @http_type = 'get_json'
+    @http_type = "get_json"
   end
 
   def launch(limit = nil)
@@ -27,7 +27,7 @@ class ScraperOrpi < Scraper
         hashed_property[:price] = item["price"].to_i
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          details = access_xml_text(html, '#collapse-details').strip.gsub(/[^[:print:]]/, "").gsub(" ","").remove_acc_scrp
+          details = access_xml_text(html, "#collapse-details").strip.gsub(/[^[:print:]]/, "").gsub(" ", "").remove_acc_scrp
           hashed_property[:rooms_number] == 1 ? hashed_property[:bedrooms_number] = 0 : hashed_property[:bedrooms_number] = regex_gen(details, '(\d){1,}chambre').to_int_scrp
           hashed_property[:floor] = regex_gen(details, 'etage(\d){1,}').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.o-container > p:nth-child(2)").specific_trim_scrp("\n\r").strip
@@ -45,10 +45,10 @@ class ScraperOrpi < Scraper
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
+        puts e.message
         next
       end
     end
-    byebug
     return @properties
   end
 end
