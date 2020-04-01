@@ -22,11 +22,16 @@ class Scraper
       when "Captcha"
         html = fetch_captcha_page(args.url)
       when "HTTPRequest"
-        html = fetch_http_page(args.url, args.http_request)
+        case args.http_type
+        when "get_json"
+          json = fetch_json(args.url)
+        when "post"
+          html = fetch_http_page(args.url, args.http_request)
+        end
       else
         puts "Error"
       end
-      card = access_xml_raw(html, args.main_page_cls)
+      json.nil? ? access_xml_raw(html, args.main_page_cls) : json
     else
       card = fetch_many_pages(args.url, args.page_nbr, args.main_page_cls)
     end
@@ -73,16 +78,6 @@ class Scraper
     end
   end
 
-  def fetch_many_pages(url, page_nbr, xml_first_page)
-    i = 1
-    xml = []
-    page_nbr.times do
-      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
-      i += 1
-    end
-    return xml.flatten
-  end
-
   def fetch_http_page(url, http_request)
     request = Typhoeus::Request.new(
       url,
@@ -94,13 +89,23 @@ class Scraper
     return Nokogiri::HTML(request.response.body)
   end
 
-  def fetch_json(args)
+  def fetch_json(url)
     request = Typhoeus::Request.new(
-      args.url,
+      url,
       method: :get,
     )
     response = request.run
     return JSON.parse(response.body)
+  end
+
+  def fetch_many_pages(url, page_nbr, xml_first_page)
+    i = 1
+    xml = []
+    page_nbr.times do
+      xml.push(access_xml_raw(fetch_static_page(page_nbr_to_url(url, i)), xml_first_page))
+      i += 1
+    end
+    return xml.flatten
   end
 
   ######################################
