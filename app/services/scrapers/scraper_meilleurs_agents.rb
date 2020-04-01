@@ -26,7 +26,7 @@ class ScraperMeilleursAgents < Scraper
           property_checker_hash[:price] = hashed_property[:price]
           property_checker_hash[:area] = hashed_property[:area]
           property_checker_hash[:link] = hashed_property[:link]
-          if is_property_clean(property_checker_hash)
+          if go_to_prop?(property_checker_hash, 14)
             @properties.push(hashed_property)
             enrich_then_insert_v2(hashed_property)
             i += 1

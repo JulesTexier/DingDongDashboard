@@ -21,7 +21,7 @@ class ScraperEfficity < Scraper
         hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = regex_gen(access_xml_text(item, "a > figcaption > h3 > span > span"), '(75)$*\d+{3}')
         hashed_property[:price] = regex_gen(access_xml_text(item, "a > div > div > strong > span"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "#nom-bien"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, ".resume-picto"), '(\d+)(.?)(chambre(s?))').to_int_scrp

@@ -18,24 +18,26 @@ class ScraperSeLoger < Scraper
     if !xml[0].to_s.strip.empty?
       json = extract_json(xml)
       json["cards"]["list"].each do |item|
-        begin
-          hashed_property = extract_each_flat(item)
-          property_checker_hash = {}
-          property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
-          property_checker_hash[:surface] = hashed_property[:surface]
-          property_checker_hash[:price] = hashed_property[:price]
-          property_checker_hash[:area] = hashed_property[:area]
-          property_checker_hash[:link] = hashed_property[:link]
-          if is_property_clean(property_checker_hash) && hashed_property[:agency_name] != "Ding Dong"
-            @properties.push(hashed_property)
-            enrich_then_insert_v2(hashed_property)
-            i += 1
+        if item["cardType"] == "classified"
+          begin
+            hashed_property = extract_each_flat(item)
+            property_checker_hash = {}
+            property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
+            property_checker_hash[:surface] = hashed_property[:surface]
+            property_checker_hash[:price] = hashed_property[:price]
+            property_checker_hash[:area] = hashed_property[:area]
+            property_checker_hash[:link] = hashed_property[:link]
+            if go_to_prop?(property_checker_hash, 7) && hashed_property[:agency_name] != "Ding Dong"
+              @properties.push(hashed_property)
+              enrich_then_insert_v2(hashed_property)
+              i += 1
+            end
+            break if i == limit
+          rescue StandardError => e
+            puts "\nError for #{@source}, skip this one."
+            puts "It could be a bad link or a bad xml extraction.\n\n"
+            next
           end
-          break if i == limit
-        rescue StandardError => e
-          puts "\nError for #{@source}, skip this one."
-          puts "It could be a bad link or a bad xml extraction.\n\n"
-          next
         end
       end
     else

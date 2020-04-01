@@ -19,11 +19,12 @@ class ScraperLaforet < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.laforet.com" + access_xml_link(item, "a.property-card__link", "href")[0].to_s
         hashed_property[:area] = regex_gen(item.text, '(PARIS (\d+))').tr("^0-9", "").district_generator
+        next if hashed_property[:area] == "N/C"
         hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:rooms_number] = regex_gen(item.text.force_encoding("UTF-8"), '(\d+)(.?)(piÃ¨ce(s?))').to_int_scrp
         hashed_property[:price] = regex_gen(item.text.tr("â¬", "€"), '(\d)(.*)(€)').to_int_scrp
         hashed_property[:flat_type] = get_type_flat(item.text)
-        if is_property_clean(hashed_property) && !hashed_property[:area].nil?
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "div.mb-2").tr("\n", "").strip
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])

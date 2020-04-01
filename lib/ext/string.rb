@@ -2,8 +2,8 @@ class String
 
   ## CHARACTER METHODS
 
-  def transform_litteral_numbers 
-    return self.downcase.gsub(' un ', " 1 ").gsub(' deux ', " 2 ").gsub(' trois ', " 3 ").gsub(' quatre ', " 4 ").gsub(' cinq ', " 5 ").gsub(' six ', " 6 ").gsub(' sept ', " 7 ").gsub(' huit ', " 8 ").gsub(' neuf ', " 9 ")
+  def transform_litteral_numbers
+    return self.downcase.gsub(" un ", " 1 ").gsub(" deux ", " 2 ").gsub(" trois ", " 3 ").gsub(" quatre ", " 4 ").gsub(" cinq ", " 5 ").gsub(" six ", " 6 ").gsub(" sept ", " 7 ").gsub(" huit ", " 8 ").gsub(" neuf ", " 9 ")
   end
 
   def clean_img_link_https
@@ -70,7 +70,7 @@ class String
   end
 
   def elevator_str_scrp
-    regex_lift = "(avec ascenseur)"
+    regex_lift = "(avec ascenseur|par ascenseur)"
     has_a_lift = self.match(/#{regex_lift}/i)
     regex_no_lift = "(sans ascenseur)"
     has_no_lift = self.match(/#{regex_no_lift}/i)
@@ -83,15 +83,6 @@ class String
     end
     return lift
   end
-
-  def district_generator
-    if self.length == 2
-      return "750#{self}"
-    elsif self.length == 1
-      return "7500#{self}"
-    end
-  end
-
 
   ################################################
   ## TRANSLATE AREA, MAINLY FOR MEILLEURSAGENTS ##
@@ -153,6 +144,8 @@ class String
       return "750#{self}"
     elsif self.length == 1
       return "7500#{self}"
+    else
+      return "N/C"
     end
   end
 

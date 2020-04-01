@@ -19,7 +19,11 @@ class Api::V1::FavoritesController < ApplicationController
                 if fav.save
                     render json: send_message_post_add(s, "success")
                 else
-                    render json: send_message_post_add(s, "error")
+                    if fav.errors.messages[:subscriber][0] === "has already been taken" 
+                        render json: send_message_post_add(s, "error_already_exists")
+                    else
+                        render json: send_message_post_add(s, "error")
+                    end
                 end
 
             rescue ActiveRecord::RecordNotFound
@@ -73,7 +77,7 @@ class Api::V1::FavoritesController < ApplicationController
         else 
             response = m.send_message_post_fav_added(s, msg)
             if response[0]
-                return {status: 'ERROR', message: "Favorite has not created but a message has been sent to subscriber", data: response[1]}, status: 500
+                return {status: 'ERROR', message: "Favorite has not been created but a message has been sent to subscriber", data: response[1]}, status: 500
             else 
                 return {status: 'ERROR', message: 'Favorite has not been created but the message could not been sent to subscriber !', data: response[1]}, status: 500
             end

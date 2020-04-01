@@ -23,7 +23,7 @@ class ScraperFigaro < Scraper
         hashed_property[:area] = access_xml_text(item, "h2 > a > span").area_translator_scrp
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "span.price-label"), '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           if hashed_property[:link].include?("https://proprietes.lefigaro.fr")
             hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul").tr("\n\r\t", ""), '(\d+)(.?)(chambre(s?))').to_int_scrp
@@ -55,5 +55,6 @@ class ScraperFigaro < Scraper
         next
       end
     end
+    return @properties
   end
 end
