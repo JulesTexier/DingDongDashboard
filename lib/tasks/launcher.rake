@@ -60,6 +60,8 @@ namespace :scraper do
     ScraperStephanePlaza.new.launch
     ScraperIad.new.launch
     ScraperProprioo.new.launch
+    ScraperHomizy.new.launch
+    ScraperSotheby.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end
