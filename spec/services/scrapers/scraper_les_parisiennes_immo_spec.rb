@@ -3,18 +3,14 @@ require "rails_helper"
 RSpec.describe ScraperLesParisiennesImmo, type: :service do
   before(:all) do
     @s = ScraperLesParisiennesImmo.new
-    @limit = 3
   end
 
   it "should launch and return proper number of properties" do
-    VCR.use_cassette("les_parisiennes_immo") do
-      expect(@s.launch(@limit)).to be_a(Array)
-      expect(Property.where(source: @s.source).count).to be == @limit
+    VCR.use_cassette(@s.source) do
+      expect(@s.launch).to be_a(Array)
+      expect(Property.where(source: @s.source).count).to be >= 1
+      expect(Property.where(source: @s.source).count).to be == @s.properties.count
     end
-  end
-
-  it "should return array with proper number of properties" do
-    expect(@s.properties.count).to be == @limit
   end
 
   it "should return the right keys" do

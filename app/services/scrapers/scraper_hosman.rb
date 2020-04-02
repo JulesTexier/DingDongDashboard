@@ -1,20 +1,21 @@
 class ScraperHosman < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_type
 
   def initialize
     @url = "https://www.hosman.co/api/v1/properties?zones=[%22Paris,%20France%22]&min_area=&max_budget=&min_room_number=0&display_sold=false"
     @source = "Hosman"
     @main_page_cls = ""
-    @type = ""
+    @type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @http_type = "get_json"
   end
 
   def launch(limit = nil)
     i = 0
-    fetch_json(self).each do |property|
+    fetch_main_page(self).each do |property|
       begin
         hashed_property = {}
         hashed_property[:link] = property["property_show_url"]
