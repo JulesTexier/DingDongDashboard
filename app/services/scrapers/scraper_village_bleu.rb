@@ -50,7 +50,6 @@ class ScraperVillageBleu < Scraper
         next
       end
     end
-    byebug
     return @properties
   end
 end
