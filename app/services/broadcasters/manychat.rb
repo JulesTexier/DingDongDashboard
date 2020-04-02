@@ -18,14 +18,9 @@ class Manychat
     return handle_manychat_response(send_content(subscriber, create_property_card(property, subscriber)))
   end
 
-  # This method send a gallery of a bunch of properties card to subscriber (i.e. : latest properties, morning properties ....)
-  def send_gallery_properties_card(subscriber, properties)
-    return handle_manychat_response(send_content(subscriber, create_gallery_card(properties, subscriber)))
-  end
-
-  # This method send a gallery of a bunch of properties card to subscriber (i.e. : latest properties, morning properties ....)
-  def send_gallery_properties_card_with_header(template, subscriber, properties)
-    return handle_manychat_response(send_content(subscriber, create_gallery_card_with_header(template, properties, subscriber)))
+  # This methid is sending a gallery of property with an header or not according to template
+  def send_properties_gallery(subscriber, properties, template = nil)
+    return handle_manychat_response(send_content(subscriber, new_create_gallery_card(properties, subscriber, template)))
   end
 
   def send_no_props_msg(subscriber, template)
@@ -188,31 +183,25 @@ class Manychat
     return message_array
   end
 
-  # This method is building a json_gallery of cards for each property with the first image of each property
-  def create_gallery_card(properties, subscriber = nil)
+  # NEW - This method is building a json_gallery of cards for each property with the first image of each property
+  def new_create_gallery_card(properties, subscriber = nil, template)
     properties.length > 9 ? properties = properties[0..9] : nil
-
+    # no direct CTA (built-in show) by default
+    direct_source = false
     elements = []
-    properties.each do |property|
-      elements.push(create_property_element(property, subscriber))
+    if template == "last_properties"
+      # adding headers
+      elements.push(create_header_gallery_element_last_properties(properties.length))
+      # direct CTA
+      direct_source = true
+    elsif template == "morning_properties"
+      # direct CTA
+      direct_source = true
     end
 
-    message_array = []
-    message_array.push(create_message_card_hash("cards", elements, "horizontal"))
-
-    return message_array
-  end
-
-  # This method is building a json_gallery of cards for each property with the first image of each property with a header card
-  def create_gallery_card_with_header(template, properties, subscriber = nil)
-    properties.length > 9 ? properties = properties[0..8] : nil
-
-    elements = []
-    elements.push(create_header_gallery_element_new_properties(properties.length)) if template == "new_properties"
-    elements.push(create_header_gallery_element_last_properties(properties.length)) if template == "last_properties"
+    # properties 
     properties.each do |property|
-      template == "morning_properties" || "last_properties" ? direct_link = true : direct_link = false
-      elements.push(create_property_element(property, subscriber, direct_link))
+      elements.push(create_property_element(property, subscriber, direct_source))
     end
 
     message_array = []
@@ -247,29 +236,6 @@ class Manychat
 
     return message_array
   end
-
-  # This method is building a json_text of the description of the property
-  # def create_show_text_card(property, subscriber = nil)
-  #   buttons = []
-  #   buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
-  #   if property.contact_number != nil && property.contact_number != "N/C"
-  #     property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
-  #     buttons.push(create_call_button_hash(caption, property.contact_number))
-  #   end
-  #   webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
-  #   body_fav = { subscriber_id: subscriber.id, property_id: property.id }
-  #   buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
-
-  #   message_array = []
-  #   message_hash = {}
-  #   message_hash[:type] = "text"
-  #   message_hash[:text] = property.get_attribues_description
-  #   message_hash[:buttons] = buttons
-
-  #   message_array.push(message_hash)
-
-  #   return message_array
-  # end
 
   # This method is building a json_gallery of cards for each property in fav of a subscriber
   def create_favorites_gallery_card(subscriber)

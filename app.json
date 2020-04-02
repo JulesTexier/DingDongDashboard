@@ -25,6 +25,7 @@
         "MANYCHAT_TOKEN": "2a21d906a553fb6bb3e7cb3101bd3ff8",
         "MESSENGER_BOT_TOKEN": "MB-GAyUxj97bQYL3zTwWyTVetYWwKCn",
         "BEARER_TOKEN": "DD-nFMdxvgGEXdpEs7whj",
+        "BASE_URL": "https://giant-cat-staging.herokuapp.com/",
         "QR_ADS": "content20200304091552_500728",
         "QR_ADVICE": "content20200304091552_531189",
         "QR_CRITERIA": "content20200304091552_580435",
