@@ -1,4 +1,4 @@
-class ScraperGreenAcres < Scraper
+class SmallSites::ScraperGreenAcres < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize

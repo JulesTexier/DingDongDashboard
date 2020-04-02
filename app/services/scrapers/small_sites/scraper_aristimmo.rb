@@ -1,6 +1,6 @@
 require "typhoeus"
 
-class ScraperAristimmo < Scraper
+class SmallSites::ScraperAristimmo < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request
 
   def initialize
