@@ -10,7 +10,7 @@ class ScrapSmallSitesWorker
   end
 
   def self.scrap
-    scrapers.each_with_index do |scraper, index|
+    scrapers.each do |scraper|
       perform_async(scraper.class.name)
     end
   end
