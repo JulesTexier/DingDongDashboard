@@ -1,4 +1,4 @@
-class ScraperCallImmo < Scraper
+class SmallSites::ScraperCallImmo < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request
 
   def initialize
@@ -10,7 +10,7 @@ class ScraperCallImmo < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
-        @http_request = [{}, {"property_search[_token]" => "dnNZo-3Tl4tCoDXqiWfswrRYVYs5d7KsXPi67utLJrI", "property_search[typeTransac]" => "vente", "property_search[town][]" => "paris" }]
+    @http_request = [{}, {"property_search[_token]" => "dnNZo-3Tl4tCoDXqiWfswrRYVYs5d7KsXPi67utLJrI", "property_search[typeTransac]" => "vente", "property_search[town][]" => "paris", "property_search[type][]" => "appartement" }]
   end
 
   def launch(limit = nil)
