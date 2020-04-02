@@ -46,7 +46,7 @@ class Scraper
 
   def fetch_dynamic_page(url, waiting_class, wait, *click_args)
     opts = {
-      headless: true,
+      headless: false,
     }
     browser = Watir::Browser.new :chrome, opts
     browser.goto url
