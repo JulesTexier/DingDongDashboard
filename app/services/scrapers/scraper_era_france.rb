@@ -21,9 +21,8 @@ class ScraperEraFrance < Scraper
             hashed_property = {}
             hashed_property[:link] = "https://www.erafrance.com" + access_xml_link(item, "a", "href")[0].to_s.gsub('..', '')
             hashed_property[:surface] = access_xml_text(item, "div.bien_infos > p").to_float_to_int_scrp
-            hashed_property[:price] = regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(...)dont').tr('^0-9', '') != "" ? regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(...)dont').tr('^0-9', '').to_float_to_int_scrp : access_xml_text(item, "div.prix").tr('^0-9', '').to_float_to_int_scrp
+            hashed_property[:price] = regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(.?)(\d+)(...)dont').tr('^0-9', '') != "" ? regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(.?)(\d+)(...)dont').tr('^0-9', '').to_float_to_int_scrp : access_xml_text(item, "div.prix").tr('^0-9', '').to_float_to_int_scrp
             hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".bien_type"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-  
             if go_to_prop?(hashed_property, 7)
               html = fetch_static_page(hashed_property[:link])
               hashed_property[:description] = access_xml_text(html, "div.description.principale").tr("\n\t", "").strip
