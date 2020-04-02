@@ -22,7 +22,7 @@ class ScraperLesParisiennesImmo < Scraper
         hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.value-prix > span > span"), '(\d)(.*)').to_int_scrp
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:area] = regex_gen(access_xml_text(html, "#infos > p:nth-child(1) > span.valueInfos"), '(\d+)').to_s
           hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp

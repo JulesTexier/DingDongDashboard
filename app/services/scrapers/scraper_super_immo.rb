@@ -22,7 +22,7 @@ class ScraperSuperImmo < Scraper
         hashed_property[:area] = regex_gen(item.text, '(75)$*\d+{3}')
         hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(item.text, '(\d)(.*)(€)').to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "h1"), '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "p.description").strip

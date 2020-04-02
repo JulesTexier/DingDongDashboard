@@ -24,7 +24,7 @@ class ScraperImax < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.margin-bottom-10.padding-bottom-10.border-solid-bottom-block-1.pagination-centered").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
         hashed_property[:price] = access_xml_text(item, "div.typo-action.h2-like.prix-annonce.pagination-centered").to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "span.typo-action"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "p.bloc-detail-descriptif").specific_trim_scrp("\n").strip
           hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")

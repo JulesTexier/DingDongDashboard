@@ -11,15 +11,15 @@ class Api::V1::ManychatController < ApplicationController
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
   def update_subscriber
     begin
-      subscriber = Subscriber.find(params[:subscriber_id])
-      if subscriber.update(subscriber_params)
-        if params[:message] == "reactivation"
+      subscriber = Subscriber.find(subscriber_params[:subscriber_id])
+      if subscriber.update(subscriber_params.except(:subscriber_id, :message))
+        if subscriber_params[:message] == "reactivation"
           render json: send_text_message(subscriber, "🔥 Ton alerte a été réactivée !", 'success')
         else
           render json: { status: "SUCCESS", message: "Subscriber updated", data: subscriber }, status: 200
         end
       else
-        if params[:message] == "reactivation"
+        if subscriber_params[:message] == "reactivation"
           render json: send_text_message(subscriber, "Oups, un probleme a eu lieu, écris nous directement dans le chat, nous reviendrons vers toi au plus vite!", 'error')
         else
           render json: { status: "ERROR", message: "Subscriber not updated", data: nil }, status: 500
@@ -160,9 +160,9 @@ class Api::V1::ManychatController < ApplicationController
   def send_text_message(subscriber, text, status)
     m = Manychat.new
     response = m.send_text_message(subscriber, text)
-    if response[0] && status = 'success'
+    if response[0] && status == 'success'
       return { status: "SUCCESS", message: "Message sent to subscriber", data: response[1] }, status: 200
-    elsif response[0] && status = 'error'
+    elsif response[0] && status == 'error'
       return { status: "ERROR", message: "Bad operation, but a message has been sent to subscriber", data: response[1] }, status: 500
     else
       return { status: "ERROR", message: "A error occur in manychat call, no message sent to subscriber", data: response[1] }, status: 500
@@ -170,7 +170,8 @@ class Api::V1::ManychatController < ApplicationController
   end
 
   def subscriber_params
-    params.permit(:firstname, :lastname, :email, :phone, :is_active)
+    # params.permit(:firstname, :lastname, :email, :phone, :is_active)
+    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message)
   end
 
   def authentificate

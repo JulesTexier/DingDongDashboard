@@ -26,7 +26,7 @@ class ScraperDeliquietImmobilier < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".carac"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         price_item = access_xml_text(item, ".carac > div:nth-child(3)")
         price_item.include?("dont") ? hashed_property[:price] = regex_gen(price_item, '(\d)(.*)(dont)').to_int_scrp : hashed_property[:price] = price_item.to_int_scrp
-        if is_property_clean(hashed_property)
+        if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           detail = access_xml_text(html, "#detailCarac")
           hashed_property[:description] = access_xml_text(html, ".description").strip
