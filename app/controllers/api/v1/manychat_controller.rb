@@ -48,7 +48,7 @@ class Api::V1::ManychatController < ApplicationController
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       props = subscriber.get_x_last_props(params[:x])
-      handle_sending(subscriber, props)
+      handle_sending(subscriber, props, "last_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -61,7 +61,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
       props = subscriber.get_morning_props
-      handle_sending(subscriber, props)
+      handle_sending(subscriber, props, "morning_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -104,12 +104,12 @@ class Api::V1::ManychatController < ApplicationController
 
   private
 
-  def handle_sending(subscriber, props)
+  def handle_sending(subscriber, props, template = nil)
     if props.length > 0
-      response = send_multiple_properties(subscriber, props)
+      response = send_multiple_properties(subscriber, props, template)
       render json: response[:json_response], status: response[:status]
     else
-      response = send_no_props(subscriber, "morning_properties")
+      response = send_no_props(subscriber, template)
       render json: response[:json_response], status: response[:status]
     end
   end
@@ -129,11 +129,8 @@ class Api::V1::ManychatController < ApplicationController
 
   def send_multiple_properties(subscriber, properties, template = nil)
     m = Manychat.new
-    if !template.nil?
-      response = m.send_gallery_properties_card_with_header(template, subscriber, properties)
-    else
-      response = m.send_gallery_properties_card(subscriber, properties)
-    end
+    response = m.send_properties_gallery(subscriber, properties, template)
+
     if response[0]
       json_response = { status: "SUCCESS", message: "#{properties.length} propert(y)(ies) sent to subscriber", data: response[1] }
       status = 200

@@ -29,7 +29,6 @@ class Broadcaster
   def new_properties_gallery 
     properties = Property.unprocessed
     subscribers = Subscriber.active
-
     subscribers.each do |sub|
       matched_props = []
       properties.each do |prop|
@@ -37,18 +36,15 @@ class Broadcaster
       end
       if matched_props.length > 0
        if matched_props.length < 9
-        # @manychat_client.send_gallery_properties_card_with_header("new_properties", sub, matched_props)
-        @manychat_client.send_gallery_properties_card(sub, matched_props)
+        @manychat_client.send_properties_gallery(sub, matched_props)
        elsif matched_props.length >= 9 && matched_props.length < 19
-        # @manychat_client.send_gallery_properties_card_with_header("new_properties", sub, matched_props[0..8])
-        @manychat_client.send_gallery_properties_card(sub, matched_props[0..8])
-        @manychat_client.send_gallery_properties_card(sub, matched_props[9..18])
+        @manychat_client.send_properties_gallery(sub, matched_props[0..8])
+        @manychat_client.send_properties_gallery(sub, matched_props[9..18])
 
        elsif matched_props.length >= 19 && matched_props.length < 29
-        # @manychat_client.send_gallery_properties_card_with_header("new_properties", sub, matched_props[0..8])
-        @manychat_client.send_gallery_properties_card(sub, matched_props[0..8])
-        @manychat_client.send_gallery_properties_card(sub, matched_props[9..18])
-        @manychat_client.send_gallery_properties_card(sub, matched_props[19..28])
+        @manychat_client.send_properties_gallery(sub, matched_props[0..8])
+        @manychat_client.send_properties_gallery(sub, matched_props[9..18])
+        @manychat_client.send_properties_gallery(sub, matched_props[19..28])
        end
 
       end
