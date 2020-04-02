@@ -13,7 +13,7 @@ class ScraperLaforet < Scraper
     @http_type = 'get_json'
   end
 
-  def launch(limit = nil)
+  def launch(limit = 20)
     i = 0
     fetch_main_page(self)["data"].each do |item|
       begin
@@ -47,7 +47,6 @@ class ScraperLaforet < Scraper
         next
       end
     end
-    byebug
     return @properties
   end
 end
