@@ -38,11 +38,13 @@ class ScraperVarenne < Scraper
           images = access_xml_link(html, '.item', 'style')
           hashed_property[:images]  = []
           images.each do |img|
-            img_link = "https://www.agencevarenne.fr" + regex_gen(img, 'url((.)*)').gsub("url('","").gsub("')\;","")
-            hashed_property[:images].push(img_link)
+            if !img.nil?
+              img_link = "https://www.agencevarenne.fr" + regex_gen(img, 'url((.)*)').gsub("url('","").gsub("')\;","") 
+              hashed_property[:images].push(img_link)
+            end
           end
           @properties.push(hashed_property) ##testing purpose
-        #   enrich_then_insert_v2(hashed_property)
+            enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
