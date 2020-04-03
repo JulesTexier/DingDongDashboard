@@ -66,7 +66,6 @@ namespace :scraper do
     ScraperLiberkeys.new.launch
     ScraperLuxResidence.new.launch
     ScraperAssasImmo.new.launch
-    ScraperEraFrance.new.launch
     ScraperVillageBleu.new.launch
     ScraperJunot.new.launch
     ScraperSotheby.new.launch
