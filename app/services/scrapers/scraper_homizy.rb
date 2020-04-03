@@ -40,7 +40,6 @@ class ScraperHomizy < Scraper
           hashed_property[:images].collect! { |img| "https:" + img }
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
-          puts JSON.pretty_generate(hashed_property)
           i += 1
           break if i == limit
         end
