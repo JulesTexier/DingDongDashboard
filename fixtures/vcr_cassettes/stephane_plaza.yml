@@ -1,0 +1,348 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.stephaneplazaimmobilier.com/search/buy?limit=15&location%5B%5D=75&sort=date_desc&target=buy&type%5B%5D=1&type%5B%5D=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Typhoeus - https://github.com/typhoeus/typhoeus
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Wed, 01 Apr 2020 14:55:20 GMT
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - SERVERID=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
+      - XSRF-TOKEN=eyJpdiI6ImRJM0REMnJCMkxxZ1BYMHJYZkRNZ0E9PSIsInZhbHVlIjoiV0g5XC9lNUFTKzFaMTdSSjM2eEoweVl5YW16UmpCRk9OcnBKYzNvU3Y4eGVHQjdhRWwyUVpvVXVBbmNvTk54SHUiLCJtYWMiOiIzZTZkOTNmNmQ3YjAwM2IzYjk1NmU1ZjI5ZTQ2YTQ3MThhYTkxMzQ5NDdjOTA5YzFlZjdmMDg0Njg5ZTRmNWYyIn0%3D;
+        expires=Wed, 01-Apr-2020 16:55:20 GMT; Max-Age=7200; path=/; domain=.stephaneplazaimmobilier.com
+      - __cfduid=d748f88f5f8cb54ea182df5b43c64ad411585752919; expires=Fri, 01-May-20
+        14:55:19 GMT; path=/; domain=.stephaneplazaimmobilier.com; HttpOnly; SameSite=Lax
+      - stephane_plaza_immobilier_session=eyJpdiI6IklDeWVnaGxYOGJ0UzNXcjVvb3ZjaVE9PSIsInZhbHVlIjoibWxMaVlZODJNaGhMQTRqRm1rcWJXYUpldjByOFNpOVwvTzQyQ2lQbXUwdzkzdGlJREFDM1Nac2tLeEdVUjZYemQiLCJtYWMiOiJiYmE4ODlhZjFmN2M3NDIxMDUxNDNjY2MwNGE2MzY4OGU3YTAyMDBiMTcyMjVlYTBhMjM5YmU4NGMxZDEwN2VkIn0%3D;
+        expires=Wed, 01-Apr-2020 16:55:20 GMT; Max-Age=7200; path=/; domain=.stephaneplazaimmobilier.com
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - PHP/7.2.29
+      Cache-Control:
+      - no-cache, private
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 57d32684be94ee48-CDG
+    body:
+      encoding: UTF-8
+      string: '{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0YXJnZXQiOiJidXkiLCJ0eXBlIjpbIjEiLCIyIl0sImxvY2F0aW9uIjpbIjc1Il0sInNvcnQiOiJkYXRlX2Rlc2MiLCJsaW1pdCI6IjE1In0.TfI5PHjbdoWJsJiFGaMVrm1IJPjAIXPWBz_UGYwtWps","other_agency":{"index":{"old":null,"new":null},"id":null,"name":null,"url":null},"results":[{"id":1618109,"isExclusive":false,"has360":"https:\/\/youtu.be\/vQCRO6HVXOw","has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/6\/1\/8\/1\/0\/9\/1618109f.jpg.mid.jpg"],"price":"445
+        000","type":"1","target":"buy","name":"Paris 15 Montparnasse - Studio 36.50m
+        \u00b2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":true,"adresse":"20
+        rue de l armorique","latitude":"48.83908821197977","longitude":"2.3146176338195805","alentourweb":"48.83908821197977,2.3146176338195805","anneeConstruction":1975,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"calme","ceQuonAimeVendeur":"Son
+        emplacement ","chargesCourantesCopro":"1 800 EUR","heating":"Collectif avec
+        comptage individuel","codePostal":"75015","consoEner":"B","consoEnerg":78,"cPVilleweb":"75015
+        PARIS","cuisine":"Amenag\u00e9e","last-floor":false,"digicode":true,"floor":1,"etatInterieur":"Bon","exposure":"Nord-ouest","exposure-living-room":"NORD
+        OUEST","fibreOptique":true,"gardien":true,"gES":"D","interphone":true,"loiCarrez":true,"mecanismeChauffage":"Radiateur","heating-mode":"Chauffage
+        de ville","bedroom":0,"nbLotsCopro":"84","room":1,"neufAncien":"Recent","nombreEtage":10,"price":"445
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDB":1,"secteur":"Montparnasse","surface":"37
+        m2","surfaceCarrez":"37 m2","surfaceSejour":"21 m2","taxeFonciere":"635 EUR","typeBien":"Appartement","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":145,"city":"PARIS","visiophone":false,"view":"Jardins","wC":1},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.83908821197977,"lon":2.3146176338195805},"url_agency":"paris15suffren.stephaneplazaimmobilier.com","description":"A
+        deux pas de la gare Montparnasse dans un immeuble  r\u00e9cent  ce studio
+        de 36.50m\u00b2  (deux pi\u00e8ces possible) enti\u00e8rement tourn\u00e9
+        sur les  jardins  int\u00e9rieurs offre un calme absolu .Cuisine ind\u00e9pendante
+        (us possible) . Aucun vis \u00e0 vis .Salle de bains avec toilettes  , placards.
+        Gardien dans l immeuble. 06 24 40 24 84  Vid\u00e9o \u00e0 la demande ","title":"Appartement
+        1 pi\u00e8ce 36.5 m2","slug":"paris-15-montparnasse-studio-3650m-2","user":null},{"id":1472892,"isExclusive":false,"has360":"https:\/\/youtu.be\/iHu70ZvL8hY","has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892j.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892k.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892l.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892m.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1911281610\/catalog\/images\/pr_p\/1\/4\/7\/2\/8\/9\/2\/1472892n.jpg.mid.jpg"],"price":"370
+        000","type":"1","target":"buy","name":"Paris 18 \u00b0 - 3P  Duplex invers\u00e9
+        - M\u00e9tro Marcadet","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":true,"access-subway":"5
+        min","adresse":"13 Rue Pierre Budin","latitude":"48.889678","longitude":"2.35221","alentourweb":"48.889678,2.35221","anneeConstruction":1900,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"Son
+        Agencement ","chargesCourantesCopro":"1 200 EUR","heating":"Individuel","codePostal":"75018","consoEner":"G","consoEnerg":704,"country":"France","cPVilleweb":"75018
+        PARIS","cuisine":"Ouverte","last-floor":false,"designationBien":"appartement
+        rcd plus souplex","diagnostiqueEnergetique":true,"digicode":true,"floor":0,"etatGeneral":"Excellent","etatInterieur":"Tr\u00e8s
+        bon","exposure-living-room":"SUD","gardien":false,"gES":"D","grenier":false,"interphone":true,"loiCarrez":true,"mecanismeChauffage":"Radiateur","heating-mode":"Electrique","cellar":1,"bedroom":1,"nbLotsCopro":"20","nbNiveaux":2,"room":3,"neufAncien":"Ancien","nombreEtage":4,"portailElectrique":false,"price":"370
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":true,"sDE":1,"sousSol":true,"standing":"Normal","surface":"42
+        m2","surfaceCarrez":"42 m2","surfaceSejour":"18 m2","taxeFonciere":"800 EUR","typeBien":"Appartement","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":22,"city":"PARIS","visiophone":true,"volets":"Bois","wC":1},"departments":"75","matches":null,"displayLocation":"75018
+        PARIS","location":{"lat":48.889678,"lon":2.35221},"url_agency":"paris15suffren.stephaneplazaimmobilier.com","description":"Dans
+        une petite copropri\u00e9t\u00e9 r\u00e9habilit\u00e9e en 2010  au calme d''une
+        grande cour  ce tr\u00e8s beau  3 pi\u00e8ces expos\u00e9 Sud offre un s\u00e9jour  de
+        18 m\u00b2 avec cuisine ouverte, une chambre .En souplex  une pi\u00e8ce de
+        18.20 m\u00b2  avec salle de douche \u00e0 l''Italienne .   Le calme est son
+        premier atout. Une cave . Vid\u00e9o \u00e0 la demande . Contact 06 24 40
+        24 84","title":"Appartement 3 pi\u00e8ces 41.6 m2","slug":"paris-18-0-3p-duplex-inverse-metro-marcadet","user":null},{"id":968095,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/9\/6\/8\/0\/9\/5\/968095a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/9\/6\/8\/0\/9\/5\/968095b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/9\/6\/8\/0\/9\/5\/968095c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/9\/6\/8\/0\/9\/5\/968095d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/9\/6\/8\/0\/9\/5\/968095e.jpg.mid.jpg"],"price":"97
+        000","type":"1","target":"buy","name":"Appartement Paris 1 pi\u00e8ce(s)","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"21
+        Avenue L\u00e9opold II","latitude":"48.8523253","longitude":"2.2711753999999473","alentourweb":"48.8523253,2.2711753999999473","anneeConstruction":1920,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"id\u00e9al
+        investissement","chargesCopropriete":"20 EUR","chargesCourantesCopro":"128
+        EUR","heating":"Collectif","codePostal":"75016","consoEner":"G","consoEnerg":688,"country":"France","cPVilleweb":"75016
+        PARIS","cuisine":"Kitchenette","last-floor":true,"diagnostiqueEnergetique":true,"floor":8,"etatGeneral":"Bon
+        Etat","gES":"G","loiCarrez":true,"heating-mode":"Chauffage de ville","bedroom":1,"nbLotsCopro":"0","nbLotsCoproHabitation":"0","room":1,"neufAncien":"Ancien","nombreEtage":8,"price":"97
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDE":1,"surface":"8
+        m2","surfaceCarrez":"8 m2","taxeFonciere":"300 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","valeurGES":161,"city":"PARIS"},"departments":"75","matches":null,"displayLocation":"75016
+        PARIS","location":{"lat":48.8523253,"lon":2.2711753999999473},"url_agency":"paris15suffren.stephaneplazaimmobilier.com","description":"Id\u00e9alement
+        situ\u00e9e \u00e0 quelques m\u00e8tres de la place Rodin. avenue L\u00e9opold
+        II, venez d\u00e9couvrir cette chambre de service d''une surface de 8.06 m\u00b2
+        habitables pour 20.07m3.\nAu 8 \u00e8me et dernier \u00e9tage avec ascenseur
+        (jusqu''au 6 eme \u00e9tage) d''un immeuble ann\u00e9e 20, vue sur les toits
+        de Paris, calme et lumineux. WC sur le palier.\nCe bien comprend une douche
+        et une kitchenette.\nId\u00e9al pied-\u00e0-terre ou location saisonni\u00e8re.\nBus
+        et M\u00e9tro Jasmin \u00e0 3 min .\n\n","title":"Appartement 1 pi\u00e8ce
+        8.06 m2","slug":"appartement-paris-1-pieces","user":null},{"id":1129886,"isExclusive":false,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886j.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886k.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886l.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886m.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/1\/2\/9\/8\/8\/6\/1129886n.jpg.mid.jpg"],"price":"1
+        135 000","type":"1","target":"buy","name":"2 chambres avec terrasse","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":true,"adresse":"120
+        Boulevard de Grenelle","latitude":"48.849128","longitude":"2.297002","alentourweb":"48.849128,2.297002","anneeConstruction":1992,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"Terrasse
+        de 74 m2 plein sud! ","ceQuonAimeVendeur":"Terrasse de 74 m2 plein sud! ","chambreRDC":false,"chargesCopropriete":"225
+        EUR","chargesCourantesCopro":"2 695 EUR","heating":"Individuel","codePostal":"75015","consoEner":"E","consoEnerg":231,"country":"France","cPVilleweb":"75015
+        PARIS","cuisine":"Independante","last-floor":false,"diagnostiqueEnergetique":true,"floor":2,"etatGeneral":"Bon
+        Etat","exposure":"Sud-ouest","gES":"C","honoraires":"45 000 EUR","garden":false,"loiCarrez":true,"heating-mode":"Electrique","cellar":1,"bedroom":2,"nbLotsCopro":"nc","nbLotsCoproHabitation":"101","room":3,"terrace":1,"neufAncien":"Recent","nombreEtage":5,"price":"1
+        135 000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDB":1,"standing":"Bon","surface":"70
+        m2","surfaceCarrez":"70 m2","surfaceTerrasse":"75 m2","taxeFonciere":"0 EUR","typeBien":"Appartement","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":11,"city":"PARIS","wC":1},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.849128,"lon":2.297002},"url_agency":"paris15mottepicquet.stephaneplazaimmobilier.com","description":"Au
+        coeur du Quartier Motte-Picquet - Commerce. Fort potentiel pour cet appartement
+        avec 74m2 de terrasse expos\u00e9e plein Sud. Le bien situ\u00e9 au 2\u00e8me
+        \u00e9tage d''un immeuble moderne avec cave au 1er \u00e9tage. Anciennement
+        utilis\u00e9 par une profession Lib\u00e9rale. Travaux \u00e0 pr\u00e9voir.
+        Possibilit\u00e9 d''une place de parking en sus. \nM\u00e9tro Motte-Picquet.","title":"Appartement
+        3 pi\u00e8ces 70 m2","slug":"2-chambres-avec-terrasse","user":null},{"id":1622866,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/6\/2\/2\/8\/6\/6\/1622866a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/6\/2\/2\/8\/6\/6\/1622866b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/6\/2\/2\/8\/6\/6\/1622866c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/6\/2\/2\/8\/6\/6\/1622866d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/6\/2\/2\/8\/6\/6\/1622866e.jpg.mid.jpg"],"price":"141
+        000","type":"1","target":"buy","name":"Chambre de service coeur du Marais","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"13
+        Rue Sainte-croix de la Bretonnerie","latitude":"48.858093","longitude":"2.356406","alentourweb":"48.858093,2.356406","lift":false,"bienEnCopro":true,"ceQuonAimeAgence":"Le
+        Quartier , La proximit\u00e9 des commerces ","chambreRDC":false,"chargesCopropriete":"45
+        EUR","chargesCourantesCopro":"540 EUR","heating":"Individuel","codePostal":"75004","consoEner":"Vierge","country":"France","cPVilleweb":"75004
+        PARIS","last-floor":false,"diagnostiqueEnergetique":true,"floor":3,"etatGeneral":"Bon
+        Etat","etatInterieur":"Bon","exposure":"Sud-est","exposure-living-room":"SUD
+        EST","fenetres":"Double vitrage","gES":"Vierge","grenier":false,"garden":false,"heating-mode":"Electrique","montantQuotePart":61,"bedroom":0,"nbLotsCopro":"NC","nbLotsCoproHabitation":"14","room":1,"neufAncien":"Ancien","nombreEtage":5,"price":"141
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDE":1,"standing":"Moyen","surface":"8
+        m2","surfaceCarrez":"8 m2","taxeFonciere":"113 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","city":"PARIS","wC":1},"departments":"75","matches":null,"displayLocation":"75004
+        PARIS","location":{"lat":48.858093,"lon":2.356406},"url_agency":"paris4.stephaneplazaimmobilier.com","description":"EXCLUSIVIT\u00c9:
+        Dans la rue la plus recherch\u00e9e du Marais, belle studette dans un tr\u00e8s
+        bel immeuble de la rue Sainte Croix de la Bretonnerie calme et lumineux au
+        troisi\u00e8me \u00e9tage sans ascenseur. Donne sur la cour int\u00e9rieure.  \n\nContacter
+        Monta au 07.78.52.05.72\n\nIl n''est pas \u00e9ligible \u00e0 la location.\n\nA
+        visiter sans tarder \nhttps:\/\/paris4.stephaneplazaimmobilier.com\/\n","title":"Appartement
+        1 pi\u00e8ce 8 m2","slug":"chambre-de-service-coeur-du-marais","user":null},{"id":1597441,"isExclusive":false,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441j.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441q.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/9\/7\/4\/4\/1\/1597441r.jpg.mid.jpg"],"price":"1
+        048 000","type":"1","target":"buy","name":"Appartement Paris 4 pi\u00e8ce(s)
+        75 m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"32
+        Rue Jean Mermoz","latitude":"48.871624","longitude":"2.312206","alentourweb":"48.871624,2.312206","anneeConstruction":1880,"lift":false,"bienEnCopro":true,"chambreRDC":false,"chargesCopropriete":"197
+        EUR","chargesCourantesCopro":"2 372 EUR","heating":"Individuel","codePostal":"75008","consoEner":"D","consoEnerg":157,"country":"France","cPVilleweb":"75008
+        PARIS","cuisine":"Am\u00e9nag\u00e9e\/\u00e9quip\u00e9e","last-floor":false,"floor":1,"etatGeneral":"A
+        Rafraichir","exposure":"Nord-ouest","exposure-living-room":"NORD OUEST","gardien":false,"gES":"E","honoraires":"25
+        000 EUR","loiCarrez":true,"heating-mode":"Gaz","cellar":1,"bedroom":2,"nbLotsCopro":"19","nbLotsCoproHabitation":"15","room":4,"neufAncien":"Ancien","nombreEtage":6,"price":"1
+        048 000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDB":1,"surface":"77
+        m2","surfaceCarrez":"75 m2","taxeFonciere":"1 051 EUR","typeBien":"Appartement","typeMandat":"Delegation","typeTransaction":"A
+        vendre","valeurGES":36,"city":"PARIS","volets":"Bois","wC":1},"departments":"75","matches":null,"displayLocation":"75008
+        PARIS","location":{"lat":48.871624,"lon":2.312206},"url_agency":"paris7.stephaneplazaimmobilier.com","description":"A
+        2 pas des Champs Elys\u00e9es et de la rue du Faubourg St Honor\u00e9, dans
+        un immeuble ancien, appartement 4 pi\u00e8ces enti\u00e8rement r\u00e9nov\u00e9,
+        vous proposant: une petite entr\u00e9e, un double s\u00e9jour traversant,
+        2 chambres (possibilit\u00e9 3), une cuisine am\u00e9nag\u00e9e et une salle
+        de bains avec wc. Charme de l''ancien parquet Point de Hongrie, moulures et
+        chemin\u00e9es. Bon \u00e9tat. Une cave compl\u00e8te ce bien. Ravalement
+        sur rue et cours vot\u00e9. Ecoles et commerces \u00e0 proximit\u00e9. M\u00b0
+        Franklin Roosevelt et St Philippe du Roule","title":"Appartement 4 pi\u00e8ces
+        77 m2","slug":"appartement-paris-4-pieces-75-m2","user":null},{"id":1474715,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/7\/1\/5\/1474715i.jpg.mid.jpg"],"price":"145
+        000","type":"1","target":"buy","name":"Appartement Paris 1 pi\u00e8ce(s) 9
+        m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"9
+        rue Rosa Bonheur","latitude":"48.846199","longitude":"2.309569","alentourweb":"48.846199,2.309569","anneeConstruction":1910,"lift":true,"bienEnCopro":true,"chargesCopropriete":"50
+        EUR","chargesCourantesCopro":"600 EUR","heating":"Individuel","codePostal":"75015","consoEner":"Non
+        requis","country":"France","cPVilleweb":"75015 PARIS","cuisine":"Kitchenette","last-floor":true,"diagnostiqueEnergetique":true,"floor":7,"etatGeneral":"Bon
+        Etat","exposure":"Est","gES":"Non requis","garden":false,"loiCarrez":false,"mecanismeChauffage":"Convecteurs","heating-mode":"Electrique","bedroom":1,"nbLotsCopro":"25","nbLotsCoproHabitation":"15","room":1,"neufAncien":"Ancien","nombreEtage":7,"normesAgroAlimentaires":false,"price":"145
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDE":1,"surface":"9
+        m2","surfaceCarrez":"9 m2","taxeFonciere":"300 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","city":"PARIS"},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.846199,"lon":2.309569},"url_agency":"paris15mottepicquet.stephaneplazaimmobilier.com","description":"Limite
+        7e quartier Place de Breteuil ,dans un bel immeuble Haussmannien, au 7e \u00e9tage
+        avec ascenseur, une chambre de service refaite avec douche et kichenette,
+        wc propre sur le palier belles parties communes. Louable (22m3). M\u00e9tro
+        S\u00e9gur s\u00e8vres Lecourbe.\n","title":"Appartement 1 pi\u00e8ce 9 m2","slug":"appartement-paris-1-pieces-9-m2","user":null},{"id":1571569,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569j.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/5\/7\/1\/5\/6\/9\/1571569k.jpg.mid.jpg"],"price":"1
+        100 000","type":"1","target":"buy","name":"Appartement et jardin !","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":true,"adresse":"68
+        Rue de la F\u00e9d\u00e9ration","latitude":"48.853276","longitude":"2.295838","alentourweb":"48.853276,2.295838","anneeConstruction":2000,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"La
+        terrasse expos\u00e9e Sud -ouest!","ceQuonAimeVendeur":"La terrasse expos\u00e9e
+        Sud -ouest pour les belles soir\u00e9es d''\u00e9t\u00e9!","chambreRDC":true,"chargesCourantesCopro":"2
+        221 EUR","heating":"Individuel","codePostal":"75015","consoEner":"E","consoEnerg":242,"cPVilleweb":"75015
+        PARIS","cuisine":"Am\u00e9nag\u00e9e\/\u00e9quip\u00e9e","last-floor":false,"diagnostiqueEnergetique":true,"digicode":true,"floor":0,"etatGeneral":"Bon
+        Etat","etatInterieur":"Bon","exposure-living-room":"SUD OUEST","fenetres":"Aluminium
+        Double Vitrage","gES":"C","grenier":false,"honoraires":"50 000 EUR","interphone":true,"garden":true,"loiCarrez":true,"heating-mode":"Electrique","cellar":1,"bedroom":3,"nbLotsCopro":"30","nbLotsCoproHabitation":"15","parking-spot":1,"room":4,"terrace":1,"neufAncien":"Recent","nombreEtage":6,"price":"1
+        100 000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":true,"sDE":2,"surface":"74
+        m2","surfaceCarrez":"73 m2","surfaceJardin":47,"taxeFonciere":"1 200 EUR","typeBien":"Appartement","typeDeStationnement":"Sous-Sol","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","valeurGES":12,"city":"PARIS","volets":"Roulants \u00e9lectriques","wC":1},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.853276,"lon":2.295838},"url_agency":"paris15mottepicquet.stephaneplazaimmobilier.com","description":"Limite
+        7e champ de mars, quartier Motte Picquet, venez d\u00e9couvrir cet appartement
+        3 ou 4 pi\u00e8ces au choix  car bien agenc\u00e9  ! Ce bien comprend un s\u00e9jour  agr\u00e9able
+        de 38m\u00b2 donnant directement sur la terrasse  am\u00e9nag\u00e9e et son  jardin
+        de 47 m2 expos\u00e9 sud ouest pour les longues soir\u00e9es d''\u00e9t\u00e9.
+        Vous trouverez  aussi une cuisine \u00e9quip\u00e9e id\u00e9ale pour recevoir  avec
+        son double plan en granit. Aujourd''hui 3 chambres ou demain 2  voir 1 comme
+        vous le souhaitez ! 2 salles d''eau avec douche ,des placards et des rangements
+        partout.Dans un immeuble des ann\u00e9es 2000 un parking en sus est possible
+        acc\u00e8s direct via ascenseur norme PMR. Une cave est incluse. M\u00e9tro
+        Motte Picquet.","title":"Appartement 4 pi\u00e8ces 74 m2","slug":"appartement-et-jardin","user":null},{"id":1594435,"isExclusive":false,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_1912021605\/catalog\/images\/pr_p\/1\/5\/9\/4\/4\/3\/5\/1594435j.jpg.mid.jpg"],"price":"250
+        000","type":"1","target":"buy","name":"Appartement Paris  1 pi\u00e8ce(s)
+        12 m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"55
+        rue saint louis en l''ile ","latitude":"48.852245","longitude":"2.355264","alentourweb":"48.852245,2.355264","lift":false,"bienEnCopro":true,"ceQuonAimeAgence":"Copropri\u00e9t\u00e9,
+        Localisation","ceQuonAimeVendeur":"Localisation","chambreRDC":false,"chargesCopropriete":"58
+        EUR","chargesCourantesCopro":"700 EUR","heating":"Individuel","codePostal":"75004","consoEner":"G","consoEnerg":771,"country":"france","cPVilleweb":"75004
+        paris","cuisine":"Ouverte","last-floor":false,"floor":4,"etatGeneral":"Bon
+        Etat","etatInterieur":"Bon","fenetres":"Double vitrage","gES":"D","grenier":false,"bedroom":0,"nbLotsCopro":"20","room":1,"neufAncien":"Ancien","nombreEtage":5,"price":"250
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDB":1,"standing":"Bon","surface":"12
+        m2","surfaceCarrez":"12 m2","taxeFonciere":"110 EUR","typeBien":"Appartement","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":25,"city":"paris","wC":1},"departments":"75","matches":null,"displayLocation":"75004
+        paris","location":{"lat":48.852245,"lon":2.355264},"url_agency":"paris4.stephaneplazaimmobilier.com","description":"Au
+        coeur de l''\u00cele Saint Louis dans une magnifique copropri\u00e9t\u00e9
+        en pierre de taille, charmant studio de 12 m2 au 4\u00e8me \u00e9tage sans
+        ascenseur, vendu meubl\u00e9 et refait \u00e0 neuf.\nLa pi\u00e8ce de vie
+        comporte deux grandes fen\u00eatres sur cour int\u00e9rieur, ce studio est
+        tr\u00e8s lumineux et profite du calme de la cour.\nBien rare avec peu de
+        charges.","title":"Appartement 1 pi\u00e8ce 12 m2","slug":"appartement-paris-1-pieces-12-m2","user":null},{"id":1474822,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_111408_111409\/catalog\/images\/pr_p\/1\/4\/7\/4\/8\/2\/2\/1474822i.jpg.mid.jpg"],"price":"1
+        260 000","type":"1","target":"buy","name":"Luxe et charme","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"9
+        Rue Rosa Bonheur","latitude":"48.846199","longitude":"2.309569","alentourweb":"48.846199,2.309569","anneeConstruction":1900,"lift":true,"bienEnCopro":true,"chambreRDC":false,"chargesCopropriete":"180
+        EUR","chargesCourantesCopro":"2 144 EUR","heating":"Individuel","cheminee":"Oui","codePostal":"75015","consoEner":"C","consoEnerg":132,"country":"France","cPVilleweb":"75015
+        PARIS","cuisine":"Am\u00e9nag\u00e9e\/\u00e9quip\u00e9e","last-floor":false,"diagnostiqueEnergetique":true,"digicode":true,"floor":6,"etatGeneral":"Bon
+        Etat","etatInterieur":"Tr\u00e8s bon","exposure":"Nord-ouest","exposure-living-room":"OUEST","fenetres":"PVC
+        Double Vitrage","gES":"A","grenier":false,"interphone":true,"loiCarrez":true,"mecanismeChauffage":"Radiateur","heating-mode":"Electrique","balcony":1,"cellar":1,"bedroom":2,"nbLotsCopro":"25","nbLotsCoproHabitation":"15","room":3,"neufAncien":"Ancien","nombreEtage":7,"price":"1
+        260 000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDE":1,"standing":"Bon","surface":"67
+        m2","surfaceCarrez":"67 m2","taxeFonciere":"1 500 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","valeurGES":4,"city":"PARIS","wC":1},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.846199,"lon":2.309569},"url_agency":"paris15mottepicquet.stephaneplazaimmobilier.com","description":"Limite
+        7e, quartier Breteuil \/saxe dans un bel immeuble haussmannien, au 6e \u00e9tage
+        avec asc venez d\u00e9couvrir cet appartement aux prestations de luxe cl\u00e9
+        en main, galerie d''entr\u00e9e avec miroir et spots encastr\u00e9s couleur
+        bronze, double s\u00e9jour point de hongrie et moulures avec cuisine modulnova
+        am\u00e9nag\u00e9e et \u00e9quip\u00e9e haut de gamme \u00e9l\u00e9ctrom\u00e9nager
+        Gaggenau , il\u00f4t central marbre et table en noyer, 2 chambres, dressing
+        sur mesure, wc ind Toto, salle de douches en marbre. Balcon de 4 m2 ,vendu
+        avec mobilier Starck et Knoll. Cave inclus M\u00e9tro S\u00e9gur et S\u00e8vres
+        Lecourbe.","title":"Appartement 3 pi\u00e8ces 67 m2","slug":"luxe-et-charme","user":null},{"id":1444592,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/4\/4\/5\/9\/2\/1444592j.jpg.mid.jpg"],"price":"865
+        000","type":"1","target":"buy","name":"Appartement Paris - 3 pi\u00e8ce(s)
+        - 87,87 m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"9
+        Rue de la Cit\u00e9 Universitaire","latitude":"48.8292048923","longitude":"2.3267445538","alentourweb":"48.8292048923,2.3267445538","anneeConstruction":1910,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"Emplacement","chargesCopropriete":"447
+        EUR","chargesCourantesCopro":"1 211 EUR","heating":"Collectif","codePostal":"75014","consoEner":"A","consoEnerg":0,"cPVilleweb":"75014
+        Paris","last-floor":false,"floor":0,"gES":"Non requis","honoraires":"25 000
+        EUR","honorairespc":"3 EUR","garden":false,"loiCarrez":true,"loyerHTHC":"0
+        EUR","cellar":1,"bedroom":2,"nbChambresService":0,"nbLotsCopro":".","parking-spot":1,"room":3,"neufAncien":"Ancien","nombreEtage":7,"price":"865
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":true,"secteur":"76","surface":"88
+        m2","surfaceCarrez":"77 m2","surfaceJardin":0,"surfaceTerrasse":"0 m2","taxeFonciere":"1
+        211 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","city":"Paris"},"departments":"75","matches":null,"displayLocation":"75014
+        Paris","location":{"lat":48.8292048923,"lon":2.3267445538},"url_agency":"paris14montsouris.stephaneplazaimmobilier.com","description":"En
+        exclusivit\u00e9, votre agence Stephane Plaza Immobilier vous propose un appartement
+        familial de  87m2 au sol.\nCet appartement familial aux beaux volumes vous
+        s\u00e9duira de par sa situation g\u00e9ographique, face au Parc Montsouris
+        mais \u00e9galement par le charme de son immeuble. \nAu rez-de chauss\u00e9e,
+        l''appartement se compose d''un couloir avec  nombreux rangements desservant
+        une cuisine dinatoire,  un grand s\u00e9jour, 2 chambres de 12m2 et 9m2  dont
+        une avec la salle de bain et un WC s\u00e9par\u00e9. Il dispose \u00e9galement
+        d''une pi\u00e8ce de dressing donnant acc\u00e8s direct par escalier \u00e0
+        un espace buanderie enti\u00e8rement carrel\u00e9e.\nPour la s\u00e9curit\u00e9,
+        l''immeuble dispose d''un gardien ainsi que deux portes \u00e9quip\u00e9es
+        de digicode et interphone. \nA deux pas de l''appartement, une place de parking
+        de 28m2 avec une mezzanine de 10m2 pourra vous \u00eatre propos\u00e9e en
+        sus (demander \u00e0 l''Agence).\n","title":"Appartement 3 pi\u00e8ces 87.87
+        m2","slug":"appartement-paris-3-pieces-8787-m2","user":null},{"id":1596842,"isExclusive":false,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/5\/9\/6\/8\/4\/2\/1596842i.jpg.mid.jpg"],"price":"440
+        000","type":"1","target":"buy","name":"Appartement Paris 2 pi\u00e8ce(s) 35.25
+        m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"35
+        Avenue Reille","latitude":"48.823942","longitude":"2.33459","alentourweb":"48.823942,2.33459","lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"Calme
+        et Luminosit\u00e9 ","chambreRDC":false,"chargesCourantesCopro":"1 320 EUR","heating":"Individuel","codePostal":"75014","consoEner":"F","consoEnerg":444,"country":"France","cPVilleweb":"75014
+        PARIS","last-floor":false,"diagnostiqueEnergetique":true,"floor":4,"gES":"C","grenier":false,"honoraires":"10
+        000 EUR","mecanismeChauffage":"Convecteurs","heating-mode":"Electrique","cellar":1,"bedroom":1,"nbLotsCopro":"29","room":2,"neufAncien":"Ancien","nombreEtage":6,"price":"440
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"secteur":"8","surface":"35
+        m2","surfaceCarrez":"35 m2","taxeFonciere":"423 EUR","typeBien":"Appartement","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":14,"city":"PARIS"},"departments":"75","matches":null,"displayLocation":"75014
+        PARIS","location":{"lat":48.823942,"lon":2.33459},"url_agency":"paris14montsouris.stephaneplazaimmobilier.com","description":"St\u00e9phane
+        Plaza Immobilier Paris 14 Montsouris, vous propose proche du r\u00e9servoir
+        Montsouris et du parc, au 4\u00e8me \u00e9tage avec ascenseur, un appartement
+        deux pi\u00e8ces transform\u00e9 en grand studio, comprenant une entr\u00e9e,
+        une spacieuse pi\u00e8ce de vie calme et lumineuse avec beaucoup de rangements,
+        une cuisine am\u00e9nag\u00e9e et \u00e9quip\u00e9e , une salle d''eau et
+        un WC s\u00e9par\u00e9. \nAucun travaux \u00e0 pr\u00e9voir.\nUn local \u00e0
+        v\u00e9lo et une cave compl\u00e8te ce bien. ","title":"Appartement 2 pi\u00e8ces
+        35.25 m2","slug":"appartement-paris-2-pieces-3525-m2","user":null},{"id":1428057,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/2\/8\/0\/5\/7\/1428057a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/2\/8\/0\/5\/7\/1428057b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/2\/8\/0\/5\/7\/1428057c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/2\/8\/0\/5\/7\/1428057d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/plaza_montsouris\/catalog\/images\/pr_p\/1\/4\/2\/8\/0\/5\/7\/1428057e.jpg.mid.jpg"],"price":"360
+        000","type":"1","target":"buy","name":"Appartement Paris - 2 pi\u00e8ce(s)
+        - 33,11 m2","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":false,"adresse":"3
+        cit\u00e9 Annibal","latitude":"48.8292048923","longitude":"2.3267445538","alentourweb":"48.8292048923,2.3267445538","anneeConstruction":1864,"lift":false,"bienEnCopro":true,"chargesCopropriete":"0
+        EUR","chargesCourantesCopro":"0 EUR","heating":"Individuel","codePostal":"75014","consoEner":"Vierge","cPVilleweb":"75014
+        Paris","cuisine":"Kitchenette","last-floor":false,"diagnostiqueEnergetique":true,"floor":0,"etatInterieur":"Renove","gES":"Vierge","honoraires":"10
+        000 EUR","interphone":true,"garden":false,"loyerHTHC":"0 EUR","mecanismeChauffage":"Convecteurs","heating-mode":"Electrique","cellar":0,"bedroom":1,"nbChambresService":0,"nbLotsCopro":"6","nbLotsCoproHabitation":"6","parking-spot":0,"room":2,"neufAncien":"Ancien","nombreEtage":0,"price":"360
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":true,"sDE":1,"secteur":"4","surface":"33
+        m2","surfaceCarrez":"33 m2","surfaceJardin":0,"surfaceTerrasse":"0 m2","taxeFonciere":"0
+        EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","city":"Paris","wC":1},"departments":"75","matches":null,"displayLocation":"75014
+        Paris","location":{"lat":48.8292048923,"lon":2.3267445538},"url_agency":"paris14montsouris.stephaneplazaimmobilier.com","description":"EXCLUSIVIT\u00c9
+        - Au coeur de la cit\u00e9 Annibal - Comme une maison, l''agence St\u00e9phane
+        Plaza Immobilier vous propose ce grand studio  enti\u00e8rement r\u00e9nov\u00e9
+        d''une surface totale de 33,11m\u00b2  (32,82 m\u00b2 loi carrez) sur deux
+        niveaux. Il se compose d''une petite entr\u00e9e desservant un coin bureau\/
+        rangement et une pi\u00e8ce de vie ouverte sur un coin cuisine.\nAu sous-sol
+        se trouve l''espace nuit ainsi que la salle d''eau avec son WC.\nBeaucoup
+        de charme pour cet appartement atypique.\nId\u00e9al primo acc\u00e9dant ou
+        investisseurs.\nCoup de coeur assur\u00e9 !\n","title":"Appartement 2 pi\u00e8ces
+        33.11 m2","slug":"appartement-paris-2-pieces-3311-m2","user":null},{"id":1527196,"isExclusive":false,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196g.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196h.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196i.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196j.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/spi_paris12daumesnil\/catalog\/images\/pr_p\/1\/5\/2\/7\/1\/9\/6\/1527196k.jpg.mid.jpg"],"price":"796
+        000","type":"1","target":"buy","name":"APPARTEMENT DE 4 PIECES FONCTIONNEL
+        AVEC BALCONS","isFavorited":false,"ratio":null,"score":null,"properties":{"access-bus":"0
+        min","access-school":"2 min","handicap":true,"access-subway":"2 min","adresse":"111
+        RUE DE REUILLY","latitude":"48.842340702123714","longitude":"2.392976761911996","alentourweb":"48.842340702123714,2.392976761911996","anneeConstruction":1965,"lift":true,"bienEnCopro":true,"ceQuonAimeAgence":"Situation,
+        clart\u00e9, balcons, 3 chambres","chambreRDC":false,"chargesCourantesCopro":"3
+        600 EUR","heating":"Collectif","codePostal":"75012","consoEner":"D","consoEnerg":186,"country":"FRANCE","cPVilleweb":"75012
+        PARIS","cuisine":"Ind\u00e9pendante, am\u00e9nag\u00e9e et \u00e9quip\u00e9e","last-floor":false,"diagnostiqueEnergetique":true,"digicode":true,"floor":1,"etatGeneral":"Bon
+        Etat","etatInterieur":"Bon","exposure":"Sud-ouest","exposure-living-room":"SUD
+        OUEST","gardien":true,"gES":"D","grenier":false,"interphone":true,"loiCarrez":true,"mecanismeChauffage":"Accumulateurs","heating-mode":"Gaz","balcony":2,"cellar":1,"bedroom":3,"nbGarage":0,"nbLotsCopro":"239","parking-spot":1,"room":4,"terrace":0,"neufAncien":"Recent","nombreEtage":12,"piscine":false,"portailElectrique":false,"price":"796
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":false,"sDB":1,"sDE":0,"secteur":"DAUMESNIL","sousSol":false,"standing":"Bon","surface":"78
+        m2","surfaceCarrez":"74 m2","surfaceSejour":"20 m2","taxeFonciere":"1 200
+        EUR","typeBien":"Appartement","typeDeStationnement":"Sous-Sol","typeMandat":"Simple","typeTransaction":"A
+        vendre","valeurGES":32,"veranda":false,"city":"PARIS","visiophone":false,"view":"RUE
+        ET COUR","wC":1},"departments":"75","matches":null,"displayLocation":"75012
+        PARIS","location":{"lat":48.842340702123714,"lon":2.392976761911996},"url_agency":"paris12placedaumesnil.stephaneplazaimmobilier.com","description":"Notre
+        Agence St\u00e9phane Plaza a le plaisir de vous proposer un appartement familial
+        avec 3 chambres, lumineux et fonctionnel. Pour vos courses, vous \u00eates
+        \u00e0 3mn \u00e0 pied de la Place F\u00e9lix \u00c9bou\u00e9 avec tous ses
+        commerces. Pour vos enfants, vous avez les \u00e9coles \"St Michel de Picpus\"
+        et \"Ste Clothilde\" qui sont r\u00e9put\u00e9es. R\u00e9sidence s\u00e9curis\u00e9e
+        avec gardien, digicode et interphone.\nParlons de cet appartement d''une surface
+        de 73,54 m carrez et de plus de 12 m carrez de balcons. Ce dernier se d\u00e9compose
+        une entr\u00e9e, une cuisine ind\u00e9pendante \u00e9quip\u00e9e, un s\u00e9jour
+        (vous avez la possibilit\u00e9 d''ouvrir la cuisine afin d''obtenir une pi\u00e8ce
+        de vie de 36 m\u00b2), 3 chambres, une salle de bains, un WC s\u00e9par\u00e9
+        et une cave. \nVous pourrez profiter pleinement des balcons de 12m\u00b2 expos\u00e9s
+        Sud-Ouest pour boire un verre ou partager un repas avec vos amis.\nSitu\u00e9
+        au premier \u00e9tage mais en retrait de la rue, ce bien b\u00e9n\u00e9ficie
+        d''une vue tr\u00e8s d\u00e9gag\u00e9e et d''une belle luminosit\u00e9.\nA
+        visiter sans aucune h\u00e9sitation ! Contacter Chantal au 0645738217.","title":"Appartement
+        4 pi\u00e8ces 78 m2","slug":"appartement-de-4-pieces-fonctionnel-avec-balcons","user":null},{"id":1638199,"isExclusive":true,"has360":null,"has3d":null,"hasPaint":null,"thumbnails":["https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199a.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199b.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199c.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199d.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199e.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199f.jpg.mid.jpg","https:\/\/media.immo-facile.com\/office10\/stepha_2001221045\/catalog\/images\/pr_p\/1\/6\/3\/8\/1\/9\/9\/1638199g.jpg.mid.jpg"],"price":"511
+        000","type":"1","target":"buy","name":"Maisonnette de 40.60 m2 en plein coeur
+        du quartier Montparnasse","isFavorited":false,"ratio":null,"score":null,"properties":{"handicap":true,"adresse":"14
+        Rue Antoine Bourdelle","latitude":"48.843056","longitude":"2.319048","alentourweb":"48.843056,2.319048","lift":false,"bienEnCopro":true,"chambreRDC":false,"chargesCourantesCopro":"1
+        027 EUR","heating":"Individuel","codePostal":"75015","consoEner":"Non requis","country":"France","cPVilleweb":"75015
+        PARIS","cuisine":"Am\u00e9nag\u00e9e\/\u00e9quip\u00e9e","last-floor":false,"diagnostiqueEnergetique":true,"floor":0,"gES":"Non
+        requis","bedroom":1,"nbLotsCopro":"93","room":2,"neufAncien":"Ancien","nombreEtage":1,"price":"511
+        000 EUR","proceduresVSSyndicCopro":"Pas de proc\u00e9dure en cours","first-floor":true,"sDB":1,"surface":"41
+        m2","surfaceCarrez":"34 m2","taxeFonciere":"500 EUR","typeBien":"Appartement","typeMandat":"Exclusif","typeTransaction":"A
+        vendre","city":"PARIS"},"departments":"75","matches":null,"displayLocation":"75015
+        PARIS","location":{"lat":48.843056,"lon":2.319048},"url_agency":"saintouen.stephaneplazaimmobilier.com","description":"EXCLUSIVITE
+        - A deux pas de la gare MONTPARNASSE, de ses nombreux transports, restaurants
+        et th\u00e9\u00e2tres, STEPHANE PLAZA IMMOBILIER vous propose cette charmante
+        maisonnette de 40,60m2 au sol et 33,72 m2 en loi Carrez. Ce bien atypique
+        et rare sur le march\u00e9 est id\u00e9alement agenc\u00e9: en duplex avec
+        beaucoup de luminosit\u00e9, au calme au fond de la cour d''une r\u00e9sidence
+        ancienne tr\u00e8s bien tenue et sans proc\u00e9dure en cours. Le bien a \u00e9t\u00e9
+        enti\u00e8rement r\u00e9nov\u00e9 il y a quelques mois, vous n''aurez qu''\u00e0
+        poser vos valises dans ce petit havre de paix. A visiter sans tarder ! \n","title":"Appartement
+        2 pi\u00e8ces 40.6 m2","slug":"maisonnette-de-4060-m2-en-plein-coeur-du-quartier-montparnasse","user":null}]}'
+    http_version: null
+  recorded_at: Wed, 01 Apr 2020 14:55:20 GMT
+recorded_with: VCR 5.1.0

@@ -40,7 +40,12 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
 
   describe "Manychat send methods" do
     before :all do
-      @sub = FactoryBot.create(:subscriber_fred)
+      @sub = FactoryBot.create(:subscriber_fred, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
+      @sub.areas << Area.new(name: "75010")
+      date = Date.today
+      date = Time.parse(date.to_time.in_time_zone('Europe/Paris').beginning_of_day.to_s)
+      @property = FactoryBot.create(:property, created_at: date, price: @sub.max_price, surface: @sub.min_surface, area: @sub.areas.first.name, rooms_number: @sub.min_rooms_number, floor: nil, has_elevator: nil)
+      FactoryBot.create(:favorite, subscriber: @sub, property: @property)
     end
 
     describe "send last X properties to a subscriber" do

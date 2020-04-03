@@ -19,7 +19,8 @@ class SmallSites::ScraperGreenAcres < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.green-acres.fr" + access_xml_link(item, "a", "href")[0].to_s
         hashed_property[:surface] = access_xml_text(item, "div.item-details > ul > li.details-component.in-meters.align-center").tr("\r\n\t", "").to_int_scrp
-        hashed_property[:rooms_number] = access_xml_text(item, "div.item-details > ul > li:nth-child(2)").to_int_scrp
+        access_xml_text(item, "div.item-details > ul > li:nth-child(2)").empty? ? hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h3.item-title.has-summary"), "(\d+)(.?)(pi(e|è)ce(s?))").to_int_scrp : hashed_property[:rooms_number] = access_xml_text(item, "div.item-details > ul > li:nth-child(2)").to_int_scrp
+        next if hashed_property[:rooms_number] == 0
         hashed_property[:price] = access_xml_text(item, "p.item-price").to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])

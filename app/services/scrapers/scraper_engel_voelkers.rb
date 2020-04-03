@@ -21,6 +21,7 @@ class ScraperEngelVoelkers < Scraper
         hashed_property[:surface] = regex_gen(access_xml_text(item, "div.ev-teaser-attributes > div:last-child"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.ev-value"), '(\d)(.*)').to_int_scrp
         hashed_property[:area] = access_xml_text(item, ".ev-teaser-subtitle").area_translator_scrp
+        next if hashed_property[:area] == "N/C"
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(html, "ul.ev-exposee-detail-facts"), 'Pi(e|è)ce(s?)(.?)(\d+)').to_int_scrp
