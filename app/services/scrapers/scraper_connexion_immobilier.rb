@@ -24,6 +24,7 @@ class ScraperConnexionImmobilier < Scraper
         hashed_property[:price] = access_xml_text(item, '.price').to_int_scrp
 
         if go_to_prop?(hashed_property, 7)
+          hashed_property[:description] = ""
           hashed_property[:bedrooms_number] = access_xml_text(item, '.bedrooms').to_int_scrp
         access_xml_text(item, '.floor') == "RDC" ? hashed_property[:floor] = 0 : hashed_property[:floor] = access_xml_text(item, '.floor').to_int_scrp
         (access_xml_link(item, '.floor', 'class' )[0].include?("nolift") || access_xml_link(item, '.floor', 'class' )[0].include?("floorrdc")) ? hashed_property[:has_elevator] = false : hashed_property[:has_elevator] = true
@@ -35,8 +36,6 @@ class ScraperConnexionImmobilier < Scraper
           i += 1
           break if i == limit
         end
-        byebug
-
       rescue StandardError => e
         puts "\nError for #{@source}, skip this one."
         puts "It could be a bad link or a bad xml extraction.\n\n"
