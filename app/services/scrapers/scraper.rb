@@ -171,9 +171,11 @@ class Scraper
   ###########################
 
   def access_xml_text(page, css_selector)
+    data = []
     page.css(css_selector).each do |item|
-      return item.text
+      data.push(item.text)
     end
+    data.empty? ? "" : data.join(" ")
   end
 
   def access_xml_array_to_text(page, css_selector)
