@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperOrpi, type: :service do
+RSpec.describe SmallSites::ScraperOrpi, type: :service do
   before(:all) do
-    @s = ScraperOrpi.new
+    @s = SmallSites::ScraperOrpi.new
   end
 
   it "should launch and return proper number of properties" do

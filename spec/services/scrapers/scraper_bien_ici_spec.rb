@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperBienIci, type: :service do
+RSpec.describe RegularSites::ScraperBienIci, type: :service do
   before(:all) do
-    @s = ScraperBienIci.new
+    @s = RegularSites::ScraperBienIci.new
   end
 
   it "should launch and return proper number of properties" do

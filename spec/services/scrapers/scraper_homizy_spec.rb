@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperHomizy, type: :service do
+RSpec.describe SmallSites::ScraperHomizy, type: :service do
   before(:all) do
-    @s = ScraperHomizy.new
+    @s = SmallSites::ScraperHomizy.new
   end
 
   it "should launch and return proper number of properties" do

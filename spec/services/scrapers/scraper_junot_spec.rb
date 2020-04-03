@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperJunot, type: :service do
+RSpec.describe SmallSites::ScraperJunot, type: :service do
   before(:all) do
-    @s = ScraperJunot.new
+    @s = SmallSites::ScraperJunot.new
   end
 
   it "should launch and return proper number of properties" do

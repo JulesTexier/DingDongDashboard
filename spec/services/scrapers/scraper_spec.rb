@@ -168,7 +168,7 @@ RSpec.describe Scraper, type: :service do
   describe "XML ACCESSORS METHODS" do
     before(:each) do
       @s = Scraper.new
-      @ssi = ScraperSuperImmo.new
+      @ssi = RegularSites::ScraperSuperImmo.new
       @html = @ssi.fetch_static_page(@ssi.url)
     end
     context "access_xml_text" do
@@ -270,9 +270,9 @@ RSpec.describe Scraper, type: :service do
   describe "FETCH METHODS" do
     before(:each) do
       @s = Scraper.new
-      @si = ScraperSuperImmo.new
-      @skmi = ScraperKmi.new
-      @sbi = ScraperBienIci.new
+      @si = RegularSites::ScraperSuperImmo.new
+      @skmi = SmallSites::ScraperKmi.new
+      @sbi = RegularSites::ScraperBienIci.new
     end
 
     it "should return a Nokogori element'" do

@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperSeLoger, type: :service do
+RSpec.describe PremiumSites::ScraperSeLoger, type: :service do
   before(:all) do
-    @s = ScraperSeLoger.new
+    @s = PremiumSites::ScraperSeLoger.new
   end
 
   it "should launch and return proper number of properties" do
