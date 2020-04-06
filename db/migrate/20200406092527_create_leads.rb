@@ -10,7 +10,8 @@ class CreateLeads < ActiveRecord::Migration[6.0]
       t.string :project_type
       t.array :areas
       t.text :additional_question
-      t.string :specific_criteria=textsource
+      t.text :specific_criteria
+      t.string :source
 
       t.timestamps
     end
