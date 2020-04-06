@@ -6,6 +6,7 @@ class CreateBrokers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :phone
       t.string :agency
+      t.string :trello_id
       t.string :trello_lead_list_id
       t.string :trello_board_id
 

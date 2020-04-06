@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_134736) do
     t.string "email"
     t.string "phone"
     t.string "agency"
+    t.string "trello_id"
     t.string "trello_lead_list_id"
     t.string "trello_board_id"
     t.datetime "created_at", precision: 6, null: false
