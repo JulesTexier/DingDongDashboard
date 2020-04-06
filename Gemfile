@@ -47,6 +47,9 @@ gem "table_print"
 # RSPEC
 gem "rspec-retry"
 
+# Postmark
+gem 'postmark-rails'
+
 # Mongo gem for migration purpose
 gem "mongo", "~> 2.7"
 
