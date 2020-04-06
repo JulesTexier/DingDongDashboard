@@ -136,9 +136,70 @@ class String
     end
   end
 
+  def district_regex_scrp
+    area_regex = '(?<=paris)(.?)(\d+)(.?)(er|e|)|(?<=paris)(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
+    area = self.match(/#{area_regex}/i).to_s
+    case area.gsub("arr", "").tr(" ", "")
+    when "1er", "1e", "i", "1"
+      return "1"
+    when "2eme", "2e", "ii", "2"
+      return "2"
+    when "3eme", "3e", "iii", "3"
+      return "3"
+    when "4eme", "4e", "iv", "4"
+      return "4"
+    when "5eme", "5e", "v", "5"
+      return "5"
+    when "6eme", "6e", "vi", "6"
+      return "6"
+    when "7eme", "7e", "vii", "7"
+      return "7"
+    when "8eme", "8e", "viii", "8"
+      return "8"
+    when "9eme", "9e", "ix", "9"
+      return "9"
+    when "10eme", "10e", "x", "10"
+      return "10"
+    when "11eme", "11e", "xi", "11"
+      return "11"
+    when "12eme", "12e", "xii", "12"
+      return "12"
+    when "13eme", "13e", "xiii", "13"
+      return "13"
+    when "14eme", "14e", "xiv", "14"
+      return "14"
+    when "15eme", "15e", "xv", "15"
+      return "15"
+    when "16eme", "16e", "xvi", "16"
+      return "16"
+    when "17eme", "17e", "xvii", "17"
+      return "17"
+    when "18eme", "18e", "xviii", "18"
+      return "18"
+    when "19eme", "19e", "xix", "19"
+      return "19"
+    when "20eme", "20e", "xx", "20"
+      return "20"
+    else
+      return "N/C"
+    end
+  end
+
+  ## Using the city as parameters, we should be able to determinate full postcode by cities for its district
+  def district_generator_scrp
+    if self.length == 2
+      return "750#{self}"
+    elsif self.length == 1
+      return "7500#{self}"
+    else
+      return "N/C"
+    end
+  end
+
   ################################################
   ## TRANSLATE AREA, WHEN FORMAT Paris-03
   ################################################
+
   def district_generator
     if self.length == 2
       return "750#{self}"
