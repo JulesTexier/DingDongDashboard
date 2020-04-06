@@ -33,7 +33,7 @@ class Api::V1::TypeformController < ApplicationController
           params[:pos] = 'top'
           params[:due] = Time.now + 15.minutes
 
-          b = Broker.first
+          b = Broker.get_current_broker
           params[:idMembers] = b.trello_id
 
           # 1• Create card on tello Board 
