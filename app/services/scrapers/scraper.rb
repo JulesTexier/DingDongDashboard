@@ -159,11 +159,18 @@ class Scraper
   end
 
   ###########################
-  ## GENERIC LOGIC METHOD  ##
+  ## GENERIC METHOD  ##
   ###########################
 
   def page_nbr_to_url(url, page_nbr)
     url.gsub("[[PAGE_NUMBER]]", page_nbr.to_s)
+  end
+
+  def error_outputs(e, source)
+    unless Rails.env.test?
+      puts "\nError for #{@source}, skip this one."
+      puts "It could be a bad link or a bad xml extraction.\n\n"
+    end
   end
 
   ###########################
