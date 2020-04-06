@@ -45,8 +45,7 @@ class ScraperLesParisiennesImmo < Scraper
           end
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end
