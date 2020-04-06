@@ -237,9 +237,18 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  # We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
-  # We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
-  # And the we send it in an array for insertion.
+  def perform_district_regex(str)
+    if str.match('(75|69)(\d{3})').is_a?(MatchData)
+      post_code = str.match('(75|69)(\d{3})').to_s
+      post_code == "75116" ? "75016" : post_code
+    else
+      str.remove_acc_scrp.district_regex_scrp.district_generator_scrp
+    end
+  end
+
+  ## We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
+  ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
+  ## And the we send it in an array for insertion.
   def perform_subway_regex(str)
     subways = JSON.parse(File.read("./db/data/subways.json"))
     subways_ids = []
