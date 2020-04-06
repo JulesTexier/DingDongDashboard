@@ -24,7 +24,7 @@ class ScraperMorissImmobilier < Scraper
           hashed_property = {}
           hashed_property[:link] = access_xml_link(item, "div.item > a", "href")[0].to_s
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.infosize_unit_type4 > span"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = regex_gen(access_xml_text(item, "div.property_address_type4 > span > a"), '(\d+){2}').district_generator
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.property_address_type4 > span > a"))
           next if hashed_property[:area] == "N/C"
           hashed_property[:rooms_number] = access_xml_text(item, "div.inforoom_unit_type4 > span").to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.listing_unit_price_wrapper").to_int_scrp

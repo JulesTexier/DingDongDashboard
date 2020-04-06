@@ -19,7 +19,7 @@ class ScraperEfficity < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.efficity.com" + access_xml_link(item, "a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "a > figcaption > h3 > span > span"), '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "a > figcaption > h3 > span > span"))
         hashed_property[:price] = regex_gen(access_xml_text(item, "a > div > div > strong > span"), '(\d)(.*)(€)').to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])

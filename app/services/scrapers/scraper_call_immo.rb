@@ -19,7 +19,7 @@ class ScraperCallImmo < Scraper
         hashed_property = {}
         hashed_property[:link] = "http://www.callimmo.fr" + access_xml_link(item, "div.overlay-container > a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_text(item, "ul.inline-list"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = access_xml_text(item, "div.vertical-align > h2").area_translator_scrp
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.vertical-align > h2"))
         next if hashed_property[:area] == "N/C"
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.vertical-align > h2").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.vertical-align > h3"), '(\d)(.*)(€)').to_int_scrp

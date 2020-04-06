@@ -22,7 +22,7 @@ class ScraperDeliquietImmobilier < Scraper
         hashed_property = {}
         hashed_property[:link] = access_xml_link(item, ".titreBien", "href")[0].to_s.gsub("../", "http://www.deliquiet-immobilier.com/")
         hashed_property[:surface] = regex_gen(access_xml_text(item, ".carac"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(item.text, 'paris (\d)*e').to_int_scrp.to_s.district_generator
+        hashed_property[:area] = perform_district_regex(item.text)
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".carac"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         price_item = access_xml_text(item, ".carac > div:nth-child(3)")
         price_item.include?("dont") ? hashed_property[:price] = regex_gen(price_item, '(\d)(.*)(dont)').to_int_scrp : hashed_property[:price] = price_item.to_int_scrp

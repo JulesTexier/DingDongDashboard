@@ -23,7 +23,7 @@ class ScraperLiberkeys < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://liberkeys.com/portails/" + item["slug"]
         hashed_property[:surface] = item["surface"].to_i
-        hashed_property[:area] = regex_gen(item["address"], '(Paris)(.?)(\d+)').to_int_scrp.to_s.district_generator
+        hashed_property[:area] = perform_district_regex(item["address"])
         hashed_property[:rooms_number] = item["room_count"]
         hashed_property[:price] = item["price"].to_i
         if go_to_prop?(hashed_property, 7)

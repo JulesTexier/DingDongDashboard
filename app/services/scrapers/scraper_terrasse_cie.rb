@@ -17,7 +17,7 @@ class ScraperTerrasseCie < Scraper
       begin
         hashed_property = {}
         hashed_property[:link] = "http://www.terrasse-cie.com" + access_xml_link(item, "a.button", "href")[1].to_s
-        hashed_property[:area] = access_xml_text(item, "h2").area_translator_scrp
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2"))
         hashed_property[:surface] = regex_gen(access_xml_text(item, "li.area"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "li.price > div"), '(\d)(.*)').to_int_scrp != 0 ? regex_gen(access_xml_text(item, "li.price > div"), '(\d)(.*)').to_int_scrp : nil
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")

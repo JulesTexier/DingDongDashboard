@@ -24,7 +24,7 @@ class ScraperGuyHoquet < Scraper
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.price"), '(\d)(.*)(€)').to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          hashed_property[:area] = regex_gen(html.text, '(75)$*\d+{3}')
+          hashed_property[:area] = perform_district_regex(html.text)
           hashed_property[:description] = access_xml_text(html, "span.description-more").strip
           hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp
           hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "h1"))

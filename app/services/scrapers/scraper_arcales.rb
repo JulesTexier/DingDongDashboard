@@ -20,7 +20,7 @@ class ScraperArcales < Scraper
         hashed_property = {}
         hashed_property[:link] = "http://www.arcales.fr" + access_xml_link(item, "h1 > a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(\d+(.?)(\d*))(.)(m²)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "h2"), '(Paris (.)(\d+))').tr("^0-9", "").to_s
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2"))
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-xs-12.col-sm-5.panel-heading > ul > li:nth-child(2) > span:nth-child(2) > span:nth-child(1)"), '(\d)(.*)').to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp

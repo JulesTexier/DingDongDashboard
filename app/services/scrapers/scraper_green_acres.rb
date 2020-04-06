@@ -25,7 +25,7 @@ class ScraperGreenAcres < Scraper
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "#mainInfoAdvertPage > div > ul"), '(\d+)(.?)(chambre(s?))').to_int_scrp
-          hashed_property[:area] = access_xml_text(html, "a.item-location > p").area_translator_scrp
+          hashed_property[:area] = perform_district_regex(access_xml_text(html, "a.item-location > p"))
           hashed_property[:description] = access_xml_text(html, "#DescriptionDiv > p").specific_trim_scrp("\n").strip
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])

@@ -22,7 +22,7 @@ class ScraperOrpi < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.orpi.com/annonce-vente-" + item["slug"]
         hashed_property[:surface] = item["surface"].to_i
-        item["locationDescription"].include?("Paris") ? hashed_property[:area] = "750" + item["locationDescription"].tr("^0-9", "") : nil
+        hashed_property[:area] = perform_district_regex(item["locationDescription"])
         hashed_property[:rooms_number] = item["nbRooms"]
         hashed_property[:price] = item["price"].to_i
         if go_to_prop?(hashed_property, 7)

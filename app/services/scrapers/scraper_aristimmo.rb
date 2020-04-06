@@ -23,7 +23,7 @@ class ScraperAristimmo < Scraper
         hashed_property[:link] = "https://www.aristimmo.com" + access_xml_link(item, ".bienTitle > h1 > a", "href")[0].to_s
         title = access_xml_text(item, ".bienTitle > h2").strip.gsub(" ", "").gsub(/[^[:print:]]/, "")
         hashed_property[:surface] = regex_gen(title, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(title, '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(title)
         hashed_property[:rooms_number] = regex_gen(title, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = item.at("//span[@itemprop = 'price']").children[0].to_s.to_int_scrp
         if go_to_prop?(hashed_property, 7)

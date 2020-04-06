@@ -18,7 +18,7 @@ class ScraperJunot < Scraper
       begin
         hashed_property = {}
         hashed_property[:link] = access_xml_link(item, "a.title-article", "href")[0].to_s
-        hashed_property[:area] = regex_gen(access_xml_text(item, "a.title-article > span:nth-child(1)").downcase, 'paris(\s)(\d)*e').to_int_scrp.to_s.district_generator
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "a.title-article > span:nth-child(1)"))
         hashed_property[:rooms_number] = access_xml_text(item, 'span[itemprop="numberOfRooms"]').to_int_scrp
         hashed_property[:surface] = access_xml_text(item, 'span[itemprop="floorSize"]').to_float_to_int_scrp
         hashed_property[:price] = access_xml_text(item, ".price> span:nth-child(1) > span:nth-child(1)").gsub(" ", "").to_int_scrp
