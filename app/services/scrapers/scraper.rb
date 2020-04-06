@@ -66,15 +66,15 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}" unless Rails.env.test?
       res = Net::HTTP.get_response(uri)
       raise ScrappingBeeError unless res.code == "200"
     rescue
-      puts "Trying again for #{source} - #{res.code}\n\n"
+      puts "Trying again for #{source} - #{res.code}\n\n" unless Rails.env.test?
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
+      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
