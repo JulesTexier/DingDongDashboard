@@ -30,23 +30,15 @@ class ScraperLadresse < Scraper
           hashed_property[:rooms_number] = 1
           hashed_property[:bedrooms_number] = 1
         else
-          hashed_property[:rooms_number] = "N/C"
+          hashed_property[:rooms_number] = nil
         end
-
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:rooms_number] = access_xml_text(html, "ul.list-criteres > li:nth-child(1) > span").to_int_scrp
           hashed_property[:description] = access_xml_text(html, "div.content-desc").tr("\n\t", "").strip
-          # hashed_property[:area] = regex_gen(access_xml_text(html, "div.agence-title"), 'PARIS(...)(\d+)').tr("^0-9", "").to_s # + update_area
           agency_area = perform_district_regex(access_xml_text(html, "div.agence-title"))
           desc_area = perform_district_regex(hashed_property[:description])
           desc_area != agency_area && desc_area != "N/C" ? hashed_property[:area] = desc_area : hashed_property[:area] = agency_area
-          puts "\n\n"
-          puts "*****" * 10
-          puts "AGENCY_link =>  " + hashed_property[:link]
-          puts "AGENCY_AREA => " + agency_area
-          puts "DESC_AREA => " + desc_area
-          puts "FINAL_AREA => " + hashed_property[:area]
           hashed_property[:floor] = regex_gen(access_xml_text(html, "ul.list-criteres > li:last-child > span"), '(\d+)/').to_int_scrp
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
@@ -59,7 +51,6 @@ class ScraperLadresse < Scraper
           i += 1
           break if i == limit
         end
-        # puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
         next
