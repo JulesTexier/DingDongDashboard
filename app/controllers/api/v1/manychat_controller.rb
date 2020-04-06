@@ -11,7 +11,7 @@ class Api::V1::ManychatController < ApplicationController
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
   def update_subscriber
     begin
-      subscriber = Subscriber.find(subscriber_params[:subscriber_id])
+      subscriber = Subscriber.find(params[:subscriber_id])
       if subscriber.update(subscriber_params.except(:subscriber_id, :message))
         if subscriber_params[:message] == "reactivation"
           render json: send_text_message(subscriber, "🔥 Ton alerte a été réactivée !", 'success')
@@ -27,6 +27,20 @@ class Api::V1::ManychatController < ApplicationController
       end
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
+    end
+  end
+
+  # POST  (update lead) /manychat/l/:lead_id/update
+  def update_lead
+    begin
+      lead = Lead.find(params[:lead_id])
+      if lead.update(lead_params.except(:lead_id))
+        render json: { status: "SUCCESS", message: "Lead updated", data: lead }, status: 200
+      else
+        render json: { status: "ERROR", message: "Lead not updated", data: nil }, status: 500
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
     end
   end
 
@@ -169,6 +183,10 @@ class Api::V1::ManychatController < ApplicationController
   def subscriber_params
     # params.permit(:firstname, :lastname, :email, :phone, :is_active)
     params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message)
+  end
+
+  def lead_params
+    params.permit(:id, :name, :email, :phone, :status, :broker_id, :lead_id)
   end
 
   def authentificate
