@@ -1,5 +1,7 @@
 class Lead < ApplicationRecord
 
+  belongs_to :broker
+
   def trello_description
     desc = ""
     desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
