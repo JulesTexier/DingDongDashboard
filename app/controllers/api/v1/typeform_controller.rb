@@ -9,8 +9,8 @@ class Api::V1::TypeformController < ApplicationController
       lead[:phone] = anwers[9]["phone_number"]
       lead[:email] = anwers[8]["email"]
       lead[:has_messenger] = anwers[6]["boolean"]
-      lead[:question] = anwers[5]["text"]
-      lead[:more_criteria] = anwers[4]["text"]
+      lead[:additional_question] = anwers[5]["text"]
+      lead[:specific_criteria] = anwers[4]["text"]
       lead[:areas] = ansewers[3]["choices"]["labels"].join(",")
       lead[:min_surface] = answers[2]["number"]
       lead[:max_price] = answers[1]["number"]
@@ -18,7 +18,7 @@ class Api::V1::TypeformController < ApplicationController
 
       lead = Lead.new(lead)
       if lead.save
-        puts "A new lead has been genrated"
+        puts "A new lead has been generated"
       else
         puts "Oops, error while genrating a new lead"
       end
