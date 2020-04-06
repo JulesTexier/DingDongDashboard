@@ -84,62 +84,56 @@ class String
     return lift
   end
 
-  ################################################
-  ## TRANSLATE AREA, MAINLY FOR MEILLEURSAGENTS ##
-  ################################################
-  def area_translator_scrp
-    area_regex = '(\d+)(.?)(er|(è|e)me)'
+  def district_regex_scrp
+    area_regex = '(?<=paris )(.?)(\d+)(.?)(er|e|)|(?<=paris )(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
     area = self.match(/#{area_regex}/i).to_s
-    case area
-    when "1er", "1ER"
-      return "75001"
-    when "2ème", "2EME"
-      return "75002"
-    when "3ème", "3EME"
-      return "75003"
-    when "4ème", "4EME"
-      return "75004"
-    when "5ème", "5EME"
-      return "75005"
-    when "6ème", "6EME"
-      return "75006"
-    when "7ème", "7EME"
-      return "75007"
-    when "8ème", "8EME"
-      return "75008"
-    when "9ème", "9EME"
-      return "75009"
-    when "10ème", "10EME"
-      return "75010"
-    when "11ème", "11EME"
-      return "75011"
-    when "12ème", "12EME"
-      return "75012"
-    when "13ème", "13EME"
-      return "75013"
-    when "14ème", "14EME"
-      return "75014"
-    when "15ème", "15EME"
-      return "75015"
-    when "16ème", "16EME"
-      return "75016"
-    when "17ème", "17EME"
-      return "75017"
-    when "18ème", "18EME"
-      return "75018"
-    when "19ème", "19EME"
-      return "75019"
-    when "20ème", "20EME"
-      return "75020"
+    case area.gsub("arr", "").tr(" ", "")
+    when "1er", "1e", "i", "1", "01"
+      return "1"
+    when "2eme", "2e", "ii", "2", "02"
+      return "2"
+    when "3eme", "3e", "iii", "3", "03"
+      return "3"
+    when "4eme", "4e", "iv", "4", "04"
+      return "4"
+    when "5eme", "5e", "v", "5", "05"
+      return "5"
+    when "6eme", "6e", "vi", "6", "06"
+      return "6"
+    when "7eme", "7e", "vii", "7", "07"
+      return "7"
+    when "8eme", "8e", "viii", "8", "08"
+      return "8"
+    when "9eme", "9e", "ix", "9", "09"
+      return "9"
+    when "10eme", "10e", "x", "10"
+      return "10"
+    when "11eme", "11e", "xi", "11"
+      return "11"
+    when "12eme", "12e", "xii", "12"
+      return "12"
+    when "13eme", "13e", "xiii", "13"
+      return "13"
+    when "14eme", "14e", "xiv", "14"
+      return "14"
+    when "15eme", "15e", "xv", "15"
+      return "15"
+    when "16eme", "16e", "xvi", "16"
+      return "16"
+    when "17eme", "17e", "xvii", "17"
+      return "17"
+    when "18eme", "18e", "xviii", "18"
+      return "18"
+    when "19eme", "19e", "xix", "19"
+      return "19"
+    when "20eme", "20e", "xx", "20"
+      return "20"
     else
       return "N/C"
     end
   end
 
-  ################################################
-  ## TRANSLATE AREA, WHEN FORMAT Paris-03
-  ################################################
-  def district_generator
+  def district_generator_scrp
     if self.length == 2
       return "750#{self}"
     elsif self.length == 1

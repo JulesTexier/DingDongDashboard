@@ -24,7 +24,7 @@ class ScraperLesParisiennesImmo < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          hashed_property[:area] = regex_gen(access_xml_text(html, "#infos > p:nth-child(1) > span.valueInfos"), '(\d+)').to_s
+          hashed_property[:area] = perform_district_regex(access_xml_text(html, "#infos > p:nth-child(1) > span.valueInfos"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:rooms_number] == 1 ? hashed_property[:bedrooms_number] = 1 : hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "#infos > p:nth-child(7) > span.valueInfos"), '(\d+)').to_int_scrp
           hashed_property[:description] = access_xml_text(html, "article.col-md-6 > p").strip
@@ -45,8 +45,7 @@ class ScraperLesParisiennesImmo < Scraper
           end
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

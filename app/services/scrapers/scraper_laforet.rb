@@ -1,46 +1,48 @@
 class ScraperLaforet < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_type
 
   def initialize
-    @url = "https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=75&filter%5Btypes%5D=house%2Capartment"
+    @url = "https://www.laforet.com/api/immo/properties?cities=75&transaction=buy"
     @source = "Laforet"
-    @main_page_cls = "div.property-search__body > div > div:nth-child(2) > div > div > div.row > div"
-    @type = "Static"
+    @main_page_cls = ""
+    @type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
     @properties = []
+    @http_type = "get_json"
   end
 
-  def launch(limit = nil)
+  def launch(limit = 20)
     i = 0
-    fetch_main_page(self).each do |item|
+    fetch_main_page(self)["data"].each do |item|
       begin
         hashed_property = {}
-        hashed_property[:link] = "https://www.laforet.com" + access_xml_link(item, "a.property-card__link", "href")[0].to_s
-        hashed_property[:area] = regex_gen(item.text, '(PARIS (\d+))').tr("^0-9", "").district_generator
-        next if hashed_property[:area] == "N/C"
-        hashed_property[:surface] = regex_gen(item.text, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:rooms_number] = regex_gen(item.text.force_encoding("UTF-8"), '(\d+)(.?)(piÃ¨ce(s?))').to_int_scrp
-        hashed_property[:price] = regex_gen(item.text.tr("â¬", "€"), '(\d)(.*)(€)').to_int_scrp
-        hashed_property[:flat_type] = get_type_flat(item.text)
+        hashed_property[:link] = "https://www.laforet.com/agence-immobiliere/paris11bastille/acheter/paris/" + item["slug"]
+        hashed_property[:area] = item["address"]["postcode"]
+        hashed_property[:surface] = item["surface"].to_i
+        hashed_property[:rooms_number] = item["rooms"]
+        hashed_property[:price] = item["price"].to_i
         if go_to_prop?(hashed_property, 7)
-          html = fetch_static_page(hashed_property[:link])
-          hashed_property[:description] = access_xml_text(html, "div.mb-2").tr("\n", "").strip
-          hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-          hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+          property = fetch_json_get(item["links"]["self"])
+          hashed_property[:bedrooms_number] = item["bedrooms"]
+          hashed_property[:flat_type] = item["type_label"]
+          hashed_property[:description] = property["description"]
+          hashed_property[:floor] = property["floor"]
+          hashed_property[:has_elevator] = property["has_lift"]
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
           hashed_property[:provider] = "Agence"
+          hashed_property[:agency_name] = property["agency"]["name"]
+          hashed_property[:contact_number] = property["agency"]["address"]["phone"]
           hashed_property[:source] = @source
-          hashed_property[:images] = JSON.parse(access_xml_text(html, "body > script:nth-child(3)").split("photos:")[1].split(",photos_updated_at:")[0].decode_json_scrp)
+          hashed_property[:images] = item["photos"]
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

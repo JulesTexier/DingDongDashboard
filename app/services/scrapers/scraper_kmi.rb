@@ -24,11 +24,11 @@ class ScraperKmi < Scraper
           hashed_property = {}
           hashed_property[:link] = access_xml_link(item, "a.unit_details_x", "href")[0].to_s
           hashed_property[:surface] = regex_gen(access_xml_text(item, "span.infosize"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = regex_gen(access_xml_text(item, "div.property_location_image"), '(75)$*\d+{3}')
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.property_location_image"))
           hashed_property[:price] = access_xml_text(item, "div.listing_unit_price_wrapper").to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4 > a"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           if hashed_property[:rooms_number] == 0
-            if regex_gen(access_xml_text(item, "h4 > a"), "(studio") == "studio" || regex_gen(access_xml_text(item, "h4 > a"), "(studette)") == "studette"
+            if regex_gen(access_xml_text(item, "h4 > a"), "(studio)") == "studio" || regex_gen(access_xml_text(item, "h4 > a"), "(studette)") == "studette"
               hashed_property[:rooms_number] = 1
             else
               hashed_property[:rooms_number] = access_xml_text(item, "div.property_listing_details > span.inforoom").to_int_scrp + 1
@@ -56,8 +56,8 @@ class ScraperKmi < Scraper
             break if i == limit
           end
         rescue StandardError => e
-          puts "\nError for #{@source}, skip this one."
-          puts "It could be a bad link or a bad xml extraction.\n\n"
+          error_outputs(e, @source)
+          byebug
           next
         end
       end

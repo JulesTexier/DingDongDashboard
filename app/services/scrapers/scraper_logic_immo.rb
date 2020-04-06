@@ -18,8 +18,9 @@ class ScraperLogicImmo < Scraper
       begin
         hashed_property = {}
         hashed_property[:link] = access_xml_link_matchdata(item, "div.offer-details-location > a", "href", "https://www.lux-residence.com/")[0].to_s
+        next if hashed_property[:link].to_s.strip.empty?
         hashed_property[:surface] = access_xml_text(item, " div.offer-details-caracteristik > a > span.offer-details-caracteristik--area > span").to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "div.offer-details-location"), '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.offer-details-location"))
         hashed_property[:rooms_number] = access_xml_text(item, "div.offer-details-caracteristik > a > span.offer-details-caracteristik--rooms > span").to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.offer-details-price > p.offer-price > span"), '(\d)(.*)(€)').to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -57,8 +58,7 @@ class ScraperLogicImmo < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end
