@@ -8,7 +8,7 @@ class CreateLeads < ActiveRecord::Migration[6.0]
       t.integer :min_surface
       t.integer :max_price
       t.string :project_type
-      t.text :areas, default: => '[]'
+      t.text :areas
       t.text :additional_question
       t.text :specific_criteria
       t.string :source
