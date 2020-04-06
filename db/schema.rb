@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_151151) do
+ActiveRecord::Schema.define(version: 2020_04_06_202620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_151151) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "status", default: "tf_filled"
     t.bigint "broker_id"
+    t.string "trello_id_card"
     t.index ["broker_id"], name: "index_leads_on_broker_id"
   end
 

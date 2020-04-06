@@ -49,6 +49,8 @@ class Api::V1::TypeformController < ApplicationController
 
           # 2• Add checklist 'Action' to created card
           card_id = JSON.parse(response.body)["id"]
+          
+
           checklist_params = {}
           checklist_params[:name] = "ACTIONS"
           request = Typhoeus::Request.new(
@@ -78,6 +80,12 @@ class Api::V1::TypeformController < ApplicationController
       # rescue
       #   render json: {status: 'ERROR', message: 'An errro occured'}, status: 500
       # end
+
+
+    end
+
+    def  send_chatbot_link_from_trello_btn
+      document = JSON.parse(request.body.read)
 
 
     end
