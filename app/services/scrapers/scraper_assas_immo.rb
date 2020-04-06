@@ -23,7 +23,7 @@ class ScraperAssasImmo < Scraper
         hashed_property[:price] = access_xml_text(item, "a > figure > figcaption > p:nth-child(2) > span").tr("^0-9", "").to_int_scrp
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "a > figure > div > ul > li:nth-child(2)"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "a > figure > div > ul > li:nth-child(1)"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
-        hashed_property[:area] = regex_gen(hashed_property[:link], '(paris-(.)(\d+))').tr("^0-9", "")
+        hashed_property[:area] = perform_district_regex(hashed_property[:link])
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "p.descriptif").strip
@@ -43,8 +43,7 @@ class ScraperAssasImmo < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end
