@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       end
 
       resources :properties, only: [:show, :index]
+      resources :leads, only: [:index, :update]
 
       resources :favorites, only: [:create, :destroy]
 
