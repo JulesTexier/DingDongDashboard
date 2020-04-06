@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       # Typeform resources 
       post "/typeform/lead/new" => "typeform#generate_lead"
 
+      # Trello resources 
+      post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn"
+
     end
   end
 

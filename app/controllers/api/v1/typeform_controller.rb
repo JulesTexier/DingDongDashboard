@@ -49,7 +49,7 @@ class Api::V1::TypeformController < ApplicationController
 
           # 2• Add checklist 'Action' to created card
           card_id = JSON.parse(response.body)["id"]
-          
+
 
           checklist_params = {}
           checklist_params[:name] = "ACTIONS"
@@ -84,10 +84,5 @@ class Api::V1::TypeformController < ApplicationController
 
     end
 
-    def  send_chatbot_link_from_trello_btn
-      document = JSON.parse(request.body.read)
-
-
-    end
 
 end
