@@ -20,7 +20,7 @@ class ScraperImax < Scraper
         hashed_property = {}
         hashed_property[:link] = access_xml_link(item, "div.span8 > a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_text(item, "div.margin-bottom-10.padding-bottom-10.border-solid-bottom-block-1.pagination-centered > p"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "div.small.pagination-centered > p"), '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.small.pagination-centered > p"))
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.margin-bottom-10.padding-bottom-10.border-solid-bottom-block-1.pagination-centered").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
         hashed_property[:price] = access_xml_text(item, "div.typo-action.h2-like.prix-annonce.pagination-centered").to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "span.typo-action"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
@@ -40,8 +40,7 @@ class ScraperImax < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

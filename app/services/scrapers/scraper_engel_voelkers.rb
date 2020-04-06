@@ -20,7 +20,7 @@ class ScraperEngelVoelkers < Scraper
         hashed_property[:link] = access_xml_link(item, "a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_text(item, "div.ev-teaser-attributes > div:last-child"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.ev-value"), '(\d)(.*)').to_int_scrp
-        hashed_property[:area] = access_xml_text(item, ".ev-teaser-subtitle").area_translator_scrp
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, ".ev-teaser-subtitle"))
         next if hashed_property[:area] == "N/C"
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
@@ -40,8 +40,7 @@ class ScraperEngelVoelkers < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

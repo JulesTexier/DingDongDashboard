@@ -19,7 +19,7 @@ class ScraperConnexionImmobilier < Scraper
         hashed_property = {}
         hashed_property[:link] = regex_gen(access_xml_link(item, "a.gp", "href")[0], "(&url=http)(.)*").gsub("&url=", "")
         hashed_property[:surface] = access_xml_text(item, ".surface>span").to_int_scrp
-        hashed_property[:area] = access_xml_text(item, ".city > nobr").to_int_scrp.to_s.district_generator
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, ".city > nobr"))
         hashed_property[:rooms_number] = access_xml_text(item, ".rooms").to_int_scrp
         hashed_property[:price] = access_xml_text(item, ".price").to_s.force_encoding("UTF-8").split("€")[0].to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -44,8 +44,7 @@ class ScraperConnexionImmobilier < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

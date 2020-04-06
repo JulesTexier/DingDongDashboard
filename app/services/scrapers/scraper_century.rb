@@ -19,7 +19,7 @@ class ScraperCentury < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.century21.fr" + access_xml_link(item, "div.zone-text-loupe a", "href")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "div.zone-text-loupe > a > h3"), '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.zone-text-loupe > a > h3"))
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.price"), '(\d)(.*)(€)').to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -39,8 +39,7 @@ class ScraperCentury < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end
