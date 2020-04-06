@@ -23,6 +23,9 @@ class Api::V1::TypeformController < ApplicationController
         lead_hash[:project_type] = answers[0]["choice"]["label"]
         lead = Lead.new(lead_hash)
 
+        b = Broker.get_current_broker
+        lead.broker = b
+
         if lead.save
 
           trello_auth = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
@@ -33,7 +36,6 @@ class Api::V1::TypeformController < ApplicationController
           params[:pos] = 'top'
           params[:due] = Time.now + 15.minutes
 
-          b = Broker.get_current_broker
           params[:idMembers] = b.trello_id
 
           # 1• Create card on tello Board 
