@@ -6,7 +6,7 @@ class Api::V1::TypeformController < ApplicationController
 
 
     def generate_lead 
-      begin 
+      # begin 
         
         document = JSON.parse(request.body.read)
         lead_hash = {}
@@ -24,7 +24,8 @@ class Api::V1::TypeformController < ApplicationController
         lead = Lead.new(lead_hash)
 
         if lead.save
-          puts "A new lead has been generated"
+
+          trello_auth = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
 
           params = {}
           params[:name] = lead_hash[:name]
@@ -37,18 +38,19 @@ class Api::V1::TypeformController < ApplicationController
 
           # 1• Create card on tello Board 
           request = Typhoeus::Request.new(
-            "https://api.trello.com/1/cards?idList=#{b.trello_lead_list_id}&key=bd3b7da95b0121bd8bdea25ff2ab5d50&token=11e09ded7eeceabe509408840639cd97864ca350310fa85ec3cd4ab5389bd97d",
+            "https://api.trello.com/1/cards?idList=#{b.trello_lead_list_id}&" + trello_auth,
             method: :post,
             params: params
           )
           response = request.run
+
 
           # 2• Add checklist 'Action' to created card
           card_id = JSON.parse(response.body)["id"]
           checklist_params = {}
           checklist_params[:name] = "ACTIONS"
           request = Typhoeus::Request.new(
-            "https://api.trello.com/1/cards/#{card_id}/checklists?&key=bd3b7da95b0121bd8bdea25ff2ab5d50&token=11e09ded7eeceabe509408840639cd97864ca350310fa85ec3cd4ab5389bd97d",
+            "https://api.trello.com/1/cards/#{card_id}/checklists?" + trello_auth,
             method: :post,
             params: checklist_params
           )
@@ -59,7 +61,7 @@ class Api::V1::TypeformController < ApplicationController
           check_items_params = {}
           check_items_params[:name] = "Rentrer en contact avec #{lead.name}"
           request = Typhoeus::Request.new(
-            "https://api.trello.com/1/checklists/#{checklist_id}/checkItems?&key=bd3b7da95b0121bd8bdea25ff2ab5d50&token=11e09ded7eeceabe509408840639cd97864ca350310fa85ec3cd4ab5389bd97d",
+            "https://api.trello.com/1/checklists/#{checklist_id}/checkItems?" + trello_auth,
             method: :post,
             params: check_items_params
           )
@@ -71,9 +73,9 @@ class Api::V1::TypeformController < ApplicationController
             render json: {status: 'ERROR', message: 'An errro occured'}, status: 500
           end
         end
-      rescue
-        render json: {status: 'ERROR', message: 'An errro occured'}, status: 500
-      end
+      # rescue
+      #   render json: {status: 'ERROR', message: 'An errro occured'}, status: 500
+      # end
 
 
     end
