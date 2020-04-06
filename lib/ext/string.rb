@@ -137,26 +137,26 @@ class String
   end
 
   def district_regex_scrp
-    area_regex = '(?<=paris)(.?)(\d+)(.?)(er|e|)|(?<=paris)(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
+    area_regex = '(?<=paris )(.?)(\d+)(.?)(er|e|)|(?<=paris )(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
     area = self.match(/#{area_regex}/i).to_s
     case area.gsub("arr", "").tr(" ", "")
-    when "1er", "1e", "i", "1"
+    when "1er", "1e", "i", "1", "01"
       return "1"
-    when "2eme", "2e", "ii", "2"
+    when "2eme", "2e", "ii", "2", "02"
       return "2"
-    when "3eme", "3e", "iii", "3"
+    when "3eme", "3e", "iii", "3", "03"
       return "3"
-    when "4eme", "4e", "iv", "4"
+    when "4eme", "4e", "iv", "4", "04"
       return "4"
-    when "5eme", "5e", "v", "5"
+    when "5eme", "5e", "v", "5", "05"
       return "5"
-    when "6eme", "6e", "vi", "6"
+    when "6eme", "6e", "vi", "6", "06"
       return "6"
-    when "7eme", "7e", "vii", "7"
+    when "7eme", "7e", "vii", "7", "07"
       return "7"
-    when "8eme", "8e", "viii", "8"
+    when "8eme", "8e", "viii", "8", "08"
       return "8"
-    when "9eme", "9e", "ix", "9"
+    when "9eme", "9e", "ix", "9", "09"
       return "9"
     when "10eme", "10e", "x", "10"
       return "10"
