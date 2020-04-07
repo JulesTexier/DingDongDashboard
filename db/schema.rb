@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_202620) do
+ActiveRecord::Schema.define(version: 2020_04_07_160217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_202620) do
     t.string "trello_board_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "trello_username"
   end
 
   create_table "districts", force: :cascade do |t|
