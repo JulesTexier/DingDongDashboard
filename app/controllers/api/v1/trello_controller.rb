@@ -10,8 +10,8 @@ class Api::V1::TrelloController < ApplicationController
     lead = Lead.where(trello_id_card: document["cardId"]).first
 
     if !lead.nil?
-      lead.update(status: 'chatbot_invite_sent')
       PostmarkMailer.send_chatbot_link(lead).deliver_now
+      lead.update(status: 'chatbot_invite_sent')
       render json: {status: 'SUCCESS', message: 'Lead found', data: lead}, status: 200
     else
       trello_auth = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
