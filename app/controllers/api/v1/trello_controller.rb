@@ -7,7 +7,7 @@ class Api::V1::TrelloController < ApplicationController
   TRELLO_AUTH = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
 
 
-  def  send_chatbot_link_from_trello_btn
+  def send_chatbot_link_from_trello_btn
     document = JSON.parse(request.body.read)
     lead = Lead.where(trello_id_card: document["cardId"]).first
 
@@ -22,6 +22,7 @@ class Api::V1::TrelloController < ApplicationController
         method: :get
       )
       response = request.run
+      byebug
       broker_trello_id = JSON.parse(response.body)[0]["id"]
       b = Broker.where(trello_id: broker_trello_id).first
       PostmarkMailer.send_error_message_broker_btn(document["cardId"], b.firstname ).deliver_now
@@ -66,8 +67,7 @@ class Api::V1::TrelloController < ApplicationController
           render json: {status: 'ERROR', message: 'Action not logged into Trello'}, status: 503
         end
       else 
+        render json: {status: 'ERROR', message: 'Could not find Actions Checklist in card !'}, status: 503
       end
-    else 
-      render json: {status: 'ERROR', message: 'Could not find Actions Checklist in card !'}, status: 503
     end 
 end
