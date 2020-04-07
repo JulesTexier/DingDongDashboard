@@ -23,5 +23,9 @@ class Lead < ApplicationRecord
     desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.strftime("%d/%m/%Y - %H:%M")}*"
   end
 
+  def get_chatbot_link
+    return "https://m.me/HiDingDong"
+  end
+
 
 end
