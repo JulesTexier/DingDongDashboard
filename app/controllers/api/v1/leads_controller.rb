@@ -12,6 +12,15 @@ class Api::V1::LeadsController < ApplicationController
     render json: {status: 'SUCCESS', message: 'List of all leads', data: @leads}, status: 200
   end
 
+  def show 
+    begin
+      @lead = Lead.find(params[:id])
+      render json: {status: 'SUCCESS', message: 'Lead found', data: @lead}, status: 200
+    rescue
+      render json: {status: 'ERROR', message: 'Lead not found'}, status: 404
+    end
+  end
+
   # PUT /lead/:id
   def update 
     begin

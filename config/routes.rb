@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       end
 
       resources :properties, only: [:show, :index]
-      resources :leads, only: [:index, :update]
+      resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
 
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
       # Trello resources 
       post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn"
+      post "/trello/add_action" => "trello#add_action_to_broker"
 
     end
   end
