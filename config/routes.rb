@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
       resources :properties, only: [:show, :index]
       resources :leads, only: [:index, :update]
-
+      resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
 
       # Manychat routes
