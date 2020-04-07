@@ -49,6 +49,7 @@ class Api::V1::TypeformController < ApplicationController
 
           # 2• Add checklist 'Action' to created card
           card_id = JSON.parse(response.body)["id"]
+          lead.update(trello_id_card: card_id)
 
 
           checklist_params = {}
