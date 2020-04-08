@@ -34,40 +34,26 @@ class Api::V1::TrelloController < ApplicationController
     document = JSON.parse(request.body.read)
     card_id = document["card_id"]
     text = document["text"]
-
-
     lead = Lead.where(trello_id_card: card_id).first
+    
+    if !lead.nil?
+      # Add comment to the card mentioning the broker
+      check_items_params = {}
+      check_items_params[:text] = text + " @#{lead.broker.trello_username}"
+      request = Typhoeus::Request.new(
+        "https://api.trello.com/1/cards/#{card_id}/actions/comments?" + TRELLO_AUTH,
+        method: :post,
+        params: check_items_params
+      )
+      response = request.run
 
-
-    # 1• Get the checklist 
-    request = Typhoeus::Request.new(
-      "https://api.trello.com/1/cards/#{card_id}/checklists?" + TRELLO_AUTH,
-      method: :get
-    )
-    response = request.run
-    checklist_id = nil
-    checklists = JSON.parse(response.body)
-    checklists.each do |checklist|
-      checklist["name"].downcase.include?("action") ? checklist_id = checklist["id"]  : nil
-    end
-      if !checklist_id.nil?
-        check_items_params = {}
-        check_items_params[:name] = text + " @#{lead.broker.trello_username}"
-
-        # 2• Create new CheckItem on checklist mentionning the broker
-        request = Typhoeus::Request.new(
-          "https://api.trello.com/1/checklists/#{checklist_id}/checkItems?" + TRELLO_AUTH,
-          method: :post,
-          params: check_items_params
-        )
-        response = request.run
-        if response.code == 200 
-          render json: {status: 'SUCCESS', message: 'Action logged into Trello'}, status: 200
-        else
-          render json: {status: 'ERROR', message: 'Action not logged into Trello'}, status: 503
-        end
-      else 
-        render json: {status: 'ERROR', message: 'Could not find Actions Checklist in card !'}, status: 503
+      if response.code == 200
+        render json: {status: 'SUCCESS', message: 'Action logged into Trello'}, status: 200
+      else
+        render json: {status: 'ERROR', message: 'Action not logged into Trello'}, status: 503
       end
-    end 
+    else 
+      render json: {status: 'ERROR', message: 'No lead found for this card_id'}, status: 404 
+    end
+  end 
 end
