@@ -324,6 +324,11 @@ RSpec.describe Scraper, type: :service do
         expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).not_to eq("75008")
         expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).to eq("N/C")
       end
+
+      it "shouldn't take floor false data from link with pattern 75201 or 69203" do
+        expect(@s.perform_district_regex("https://example.com/75229209429")).not_to eq("75229")
+        expect(@s.perform_district_regex("https://example.com/6919209429")).not_to eq("69192")
+      end
     end
   end
 
