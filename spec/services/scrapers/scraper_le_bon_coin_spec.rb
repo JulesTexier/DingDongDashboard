@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe PremiumSites::ScraperLeBonCoin, type: :service do
+RSpec.describe Premium::ScraperLeBonCoin, type: :service do
   before(:all) do
-    @s = PremiumSites::ScraperLeBonCoin.new
+    @s = Premium::ScraperLeBonCoin.new
     @limit = 10
   end
 
