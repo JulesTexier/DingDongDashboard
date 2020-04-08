@@ -245,7 +245,7 @@ class Scraper
   end
 
   def perform_district_regex(str)
-    if str.match('(750|690)(\d{2})').is_a?(MatchData)
+    if str.match('(75(0|1)|690)(\d{2})').is_a?(MatchData)
       post_code = str.match('(75|69)(\d{3})').to_s
       post_code == "75116" ? "75016" : post_code
     else
