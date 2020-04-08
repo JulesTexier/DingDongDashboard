@@ -336,9 +336,7 @@ RSpec.describe Scraper, type: :service do
     context "FETCH METHODS" do
       before(:each) do
         @s = Scraper.new
-        @si = ScraperSuperImmo.new
-        @skmi = ScraperKmi.new
-        @sbi = ScraperBienIci.new
+        @si = RegularSites::ScraperSuperImmo.new
       end
 
       it "should return a Nokogori element'" do
@@ -346,7 +344,7 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should return an array of Nokogiri Elements" do
-        expect(@s.fetch_many_pages(@skmi.url, 1, @skmi.main_page_cls)).to be_a(Array)
+        expect(@s.fetch_many_pages(@si.url, 1, @si.main_page_cls)).to be_a(Array)
       end
     end
   end
