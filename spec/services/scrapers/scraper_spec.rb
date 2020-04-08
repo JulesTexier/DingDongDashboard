@@ -336,7 +336,7 @@ RSpec.describe Scraper, type: :service do
     context "FETCH METHODS" do
       before(:each) do
         @s = Scraper.new
-        @si = RegularSites::ScraperSuperImmo.new
+        @si = Hub::ScraperSuperImmo.new
       end
 
       it "should return a Nokogori element'" do
