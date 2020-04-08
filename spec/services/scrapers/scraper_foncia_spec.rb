@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SmallSites::ScraperFoncia, type: :service do
+RSpec.describe Group::ScraperFoncia, type: :service do
   before(:all) do
-    @s = SmallSites::ScraperFoncia.new
+    @s = Group::ScraperFoncia.new
   end
 
   it "should launch and return proper number of properties" do

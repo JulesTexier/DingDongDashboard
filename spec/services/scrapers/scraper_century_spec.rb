@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe RegularSites::ScraperCentury, type: :service do
+RSpec.describe Group::ScraperCentury, type: :service do
   before(:all) do
-    @s = RegularSites::ScraperCentury.new
+    @s = Group::ScraperCentury.new
   end
 
   it "should launch and return proper number of properties" do
