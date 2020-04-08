@@ -45,7 +45,6 @@ namespace :scraper do
     ScraperMorissImmobilier.new.launch
     ScraperFoncia.new.launch
     ScraperKmi.new.launch
-    ScraperImax.new.launch
     ScraperEfficity.new.launch
     ScraperGreenAcres.new.launch
     ScraperCallImmo.new.launch
