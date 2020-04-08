@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SmallSites::ScraperParisMontmartreImmobilier, type: :service do
+RSpec.describe Independant::ScraperParisMontmartreImmobilier, type: :service do
   before(:all) do
-    @s = SmallSites::ScraperParisMontmartreImmobilier.new
+    @s = Independant::ScraperParisMontmartreImmobilier.new
   end
 
   it "should launch and return proper number of properties" do

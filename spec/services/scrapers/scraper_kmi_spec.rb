@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SmallSites::ScraperKmi, type: :service do
+RSpec.describe Independant::ScraperKmi, type: :service do
   before(:all) do
     @s = SmallSites::ScraperKmi.new
   end
