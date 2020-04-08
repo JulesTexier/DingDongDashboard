@@ -42,7 +42,6 @@ class Group::ScraperDavidImmo < Scraper
           i += 1
           break if i == limit
         end
-        puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
         next
