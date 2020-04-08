@@ -168,7 +168,7 @@ RSpec.describe Scraper, type: :service do
   describe "XML ACCESSORS METHODS" do
     before(:each) do
       @s = Scraper.new
-      @ssi = RegularSites::ScraperSuperImmo.new
+      @ssi = Hub::ScraperSuperImmo.new
       @html = @ssi.fetch_static_page(@ssi.url)
     end
     context "access_xml_text" do

@@ -1,10 +1,8 @@
 require "rails_helper"
 
-    @s = Group::ScraperCentury.new
-::    RSpec.describe ScraperEraFrance, type: :service do
+RSpec.describe Group::ScraperEraFrance, type: :service do
   before(:all) do
-    @s = Group::ScraperCentury.new
-::    @s = ScraperEraFrance.new
+    @s = Group::ScraperEraFrance.new
   end
 
   it "should launch and return proper number of properties" do

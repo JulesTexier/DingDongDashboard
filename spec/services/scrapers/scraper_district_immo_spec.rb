@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperDistrictImmo, type: :service do
+RSpec.describe Independant::ScraperDistrictImmo, type: :service do
   before(:all) do
-    @s = ScraperDistrictImmo.new
+    @s = Independant::ScraperDistrictImmo.new
   end
 
   it "should launch and return proper number of properties" do
