@@ -20,7 +20,7 @@ class SmallSites::ScraperSotheby < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.proprietesparisiennes-sothebysrealty.com" + access_xml_link(item, "a", "href")[0].to_s
         hashed_property[:surface] = access_xml_text(item, "span.ico_surface").to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "figcaption > p:nth-child(1) > span"), '\d+').district_generator
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "figcaption > p:nth-child(1) > span"))
         hashed_property[:rooms_number] = access_xml_text(item, "span.ico_piece > span").to_float_to_int_scrp + 1
         hashed_property[:price] = regex_gen(access_xml_text(item, "figcaption > p:nth-child(2) > span"), '(\d)(.*)(€)').to_int_scrp
         hashed_property[:flat_type] = regex_gen(access_xml_text(item, "figcaption > p:nth-child(3)"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
@@ -39,8 +39,7 @@ class SmallSites::ScraperSotheby < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

@@ -46,7 +46,7 @@ class Scraper
 
   def fetch_dynamic_page(url, waiting_class, wait, *click_args)
     opts = {
-      headless: false,
+      headless: true,
     }
     browser = Watir::Browser.new :chrome, opts
     browser.goto url
@@ -66,15 +66,15 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}"
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}" unless Rails.env.test?
       res = Net::HTTP.get_response(uri)
       raise ScrappingBeeError unless res.code == "200"
     rescue
-      puts "Trying again for #{source} - #{res.code}\n\n"
+      puts "Trying again for #{source} - #{res.code}\n\n" unless Rails.env.test?
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n"
+      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
@@ -159,11 +159,18 @@ class Scraper
   end
 
   ###########################
-  ## GENERIC LOGIC METHOD  ##
+  ## GENERIC METHOD  ##
   ###########################
 
   def page_nbr_to_url(url, page_nbr)
     url.gsub("[[PAGE_NUMBER]]", page_nbr.to_s)
+  end
+
+  def error_outputs(e, source)
+    unless Rails.env.test?
+      puts "\nError for #{@source}, skip this one."
+      puts "It could be a bad link or a bad xml extraction.\n\n"
+    end
   end
 
   ###########################
@@ -237,9 +244,18 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  # We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
-  # We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
-  # And the we send it in an array for insertion.
+  def perform_district_regex(str)
+    if str.match('(75(0|1)|690)(\d{2})').is_a?(MatchData)
+      post_code = str.match('(75|69)(\d{3})').to_s
+      post_code == "75116" ? "75016" : post_code
+    else
+      str.remove_acc_scrp.district_regex_scrp.district_generator_scrp
+    end
+  end
+
+  ## We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
+  ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
+  ## And the we send it in an array for insertion.
   def perform_subway_regex(str)
     subways = JSON.parse(File.read("./db/data/subways.json"))
     subways_ids = []

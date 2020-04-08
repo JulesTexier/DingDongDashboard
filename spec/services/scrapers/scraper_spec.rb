@@ -265,22 +265,89 @@ RSpec.describe Scraper, type: :service do
         expect(@s.perform_subway_regex("Nothing Nothing Nothing")).to eq([])
       end
     end
+
+    context "perform_district_regex(str)" do
+      it "should always return a parisian district number OR N/C " do
+        expect(@s.perform_district_regex("Appartement situé à Paris 20e")).to be_a(String)
+        expect(@s.perform_district_regex("Ici c'est Paris")).to be_a(String)
+        expect(@s.perform_district_regex("Ici c'est Pas Paris mdr")).to eq("N/C")
+        expect(@s.perform_district_regex("Random String")).not_to be_a(Integer)
+        expect(@s.perform_district_regex("Random String")).not_to be_a(Array)
+      end
+
+      it "should translate Paris ??e to 750??" do
+        expect(@s.perform_district_regex("Appartement situé à Paris 20e")).to eq("75020")
+        expect(@s.perform_district_regex("Bien situé dans le Paris 18e")).to eq("75018")
+        expect(@s.perform_district_regex("Superbe petit bien à Paris 12e")).to eq("75012")
+        expect(@s.perform_district_regex("Superbe petit bien PARIS 10e")).to eq("75010")
+      end
+
+      it "shouldnt put 75116 in DB, it should return whole 75016" do
+        expect(@s.perform_district_regex("Appartement Paris 75116")).to eq("75016")
+        expect(@s.perform_district_regex("Appartement Paris 75116")).not_to eq("75116")
+      end
+
+      it "should translate Paris ?? to 750??" do
+        expect(@s.perform_district_regex("Appartement situé à Paris 20")).to eq("75020")
+        expect(@s.perform_district_regex("Bien situé dans le Paris 18")).to eq("75018")
+        expect(@s.perform_district_regex("Superbe petit bien à Paris 12")).to eq("75012")
+        expect(@s.perform_district_regex("Superbe petit bien PARIS 10")).to eq("75010")
+      end
+
+      it "should translate romanian numbers to 750??" do
+        expect(@s.perform_district_regex("Appartement situé à Paris XVI")).to eq("75016")
+        expect(@s.perform_district_regex("Appartement situé à Paris XV")).to eq("75015")
+        expect(@s.perform_district_regex("Appartement situé à Paris X")).to eq("75010")
+        expect(@s.perform_district_regex("Appartement situé à Paris V")).to eq("75005")
+      end
+
+      it "should translate 20ème/eme arrondissement or 20ème/eme arr to 75020" do
+        expect(@s.perform_district_regex("Dans le 20ème arrondissement")).to eq("75020")
+        expect(@s.perform_district_regex("Dans le 20ème arr")).to eq("75020")
+        expect(@s.perform_district_regex("Dans le 18ème arr")).to eq("75018")
+        expect(@s.perform_district_regex("Dans le 20eme arrondissement")).to eq("75020")
+        expect(@s.perform_district_regex("Dans le 20eme arr")).to eq("75020")
+        expect(@s.perform_district_regex("Dans le 1er arr")).to eq("75001")
+        expect(@s.perform_district_regex("Dans le 3ème arr")).to eq("75003")
+      end
+
+      it "should translate only district as it is in long string (ex:75012 is 75012)" do
+        expect(@s.perform_district_regex("Dans le 75012")).to eq("75012")
+        expect(@s.perform_district_regex("PARIS 75013")).to eq("75013")
+        expect(@s.perform_district_regex("Limite vincennes - 75012")).to eq("75012")
+      end
+
+      it "shouldn't take floor spelling" do
+        expect(@s.perform_district_regex("Au 3ème étage dans Paris 15ème")).to eq("75015")
+        expect(@s.perform_district_regex("Au 8ème étage dans Paris 15")).to eq("75015")
+        expect(@s.perform_district_regex("Au 8ème sans ascenseur")).not_to eq("75008")
+        expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).not_to eq("75008")
+        expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).to eq("N/C")
+      end
+
+      it "shouldn't take floor false data from link with pattern 75201 or 69203" do
+        expect(@s.perform_district_regex("https://example.com/75229209429")).not_to eq("75229")
+        expect(@s.perform_district_regex("https://example.com/6919209429")).not_to eq("69192")
+      end
+    end
   end
 
-  describe "FETCH METHODS" do
-    before(:each) do
-      @s = Scraper.new
-      @si = RegularSites::ScraperSuperImmo.new
-      @skmi = SmallSites::ScraperKmi.new
-      @sbi = RegularSites::ScraperBienIci.new
-    end
+  describe "simple fetch methods" do
+    context "FETCH METHODS" do
+      before(:each) do
+        @s = Scraper.new
+        @si = ScraperSuperImmo.new
+        @skmi = ScraperKmi.new
+        @sbi = ScraperBienIci.new
+      end
 
-    it "should return a Nokogori element'" do
-      expect(@s.fetch_static_page(@si.url)).to be_a(Nokogiri::HTML::Document)
-    end
+      it "should return a Nokogori element'" do
+        expect(@s.fetch_static_page(@si.url)).to be_a(Nokogiri::HTML::Document)
+      end
 
-    it "should return an array of Nokogiri Elements" do
-      expect(@s.fetch_many_pages(@skmi.url, 1, @skmi.main_page_cls)).to be_a(Array)
+      it "should return an array of Nokogiri Elements" do
+        expect(@s.fetch_many_pages(@skmi.url, 1, @skmi.main_page_cls)).to be_a(Array)
+      end
     end
   end
 end

@@ -20,7 +20,7 @@ class SmallSites::ScraperErnest < Scraper
         next if access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a").downcase.include?("vendu")
         hashed_property[:link] = "http://www.ernest-et-associes.com" + access_xml_link(item, ".content_liste_vente_voir > a", "href")[0].to_s.gsub("..", "")
         hashed_property[:surface] = regex_gen(access_xml_text(item, ".description_annonce"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a").area_translator_scrp
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.content_liste_texte > div:nth-child(1) > h2 > a"))
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".description_annonce"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = access_xml_text(item, ".content_liste_prix").strip.to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -50,8 +50,7 @@ class SmallSites::ScraperErnest < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end

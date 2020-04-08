@@ -19,7 +19,7 @@ class RegularSites::ScraperPap < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.pap.fr" + access_xml_link_matchdata(item, "div.col-right > a", "href", "(#dialog_mensualite|www.immoneuf.com/)")[0].to_s
         hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul").specific_trim_scrp("\n\r\t"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = regex_gen(access_xml_text(item, "div.col-right > p.item-description"), '(75)$*\d+{3}')
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > p.item-description"))
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-right > a.item-title > span.item-price"), '(\d)(.*)(€)').to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -39,8 +39,7 @@ class RegularSites::ScraperPap < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        puts "\nError for #{@source}, skip this one."
-        puts "It could be a bad link or a bad xml extraction.\n\n"
+        error_outputs(e, @source)
         next
       end
     end
