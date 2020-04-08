@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SmallSites::ScraperProprietesFigaro, type: :service do
+RSpec.describe Hub::ScraperProprietesFigaro, type: :service do
   before(:all) do
-    @s = SmallSites::ScraperProprietesFigaro.new
+    @s = Hub::ScraperProprietesFigaro.new
   end
 
   it "should launch and return proper number of properties" do

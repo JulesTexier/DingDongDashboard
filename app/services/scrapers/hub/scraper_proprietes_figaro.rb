@@ -1,4 +1,4 @@
-class Independant::ScraperProprietesFigaro < Scraper
+class Hub::ScraperProprietesFigaro < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
