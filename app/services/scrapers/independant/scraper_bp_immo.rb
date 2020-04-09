@@ -5,12 +5,12 @@ class Independant::ScraperBpImmo < Scraper
     @url = "https://www.bpimmo.com/recherche.php"
     @source = "Building Parners"
     @main_page_cls = "div.offre_bien"
-    @type = "Static"
+    @type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
     @properties = []
-     @http_request = [{}, { "ville[]" => "75008", "rechercher" => "Rechercher"  }]
+    @http_request = [{}, "ville%5B%5D=75001&ville%5B%5D=75002&ville%5B%5D=75003&ville%5B%5D=75004&ville%5B%5D=75005&ville%5B%5D=75006&ville%5B%5D=75007&ville%5B%5D=75008&ville%5B%5D=75009&ville%5B%5D=75010&ville%5B%5D=75011&ville%5B%5D=75012&ville%5B%5D=75013&ville%5B%5D=75014&ville%5B%5D=75010&ville%5B%5D=75015&ville%5B%5D=75016&ville%5B%5D=75017&ville%5B%5D=75018&ville%5B%5D=75019&ville%5B%5D=75020&budget=&rechercher=Rechercher"]
     @http_type = "post"
   end
 
