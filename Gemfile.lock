@@ -339,6 +339,7 @@ DEPENDENCIES
   webdrivers
   webmock
   webpacker (~> 4.0)
+  zeitwerk (~> 2.1, >= 2.1.8)
 
 RUBY VERSION
    ruby 2.5.7p206
