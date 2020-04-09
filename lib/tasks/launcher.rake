@@ -22,7 +22,6 @@ namespace :scraper do
     puts "Launching Independant Worker"
     ScraperIndependantSitesWorker.scrap
   end
-
 end
 
 namespace :subscriber do

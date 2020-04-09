@@ -271,7 +271,7 @@ class Scraper
   def get_type_flat(str)
     flat_type = "N/C"
     flat_type = "Appartement" if str.downcase.include? "appartement"
-    flat_type = "Maison" if str.downcase!.include? "maison"
+    flat_type = "Maison" if str.downcase.include? "maison"
     return flat_type
   end
 
