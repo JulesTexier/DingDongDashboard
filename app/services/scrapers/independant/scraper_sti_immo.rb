@@ -34,9 +34,9 @@ class Independant::ScraperStiImmo < Scraper
 
           details = access_xml_text(html, "#infos").strip.gsub(/[^[:print:]]/, "").downcase.gsub(' ','').remove_acc_scrp
           if details.match(/etage(\d)*/i).is_a?(MatchData) 
-            hashed_property[:has_elevator] = regex_gen(details, 'etage(\d)*').to_int_scrp
+            hashed_property[:floor] = regex_gen(details, 'etage(\d)*').to_int_scrp
           else 
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+            hashed_property[:floor] = perform_elevator_regex(hashed_property[:description])
           end
           if details.match(/ascenseur(oui|non)/i).is_a?(MatchData) 
             regex_gen(details, 'ascenseur(oui|non)').include?('oui') ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = false
