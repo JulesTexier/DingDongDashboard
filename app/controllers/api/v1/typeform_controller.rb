@@ -4,6 +4,9 @@ require "typhoeus"
 class Api::V1::TypeformController < ApplicationController
   protect_from_forgery with: :null_session
 
+  def initialize
+    @trello = Trello.new
+  end
 
     def generate_lead 
       # begin 
@@ -28,49 +31,32 @@ class Api::V1::TypeformController < ApplicationController
 
         if lead.save
 
-          trello_auth = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
+          # trello_auth = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
+          list_id = b.trello_lead_list_id
 
           params = {}
           params[:name] = lead_hash[:name]
           params[:desc] = lead.trello_description
           params[:pos] = 'top'
           params[:due] = Time.now + 15.minutes
-
           params[:idMembers] = b.trello_id
 
           # 1• Create card on tello Board 
-          request = Typhoeus::Request.new(
-            "https://api.trello.com/1/cards?idList=#{b.trello_lead_list_id}&" + trello_auth,
-            method: :post,
-            params: params
-          )
-          response = request.run
+          new_card_response = @trello.create_new_card(list_id, params)
 
 
           # 2• Add checklist 'Action' to created card
-          card_id = JSON.parse(response.body)["id"]
+          card_id = JSON.parse(new_card_response.body)["id"]
           lead.update(trello_id_card: card_id)
 
-
-          checklist_params = {}
-          checklist_params[:name] = "ACTIONS"
-          request = Typhoeus::Request.new(
-            "https://api.trello.com/1/cards/#{card_id}/checklists?" + trello_auth,
-            method: :post,
-            params: checklist_params
-          )
-          response = request.run
+          new_checklist_response = @trello.add_checklist_to_card(card_id)
 
           # 3• Add first action on the checklist
-          checklist_id = JSON.parse(response.body)["id"]
+          checklist_id = JSON.parse(new_checklist_response.body)["id"]
           check_items_params = {}
           check_items_params[:name] = "Rentrer en contact avec #{lead.name}"
-          request = Typhoeus::Request.new(
-            "https://api.trello.com/1/checklists/#{checklist_id}/checkItems?" + trello_auth,
-            method: :post,
-            params: check_items_params
-          )
-          response = request.run
+          
+          @trello.add_checkitem_to_checklist(checklist_id, check_items_params)
 
           if response.code == 200
             render json: {status: 'SUCCESS', message: 'Lead added to Trello !', data: lead}, status: 200
