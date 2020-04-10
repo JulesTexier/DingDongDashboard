@@ -1,5 +1,4 @@
 class Lead < ApplicationRecord
-
   belongs_to :broker
 
   def trello_description
