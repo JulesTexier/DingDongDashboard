@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Group::ScraperNestenn, type: :service do
+RSpec.describe Independant::ScraperNestenn, type: :service do
   before(:all) do
-    @s = Group::ScraperNestenn.new
+    @s = Independant::ScraperNestenn.new
   end
 
   it "should launch and return proper number of properties" do
