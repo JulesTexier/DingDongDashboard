@@ -40,46 +40,47 @@ namespace :scraper do
     puts "Launching Small Shitty Website Scraper"
     puts "...\n\n"
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    ScraperOrpi.new.launch(20)
-    ScraperProprietesFigaro.new.launch
-    ScraperMorissImmobilier.new.launch
-    ScraperFoncia.new.launch
-    ScraperKmi.new.launch
-    ScraperEfficity.new.launch
-    ScraperGreenAcres.new.launch
-    ScraperCallImmo.new.launch
-    ScraperLesParisiennesImmo.new.launch
-    ScraperDeferla.new.launch
-    ScraperLaforet.new.launch
-    ScraperErnest.new.launch
-    ScraperParisMontmartreImmobilier.new.launch
-    ScraperLaResidence.new.launch
-    ScraperArcales.new.launch
-    ScraperEngelVoelkers.new.launch
-    ScraperHosman.new.launch
-    ScraperStephanePlaza.new.launch
-    ScraperIad.new.launch
-    ScraperProprioo.new.launch
-    ScraperImmobilierSurMesure.new.launch
-    ScraperTerrasseCie.new.launch
-    ScraperLiberkeys.new.launch
-    ScraperLuxResidence.new.launch
-    ScraperAssasImmo.new.launch
-    ScraperVillageBleu.new.launch
-    ScraperJunot.new.launch
-    ScraperSotheby.new.launch
-    ScraperHomizy.new.launch
-    ScraperAristimmo.new.launch
-    ScraperDeliquietImmobilier.new.launch
-    ScraperConnexionImmobilier.new.launch
-    ScraperEraFrance.new.launch
-    ScraperLadresse.new.launch
-    ScraperVarenne.new.launch
-    ScraperEnfantsRouges.new.launch
-    ScraperVillaret.new.launch
-    ScraperSistelImmo.new.launch
-    ScraperCphImmobilier.new.launch
-    ScraperEmileGarcin.new.launch
+    # ScraperOrpi.new.launch(20)
+    # ScraperProprietesFigaro.new.launch
+    # ScraperMorissImmobilier.new.launch
+    # ScraperFoncia.new.launch
+    # ScraperKmi.new.launch
+    # ScraperEfficity.new.launch
+    # ScraperGreenAcres.new.launch
+    # ScraperCallImmo.new.launch
+    # ScraperLesParisiennesImmo.new.launch
+    # ScraperDeferla.new.launch
+    # ScraperLaforet.new.launch
+    # ScraperErnest.new.launch
+    # ScraperParisMontmartreImmobilier.new.launch
+    # ScraperLaResidence.new.launch
+    # ScraperArcales.new.launch
+    # ScraperEngelVoelkers.new.launch
+    # ScraperHosman.new.launch
+    # ScraperStephanePlaza.new.launch
+    # ScraperIad.new.launch
+    # ScraperProprioo.new.launch
+    # ScraperImmobilierSurMesure.new.launch
+    # ScraperTerrasseCie.new.launch
+    # ScraperLiberkeys.new.launch
+    # ScraperLuxResidence.new.launch
+    # ScraperAssasImmo.new.launch
+    # ScraperVillageBleu.new.launch
+    # ScraperJunot.new.launch
+    # ScraperSotheby.new.launch
+    # ScraperHomizy.new.launch
+    # ScraperAristimmo.new.launch
+    # ScraperDeliquietImmobilier.new.launch
+    # ScraperConnexionImmobilier.new.launch
+    # ScraperEraFrance.new.launch
+    # ScraperLadresse.new.launch
+    # ScraperVarenne.new.launch
+    # ScraperEnfantsRouges.new.launch
+    # ScraperVillaret.new.launch
+    # ScraperSistelImmo.new.launch
+    # ScraperCphImmobilier.new.launch
+    # ScraperEmileGarcin.new.launch
+    ScraperCheneVert.new.launch
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "\nThe Small Shitty Website Scraper script took #{ending - starting} seconds to run"
   end
