@@ -37,8 +37,30 @@ class Trello
     return true
   end
   
-  def add_comment_to_card(card_id, comment)
-    
+  def add_comment_to_card(card_id, comment) 
+  end
+
+  def get_trello_card_broker(card_id)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}/members?" + @token,
+      method: :get
+    )
+    response = request.run
+    broker_trello_id = JSON.parse(response.body)[0]["id"]
+    b = Broker.where(trello_id: broker_trello_id).first
+  end
+
+  def add_comment_to_lead_card(lead, comment)
+    card_id = lead.trello_id_card
+    byebug
+    check_items_params = {}
+    check_items_params[:text] = comment + " @#{lead.broker.trello_username}"
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}/actions/comments?" + @token,
+      method: :post,
+      params: check_items_params
+    )
+    response = request.run
   end
 
   private 

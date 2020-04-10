@@ -4,8 +4,9 @@ require "typhoeus"
 class Api::V1::TrelloController < ApplicationController
   protect_from_forgery with: :null_session
 
-  TRELLO_AUTH = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
-
+  def initialize
+    @trello = Trello.new
+  end
 
   def send_chatbot_link_from_trello_btn
     document = JSON.parse(request.body.read)
@@ -16,15 +17,7 @@ class Api::V1::TrelloController < ApplicationController
       lead.update(status: 'chatbot_invite_sent')
       render json: {status: 'SUCCESS', message: 'Lead found', data: lead}, status: 200
     else
-      
-      request = Typhoeus::Request.new(
-        "https://api.trello.com/1/cards/#{document["cardId"]}/members?" + TRELLO_AUTH,
-        method: :get
-      )
-      response = request.run
-      byebug
-      broker_trello_id = JSON.parse(response.body)[0]["id"]
-      b = Broker.where(trello_id: broker_trello_id).first
+      b = @trello.get_trello_card_broker(document["cardId"])
       PostmarkMailer.send_error_message_broker_btn(document["cardId"], b.firstname ).deliver_now
       render json: {status: 'ERROR', message: 'Lead not found, email sent to Etienne with data about the concerned broker', data: b}, status: 500
     end
@@ -33,19 +26,11 @@ class Api::V1::TrelloController < ApplicationController
   def add_action_to_broker
     document = JSON.parse(request.body.read)
     card_id = document["card_id"]
-    text = document["text"]
-    lead = Lead.where(trello_id_card: card_id).first
+    comment = document["text"]
+    !card_id.nil? ? lead = Lead.where(trello_id_card: card_id).first : lead = nil
     
     if !lead.nil?
-      # Add comment to the card mentioning the broker
-      check_items_params = {}
-      check_items_params[:text] = text + " @#{lead.broker.trello_username}"
-      request = Typhoeus::Request.new(
-        "https://api.trello.com/1/cards/#{card_id}/actions/comments?" + TRELLO_AUTH,
-        method: :post,
-        params: check_items_params
-      )
-      response = request.run
+      response = @trello.add_comment_to_lead_card(lead, comment)
 
       if response.code == 200
         render json: {status: 'SUCCESS', message: 'Action logged into Trello'}, status: 200
