@@ -12,7 +12,28 @@ class Trello
     
   end
 
-  def add_new_lead_on_trello
+  def add_new_lead_on_trello(lead)
+    
+    # 1• Create card on tello Board 
+    list_id = lead.broker.trello_lead_list_id
+    params = {}
+    params[:name] = lead_hash[:name]
+    params[:desc] = lead.trello_description
+    params[:pos] = 'top'
+    params[:due] = Time.now + 15.minutes
+    params[:idMembers] = b.trello_id
+    new_card_response = @trello.create_new_card(list_id, params)
+
+    # 2• Add checklist 'Action' to created card
+    card_id = JSON.parse(new_card_response.body)["id"]
+    lead.update(trello_id_card: card_id)
+    new_checklist_response = @trello.add_checklist_to_card(card_id)
+
+    # 3• Add first action on the checklist
+    checklist_id = JSON.parse(new_checklist_response.body)["id"]
+    check_items_params = {}
+    check_items_params[:name] = "Rentrer en contact avec #{lead.name}"
+    new_checkitem_response = @trello.add_checkitem_to_checklist(checklist_id, check_items_params)
 
   end
 
