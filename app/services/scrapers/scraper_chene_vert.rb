@@ -23,6 +23,7 @@ class ScraperCheneVert < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.cbp-l-caption-body"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:rooms_number] == 0 && hashed_property[:rooms_number] = 1  
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.cbp-l-caption-body"))
+          hashed_property[:surface] = 50 #to pass go_to_prop
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:surface] = regex_gen(access_xml_text(html, "h4"), '(\d+(.?)(\d*))(.)(m²)').to_float_to_int_scrp
