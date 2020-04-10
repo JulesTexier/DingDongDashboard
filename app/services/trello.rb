@@ -9,7 +9,7 @@ class Trello
   end
 
   def add_new_lead_on_trello(lead)
-    is_ok = false
+
     # 1• Create card on tello Board 
     list_id = lead.broker.trello_lead_list_id
     params = {}
@@ -19,13 +19,13 @@ class Trello
     params[:due] = Time.now + 15.minutes
     params[:idMembers] = lead.broker.trello_id
     new_card_response = create_new_card(list_id, params)
-    return is_ok if new_card_response.code != 200
+    return false if new_card_response.code != 200
     
     # 2• Add checklist 'Action' to created card
     card_id = JSON.parse(new_card_response.body)["id"]
     lead.update(trello_id_card: card_id)
     new_checklist_response = add_checklist_to_card(card_id)
-    return is_ok if new_checklist_response.code != 200
+    return false if new_checklist_response.code != 200
 
     
     # 3• Add first action on the checklist
@@ -33,7 +33,7 @@ class Trello
     check_items_params = {}
     check_items_params[:name] = "Rentrer en contact avec #{lead.name}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
-    return is_ok if new_checkitem_response.code != 200
+    return false if new_checkitem_response.code != 200
     return true
   end
   
