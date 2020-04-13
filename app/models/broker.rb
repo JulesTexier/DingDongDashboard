@@ -1,6 +1,7 @@
 class Broker < ApplicationRecord
 
   has_many :leads
+  has_many :subscribers
 
   def self.get_current_broker
     b = self.where(trello_username:"gregrouxeloldra").first

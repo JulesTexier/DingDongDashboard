@@ -8,6 +8,8 @@ class Subscriber < ApplicationRecord
   validates :firstname, presence: true 
   validates :lastname, presence: true 
 
+  belongs_to :broker
+
   has_many :selected_areas
   has_many :areas, through: :selected_areas
 
