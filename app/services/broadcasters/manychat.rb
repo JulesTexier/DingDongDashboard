@@ -270,12 +270,12 @@ class Manychat
   def get_default_qr
     qr = [{
       "type": "flow",
-      "caption": ":house: 5 annonces",
+      "caption": "🏠 5 annonces",
       "target": ENV["QR_ADS"],
     },
           {
       "type": "flow",
-      "caption": "📞 Appeler [courtier_name]",
+      "caption": "📞 Appeler courtier",
       "target": "20200330083518_711940",
     },
           {
@@ -290,7 +290,7 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": ":no_entry: Stop",
+      "caption": "⛔ Stop",
       "target": ENV["QR_UNSUBS"],
     }]
     return qr
