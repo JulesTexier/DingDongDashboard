@@ -351,8 +351,8 @@ class Scraper
 
   def desc_comparator(desc, desc_to_compare)
     response = false
-    str1 = desc.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
-    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    str1 = desc.remove_acc_scrp.tr(".,!?:;'", "").tr("²", "2").tr("\s\t\r", "")
+    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;'", "").tr("²", "2").tr("\s\t\r", "")
     min = [str1.length, str2.length].min
     if min > 20
       if str1.length == min
@@ -362,8 +362,8 @@ class Scraper
         short_string = str2
         long_string = str1
       end
-      if min > 45
-        min = 45
+      if min > 44
+        min = 44
         x = short_string.length - min
       else
         x = short_string.length - min + 1
