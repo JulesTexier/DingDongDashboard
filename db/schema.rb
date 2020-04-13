@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_160217) do
+ActiveRecord::Schema.define(version: 2020_04_13_080911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -180,6 +180,9 @@ ActiveRecord::Schema.define(version: 2020_04_07_160217) do
     t.integer "min_rooms_number"
     t.integer "min_floor", default: 0
     t.integer "min_elevator_floor"
+    t.bigint "broker_id"
+    t.string "trello_id_card"
+    t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
   create_table "subways", force: :cascade do |t|
