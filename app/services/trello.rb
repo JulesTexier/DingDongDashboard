@@ -62,6 +62,15 @@ class Trello
     response = request.run
   end
 
+  def update_trello_card_greg_list(card_id)
+    response = update_list_of_a_card(card_id, "5e95ca5e56f1c580127eb9c0")
+    if response.code == 200 
+      return true
+    else 
+      return false
+    end
+  end
+
   private 
   
   def create_new_card(list_id, params)
@@ -88,6 +97,17 @@ class Trello
     request = Typhoeus::Request.new(
       "https://api.trello.com/1/checklists/#{checklist_id}/checkItems?" + @token,
       method: :post,
+      params: params
+    )
+    response = request.run
+  end
+
+  def update_list_of_a_card(card_id, new_list_id)
+    params = {}
+    params[:idList] = new_list_id
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}?" + @token,
+      method: :put,
       params: params
     )
     response = request.run
