@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       # Manychat routes
         # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
+      post "/manychat/s/create-from-lead" => "manychat#create_subscriber_from_lead"
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days"
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning"
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details"
