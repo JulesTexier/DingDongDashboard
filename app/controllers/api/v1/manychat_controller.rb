@@ -8,6 +8,45 @@ class Api::V1::ManychatController < ApplicationController
 
   before_action :authentificate
 
+  #POST (create subscriber in manychat) /manychat/s/create-from-lead
+  def create_subscriber_from_lead
+    lead = Lead.find(params[:lead_id])
+
+    if !lead.nil?
+      subscriber_hash = {}
+      subscriber_hash[:firstname] = lead.name #TO BE UPDATED
+      subscriber_hash[:lastname] = lead.name #TO BE UPDATED
+      subscriber_hash[:email] = lead.email
+      subscriber_hash[:phone] = lead.phone
+      subscriber_hash[:min_surface] = lead.min_surface
+      subscriber_hash[:max_price] = lead.max_price
+      subscriber_hash[:broker_id] = lead.broker_id
+      subscriber_hash[:trello_id_card] = lead.trello_id_card
+      subscriber_hash[:facebook_id] = params[:facebook_id]
+      s = Subscriber.new(subscriber_hash)
+
+      if s.save
+        lead.areas.split(",").each do  |area|
+          area = Area.where(name: area.gsub(' ','')).first 
+          SelectedArea.create(subscriber: s, area: area) if !area.nil?
+        end
+
+        data = s.as_json
+        data[:areas_list] = s.get_areas_list
+        data[:districts_list] = s.get_districts_list
+        data[:edit_path] = s.get_edit_path
+        render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
+      else
+        byebug
+        render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
+      end
+
+    else
+      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
+    end
+    
+  end
+
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
   def update_subscriber
     begin
