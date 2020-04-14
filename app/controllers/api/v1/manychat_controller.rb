@@ -8,10 +8,50 @@ class Api::V1::ManychatController < ApplicationController
 
   before_action :authentificate
 
+  #POST (create subscriber in manychat) /manychat/s/create-from-lead
+  def create_subscriber_from_lead
+    lead = Lead.find(params[:lead_id])
+
+    if !lead.nil?
+      subscriber_hash = {}
+      subscriber_hash[:firstname] = lead.firstname
+      subscriber_hash[:lastname] = lead.lastname
+      subscriber_hash[:email] = lead.email
+      subscriber_hash[:phone] = lead.phone
+      subscriber_hash[:min_surface] = lead.min_surface
+      subscriber_hash[:max_price] = lead.max_price
+      subscriber_hash[:min_rooms_number] = lead.min_rooms_number
+      subscriber_hash[:broker_id] = lead.broker_id
+      subscriber_hash[:trello_id_card] = lead.trello_id_card
+      subscriber_hash[:facebook_id] = params[:facebook_id]
+      s = Subscriber.new(subscriber_hash)
+
+      if s.save
+        lead.areas.split(",").each do  |area|
+          area = Area.where(name: area.gsub(' ','')).first 
+          SelectedArea.create(subscriber: s, area: area) if !area.nil?
+        end
+
+        data = s.as_json
+        data[:areas_list] = s.get_areas_list
+        data[:districts_list] = s.get_districts_list
+        data[:edit_path] = s.get_edit_path
+        data[:project_type] = lead.project_type
+        render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
+      else
+        render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
+      end
+
+    else
+      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
+    end
+    
+  end
+
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
   def update_subscriber
     begin
-      subscriber = Subscriber.find(subscriber_params[:subscriber_id])
+      subscriber = Subscriber.find(params[:subscriber_id])
       if subscriber.update(subscriber_params.except(:subscriber_id, :message))
         if subscriber_params[:message] == "reactivation"
           render json: send_text_message(subscriber, "🔥 Ton alerte a été réactivée !", 'success')
@@ -27,6 +67,20 @@ class Api::V1::ManychatController < ApplicationController
       end
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
+    end
+  end
+
+  # POST  (update lead) /manychat/l/:lead_id/update
+  def update_lead
+    begin
+      lead = Lead.find(params[:lead_id])
+      if lead.update(lead_params.except(:lead_id))
+        render json: { status: "SUCCESS", message: "Lead updated", data: lead }, status: 200
+      else
+        render json: { status: "ERROR", message: "Lead not updated", data: nil }, status: 500
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
     end
   end
 
@@ -169,6 +223,10 @@ class Api::V1::ManychatController < ApplicationController
   def subscriber_params
     # params.permit(:firstname, :lastname, :email, :phone, :is_active)
     params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message)
+  end
+
+  def lead_params
+    params.permit(:id, :name, :email, :phone, :status, :broker_id, :lead_id)
   end
 
   def authentificate

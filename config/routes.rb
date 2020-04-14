@@ -12,16 +12,30 @@ Rails.application.routes.draw do
       end
 
       resources :properties, only: [:show, :index]
-
+      resources :leads, only: [:index, :show, :update]
+      resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
 
       # Manychat routes
+        # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
+      post "/manychat/s/create-from-lead" => "manychat#create_subscriber_from_lead"
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days"
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning"
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details"
       get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites"
       get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props"
+      # Lead
+      post "/manychat/l/:lead_id/update" => "manychat#update_lead"
+
+      # Typeform resources 
+      post "/typeform/lead/new" => "typeform#generate_lead"
+
+      # Trello resources 
+      post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn"
+      post "/trello/add_action" => "trello#add_action_to_broker"
+      post "/trello/move-card-to-broker" => "trello#update_lead_broker"
+
     end
   end
 

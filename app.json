@@ -31,7 +31,10 @@
         "QR_CRITERIA": "content20200304091552_580435",
         "QR_ESTIM": "content20200304091552_506521",
         "QR_LOAN": "content20200304091552_512770",
-        "QR_UNSUBS":"system_unsubscribe20200304091552_543306"
+        "QR_UNSUBS":"system_unsubscribe20200304091552_543306",
+        "TRELLO_KEY": "bd3b7da95b0121bd8bdea25ff2ab5d50",
+        "TRELLO_SECRET":"11e09ded7eeceabe509408840639cd97864ca350310fa85ec3cd4ab5389bd97d",
+        "POSTMARK_TOKEN":"84616c63-f0f7-4cf7-8590-90e1dcc11302"
       },
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":

@@ -19,7 +19,7 @@ class Independant::ScraperEmileGarcin < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.emilegarcin.fr/" + access_xml_link(item, "a", "href")[0].gsub("../", "")
         hashed_property[:surface] = regex_gen(access_xml_text(item, "p.info"), '(\d+)(.?)(m)').to_int_scrp
-        hashed_property[:area] = perform_district_regex(hashed_property[:link])
+        hashed_property[:area] = perform_district_regex(access_xml_link(item, "a", "href")[0].gsub("../", "").split("/")[2].split(".html?")[0])
         hashed_property[:area] = nil if hashed_property[:area] == "N/C"
         hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, "p.info"), '(\d+)(.?)(chambre(s?))').to_int_scrp
         rooms_number = regex_gen(access_xml_text(item, "p.type"), '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
