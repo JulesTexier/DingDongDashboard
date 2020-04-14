@@ -24,6 +24,10 @@ class Api::V1::TypeformController < ApplicationController
   private 
 
   def generate_lead_from_typeform_data(request)
+    puts "REQUEST : "
+    puts request.body.read
+    puts "*"*10
+
     document = JSON.parse(request.body.read)
     lead_hash = {}
     answers = document['form_response']['answers']
