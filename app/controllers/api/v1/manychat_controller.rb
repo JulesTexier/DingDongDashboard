@@ -36,6 +36,7 @@ class Api::V1::ManychatController < ApplicationController
         data[:areas_list] = s.get_areas_list
         data[:districts_list] = s.get_districts_list
         data[:edit_path] = s.get_edit_path
+        data[:project_type] = lead.project_type
         render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
       else
         render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
