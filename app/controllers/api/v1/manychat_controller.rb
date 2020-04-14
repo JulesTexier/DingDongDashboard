@@ -14,12 +14,13 @@ class Api::V1::ManychatController < ApplicationController
 
     if !lead.nil?
       subscriber_hash = {}
-      subscriber_hash[:firstname] = lead.name #TO BE UPDATED
-      subscriber_hash[:lastname] = lead.name #TO BE UPDATED
+      subscriber_hash[:firstname] = lead.firstname
+      subscriber_hash[:lastname] = lead.lastname
       subscriber_hash[:email] = lead.email
       subscriber_hash[:phone] = lead.phone
       subscriber_hash[:min_surface] = lead.min_surface
       subscriber_hash[:max_price] = lead.max_price
+      subscriber_hash[:min_rooms_number] = lead.min_rooms_number
       subscriber_hash[:broker_id] = lead.broker_id
       subscriber_hash[:trello_id_card] = lead.trello_id_card
       subscriber_hash[:facebook_id] = params[:facebook_id]
@@ -37,7 +38,6 @@ class Api::V1::ManychatController < ApplicationController
         data[:edit_path] = s.get_edit_path
         render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
       else
-        byebug
         render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
       end
 

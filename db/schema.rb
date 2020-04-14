@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_080911) do
+ActiveRecord::Schema.define(version: 2020_04_14_091205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_080911) do
   end
 
   create_table "leads", force: :cascade do |t|
-    t.string "name"
+    t.string "firstname"
     t.string "phone"
     t.string "email"
     t.boolean "has_messenger"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_04_13_080911) do
     t.string "status", default: "tf_filled"
     t.bigint "broker_id"
     t.string "trello_id_card"
+    t.string "lastname"
+    t.integer "min_rooms_number"
     t.index ["broker_id"], name: "index_leads_on_broker_id"
   end
 
