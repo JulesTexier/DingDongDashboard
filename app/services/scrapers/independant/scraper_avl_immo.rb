@@ -22,7 +22,7 @@ class Independant::ScraperAvlImmo < Scraper
         hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "div.picto-txt"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
         hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.city"))
         hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.picto-txt").remove_acc_scrp, '(\d+)(.?)(piece(s?))').to_int_scrp
-        hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.picto-txt").remove_acc_scrp, '(\d+)(.?)(chambre(s?))').to_int_scrp
+        hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(item, "div.picto-txt").remove_acc_scrp, '(\d+)(.?)(chambre(s?))').to_int_scrp
         hashed_property[:price] = access_xml_array_to_text(item, "div.price").split("dont")[0].to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
