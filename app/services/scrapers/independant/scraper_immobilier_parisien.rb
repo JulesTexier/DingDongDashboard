@@ -32,8 +32,7 @@ class Independant::ScraperImmobilierParisien < Scraper
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
-          hashed_property[:images] = access_xml_link(html, "div.carousel-inner > div > a > img", "src")
-          hashed_property[:images].collect! { |img| "http://www.immobilier-parisien.fr" + img }
+          hashed_property[:images] = access_xml_link(html, "div.carousel-inner > div > a > img", "src").map { |img| "http://www.immobilier-parisien.fr" + img }
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
