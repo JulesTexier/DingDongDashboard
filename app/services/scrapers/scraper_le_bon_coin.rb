@@ -21,6 +21,11 @@ class ScraperLeBonCoin < Scraper
       if !json.nil?
         json["data"]["ads"].each do |item|
           begin
+            unless Rails.env.test?
+              ## Some tape to prevent LBC lack of properties and random old properties showing up on main page
+              ## wrapped it in a condition for test env, otherwise every fixtures will be outdated in two days
+              next if Time.parse(item["first_publication_date"]) < Time.now - 2.days
+            end
             hashed_property = extract_each_flat(item)
             property_checker_hash = {}
             property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
