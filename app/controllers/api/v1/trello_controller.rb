@@ -41,4 +41,25 @@ class Api::V1::TrelloController < ApplicationController
       render json: {status: 'ERROR', message: 'No lead found for this card_id'}, status: 404 
     end
   end 
+
+  def update_lead_broker
+    document = JSON.parse(request.body.read)
+    lead = Lead.where(trello_id_card: document["cardId"]).first
+    new_broker = Broker.where(trello_username: document["brokerUsername"]).first
+    if !lead.nil? && !new_broker.nil?
+      # 1 • Update du lead avec le nouveau Broker
+        lead.update(broker: new_broker)
+      # 2 • Créer carte dans le tableau du courtier
+        @trello.add_new_lead_on_trello(lead)
+      # 3 • Update de la carte initiale du lead (mettre sur le bord du nv courtier et enlever échéance)
+        @trello.update_trello_card_greg_list(document["cardId"])
+
+      render json: {status: 'SUCCESS', message: 'Lead found', data: lead}, status: 200
+    else
+      # b = @trello.get_trello_card_broker(document["cardId"])
+      # PostmarkMailer.send_error_message_broker_btn(document["cardId"], b.firstname ).deliver_now
+      render json: {status: 'ERROR', message: 'Lead and/or broker not found !', data: nil}, status: 500
+    end
+  end
+
 end
