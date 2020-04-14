@@ -52,7 +52,6 @@ class Trello
 
   def add_comment_to_lead_card(lead, comment)
     card_id = lead.trello_id_card
-    byebug
     check_items_params = {}
     check_items_params[:text] = comment + " @#{lead.broker.trello_username}"
     request = Typhoeus::Request.new(
