@@ -13,7 +13,7 @@ class Trello
     # 1• Create card on tello Board 
     list_id = lead.broker.trello_lead_list_id
     params = {}
-    params[:name] = lead.name
+    params[:name] = lead.get_fullname
     params[:desc] = lead.trello_description
     params[:pos] = 'top'
     params[:due] = Time.now + 15.minutes
@@ -31,7 +31,7 @@ class Trello
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{lead.name}"
+    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != 200
     return true

@@ -14,17 +14,21 @@ class Lead < ApplicationRecord
 
   def trello_summary
     desc = ""
-    desc += "**#{self.name.upcase}**"
+    desc += "**#{self.get_fullname.upcase}**"
     desc += "\u000A**Projet d'achat** : #{self.project_type}"
     desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} €"
     desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
     desc += "\u000A**Arrondissements** : #{self.areas}"
-    desc += "\u000A\u000A**#{self.name} a déclaré ne pas avoir Messenger**" if !self.has_messenger
+    desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
     desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.strftime("%d/%m/%Y - %H:%M")}*"
   end
 
   def get_chatbot_link
     return "https://m.me/HiDingDong?ref=welcome--#{self.id}"
+  end
+
+  def get_fullname
+    return self.firstname + " " + self.lastname
   end
 
 
