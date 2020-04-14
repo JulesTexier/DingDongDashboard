@@ -35,7 +35,7 @@ class Independant::ScraperAssasImmo < Scraper
           hashed_property[:source] = @source
           hashed_property[:images] = []
           access_xml_text(html, "section#annonce_profil").each_line do |line|
-            hashed_property[:images].push("https://www.assasimmobilier.com" + line.split("src:'")[1].split("', title:")[0]) if line if line.include?("items.push({ src:'/datas/biens")
+            hashed_property[:images].push("https://www.assasimmobilier.com" + line.split("src:'")[1].split("', title:")[0]) if line.include?("items.push({ src:'/datas/biens")
           end
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
