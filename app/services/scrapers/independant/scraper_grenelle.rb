@@ -19,7 +19,6 @@ class Independant::ScraperGrenelle < Scraper
         hashed_property = {}
         hashed_property[:link] = "http://www.grenelle-immobilier.com" + access_xml_link(item, "div.caption-footer > a.block-link", "href")[0]
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2").remove_acc_scrp.tr(" ", ""), '(\d+)(.?)(piece(s?))').to_int_scrp
-        byebug if hashed_property[:rooms_number] == 0
         hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(.?)(\d+(.?)(\d*))(.?)(m)').tr("/[A-z]/", "").to_float_to_int_scrp
         hashed_property[:price] = access_xml_text(item, "div.value-prix").to_int_scrp
         hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h2"))
