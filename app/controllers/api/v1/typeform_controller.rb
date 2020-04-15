@@ -30,19 +30,37 @@ class Api::V1::TypeformController < ApplicationController
 
     document = JSON.parse(request.body.read)
     lead_hash = {}
-    answers = document['form_response']['answers']
-    lead_hash[:firstname] = answers[8]["text"]
-    lead_hash[:lastname] = answers[9]["text"]
-    lead_hash[:phone] = answers[11]["phone_number"]
-    lead_hash[:email] = answers[10]["email"]
-    lead_hash[:has_messenger] = answers[7]["boolean"]
-    lead_hash[:additional_question] = answers[6]["text"]
-    lead_hash[:specific_criteria] = answers[5]["text"]
-    lead_hash[:min_rooms_number] = answers[4]["number"]
-    lead_hash[:areas] = answers[3]["choices"]["labels"].join(",")
-    lead_hash[:min_surface] = answers[2]["number"]
-    lead_hash[:max_price] = answers[1]["number"]
-    lead_hash[:project_type] = answers[0]["choice"]["label"]
+    questions = document['form_response']['answers']
+    questions.each do |q|
+      case q["field"]["id"]
+      when "aGkhhYOKuUCt"
+        lead_hash[:max_price] = q["number"]
+      when "p0arvZv5ItXj"
+        lead_hash[:min_surface] = q["number"]
+      when "AyRA34Ph5L34"
+        lead_hash[:areas] = q["choices"]["labels"].join(",")
+      when "TxGNsw4uYCkJ"
+        lead_hash[:min_rooms_number] = q["number"]
+      when "uK91am1GTnip"
+        lead_hash[:specific_criteria] = q["text"]
+      when "AhoulpInovin"
+        lead_hash[:project_type] = q["choice"]["label"]
+      when "G5iKFd5ed0to"
+        lead_hash[:additional_question] = q["text"]
+      when "UwhWRdoW9ukL"
+        lead_hash[:has_messenger] = q["boolean"]
+      when "tPDaIN7pPEwe"
+        lead_hash[:firstname] = q["text"]
+      when "BfOAVvTM0DgI"
+        lead_hash[:lastname] = q["text"]
+      when "yfT6AYau3EnW"
+        lead_hash[:email] = q["email"]
+      when "fjNwZTr8I0DS"
+        lead_hash[:phone] = q["phone_number"]
+      else 
+      end
+    end
+
     lead = Lead.new(lead_hash)
     lead.broker = Broker.get_current_broker
     lead.save ?  lead : false
