@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_131247) do
+ActiveRecord::Schema.define(version: 2020_04_14_091205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 2020_03_19_131247) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "brokers", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "email"
+    t.string "phone"
+    t.string "agency"
+    t.string "trello_id"
+    t.string "trello_lead_list_id"
+    t.string "trello_board_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "trello_username"
+  end
+
   create_table "districts", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -58,6 +72,28 @@ ActiveRecord::Schema.define(version: 2020_03_19_131247) do
     t.index ["property_id"], name: "index_favorites_on_property_id"
     t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
+  end
+
+  create_table "leads", force: :cascade do |t|
+    t.string "firstname"
+    t.string "phone"
+    t.string "email"
+    t.boolean "has_messenger"
+    t.integer "min_surface"
+    t.integer "max_price"
+    t.string "project_type"
+    t.text "areas"
+    t.text "additional_question"
+    t.text "specific_criteria"
+    t.string "source"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status", default: "tf_filled"
+    t.bigint "broker_id"
+    t.string "trello_id_card"
+    t.string "lastname"
+    t.integer "min_rooms_number"
+    t.index ["broker_id"], name: "index_leads_on_broker_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -146,6 +182,9 @@ ActiveRecord::Schema.define(version: 2020_03_19_131247) do
     t.integer "min_rooms_number"
     t.integer "min_floor", default: 0
     t.integer "min_elevator_floor"
+    t.bigint "broker_id"
+    t.string "trello_id_card"
+    t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
   create_table "subways", force: :cascade do |t|

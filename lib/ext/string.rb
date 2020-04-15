@@ -85,7 +85,7 @@ class String
   end
 
   def district_regex_scrp
-    area_regex = '(?<=paris )(.?)(\d+)(.?)(er|e|)|(?<=paris )(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
+    area_regex = '(?<=paris )(.*?)(\d+)(.?)(er|e|)|(?<=paris )(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
     area = self.match(/#{area_regex}/i).to_s
     case area.gsub("arr", "").tr(" ", "")
     when "1er", "1e", "i", "1", "01", "01e"

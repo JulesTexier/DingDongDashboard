@@ -13,6 +13,9 @@ module GiantCat
     # config.assets.initialize_on_precompile = false
     # config.assets.enabled = false
 
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = { api_token: '84616c63-f0f7-4cf7-8590-90e1dcc11302' }
+
 
 
     # Settings in config/environments/* take precedence over those specified here.
