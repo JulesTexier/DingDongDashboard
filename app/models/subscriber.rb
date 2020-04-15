@@ -184,7 +184,7 @@ class Subscriber < ApplicationRecord
   end
 
   def notify_broker_if_max_price_is_changed
-    if previous_changes['max_price'].any? 
+    if !previous_changes['max_price'].nil? && !self.broker.nil? && !self.trello_id_card.nil?
       old_price = previous_changes['max_price'][0]
       new_price = previous_changes['max_price'][1]
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")

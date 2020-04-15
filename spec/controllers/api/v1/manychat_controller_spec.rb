@@ -47,7 +47,7 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
       @property = FactoryBot.create(:property, created_at: date, price: @sub.max_price, surface: @sub.min_surface, area: @sub.areas.first.name, rooms_number: @sub.min_rooms_number, floor: nil, has_elevator: nil)
       FactoryBot.create(:favorite, subscriber: @sub, property: @property)
     end
-
+    
     describe "send last X properties to a subscriber" do
       context "#send_x_last_props" do
         it "should contain an authorization token" do
