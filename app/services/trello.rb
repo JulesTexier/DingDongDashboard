@@ -54,12 +54,14 @@ class Trello
     card_id = lead.trello_id_card
     check_items_params = {}
     check_items_params[:text] = comment + " @#{lead.broker.trello_username}"
-    request = Typhoeus::Request.new(
-      "https://api.trello.com/1/cards/#{card_id}/actions/comments?" + @token,
-      method: :post,
-      params: check_items_params
-    )
-    response = request.run
+    if !card_id.nil? && !lead.broker.trello_username.nil?
+      request = Typhoeus::Request.new(
+        "https://api.trello.com/1/cards/#{card_id}/actions/comments?" + @token,
+        method: :post,
+        params: check_items_params
+      )
+      response = request.run
+    end
   end
 
   def update_trello_card_greg_list(card_id)
