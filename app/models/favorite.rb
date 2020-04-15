@@ -10,7 +10,9 @@ class Favorite < ApplicationRecord
     private 
 
     def notify_broker_if_new_fav_created
-			self.subscriber.notify_broker_trello("Nouvelle annonce mise en favoris : \u000A #{self.property.get_title} \u000A #{self.property.link}") 
+      if !self.subscriber.broker.nil? && !self.subscriber.trello_id_card.nil?
+			  self.subscriber.notify_broker_trello("Nouvelle annonce mise en favoris : \u000A #{self.property.get_title} \u000A #{self.property.link}") 
+      end
     end
 
 end
