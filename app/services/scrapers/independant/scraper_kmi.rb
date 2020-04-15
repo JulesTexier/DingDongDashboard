@@ -57,7 +57,6 @@ class Independant::ScraperKmi < Scraper
           end
         rescue StandardError => e
           error_outputs(e, @source)
-          byebug
           next
         end
       end
