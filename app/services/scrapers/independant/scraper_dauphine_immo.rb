@@ -41,7 +41,7 @@ class Independant::ScraperDauphineImmo < Scraper
           hashed_property[:agency_name] = access_xml_text(item, '.prop-user-agent')
           hashed_property[:images] = access_xml_link(html, 'div.item > a > img' ,'src')
           @properties.push(hashed_property) ##testing purpose
-          # enrich_then_insert_v2(hashed_property)
+            enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
