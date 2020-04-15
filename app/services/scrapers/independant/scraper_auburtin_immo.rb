@@ -19,9 +19,9 @@ class Independant::ScraperAuburtinImmo < Scraper
         hashed_property = {}
         hashed_property[:link] = access_xml_link(item, "div:nth-child(1) > div:nth-child(1) > a", "href")[0].to_s
         hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.ville-annonce"))
-        raw_price =  access_xml_text(item, "div.prix-annonce")
-        hashed_property[:price] = raw_price[0..raw_price.length/2].to_int_scrp
-        details = access_xml_text(item, 'div:nth-child(1) > div:nth-child(2) > a:nth-child(1) > div:nth-child(1) > p:nth-child(1)').gsub(' ','').gsub(/[^[:print:]]/, "")
+        raw_price = access_xml_text(item, "div.prix-annonce")
+        hashed_property[:price] = raw_price[0..raw_price.length / 2].to_int_scrp
+        details = access_xml_text(item, "div:nth-child(1) > div:nth-child(2) > a:nth-child(1) > div:nth-child(1) > p:nth-child(1)").gsub(" ", "").gsub(/[^[:print:]]/, "")
         hashed_property[:rooms_number] = regex_gen(details, '(\d)*(pi)').to_int_scrp
         hashed_property[:surface] = regex_gen(details, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         if go_to_prop?(hashed_property, 7)
@@ -40,12 +40,13 @@ class Independant::ScraperAuburtinImmo < Scraper
           hashed_property[:agency_name] = "AUBURTIN IMMOBILIER - Marx Dormoy"
           hashed_property[:contact_number] = "+33142058403"
           hashed_property[:source] = @source
-          hashed_property[:images]  = access_xml_link(html, "#slider > a", "href")
+          hashed_property[:images] = access_xml_link(html, "#slider > a", "href")
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
+        puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
         next
