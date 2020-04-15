@@ -21,7 +21,6 @@ class Independant::ScraperRennesStGermain < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.flash-infos").remove_acc_scrp, '(piece(s?))(.?)(\d+)').to_int_scrp
         hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, "div.flash-infos").remove_acc_scrp, '(chambre\(s\))(.?)(\d+)').to_int_scrp
         hashed_property[:surface] = regex_gen(access_xml_text(item, "div.flash-infos").remove_acc_scrp, '(Surface)(.?)(\d+(.?)(\d*))(.?)(m)').tr("/[A-z]/", "").to_float_to_int_scrp
-        byebug if hashed_property[:surface] == 0
         hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.ville"))
         hashed_property[:price] = access_xml_text(item, "div.left-caption").to_int_scrp
         hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.value > span"))
