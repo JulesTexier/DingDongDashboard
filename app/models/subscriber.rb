@@ -1,6 +1,9 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
+
+  after_update :notify_broker_if_max_price_is_changed
+
   validates_uniqueness_of :facebook_id, :case_sensitive => false
   validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
@@ -129,6 +132,10 @@ class Subscriber < ApplicationRecord
     self.where(facebook_id: facebook_id)
   end
 
+  def notify_broker_trello(comment) 
+    Trello.new.add_comment_to_lead_card(self, comment)
+  end
+
   private
 
   def is_matching_property_price(property)
@@ -175,4 +182,13 @@ class Subscriber < ApplicationRecord
     property.area == "75116" ? p_area = "75016" : p_area =  property.area
     self.get_areas.include?(p_area) ? true : false
   end
+
+  def notify_broker_if_max_price_is_changed
+    if previous_changes['max_price'].any? 
+      old_price = previous_changes['max_price'][0]
+      new_price = previous_changes['max_price'][1]
+      self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
+    end
+  end
+
 end
