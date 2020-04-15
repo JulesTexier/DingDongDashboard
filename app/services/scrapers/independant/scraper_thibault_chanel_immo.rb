@@ -37,12 +37,11 @@ class Independant::ScraperThibaultChanelImmo < Scraper
           hashed_property[:description] = access_xml_text(html, "div.property-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)").strip
           hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
           hashed_property[:agency_name] = @source + " - " + access_xml_text(html, ".agent-action > a").gsub(/[^[:print:]]/, "")
-          raw_floor = access_xml_text(html, '.value-_noo_property_field_ascenseur')
-          if !raw_floor.nil?
-            hashed_property[:has_elevator] = true if raw_floor == "Oui"
-            hashed_property[:has_elevator] = false if raw_floor == "Non"
-          else
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+          hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+          raw_elevator = access_xml_text(html, '.value-_noo_property_field_ascenseur')
+          if !raw_elevator.empty? && !hashed_property[:has_elevator].nil?
+            hashed_property[:has_elevator] = true if raw_elevator == "Oui"
+            hashed_property[:has_elevator] = false if raw_elevator == "Non"
           end
           raw_floor = access_xml_text(html, '.value-_noo_property_field_etage')
           hashed_property[:floor] = raw_floor.to_int_scrp if !raw_floor.nil?
