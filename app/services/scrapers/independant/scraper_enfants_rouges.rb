@@ -39,7 +39,7 @@ class Independant::ScraperEnfantsRouges < Scraper
           break if i == limit
         end
       rescue StandardError => e
-        error_outpus(e, @source)
+        error_outputs(e, @source)
         next
       end
     end
