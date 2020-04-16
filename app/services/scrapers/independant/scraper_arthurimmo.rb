@@ -40,7 +40,7 @@ class Independant::ScraperArthurimmo < Scraper
               hashed_property[:images].push(img.gsub("background-image:url(", "").gsub(");","")) if !img.nil?
           end
           @properties.push(hashed_property) ##testing purpose
-          # enrich_then_insert_v2(hashed_property)
+          enrich_then_insert_v2(hashed_property)
           i += 1
           break if i == limit
         end
