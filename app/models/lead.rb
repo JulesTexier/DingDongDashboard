@@ -8,6 +8,9 @@ class Lead < ApplicationRecord
     desc += "\u000A**FINANCEMENT**\u000A"
     desc += "\u000A**CLIENTE**\u000A"
     desc += "\u000A**NOTES**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (inscription) :**\u000A"
+    desc += "\u000A**SUITE RDV COURTAGE :**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (courtage) :**\u000A"
     desc += "\u000A\u000A---\u000A\u000A"
     desc += trello_summary
   end
@@ -23,7 +26,7 @@ class Lead < ApplicationRecord
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
-    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.strftime("%d/%m/%Y - %H:%M")}*"
+    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
   end
 
   def get_chatbot_link
