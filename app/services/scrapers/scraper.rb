@@ -2,9 +2,13 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !is_already_exists_by_desc?(hashed_property)
+    if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description])
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
+    else
+      # for test purpose, if we don't want ton insert this shitty property,
+      ## then we remove it from the final array of our dedicated scraper
+      @properties.reject!(@properties.reject! { |h| h[:link] == hashed_property[:link] })
     end
   end
 
@@ -271,7 +275,11 @@ class Scraper
   def get_type_flat(str)
     flat_type = "N/C"
     flat_type = "Appartement" if str.downcase.include? "appartement"
-    flat_type = "Maison" if str.downcase!.include? "maison"
+    flat_type = "Maison" if str.downcase.include? "maison"
+    flat_type = "Studio" if str.downcase.include? "studio"
+    flat_type = "Cave" if str.downcase.include? "cave"
+    flat_type = "Parking" if str.downcase.include? "parking"
+    flat_type = "Hotel particulier" if str.downcase.include? "hotel particulier"
     return flat_type
   end
 
@@ -334,6 +342,11 @@ class Scraper
     return response
   end
 
+  ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
+  def is_it_unwanted_prop?(str)
+    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)/i).is_a?(MatchData)
+  end
+
   def is_it_night?
     response = false
     a = Time.parse("22:00:00 +0200")
@@ -351,8 +364,8 @@ class Scraper
 
   def desc_comparator(desc, desc_to_compare)
     response = false
-    str1 = desc.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
-    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;", "").tr("²", "2").tr("\s\t\r", "")
+    str1 = desc.remove_acc_scrp.tr(".,!?:;'", "").tr("²", "2").tr("\s\t\r", "")
+    str2 = desc_to_compare.remove_acc_scrp.tr(".,!?:;'", "").tr("²", "2").tr("\s\t\r", "")
     min = [str1.length, str2.length].min
     if min > 20
       if str1.length == min
@@ -362,8 +375,8 @@ class Scraper
         short_string = str2
         long_string = str1
       end
-      if min > 45
-        min = 45
+      if min > 44
+        min = 44
         x = short_string.length - min
       else
         x = short_string.length - min + 1

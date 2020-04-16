@@ -35,6 +35,45 @@ RSpec.describe Scraper, type: :service do
       end
     end
 
+    context "Testing is_it_unwanted_prop?(hashed_property) to see if a property is viager or else from description" do
+      before(:all) do
+        @s = Scraper.new
+      end
+      it "should return true because it has viager in desc" do
+        expect(@s.is_it_unwanted_prop?("Superbe investissement viager !!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("Superbe investissement disponible uniquement en viager !!")).to eq(true)
+      end
+
+      it "should return true because it is residences/app services in desc" do
+        expect(@s.is_it_unwanted_prop?("Superbe investissement de type résidence service!!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("Superbe investissement de type résidences services!!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("Superbe investissement de type appartement service!!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("Superbe investissement de type appartements services!!")).to eq(true)
+      end
+
+      it "should return true because it is EHPAD" do
+        expect(@s.is_it_unwanted_prop?("Superbe investissement d'une chambre EHPAD")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("Superbe investissement dans un EHPAD")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("EHPAD meublé à 5,37% de rentabilité")).to eq(true)
+      end
+
+      it "should return true because already sold by agency is ok" do
+        expect(@s.is_it_unwanted_prop?("APPARTEMENT SOUS COMPROMIS")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("APPARTEMENT DEJA VENDU PAR L'AGENCE")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("BIEN SOUS COMPROMIS")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("BIEN DEJA VENDU PAR L'AGENCE")).to eq(true)
+        expect(@s.is_it_unwanted_prop?("SOUS OFFRE ACTUELLEMENT")).to eq(true)
+      end
+
+      it "should return false because its a classic description" do
+        expect(@s.is_it_unwanted_prop?("Superbe investissement dans Paris")).to eq(false)
+        expect(@s.is_it_unwanted_prop?("Superbe appartement à 129 300€")).to eq(false)
+        expect(@s.is_it_unwanted_prop?("PARIS 18 à 129392euros dans un bete d'immeuble, super service rendu")).to eq(false)
+        expect(@s.is_it_unwanted_prop?("Appartement vendu via germinal agency")).to eq(false)
+        expect(@s.is_it_unwanted_prop?("Appartement vendu via germinal agency, super service rendu dans une belle résidence")).to eq(false)
+      end
+    end
+
     context "Testing is_link_in_db?(prop) to see if the property already exists in DB by its link" do
       before(:all) do
         @s = Scraper.new
@@ -168,7 +207,7 @@ RSpec.describe Scraper, type: :service do
   describe "XML ACCESSORS METHODS" do
     before(:each) do
       @s = Scraper.new
-      @ssi = ScraperSuperImmo.new
+      @ssi = Hub::ScraperSuperImmo.new
       @html = @ssi.fetch_static_page(@ssi.url)
     end
     context "access_xml_text" do
@@ -336,9 +375,7 @@ RSpec.describe Scraper, type: :service do
     context "FETCH METHODS" do
       before(:each) do
         @s = Scraper.new
-        @si = ScraperSuperImmo.new
-        @skmi = ScraperKmi.new
-        @sbi = ScraperBienIci.new
+        @si = Hub::ScraperSuperImmo.new
       end
 
       it "should return a Nokogori element'" do
@@ -346,7 +383,7 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should return an array of Nokogiri Elements" do
-        expect(@s.fetch_many_pages(@skmi.url, 1, @skmi.main_page_cls)).to be_a(Array)
+        expect(@s.fetch_many_pages(@si.url, 1, @si.main_page_cls)).to be_a(Array)
       end
     end
   end

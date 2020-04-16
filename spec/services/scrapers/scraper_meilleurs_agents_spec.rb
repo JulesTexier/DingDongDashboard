@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperMeilleursAgents, type: :service do
+RSpec.describe Premium::ScraperMeilleursAgents, type: :service do
   before(:all) do
-    @s = ScraperMeilleursAgents.new
+    @s = Premium::ScraperMeilleursAgents.new
   end
 
   it "should launch and return proper number of properties" do

@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperLaforet, type: :service do
+RSpec.describe Group::ScraperLaforet, type: :service do
   before(:all) do
-    @s = ScraperLaforet.new
+    @s = Group::ScraperLaforet.new
   end
 
   it "should launch and return proper number of properties" do

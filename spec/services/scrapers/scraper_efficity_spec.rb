@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperEfficity, type: :service do
+RSpec.describe Independant::ScraperEfficity, type: :service do
   before(:all) do
-    @s = ScraperEfficity.new
+    @s = Independant::ScraperEfficity.new
   end
 
   it "should launch and return proper number of properties" do

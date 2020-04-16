@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe ScraperVarenne, type: :service do
+RSpec.describe Independant::ScraperVarenne, type: :service do
   before(:all) do
-    @s = ScraperVarenne.new
+    @s = Independant::ScraperVarenne.new
   end
 
   it "should launch and return proper number of properties" do
     VCR.use_cassette(@s.source) do
-      expect(@s.launch).to be_a(Array)
+      expect(@s.launch(20)).to be_a(Array)
       expect(Property.where(source: @s.source).count).to be >= 1
       expect(Property.where(source: @s.source).count).to be == @s.properties.count
     end

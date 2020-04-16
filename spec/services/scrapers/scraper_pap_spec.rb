@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ScraperPap, type: :service do
+RSpec.describe Hub::ScraperPap, type: :service do
   before(:all) do
-    @s = ScraperPap.new
+    @s = Hub::ScraperPap.new
   end
 
   it "should launch and return proper number of properties" do
