@@ -2,7 +2,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description])
+    if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     else
@@ -289,22 +289,23 @@ class Scraper
   ## PUBLIC DATABASE METHODS ##
   #############################
 
-  ## On fait plusieurs check à la suite pour déterminer si une property vue en main_page
-  ## mérite d'aller en sa show, par soucis de performance
+  ## This methods make multiple checks to see if we can go to a
+  ## property seen on the main page, for performance reasons
+
   def go_to_prop?(prop, time)
-    if !is_prop_fake?(prop) ## on check si la property n'est pas une prop de merde (>5000m2, arnaque, garage, province)
-      if is_link_in_db?(prop) ## on check si la prop est en base avec son lien
-        false ## on ne va pas dans le show car on est sûr de l'avoir en base
-      else ## elle n'existe pas donc on va regarder avec son triptique
-        filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## on garde que les arguments non nil du quadruplé
-        if filtered_prop.length > 2 ## on vérifie qu'on a au moins 3 arguments
-          does_prop_exists?(filtered_prop, time) ? false : true ## on ne va pas dans la show si la prop existe, sinon on y va enfin
-        else ## pas assez d'argument pour tester donc au revoir
+    if !is_prop_fake?(prop) ## we check if the property is fake if we have enough informations (surface + price)
+      if is_link_in_db?(prop) ## we check if the prop is in DB by its link
+        false ##we dont go to the property show because we already have it
+      else ## it doesnt exist in db so we check by 3 - 4 keys if its already in DB from another source
+        filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## we only keep existants arguments
+        if filtered_prop.length > 2 ## we verify that theres at least 3 arguements
+          does_prop_exists?(filtered_prop, time) ? false : true ## if it doesnt exist, we go to the show
+        else ## not enought args, so fuck off we dont go to the show
           false
         end
       end
     else
-      false ## la prop est fake donc on ne va pas dans la show
+      false ## prop is fake so goodbye we dont go the the show.
     end
   end
 
@@ -319,11 +320,16 @@ class Scraper
   end
 
   def is_prop_fake?(prop)
-    if !prop[:price].nil? && prop[:price].to_i != 0 && !prop[:surface].nil? && prop[:surface].to_i != 0
+    if prop[:surface].nil? || prop[:price].nil?
+      ## delibarately not enough informations, we should further check
+      ## if we put thoses attributes to nil, it means that we can't have informations on the main page
+      ## but that we probably can retrieve it in property show
+      false
+    elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0
       sqm = prop[:price].to_i / prop[:surface].to_i
       sqm < 5000 ? true : false
     else
-      true ## not enough informations, it shouldnt be processed
+      true ## not enough informations, we should further check
     end
   end
 
