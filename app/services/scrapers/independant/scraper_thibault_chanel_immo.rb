@@ -16,40 +16,32 @@ class Independant::ScraperThibaultChanelImmo < Scraper
     i = 0
     fetch_main_page(self).each do |item|
       begin
-        hashed_property = {}
         status = access_xml_text(item, ".property-label")
-        next if (status.include?("SOUS PROMESSE")  || status.include?("VENDU" ))
+        next if (status.include?("SOUS PROMESSE") || status.include?("VENDU"))
+        hashed_property = {}
         hashed_property[:link] = access_xml_link(item, "div:nth-child(1) > a:nth-child(1)", "href")[0].to_s
         title = access_xml_text(item, ".property-title").strip.gsub(/[^[:print:]]/, "")
         hashed_property[:area] = perform_district_regex(title)
-        if get_type_flat(title) == "Studio"
-          hashed_property[:rooms_number] = 1
-          hashed_property[:bedrooms_number] = 0
-        else 
-          hashed_property[:rooms_number] = regex_gen(title.gsub(' ','').downcase, '(\d)p').to_int_scrp
-          hashed_property[:bedrooms_number] = access_xml_text(item, '.bedrooms > span:nth-child(2)')[0..access_xml_text(item, '.bedrooms > span:nth-child(2)').length/2].to_int_scrp
-        end
-        raw_price = access_xml_text(item, ".property-price > span")
-        hashed_property[:price] = raw_price[0..raw_price.length/2].to_int_scrp
+        hashed_property[:price] = access_xml_text(item, ".property-price > span").split("€")[0].to_int_scrp
         hashed_property[:surface] = regex_gen(title, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "div.property-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)").strip
           hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
-          hashed_property[:agency_name] = @source + " - " + access_xml_text(html, ".agent-action > a").gsub(/[^[:print:]]/, "")
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-          raw_elevator = access_xml_text(html, '.value-_noo_property_field_ascenseur')
+          raw_elevator = access_xml_text(html, ".value-_noo_property_field_ascenseur")
           if !raw_elevator.empty? && !hashed_property[:has_elevator].nil?
             hashed_property[:has_elevator] = true if raw_elevator == "Oui"
             hashed_property[:has_elevator] = false if raw_elevator == "Non"
           end
-          raw_floor = access_xml_text(html, '.value-_noo_property_field_etage')
+          hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "div.detail-field.row").remove_acc_scrp, '(piece(s?))(\d)').to_int_scrp
+          raw_floor = access_xml_text(html, ".value-_noo_property_field_etage")
           hashed_property[:floor] = raw_floor.to_int_scrp if !raw_floor.nil?
-          raw_metro = access_xml_text(html, '.value-_noo_property_field_metro')
+          raw_metro = access_xml_text(html, ".value-_noo_property_field_metro")
           raw_metro.nil? ? hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description]) : hashed_property[:subway_ids] = perform_subway_regex(raw_metro)
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
-          hashed_property[:images] =  access_xml_link(html, ".noo-lightbox-item", "href")
+          hashed_property[:images] = access_xml_link(html, ".noo-lightbox-item", "href")
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
           i += 1
