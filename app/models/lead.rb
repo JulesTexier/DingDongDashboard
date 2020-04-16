@@ -20,6 +20,8 @@ class Lead < ApplicationRecord
     desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
     desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
     desc += "\u000A**Arrondissements** : #{self.areas}"
+    desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
+    desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
     desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.strftime("%d/%m/%Y - %H:%M")}*"
   end
