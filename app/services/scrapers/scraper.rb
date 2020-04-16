@@ -277,6 +277,9 @@ class Scraper
     flat_type = "Appartement" if str.downcase.include? "appartement"
     flat_type = "Maison" if str.downcase.include? "maison"
     flat_type = "Studio" if str.downcase.include? "studio"
+    flat_type = "Cave" if str.downcase.include? "cave"
+    flat_type = "Parking" if str.downcase.include? "parking"
+    flat_type = "Hotel particulier" if str.downcase.include? "hotel particulier"
     return flat_type
   end
 
