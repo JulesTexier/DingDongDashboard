@@ -3,7 +3,7 @@ class String
   ## CHARACTER METHODS
 
   def transform_litteral_numbers
-    return self.downcase.gsub(" un ", " 1 ").gsub(" deux ", " 2 ").gsub(" trois ", " 3 ").gsub(" quatre ", " 4 ").gsub(" cinq ", " 5 ").gsub(" six ", " 6 ").gsub(" sept ", " 7 ").gsub(" huit ", " 8 ").gsub(" neuf ", " 9 ")
+    return self.downcase.gsub(" un ", " 1 ").gsub(" une ", " 1 ").gsub(" deux ", " 2 ").gsub(" trois ", " 3 ").gsub(" quatre ", " 4 ").gsub(" cinq ", " 5 ").gsub(" six ", " 6 ").gsub(" sept ", " 7 ").gsub(" huit ", " 8 ").gsub(" neuf ", " 9 ")
   end
 
   def clean_img_link_https
@@ -35,31 +35,68 @@ class String
 
   def convert_numerals_scrp
     regex = "(premier|deuxieme|troisieme|quatrieme|cinquieme|sixieme|septieme|huitieme|neuvieme|dixieme)"
-    numeral = self.match(/#{regex}/i).to_s
-    case numeral
-    when "premier"
-      return self.gsub(/#{regex}/i, "1er")
-    when "deuxieme"
-      return self.gsub(/#{regex}/i, "2eme")
-    when "troisieme"
-      return self.gsub(/#{regex}/i, "3eme")
-    when "quatrieme"
-      return self.gsub(/#{regex}/i, "4eme")
-    when "cinquieme"
-      return self.gsub(/#{regex}/i, "5eme")
-    when "sixieme"
-      return self.gsub(/#{regex}/i, "6eme")
-    when "septieme"
-      return self.gsub(/#{regex}/i, "7eme")
-    when "huitieme"
-      return self.gsub(/#{regex}/i, "8eme")
-    when "neuvieme"
-      return self.gsub(/#{regex}/i, "9eme")
-    when "dixieme"
-      return self.gsub(/#{regex}/i, "10eme")
-    else
-      return self
+    str_array = self.split
+    str_array.map do |str|
+      numeral = str.match(/#{regex}/i).to_s
+      case numeral
+      when "premier"
+        str.gsub!(/#{regex}/i, "1er")
+      when "deuxieme"
+        str.gsub!(/#{regex}/i, "2eme")
+      when "troisieme"
+        str.gsub!(/#{regex}/i, "3eme")
+      when "quatrieme"
+        str.gsub!(/#{regex}/i, "4eme")
+      when "cinquieme"
+        str.gsub!(/#{regex}/i, "5eme")
+      when "sixieme"
+        str.gsub!(/#{regex}/i, "6eme")
+      when "septieme"
+        str.gsub!(/#{regex}/i, "7eme")
+      when "huitieme"
+        str.gsub!(/#{regex}/i, "8eme")
+      when "neuvieme"
+        str.gsub!(/#{regex}/i, "9eme")
+      when "dixieme"
+        str.gsub!(/#{regex}/i, "10eme")
+      else
+        str
+      end
     end
+    return str_array.join(" ")
+  end
+
+  def convert_written_number_scrp
+    regex = "(un(e?)|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)"
+    str_array = self.split
+    str_array.map do |str|
+      written_number = str.match(/#{regex}/i).to_s
+      case written_number
+      when "un", "une"
+        str.gsub!(/#{regex}/i, "1")
+      when "deux"
+        str.gsub!(/#{regex}/i, "2")
+      when "trois"
+        str.gsub!(/#{regex}/i, "3")
+      when "quatre"
+        str.gsub!(/#{regex}/i, "4")
+      when "cinq"
+        str.gsub!(/#{regex}/i, "5")
+      when "six"
+        str.gsub!(/#{regex}/i, "6")
+      when "sept"
+        str.gsub!(/#{regex}/i, "7")
+      when "huit"
+        str.gsub!(/#{regex}/i, "8")
+      when "neuf"
+        str.gsub!(/#{regex}/i, "9")
+      when "dix"
+        str.gsub!(/#{regex}/i, "10")
+      else
+        str
+      end
+    end
+    return str_array.join(" ")
   end
 
   def floors_str_scrp
