@@ -30,50 +30,53 @@ class Broker < ApplicationRecord
     morning_end = 13
     afternooon_end = 18
     date = date.in_time_zone("Paris")
-
     case date.wday
+    when 0
+      b = self.get_broker_by_username(hugo)
+    when 6
+      b = self.get_broker_by_username(hugo)
     when 1 #Lundi  : Aprem : Véronique
       if date.hour < morning_end
-        b = get_broker_by_username(hugo)
+        b = self.get_broker_by_username(hugo)
       elsif date.hour >= morning_end && date.hour < afternooon_end
-        b = get_broker_by_username(veronique)
+        b = self.get_broker_by_username(veronique)
       else 
-        b = get_broker_by_username(aurelien)
+        b = self.get_broker_by_username(aurelien)
       end
     when 2 #Mardi  : Matin Aurélien, Aprem : Mélanie
       if date.hour < morning_end
-        b = get_broker_by_username(aurelien)
+        b = self.get_broker_by_username(aurelien)
       elsif date.hour >= morning_end && date.hour < afternooon_end
-        b = get_broker_by_username(melanie)
+        b = self.get_broker_by_username(melanie)
       else 
-        b = get_broker_by_username(hugo)
+        b = self.get_broker_by_username(hugo)
       end
     when 3 #Mercredi  : Aprem : Véronique
       if date.hour < morning_end
-        b = get_broker_by_username(hugo)
+        b = self.get_broker_by_username(hugo)
       elsif date.hour >= morning_end && date.hour < afternooon_end
-        b = get_broker_by_username(amelie)
+        b = self.get_broker_by_username(amelie)
       else 
-        b = get_broker_by_username(melanie)
+        b = self.get_broker_by_username(melanie)
       end
     when 4  #Jeudi  : Matin Mélanie, Aprem : Aurélien
       if date.hour < morning_end
-        b = get_broker_by_username(melanie)
+        b = self.get_broker_by_username(melanie)
       elsif date.hour >= morning_end && date.hour < afternooon_end
-        b = get_broker_by_username(aurelien)
+        b = self.get_broker_by_username(aurelien)
       else 
-        b = get_broker_by_username(amelie)
+        b = self.get_broker_by_username(amelie)
       end
     when 5 #Vendredi  : Matin Mélanie, Aprem : Aurélien
       if date.hour < morning_end
-        b = get_broker_by_username(amelie)
+        b = self.get_broker_by_username(amelie)
       elsif date.hour >= morning_end && date.hour < afternooon_end
-        b = get_broker_by_username(veronique)
+        b = self.get_broker_by_username(veronique)
       else 
-        b = get_broker_by_username(hugo)
+        b = self.get_broker_by_username(hugo)
       end
     else
-      b = get_broker_by_username("gregrouxeloldra")
+      b = self.get_broker_by_username("gregrouxeloldra")
     end
     
     return b
