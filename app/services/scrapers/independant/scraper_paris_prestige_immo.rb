@@ -34,7 +34,7 @@ class Independant::ScraperParisPrestigeImmo < Scraper
           hashed_property[:bedrooms_number] = regex_gen(raw_bedrooms, '(\d){1,}chambre').to_int_scrp if raw_bedrooms.match(/(\d){1,}chambre/i).is_a?(MatchData) 
           hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-          hashed_property[:subway_ids] = perform_subway_regex(access_xml_text(html, ".localisation"))
+          hashed_property[:subway_ids] = perform_subway_regex(access_xml_text(html, ".title > h1") + hashed_property[:description] )
           hashed_property[:provider] = "Agence"
           hashed_property[:agency_name] = access_xml_text(html, 'aside  > h4')
           hashed_property[:contact_number] = access_xml_link(html, 'aside  > p > a', 'href')[0].gsub("tel:","")
