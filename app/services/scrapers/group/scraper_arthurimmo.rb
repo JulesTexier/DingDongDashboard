@@ -1,4 +1,4 @@
-class Independant::ScraperArthurimmo < Scraper
+class Group::ScraperArthurimmo < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
@@ -27,7 +27,6 @@ class Independant::ScraperArthurimmo < Scraper
         next if hashed_property[:flat_type] == "Bureaux"
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          # byebug
           hashed_property[:description] = access_xml_text(html, "div.detail-accordeon-item-txt > p").strip
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
@@ -42,10 +41,8 @@ class Independant::ScraperArthurimmo < Scraper
           i += 1
           break if i == limit
         end
-        puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
-        puts e.message
         next
       end
     end
