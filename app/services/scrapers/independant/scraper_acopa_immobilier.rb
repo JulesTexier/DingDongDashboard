@@ -10,7 +10,7 @@ class Independant::ScraperAcopaImmobilier < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
-    @http_request = [{}, "action=corn_realestateSearch&nonce=a96673b199&param=budget_max=10000000&surface_min=0&rooms_min=0&ville=&typetransacselected=vente&mapselected=paris&zoneselected=&lastcriteria=prix"]
+    @http_request = [{}, "action=corn_realestateSearch&nonce=347c922758&param=budget_max=1000000&surface_min=0&rooms_min=0&ville=&typetransacselected=vente&mapselected=paris&zoneselected=&lastcriteria=type transaction"]
     @http_type = "post"
   end
 
