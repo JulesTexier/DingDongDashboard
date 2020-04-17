@@ -6,8 +6,10 @@ RSpec.describe Scraper, type: :service do
       before(:all) do
         @s = Scraper.new
       end
-      it "should return true if price is 0 and surface nil" do
-        expect(@s.is_prop_fake?({ price: 0, surface: nil })).to eq(true)
+      it "should return false if one attribute is nil because its delibarately put to nil by a human being" do
+        expect(@s.is_prop_fake?({ price: 0, surface: nil })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: nil })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: 0 })).to eq(false)
       end
       it "should return true if each attributes is equal to 0 and random integer respectively" do
         expect(@s.is_prop_fake?({ price: 0, surface: 20 })).to eq(true)
@@ -18,9 +20,6 @@ RSpec.describe Scraper, type: :service do
         expect(@s.is_prop_fake?({ price: "0", surface: "20" })).to eq(true)
         expect(@s.is_prop_fake?({ price: "20", surface: "0" })).to eq(true)
         expect(@s.is_prop_fake?({ price: "0", surface: "0" })).to eq(true)
-      end
-      it "should return true if price is nil and surface nil" do
-        expect(@s.is_prop_fake?({ price: nil, surface: nil })).to eq(true)
       end
       it "should return true if we try to divide with or by 0" do
         expect(@s.is_prop_fake?({ price: 3000000, surface: 0 })).to eq(true)
