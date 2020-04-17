@@ -1,5 +1,5 @@
 class Independant::ScraperAcopaImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr,  :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
 
   def initialize
     @url = "https://www.acopa-immobilier.fr/wp-admin/admin-ajax.php"
@@ -10,12 +10,21 @@ class Independant::ScraperAcopaImmobilier < Scraper
     @multi_page = false
     @page_nbr = 1
     @properties = []
-    @http_request = [{}, "action=corn_realestateSearch&nonce=347c922758&param=budget_max=1000000&surface_min=0&rooms_min=0&ville=&typetransacselected=vente&mapselected=paris&zoneselected=&lastcriteria=type transaction"]
+    @http_request = [{}, ""]
     @http_type = "post"
   end
 
   def launch(limit = nil)
     i = 0
+    # These tricky lines are made to get the nonce variable, required for authenticity of the post request
+    doc = fetch_static_page("https://www.acopa-immobilier.fr/")
+    doc.css('script').each do |script|
+      if script.content.include?("nonce")
+        nonce = regex_gen(regex_gen(script.content, "var nonce = (.)*'"), "'(.)*'").gsub("'",'')
+        @http_request[1] = "action=corn_realestateSearch&nonce=#{nonce}&param=budget_max=1560000&surface_min=0&rooms_min=0&ville=&typetransacselected=vente&mapselected=paris&zoneselected=&lastcriteria=undefined"
+        break if !nonce.empty?
+      end
+    end
     fetch_main_page(self).each do |item|
       begin
         hashed_property = {}
