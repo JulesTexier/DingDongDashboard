@@ -37,7 +37,7 @@ class Trello
     return true
 
     # 4 • Send notification email to the broker
-    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now
+    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !lead.broker.email.nil?
 
   end
   
