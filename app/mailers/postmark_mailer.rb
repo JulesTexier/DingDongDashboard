@@ -13,6 +13,11 @@ class PostmarkMailer < ApplicationMailer
     mail from: 'etienne@hellodingdong.com', to: lead.email, postmark_template_alias: 'welcome'
   end
 
+  def send_email_to_lead_with_no_messenger(lead)
+    self.template_model = { lead_firstname: lead.firstname }
+    mail from: 'etienne@hellodingdong.com', to: lead.email, postmark_template_alias: 'lead-no-messenger'
+  end
+
   def send_error_message_broker_btn(card_id, broker_firstname = "XXX")
     self.template_model = { broker_name: broker_firstname, card_id: card_id}
     mail from: 'fred@hellodingdong.com', to: "etienne@hellodingdong.com", postmark_template_alias: 'error-broker-btn'
