@@ -19,13 +19,13 @@ class Trello
     params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
     params[:idMembers] = lead.broker.trello_id
     new_card_response = create_new_card(list_id, params)
-    return false if new_card_response.code != 200
+    return false if new_card_response.code != (200 || 204)
     
     # 2• Add checklist 'Action' to created card
     card_id = JSON.parse(new_card_response.body)["id"]
     lead.update(trello_id_card: card_id)
     new_checklist_response = add_checklist_to_card(card_id)
-    return false if new_checklist_response.code != 200
+    return false if new_checklist_response.code != (200 || 204)
 
     
     # 3• Add first action on the checklist
@@ -33,12 +33,12 @@ class Trello
     check_items_params = {}
     check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname} - @#{lead.broker.trello_username}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
-    return false if new_checkitem_response.code != 200
-    return true
-
+    return false if new_checkitem_response.code != (200 || 204)
+    
     # 4 • Send notification email to the broker
     PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !lead.broker.email.nil?
-
+    return true
+    
   end
 
   def add_lead_on_trello_no_messenger(lead)
