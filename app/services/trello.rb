@@ -31,7 +31,7 @@ class Trello
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
+    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname} - @#{lead.broker.trello_username}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != 200
     return true
