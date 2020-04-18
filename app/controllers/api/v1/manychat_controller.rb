@@ -170,7 +170,6 @@ class Api::V1::ManychatController < ApplicationController
       end
       lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas )
       broker = Broker.get_current_broker
-      broker = Broker.find(1) #testing purpose only !
       lead.update(broker: broker)
 
       if lead.save
@@ -186,7 +185,7 @@ class Api::V1::ManychatController < ApplicationController
 
       # 5 • Ajout de la trello_id_card au lead et au sub 
       subscriber.update(trello_id_card: lead.trello_id_card)
-      
+      render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: nil }, status: 500
       else
         render json: { status: "ERROR", message: "Lead not created", data: nil }, status: 500
       end
