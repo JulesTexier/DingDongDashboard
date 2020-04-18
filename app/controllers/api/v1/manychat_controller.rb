@@ -185,7 +185,7 @@ class Api::V1::ManychatController < ApplicationController
 
       # 5 • Ajout de la trello_id_card au lead et au sub 
       subscriber.update(trello_id_card: lead.trello_id_card)
-      render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: nil }, status: 500
+      render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: subscriber }, status: 500
       else
         render json: { status: "ERROR", message: "Lead not created", data: nil }, status: 500
       end
