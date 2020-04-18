@@ -3,6 +3,11 @@ require 'postmark-rails/templated_mailer'
 class PostmarkMailer < ApplicationMailer
   include PostmarkRails::TemplatedMailerMixin
 
+  def send_new_lead_notification_to_broker(lead)
+    self.template_model = { broker_firstname: lead.broker.firstname, lead_info: lead.get_fullname, trello_board_url: lead.broker.get_board_url }
+    mail from: 'etienne@hellodingdong.com', to: lead.broker.email, postmark_template_alias: 'broker-new-lead-notification'
+  end
+
   def send_chatbot_link(lead)
     self.template_model = { name: lead.firstname, action_url: lead.get_chatbot_link, broker_name:lead.broker.firstname, broker_phone: lead.broker.phone, broker_email: lead.broker.email }
     mail from: 'etienne@hellodingdong.com', to: lead.email, postmark_template_alias: 'welcome'
