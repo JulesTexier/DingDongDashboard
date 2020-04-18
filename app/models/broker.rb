@@ -3,6 +3,10 @@ class Broker < ApplicationRecord
   has_many :leads
   has_many :subscribers
 
+  def get_board_url
+    return "https://trello.com/b/" + self.trello_board_id
+  end
+
   def self.get_broker_by_username(username)
     return self.where(trello_username:username).first
   end
@@ -10,16 +14,16 @@ class Broker < ApplicationRecord
   def self.get_current_broker(date = Time.now)
     b = self.where(trello_username:"gregrouxeloldra").first
 
-#     Lundi matin : hugo
-# lundi aprem : véronique
-# mardi matin : aurélien
-# mardi aprem : mélanie
-# mercredi matin : hugo
-# mercredi aprem : amélie
-# jeudi matin : mélanie
-# jeudi aprem : aurélien
-# vendredi matin : amélie
-# vendredi aprem : véronique
+    #     Lundi matin : hugo
+    # lundi aprem : véronique
+    # mardi matin : aurélien
+    # mardi aprem : mélanie
+    # mercredi matin : hugo
+    # mercredi aprem : amélie
+    # jeudi matin : mélanie
+    # jeudi aprem : aurélien
+    # vendredi matin : amélie
+    # vendredi aprem : véronique
 
     aurelien = "aurelienguichard1"
     melanie = "melanieramon2"
