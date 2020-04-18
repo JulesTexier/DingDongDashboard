@@ -43,7 +43,7 @@ class Trello
 
   def add_lead_on_trello_no_messenger(lead)
 
-    # 1 • Atatch Greg as broker to this lead 
+    # 1 • Attach Greg as broker to this lead 
     lead.update(broker: Broker.get_broker_by_username("gregrouxeloldra"))
 
     # 2 • Add lead on the adequate Greg's list
@@ -57,8 +57,7 @@ class Trello
     # return false if new_card_response.code != 200
     
     # 3 • Handle support for the lead 
-    #  - send email ? 
-
+    PostmarkMailer.send_email_to_lead_with_no_messenger(lead).deliver_now
   end
   
   def add_comment_to_card(card_id, comment) 
