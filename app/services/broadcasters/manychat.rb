@@ -270,32 +270,30 @@ class Manychat
   def get_default_qr
     qr = [{
       "type": "flow",
-      "caption": "🏠 5 annonces",
+      "caption": ":house: 5 annonces",
       "target": ENV["QR_ADS"],
     },
           {
       "type": "flow",
-      "caption": "🔎 Mes critères",
-      "target": ENV["QR_CRITERIA"],
+      "caption": "📞 Appeler mon conseiller",
+      "target": "20200420082225_07451",
+    },  {
+      "type": "flow",
+      "caption": "🧐 Préparer visite",
+      "target": "20200406175824_347680",
+    },{
+      "type": "flow",
+      "caption": "🤝 Négocier",
+      "target": "20200417143528_857983",
     },
           {
       "type": "flow",
-      "caption": "💸 Prêt",
-      "target": ENV["QR_LOAN"],
+      "caption": "📝​ Faire une offre",
+      "target": "20200420082225_057338",
     },
-          {
+    {
       "type": "flow",
-      "caption": "🏘️ Estimation",
-      "target": ENV["QR_ESTIM"],
-    },
-          {
-      "type": "flow",
-      "caption": "💡 Conseil",
-      "target": ENV["QR_ADVICE"],
-    },
-          {
-      "type": "flow",
-      "caption": "⛔ Stop",
+      "caption": ":no_entry: Stop",
       "target": ENV["QR_UNSUBS"],
     }]
     # [{
