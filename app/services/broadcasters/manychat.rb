@@ -275,7 +275,7 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": "📞 Appeler mon conseiller",
+      "caption": "📞 Appeler conseiller",
       "target": ENV["QR_CALL_BROKER"],
     },  {
       "type": "flow",
