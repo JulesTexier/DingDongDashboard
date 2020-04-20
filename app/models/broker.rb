@@ -42,7 +42,7 @@ class Broker < ApplicationRecord
       b = self.get_broker_by_username(hugo)
     when 1 #Lundi  : Aprem : Véronique
       if date.hour < morning_end
-        b = self.get_broker_by_username(greg)
+        b = self.get_broker_by_username(hugo)
       elsif date.hour >= morning_end && date.hour < afternooon_end
         b = self.get_broker_by_username(veronique)
       else 
