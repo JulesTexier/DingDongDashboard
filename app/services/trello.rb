@@ -98,7 +98,7 @@ class Trello
     add_label_to_card(lead.trello_id_card, label_id)
     # Add comment on carte to advise broker 
     params = {}
-    params[:text] = "Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong" + " @#{lead.broker.trello_username}"
+    params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong" + " @#{lead.broker.trello_username}"
     add_comment_to_card(lead.trello_id_card, params)
   end
 
