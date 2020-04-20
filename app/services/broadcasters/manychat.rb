@@ -276,20 +276,20 @@ class Manychat
           {
       "type": "flow",
       "caption": "📞 Appeler mon conseiller",
-      "target": "20200420082225_07451",
+      "target": ENV["QR_CALL_BROKER"],
     },  {
       "type": "flow",
       "caption": "🧐 Préparer visite",
-      "target": "20200406175824_347680",
+      "target": ENV["QR_VISIT"],
     },{
       "type": "flow",
       "caption": "🤝 Négocier",
-      "target": "20200417143528_857983",
+      "target": ENV["QR_NEGO"],
     },
           {
       "type": "flow",
       "caption": "📝​ Faire une offre",
-      "target": "20200420082225_057338",
+      "target": ENV["QR_MAKE_OFFER"],
     },
     {
       "type": "flow",
