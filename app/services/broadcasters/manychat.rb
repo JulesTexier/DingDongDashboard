@@ -267,7 +267,11 @@ class Manychat
   end
 
   # Getter method for default quick_replies menu
-  def get_default_qr
+  def get_default_qr(subscriber = nil)
+    broker_name = "conseiller"
+    if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil? 
+       broker_name = subscriber.broker.firstname 
+    end
     qr = [{
       "type": "flow",
       "caption": "🏠 5 annonces",
@@ -275,7 +279,7 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": "📞 Appeler conseiller",
+      "caption": "📞 Appeler #{broker_name}",
       "target": ENV["QR_CALL_BROKER"],
     },  {
       "type": "flow",
@@ -447,7 +451,7 @@ class Manychat
   #----------------
   # final_json
   #----------------
-  def create_final_json(subscriber, messages_array, actions_array = [], quick_replies_array = self.default_qr)
+  def create_final_json(subscriber, messages_array, actions_array = [], quick_replies_array = get_default_qr(subscriber))
     {
       "subscriber_id": subscriber.facebook_id,
       "data": {
