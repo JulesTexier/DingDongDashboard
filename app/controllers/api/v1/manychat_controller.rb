@@ -170,6 +170,7 @@ class Api::V1::ManychatController < ApplicationController
       end
       lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas )
       broker = Broker.get_current_broker
+      broker = Broker.get_broker_by_username("fredbnd") if ENV['TEST'] == "true"
       lead.update(broker: broker)
 
       if lead.save
