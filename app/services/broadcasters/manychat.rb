@@ -268,9 +268,11 @@ class Manychat
 
   # Getter method for default quick_replies menu
   def get_default_qr(subscriber = nil)
-    broker_name = "conseiller"
+    
     if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil? 
        broker_name = subscriber.broker.firstname 
+    else 
+      broker_name = "conseiller"
     end
     qr = [{
       "type": "flow",
