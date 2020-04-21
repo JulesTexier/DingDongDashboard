@@ -8,7 +8,7 @@ class Scraper
     else
       # for test purpose, if we don't want ton insert this shitty property,
       ## then we remove it from the final array of our dedicated scraper
-      @properties.reject!(@properties.reject! { |h| h[:link] == hashed_property[:link] })
+      @properties.reject! { |h| h[:link] == hashed_property[:link] }
     end
   end
 
@@ -174,6 +174,8 @@ class Scraper
     unless Rails.env.test?
       puts "\nError for #{@source}, skip this one."
       puts "It could be a bad link or a bad xml extraction.\n\n"
+      puts e.message
+      puts e.backtrace
     end
   end
 
