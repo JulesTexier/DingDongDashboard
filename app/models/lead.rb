@@ -1,5 +1,7 @@
 class Lead < ApplicationRecord
-  belongs_to :broker
+  belongs_to :broker, optional: true
+  after_create :handle_onboarding
+
 
   def trello_description
     desc = ""
@@ -37,5 +39,39 @@ class Lead < ApplicationRecord
     return self.firstname + " " + self.lastname
   end
 
+  
+  private 
+  
+  def handle_onboarding
+    # 1 • Handle case lead is a real estate hunter 
+    if self.project_type.downcase.include?("chasseur")
+      onboarding_hunter
+    # 2 • Handle case lead has not Messenger 
+    elsif !self.has_messenger 
+      add_lead_on_trello_no_messenger
+    else 
+      onboarding_broker
+    end
+  end
+  
+  def onboarding_hunter
+    # Send email to lead with Max in C/C
+    PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
+  end
 
+  def add_lead_on_trello_no_messenger
+    # Send email to lead with explainations 
+    PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
+  end
+
+  def onboarding_broker
+    self.update(broker: Broker.get_current_broker)
+      trello = Trello.new
+      sms = SmsMode.new
+      if trello.add_new_lead_on_trello(self)
+        self.broker.send_email_notification(self)
+        sms.send_sms_to_broker(self, self.broker)
+      end
+  end
+  
 end

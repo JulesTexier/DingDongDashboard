@@ -7,6 +7,10 @@ class Broker < ApplicationRecord
     return "https://trello.com/b/" + self.trello_board_id
   end
 
+  def send_email_notification(lead)
+    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !self.email.nil?
+  end
+
   def self.get_broker_by_username(username)
     return self.where(trello_username:username).first
   end
@@ -14,7 +18,7 @@ class Broker < ApplicationRecord
   def self.get_current_broker(date = Time.now)
     b = self.where(trello_username:"gregrouxeloldra").first
 
-    #     Lundi matin : hugo
+    # lundi matin : hugo
     # lundi aprem : véronique
     # mardi matin : aurélien
     # mardi aprem : mélanie

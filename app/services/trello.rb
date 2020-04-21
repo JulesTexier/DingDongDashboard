@@ -17,51 +17,25 @@ class Trello
     params[:desc] = lead.trello_description
     params[:pos] = 'top'
     params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
-    params[:idMembers] = lead.broker.trello_id
     new_card_response = create_new_card(list_id, params)
-    return false if new_card_response.code != 200
+    return false if new_card_response.code != (200 || 204)
     
     # 2• Add checklist 'Action' to created card
     card_id = JSON.parse(new_card_response.body)["id"]
     lead.update(trello_id_card: card_id)
     new_checklist_response = add_checklist_to_card(card_id)
-    return false if new_checklist_response.code != 200
+    return false if new_checklist_response.code != (200 || 204)
 
     
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname} - @#{lead.broker.trello_username}"
+    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
-    return false if new_checkitem_response.code != 200
-    return true
-
-    # 4 • Send notification email to the broker
-    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !lead.broker.email.nil?
-
-  end
-
-  def add_lead_on_trello_no_messenger(lead)
-
-    # 1 • Atatch Greg as broker to this lead 
-    lead.update(broker: Broker.get_broker_by_username("gregrouxeloldra"))
-
-    # 2 • Add lead on the adequate Greg's list
-    # params = {}
-    # params[:name] = lead.get_fullname
-    # params[:desc] = lead.trello_description
-    # params[:pos] = 'top'
-    # # params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
-    # params[:idMembers] = lead.broker.trello_id
-    # new_card_response = create_new_card("5e9add8a8122483bba7a7f77", params)
-    # return false if new_card_response.code != 200
+    return false if new_checkitem_response.code != (200 || 204)
     
-    # 3 • Handle support for the lead 
-    #  - send email ? 
-
-  end
-  
-  def add_comment_to_card(card_id, comment) 
+    return true
+    
   end
 
   def get_trello_card_broker(card_id)
@@ -77,7 +51,7 @@ class Trello
   def add_comment_to_lead_card(lead, comment)
     card_id = lead.trello_id_card
     params = {}
-    params[:text] = comment + " @#{lead.broker.trello_username}"
+    params[:text] = comment
     if !card_id.nil? && !lead.broker.trello_username.nil?
       add_comment_to_card(card_id, params)
     end
@@ -98,7 +72,7 @@ class Trello
     add_label_to_card(lead.trello_id_card, label_id)
     # Add comment on carte to advise broker 
     params = {}
-    params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong" + " @#{lead.broker.trello_username}"
+    params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong"
     add_comment_to_card(lead.trello_id_card, params)
   end
 
