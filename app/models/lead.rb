@@ -50,9 +50,7 @@ class Lead < ApplicationRecord
     elsif !self.has_messenger 
       add_lead_on_trello_no_messenger
     else 
-      self.update(broker: Broker.get_current_broker)
-      trello = Trello.new
-      trello.add_new_lead_on_trello(self)
+      onboarding_broker
     end
   end
   
@@ -64,6 +62,14 @@ class Lead < ApplicationRecord
   def add_lead_on_trello_no_messenger
     # Send email to lead with explainations 
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
+  end
+
+  def onboarding_broker
+    self.update(broker: Broker.get_current_broker)
+      trello = Trello.new
+      if trello.add_new_lead_on_trello(self)
+        self.broker.send_email_notification(self)
+      end
   end
   
 end
