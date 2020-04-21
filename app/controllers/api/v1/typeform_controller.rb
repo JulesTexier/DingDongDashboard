@@ -4,10 +4,6 @@ require "typhoeus"
 class Api::V1::TypeformController < ApplicationController
   protect_from_forgery with: :null_session
 
-  def initialize
-    @trello = Trello.new
-  end
-
   def generate_lead 
     lead = generate_lead_from_typeform_data(request)
     if lead
