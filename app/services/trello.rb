@@ -35,8 +35,6 @@ class Trello
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
     
-    # 4 • Send notification email to the broker
-    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !lead.broker.email.nil?
     return true
     
   end
