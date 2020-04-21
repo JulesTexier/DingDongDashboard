@@ -16,7 +16,6 @@ class Trello
     params[:name] = lead.get_fullname
     params[:desc] = lead.trello_description
     params[:pos] = 'top'
-    params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
     new_card_response = create_new_card(list_id, params)
     return false if new_card_response.code != (200 || 204)
     
