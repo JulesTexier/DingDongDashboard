@@ -7,8 +7,8 @@ class Broker < ApplicationRecord
     return "https://trello.com/b/" + self.trello_board_id
   end
 
-  def send_email_notofication(lead)
-    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if if !self.email.nil?
+  def send_email_notification(lead)
+    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !self.email.nil?
   end
 
   def self.get_broker_by_username(username)
