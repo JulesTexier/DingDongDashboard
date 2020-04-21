@@ -50,8 +50,7 @@ class Lead < ApplicationRecord
     elsif !self.has_messenger 
       add_lead_on_trello_no_messenger
     else 
-      # self.update(broker: Broker.get_current_broker)
-      self.update(broker: Broker.first)
+      self.update(broker: Broker.get_current_broker)
       trello = Trello.new
       trello.add_new_lead_on_trello(self)
     end
