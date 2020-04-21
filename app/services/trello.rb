@@ -17,7 +17,6 @@ class Trello
     params[:desc] = lead.trello_description
     params[:pos] = 'top'
     params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
-    params[:idMembers] = lead.broker.trello_id
     new_card_response = create_new_card(list_id, params)
     return false if new_card_response.code != (200 || 204)
     
@@ -31,16 +30,12 @@ class Trello
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname} - @#{lead.broker.trello_username}"
+    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
     
     return true
     
-  end
-
-  
-  def add_comment_to_card(card_id, comment) 
   end
 
   def get_trello_card_broker(card_id)
@@ -56,7 +51,7 @@ class Trello
   def add_comment_to_lead_card(lead, comment)
     card_id = lead.trello_id_card
     params = {}
-    params[:text] = comment + " @#{lead.broker.trello_username}"
+    params[:text] = comment
     if !card_id.nil? && !lead.broker.trello_username.nil?
       add_comment_to_card(card_id, params)
     end
@@ -77,7 +72,7 @@ class Trello
     add_label_to_card(lead.trello_id_card, label_id)
     # Add comment on carte to advise broker 
     params = {}
-    params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong" + " @#{lead.broker.trello_username}"
+    params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong"
     add_comment_to_card(lead.trello_id_card, params)
   end
 
