@@ -41,24 +41,6 @@ class Trello
     
   end
 
-  def add_lead_on_trello_no_messenger(lead)
-
-    # 1 • Attach Greg as broker to this lead 
-    lead.update(broker: Broker.get_broker_by_username("gregrouxeloldra"))
-
-    # 2 • Add lead on the adequate Greg's list
-    # params = {}
-    # params[:name] = lead.get_fullname
-    # params[:desc] = lead.trello_description
-    # params[:pos] = 'top'
-    # # params[:due] = Time.now.in_time_zone("Paris") + 15.minutes
-    # params[:idMembers] = lead.broker.trello_id
-    # new_card_response = create_new_card("5e9add8a8122483bba7a7f77", params)
-    # return false if new_card_response.code != 200
-    
-    # 3 • Handle support for the lead 
-    PostmarkMailer.send_email_to_lead_with_no_messenger(lead).deliver_now
-  end
   
   def add_comment_to_card(card_id, comment) 
   end
