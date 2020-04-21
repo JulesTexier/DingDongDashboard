@@ -406,6 +406,23 @@ class Scraper
     return response
   end
 
+  def scraped_property_count(time_frame)
+    Property.where("created_at >= ?", Time.zone.now - time_frame.to_i.hours).count
+  end
+
+  def scraped_property_checker
+    time_frame = ENV["TIME_FRAME_ALERT"].nil? ? 6 : ENV["TIME_FRAME_ALERT"]
+    prop_nbr = scraped_property_count(time_frame)
+    if prop_nbr == 0
+      message = "ALERTE. Ceci n'est pas un exercice, nous n'avons pas scrapé d'annonces en #{time_frame} heure(s)"
+      # send_sms(message)
+      puts "\n\n" + message + "\n\n"
+    else
+      property_word = prop_nbr > 1 ? "properties" : "property"
+      puts "\n\nWe've scraped #{prop_nbr} #{property_word} in a #{time_frame} hour window.\n\n"
+    end
+  end
+
   private
 
   ##############################
