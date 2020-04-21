@@ -43,10 +43,8 @@ Rails.application.routes.draw do
 
   resources :subscribers, only: [:show, :update, :edit]
   resources :properties, only: [:show]
-  resources :lead, only: [:create]
+  resources :lead, only: [:new, :create]
   
-  post "/lead/new" => "lead#handle_lead_broker" 
-  # put '/subscribers/:id', to "subcribers#update"
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
   get "/dashboard/stats" => "static_pages#stats"
