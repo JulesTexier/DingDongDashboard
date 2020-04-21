@@ -22,6 +22,11 @@ namespace :scraper do
     puts "Launching Independant Worker"
     ScraperIndependantSitesWorker.scrap
   end
+
+  task :alert do
+    puts "Scanning Property numbers to see if everything is fine"
+    Scraper.new.scraped_property_checker
+  end
 end
 
 namespace :subscriber do
