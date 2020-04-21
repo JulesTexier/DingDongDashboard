@@ -10,14 +10,10 @@ class Api::V1::TypeformController < ApplicationController
 
   def generate_lead 
     lead = generate_lead_from_typeform_data(request)
-  
     if lead
-      lead.has_messenger ? response = @trello.add_new_lead_on_trello(lead) : @trello.add_lead_on_trello_no_messenger(lead)
-      if response
-        render json: {status: 'SUCCESS', message: 'Lead added to Trello !', data: lead}, status: 200
-      else
-        render json: {status: 'ERROR', message: 'An errror occured'}, status: 500
-      end
+      render json: {status: 'SUCCESS', message: 'Lead has been created !', data: lead}, status: 200
+    else
+      render json: {status: 'ERROR', message: 'An errror occured'}, status: 500
     end
   end
 
@@ -62,7 +58,6 @@ class Api::V1::TypeformController < ApplicationController
     end
 
     lead = Lead.new(lead_hash)
-    lead.broker = Broker.get_current_broker
     lead.save ?  lead : false
   end
 
