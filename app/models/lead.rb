@@ -67,8 +67,10 @@ class Lead < ApplicationRecord
   def onboarding_broker
     self.update(broker: Broker.get_current_broker)
       trello = Trello.new
+      sms = SmsMode.new
       if trello.add_new_lead_on_trello(self)
         self.broker.send_email_notification(self)
+        sms.send_sms_to_broker(self, self.broker)
       end
   end
   
