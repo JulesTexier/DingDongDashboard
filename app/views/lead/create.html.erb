@@ -1,0 +1,134 @@
+<h1>Création d'un nouveau contact</h1>
+
+<%= form_for @lead, url: "/lead/new" do |f| %>
+      
+      <h4 class="mt-5">Identité</h4>
+      <div class="row">
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Prénom *</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :firstname, class: "form-control", placeholder:"Jean", :required => true   %>
+          </div>
+        </div>
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Nom *</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :lastname, class: "form-control", placeholder:"Dupond", :required => true   %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Email *</h5>
+          <div class="input-group mb-3">
+              <%= f.email_field :email, class: "form-control", placeholder:"jean.dupond@gmail.com", :required => true   %>
+          </div>
+        </div>
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Téléphone *</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :phone, class: "form-control", placeholder:"0783746253", :required => true   %>
+          </div>
+        </div>
+      </div>
+
+
+      <h4 class="mt-5">Projet immobilier</h4>
+      <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Type de projet </h5>
+      <div class="input-group mb-3">
+          <%= f.select :project_type, options_for_select([["Chosir...", ""], "1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]), class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰 Prix d'achat maximum ? *</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">€</span>
+            </div>
+            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", min:"10000", max:"10000000", :required => true %>
+        </div>
+        </div>
+        <div class="col-4">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">m2</span>
+            </div>
+            <%= f.number_field :min_surface, type:"number", class: "form-control", placeholder:"Ex : 30", min:"8", max:"400", :required => true   %>
+        </div>
+        </div>
+        <div class="col-4">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡 Nombre de pièces minimum ? *</h5>
+          <div class="input-group mb-3">
+              <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", min:"1", max:"6", :required => true   %>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
+      <div class="d-flex flex-wrap">
+        <% @areas.each do |area| %>
+          <div 
+              class="form-check mr-3 <%=area.name%> d-flex" 
+              onclick="changeColor(className)"
+          >       <div>
+                      <%= check_box_tag 'selected_area[]', 
+                          area.id, 
+                          false, 
+                          class: "",
+                          id: area.name
+                      %>
+                  </div>
+                  <label class="form-check-label mb-2 ml-2" for="<%=area.name%>">
+                      <%= area.name %>
+                  </label>
+
+          </div>
+        <% end %>
+      </div>
+
+        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Critères spécifiques </h5>
+        <div class="input-group mb-3">
+            <%= f.text_area :specific_criteria, class: "form-control", placeholder:"Avec vue dégagée sur la Tour Eiffel ...", rows:5, cols:5, :required => false   %>
+        </div>
+
+        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Remarques supplémentaires </h5>
+        <div class="input-group mb-3">
+            <%= f.text_area :additional_question, class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
+        </div>
+
+        <h4 class="mt-5">Ding Dong</h4>
+        
+        <div class="row"  style="margin-bottom:100px;">
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Courtier Ding Dong de référence *</h5>
+        <div class="input-group mb-3">
+            <%= f.select :project_type, options_for_select(@broker_select), class: "form-control", :required => true   %>
+        </div>
+        </div>
+        <div class="col-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Source du lead</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :lastname, class: "form-control", placeholder:"Folhomee, réseau interne, ...", :required => false   %>
+          </div>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <%= f.submit "Créer le contact 🚀", 
+                class: "btn btn-outline-light", 
+                style:"font-weight:600"
+            %>
+        </div>
+      </nav>
+
+       
+
+        <div class="d-flex justify-content-center mt-4 mb-6">
+        -------- 🔔--------
+        </div>
+      </p>
+    <% end %>
