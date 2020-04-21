@@ -14,7 +14,7 @@ class Broker < ApplicationRecord
   def self.get_current_broker(date = Time.now)
     b = self.where(trello_username:"gregrouxeloldra").first
 
-    #     Lundi matin : hugo
+    # lundi matin : hugo
     # lundi aprem : véronique
     # mardi matin : aurélien
     # mardi aprem : mélanie
