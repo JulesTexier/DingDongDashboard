@@ -65,12 +65,12 @@ class Lead < ApplicationRecord
   end
 
   def onboarding_broker
-    self.update(broker: Broker.get_current_broker)
+    self.update(broker: Broker.get_current_broker) if self.broker.nil?
       trello = Trello.new
       sms = SmsMode.new
       if trello.add_new_lead_on_trello(self)
-        self.broker.send_email_notification(self)
-        sms.send_sms_to_broker(self, self.broker)
+        self.broker.send_email_notification(self) if Rails.env.production?
+        sms.send_sms_to_broker(self, self.broker) if Rails.env.production?
       end
   end
   

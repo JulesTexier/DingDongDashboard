@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'lead/create'
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
 
@@ -42,7 +43,8 @@ Rails.application.routes.draw do
 
   resources :subscribers, only: [:show, :update, :edit]
   resources :properties, only: [:show]
-  # put '/subscribers/:id', to "subcribers#update"
+  resources :lead, only: [:new, :create]
+  
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
   get "/dashboard/stats" => "static_pages#stats"
