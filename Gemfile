@@ -91,6 +91,7 @@ group :test do
   gem "factory_bot_rails"
   gem "webmock"
   gem "vcr"
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
