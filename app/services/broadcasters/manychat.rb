@@ -302,31 +302,6 @@ class Manychat
       "caption": "⛔ Stop",
       "target": ENV["QR_UNSUBS"],
     }]
-    # [{
-    #   "type": "flow",
-    #   "caption": "🏠 5 annonces",
-    #   "target": ENV["QR_ADS"],
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "📞 Appeler courtier",
-    #   "target": "20200330083518_711940",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "📝​🤝 Faire une offre",
-    #   "target": "20200406085625_574803",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "🧐 Préparer visite",
-    #   "target": "20200406175824_347680",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "⛔ Stop",
-    #   "target": ENV["QR_UNSUBS"],
-    # }]
     return qr
   end
 
