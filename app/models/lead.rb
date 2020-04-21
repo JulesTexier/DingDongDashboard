@@ -37,5 +37,10 @@ class Lead < ApplicationRecord
     return self.firstname + " " + self.lastname
   end
 
+  def onboarding_hunter
+    # Send email to lead with Max in C/C
+    PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
+  end
+
 
 end
