@@ -267,7 +267,13 @@ class Manychat
   end
 
   # Getter method for default quick_replies menu
-  def get_default_qr
+  def get_default_qr(subscriber = nil)
+    
+    if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil? 
+       broker_name = subscriber.broker.firstname 
+    else 
+      broker_name = "conseiller"
+    end
     qr = [{
       "type": "flow",
       "caption": "🏠 5 annonces",
@@ -275,54 +281,27 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": "🔎 Mes critères",
-      "target": ENV["QR_CRITERIA"],
+      "caption": "📞 Appeler #{broker_name}",
+      "target": ENV["QR_CALL_BROKER"],
+    },  {
+      "type": "flow",
+      "caption": "🧐 Préparer visite",
+      "target": ENV["QR_VISIT"],
+    },{
+      "type": "flow",
+      "caption": "🤝 Négocier",
+      "target": ENV["QR_NEGO"],
     },
           {
       "type": "flow",
-      "caption": "💸 Prêt",
-      "target": ENV["QR_LOAN"],
+      "caption": "📝​ Faire une offre",
+      "target": ENV["QR_MAKE_OFFER"],
     },
-          {
-      "type": "flow",
-      "caption": "🏘️ Estimation",
-      "target": ENV["QR_ESTIM"],
-    },
-          {
-      "type": "flow",
-      "caption": "💡 Conseil",
-      "target": ENV["QR_ADVICE"],
-    },
-          {
+    {
       "type": "flow",
       "caption": "⛔ Stop",
       "target": ENV["QR_UNSUBS"],
     }]
-    # [{
-    #   "type": "flow",
-    #   "caption": "🏠 5 annonces",
-    #   "target": ENV["QR_ADS"],
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "📞 Appeler courtier",
-    #   "target": "20200330083518_711940",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "📝​🤝 Faire une offre",
-    #   "target": "20200406085625_574803",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "🧐 Préparer visite",
-    #   "target": "20200406175824_347680",
-    # },
-    #       {
-    #   "type": "flow",
-    #   "caption": "⛔ Stop",
-    #   "target": ENV["QR_UNSUBS"],
-    # }]
     return qr
   end
 
@@ -449,7 +428,7 @@ class Manychat
   #----------------
   # final_json
   #----------------
-  def create_final_json(subscriber, messages_array, actions_array = [], quick_replies_array = self.default_qr)
+  def create_final_json(subscriber, messages_array, actions_array = [], quick_replies_array = get_default_qr(subscriber))
     {
       "subscriber_id": subscriber.facebook_id,
       "data": {

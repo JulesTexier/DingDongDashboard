@@ -30,6 +30,7 @@ class Broker < ApplicationRecord
     hugo = "cohen172"
     amelie = "kleinamelie"
     veronique = "veroniquebenazet"
+    greg = "gregrouxeloldra"
 
     morning_end = 13
     afternooon_end = 18
