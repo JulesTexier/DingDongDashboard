@@ -168,30 +168,11 @@ class Api::V1::ManychatController < ApplicationController
       subscriber.areas.each do |area|
         areas += area.name + ","
       end
-      lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas )
-      if !ENV["BROKER"].nil? 
-        puts "#"*10
-        puts ENV["BROKER"]
-        broker = Broker.get_broker_by_username(ENV["BROKER"]) 
-      else
-        broker = Broker.get_current_broker
-      end
-      lead.broker =  broker
-
+      lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas, project_type: "N/C" )
       if lead.save
-      # 2 • Ajouter le lead au broker (et update du subscriber)
-        subscriber.update(broker: broker)
-        
-        trello = Trello.new
-      # 3 • Ajout du lead au Trello du Broker 
-        trello.add_new_lead_on_trello(lead)
-
-      # 4 • Mettre une étiquette particulière à la card (old user)
-        trello.add_label_old_user(lead)
-
-      # 5 • Ajout de la trello_id_card au lead et au sub 
-      subscriber.update(trello_id_card: lead.trello_id_card)
-      render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: subscriber }, status: 200
+        #Ajout de la trello_id_card au lead et au sub 
+        subscriber.update(trello_id_card: lead.trello_id_card)
+        render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: subscriber }, status: 200
       else
         render json: { status: "ERROR", message: "Lead not created", data: nil }, status: 500
       end
