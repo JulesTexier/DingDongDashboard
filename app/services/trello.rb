@@ -32,6 +32,13 @@ class Trello
     check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
+
+    # 4• Add dedicated label if old user
+    if !lead.status.nil?
+      if lead.status.include?("old user")
+        add_label_old_user(lead)
+      end
+    end
     
     return true
     
