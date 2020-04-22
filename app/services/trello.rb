@@ -32,6 +32,13 @@ class Trello
     check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
+
+    # 4• Add dedicated label if old user
+    if !lead.status.nil?
+      if lead.status.include?("old user")
+        add_label_old_user(lead)
+      end
+    end
     
     return true
     
@@ -73,6 +80,14 @@ class Trello
     params = {}
     params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong"
     add_comment_to_card(lead.trello_id_card, params)
+  end
+
+  def archive_card_after_lead_transfer(old_card_id, new_broker)
+    params = {}
+    params[:closed] = true
+    params[:desc] = "Transféré à #{new_broker.firstname}, le #{Time.now.in_time_zone("Paris")}"
+    response = update_card_list(old_card_id, params)
+    response.code == 200 ? true : false
   end
 
   private 
@@ -149,6 +164,15 @@ class Trello
       label_id = label["id"] if label["name"] == name 
     end
     return label_id
+  end
+
+  def update_card_list(card_id, params)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}/?" + @token,
+      method: :put,
+      params: params
+    )
+    response = request.run
   end
 
 end
