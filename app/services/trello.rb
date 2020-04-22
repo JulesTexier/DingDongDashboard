@@ -75,6 +75,14 @@ class Trello
     add_comment_to_card(lead.trello_id_card, params)
   end
 
+  def archive_card_after_lead_transfer(old_card_id, new_broker)
+    params = {}
+    params[:closed] = true
+    params[:desc] = "Transféré à #{new_broker.firstname}, le #{Time.now.in_time_zone("Paris")}"
+    response = update_card_list(old_card_id, params)
+    response.code == 200 ? true : false
+  end
+
   private 
   
   def create_new_card(list_id, params)
@@ -149,6 +157,15 @@ class Trello
       label_id = label["id"] if label["name"] == name 
     end
     return label_id
+  end
+
+  def update_card_list(card_id, params)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}/?" + @token,
+      method: :put,
+      params: params
+    )
+    response = request.run
   end
 
 end
