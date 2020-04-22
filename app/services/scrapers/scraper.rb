@@ -406,6 +406,29 @@ class Scraper
     return response
   end
 
+  #########################################
+  ## CHECKER TO SEE IF EVERYTHING IS FINE##
+  #########################################
+
+  def scraped_property_count(time_frame)
+    Property.where("created_at >= ?", Time.zone.now - time_frame.to_i.hours).count
+  end
+
+  def scraped_property_checker
+    time_frame = ENV["TIME_FRAME_ALERT"].nil? ? 6 : ENV["TIME_FRAME_ALERT"]
+    prop_nbr = scraped_property_count(time_frame)
+    if prop_nbr == 0
+      message = "ALERTE. Ceci n'est pas un exercice, nous n'avons pas scrapé d'annonces en #{time_frame} heure(s)"
+      sms_mode = SmsMode.new
+      sms_mode.send_sms_to_team(message)
+      puts "\n\n" + message + "\n\n"
+    else
+      property_word = prop_nbr > 1 ? "properties" : "property"
+      puts "\n\nEverything seems to be fine."
+      puts "We've scraped #{prop_nbr} #{property_word} in a #{time_frame} hour window.\n\n"
+    end
+  end
+
   private
 
   ##############################
