@@ -179,8 +179,7 @@ class Subscriber < ApplicationRecord
   end
 
   def is_matching_property_area(property)
-    property.area == "75116" ? p_area = "75016" : p_area =  property.area
-    self.get_areas.include?(p_area) ? true : false
+    self.areas.include?(property.area) ? true : false
   end
 
   def notify_broker_if_max_price_is_changed

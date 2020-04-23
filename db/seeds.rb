@@ -1,8 +1,14 @@
-require "json"
-Subway.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!("subways")
-obj = JSON.parse(File.read("./db/data/subways.json"))
-obj["stations"].each do |hsh|
-  puts "***"
-  puts Subway.create(name: hsh["metro"], line: hsh["ligne"])
+Area.all.each do |area|
+  area.update(zone: "Paris")
 end
+
+total = Property.all.size
+i = 1
+
+Property.all.each do |property|
+  puts "Update property #{i}/#{total} "
+  property.update(area: Area.where(name: property.old_area).first)
+  i += 1
+end
+
+Property.where(old_area: "75116").update_all(area_id: Area.where(name: "75016").first.id)

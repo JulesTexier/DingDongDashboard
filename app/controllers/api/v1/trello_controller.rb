@@ -45,16 +45,21 @@ class Api::V1::TrelloController < ApplicationController
   def update_lead_broker
     document = JSON.parse(request.body.read)
     lead = Lead.where(trello_id_card: document["cardId"]).first
+    old_card_id = lead.trello_id_card
     new_broker = Broker.where(trello_username: document["brokerUsername"]).first
     if !lead.nil? && !new_broker.nil?
       # 1 • Update du lead avec le nouveau Broker
         lead.update(broker: new_broker)
       # 2 • Créer carte dans le tableau du courtier
-        @trello.add_new_lead_on_trello(lead)
-      # 3 • Update de la carte initiale du lead (mettre sur le bord du nv courtier et enlever échéance)
-        @trello.update_trello_card_greg_list(document["cardId"])
+        is_new_card = @trello.add_new_lead_on_trello(lead)
+      # 3 • Archiver la carte initiale de l'ancien courtier
+        is_archive = @trello.archive_card_after_lead_transfer(old_card_id, new_broker)
 
-      render json: {status: 'SUCCESS', message: 'Lead found', data: lead}, status: 200
+        if is_archive && is_new_card
+          render json: {status: 'SUCCESS', message: "Lead assigned and moved to #{new_broker.firstname}", data: lead}, status: 200
+        else
+          render json: {status: 'ERROR', message: 'Lead has not been transfered correctly', data: lead}, status: 500
+        end
     else
       # b = @trello.get_trello_card_broker(document["cardId"])
       # PostmarkMailer.send_error_message_broker_btn(document["cardId"], b.firstname ).deliver_now
