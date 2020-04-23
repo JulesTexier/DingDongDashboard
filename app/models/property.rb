@@ -19,6 +19,8 @@ class Property < ApplicationRecord
 
   has_many :property_subways
   has_many :subways, through: :property_subways
+  
+  belongs_to :area
 
   def get_cover
     self.images[0]
