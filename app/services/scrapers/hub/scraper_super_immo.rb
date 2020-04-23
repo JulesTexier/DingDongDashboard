@@ -26,7 +26,7 @@ class Hub::ScraperSuperImmo < Scraper
             hashed_property[:agency_name] = access_xml_text(html, "header > div.media-body > b")
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args["zone"])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "a.fancybox img", "src")

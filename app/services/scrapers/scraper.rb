@@ -3,7 +3,7 @@ require "dotenv/load"
 class Scraper
   def enrich_then_insert_v2(hashed_property)
     if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
-      hashed_property[:area] == Area.where(name: hashed_property[:area]).first
+      hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     else
@@ -325,16 +325,18 @@ class Scraper
   ## We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
   ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
   ## And the we send it in an array for insertion.
-  def perform_subway_regex(str)
-    subways = JSON.parse(File.read("./db/data/subways.json"))
-    subways_ids = []
-    subways["stations"].each do |subway|
-      if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
-        s = Subway.where(name: subway["metro"]).limit(1)
-        subways_ids.push(s.ids[0])
+  def perform_subway_regex(str, zone = "Paris")
+    if zone == "Paris"
+      subways = JSON.parse(File.read("./db/data/subways.json"))
+      subways_ids = []
+      subways["stations"].each do |subway|
+        if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
+          s = Subway.where(name: subway["metro"]).limit(1)
+          subways_ids.push(s.ids[0])
+        end
       end
+      return subways_ids.uniq
     end
-    return subways_ids.uniq
   end
 
   def get_type_flat(str)
