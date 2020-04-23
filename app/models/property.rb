@@ -48,10 +48,14 @@ class Property < ApplicationRecord
   end
 
   def get_pretty_area
-    if self.area[3..3] == "0"
-      self.area[4..4] == "1" ? pretty_area = "1er" : pretty_area = "#{self.area[4..4]}ème"
+    if self.area.name[0..1] == "75" 
+      if self.area.name[3..3] == "0"
+        self.area.name[4..4] == "1" ? pretty_area = "1er" : pretty_area = "#{self.area.name[4..4]}ème"
+      else
+        pretty_area = "#{self.area.name[3..4]}ème"
+      end
     else
-      pretty_area = "#{self.area[3..4]}ème"
+      pretty_area = self.area.name
     end
     return pretty_area
   end
@@ -97,10 +101,9 @@ class Property < ApplicationRecord
     subs = []
     subs_query.each do |sub|
       sub.areas.each do |sub_area|
-        sub_area.name === area ? subs.push(sub) : nil
+        subs.push(sub) if sub_area == area
       end
     end
-
     # 3. elevator criteria
     final_subs = []
     if has_elevator === false && floor != nil
