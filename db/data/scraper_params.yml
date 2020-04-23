@@ -1,0 +1,13 @@
+---
+- source: SuperImmo
+  params:
+  - zone: Paris
+    url: https://www.superimmo.com/achat/ile-de-france/paris?sort=created_at
+    type: Static
+    main_page_cls: section > div.media-body
+  - zone: Banlieue-Ouest
+    url: https://www.superimmo.com/achat/appartement/rueil-malmaison-92500,sartrouville-78500,houilles-78800,chatou-78400,maisons-laffitte-78600,marly-le-roi-78160,le-vesinet-78110,montesson-78360,carrieres-sur-seine-78420,croissy-sur-seine-78290,chambourcy-78240,l-etang-la-ville-78620,mareil-marly-78750,saint-germain-en-laye-78/p/[[PAGE_NUMBER]]?option%5B%5D=old_build&sort=created_at
+    type: Static
+    main_page_cls: section > div.media-body
+    multi_page: true
+    page_nbr: 3
