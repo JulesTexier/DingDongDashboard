@@ -1,0 +1,111 @@
+---
+- zone: Paris
+  datas:
+    - name: "Paris 1er"
+      terms:
+        - "75001"
+    - name: "Paris 2ème"
+      terms:
+        - "75002"
+    - name: "Paris 3ème"
+      terms:
+        - "75003"
+    - name: "Paris 4ème"
+      terms:
+        - "75004"
+    - name: "Paris 5ème"
+      terms:
+        - "75005"
+    - name: "Paris 6ème"
+      terms:
+        - "75006"
+    - name: "Paris 7ème"
+      terms:
+        - "75007"
+    - name: "Paris 8ème"
+      terms:
+        - "75008"
+    - name: "Paris 9ème"
+      terms:
+        - "75009"
+    - name: "Paris 10ème"
+      terms:
+        - "75010"
+    - name: "Paris 11ème"
+      terms:
+        - "75011"
+    - name: "Paris 12ème"
+      terms:
+        - "75012"
+    - name: "Paris 13ème"
+      terms:
+        - "75013"
+    - name: "Paris 14ème"
+      terms:
+        - "75014"
+    - name: "Paris 15ème"
+      terms:
+        - "75015"
+    - name: "Paris 16ème"
+      terms:
+        - "75016"
+        - "75116"
+    - name: "Paris 17ème"
+      terms:
+        - "75017"
+    - name: "Paris 18ème"
+      terms:
+        - "75018"
+    - name: "Paris 19ème"
+      terms:
+        - "75019"
+    - name: "Paris 20ème"
+      terms:
+        - "75020"
+- zone: Banlieue-Ouest
+  datas:
+    - name: Fourqueux
+      terms:
+        - "78112"
+    - name: Saint-Germain-En-Laye
+      terms:
+        - "78100"
+    - name: Sartrouville
+      terms:
+        - "78500"
+    - name: Le Vesinet
+      terms:
+        - "78110"
+    - name: Chambourcy
+      terms:
+        - "78240"
+    - name: Maison-Laffitte
+      terms:
+        - "78600"
+    - name: Mareil-Marly
+      terms:
+        - "78750"
+    - name: Marly-Leroy
+      terms:
+        - "78160"
+    - name: L'Etang-La-Ville
+      terms:
+        - "78620"
+    - name: Croissy-sur-Seine
+      terms:
+        - "78290"
+    - name: Chatou
+      terms:
+        - "78400"
+    - name: Montesson
+      terms:
+        - "78360"
+    - name: Houilles
+      terms:
+        - "78800"
+    - name: Carrières-sur-Seines
+      terms:
+        - "78420"
+    - name: Rueil-Malmaison
+      terms:
+        - "92500"
