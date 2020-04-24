@@ -200,8 +200,6 @@ class Scraper
     unless Rails.env.test?
       puts "\nError for #{@source}, skip this one."
       puts "It could be a bad link or a bad xml extraction.\n\n"
-      puts e.message
-      puts e.backtrace
     end
   end
 
@@ -276,31 +274,10 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  ## This method allow us to get, from a short string, the name of a district from a certain zone
-
-  ## We loop through a yml file that as terms,
-
-  ## and we check, given the name or the terms, if the string is equal
-
-  ## Rules for suburbs = If a city is present in the string, it primes on the postcode
-
-  ## Got the old code for Paris
   def perform_district_regex(str, zone = "Paris")
     district_datas = YAML.load_file("./db/data/areas.yml")
-
     district = []
-
-    if zone == "Paris"
-      paris_regex = '(75(0|1))(\d{2})'
-      if str.match(/#{paris_regex}/i).is_a?(MatchData)
-        post_code = str.match(/#{paris_regex}/i).to_s
-        cleaned_str = post_code == "75116" ? "75016" : post_code
-      else
-        cleaned_str = str.remove_acc_scrp.district_regex_scrp.district_generator_scrp
-      end
-    else
-      cleaned_str = str.remove_acc_scrp
-    end
+    cleaned_str = str.perform_num_converter_scrp
     district_datas.each do |district_data|
       if district_data["zone"] == zone
         district_data["datas"].each do |city_data|
@@ -311,7 +288,7 @@ class Scraper
         end
         district_data["datas"].each do |city_data|
           city_data["terms"].each do |term|
-            if cleaned_str.match(/#{term.remove_acc_scrp}/i).is_a?(MatchData)
+            if cleaned_str.match(/\b#{term.remove_acc_scrp}\b/i).is_a?(MatchData)
               district.push(city_data["name"])
               break
             end
@@ -378,8 +355,16 @@ class Scraper
   end
 
   def does_prop_exists?(prop, time)
-    prop[:area] = Area.where(name: prop[:area]).first
-    props = Property.where(prop).where("created_at >= ?", time.days.ago)
+    if prop[:area].nil?
+      props = Property.where(
+        prop.except(:area)
+      ).where("created_at >= ?", time.days.ago)
+    else
+      props = Property.where(
+        prop.except(:area),
+        area: Area.where(name: prop[:area]).first,
+      ).where("created_at >= ?", time.days.ago)
+    end
     props.count == 0 ? false : true
   end
 
@@ -389,17 +374,15 @@ class Scraper
   end
 
   def is_prop_fake?(prop)
-    if prop[:surface].nil? || prop[:price].nil?
+    if prop[:surface].nil? || prop[:price].nil? || prop[:area].nil?
       ## delibarately not enough informations, we should further check
       ## if we put thoses attributes to nil, it means that we can't have informations on the main page
       ## but that we probably can retrieve it in property show
       false
-    elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0
-      if prop[:area] != "N/C"
-        price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
-        sqm = prop[:price].to_i / prop[:surface].to_i
-        sqm < price_threshold ? true : false
-      end
+    elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
+      price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
+      sqm = prop[:price].to_i / prop[:surface].to_i
+      sqm < price_threshold ? true : false
     else
       true ## not enough informations, we should further check
     end
@@ -411,7 +394,7 @@ class Scraper
     properties = Property.where(
       surface: hashed_property[:surface],
       price: hashed_property[:price],
-      area: hashed_property[:area],
+      area: Area.where(name: hashed_property[:area]).first,
       rooms_number: hashed_property[:rooms_number],
     )
 
