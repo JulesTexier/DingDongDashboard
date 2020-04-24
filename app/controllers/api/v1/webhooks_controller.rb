@@ -6,7 +6,13 @@ class Api::V1::WebhooksController < ApplicationController
 
 
   def handle_postmark_inbound
-    render json: { status: "SUCCESS", message: "Hello"}, status: 200
+    if params["FromName"] == "SeLoger"
+      Email::ScraperSeLoger.new(params["HtmlBody"]).launch
+      # Gérer des condtitions pour savoir si on a bien inséré la property ou pas ... (doublon, 500 ou succès) 
+      render json: { status: "SUCCESS", message: "Mail from SeLoger", data: nil}, status: 200
+    else 
+      render json: { status: "ERROR", message: "Can't handle this email"}, status: 500
+    end
   end
 
 end
