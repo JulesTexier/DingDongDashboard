@@ -129,8 +129,9 @@ RSpec.describe Scraper, type: :service do
     context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
       before(:each) do
         @s = Scraper.new
-        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
-        @prop = { area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
+        area = FactoryBot.create(:area, name: "Paris 17ème", zone: "Paris")
+        FactoryBot.create(:property, created_at: 6.days.ago, area: area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @prop = { area: "Paris 17ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
       end
 
       it "should return true because the two properties are the same" do
@@ -162,36 +163,37 @@ RSpec.describe Scraper, type: :service do
     context "Testing go_to_prop?(prop, time)" do
       before(:each) do
         @s = Scraper.new
-        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @area = FactoryBot.create(:area, name: "Paris 18ème", zone: "Paris")
+        FactoryBot.create(:property, created_at: 6.days.ago, area: @area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
       end
 
       it "should return false because @prop is the same as a property inside DB" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
       end
 
       it "should return false because price or surface is nil or equal to 0" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: nil, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 0, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 0, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: "23", price: "0", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: "400000", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: nil, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 0, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 0, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: "23", price: "0", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: "400000", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
       end
 
       it "should return false because link is the same has a property inside DB" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "     https://google.com    " }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "     https://google.com    " }, 7)).to eq(false)
       end
 
       it "should return true because the property isnt the same, and the timeframe is out of reach of property inside DB and link is different but arguments are the same" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 5)).to eq(true)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 4)).to eq(true)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 3)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 5)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 4)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 3)).to eq(true)
       end
 
       it "should return true because price is different and therefore link is different and out of timeframe" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 390000, rooms_number: 1, link: "https://google.com/new_link/" }, 7)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 390000, rooms_number: 1, link: "https://google.com/new_link/" }, 7)).to eq(true)
       end
     end
 
@@ -241,32 +243,39 @@ RSpec.describe Scraper, type: :service do
     before(:each) do
       @s = Scraper.new
       @sai = Independant::ScraperAabiImmo.new
-      @html = @sai.fetch_static_page(@sai.url)
     end
     context "access_xml_text" do
       it "should return a string" do
-        expect(@s.access_xml_text(@html, "body")).to be_a(String)
-        expect(@s.access_xml_text(@html, "body")).not_to be_a(Array)
+        VCR.use_cassette(@sai.source + "Test") do
+          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).to be_a(String)
+          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(Array)
+        end
       end
 
       context "access_xml_raw" do
         it "should return an array" do
-          expect(@s.access_xml_raw(@html, "body")).to be_a(Array)
-          expect(@s.access_xml_raw(@html, "body")).not_to be_a(String)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).to be_a(Array)
+            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(String)
+          end
         end
       end
 
       context "access_xml_link" do
         it "should return an array" do
-          expect(@s.access_xml_link(@html, "p > a", "href")).to be_a(Array)
-          expect(@s.access_xml_link(@html, "p > a", "href")[0].to_s).to be_a(String)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")).to be_a(Array)
+            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")[0].to_s).to be_a(String)
+          end
         end
       end
 
       context "access_xml_array_to_text" do
         it "should return an array" do
-          expect(@s.access_xml_array_to_text(@html, "p > a")).to be_a(String)
-          expect(@s.access_xml_array_to_text(@html, "p > a")).not_to be_a(Array)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).to be_a(String)
+            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).not_to be_a(Array)
+          end
         end
       end
     end
@@ -401,6 +410,26 @@ RSpec.describe Scraper, type: :service do
         expect(@s.perform_district_regex("https://example.com/6919209429")).not_to eq("Lyon 2ème")
       end
     end
+
+    context "perform_district_regex(str) for Suburbs" do
+      it "should translate postcode to City Name" do
+        expect(@s.perform_district_regex("Appartement situé 78112", "Banlieue-Ouest")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Bien situé dans le 78100", "Banlieue-Ouest")).to eq("Saint-Germain-En-Laye")
+        expect(@s.perform_district_regex("Superbe petit bien à 92500", "Banlieue-Ouest")).to eq("Rueil-Malmaison")
+      end
+
+      it "should take city over postcode" do
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).not_to eq("Saint-Germain-En-Laye")
+      end
+
+      it "shouldnt take any city because there's no args for suburbs" do
+        expect(@s.perform_district_regex("Appartement situé à Fourqueux")).to eq("N/C")
+        expect(@s.perform_district_regex("Bien situé dans le 78112")).to eq("N/C")
+        expect(@s.perform_district_regex("Appartement situé à Fourqueux")).not_to eq("Fourqueux")
+        expect(@s.perform_district_regex("Bien situé dans le 78112")).not_to eq("Fourqueux")
+      end
+    end
   end
 
   describe "simple fetch methods" do
@@ -411,11 +440,15 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should return a Nokogori element'" do
-        expect(@s.fetch_static_page(@sai.url)).to be_a(Nokogiri::HTML::Document)
+        VCR.use_cassette(@sai.source + "Test") do
+          expect(@s.fetch_static_page(@sai.url)).to be_a(Nokogiri::HTML::Document)
+        end
       end
 
       it "should return an array of Nokogiri Elements" do
-        expect(@s.fetch_many_pages(@sai.url, 1, @sai.main_page_cls)).to be_a(Array)
+        VCR.use_cassette(@sai.source + "TestManyPages") do
+          expect(@s.fetch_many_pages(@sai.url, 1, @sai.main_page_cls)).to be_a(Array)
+        end
       end
     end
   end
