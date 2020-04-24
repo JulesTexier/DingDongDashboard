@@ -22,7 +22,7 @@ class Hub::ScraperBienIci < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.bienici.com/annonce/vente/" + item["id"]
         hashed_property[:surface] = item["surfaceArea"].round if item["surfaceArea"].is_a?(Integer) ## the json is sometimes an array for bad properties
-        hashed_property[:area] = item["postalCode"]
+        hashed_property[:area] = perform_district_regex(item["postalCode"])
         hashed_property[:rooms_number] = item["roomsQuantity"]
         hashed_property[:price] = item["price"] if item["price"].is_a?(Integer)
         next if hashed_property[:link].match(/(visiteonline-)/i).is_a?(MatchData)

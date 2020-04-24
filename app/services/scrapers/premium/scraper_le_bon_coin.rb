@@ -87,7 +87,7 @@ class Premium::ScraperLeBonCoin < Scraper
 
     !item["url"].nil? ? flat_data[:link] = item["url"].gsub(" u002F", "/").gsub("\s", "") : nil
     !item["body"].nil? ? flat_data[:description] = item["body"].tr("\n", "") : nil
-    !item["location"]["zipcode"].nil? ? flat_data[:area] = item["location"]["zipcode"] : nil
+    !item["location"]["zipcode"].nil? ? flat_data[:area] = perform_district_regex(item["location"]["zipcode"]) : nil
     !item["price"].nil? ? flat_data[:price] = item["price"][0].to_i : nil
 
     !flat_data[:description].nil? ? flat_data[:floor] = perform_floor_regex(flat_data[:description]) : nil

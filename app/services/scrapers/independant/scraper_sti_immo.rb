@@ -18,8 +18,9 @@ class Independant::ScraperStiImmo < Scraper
       begin
         hashed_property = {}
         clean_title = access_xml_text(item, "p[itemprop='description']").strip.gsub(/[^[:print:]]/, "").gsub(" ", "").remove_acc_scrp
-        next unless clean_title.include?("appartement") || clean_title.include?("studio") || !clean_title.match(/paris/i).is_a?(MatchData)
-        hashed_property[:area] = "750" + regex_gen(clean_title, 'paris(\d)*').gsub("paris", "")
+        next unless clean_title.include?("appartement") || clean_title.include?("studio")
+        next unless clean_title.match(/paris/i).is_a?(MatchData)
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "p[itemprop='description']"))
         hashed_property[:link] = "http://www.sti-immo.com" + access_xml_link(item, "a:nth-child(1)", "href")[0].to_s
         hashed_property[:price] = access_xml_text(item, "span[itemprop='price']").to_int_scrp
         hashed_property[:rooms_number] = regex_gen(clean_title, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
