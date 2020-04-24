@@ -38,6 +38,9 @@ Rails.application.routes.draw do
       post "/trello/add_action" => "trello#add_action_to_broker"
       post "/trello/move-card-to-broker" => "trello#update_lead_broker"
 
+      # Webhooks resources 
+      post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
+
     end
   end
 
