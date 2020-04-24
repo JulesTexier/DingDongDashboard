@@ -223,6 +223,10 @@ class String
     return str_array.join(" ")
   end
 
+  def perform_num_converter_scrp
+    self.remove_acc_scrp.convert_romanian_nbr_scrp.convert_written_number_scrp.convert_numerals_scrp
+  end
+
   def district_generator_scrp
     if self.length == 2
       return "750#{self}"
