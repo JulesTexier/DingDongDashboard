@@ -6,7 +6,7 @@ class SubscribersController < ApplicationController
 
   def edit
     @subscriber = Subscriber.find(params[:id])
-    @areas = Area.all
+    @areas = Area.where(zone:@subscriber.areas.first.zone)
   end
 
   def update

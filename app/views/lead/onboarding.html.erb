@@ -1,0 +1,109 @@
+
+    <h4 class="text-center mt-5" style="color: #525f7f; font-weight:400">Bienvenue chez Ding Dong !</h4>
+
+    <div class="d-flex justify-content-center mt-5" style="background:white">
+        <img style="width: 100%; max-width: 700px;" src="https://media-private.canva.com/oYO_U/MAD6WYoYO_U/1/s.jpg?response-expires=Fri%2C%2024%20Apr%202020%2012%3A28%3A05%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T093729Z&X-Amz-SignedHeaders=host&X-Amz-Expires=10235&X-Amz-Credential=AKIAJWF6QO3UH4PAAJ6Q%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=3f2a1bedf69f886937c885a01b910877cf52105170512e1df83d94306bbc1a90" alt="Equipe Ding Dong"><img>
+    </div>
+
+    <h5 class="text-center mt-5" style="color: #525f7f; font-weight:400">Voici quelques questions pour mieux cerner ton projet d'achat 🙂</h5>
+
+    <div class="d-flex justify-content-center align-items-center mt-2">
+        <img style="width: 40px;" class="mr-2" src="https://media-private.canva.com/wEYrU/MAD1xrwEYrU/1/s.png?response-expires=Fri%2C%2024%20Apr%202020%2012%3A57%3A53%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T100524Z&X-Amz-SignedHeaders=host&X-Amz-Expires=10348&X-Amz-Credential=AKIAJJATJK7JCUD446NA%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=67d03d6ac48f71405d2d1803a15926a6d8607bbc7da5195d7c86093dbf4799e0" alt="Equipe Ding Dong"><img>
+        <h5 class="text-center mb-0" style="color: #525f7f; font-weight:400">
+            30 sec chrono !
+        </h5>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h5 class="mt-5 mb-3" style="color: #525f7f; font-weight:400">🔎 Où recherches-tu ? *</h5>
+                <%= form_tag(new_lead_path, :id => 'zone_selection_form', method: :get) do |f| %>
+
+                <div class="d-flex flex-wrap">
+                    <% @zone_select.each do |zone| %>
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+                        <% if zone == "Paris" %>
+                            <img style="width: 80px;" class="mr-2" src="https://media-private.canva.com/-sB-4/MAD1wu-sB-4/1/s.png?response-expires=Fri%2C%2024%20Apr%202020%2012%3A29%3A06%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T100547Z&X-Amz-SignedHeaders=host&X-Amz-Expires=8598&X-Amz-Credential=AKIAJJATJK7JCUD446NA%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=588abd26b40a556ae4f20d404bf50902e7eeaf5c0bed175a847886122a0d14b2" alt="Equipe Ding Dong"><img>
+                        <% elsif zone == "Banlieue-Ouest" %>
+                            <img style="width: 80px;" class="mr-2" src="https://media-private.canva.com/sItjo/MAD6W8sItjo/1/s.png?response-expires=Fri%2C%2024%20Apr%202020%2013%3A48%3A32%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T113047Z&X-Amz-SignedHeaders=host&X-Amz-Expires=8264&X-Amz-Credential=AKIAJWF6QO3UH4PAAJ6Q%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=7a90793ba9e2fca73cd87bed8e44eae6416d050dd18eeae7b3a1df97861616d7" alt="Equipe Ding Dong"><img>
+                        <% end %>
+                        </div>
+                        <div 
+                            class="form-check mr-3 <%=zone%> d-flex" 
+                            style="font-size: 1em;
+                                border: solid 1px;
+                                border-color:white;
+                                padding: 5px 10px 0px 10px;
+                                background: #e9ecef;
+                                color: #525f7f;
+                                border-radius: 36px;" 
+                            onclick="changeColor(className)"
+                        >       <div>
+                                    <%= check_box_tag 'selected_zones[]', 
+                                        zone, 
+                                        false, 
+                                        class: "",
+                                        id: zone
+                                    %>
+                                </div>
+                                <label class="form-check-label mb-2 ml-2" for="<%=zone%>">
+                                    <%= zone %>
+                                </label>
+
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mt-2 mb-2">
+                        <%= submit_tag "C'est parti ! 🚀", :name => 'commit', class: "btn btn-outline-light", style:"font-weight:600" %>
+                    </div>
+                </nav>
+                <% end %>
+            <div class="mt-5 mb-6">
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+
+
+<script>
+    
+    function changeColor(className) {
+      let item = document.getElementsByClassName(className)[0]
+      let label = item.children[1]
+      let checkboxValue = item.children[0].children[0].checked
+      console.log(item)
+    
+      if(checkboxValue){ 
+          item.style.backgroundColor = "#57b894"
+          label.style.color = "white"
+        }
+      else{
+          item.style.backgroundColor = "#e9ecef"
+          label.style.color = "#525f7f"
+        }
+    }
+
+
+    function selectAll(className) {
+        let all_items = document.getElementsByClassName(className)
+
+        if(all_items[0].checked){
+            for(i=1; i < 21; i++){
+                all_items[i].checked = true;
+                all_items[i].parentNode.nextElementSibling.style.color = "#57b894"
+            }
+        }
+        else{
+            for(i=1; i < 21; i++){
+                all_items[i].checked = false;
+                all_items[i].parentNode.nextElementSibling.style.color = "black"
+            }
+        }
+    }
+
+
+</script>

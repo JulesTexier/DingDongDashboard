@@ -1,41 +1,11 @@
-<h1>Création d'un nouveau contact</h1>
-
 <%= form_for @lead, url: lead_index_path do |f| %>
-      
-      <h4 class="mt-5">Identité</h4>
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Prénom *</h5>
-          <div class="input-group mb-3">
-              <%= f.text_field :firstname, class: "form-control", placeholder:"Jean", :required => true   %>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Nom *</h5>
-          <div class="input-group mb-3">
-              <%= f.text_field :lastname, class: "form-control", placeholder:"Dupond", :required => true   %>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Email *</h5>
-          <div class="input-group mb-3">
-              <%= f.email_field :email, class: "form-control", placeholder:"jean.dupond@gmail.com", :required => true   %>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Téléphone *</h5>
-          <div class="input-group mb-3">
-              <%= f.text_field :phone, class: "form-control", placeholder:"0783746253", :required => true   %>
-          </div>
-        </div>
-      </div>
-
-
-      <h4 class="mt-5">Projet immobilier</h4>
-      <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Type de projet </h5>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <img style="width: 40px;" class="mr-2" src="https://media-private.canva.com/Ipmvs/MAD4SIIpmvs/1/s.png?response-expires=Fri%2C%2024%20Apr%202020%2015%3A18%3A27%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T131452Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7414&X-Amz-Credential=AKIAJJATJK7JCUD446NA%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f03d5ed044d6a33d43a4eba8b92ca25c5d5eca9cc04edaaf5066b31cae56791a" alt="Equipe Ding Dong"><img>
+        <h4 class="text-center mb-0" style="color: #525f7f; font-weight:400">
+            Projet immobilier
+        </h4>
+    </div>
+      <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🤔 Type de projet </h5>
       <div class="input-group mb-3">
           <%= f.select :project_type, options_for_select([["Chosir...", ""], "1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]), class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
       </div>
@@ -67,11 +37,18 @@
         </div>
       </div>
 
-      <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
+      <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Quartiers précis ? *</h5>
       <div class="d-flex flex-wrap">
         <% @areas.each do |area| %>
           <div 
-              class="form-check mr-3 <%=area.name%> d-flex" 
+              class="form-check mr-3 <%=area.name%> d-flex"
+              style="font-size: 1em;
+                    border: solid 1px;
+                    border-color:white;
+                    padding: 5px 10px 0px 10px;
+                    background: #e9ecef;
+                    color: #525f7f;
+                    border-radius: 36px;" 
               onclick="changeColor(className)"
           >       <div>
                       <%= check_box_tag 'selected_areas[]', 
@@ -89,42 +66,59 @@
         <% end %>
       </div>
 
-        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Critères spécifiques </h5>
+        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🧐 Critères spécifiques </h5>
         <div class="input-group mb-3">
             <%= f.text_area :specific_criteria, class: "form-control", placeholder:"Avec vue dégagée sur la Tour Eiffel ...", rows:5, cols:5, :required => false   %>
         </div>
 
-        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Remarques supplémentaires </h5>
-        <div class="input-group mb-3">
-            <%= f.text_area :additional_question, class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
-        </div>
 
-        <h4 class="mt-5">Ding Dong</h4>
-        
-        <div class="row">
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <img style="width: 40px;" class="mr-2" src="https://media-private.canva.com/-6DpQ/MAD4SA-6DpQ/1/s.png?response-expires=Fri%2C%2024%20Apr%202020%2015%3A47%3A50%20GMT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T131452Z&X-Amz-SignedHeaders=host&X-Amz-Expires=9177&X-Amz-Credential=AKIAJJATJK7JCUD446NA%2F20200424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b622ca5cfb2ba8a31b0eb99aa43dc09bd047072d08cb5bf351aa2bcee5517ef4" alt="Equipe Ding Dong"><img>
+        <h4 class="text-center mb-0" style="color: #525f7f; font-weight:400">
+            Identité
+        </h4>
+    </div>
+      <div class="row">
         <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Courtier Ding Dong de référence *</h5>
-        <div class="input-group mb-3">
-            <%= f.select :broker_id, options_from_collection_for_select(@brokers, "id", "firstname"), class: "form-control", :required => true   %>
-        </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Source du lead</h5>
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">⬅️ Prénom *</h5>
           <div class="input-group mb-3">
-              <%= f.text_field :source, class: "form-control", placeholder:"Folhomee, réseau interne, ...", :required => false   %>
+              <%= f.text_field :firstname, class: "form-control", placeholder:"Jean", :required => true   %>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">➡️ Nom *</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :lastname, class: "form-control", placeholder:"Dupond", :required => true   %>
           </div>
         </div>
       </div>
 
-      <div class="row"   style="margin-bottom:100px;">
-        <div class="col-12">
-          <p class="text-danger">Attention, vérifie bien avec ton contact s'il a un compte Facebook Messenger, sinon il ne sera pas en mesure d'accéder à l'alerte Ding Dong ...</p>
-        </div>  
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📧 Email *</h5>
+          <div class="input-group mb-3">
+              <%= f.email_field :email, class: "form-control", placeholder:"jean.dupond@gmail.com", :required => true   %>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📞 Téléphone *</h5>
+          <div class="input-group mb-3">
+              <%= f.text_field :phone, class: "form-control", placeholder:"0783746253", :required => true   %>
+          </div>
+        </div>
       </div>
+
+        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">✋ Une question en particulier ? </h5>
+        <div class="input-group mb-3">
+            <%= f.text_area :additional_question, class: "form-control", placeholder:"", rows:5, cols:5, :required => false   %>
+        </div>
+
+        
+
 
       <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
-            <%= f.submit "Créer le contact 🚀", 
+            <%= f.submit "Accéder à Ding Dong 🚀", 
                 class: "btn btn-outline-light", 
                 style:"font-weight:600"
             %>
@@ -138,3 +132,44 @@
         </div>
       </p>
     <% end %>
+
+
+
+<script>
+    
+    function changeColor(className) {
+      let item = document.getElementsByClassName(className)[0]
+      let label = item.children[1]
+      let checkboxValue = item.children[0].children[0].checked
+      console.log(item)
+    
+      if(checkboxValue){ 
+          item.style.backgroundColor = "#57b894"
+          label.style.color = "white"
+        }
+      else{
+          item.style.backgroundColor = "#e9ecef"
+          label.style.color = "#525f7f"
+        }
+    }
+
+
+    function selectAll(className) {
+        let all_items = document.getElementsByClassName(className)
+
+        if(all_items[0].checked){
+            for(i=1; i < 21; i++){
+                all_items[i].checked = true;
+                all_items[i].parentNode.nextElementSibling.style.color = "#57b894"
+            }
+        }
+        else{
+            for(i=1; i < 21; i++){
+                all_items[i].checked = false;
+                all_items[i].parentNode.nextElementSibling.style.color = "black"
+            }
+        }
+    }
+
+
+</script>

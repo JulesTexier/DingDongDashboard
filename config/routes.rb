@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:show, :update, :edit]
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
+
+  get "/lead/onboarding" => "lead#onboarding"
   
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"

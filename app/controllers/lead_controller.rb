@@ -1,5 +1,13 @@
 class LeadController < ApplicationController
-  def new
+  def onboarding
+    @zone_select = []
+    Area.all.each do |area|
+      @zone_select << area.zone 
+    end
+    @zone_select = @zone_select.uniq
+  end
+
+  def new_broker
     @lead = Lead.new
     @areas = Area.all
     @brokers = Broker.all
@@ -10,7 +18,7 @@ class LeadController < ApplicationController
     end
   end
 
-  def create
+  def create_broker
     lead = Lead.new(lead_params)
     lead.areas = params[:selected_areas].join(",") if !params[:selected_areas].nil?
     lead.has_messenger = true
@@ -23,6 +31,21 @@ class LeadController < ApplicationController
       flash[:danger] = "Une erreur s'est produite ..."
       puts "ohoh, probleme"
     end
+  end
+
+  def new
+    selected_zones = params[:selected_zones]
+    if selected_zones.nil? || Area.where(zone: selected_zones).empty?
+      flash[:danger] = "Zone de recherche non reconnue"
+      redirect_to "/lead/onboarding"
+    else
+      @lead = Lead.new()
+      @zone = "Banlieue-Ouest"
+      @areas = Area.where(zone: selected_zones)
+    end
+  end
+
+  def create
   end
 
   private
