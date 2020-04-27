@@ -46,7 +46,8 @@
         <div class="input-group mb-3">
           <div class="d-flex flex-wrap">
             <% messenger_choices.each do |messenger_choice| %>
-              <div 
+              <label 
+                  for="<%=messenger_choice%>"
                   class="form-check mr-3 mb-2 <%=messenger_choice%> d-flex radio-button box_hover"
                   style="font-size: 1em;
                         border: solid 1px;
@@ -65,11 +66,11 @@
                               required: true
                           %>
                       </div>
-                      <label class="form-check-label mb-2 ml-2 box_hover" for="<%=messenger_choice%>">
+                      <span class="form-check-label mb-2 ml-2 box_hover" >
                           <%= messenger_choice %>
-                      </label>
+                      </span>
 
-              </div>
+              </label>
             <% end %>
           </div>        
         </div>

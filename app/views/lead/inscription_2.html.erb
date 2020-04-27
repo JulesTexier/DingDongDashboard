@@ -9,7 +9,8 @@
       <% project_types = ["1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]%>
       <div class="d-flex flex-wrap">
         <% project_types.each do |project_type| %>
-          <div 
+          <label 
+              for="<%=project_type%>"
               class="form-check mr-3 mb-2 <%=project_type%> d-flex radio-button box_hover"
               style="font-size: 1em;
                     border: solid 1px;
@@ -28,11 +29,11 @@
                           required: true
                       %>
                   </div>
-                  <label class="form-check-label mb-2 ml-2 box_hover" for="<%=project_type%>">
+                  <span class="form-check-label mb-2 ml-2 box_hover" >
                       <%= project_type %>
-                  </label>
+                  </span>
 
-          </div>
+          </label>
         <% end %>
       </div>
 
@@ -65,7 +66,8 @@
 
       <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">📍 Quartiers précis ? *</h5>
       <div class="d-flex flex-wrap">
-        <div 
+        <label 
+        for="tous"
         class="form-check mr-3 mb-2 box_hover"
         style="font-size: 1em;
               border: solid 1px #ced4da;
@@ -81,12 +83,13 @@
                 style="display: none"
                 onclick="selectAll(className)"
             >
-            <label for="tous" class="checkbox-allbutton-label box_hover">+ Tous / Aucun</label>
-        </div>
+            <span  class="checkbox-allbutton-label box_hover mb-2 form-check p-0">+ Tous / Aucun</span>
+        </label>
       </div>
       <div class="d-flex flex-wrap">
         <% @areas.each do |area| %>
-          <div 
+          <label 
+              for="<%=area.name%>"
               class="form-check mr-3 mb-2 <%=area.name%> d-flex checkbox-button box_hover"
               style="font-size: 1em;
                     border: solid 1px #ced4da;
@@ -108,11 +111,11 @@
                   <div>
                     +
                   </div>
-                  <label class="form-check-label mb-2 ml-1 box_hover" for="<%=area.name%>">
+                  <span class="form-check-label mb-2 ml-1 box_hover" >
                       <%= area.name %>
-                  </label>
+                  </span>
 
-          </div>
+          </label>
         <% end %>
       </div>
 
