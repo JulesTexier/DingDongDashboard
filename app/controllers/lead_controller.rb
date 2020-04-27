@@ -1,10 +1,22 @@
 class LeadController < ApplicationController
-  def onboarding
+  def inscription_1
     @zone_select = []
     Area.all.each do |area|
       @zone_select << area.zone 
     end
     @zone_select = @zone_select.uniq
+  end
+
+  def inscription_2
+    selected_zones = params[:selected_zones]
+    if selected_zones.nil? || Area.where(zone: selected_zones).empty?
+      flash[:danger] = "Zone de recherche non reconnue"
+      redirect_to "/lead/inscription-1"
+    else
+      @lead = Lead.new()
+      @zone = "Banlieue-Ouest"
+      @areas = Area.where(zone: selected_zones)
+    end
   end
 
   def new_broker
@@ -34,18 +46,30 @@ class LeadController < ApplicationController
   end
 
   def new
-    selected_zones = params[:selected_zones]
-    if selected_zones.nil? || Area.where(zone: selected_zones).empty?
-      flash[:danger] = "Zone de recherche non reconnue"
-      redirect_to "/lead/onboarding"
+    @draft_lead = params["lead"]
+    @draft_lead["selected_areas"] = params["selected_areas"].join(",")
+    @draft_lead["project_type"] = params["selected_project_types"].join(",")
+    if @draft_lead.nil? 
+      flash[:danger] = "Un erreur est apparue, veuillez recommencer svp"
+      redirect_to "/lead/inscription-1"
     else
       @lead = Lead.new()
-      @zone = "Banlieue-Ouest"
-      @areas = Area.where(zone: selected_zones)
     end
   end
 
   def create
+    lead = Lead.new(lead_params)
+    lead.status = "tf_submitted"
+    lead.has_messenger = params["selected_messenger_choices"].join(",") == "Oui" ? true : false
+    lead.source = "website"
+    if lead.save 
+      flash[:success] = "Nous avons bien reçu ta demande 🙂 Merci !"
+      redirect_to "/lead/inscription-finalisee"
+    else 
+      flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
+      puts "ohoh, probleme"
+      redirect_to "/lead/inscription-1"
+    end
   end
 
   private

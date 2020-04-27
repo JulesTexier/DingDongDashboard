@@ -45,7 +45,9 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
 
-  get "/lead/onboarding" => "lead#onboarding"
+  get "/lead/inscription-1" => "lead#inscription_1"
+  get "/lead/inscription-2" => "lead#inscription_2"
+  get "/lead/inscription-finalisee" => "lead#inscription_4"
   
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
