@@ -20,6 +20,5 @@
 
   .box_hover:hover {
     cursor: pointer !important;
-    color:white !important;
-    background: #57b894 !important;
+    border-color:#57b894 !important;
   }
