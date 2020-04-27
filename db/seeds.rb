@@ -11,14 +11,17 @@ Property.all.each do |property|
   i += 1
 end
 
-Property.where(old_area: "75116").update_all(area_id: Area.where(name: "75016").first.id)
+props_116 = Property.where(old_area: "75116")
+if !props_116.empty?
+  props_116.update_all(area_id: Area.where(name: "75016").first.id)
+end
 
 area_yaml = YAML.load_file("db/data/areas.yml")
 
 area_yaml.each do |district_data|
   if district_data["zone"] == "Paris"
     district_data["datas"].each do |data|
-      Area.where(name: data["terms"][0]).first.update(name: data["name"])
+      Area.where(name: data["terms"][0]).first.update(name: data["name"]) if !Area.where(name: data["terms"][0]).first.nil?
     end
   end
 end
