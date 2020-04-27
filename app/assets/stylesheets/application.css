@@ -17,3 +17,8 @@
  .font-grey-style {
     color: #525f7f;
   }
+
+  .box_hover:hover {
+    cursor: pointer !important;
+    border-color:#57b894 !important;
+  }

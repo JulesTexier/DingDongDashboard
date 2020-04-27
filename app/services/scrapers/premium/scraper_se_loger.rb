@@ -75,7 +75,7 @@ class Premium::ScraperSeLoger < Scraper
       item["photos"].each do |img|
         flat_data[:images].push(img.gsub("/400/visuels", "/800/visuels"))
       end
-      flat_data[:area] = item["zipCode"]
+      flat_data[:area] = perform_district_regex(item["zipCode"])
       flat_data[:description] = item["description"] + " ... - #{flat_data[:area_district]}"
       flat_data[:link] = item["classifiedURL"]
       item["tags"].each do |infos|

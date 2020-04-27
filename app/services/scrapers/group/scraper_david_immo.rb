@@ -22,7 +22,7 @@ class Group::ScraperDavidImmo < Scraper
         hashed_property[:surface] = regex_gen(access_xml_text(item, ".icon_surface"), '(\d)(.)').to_int_scrp
         hashed_property[:price] = regex_gen(access_xml_text(item, "a > div > h4:nth-child(20)"), '(\d)(.*)(€)').to_int_scrp
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".icon_pieces"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-        hashed_property[:area] = access_xml_text(item, "a > div > h4:nth-child(2)").tr("^0-9", "")
+        hashed_property[:area] = perform_district_regex(access_xml_text(item, "a > div > h4:nth-child(2)").tr("^0-9", ""))
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "#main > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)").strip

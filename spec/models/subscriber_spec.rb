@@ -41,12 +41,12 @@ RSpec.describe Subscriber, type: :model do
     describe "is_matching_property?" do
       before :each do
         @subscriber = FactoryBot.build(:subscriber, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
-        @subscriber.areas << Area.new(name: "75010")
+        @subscriber.areas << Area.new(name: "Paris 10ème")
       end
 
       describe "case subscriber matching properties values" do
         before :each do
-          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first.name, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
         end
 
         context "floor and elevator are unknown" do
@@ -68,12 +68,6 @@ RSpec.describe Subscriber, type: :model do
             @property.has_elevator = true
             expect(@subscriber.is_matching_property?(@property)).to eq(true)
           end
-
-          it "should match when user wants 75016 and property is 75116" do 
-            @subscriber.areas << Area.new(name: "75016")
-            @property.area = "75116"
-            expect(@subscriber.is_matching_property?(@property)).to eq(true)
-          end
         end
 
         context "floor is equal to min_elevator_floor and elevator is true" do
@@ -87,7 +81,7 @@ RSpec.describe Subscriber, type: :model do
 
       describe "Property NOT matchs" do
         before :each do
-          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first.name, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
         end
 
         context "Surface is not ok" do
@@ -99,14 +93,14 @@ RSpec.describe Subscriber, type: :model do
 
         context "Area is not ok" do
           it "should NOT match user and property because of area !" do
-            @property.area = "75001"
+            @property.area = FactoryBot.create(:area, name: "Paris 1er")
             expect(@subscriber.is_matching_property?(@property)).to eq(false)
           end
         end
 
         context "Rooms_number is not ok" do
           it "should NOT match user and property because of rooms_number !" do
-            @property.area = @subscriber.min_rooms_number - 1
+            @property.rooms_number = @subscriber.min_rooms_number - 1
             expect(@subscriber.is_matching_property?(@property)).to eq(false)
           end
         end
@@ -118,22 +112,22 @@ RSpec.describe Subscriber, type: :model do
           end
         end
 
-        context 'Floor is not ok' do 
+        context "Floor is not ok" do
           it "should NOT match user and property because of floor !" do
             @property.floor = @subscriber.min_floor - 1
             expect(@subscriber.is_matching_property?(@property)).to eq(false)
           end
         end
 
-        describe 'elevator contraints' do 
-          describe 'elevator is true but floor is inferior to min elevator_floor' do 
+        describe "elevator contraints" do
+          describe "elevator is true but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
               @property.has_elevator = false
               @property.floor = @subscriber.min_elevator_floor - 1
               expect(@subscriber.is_matching_property?(@property)).to eq(true)
             end
           end
-          describe 'floor is equal to min_elevator_floor but elevator is false' do 
+          describe "floor is equal to min_elevator_floor but elevator is false" do
             it "should NOT match user and property (known elevator absence)" do
               @property.has_elevator = false
               @property.floor = @subscriber.min_elevator_floor

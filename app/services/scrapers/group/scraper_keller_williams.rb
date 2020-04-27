@@ -25,7 +25,7 @@ class Group::ScraperKellerWilliams < Scraper
         hashed_property[:bedrooms_number] = access_xml_text(item, "span.number").split(" ")[2].to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          hashed_property[:area] = perform_district_regex(access_xml_array_to_text(html, "#accordion"))
+          hashed_property[:area] = perform_district_regex(access_xml_array_to_text(html, "#accordion").split("Code postal")[1].split("Ville")[0])
           hashed_property[:description] = access_xml_text(html, "p.description").strip
           hashed_property[:flat_type] = regex_gen(access_xml_array_to_text(html, "#accordion"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison|(DEMEURE DE PRESTIGE))")
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
