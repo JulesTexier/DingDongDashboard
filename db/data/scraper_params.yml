@@ -11,3 +11,57 @@
     main_page_cls: section > div.media-body
     multi_page: true
     page_nbr: 3
+- source: BienIci
+  params:
+  - zone: Paris
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-7444%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
+    type: HTTPRequest
+    http_type: get_json
+  - zone: Banlieue-Ouest
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-72261%22%2C%22-75022%22%2C%22-75003%22%2C%22-73610%22%2C%22-75453%22%2C%22-73330%22%2C%22-59958%22%2C%22-58170%22%2C%22-73619%22%2C%22-73609%22%2C%22-121217%22%2C%22-82656%22%2C%22-932299%22%2C%22-75454%22%2C%22-932293%22%5D%7D%7D&extensionType=extendedIfNoResult&enableAggregates=true&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
+    type: HTTPRequest
+    http_type: get_json
+- source: Figaro
+  params:
+  - zone: Paris
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=paris&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    type: Static
+    main_page_cls: div.item-main-infos
+  - zone: Banlieue-Ouest
+    url: "https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Saint-Germain-en-Laye%20(78),Fourqueux%20(78),Le%20Vesinet%20(78),Chambourcy%20(78),Maisons-Laffitte%20(78),Mareil-Marly%20(78),L%27Etang-la-Ville%20(78),Croissy-sur-Seine%20(78),Chatou%20(78),Montesson%20(78),Houilles%20(78),Sartrouville%20(78),Carrieres-sur-seine%20(78),Rueil-Malmaison%20(92)&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa"
+    type: Static
+    main_page_cls: div.item-main-infos
+- source: Propr. Figaro
+  params:
+  - zone: Paris
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-paris-ile+de+france-france/?tri=2
+    type: Static
+    main_page_cls: div.item-container-inline
+  - zone: Banlieue-Ouest
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-yvelines-ile+de+france-france/?ville=st+germain+laye&ville=34233&ville=34290&ville=34190&ville=34310&ville=34315&ville=34317&ville=34268&ville=34210&ville=34194&ville=34338&ville=34259&ville=34381&ville=34188&ville=38661&tri=2
+    type: Static
+    main_page_cls: div.item-container-inline
+- source: LogicImmo
+  params:
+  - zone: Paris
+    url: https://www.logic-immo.com/vente-immobilier-paris-75,100_1/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    type: Static
+    main_page_cls: div.offer-details-wrapper
+  - zone: Banlieue-Ouest
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=28016_2,11603_2,17331_2,6361_2,19095_2,19440_2,19563_2,17892_2,8875_2,7021_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    type: Static
+    main_page_cls: div.offer-details-wrapper
+  - zone: Banlieue-Ouest
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=21249_2,13772_2,31111_2,5698_2,26546_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    type: Static
+    main_page_cls: div.offer-details-wrapper
+- source: PAP
+  params:
+  - zone: Paris
+    url: https://www.pap.fr/annonce/vente-appartement-maison-paris-75-g439-a-partir-du-studio
+    type: Static
+    main_page_cls: div.search-list-item
+  - zone: Banlieue-Ouest
+    url: https://www.pap.fr/annonce/vente-appartement-maison-fourqueux-78112-g39064g39073g39088g39105g39145g39153g39154g39206g39216g39221g39254g39279g43298-a-partir-du-studio
+    type: Static
+    main_page_cls: div.search-list-item

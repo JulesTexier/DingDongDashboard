@@ -184,13 +184,15 @@
         - "78500"
     - name: Le Vesinet
       terms:
+        - "Le Vésinet"
         - "78110"
     - name: Chambourcy
       terms:
         - "78240"
-    - name: Maison-Laffitte
+    - name: Maisons-Laffitte
       terms:
         - "78600"
+        - Maison-Laffitte
     - name: Mareil-Marly
       terms:
         - "78750"
