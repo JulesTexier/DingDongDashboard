@@ -37,12 +37,11 @@ class Independant::ScraperLesParisiennesImmo < Scraper
           hashed_property[:source] = @source
           hashed_property[:images] = access_xml_link(html, "ul > li > img", "src")
           hashed_property[:images].collect! { |img| "https:" + img }
-          if hashed_property[:area][0..1] == "75"
-            @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
-            i += 1
-            break if i == limit
-          end
+          next if hashed_property[:area] == "N/C"
+          @properties.push(hashed_property) ##testing purpose
+          enrich_then_insert_v2(hashed_property)
+          i += 1
+          break if i == limit
         end
       rescue StandardError => e
         error_outputs(e, @source)

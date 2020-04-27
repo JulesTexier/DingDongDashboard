@@ -24,7 +24,7 @@ class Independant::ScraperAgenceTroisFreres < Scraper
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
           hashed_property[:description] = access_xml_text(html, "div.property-description > p").tr("\n\t\r", "").strip
-          hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.property-overview"))
+          hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.property-overview").split("Localisation")[1])
           hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
           hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
           hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])

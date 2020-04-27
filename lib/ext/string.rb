@@ -174,7 +174,7 @@ class String
     romanian_regex = "(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))"
     str_array = self.split
     str_array.map do |str|
-      romanian_number = str.match(/#{romanian_regex}/i).to_s
+      romanian_number = str.match(/\b#{romanian_regex}\b/i).to_s
       case romanian_number
       when "i"
         str.gsub!(str, "1")
@@ -221,6 +221,10 @@ class String
       end
     end
     return str_array.join(" ")
+  end
+
+  def perform_num_converter_scrp
+    self.remove_acc_scrp.convert_romanian_nbr_scrp.convert_written_number_scrp.convert_numerals_scrp
   end
 
   def district_generator_scrp
