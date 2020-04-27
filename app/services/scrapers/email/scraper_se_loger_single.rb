@@ -1,4 +1,4 @@
-class Email::ScraperSeLoger < Scraper
+class Email::ScraperSeLogerSingle < Scraper
   attr_accessor :html_content, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize(html_content)
@@ -37,7 +37,6 @@ class Email::ScraperSeLoger < Scraper
       hashed_property[:agency_name] = access_xml_text(html, ' div.LightSummary__Container-f6k8ax-0.hxnYKw > div > h3')
       hashed_property[:source] = @source
       hashed_property[:images] =  access_xml_link(html, '.Slide__ShowcaseMediaSlide-sc-8kj5lh-0 > div', 'data-background').select { |img| !img.nil? }
-    byebug
       @properties.push(hashed_property) ##testing purpose
       enrich_then_insert_v2(hashed_property)
     end
