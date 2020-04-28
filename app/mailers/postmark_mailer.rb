@@ -25,6 +25,6 @@ class PostmarkMailer < ApplicationMailer
 
   def send_onboarding_hunter_email(lead)
     self.template_model = { lead_firstname: lead.firstname }
-    mail from: 'etienne@hellodingdong.com', to: lead.broker.email, bcc: 'maxime@hellodingdong.com', postmark_template_alias: 'onboarding-hunter'
+    mail from: 'etienne@hellodingdong.com', to: lead.email, bcc: 'maxime@hellodingdong.com', postmark_template_alias: 'onboarding-hunter'
   end
 end
