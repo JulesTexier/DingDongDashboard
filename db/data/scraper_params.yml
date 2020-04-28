@@ -65,3 +65,33 @@
     url: https://www.pap.fr/annonce/vente-appartement-maison-fourqueux-78112-g39064g39073g39088g39105g39145g39153g39154g39206g39216g39221g39254g39279g43298-a-partir-du-studio
     type: Static
     main_page_cls: div.search-list-item
+- source: Stephane Plaza
+  params:
+  - zone: Paris
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=75&sort=date_desc&limit=15
+    type: HTTPRequest
+    http_type: get_json
+  - zone: Banlieue-Ouest
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=78551&location[]=78650&location[]=78251&location[]=78133&location[]=78358&location[]=78367&location[]=78372&location[]=78224&location[]=78190&location[]=78146&location[]=78418&location[]=78311&location[]=78586&location[]=78124&sort=date_desc&limit=15
+    type: HTTPRequest
+    http_type: get_json
+- source: Orpi
+  params:
+  - zone: Paris
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=paris&locations%5B0%5D%5Blabel%5D=Paris&minSurface=10&maxSurface=1000&nbRooms%5B%5D=1&nbRooms%5B%5D=2&nbRooms%5B%5D=3&nbRooms%5B%5D=4&nbRooms%5B%5D=5&nbRooms%5B%5D=6&newBuild=true&oldBuild=true&minPrice=0&maxPrice=7000000&sort=date-down&layoutType=list
+    type: HTTPRequest
+    http_type: get_json
+  - zone: Banlieue-Ouest
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-germain-en-laye&locations%5B0%5D%5Blabel%5D=Saint-Germain-en-Laye+(78100)&locations%5B1%5D%5Bvalue%5D=le-vesinet&locations%5B1%5D%5Blabel%5D=Le+V%C3%A9sinet+(78110)&locations%5B2%5D%5Bvalue%5D=fourqueux&locations%5B2%5D%5Blabel%5D=Fourqueux+(78112)&locations%5B3%5D%5Bvalue%5D=chambourcy&locations%5B3%5D%5Blabel%5D=Chambourcy+(78240)&locations%5B4%5D%5Bvalue%5D=maisons-laffitte&locations%5B4%5D%5Blabel%5D=Maisons-Laffitte+(78600)&locations%5B5%5D%5Bvalue%5D=mareil-marly&locations%5B5%5D%5Blabel%5D=Mareil-Marly+(78750)&locations%5B6%5D%5Bvalue%5D=marly-le-roi&locations%5B6%5D%5Blabel%5D=Marly-le-Roi+(78160)&locations%5B7%5D%5Bvalue%5D=l-etang-la-ville&locations%5B7%5D%5Blabel%5D=L%27%C3%89tang-la-Ville+(78620)&locations%5B8%5D%5Bvalue%5D=croissy-sur-seine&locations%5B8%5D%5Blabel%5D=Croissy-sur-Seine+(78290)&locations%5B9%5D%5Bvalue%5D=chatou&locations%5B9%5D%5Blabel%5D=Chatou+(78400)&locations%5B10%5D%5Bvalue%5D=montesson&locations%5B10%5D%5Blabel%5D=Montesson+(78360)&locations%5B11%5D%5Bvalue%5D=houilles&locations%5B11%5D%5Blabel%5D=Houilles+(78800)&locations%5B12%5D%5Bvalue%5D=sartrouville&locations%5B12%5D%5Blabel%5D=Sartrouville+(78500)&locations%5B13%5D%5Bvalue%5D=carrieres-sur-seine&locations%5B13%5D%5Blabel%5D=Carri%C3%A8res-sur-Seine+(78420)&locations%5B14%5D%5Bvalue%5D=rueil-malmaison&locations%5B14%5D%5Blabel%5D=Rueil-Malmaison+(92500)&sort=date-down&layoutType=list
+    type: HTTPRequest
+    http_type: get_json
+- source: Laforet
+  params:
+  - zone: Paris
+    url: https://www.laforet.com/api/immo/properties?cities=75&transaction=buy
+    type: HTTPRequest
+    http_type: get_json
+  - zone: Banlieue-Ouest
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=17930265%2C17926685%2C17895588%2C17892236%2C17890052%2C17888110%2C17885459%2C17871368%2C17852869%2C17787979%2C17787083%2C17769591%2C17758177%2C17445548%2C17111837%2C4468262&cities=92063%2C78586%2C78551%2C78311%2C78146%2C78358%2C78372%2C78650%2C78418%2C78124%2C78190%2C78133%2C78224%2C78367%2C78224&types=house%2Capartment&transaction=buy
+    type: HTTPRequest
+    http_type: get_json
