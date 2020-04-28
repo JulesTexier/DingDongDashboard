@@ -31,14 +31,8 @@
                         </div>
                         <label
                             for="<%=zone%>" 
-                            class="form-check mr-3 <%=zone%> d-flex box_hover" 
-                            style="font-size: 1em;
-                                border: solid 1px #ced4da;
-                                padding: 5px 10px 0px 10px;
-                                background: #e9ecef;
-                                color: #525f7f;
-                                border-radius: 36px; "
-                                onclick="changeColorCheckbox(className)" >
+                            class="form-check mr-3 <%=zone%> d-flex box_hover label_non_active" 
+                            onclick="changeColorCheckbox(className)" >
                             <div>
                                 <%= check_box_tag 'selected_zones[]', 
                                     zone, 
@@ -74,39 +68,19 @@
 
 <script>
     
-    function changeColor(className) {
-      let item = document.getElementsByClassName(className)[0]
-      let label = item.children[1]
-      let checkboxValue = item.children[0].children[0].checked
-      console.log(item)
-    
-      if(checkboxValue){ 
-          item.style.backgroundColor = "#57b894"
-          label.style.color = "white"
-        }
-      else{
-          item.style.backgroundColor = "#e9ecef"
-          label.style.color = "#525f7f"
-        }
-    }
-
     function changeColorCheckbox(className) {
-      let item = document.getElementsByClassName(className)[0]
-      let image = item.children[1]
-      let label = item.children[2]
-      let checkboxValue = item.children[0].children[0].checked
-    
+      let label = document.getElementsByClassName(className)[0]
+      let image = label.children[1]
+      let checkboxValue = label.children[0].children[0].checked
       if(checkboxValue){ 
-          item.style.backgroundColor = "#57b894"
-          label.style.color = "white"
-          item.style.border = "1px solid white"
           image.innerHTML = "👌";
+          label.classList.remove('label_non_active')
+          label.className += " label_active"
         }
       else{
-          item.style.backgroundColor = "#e9ecef"
-          label.style.color = "#525f7f"
-          item.style.border = "1px solid #ced4da"
           image.innerHTML = "+";
+          label.classList.remove('label_active')
+          label.className += " label_non_active"
         }
     }
 
