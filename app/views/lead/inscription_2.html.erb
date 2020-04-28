@@ -81,7 +81,7 @@
                 onclick="changeColorCheckbox(className)"
             >       <div>
                         <%= check_box_tag 'selected_areas[]', 
-                            area.id, 
+                            area.name, 
                             false, 
                             class: "checkbox-button-input box_hover",
                             style: "display : none",
@@ -105,7 +105,7 @@
         </div>      
 
 
-      <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center" style="background-color: #0470C1">
+      <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
         <div class="d-flex justify-content-center mt-2 mb-2">
             <%= f.submit "Dernière étape 🚀", 
                 class: "btn btn-outline-light", 
