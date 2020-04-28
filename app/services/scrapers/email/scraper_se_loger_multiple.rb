@@ -1,49 +1,39 @@
 class Email::ScraperSeLogerMultiple < Scraper
-  attr_accessor :html_content, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :html_content, :properties, :source, :main_page_cls
 
   def initialize(html_content)
     @html_content = html_content
     @source = "SeLoger"
     @main_page_cls = "td.two-column"
-    @type = "Captcha"
-    @waiting_cls = nil
-    @multi_page = true
-    @page_nbr = 2
     @properties = []
   end
 
   def launch(limit = nil)
-    i = 0 
+    i = 0
     html = Nokogiri::HTML(html_content)
     items = access_xml_raw(html, @main_page_cls)
     items.each do |item|
       begin
-      content = access_xml_text(item, 'table.contents').gsub(" ", "").gsub(/[^[:print:]]/, "")
-      hashed_property = {}
-      hashed_property[:price] = regex_gen(content, '(\d)(.*)(€)').to_int_scrp
-      hashed_property[:rooms_number] = regex_gen(content, '(•)(\d+)(pi(è|e)ce(s?))').to_int_scrp 
-      hashed_property[:area] = perform_district_regex(content) 
-      hashed_property[:surface] = regex_gen(content, '(\d){1,}(m)').to_float_to_int_scrp
-      raw_link = access_xml_link(item, 'a[_label="CTA"]', 'href')[0]
-      hashed_property[:link] = "https://" + regex_gen(raw_link, '(www.seloger.com)(.){1,}(htm)')
-      byebug
-      @properties = []
-      html = fetch_static_page(hashed_property[:link])
-      # # html = Nokogiri::HTML(open("sl.html")) #test purpose : avoid to burn BEE credits ...
-      if go_to_prop?(hashed_property, 7)
-      hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html,'.Summarystyled__TagsWrapper-tzuaot-18').gsub(" ", "").gsub(/[^[:print:]]/, ""), '(\d+)(chambre(s?))').to_int_scrp
-        hashed_property[:flat_type] = get_type_flat(title)
-        hashed_property[:description] = access_xml_text(html, '#showcase-description > div:nth-child(2) > div > div > div > div > p').strip
-        hashed_property[:floor] = perform_floor_regex(access_xml_text(html, '#showcase-description > div:nth-child(3) > div > div > div:nth-child(1) > div'))
-        hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-        hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+        content = access_xml_text(item, "table.contents").gsub(" ", "").gsub(/[^[:print:]]/, "")
+        hashed_property = {}
+        hashed_property[:price] = regex_gen(content, '(\d)(.*)(€)').to_int_scrp
+        hashed_property[:rooms_number] = regex_gen(content, '(•)(\d+)(pi(è|e)ce(s?))').to_int_scrp
+        hashed_property[:area] = perform_district_regex(content)
+        hashed_property[:surface] = regex_gen(content, '(\d){1,}(m)').to_float_to_int_scrp
+        next if access_xml_link(item, 'a[_label="CTA"]', "href")[0].include?("www.bellesdemeures.com")
+        hashed_property[:link] = "https://" + regex_gen(access_xml_link(item, 'a[_label="CTA"]', "href")[0], "(www.seloger.com)(.){1,}(htm)")
+        hashed_property[:images] = access_xml_link(item, "span > img", "src").map { |img| img.gsub("300x225", "600x450") }
+        hashed_property[:description] = ""
+        hashed_property[:subway_ids] = []
+        hashed_property[:floor] = nil
+        hashed_property[:flat_type] = get_type_flat(content)
         hashed_property[:provider] = "Agence"
-        hashed_property[:agency_name] = access_xml_text(html, ' div.LightSummary__Container-f6k8ax-0.hxnYKw > div > h3')
         hashed_property[:source] = @source
-        hashed_property[:images] =  access_xml_link(html, '.Slide__ShowcaseMediaSlide-sc-8kj5lh-0 > div', 'data-background').select { |img| !img.nil? }
-        @properties.push(hashed_property) ##testing purpose
-        enrich_then_insert_v2(hashed_property)
-      end
+        hashed_property[:has_elevator] = nil
+        if go_to_prop?(hashed_property, 7)
+          @properties.push(hashed_property) ##testing purpose
+          enrich_then_insert_v2(hashed_property)
+        end
       rescue StandardError => e
         error_outputs(e, @source)
         next
