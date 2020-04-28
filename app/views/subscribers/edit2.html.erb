@@ -9,41 +9,71 @@
         </div>
     </nav>
     
-      <h5 class="mb-3 mt-4 " style="color: #0470C1; font-weight:400;">📍 Quartiers précis ? *</h5>
-      <div class="d-flex flex-wrap">
-        <label 
-        for="tous"
-        class="form-check mr-3 mb-2 box_hover label_non_active"
-        >
-            <input 
-                type="checkbox" 
-                id="tous" 
-                class="checkbox-button-input box_hover"
-                style="display: none"
-                onclick="selectAll(className)"
-            >
-            <span  class="checkbox-allbutton-label box_hover mb-2 form-check p-0">+ Tous / Aucun</span>
-        </label>
-      </div>
+        <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
+
+   
+        <div class="d-flex flex-wrap">
+            <div class="form-check mr-3">
+                <input 
+                    type="checkbox" 
+                    id="tous" 
+                    class="form-check-input"
+                    onclick="selectAll(className)"
+                >
+                <label for="tous">Tous / Aucun</label>
+            </div>
+        </div>
+
+
+    
+        <div class="d-flex flex-wrap">
+                <% @areas.each do |area| %>
+                    <div 
+                        class="form-check mr-3 <%=area.name%> d-flex" 
+                        onclick="changeColor(className)"
+                        <% if @subscriber.areas.include?(area) %> 
+                        style="color:#57b894"
+                        <%end%>
+                    >       <div>
+                                <%= check_box_tag 'selected_area[]', 
+                                    area.id, 
+                                    @subscriber.areas.include?(area) ? true : nil,
+                                    class: "form-check-input",
+                                    id: area.name
+                                %>
+                            </div>
+                            <label class="form-check-label mb-2" for="<%=area.name%>">
+                                <%= area.name %>
+                            </label>
+    
+                    </div>
+                <% end %>
+        </div>
 
         <div class="d-flex flex-wrap">
             <% @areas.each do |area| %>
             <label 
                 for="<%=area.name%>"
-                class="form-check mr-3 mb-2 <%=area.name%> d-flex checkbox-button box_hover <%=@subscriber.areas.include?(area) ? "label_active" : "label_non_active"%> "
+                class="form-check mr-3 mb-2 <%=area.name%> d-flex checkbox-button box_hover"
+                style="font-size: 1em;
+                        border: solid 1px #ced4da;
+                        padding: 5px 10px 0px 10px;
+                        background: #e9ecef;
+                        color: #525f7f;
+                        border-radius: 36px;" 
+
                 onclick="changeColorCheckbox(className)"
             >       <div>
                         <%= check_box_tag 'selected_areas[]', 
-                            area.id, 
+                            area.name, 
                             false, 
                             class: "checkbox-button-input box_hover",
                             style: "display : none",
-                            id: area.name,
-                            checked: @subscriber.areas.include?(area) && true
+                            id: area.name
                         %>
                     </div>
                     <div>
-                        <%=@subscriber.areas.include?(area) ? "👌" : "+"%>
+                        +
                     </div>
                     <span class="form-check-label mb-2 ml-1 box_hover" >
                         <%= area.name %>
@@ -93,58 +123,37 @@
     
     
 <script>
-
-    function areasChecked(){
-      let checkboxes = document.querySelectorAll('input[type="checkbox"]')
-      let checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
-      if (!checkedOne) {
-        alert('Sélectionne au moins un quartier 📍')
-      }
-    }
-
-    function changeColorCheckbox(className) {
-
-      let label = document.getElementsByClassName(className)[0]
-      let image = label.children[1]
-      let checkboxValue = label.children[0].children[0].checked
+    
+    function changeColor(className) {
+      let item = document.getElementsByClassName(className)[0]
+      let label = item.children[1]
+      let checkboxValue = item.children[0].children[0].checked
     
       if(checkboxValue){ 
-          image.innerHTML = "👌";
-          label.classList.remove('label_non_active')
-          label.className += " label_active"
+          label.style.color = "#57b894"
         }
       else{
-          image.innerHTML = "+";
-          label.classList.remove('label_active')
-          label.className += " label_non_active"
+          label.style.color = "black"
         }
     }
 
-    function selectAll(className) {
-        let all_labels = document.getElementsByClassName(className)
-        let all_label = document.getElementsByClassName("checkbox-allbutton-label")
 
-        if(all_labels[0].checked){
-          all_label[0].innerHTML = "🌟Tous / Aucun"
-          all_label[0].parentNode.classList.remove('label_non_active')
-          all_label[0].parentNode.className += " label_active"
-            for(i=1; i < all_labels.length; i++){
-                all_labels[i].checked = true;
-                all_labels[i].parentNode.parentNode.classList.remove('label_non_active')
-                all_labels[i].parentNode.parentNode.className += " label_active"
-                all_labels[i].parentNode.nextElementSibling.innerHTML = "👌"
+    function selectAll(className) {
+        let all_items = document.getElementsByClassName(className)
+
+        if(all_items[0].checked){
+            for(i=1; i < 21; i++){
+                all_items[i].checked = true;
+                all_items[i].parentNode.nextElementSibling.style.color = "#57b894"
             }
         }
         else{
-          all_label[0].innerHTML = "+ Tous / Aucun"
-          all_label[0].parentNode.classList.remove('label_active')
-          all_label[0].parentNode.className += " label_non_active"
-            for(i=1; i < all_labels.length; i++){
-                all_labels[i].checked = false;
-                all_labels[i].parentNode.parentNode.classList.remove('label_active')
-                all_labels[i].parentNode.parentNode.className += " label_non_active"
-                all_labels[i].parentNode.nextElementSibling.innerHTML = "+"
+            for(i=1; i < 21; i++){
+                all_items[i].checked = false;
+                all_items[i].parentNode.nextElementSibling.style.color = "black"
             }
         }
     }
+
+
 </script>

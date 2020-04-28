@@ -94,7 +94,7 @@ class Manychat
   #If so, we update him to is_active: false
   def is_last_interaction_borderline(mc_subs_infos)
     response = false
-    a = Time.parse(mc_subs_infos["last_interaction"]) + (72 * 60 * 60)
+    a = Time.parse(mc_subs_infos["last_interaction"]) + 6.days
     b = Time.now
     if a < b
       sub = Subscriber.where(facebook_id: mc_subs_infos["id"])
