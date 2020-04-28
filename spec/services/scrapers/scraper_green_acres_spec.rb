@@ -3,6 +3,12 @@ require "rails_helper"
 RSpec.describe Independant::ScraperGreenAcres, type: :service do
   before(:all) do
     @s = Independant::ScraperGreenAcres.new
+    area_yaml = YAML.load_file("db/data/areas.yml")
+    area_yaml.each do |district_data|
+      district_data["datas"].each do |data|
+        FactoryBot.create(:area, name: data["name"], zone: district_data["zone"])
+      end
+    end
   end
 
   it "should launch and return proper number of properties" do
@@ -34,7 +40,7 @@ RSpec.describe Independant::ScraperGreenAcres, type: :service do
       expect(property[:price]).to be_a(Integer)
       expect(property[:surface]).to be_a(Integer)
       expect(property[:floor]).to be_a(Integer).or be_a(NilClass)
-      expect(property[:area]).to be_a(String)
+      expect(property[:area]).to be_a(Area)
       expect(property[:description]).to be_a(String)
       expect(property[:source]).to be_truthy
     end

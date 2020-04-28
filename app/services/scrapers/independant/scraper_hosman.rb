@@ -20,7 +20,7 @@ class Independant::ScraperHosman < Scraper
         hashed_property = {}
         hashed_property[:link] = property["property_show_url"]
         hashed_property[:surface] = property["area"].to_float_to_int_scrp
-        hashed_property[:area] = property["zip_code"]
+        hashed_property[:area] = perform_district_regex(property["zip_code"])
         hashed_property[:rooms_number] = property["room_number"]
         hashed_property[:price] = property["sale"]["price"]
         hashed_property[:floor] = property["floor"]

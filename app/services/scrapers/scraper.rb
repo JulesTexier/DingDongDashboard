@@ -3,6 +3,7 @@ require "dotenv/load"
 class Scraper
   def enrich_then_insert_v2(hashed_property)
     if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+      hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
     else
@@ -40,6 +41,31 @@ class Scraper
       json.nil? ? access_xml_raw(html, args.main_page_cls) : json
     else
       card = fetch_many_pages(args.url, args.page_nbr, args.main_page_cls)
+    end
+  end
+
+  def fetch_main_page_multi_city(args)
+    if !args["multi_page"]
+      case args["type"]
+      when "Static"
+        html = fetch_static_page(args["url"])
+      when "Captcha"
+        html = fetch_captcha_page(args["url"])
+      when "HTTPRequest"
+        case args["http_type"]
+        when "get_json"
+          json = fetch_json_get(args["url"])
+        when "post_json"
+          json = fetch_json_post(args["url"], args["http_request"])
+        when "post"
+          html = fetch_http_page(args["url"], args["http_request"])
+        end
+      else
+        puts "Error"
+      end
+      json.nil? ? access_xml_raw(html, args["main_page_cls"]) : json
+    else
+      card = fetch_many_pages(args["url"], args["page_nbr"], args["main_page_cls"])
     end
   end
 
@@ -174,8 +200,6 @@ class Scraper
     unless Rails.env.test?
       puts "\nError for #{@source}, skip this one."
       puts "It could be a bad link or a bad xml extraction.\n\n"
-      puts e.message
-      puts e.backtrace
     end
   end
 
@@ -250,28 +274,46 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  def perform_district_regex(str)
-    if str.match('(75(0|1)|690)(\d{2})').is_a?(MatchData)
-      post_code = str.match('(75|69)(\d{3})').to_s
-      post_code == "75116" ? "75016" : post_code
-    else
-      str.remove_acc_scrp.district_regex_scrp.district_generator_scrp
+  def perform_district_regex(str, zone = "Paris")
+    district_datas = YAML.load_file("./db/data/areas.yml")
+    district = []
+    cleaned_str = str.perform_num_converter_scrp
+    district_datas.each do |district_data|
+      if district_data["zone"] == zone
+        district_data["datas"].each do |city_data|
+          if cleaned_str.match(/#{city_data["name"].remove_acc_scrp}/i).is_a?(MatchData)
+            district.push(city_data["name"])
+            break
+          end
+        end
+        district_data["datas"].each do |city_data|
+          city_data["terms"].each do |term|
+            if cleaned_str.match(/\b#{term.remove_acc_scrp}\b/i).is_a?(MatchData)
+              district.push(city_data["name"])
+              break
+            end
+          end
+        end
+      end
     end
+    district.uniq.empty? ? "N/C" : district[0]
   end
 
   ## We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
   ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
   ## And the we send it in an array for insertion.
-  def perform_subway_regex(str)
-    subways = JSON.parse(File.read("./db/data/subways.json"))
-    subways_ids = []
-    subways["stations"].each do |subway|
-      if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
-        s = Subway.where(name: subway["metro"]).limit(1)
-        subways_ids.push(s.ids[0])
+  def perform_subway_regex(str, zone = "Paris")
+    if zone == "Paris"
+      subways = JSON.parse(File.read("./db/data/subways.json"))
+      subways_ids = []
+      subways["stations"].each do |subway|
+        if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
+          s = Subway.where(name: subway["metro"]).limit(1)
+          subways_ids.push(s.ids[0])
+        end
       end
+      return subways_ids.uniq
     end
-    return subways_ids.uniq
   end
 
   def get_type_flat(str)
@@ -313,7 +355,16 @@ class Scraper
   end
 
   def does_prop_exists?(prop, time)
-    props = Property.where(prop).where("created_at >= ?", time.days.ago)
+    if prop[:area].nil?
+      props = Property.where(
+        prop.except(:area)
+      ).where("created_at >= ?", time.days.ago)
+    else
+      props = Property.where(
+        prop.except(:area),
+        area: Area.where(name: prop[:area]).first,
+      ).where("created_at >= ?", time.days.ago)
+    end
     props.count == 0 ? false : true
   end
 
@@ -323,14 +374,15 @@ class Scraper
   end
 
   def is_prop_fake?(prop)
-    if prop[:surface].nil? || prop[:price].nil?
+    if prop[:surface].nil? || prop[:price].nil? || prop[:area].nil?
       ## delibarately not enough informations, we should further check
       ## if we put thoses attributes to nil, it means that we can't have informations on the main page
       ## but that we probably can retrieve it in property show
       false
-    elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0
+    elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
+      price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
       sqm = prop[:price].to_i / prop[:surface].to_i
-      sqm < 5000 ? true : false
+      sqm < price_threshold ? true : false
     else
       true ## not enough informations, we should further check
     end
@@ -342,7 +394,7 @@ class Scraper
     properties = Property.where(
       surface: hashed_property[:surface],
       price: hashed_property[:price],
-      area: hashed_property[:area],
+      area: Area.where(name: hashed_property[:area]).first,
       rooms_number: hashed_property[:rooms_number],
     )
 
@@ -427,6 +479,22 @@ class Scraper
       puts "\n\nEverything seems to be fine."
       puts "We've scraped #{prop_nbr} #{property_word} in a #{time_frame} hour window.\n\n"
     end
+  end
+
+  #####################################
+  ## PARAMS METHODS FOR CITY OPENING ##
+  #####################################
+
+  def fetch_init_params(source)
+    yaml_file = YAML.load_file("./db/data/scraper_params.yml")
+    data = []
+
+    yaml_file.each do |scraper|
+      if scraper["source"] == source
+        data = scraper["params"]
+      end
+    end
+    return data
   end
 
   private

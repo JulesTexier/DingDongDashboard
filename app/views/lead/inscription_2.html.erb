@@ -1,0 +1,196 @@
+<%= form_for @lead, url: new_lead_path, method: :get do |f| %>
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/search.png" alt="Recherche png"><img>
+        <h4 class="text-center mb-0" style="color: #0470C1; font-weight:400">
+            Projet immobilier
+        </h4>
+    </div>
+      <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">🤔 Type de projet </h5>
+      <% project_types = ["1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]%>
+      <div class="d-flex flex-wrap">
+        <% project_types.each do |project_type| %>
+          <label 
+              for="<%=project_type%>"
+              class="form-check mr-3 mb-2 <%=project_type%> d-flex radio-button box_hover label_non_active"
+              onclick="changeColorRadioButton(className)"
+          >       <div>
+                      <%= radio_button_tag 'selected_project_types[]', 
+                          project_type, 
+                          false, 
+                          class: "box_hover",
+                          id: project_type,
+                          required: true
+                      %>
+                  </div>
+                  <span class="form-check-label mb-2 ml-2 box_hover" >
+                      <%= project_type %>
+                  </span>
+
+          </label>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">💰 Prix d'achat maximum ? *</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">€</span>
+            </div>
+            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", min:"10000", max:"10000000", :required => true %>
+        </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">↔️ Surface minimum ? *</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">m2</span>
+            </div>
+            <%= f.number_field :min_surface, type:"number", class: "form-control", placeholder:"Ex : 30", min:"8", max:"400", :required => true   %>
+        </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">🏡 Nombre de pièces minimum ? *</h5>
+          <div class="input-group mb-3">
+              <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", min:"1", max:"6", :required => true   %>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">📍 Quartiers précis ? *</h5>
+      <div class="d-flex flex-wrap">
+        <label 
+        for="tous"
+        class="form-check mr-3 mb-2 box_hover label_non_active"
+        >
+            <input 
+                type="checkbox" 
+                id="tous" 
+                class="checkbox-button-input box_hover"
+                style="display: none"
+                onclick="selectAll(className)"
+            >
+            <span  class="checkbox-allbutton-label box_hover mb-2 form-check p-0">+ Tous / Aucun</span>
+        </label>
+      </div>
+        <div class="d-flex flex-wrap">
+            <% @areas.each do |area| %>
+            <label 
+                for="<%=area.name%>"
+                class="form-check mr-3 mb-2 <%=area.name%> d-flex checkbox-button box_hover label_non_active"
+                onclick="changeColorCheckbox(className)"
+            >       <div>
+                        <%= check_box_tag 'selected_areas[]', 
+                            area.name, 
+                            false, 
+                            class: "checkbox-button-input box_hover",
+                            style: "display : none",
+                            id: area.name
+                        %>
+                    </div>
+                    <div>
+                        +
+                    </div>
+                    <span class="form-check-label mb-2 ml-1 box_hover" >
+                        <%= area.name %>
+                    </span>
+
+            </label>
+            <% end %>
+        </div>
+
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">🧐 Critères spécifiques </h5>
+        <div class="input-group mb-3">
+            <%= f.text_area :specific_criteria, class: "form-control", placeholder:"Avec vue dégagée sur la Tour Eiffel ...", rows:5, cols:5, :required => false   %>
+        </div>      
+
+
+      <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <%= f.submit "Dernière étape 🚀", 
+                class: "btn btn-outline-light", 
+                style:"font-weight:600",
+                onclick:"areasChecked()"
+            %>
+        </div>
+      </nav>
+
+       
+
+        <div class="d-flex justify-content-center mt-4 mb-5">
+        🧡
+        </div>
+    <% end %>
+
+
+
+<script>
+
+    function areasChecked(){
+      let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+      let checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+      if (!checkedOne) {
+        alert('Sélectionne au moins un quartier 📍')
+      }
+    }
+    function changeColorCheckbox(className) {
+      let label = document.getElementsByClassName(className)[0]
+      let image = label.children[1]
+      let checkboxValue = label.children[0].children[0].checked
+      if(checkboxValue){ 
+          image.innerHTML = "👌";
+          label.classList.remove('label_non_active')
+          label.className += " label_active"
+        }
+      else{
+          image.innerHTML = "+";
+          label.classList.remove('label_active')
+          label.className += " label_non_active"
+        }
+    }
+
+    function selectAll(className) {
+        let all_labels = document.getElementsByClassName(className)
+        let all_label = document.getElementsByClassName("checkbox-allbutton-label")
+
+        if(all_labels[0].checked){
+          all_label[0].innerHTML = "🌟Tous / Aucun"
+          all_label[0].parentNode.classList.remove('label_non_active')
+          all_label[0].parentNode.className += " label_active"
+            for(i=1; i < all_labels.length; i++){
+                all_labels[i].checked = true;
+                all_labels[i].parentNode.parentNode.classList.remove('label_non_active')
+                all_labels[i].parentNode.parentNode.className += " label_active"
+                all_labels[i].parentNode.nextElementSibling.innerHTML = "👌"
+            }
+        }
+        else{
+          all_label[0].innerHTML = "+ Tous / Aucun"
+          all_label[0].parentNode.classList.remove('label_active')
+          all_label[0].parentNode.className += " label_non_active"
+            for(i=1; i < all_labels.length; i++){
+                all_labels[i].checked = false;
+                all_labels[i].parentNode.parentNode.classList.remove('label_active')
+                all_labels[i].parentNode.parentNode.className += " label_non_active"
+                all_labels[i].parentNode.nextElementSibling.innerHTML = "+"
+            }
+        }
+    }
+
+    function changeColorRadioButton(className) {
+      let labels = document.getElementsByClassName("radio-button")
+      let item = document.getElementsByClassName(className)[0]
+      let checkboxValue = item.children[0].children[0].checked
+    
+      if(checkboxValue){ 
+          for(i=0; i < labels.length; i++){
+              labels[i].classList.remove('label_active')
+              labels[i].className += " label_non_active"
+          }
+          item.classList.remove('label_non_active')
+          item.className += " label_active"
+        }
+    }
+
+
+</script>

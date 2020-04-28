@@ -170,6 +170,63 @@ class String
     end
   end
 
+  def convert_romanian_nbr_scrp
+    romanian_regex = "(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))"
+    str_array = self.split
+    str_array.map do |str|
+      romanian_number = str.match(/\b#{romanian_regex}\b/i).to_s
+      case romanian_number
+      when "i"
+        str.gsub!(str, "1")
+      when "ii"
+        str.gsub!(str, "2")
+      when "iii"
+        str.gsub!(str, "3")
+      when "iv"
+        str.gsub!(str, "4")
+      when "v"
+        str.gsub!(str, "5")
+      when "vi"
+        str.gsub!(str, "6")
+      when "vii"
+        str.gsub!(str, "7")
+      when "viii"
+        str.gsub!(str, "8")
+      when "ix"
+        str.gsub!(str, "9")
+      when "x"
+        str.gsub!(str, "10")
+      when "xi"
+        str.gsub!(str, "11")
+      when "xii"
+        str.gsub!(str, "12")
+      when "xiii"
+        str.gsub!(str, "13")
+      when "xiv"
+        str.gsub!(str, "14")
+      when "xv"
+        str.gsub!(str, "15")
+      when "xvi"
+        str.gsub!(str, "16")
+      when "xvii"
+        str.gsub!(str, "17")
+      when "xviii"
+        str.gsub!(str, "18")
+      when "xix"
+        str.gsub!(str, "19")
+      when "xx"
+        str.gsub!(str, "20")
+      else
+        str
+      end
+    end
+    return str_array.join(" ")
+  end
+
+  def perform_num_converter_scrp
+    self.remove_acc_scrp.convert_romanian_nbr_scrp.convert_written_number_scrp.convert_numerals_scrp
+  end
+
   def district_generator_scrp
     if self.length == 2
       return "750#{self}"

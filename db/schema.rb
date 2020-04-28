@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_091205) do
+ActiveRecord::Schema.define(version: 2020_04_23_135950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_091205) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "zone"
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -74,6 +75,31 @@ ActiveRecord::Schema.define(version: 2020_04_14_091205) do
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
   end
 
+  create_table "hunter_searches", force: :cascade do |t|
+    t.string "research_name"
+    t.text "areas", default: [], array: true
+    t.integer "min_floor", default: 0
+    t.boolean "has_elevator"
+    t.integer "min_elevator_floor", default: 0
+    t.integer "surface"
+    t.integer "rooms_number"
+    t.integer "max_price"
+    t.bigint "hunter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
+  end
+
+  create_table "hunters", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "email"
+    t.string "phone"
+    t.string "company"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "leads", force: :cascade do |t|
     t.string "firstname"
     t.string "phone"
@@ -98,7 +124,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_091205) do
 
   create_table "properties", force: :cascade do |t|
     t.integer "price"
-    t.string "area"
+    t.string "old_area"
     t.string "title"
     t.text "description"
     t.string "link"
@@ -119,6 +145,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_091205) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "has_elevator"
     t.text "images", default: [], array: true
+    t.integer "area_id"
   end
 
   create_table "property_districts", force: :cascade do |t|
@@ -196,4 +223,5 @@ ActiveRecord::Schema.define(version: 2020_04_14_091205) do
 
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
+  add_foreign_key "properties", "areas"
 end

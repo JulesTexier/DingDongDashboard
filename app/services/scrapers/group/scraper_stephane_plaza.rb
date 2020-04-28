@@ -21,7 +21,7 @@ class Group::ScraperStephanePlaza < Scraper
         hashed_property = {}
         hashed_property[:link] = "https://www.stephaneplazaimmobilier.com/immobilier-acheter/" + property["id"].to_s + "/" + property["slug"].to_s + "?token=" + json["token"]
         hashed_property[:surface] = regex_gen(property["properties"]["surface"], '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:area] = property["properties"]["codePostal"]
+        hashed_property[:area] = perform_district_regex(property["properties"]["codePostal"])
         hashed_property[:rooms_number] = property["properties"]["room"]
         hashed_property[:price] = property["price"].to_int_scrp
         if go_to_prop?(hashed_property, 7)

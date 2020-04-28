@@ -2,35 +2,70 @@ require "rails_helper"
 
 RSpec.describe Scraper, type: :service do
   describe "PUBLIC_DATABASE_METHODS UPDATED" do
-    context "Testing is_prop_fake?(prop) to see if there is pb with the property without checking DB" do
+    context "Testing is_prop_fake?(prop) to see if there is pb with the property without checking DB for PARIS" do
       before(:all) do
         @s = Scraper.new
       end
       it "should return false if one attribute is nil because its delibarately put to nil by a human being" do
-        expect(@s.is_prop_fake?({ price: 0, surface: nil })).to eq(false)
-        expect(@s.is_prop_fake?({ price: nil, surface: nil })).to eq(false)
-        expect(@s.is_prop_fake?({ price: nil, surface: 0 })).to eq(false)
+        expect(@s.is_prop_fake?({ price: 0, surface: nil, area: "Paris 2ème" })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: nil, area: "Paris 2ème" })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: 0, area: "Paris 2ème" })).to eq(false)
       end
       it "should return true if each attributes is equal to 0 and random integer respectively" do
-        expect(@s.is_prop_fake?({ price: 0, surface: 20 })).to eq(true)
-        expect(@s.is_prop_fake?({ price: 20, surface: 0 })).to eq(true)
-        expect(@s.is_prop_fake?({ price: 0, surface: 0 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 20, area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 20, surface: 0, area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 0, area: "Paris 2ème" })).to eq(true)
       end
       it "should return true if each attributes is string and not integer" do
-        expect(@s.is_prop_fake?({ price: "0", surface: "20" })).to eq(true)
-        expect(@s.is_prop_fake?({ price: "20", surface: "0" })).to eq(true)
-        expect(@s.is_prop_fake?({ price: "0", surface: "0" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "0", surface: "20", area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "20", surface: "0", area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "0", surface: "0", area: "Paris 2ème" })).to eq(true)
       end
       it "should return true if we try to divide with or by 0" do
-        expect(@s.is_prop_fake?({ price: 3000000, surface: 0 })).to eq(true)
-        expect(@s.is_prop_fake?({ price: 0, surface: 230 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 3000000, surface: 0, area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 230, area: "Paris 2ème" })).to eq(true)
       end
+
       it "should return true if the €/m2 is under 5000" do
-        expect(@s.is_prop_fake?({ price: 20000, surface: 20 })).to eq(true)
-        expect(@s.is_prop_fake?({ price: 2000000, surface: 2000 })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 20000, surface: 20, area: "Paris 2ème" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 2000000, surface: 2000, area: "Paris 2ème" })).to eq(true)
       end
       it "should return false if the €/m2 is over 5000, so the test pass" do
-        expect(@s.is_prop_fake?({ price: 400000, surface: 20 })).to eq(false)
+        expect(@s.is_prop_fake?({ price: 400000, surface: 20, area: "Paris 2ème" })).to eq(false)
+      end
+    end
+
+    context "Testing is_prop_fake?(prop) to see if there is pb with the property without checking DB for SUBURBS" do
+      before(:all) do
+        @s = Scraper.new
+      end
+      it "should return false if one attribute is nil because its delibarately put to nil by a human being" do
+        expect(@s.is_prop_fake?({ price: 0, surface: nil, area: "Fourqueux" })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: nil, area: "Fourqueux" })).to eq(false)
+        expect(@s.is_prop_fake?({ price: nil, surface: 0, area: "Fourqueux" })).to eq(false)
+        expect(@s.is_prop_fake?({ price: 200000, surface: 30, area: nil })).to eq(false)
+      end
+      it "should return true if each attributes is equal to 0 and random integer respectively" do
+        expect(@s.is_prop_fake?({ price: 0, surface: 20, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 20, surface: 0, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 0, area: "Fourqueux" })).to eq(true)
+      end
+      it "should return true if each attributes is string and not integer" do
+        expect(@s.is_prop_fake?({ price: "0", surface: "20", area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "20", surface: "0", area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: "0", surface: "0", area: "Fourqueux" })).to eq(true)
+      end
+      it "should return true if we try to divide with or by 0" do
+        expect(@s.is_prop_fake?({ price: 3000000, surface: 0, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 0, surface: 230, area: "Fourqueux" })).to eq(true)
+      end
+
+      it "should return true if the €/m2 is under 1000" do
+        expect(@s.is_prop_fake?({ price: 20000, surface: 21, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 2000000, surface: 2100, area: "Fourqueux" })).to eq(true)
+      end
+      it "should return false if the €/m2 is over 1000, so the test pass" do
+        expect(@s.is_prop_fake?({ price: 20000, surface: 18, area: "Fourqueux" })).to eq(false)
       end
     end
 
@@ -95,8 +130,9 @@ RSpec.describe Scraper, type: :service do
     context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
       before(:each) do
         @s = Scraper.new
-        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
-        @prop = { area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
+        area = FactoryBot.create(:area, name: "Paris 17ème", zone: "Paris")
+        FactoryBot.create(:property, created_at: 6.days.ago, area: area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @prop = { area: "Paris 17ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
       end
 
       it "should return true because the two properties are the same" do
@@ -128,36 +164,37 @@ RSpec.describe Scraper, type: :service do
     context "Testing go_to_prop?(prop, time)" do
       before(:each) do
         @s = Scraper.new
-        FactoryBot.create(:property, created_at: 6.days.ago, area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @area = FactoryBot.create(:area, name: "Paris 18ème", zone: "Paris")
+        FactoryBot.create(:property, created_at: 6.days.ago, area: @area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
       end
 
       it "should return false because @prop is the same as a property inside DB" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
       end
 
       it "should return false because price or surface is nil or equal to 0" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: nil, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 0, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 0, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: "23", price: "0", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: nil, price: "400000", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: nil, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 0, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 0, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: "23", price: "0", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: nil, price: "400000", rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
       end
 
       it "should return false because link is the same has a property inside DB" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "     https://google.com    " }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }, 7)).to eq(false)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "     https://google.com    " }, 7)).to eq(false)
       end
 
       it "should return true because the property isnt the same, and the timeframe is out of reach of property inside DB and link is different but arguments are the same" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 5)).to eq(true)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 4)).to eq(true)
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 3)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 5)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 4)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com/different_link" }, 3)).to eq(true)
       end
 
       it "should return true because price is different and therefore link is different and out of timeframe" do
-        expect(@s.go_to_prop?({ area: "75018", surface: 23, price: 390000, rooms_number: 1, link: "https://google.com/new_link/" }, 7)).to eq(true)
+        expect(@s.go_to_prop?({ area: "Paris 18ème", surface: 23, price: 390000, rooms_number: 1, link: "https://google.com/new_link/" }, 7)).to eq(true)
       end
     end
 
@@ -206,33 +243,40 @@ RSpec.describe Scraper, type: :service do
   describe "XML ACCESSORS METHODS" do
     before(:each) do
       @s = Scraper.new
-      @ssi = Hub::ScraperSuperImmo.new
-      @html = @ssi.fetch_static_page(@ssi.url)
+      @sai = Independant::ScraperAabiImmo.new
     end
     context "access_xml_text" do
       it "should return a string" do
-        expect(@s.access_xml_text(@html, "body")).to be_a(String)
-        expect(@s.access_xml_text(@html, "body")).not_to be_a(Array)
+        VCR.use_cassette(@sai.source + "Test") do
+          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).to be_a(String)
+          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(Array)
+        end
       end
 
       context "access_xml_raw" do
         it "should return an array" do
-          expect(@s.access_xml_raw(@html, "body")).to be_a(Array)
-          expect(@s.access_xml_raw(@html, "body")).not_to be_a(String)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).to be_a(Array)
+            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(String)
+          end
         end
       end
 
       context "access_xml_link" do
         it "should return an array" do
-          expect(@s.access_xml_link(@html, "p > a", "href")).to be_a(Array)
-          expect(@s.access_xml_link(@html, "p > a", "href")[0].to_s).to be_a(String)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")).to be_a(Array)
+            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")[0].to_s).to be_a(String)
+          end
         end
       end
 
       context "access_xml_array_to_text" do
         it "should return an array" do
-          expect(@s.access_xml_array_to_text(@html, "p > a")).to be_a(String)
-          expect(@s.access_xml_array_to_text(@html, "p > a")).not_to be_a(Array)
+          VCR.use_cassette(@sai.source + "Test") do
+            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).to be_a(String)
+            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).not_to be_a(Array)
+          end
         end
       end
     end
@@ -304,7 +348,7 @@ RSpec.describe Scraper, type: :service do
       end
     end
 
-    context "perform_district_regex(str)" do
+    context "perform_district_regex(str) for PARIS" do
       it "should always return a parisian district number OR N/C " do
         expect(@s.perform_district_regex("Appartement situé à Paris 20e")).to be_a(String)
         expect(@s.perform_district_regex("Ici c'est Paris")).to be_a(String)
@@ -314,58 +358,77 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should translate Paris ??e to 750??" do
-        expect(@s.perform_district_regex("Appartement situé à Paris 20e")).to eq("75020")
-        expect(@s.perform_district_regex("Bien situé dans le Paris 18e")).to eq("75018")
-        expect(@s.perform_district_regex("Superbe petit bien à Paris 12e")).to eq("75012")
-        expect(@s.perform_district_regex("Superbe petit bien PARIS 10e")).to eq("75010")
+        expect(@s.perform_district_regex("Appartement situé à Paris 20e")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Bien situé dans le Paris 18e")).to eq("Paris 18ème")
+        expect(@s.perform_district_regex("Superbe petit bien à Paris 12e")).to eq("Paris 12ème")
+        expect(@s.perform_district_regex("Superbe petit bien PARIS 10e")).to eq("Paris 10ème")
       end
 
       it "shouldnt put 75116 in DB, it should return whole 75016" do
-        expect(@s.perform_district_regex("Appartement Paris 75116")).to eq("75016")
-        expect(@s.perform_district_regex("Appartement Paris 75116")).not_to eq("75116")
+        expect(@s.perform_district_regex("Appartement Paris 75116")).to eq("Paris 16ème")
       end
 
       it "should translate Paris ?? to 750??" do
-        expect(@s.perform_district_regex("Appartement situé à Paris 20")).to eq("75020")
-        expect(@s.perform_district_regex("Bien situé dans le Paris 18")).to eq("75018")
-        expect(@s.perform_district_regex("Superbe petit bien à Paris 12")).to eq("75012")
-        expect(@s.perform_district_regex("Superbe petit bien PARIS 10")).to eq("75010")
+        expect(@s.perform_district_regex("Appartement situé à Paris 20")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Bien situé dans le Paris 18")).to eq("Paris 18ème")
+        expect(@s.perform_district_regex("Superbe petit bien à Paris 12")).to eq("Paris 12ème")
+        expect(@s.perform_district_regex("Superbe petit bien PARIS 10")).to eq("Paris 10ème")
       end
 
       it "should translate romanian numbers to 750??" do
-        expect(@s.perform_district_regex("Appartement situé à Paris XVI")).to eq("75016")
-        expect(@s.perform_district_regex("Appartement situé à Paris XV")).to eq("75015")
-        expect(@s.perform_district_regex("Appartement situé à Paris X")).to eq("75010")
-        expect(@s.perform_district_regex("Appartement situé à Paris V")).to eq("75005")
+        expect(@s.perform_district_regex("Appartement situé à Paris XVI")).to eq("Paris 16ème")
+        expect(@s.perform_district_regex("Appartement situé à Paris XV")).to eq("Paris 15ème")
+        expect(@s.perform_district_regex("Appartement situé à Paris X")).to eq("Paris 10ème")
+        expect(@s.perform_district_regex("Appartement situé à Paris V")).to eq("Paris 5ème")
       end
 
       it "should translate 20ème/eme arrondissement or 20ème/eme arr to 75020" do
-        expect(@s.perform_district_regex("Dans le 20ème arrondissement")).to eq("75020")
-        expect(@s.perform_district_regex("Dans le 20ème arr")).to eq("75020")
-        expect(@s.perform_district_regex("Dans le 18ème arr")).to eq("75018")
-        expect(@s.perform_district_regex("Dans le 20eme arrondissement")).to eq("75020")
-        expect(@s.perform_district_regex("Dans le 20eme arr")).to eq("75020")
-        expect(@s.perform_district_regex("Dans le 1er arr")).to eq("75001")
-        expect(@s.perform_district_regex("Dans le 3ème arr")).to eq("75003")
+        expect(@s.perform_district_regex("Dans le 20ème arrondissement")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Dans le 20ème arr")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Dans le 18ème arr")).to eq("Paris 18ème")
+        expect(@s.perform_district_regex("Dans le 20eme arrondissement")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Dans le 20eme arr")).to eq("Paris 20ème")
+        expect(@s.perform_district_regex("Dans le 1er arr")).to eq("Paris 1er")
+        expect(@s.perform_district_regex("Dans le 3ème arr")).to eq("Paris 3ème")
       end
 
       it "should translate only district as it is in long string (ex:75012 is 75012)" do
-        expect(@s.perform_district_regex("Dans le 75012")).to eq("75012")
-        expect(@s.perform_district_regex("PARIS 75013")).to eq("75013")
-        expect(@s.perform_district_regex("Limite vincennes - 75012")).to eq("75012")
+        expect(@s.perform_district_regex("Dans le 75012")).to eq("Paris 12ème")
+        expect(@s.perform_district_regex("PARIS 75013")).to eq("Paris 13ème")
+        expect(@s.perform_district_regex("Limite vincennes - 75012")).to eq("Paris 12ème")
       end
 
       it "shouldn't take floor spelling" do
-        expect(@s.perform_district_regex("Au 3ème étage dans Paris 15ème")).to eq("75015")
-        expect(@s.perform_district_regex("Au 8ème étage dans Paris 15")).to eq("75015")
-        expect(@s.perform_district_regex("Au 8ème sans ascenseur")).not_to eq("75008")
-        expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).not_to eq("75008")
+        expect(@s.perform_district_regex("Au 3ème étage dans Paris 15ème")).to eq("Paris 15ème")
+        expect(@s.perform_district_regex("Au 8ème étage dans Paris 15")).to eq("Paris 15ème")
+        expect(@s.perform_district_regex("Au 8ème sans ascenseur")).not_to eq("Paris 8ème")
+        expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).not_to eq("Paris 8ème")
         expect(@s.perform_district_regex("Paris, 8ème sans ascenseur")).to eq("N/C")
       end
 
       it "shouldn't take floor false data from link with pattern 75201 or 69203" do
-        expect(@s.perform_district_regex("https://example.com/75229209429")).not_to eq("75229")
-        expect(@s.perform_district_regex("https://example.com/6919209429")).not_to eq("69192")
+        expect(@s.perform_district_regex("https://example.com/75229209429")).not_to eq("Paris 29ème")
+        expect(@s.perform_district_regex("https://example.com/6919209429")).not_to eq("Lyon 2ème")
+      end
+    end
+
+    context "perform_district_regex(str) for Suburbs" do
+      it "should translate postcode to City Name" do
+        expect(@s.perform_district_regex("Appartement situé 78112", "Banlieue-Ouest")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Bien situé dans le 78100", "Banlieue-Ouest")).to eq("Saint-Germain-En-Laye")
+        expect(@s.perform_district_regex("Superbe petit bien à 92500", "Banlieue-Ouest")).to eq("Rueil-Malmaison")
+      end
+
+      it "should take city over postcode" do
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).not_to eq("Saint-Germain-En-Laye")
+      end
+
+      it "shouldnt take any city because there's no args for suburbs" do
+        expect(@s.perform_district_regex("Appartement situé à Fourqueux")).to eq("N/C")
+        expect(@s.perform_district_regex("Bien situé dans le 78112")).to eq("N/C")
+        expect(@s.perform_district_regex("Appartement situé à Fourqueux")).not_to eq("Fourqueux")
+        expect(@s.perform_district_regex("Bien situé dans le 78112")).not_to eq("Fourqueux")
       end
     end
   end
@@ -374,15 +437,19 @@ RSpec.describe Scraper, type: :service do
     context "FETCH METHODS" do
       before(:each) do
         @s = Scraper.new
-        @si = Hub::ScraperSuperImmo.new
+        @sai = Independant::ScraperAabiImmo.new
       end
 
       it "should return a Nokogori element'" do
-        expect(@s.fetch_static_page(@si.url)).to be_a(Nokogiri::HTML::Document)
+        VCR.use_cassette(@sai.source + "Test") do
+          expect(@s.fetch_static_page(@sai.url)).to be_a(Nokogiri::HTML::Document)
+        end
       end
 
       it "should return an array of Nokogiri Elements" do
-        expect(@s.fetch_many_pages(@si.url, 1, @si.main_page_cls)).to be_a(Array)
+        VCR.use_cassette(@sai.source + "TestManyPages") do
+          expect(@s.fetch_many_pages(@sai.url, 1, @sai.main_page_cls)).to be_a(Array)
+        end
       end
     end
   end

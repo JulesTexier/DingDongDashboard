@@ -25,7 +25,7 @@ class Independant::ScraperCapitaliParis < Scraper
         hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".carac"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
         if go_to_prop?(hashed_property, 7)
           html = fetch_static_page(hashed_property[:link])
-          hashed_property[:area] = perform_district_regex(access_xml_text(html, "ul.list-group:nth-child(2) > li.list-group-item:nth-child(1) > div"))
+          hashed_property[:area] = perform_district_regex(access_xml_text(html, "ul.list-group:nth-child(2) > li.list-group-item:nth-child(1) > div").split("Code postal")[1])
           hashed_property[:description] = access_xml_text(html, ".description").gsub("\t", "").gsub("\n", "").strip
           hashed_property[:flat_type] = regex_gen(hashed_property[:description], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
           hashed_property[:agency_name] = "Capitali Paris"

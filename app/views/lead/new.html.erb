@@ -1,17 +1,20 @@
-<h1>Création d'un nouveau contact</h1>
-
 <%= form_for @lead, url: lead_index_path do |f| %>
-      
-      <h4 class="mt-5">Identité</h4>
+   
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/identite.png" alt="identité Ding Dong"><img>
+        <h4 class="text-center mb-0" style="color: #0470C1; font-weight:400">
+            Identité
+        </h4>
+    </div>
       <div class="row">
         <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Prénom *</h5>
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">⬅️ Prénom *</h5>
           <div class="input-group mb-3">
               <%= f.text_field :firstname, class: "form-control", placeholder:"Jean", :required => true   %>
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Nom *</h5>
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">➡️ Nom *</h5>
           <div class="input-group mb-3">
               <%= f.text_field :lastname, class: "form-control", placeholder:"Dupond", :required => true   %>
           </div>
@@ -20,111 +23,66 @@
 
       <div class="row">
         <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Email *</h5>
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📧 Email *</h5>
           <div class="input-group mb-3">
               <%= f.email_field :email, class: "form-control", placeholder:"jean.dupond@gmail.com", :required => true   %>
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Téléphone *</h5>
+          <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📞 Téléphone *</h5>
           <div class="input-group mb-3">
               <%= f.text_field :phone, class: "form-control", placeholder:"0783746253", :required => true   %>
           </div>
         </div>
       </div>
 
-
-      <h4 class="mt-5">Projet immobilier</h4>
-      <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Type de projet </h5>
-      <div class="input-group mb-3">
-          <%= f.select :project_type, options_for_select([["Chosir...", ""], "1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]), class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-4">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰 Prix d'achat maximum ? *</h5>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">€</span>
-            </div>
-            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", min:"10000", max:"10000000", :required => true %>
-        </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">m2</span>
-            </div>
-            <%= f.number_field :min_surface, type:"number", class: "form-control", placeholder:"Ex : 30", min:"8", max:"400", :required => true   %>
-        </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡 Nombre de pièces minimum ? *</h5>
-          <div class="input-group mb-3">
-              <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", min:"1", max:"6", :required => true   %>
-          </div>
-        </div>
-      </div>
-
-      <h5 class="mb-3 mt-4" style="color: #525f7f; font-weight:400;">📍 Arrondissements ? *</h5>
-      <div class="d-flex flex-wrap">
-        <% @areas.each do |area| %>
-          <div 
-              class="form-check mr-3 <%=area.name%> d-flex" 
-              onclick="changeColor(className)"
-          >       <div>
-                      <%= check_box_tag 'selected_areas[]', 
-                          area.name, 
-                          false, 
-                          class: "",
-                          id: area.name
-                      %>
-                  </div>
-                  <label class="form-check-label mb-2 ml-2" for="<%=area.name%>">
-                      <%= area.name %>
-                  </label>
-
-          </div>
-        <% end %>
-      </div>
-
-        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Critères spécifiques </h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">✋ Une question en particulier ? </h5>
         <div class="input-group mb-3">
-            <%= f.text_area :specific_criteria, class: "form-control", placeholder:"Avec vue dégagée sur la Tour Eiffel ...", rows:5, cols:5, :required => false   %>
+            <%= f.text_area :additional_question, class: "form-control", placeholder:"", rows:5, cols:5, :required => false   %>
         </div>
 
-        <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Remarques supplémentaires </h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📱 Notre alerte est uniquement disponible sur Messenger, as-tu un compte Facebook ? *</h5>
+        <% messenger_choices = ["Oui", "Non"]%>
         <div class="input-group mb-3">
-            <%= f.text_area :additional_question, class: "form-control", placeholder:"A déjà parlé avec son banquier mais ...", rows:5, cols:5, :required => false   %>
+          <div class="d-flex flex-wrap">
+            <% messenger_choices.each do |messenger_choice| %>
+              <label 
+                  for="<%=messenger_choice%>"
+                  class="form-check mr-3 mb-2 <%=messenger_choice%> d-flex radio-button box_hover label_non_active"
+                  onclick="changeColorRadioButton(className)"
+              >       <div>
+                          <%= radio_button_tag 'selected_messenger_choices[]', 
+                              messenger_choice, 
+                              false, 
+                              class: "box_hover",
+                              id: messenger_choice,
+                              required: true
+                          %>
+                      </div>
+                      <span class="form-check-label mb-2 ml-2 box_hover" >
+                          <%= messenger_choice %>
+                      </span>
+
+              </label>
+            <% end %>
+          </div>        
         </div>
 
-        <h4 class="mt-5">Ding Dong</h4>
+        <%= f.hidden_field :project_type, value:@draft_lead["project_type"]  %>
+        <%= f.hidden_field :max_price, value:@draft_lead["max_price"]  %>
+        <%= f.hidden_field :min_surface, value:@draft_lead["min_surface"]  %>
+        <%= f.hidden_field :min_rooms_number, value:@draft_lead["min_rooms_number"]  %>
+        <%= f.hidden_field :specific_criteria, value:@draft_lead["specific_criteria"]  %>
+        <%= f.hidden_field :areas, value:@draft_lead["selected_areas"]  %>
+        <%= f.hidden_field :project_type, value:@draft_lead["project_type"]  %>
+
+
         
-        <div class="row">
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400"> Courtier Ding Dong de référence *</h5>
-        <div class="input-group mb-3">
-            <%= f.select :broker_id, options_from_collection_for_select(@brokers, "id", "firstname"), class: "form-control", :required => true   %>
-        </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">Source du lead</h5>
-          <div class="input-group mb-3">
-              <%= f.text_field :source, class: "form-control", placeholder:"Folhomee, réseau interne, ...", :required => false   %>
-          </div>
-        </div>
-      </div>
 
-      <div class="row"   style="margin-bottom:100px;">
-        <div class="col-12">
-          <p class="text-danger">Attention, vérifie bien avec ton contact s'il a un compte Facebook Messenger, sinon il ne sera pas en mesure d'accéder à l'alerte Ding Dong ...</p>
-        </div>  
-      </div>
 
-      <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
+      <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
         <div class="d-flex justify-content-center mt-2 mb-2">
-            <%= f.submit "Créer le contact 🚀", 
+            <%= f.submit "Accéder à Ding Dong 🚀", 
                 class: "btn btn-outline-light", 
                 style:"font-weight:600"
             %>
@@ -133,8 +91,29 @@
 
        
 
-        <div class="d-flex justify-content-center mt-4 mb-6">
-        -------- 🔔--------
+        <div class="d-flex justify-content-center mt-4 mb-5">
+        🧡
         </div>
-      </p>
     <% end %>
+
+
+
+<script>
+
+    function changeColorRadioButton(className) {
+      let labels = document.getElementsByClassName("radio-button")
+      let item = document.getElementsByClassName(className)[0]
+      let checkboxValue = item.children[0].children[0].checked
+    
+      if(checkboxValue){ 
+          for(i=0; i < labels.length; i++){
+              labels[i].classList.remove('label_active')
+              labels[i].className += " label_non_active"
+          }
+          item.classList.remove('label_non_active')
+          item.className += " label_active"
+        }
+    }
+
+
+</script>

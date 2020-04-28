@@ -6,14 +6,19 @@ class SubscribersController < ApplicationController
 
   def edit
     @subscriber = Subscriber.find(params[:id])
-    @areas = Area.all
+    zone_areas = []
+    @subscriber.areas.each do |area|
+      zone_areas.push(area.zone)
+    end
+    zone_areas.uniq
+    @areas = Area.where(zone:zone_areas)
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
-    if @subscriber.update(subscriber_params) && !params[:selected_area].nil?
-      params[:selected_area].each do |area_id|
+    if @subscriber.update(subscriber_params) && !params[:selected_areas].nil?
+      params[:selected_areas].each do |area_id|
         SelectedArea.create(subscriber:@subscriber, area_id:area_id)
       end
       flash[:success] = "Les critères sont enregistrés ! Ferme cette fenêtre pour continuer."
