@@ -28,7 +28,7 @@ class Api::V1::ManychatController < ApplicationController
 
       if s.save
         lead.areas.split(",").each do  |area|
-          area = Area.where(name: area.gsub(' ','')).first 
+          area = Area.where(name: area).first 
           SelectedArea.create(subscriber: s, area: area) if !area.nil?
         end
 
