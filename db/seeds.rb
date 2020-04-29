@@ -1,35 +1,5 @@
-Area.all.each do |area|
-  area.update(zone: "Paris")
-end
-
-total = Property.all.size
-i = 1
-
-Property.all.each do |property|
-  puts "Update property #{i}/#{total} "
-  property.update(area: Area.where(name: property.old_area).first)
-  i += 1
-end
-
-props_116 = Property.where(old_area: "75116")
-if !props_116.empty?
-  props_116.update_all(area_id: Area.where(name: "75016").first.id)
-end
-
-area_yaml = YAML.load_file("db/data/areas.yml")
-
-area_yaml.each do |district_data|
-  if district_data["zone"] == "Paris"
-    district_data["datas"].each do |data|
-      Area.where(name: data["terms"][0]).first.update(name: data["name"]) if !Area.where(name: data["terms"][0]).first.nil?
-    end
-  end
-end
-
-area_yaml.each do |district_data|
-  if district_data["zone"] == "Banlieue-Ouest"
-    district_data["datas"].each do |data|
-      Area.create(name: data["name"], zone: "Banlieue-Ouest")
-    end
-  end
-end
+Admin.create(firstname: "Etienne", lastname: "Chevalier", email: "etienne@hellodingdong.com", password: "DingDongRocks75$")
+Admin.create(firstname: "Frederic", lastname: "Bonnand", email: "fred@hellodingdong.com", password: "DingDongRocks75$")
+Admin.create(firstname: "Nicolas", lastname: "Fernandez-Le Follic", email: "nicolas@hellodingdong.com", password: "DingDongRocks75$")
+Admin.create(firstname: "Maxime", lastname: "Le Segretain", email: "maxime@hellodingdong.com", password: "DingDongRocks75$")
+Admin.create(firstname: "Greg", lastname: "Rouxel Oldrà", email: "greg@hellodingdong.com", password: "DingDongRocks75$")
