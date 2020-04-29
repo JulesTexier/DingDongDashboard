@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       #data
       get "data/subscribers" => "data#get_subscribers"
       get "data/subscribers/active" => "data#get_active_subscribers"
+      get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
 
     end
   end
