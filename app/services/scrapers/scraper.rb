@@ -491,6 +491,7 @@ class Scraper
 
     yaml_file.each do |scraper|
       if scraper["source"] == source
+        scraper["params"].reject! { |hash_data| hash_data["is_active"] == false }
         data = scraper["params"]
       end
     end
