@@ -177,11 +177,20 @@ class Scraper
     puts "This is the User_Agent => " + user_agent
     puts "This is our Proxy => " + proxy_ip
     user_agent_page = open(user_agent_url, "User-Agent" => user_agent).read
-    byebug
     ip_page = open(ip_url, proxy: URI.parse(proxy_ip)).read
-    byebug
     header_page = open(header_url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
-    byebug
+  end
+
+  def change_ip(proxy_params, url)
+    uri = URI("https://httpbin.org/ip")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.local_host = proxy_params["ip"]
+    http.use_ssl = true
+    request = Net::HTTP::Get.new("/")
+    request.content_type = "application/json"
+    request.initialize_http_header("Content-Type" => "application/json")
+    response = http.request(request)
+    puts response.body
   end
 
   def get_ip(proxy_params)
