@@ -164,14 +164,25 @@ class Scraper
   def get_user_agent(proxy_params)
     user_agent_url = "https://httpbin.org/user-agent"
     user_agent = proxy_params["randomUserAgent"]
-    open(user_agent_url, "User-Agent" => user_agent).read
+    puts user_agent
+    open(user_agent_url, "User-Agent" => user_agent, "read_timeout" => "10").read
+  end
+
+  def get_whole_header(proxy_params)
+    header_url = "https://httpbin.org/headers"
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_ip = "http://" + proxy_params["proxy"]
+    puts "This is the User_Agent => " + user_agent
+    puts "This is our Proxy => " + proxy_ip
+    puts open(ip_url, "proxy" => URI.parse(proxy_ip)).read
+    puts open(header_url, "proxy" => URI.parse(proxy_ip), "User-Agent" => user_agent).read
   end
 
   def get_ip(proxy_params)
     ip_url = "https://httpbin.org/ip"
-    proxy_ip = proxy_params["proxy"]
+    proxy_ip = "http://" + proxy_params["proxy"]
     puts proxy_ip
-    open(ip_url, "proxy" => URI.parse(proxy_ip)).read
+    puts open(ip_url, "proxy" => URI.parse(proxy_ip)).read
   end
 
   def get_website(url, proxy_params)
