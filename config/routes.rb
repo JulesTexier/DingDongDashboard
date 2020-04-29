@@ -41,6 +41,10 @@ Rails.application.routes.draw do
       # Webhooks resources 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
 
+      #data
+      get "data/subscribers" => "data#get_subscribers"
+      get "data/subscribers/active" => "data#get_active_subscribers"
+
     end
   end
 
