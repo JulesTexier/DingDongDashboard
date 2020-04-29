@@ -14,6 +14,8 @@ class Api::V1::WebhooksController < ApplicationController
       end
       # Gérer des condtitions pour savoir si on a bien inséré la property ou pas ... (doublon, 500 ou succès) 
       render json: { status: "SUCCESS", message: "Mail from SeLoger", data: nil}, status: 200
+    elsif params["FromName"] == "Postmarkapp Support"
+      render json: { status: "SUCCESS", message: "Mail from PostMark Support", data: nil}, status: 200
     else 
       render json: { status: "ERROR", message: "Can't handle this email"}, status: 500
     end
