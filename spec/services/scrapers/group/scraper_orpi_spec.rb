@@ -12,7 +12,7 @@ RSpec.describe Group::ScraperOrpi, type: :service do
   end
 
   it "should launch and return proper number of properties" do
-    VCR.use_cassette(@s.source) do
+    VCR.use_cassette(@s.source + "forced") do
       expect(@s.launch(10)).to be_a(Array)
       expect(Property.where(source: @s.source).count).to be >= 1
       expect(Property.where(source: @s.source).count).to be == @s.properties.count
