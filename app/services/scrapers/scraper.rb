@@ -151,41 +151,33 @@ class Scraper
     return xml.flatten
   end
 
-  ######################################
-  ## WATIR INTERACTIVE CLICKS METHODS ##
-  ######################################
+  #####################
+  ## PROXY SERVICES  ##
+  #####################
 
-  ##############################
-  ## PENDING METHODS BECAUSE ##
-  ## IT DOESNT WORK YET      ##
-  #############################
-
-  def click_those_btns(browser, click_args)
-    click_args.each do |click_arg|
-      sleep 1
-      click_this_element(browser, click_arg)
-    end
+  def fetch_proxy_params
+    proxy_url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}"
+    uri = URI(proxy_url)
+    return JSON.parse(Net::HTTP.get(uri))
   end
 
-  def click_this_element(browser, click_arg)
-    case click_arg[:element]
-    when "div"
-      browser.div(click_arg[:values]).click
-    when "li"
-      browser.li(click_arg[:values]).click
-    when "button"
-      browser.button(click_arg[:values]).click
-    when "a"
-      browser.a(click_arg[:values]).click
-    when "span"
-      browser.span(click_arg[:values]).click
-    when "option"
-      browser.option(click_arg[:values]).click
-    when "select"
-      browser.select(click_arg[:values]).click
-    else
-      puts "Error on Click_this_btn"
-    end
+  def get_user_agent(proxy_params)
+    user_agent_url = "https://httpbin.org/user-agent"
+    user_agent = proxy_params["randomUserAgent"]
+    open(user_agent_url, "User-Agent" => user_agent).read
+  end
+
+  def get_ip(proxy_params)
+    ip_url = "https://httpbin.org/ip"
+    proxy_ip = proxy_params["proxy"]
+    puts proxy_ip
+    open(ip_url, "proxy" => URI.parse(proxy_ip)).read
+  end
+
+  def get_website(url, proxy_params)
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_ip = proxy_params["proxy"]
+    open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
   end
 
   ###########################
