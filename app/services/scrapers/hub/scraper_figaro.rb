@@ -2,14 +2,6 @@ class Hub::ScraperFigaro < Scraper
   attr_accessor :source, :params, :properties
 
   def initialize
-    # @url = "https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=paris&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5"
-    # @source = "Figaro"
-    # @main_page_cls = "div.item-main-infos"
-    # @type = "Static"
-    # @waiting_cls = nil
-    # @multi_page = false
-    # @page_nbr = 1
-    # @properties = []
     @source = "Figaro"
     @params = fetch_init_params(@source)
     @properties = []
