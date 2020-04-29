@@ -156,7 +156,7 @@ class Scraper
   #####################
 
   def fetch_proxy_params
-    proxy_url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}"
+    proxy_url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}&country=US"
     uri = URI(proxy_url)
     return JSON.parse(Net::HTTP.get(uri))
   end
@@ -170,12 +170,18 @@ class Scraper
 
   def get_whole_header(proxy_params)
     header_url = "https://httpbin.org/headers"
+    ip_url = "https://httpbin.org/ip"
+    user_agent_url = "https://httpbin.org/user-agent"
     user_agent = proxy_params["randomUserAgent"]
     proxy_ip = "http://" + proxy_params["proxy"]
     puts "This is the User_Agent => " + user_agent
     puts "This is our Proxy => " + proxy_ip
-    puts open(ip_url, "proxy" => URI.parse(proxy_ip)).read
-    puts open(header_url, "proxy" => URI.parse(proxy_ip), "User-Agent" => user_agent).read
+    user_agent_page = open(user_agent_url, "User-Agent" => user_agent).read
+    byebug
+    ip_page = open(ip_url, proxy: URI.parse(proxy_ip)).read
+    byebug
+    header_page = open(header_url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
+    byebug
   end
 
   def get_ip(proxy_params)
