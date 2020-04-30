@@ -8,3 +8,7 @@ leads.each do |lead|
   end
 end
 
+Broker.all.each do |broker|
+  broker.update(profile_picture:  "https://hellodingdong.com/ressources/broker_pp_default.jpg")
+  broker.update(description: "Bonjour, je suis #{broker.firstname} et je vais vous conseiller dans tout votre projet !")
+end
