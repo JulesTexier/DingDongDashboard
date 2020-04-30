@@ -1,11 +1,11 @@
 class Group::ScraperLadresse < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.ladresse.com/catalog/advanced_search_result.php?action=update_search&C_28=Vente&C_28_search=EGAL&C_28_type=UNIQUE&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30_MIN=&30_MAX="
     @source = "L'Adresse"
     @main_page_cls = "#listing_bien > div.row > div.col-lg-6"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0
