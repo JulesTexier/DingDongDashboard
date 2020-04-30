@@ -19,6 +19,10 @@ class LeadController < ApplicationController
     end
   end
 
+  def inscription_4
+    @lead = Lead.find(params["id"])
+  end
+
   def new_broker
     @lead = Lead.new
     @areas = Area.all
@@ -64,7 +68,7 @@ class LeadController < ApplicationController
     lead.source = "website"
     if lead.save 
       flash[:success] = "Nous avons bien reçu ta demande 🙂 Merci !"
-      redirect_to "/lead/inscription-finalisee"
+      redirect_to "/lead/inscription-finalisee?id=#{lead.id}"
     else 
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
       puts "ohoh, probleme"
