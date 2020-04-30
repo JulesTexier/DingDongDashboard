@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_151545) do
+ActiveRecord::Schema.define(version: 2020_04_30_124700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_151545) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "trello_username"
+    t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
+    t.string "description"
   end
 
   create_table "districts", force: :cascade do |t|
@@ -187,6 +189,22 @@ ActiveRecord::Schema.define(version: 2020_04_29_151545) do
     t.index ["property_id", "subway_id"], name: "index_property_subways_on_property_id_and_subway_id", unique: true
     t.index ["property_id"], name: "index_property_subways_on_property_id"
     t.index ["subway_id"], name: "index_property_subways_on_subway_id"
+  end
+
+  create_table "scraper_parameters", force: :cascade do |t|
+    t.string "url"
+    t.string "source"
+    t.string "main_page_cls"
+    t.string "scraper_type", default: "Static"
+    t.string "waiting_cls"
+    t.boolean "multi_page", default: false
+    t.integer "page_nbr", default: 1
+    t.string "http_type"
+    t.text "http_request", default: [], array: true
+    t.boolean "is_active", default: true
+    t.string "zone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "selected_areas", force: :cascade do |t|
