@@ -39,8 +39,8 @@
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
-          "seed": "bundle exec rake db:seed",
-          "rspec": "bundle exec rspec spec/services/scrapers/scraper_bien_ici_spec.rb" 
+          "test-setup": "bundle exec rake db:seed",
+          "test": "bundle exec rspec" 
         }
     }
   }
