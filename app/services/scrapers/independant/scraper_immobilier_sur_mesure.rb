@@ -1,16 +1,16 @@
 class Independant::ScraperImmobilierSurMesure < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_type, :http_request
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_type, :http_request
 
   def initialize
     @url = "https://www.immobilier-surmesure.com/wp-admin/admin-ajax.php"
     @source = "Immo Sur Mesure"
     @main_page_cls = "div.mon-bien"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @properties = []
     @http_type = "post"
-    @http_request = [{}, { "lieux[]": "paris-11", "lieux[]": "paris-12", "lieux[]": "paris-20", "Prix": "", "budget": "0,3000000", "surface-mini": "", "action": "myfilter", "cat": "14" }]
+    @http_request = [{}, "lieux%5B%5D=paris&lieux%5B%5D=paris-11&lieux%5B%5D=paris-12&lieux%5B%5D=paris-20&Prix=&budget=0%2C2000000&surface-mini=&action=myfilter&cat=14"]
   end
 
   def launch(limit = nil)
