@@ -10,11 +10,11 @@ class Group::ScraperLaforet < Scraper
   def launch(limit = 20)
     i = 0
     self.params.each do |args|
-      fetch_main_page_multi_city(args)["data"].each do |item|
+      fetch_main_page(args)["data"].each do |item|
         begin
           hashed_property = {}
           hashed_property[:link] = "https://www.laforet.com/agence-immobiliere/paris11bastille/acheter/paris/" + item["slug"]
-          hashed_property[:area] = perform_district_regex(item["address"]["postcode"], args["zone"])
+          hashed_property[:area] = perform_district_regex(item["address"]["postcode"], args.zone)
           hashed_property[:surface] = item["surface"].to_i
           hashed_property[:rooms_number] = item["rooms"]
           hashed_property[:price] = item["price"].to_i
@@ -25,7 +25,7 @@ class Group::ScraperLaforet < Scraper
             hashed_property[:description] = property["description"]
             hashed_property[:floor] = property["floor"]
             hashed_property[:has_elevator] = property["has_lift"]
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args["zone"])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:agency_name] = property["agency"]["name"]
             hashed_property[:contact_number] = property["agency"]["address"]["phone"]

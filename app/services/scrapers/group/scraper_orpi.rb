@@ -10,13 +10,13 @@ class Group::ScraperOrpi < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      fetch_main_page_multi_city(args)["items"].each do |item|
+      fetch_main_page(args)["items"].each do |item|
         begin
           next if item["sold"]
           hashed_property = {}
           hashed_property[:link] = "https://www.orpi.com/annonce-vente-" + item["slug"]
           hashed_property[:surface] = item["surface"].to_i
-          hashed_property[:area] = perform_district_regex(item["locationDescription"], args["zone"])
+          hashed_property[:area] = perform_district_regex(item["locationDescription"], args.zone)
           hashed_property[:rooms_number] = item["nbRooms"]
           hashed_property[:price] = item["price"].to_i
           if go_to_prop?(hashed_property, 7)
@@ -27,7 +27,7 @@ class Group::ScraperOrpi < Scraper
             hashed_property[:description] = access_xml_text(html, "div.o-container > p:nth-child(2)").specific_trim_scrp("\n\r").strip
             hashed_property[:flat_type] = regex_gen(access_xml_text(html, "span.u-text-xl"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
             details.match(/ascenseur/i).is_a?(MatchData) ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args["zone"])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = item["images"]

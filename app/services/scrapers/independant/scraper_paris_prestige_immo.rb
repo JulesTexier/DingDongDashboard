@@ -1,11 +1,11 @@
 class Independant::ScraperParisPrestigeImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
 
   def initialize
     @url = "http://www.parisprestigeimmo.fr/fr/recherche/"
     @source = "Paris prestige immo"
     @main_page_cls = "li.ad"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

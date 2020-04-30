@@ -1,11 +1,11 @@
 class Independant::ScraperLaResidence < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.laresidence.fr/nos-annonces?Etats=Bac&CodesVille=1862,21759,650,554,21952,682,493,21996,654,680,21967,21787,661,21660,21756,22022,573,21861,45938,45937&CodesType=20,1&autosave=true"
     @source = "La Résidence"
     @main_page_cls = "div.vignetteBienListing"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

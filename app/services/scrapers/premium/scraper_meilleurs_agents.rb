@@ -1,11 +1,11 @@
 class Premium::ScraperMeilleursAgents < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.meilleursagents.com/annonces/achat/paris-75000/"
     @source = "MeilleursAgents"
     @main_page_cls = "div.listing-item.search-listing-result__item"
-    @type = "Captcha"
+    @scraper_type = "Captcha"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

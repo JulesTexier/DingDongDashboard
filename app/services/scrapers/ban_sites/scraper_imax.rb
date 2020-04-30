@@ -1,11 +1,11 @@
 class BanSites::ScraperImax < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.imax.fr/recherche,basic.htm?tri=d_px&idtt=2#ci=750109,750109,750116,750116,750117,750117,750118,750118&idqfix=1&idtt=2&idtypebien=1,2&lang=fr&pres=prestige&pxmax=Max&pxmin=Min&surf_terrainmax=Max&surf_terrainmin=Min"
     @source = "Imax"
     @main_page_cls = "div.recherche-annonces-vente"
-    @type = "Dynamic"
+    @scraper_type = "Dynamic"
     @waiting_cls = "recherche-annonces-vente"
     @multi_page = false
     @page_nbr = 1

@@ -1,11 +1,11 @@
 class Independant::ScraperGerando < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.gerandoimmobilier.fr/catalog/advanced_search_result.php?action=update_search&search_id=1664115282882257&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=PARIS&C_27=&C_27_search=EGAL&C_27_type=UNIQUE&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&C_38_search=COMPRIS&C_38_type=NUMBER&C_38_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&page=1&search_id=1664115282882257&sort=0"
     @source = "Gérando Immobilier"
     @main_page_cls = "section.unBien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

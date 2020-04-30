@@ -1,11 +1,11 @@
 class Group::ScraperJunot < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.junot.fr/fr/resultat?type=buy&location[]=75001&location[]=75002&location[]=75003&location[]=75004&location[]=75005&location[]=75006&location[]=75007&location[]=75008&location[]=75009&location[]=75010&location[]=75011&location[]=75012&location[]=75013&location[]=75014&location[]=75015&location[]=75016&location[]=75116&location[]=75017&location[]=75018&location[]=75019&location[]=75020"
     @source = "Junot"
     @main_page_cls = "li.block_product"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

@@ -1,11 +1,11 @@
 class Independant::ScraperCheneVert < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "http://www.le-chene-vert.com/annonces-liste.asp?typeliste=&tri=nouveaute"
     @source = "Chene Vert"
     @main_page_cls = "#grid-container > ul > li"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

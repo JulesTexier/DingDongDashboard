@@ -1,11 +1,11 @@
 class Independant::ScraperVarenne < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.agencevarenne.fr/fr/liste-biens?search=1&clicarrondissement=0&arrondissement%5B0%5D=5&arrondissement%5B1%5D=6&arrondissement%5B2%5D=7&arrondissement%5B3%5D=13&arrondissement%5B4%5D=14&arrondissement%5B5%5D=15&arrondissement%5B6%5D=1&arrondissement%5B7%5D=2&arrondissement%5B8%5D=3&arrondissement%5B9%5D=4&arrondissement%5B10%5D=8&arrondissement%5B11%5D=9&arrondissement%5B12%5D=16&arrondissement%5B13%5D=17"
     @source = "Agence Varenne"
     @main_page_cls = "div.row-ct-liste"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

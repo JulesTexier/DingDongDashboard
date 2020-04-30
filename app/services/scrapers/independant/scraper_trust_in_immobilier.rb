@@ -1,11 +1,11 @@
 class Independant::ScraperTrustInImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.trust-in-immobilier.fr/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=2&idtypebien=1&pxmax=Max&pxmin=Min&saisie=O%C3%B9+d%C3%A9sirez-vous+habiter+%3f&surfacemax=Max&surfacemin=Min&tri=d_dt_crea&"
     @source = "Trust In Immobilier"
     @main_page_cls = "div.conteneur-annonce"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

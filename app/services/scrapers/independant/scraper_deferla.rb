@@ -1,11 +1,11 @@
 class Independant::ScraperDeferla < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://deferla.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&investissement=0&type_lot%5B%5D=Appartement&type_lot%5B%5D=Atelier&type_lot%5B%5D=Immeuble&type_lot%5B%5D=Loft&type_lot%5B%5D=Maison&type_lot%5B%5D=Terrain&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&nb_chambre=&surface=&budget_min=&budget_max=&page=1&vendus=0&submit_search_0=&page=[[PAGE_NUMBER]]"
     @source = "Deferla"
     @main_page_cls = "div.property"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = "properties-grid"
     @multi_page = true
     @page_nbr = 3

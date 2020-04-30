@@ -1,11 +1,11 @@
 class Independant::ScraperBpImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
 
   def initialize
     @url = "https://www.bpimmo.com/recherche.php"
     @source = "Building Parners"
     @main_page_cls = "div.offre_bien"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

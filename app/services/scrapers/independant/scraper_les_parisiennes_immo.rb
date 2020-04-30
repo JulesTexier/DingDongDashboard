@@ -1,11 +1,11 @@
 class Independant::ScraperLesParisiennesImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.lesparisiennesimmo.com/recherche/[[PAGE_NUMBER]]"
     @source = "Les Parisiennes"
     @main_page_cls = "ul.listingUL > li"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = true
     @wait = 0

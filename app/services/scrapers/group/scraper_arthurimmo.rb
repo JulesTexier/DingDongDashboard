@@ -1,11 +1,11 @@
 class Group::ScraperArthurimmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.arthurimmo.com/recherche,incl_recherche_prestige_ajax.htm?idpays=250&ci=750056&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&tri=d_dt_crea%2Cd_dt_crea&idtypebien=1%2C2&tri=d_dt_crea&_=1587115724817"
     @source = "Arthurimmo"
     @main_page_cls = "div.recherche-annonces-vente"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

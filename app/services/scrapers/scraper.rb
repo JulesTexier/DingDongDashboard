@@ -1,3 +1,4 @@
+# coding: utf-8
 require "dotenv/load"
 
 class Scraper
@@ -19,7 +20,7 @@ class Scraper
 
   def fetch_main_page(args)
     if !args.multi_page
-      case args.type
+      case args.scraper_type
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
@@ -41,31 +42,6 @@ class Scraper
       json.nil? ? access_xml_raw(html, args.main_page_cls) : json
     else
       card = fetch_many_pages(args.url, args.page_nbr, args.main_page_cls)
-    end
-  end
-
-  def fetch_main_page_multi_city(args)
-    if !args["multi_page"]
-      case args["type"]
-      when "Static"
-        html = fetch_static_page(args["url"])
-      when "Captcha"
-        html = fetch_captcha_page(args["url"])
-      when "HTTPRequest"
-        case args["http_type"]
-        when "get_json"
-          json = fetch_json_get(args["url"])
-        when "post_json"
-          json = fetch_json_post(args["url"], args["http_request"])
-        when "post"
-          html = fetch_http_page(args["url"], args["http_request"])
-        end
-      else
-        puts "Error"
-      end
-      json.nil? ? access_xml_raw(html, args["main_page_cls"]) : json
-    else
-      card = fetch_many_pages(args["url"], args["page_nbr"], args["main_page_cls"])
     end
   end
 
@@ -104,17 +80,18 @@ class Scraper
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n" unless Rails.env.test?
+      puts "Worked on attempt n#{attempt_count} for #{source}\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
   end
 
   def fetch_http_page(url, http_request)
+    header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
       method: :post,
-      headers: http_request[0],
+      headers: header,
       body: http_request[1],
     )
     request.run
@@ -122,10 +99,11 @@ class Scraper
   end
 
   def fetch_json_post(url, http_request)
+    header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
       method: :post,
-      headers: http_request[0],
+      headers: header,
       body: http_request[1],
     )
     response = request.run
@@ -486,14 +464,10 @@ class Scraper
   #####################################
 
   def fetch_init_params(source)
-    yaml_file = YAML.load_file("./db/data/scraper_params.yml")
+    parameters = ScraperParameter.where(source: source)
     data = []
-
-    yaml_file.each do |scraper|
-      if scraper["source"] == source
-        scraper["params"].reject! { |hash_data| hash_data["is_active"] == false }
-        data = scraper["params"]
-      end
+    parameters.each do |param|
+      data.push(param) unless param.is_active == false
     end
     return data
   end

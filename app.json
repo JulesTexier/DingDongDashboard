@@ -39,8 +39,8 @@
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
-          "configure-web-driver" : "bundle e  xec rake webdrivers:chromedriver:update WD_CHROME_PATH=/app/.apt/usr/bin/google-chrome-stable",
-          "rspec": "bundle exec rspec spec/services/scrapers/scraper_bien_ici_spec.rb" 
+          "test-setup": "bundle exec rake db:seed",
+          "test": "bundle exec rspec" 
         }
     }
   }

@@ -1,11 +1,11 @@
 class Independant::ScraperVillageBleu < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.villagebleu.com/recherche,incl_recherche_mobilefirst_ajax.htm?idqfix=1&annlistepg=1&lang=fr&idtt=2&idtypebien=1&ci=750056&tri=d_dt_crea"
     @source = "Village Bleu"
     @main_page_cls = "div.annonce"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

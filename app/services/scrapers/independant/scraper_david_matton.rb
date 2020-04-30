@@ -1,11 +1,11 @@
 class Independant::ScraperDavidMatton < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :http_request, :http_type
 
   def initialize
     @url = "http://www.davidmattonimmobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=2%2C1&C_65_REPLACE=Paris&C_65_search=CONTIENT&C_65_type=TEXT&C_65=Paris&page=1&search_id=1663595643973767&sort=PRODUCT_LIST_DATEd"
     @source = "David Matton"
     @main_page_cls = "article.bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

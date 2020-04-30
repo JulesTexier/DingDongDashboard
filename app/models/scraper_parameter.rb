@@ -1,0 +1,2 @@
+class ScraperParameter < ApplicationRecord
+end

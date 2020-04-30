@@ -1,11 +1,11 @@
 class Group::ScraperDanielFeau < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://danielfeau.com/fr/acheter/paris-neuilly-boulogne-saint-cloud"
     @source = "Daniel Feau"
     @main_page_cls = "li.property.initial"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

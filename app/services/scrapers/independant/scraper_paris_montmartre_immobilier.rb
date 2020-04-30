@@ -1,11 +1,11 @@
 class Independant::ScraperParisMontmartreImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://paris-montmartre-immobilier.fr/advanced-search/?keyword=PARIS&status=vente&type=&bedrooms=&min-area=&max-price=&bathrooms=&max-area=&min-price="
     @source = "Paris Montmartre Immo"
     @main_page_cls = "div.property-item"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

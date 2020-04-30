@@ -1,11 +1,11 @@
 class Group::ScraperMorissImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
 
   def initialize
     @url = "https://www.morissimmobilier.com/wp-admin/admin-ajax.php"
     @source = "MorissImmobilier"
     @main_page_cls = "div.property_listing"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = "carousel-inner"
     @multi_page = false
     @page_nbr = 1

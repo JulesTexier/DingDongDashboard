@@ -1,11 +1,11 @@
 class Independant::ScraperEtudeLepic < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.etudelepic.fr/vente-appartement-paris/tri=id&ordre=DESC"
     @source = "Etude Lepic"
     @main_page_cls = "article.annonce_listing"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

@@ -1,11 +1,11 @@
 class Premium::ScraperLeBonCoin < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max"
     @source = "LeBonCoin"
     @main_page_cls = "body"
-    @type = "Captcha"
+    @scraper_type = "Captcha"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

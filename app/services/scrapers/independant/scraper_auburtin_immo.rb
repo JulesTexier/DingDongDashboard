@@ -1,11 +1,11 @@
 class Independant::ScraperAuburtinImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.auburtin-immo.com/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=1&saisie=Paris&tri=d_dt_crea&"
     @source = "Auburtin Immo"
     @main_page_cls = "#recherche-resultats-listing > div.row-fluid > div"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

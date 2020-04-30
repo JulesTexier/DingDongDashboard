@@ -1,14 +1,34 @@
-leads = Lead.all
+# Admin.create(firstname: "Etienne", lastname: "Chevalier", email: "etienne@hellodingdong.com", password: "DingDongRocks75$")
+# Admin.create(firstname: "Frederic", lastname: "Bonnand", email: "fred@hellodingdong.com", password: "DingDongRocks75$")
+# Admin.create(firstname: "Nicolas", lastname: "Fernandez-Le Follic", email: "nicolas@hellodingdong.com", password: "DingDongRocks75$")
+# Admin.create(firstname: "Maxime", lastname: "Le Segretain", email: "maxime@hellodingdong.com", password: "DingDongRocks75$")
+# Admin.create(firstname: "Greg", lastname: "Rouxel Oldrà", email: "greg@hellodingdong.com", password: "DingDongRocks75$")
 
-leads.each do |lead|
-  old_areas = lead.areas 
-  unless old_areas.nil?
-    new_areas = old_areas.gsub("75001", "Paris 1er").gsub("75002", "Paris 2ème").gsub("75003", "Paris 3ème").gsub("75004", "Paris 4ème").gsub("75005", "Paris 5ème").gsub("75006", "Paris 6ème").gsub("75007", "Paris 7ème").gsub("75008", "Paris 8ème").gsub("75009", "Paris 9ème").gsub("75010", "Paris 10ème").gsub("75011", "Paris 11ème").gsub("75012", "Paris 12ème").gsub("75013", "Paris 13ème").gsub("75014", "Paris 14ème").gsub("75015", "Paris 15ème").gsub("75016", "Paris 16ème").gsub("75017", "Paris 17ème").gsub("75018", "Paris 18ème").gsub("75019", "Paris 19ème").gsub("75020", "Paris 20ème")
-    lead.update(areas: new_areas)
+scraper_params = YAML.load_file("db/data/scraper_params.yml")
+
+scraper_params.each do |param|
+  param["params"].each do |data|
+    s = ScraperParameter.new
+    data["multi_page"] = false if data["multi_page"].nil?
+    data["http_type"] = nil if data["http_type"].nil?
+    data["http_request"] = [] if data["http_request"].nil?
+    data["page_nbr"] = 1 if data["page_nbr"].nil?
+    s.source = param["source"]
+    s.zone = data["zone"]
+    s.main_page_cls = data["main_page_cls"]
+    s.scraper_type = data["type"]
+    s.url = data["url"]
+    s.multi_page = data["multi_page"]
+    s.page_nbr = data["page_nbr"]
+    s.http_type = data["http_type"]
+    s.http_request = data["http_request"]
+    s.zone = data["zone"]
+    if ScraperParameter.where(source: s.source, zone: s.zone).count == 0 
+      if s.save
+        puts "Insertion of parameters"
+      else
+        puts "Error of parameter insertion"
+      end
+    end
   end
-end
-
-Broker.all.each do |broker|
-  broker.update(profile_picture:  "https://hellodingdong.com/ressources/broker_pp_default.jpg")
-  broker.update(description: "Bonjour, je suis #{broker.firstname} et je vais vous conseiller dans tout votre projet !")
 end

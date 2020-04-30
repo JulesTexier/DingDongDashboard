@@ -1,12 +1,12 @@
 
 class Independant::ScraperEfficity < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.efficity.com/achat-immobilier/results/?inputed_location=8075056&property_type=1&max_price=&min_nb_of_rooms=1"
     @source = "Efficity"
     @main_page_cls = "div.annonce"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

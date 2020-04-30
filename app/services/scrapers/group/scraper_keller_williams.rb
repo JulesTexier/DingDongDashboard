@@ -1,11 +1,11 @@
 class Group::ScraperKellerWilliams < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.kwfrance.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_28_search=EGAL&C_28_type=UNIQUE&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&C_30=0"
     @source = "Keller Williams"
     @main_page_cls = "a.element-item"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0
