@@ -1,11 +1,11 @@
 class Independant::ScraperGrenelle < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.grenelle-immobilier.com/a-vendre/1"
     @source = "Grenelle Immobilier"
     @main_page_cls = "article.panelBien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

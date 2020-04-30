@@ -1,11 +1,11 @@
 class Independant::ScraperLiberkeys < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_type, :http_request
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :http_type, :http_request
 
   def initialize
     @url = "https://api.liberkeys.com/portal/properties?region=1&max_results=500&min_price=0&max_price=3500000&room_count=0&bedroom_count=0&include_sold_properties=false&order=recent_desc"
     @source = "Liberkeys"
     @main_page_cls = ""
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

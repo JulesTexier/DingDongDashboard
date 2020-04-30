@@ -1,11 +1,11 @@
 class Independant::ScraperEmileGarcin < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.emilegarcin.fr/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_REPLACE=%2CParis&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_64_search=INFERIEUR&C_64_type=TEXT&C_64=&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30_MIN=&C_30_MAX=&30_MAX=&products_sort_id=0"
     @source = "Emile Garcin"
     @main_page_cls = "div.un-bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

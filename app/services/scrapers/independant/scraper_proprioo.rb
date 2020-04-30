@@ -1,11 +1,11 @@
 class Independant::ScraperProprioo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
 
   def initialize
     @url = "https://9zx8d1ab8c-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.1.0)%3B%20Browser%20(lite)%3B%20JS%20Helper%20(3.1.1)%3B%20react%20(16.13.1)%3B%20react-instantsearch%20(6.4.0)&x-algolia-api-key=b848f214a86e4735a9801b9a0aad971b&x-algolia-application-id=9ZX8D1AB8C"
     @source = "Proprioo"
     @main_page_cls = "div.sc-1y2l6jx-0"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @wait = 1

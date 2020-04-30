@@ -1,11 +1,11 @@
 class Independant::ScraperVillaret < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.villaret-immobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75003+paris%2C75004+paris%2C75005+paris%2C75006+paris%2C75008+paris%2C75009+paris%2C75010+paris%2C75011+paris%2C75012+paris%2C75015+paris%2C75016+paris&C_65_tmp=75003+paris&C_65_tmp=75004+paris&C_65_tmp=75005+paris&C_65_tmp=75006+paris&C_65_tmp=75008+paris&C_65_tmp=75009+paris&C_65_tmp=75010+paris&C_65_tmp=75011+paris&C_65_tmp=75012+paris&C_65_tmp=75015+paris&C_65_tmp=75016+paris&C_27_search=EGAL&C_27_type=TEXT&C_27=1%2C2%2CLoft&C_27_tmp=1&C_27_tmp=2&C_27_tmp=Loft&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX="
     @source = "Villaret"
     @main_page_cls = "div.cell-product"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

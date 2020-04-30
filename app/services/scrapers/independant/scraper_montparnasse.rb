@@ -1,11 +1,11 @@
 class Independant::ScraperMontparnasse < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.montparnasseimmobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=2%2C1&C_27_tmp=2&C_27_tmp=1&C_34_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75015+PARIS%2C75005+PARIS%2C75007+PARIS&C_65_tmp=75015+PARIS&C_65_tmp=75005+PARIS&C_65_tmp=75007+PARIS&keywords=&C_33_MAX=&C_30_MIN="
     @source = "Montparnasse Immobilier"
     @main_page_cls = "div.product-listing"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

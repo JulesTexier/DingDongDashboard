@@ -1,11 +1,11 @@
 class Independant::ScraperParisVente < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.parisvente.com/pv_liste.pl?ACTION=CONSULTER;FROM=LISTE;PAR_PAGE=20;PAR_PAGE3=selected;ISMOBILE=non;ISMOBILE_OU_TABLETTE=non;localisation=75015%2C75006%2C75007%2C75014%2C75013%2C75005%2C75012%2C75004%2C75001%2C75008%2C75016%2C75017%2C75018%2C75009%2C75010%2C75002%2C75003%2C75011%2C75020%2C75019;localisationTitle=75015%2C%2075006%2C%2075007%2C%2075014%2C%2075013%2C%2075005%2C%2075012%2C%2075004%2C%2075001%2C%2075008%2C%2075016%2C%2075017%2C%2075018%2C%2075009%2C%2075010%2C%2075002%2C%2075003%2C%2075011%2C%2075020%2C%2075019;localisationDatastate=75015---75015%2C75006---75006%2C75007---75007%2C75014---75014%2C75013---75013%2C75005---75005%2C75012---75012%2C75004---75004%2C75001---75001%2C75008---75008%2C75016---75016%2C75017---75017%2C75018---75018%2C75009---75009%2C75010---75010%2C75002---75002%2C75003---75003%2C75011---75011%2C75020---75020%2C75019---75019;TYPE_BIEN=appartement;TYPE_BIEN=maison%20de%20ville;PRIX_MIN=0;PRIX_MAX=10000000;SURFACE_MIN=0;SURFACE_MAX=1000;submit=Rechercher;NUM_PAGE=1"
     @source = "Paris Vente"
     @main_page_cls = "div.propItem"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

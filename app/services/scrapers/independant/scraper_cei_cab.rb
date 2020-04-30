@@ -1,11 +1,11 @@
 class Independant::ScraperCeiCab < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.cei-cab.com/annonces?id_polygon=&localisation_etendu=1&visite_virtuelle=&categorie=vente&type_bien=appartement&nb_pieces=&surface=&budget=&localisation=Paris+%2875%29&submit=Rechercher"
     @source = "Cei Cab"
     @main_page_cls = "div.container-offre"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

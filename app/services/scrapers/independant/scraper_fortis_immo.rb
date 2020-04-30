@@ -1,11 +1,11 @@
 class Independant::ScraperFortisImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args, :http_request, :http_type
 
   def initialize
     @url = "https://www.fortisimmo.fr/wp-admin/admin-ajax.php"
     @source = "Fortis Immo"
     @main_page_cls = "div.purchase-wrapper"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

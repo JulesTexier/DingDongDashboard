@@ -1,11 +1,11 @@
 class Independant::ScraperLoretoImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.loretoimmobilier.com/fr/vente-studio-maison-appartement-hotel-particulier-loft-atelier-paris/tri=id&ordre=DESC"
     @source = "Loreto Immo"
     @main_page_cls = "div.annonce_listing"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

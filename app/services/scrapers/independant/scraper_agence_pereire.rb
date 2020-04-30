@@ -1,11 +1,11 @@
 class Independant::ScraperAgencePereire < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.agencepereire.com/immobilier/pays/achat/france.htm#ci=750056&idpays=250&idqfix=1&idtt=2&idtypebien=1&lang=fr&pres=prestige&pxmax=Max&pxmin=Min&surf_terrainmax=Max&surf_terrainmin=Min&surfacemax=Max&surfacemin=Min&tri=d_dt_crea"
     @source = "Agence Pereire"
     @main_page_cls = "div.recherche-annonces"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

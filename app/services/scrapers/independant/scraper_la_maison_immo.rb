@@ -1,11 +1,11 @@
 class Independant::ScraperLaMaisonImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.lamaisonimmo.fr/catalog/advanced_search_result.php?action=update_search&search_id=1663963762147810&map_polygone=&C_28=Vente&C_28_search=EGAL&C_28_type=UNIQUE&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=1&C_65_REPLACE=75002+paris%2C+75009+paris%2C+75015+paris%2C+75001+paris%2C+75003+paris%2C+75009+paris%2C+75005+paris%2C+75006+paris%2C+75007+paris%2C+75008+paris%2C+75004+paris%2C+75010+paris%2C+75011+paris%2C+75012+paris%2C+75014+paris%2C+75016+paris%2C+75017+paris%2C+75018+paris%2C+75019+paris%2C+75020+paris&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75002+paris%2C+75009+paris%2C+75015+paris%2C+75001+paris%2C+75003+paris%2C+75004+paris%2C+75009+paris%2C+75005+paris%2C+75006+paris%2C+75007+paris%2C+75008+paris%2C+75010+paris%2C+75011+paris%2C+75012+paris%2C+75014+paris%2C+75016+paris%2C+75017+paris%2C+75018+paris%2C+75019+paris%2C+75020+paris&C_30_MIN=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_33_search=COMPRIS&C_33_type=NUMBER&C_33_MAX=&C_33_MIN=0&C_38_search=COMPRIS&C_38_type=NUMBER&C_38_MAX=&C_38_MIN=0&C_36_search=COMPRIS&C_36_type=NUMBER&C_36_MAX=&C_36_MIN="
     @source = "La Maison Immo"
     @main_page_cls = "div.bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

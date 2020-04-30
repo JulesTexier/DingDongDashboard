@@ -1,11 +1,11 @@
 class Independant::ScraperSellierPatrimoine < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.sellier-patrimoine.com/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=1&saisie=Paris&tri=d_dt_crea&"
     @source = "Sellier Patrimoine"
     @main_page_cls = "div.recherche-annonces-vente"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

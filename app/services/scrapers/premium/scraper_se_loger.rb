@@ -1,11 +1,11 @@
 class Premium::ScraperSeLoger < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0"
     @source = "SeLoger"
     @main_page_cls = "script"
-    @type = "Captcha"
+    @scraper_type = "Captcha"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

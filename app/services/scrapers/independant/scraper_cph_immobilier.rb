@@ -1,11 +1,11 @@
 class Independant::ScraperCphImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.cph.fr/recherche,incl_recherche_prestige_ajax.htm?idpays=250&cp=75&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&pxmin=Min&pxmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&idtypebien=1%2C2&tri=d_dt_crea&_=1586254200670"
     @source = "CPH Immobilier"
     @main_page_cls = "div.recherche-annonces"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
