@@ -23,7 +23,7 @@ scraper_params.each do |param|
     s.http_type = data["http_type"]
     s.http_request = data["http_request"]
     s.zone = data["zone"]
-    if ScraperParameter.where(s).count == 0 
+    if ScraperParameter.where(source: s.source, zone: s.zone).count == 0 
       if s.save
         puts "Insertion of parameters"
       else
