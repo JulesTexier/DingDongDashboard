@@ -1,11 +1,11 @@
 class Independant::ScraperThibaultChanelImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.thibaultchanel.com/search-property-result/?location=&category=&bedrooms=&bathrooms=&min_price=0&max_price=10000000&min_area=0&max_area=1000"
     @source = "Thibault Chanel Immobilier"
     @main_page_cls = "article"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

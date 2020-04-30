@@ -1,11 +1,11 @@
 class Independant::ScraperNestenn < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://nestenn.com/?prestige=0&action=listing&transaction=Vente&list_ville=75000+Paris%2C75001+Paris+1%2C75010+Paris+10%2C75011+Paris+11%2C75012+Paris+12%2C75013+Paris+13%2C75014+Paris+14%2C75015+Paris+15%2C75018+Paris+18%2C75002+Paris+2%2C75116+PARIS%2C75017+Paris+17%2C75016+Paris+16%2C75019+Paris+19%2C75020+Paris+20%2C75003+Paris+3%2C75004+Paris+4%2C75005+Paris+5%2C75006+Paris+6%2C75007+Paris+7&ville=75000+Paris&ville=75001+Paris+1&ville=75010+Paris+10&ville=75011+Paris+11&ville=75012+Paris+12&ville=75013+Paris+13&ville=75014+Paris+14&ville=75015+Paris+15&ville=75018+Paris+18&ville=75002+Paris+2&ville=75116+PARIS&ville=75017+Paris+17&ville=75016+Paris+16&ville=75019+Paris+19&ville=75020+Paris+20&ville=75003+Paris+3&ville=75004+Paris+4&ville=75005+Paris+5&ville=75006+Paris+6&ville=75007+Paris+7&list_type=Maison%2CAppartement%2CStudio&type=Maison&type=Appartement&type=Studio&prix_min=&prix_max=&pieces=&chambres=&surface_min=&surface_max=&surface_terrain_min=&surface_terrain_max=&ref="
     @source = "Nestenn"
     @main_page_cls = ".annonce"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

@@ -1,11 +1,11 @@
 class Independant::ScraperAgenceTroisFreres < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://agencedes3freres.com/?page_id=1213"
     @source = "Agences des 3 Frères"
     @main_page_cls = "div.property-container"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

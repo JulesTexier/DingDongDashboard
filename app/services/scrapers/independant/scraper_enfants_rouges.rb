@@ -1,11 +1,11 @@
 class Independant::ScraperEnfantsRouges < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.agencedesenfantsrouges.com/fr/recherche/?nature=1&type[]=1&type[]=2&city[]=32552&city[]=32553&city[]=32569&city[]=32554&city[]=32560&city[]=32561&city[]=32562&city[]=32565&city[]=32567&city[]=32568&city[]=32559&price&age&tenant_min&tenant_max&rent_type&newprogram_delivery_at&newprogram_delivery_at_display&currency=EUR&customroute&homepage&order=news%7Cdesc"
     @source = "Enfants Rouges"
     @main_page_cls = "li.ad"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

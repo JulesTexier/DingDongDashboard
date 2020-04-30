@@ -1,11 +1,11 @@
 class Independant::ScraperTendancesImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.tendancesimmobilieres.com/properties/?filter_location=74&filter_type=25&filter_contract_type=21&filter_price_from=&filter_price_to=&filter_area_from=&filter_area_to=&filter_sort_by=date&filter_order=DESC"
     @source = "Tendances Immobilières"
     @main_page_cls = "div.property"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

@@ -10,13 +10,13 @@ class Group::ScraperStephanePlaza < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      json = fetch_main_page_multi_city(args)
+      json = fetch_main_page(args)
       json["results"].each do |property|
         begin
           hashed_property = {}
           hashed_property[:link] = "https://www.stephaneplazaimmobilier.com/immobilier-acheter/" + property["id"].to_s + "/" + property["slug"].to_s + "?token=" + json["token"]
           hashed_property[:surface] = regex_gen(property["properties"]["surface"], '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = perform_district_regex(property["properties"]["codePostal"], args["zone"])
+          hashed_property[:area] = perform_district_regex(property["properties"]["codePostal"], args.zone)
           hashed_property[:rooms_number] = property["properties"]["room"]
           hashed_property[:price] = property["price"].to_int_scrp
           if go_to_prop?(hashed_property, 7)
@@ -32,7 +32,7 @@ class Group::ScraperStephanePlaza < Scraper
             hashed_property[:agency_name] = @source
             hashed_property[:floor] = property["properties"]["floor"]
             hashed_property[:has_elevator] = property["properties"]["lift"]
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args["zone"])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = property["thumbnails"]

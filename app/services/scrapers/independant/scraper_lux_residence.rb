@@ -1,11 +1,11 @@
 class Independant::ScraperLuxResidence < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.lux-residence.com/fr/annonces/vente/immobilier-prestige-PARIS.php?currency=EUR&sort=date_desc"
     @source = "Lux Residence"
     @main_page_cls = "#prod-list > div > div > div.row"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

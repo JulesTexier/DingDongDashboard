@@ -1,11 +1,11 @@
 class Independant::ScraperDistrictImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.district-immo.com/fr/acheter-un-appartement/recherche/75001-75002-75003-75004-75011-75005-75006-75007-75015-75008-75009-75016-75116-75017-75010-75018-75019-75020-75012-75013-75014"
     @source = "District Immo"
     @main_page_cls = "article.item-property-small"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

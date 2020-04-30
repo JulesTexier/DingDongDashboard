@@ -1,11 +1,11 @@
 class Independant::ScraperKrystynaImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.krystyna-immobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_34_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75013+PARIS&C_65_tmp=75013+PARIS&keywords=&C_33_MAX=&C_30_MIN="
     @source = "Krystyna"
     @main_page_cls = "div.product-listing"
-    @type = "Static"
+    @scraper_type = "Static"
     @multi_page = false
     @page_nbr = 1
     @waiting_cls = nil

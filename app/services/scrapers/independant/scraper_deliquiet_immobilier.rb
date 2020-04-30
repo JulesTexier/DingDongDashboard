@@ -1,11 +1,11 @@
 class Independant::ScraperDeliquietImmobilier < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "http://www.deliquiet-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=UNIQUE&C_27=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75001%20PARIS%2C75002%20PARIS%2C75003%20PARIS%2C75004%20PARIS%2C75005%20PARIS%2C75006%20PARIS%2C75007%20PARIS%2C75008%20PARIS%2C75009%20PARIS%2C75010%20PARIS%2C75011%20PARIS%2C75012%20PARIS%2C75013%20PARIS%2C75014%20PARIS%2C75015%20PARIS%2C75016%20PARIS%2C75017%20PARIS%2C75018%20PARIS%2C75019%20PARIS%2C75020%20PARIS%2C&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_30_MIN=0&C_33_search=COMPRIS&C_33_type=NUMBER&C_33_MIN=&page=1&search_id=1662214799533655&sort=0"
     @source = "Deliquiet Immobilier"
     @main_page_cls = "article.bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

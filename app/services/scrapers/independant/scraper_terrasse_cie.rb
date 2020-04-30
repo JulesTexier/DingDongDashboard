@@ -1,11 +1,11 @@
 class Independant::ScraperTerrasseCie < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "http://www.terrasse-cie.com/fr/ventes?order=news%7Cdesc"
     @source = "TerrasseCie"
     @main_page_cls = ".ad"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @properties = []

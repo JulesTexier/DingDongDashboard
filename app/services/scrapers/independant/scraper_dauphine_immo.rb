@@ -1,11 +1,11 @@
 class Independant::ScraperDauphineImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.dauphine-immo.com/advanced-search/?type=&max-price=&status=vente&location=&bathrooms=&min-area=&max-area=&min-price=&max-price=&property_id="
     @source = "Dauphine Immo"
     @main_page_cls = "div.property-item"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

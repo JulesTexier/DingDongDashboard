@@ -1,11 +1,11 @@
 class Independant::ScraperKmi < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :click_args, :wait, :http_request, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :click_args, :wait, :http_request, :http_type
 
   def initialize
     @url = "https://www.cabinet-kmi.com/recherche-avancee/page/1?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F"
     @source = "KMI"
     @main_page_cls = "div.property_listing"
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = "carousel-inner"
     @multi_page = false
     @page_nbr = 1

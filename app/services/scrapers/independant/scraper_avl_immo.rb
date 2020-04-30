@@ -1,11 +1,11 @@
 class Independant::ScraperAvlImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.avl-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_1725=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=2%2C1&C_27_tmp=1&C_33_search=EGAL&C_33_type=TEXT&C_33=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=INFERIEUR&C_30_type=NUMBER&C_30=&search_id=1663957660967503&page=1&search_id=1663957660967503&sort=0"
     @source = "AVL Immobilier"
     @main_page_cls = "article.bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

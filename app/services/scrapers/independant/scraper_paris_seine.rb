@@ -1,11 +1,11 @@
 class Independant::ScraperParisSeine < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.paris-seine-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=2%2C1&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&page=1&search_id=1663417493034890&sort=0"
     @source = "Paris Seine"
     @main_page_cls = "article.bien"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

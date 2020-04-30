@@ -1,11 +1,11 @@
 class Independant::ScraperIad < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
 
   def initialize
     @url = "https://www.iadfrance.fr/rechercher/annonces?generic_type%5B%5D=AP&generic_type%5B%5D=MV&surface_min=&surface_max=&price_min=&price_max=&id=&departments=Paris&tags_list=%5B%7B%22type%22%3A%22departments%22%2C%22value%22%3A%22Paris%22%2C%22name%22%3A%22Paris+%22%7D%5D&transaction_type=Vente&frequency=Journali%C3%A8re"
     @source = "Iad"
     @main_page_cls = "div.c-offer"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1

@@ -1,11 +1,11 @@
 class Group::ScraperDavidImmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
   def initialize
     @url = "https://www.davidimmo.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&type_lot%5B%5D=appartement&type_lot%5B%5D=maison&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&surface=&budget_min=&budget_max=&page=0&vendus=0&submit_search_0="
     @source = "DavidImmo"
     @main_page_cls = "div.property"
-    @type = "Static"
+    @scraper_type = "Static"
     @waiting_cls = nil
     @multi_page = false
     @wait = 0

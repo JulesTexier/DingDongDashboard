@@ -1,11 +1,11 @@
 class Independant::ScraperHosman < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :http_type
+  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :http_type
 
   def initialize
     @url = "https://www.hosman.co/api/v1/properties?zones=[%22Paris,%20France%22]&min_area=&max_budget=&min_room_number=0&display_sold=false"
     @source = "Hosman"
     @main_page_cls = ""
-    @type = "HTTPRequest"
+    @scraper_type = "HTTPRequest"
     @waiting_cls = nil
     @multi_page = false
     @page_nbr = 1
