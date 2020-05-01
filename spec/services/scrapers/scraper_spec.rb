@@ -248,16 +248,20 @@ RSpec.describe Scraper, type: :service do
     context "access_xml_text" do
       it "should return a string" do
         VCR.use_cassette(@sai.source + "Test") do
-          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).to be_a(String)
-          expect(@s.access_xml_text(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(Array)
+          @sai.params.each do |args|
+            expect(@s.access_xml_text(@sai.fetch_static_page(args.url), "body")).to be_a(String)
+            expect(@s.access_xml_text(@sai.fetch_static_page(args.url), "body")).not_to be_a(Array)
+          end
         end
       end
 
       context "access_xml_raw" do
         it "should return an array" do
           VCR.use_cassette(@sai.source + "Test") do
-            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).to be_a(Array)
-            expect(@s.access_xml_raw(@sai.fetch_static_page(@sai.url), "body")).not_to be_a(String)
+            @sai.params.each do |args|
+              expect(@s.access_xml_raw(@sai.fetch_static_page(args.url), "body")).to be_a(Array)
+              expect(@s.access_xml_raw(@sai.fetch_static_page(args.url), "body")).not_to be_a(String)
+            end
           end
         end
       end
@@ -265,8 +269,10 @@ RSpec.describe Scraper, type: :service do
       context "access_xml_link" do
         it "should return an array" do
           VCR.use_cassette(@sai.source + "Test") do
-            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")).to be_a(Array)
-            expect(@s.access_xml_link(@sai.fetch_static_page(@sai.url), "p > a", "href")[0].to_s).to be_a(String)
+            @sai.params.each do |args|
+              expect(@s.access_xml_link(@sai.fetch_static_page(args.url), "p > a", "href")).to be_a(Array)
+              expect(@s.access_xml_link(@sai.fetch_static_page(args.url), "p > a", "href")[0].to_s).to be_a(String)
+            end
           end
         end
       end
@@ -274,8 +280,10 @@ RSpec.describe Scraper, type: :service do
       context "access_xml_array_to_text" do
         it "should return an array" do
           VCR.use_cassette(@sai.source + "Test") do
-            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).to be_a(String)
-            expect(@s.access_xml_array_to_text(@sai.fetch_static_page(@sai.url), "p > a")).not_to be_a(Array)
+            @sai.params.each do |args|
+              expect(@s.access_xml_array_to_text(@sai.fetch_static_page(args.url), "p > a")).to be_a(String)
+              expect(@s.access_xml_array_to_text(@sai.fetch_static_page(args.url), "p > a")).not_to be_a(Array)
+            end
           end
         end
       end
@@ -442,13 +450,17 @@ RSpec.describe Scraper, type: :service do
 
       it "should return a Nokogori element'" do
         VCR.use_cassette(@sai.source + "Test") do
-          expect(@s.fetch_static_page(@sai.url)).to be_a(Nokogiri::HTML::Document)
+          @sai.params.each do |args|
+            expect(@s.fetch_static_page(args.url)).to be_a(Nokogiri::HTML::Document)
+          end
         end
       end
 
       it "should return an array of Nokogiri Elements" do
         VCR.use_cassette(@sai.source + "TestManyPages") do
-          expect(@s.fetch_many_pages(@sai.url, 1, @sai.main_page_cls)).to be_a(Array)
+          @sai.params.each do |args|
+            expect(@s.fetch_many_pages(args.url, 1, args.main_page_cls)).to be_a(Array)
+          end
         end
       end
     end
