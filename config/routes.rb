@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       # Trello resources 
       post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn"
       post "/trello/add_action" => "trello#add_action_to_broker"
-      post "/trello/move-card-to-broker" => "trello#update_lead_broker"
+      post "/trello/move-card-to-broker" => "trello#update_user_broker"
 
       # Webhooks resources 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
