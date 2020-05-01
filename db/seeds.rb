@@ -16,16 +16,17 @@ scraper_params.each do |param|
     s.source = param["source"]
     s.zone = data["zone"]
     s.main_page_cls = data["main_page_cls"]
-    s.scraper_type = data["type"]
+    s.scraper_type = data["scraper_type"]
     s.url = data["url"]
     s.multi_page = data["multi_page"]
     s.page_nbr = data["page_nbr"]
     s.http_type = data["http_type"]
     s.http_request = data["http_request"]
+    s.group_type = data["group_type"]
     s.zone = data["zone"]
     if ScraperParameter.where(source: s.source, zone: s.zone).count == 0 
       if s.save
-        puts "Insertion of parameters"
+        puts "Insertion of parameters - #{s.source} - #{s.zone}"
       else
         puts "Error of parameter insertion"
       end
