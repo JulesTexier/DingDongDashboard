@@ -244,6 +244,10 @@ ActiveRecord::Schema.define(version: 2020_05_01_075527) do
     t.bigint "broker_id"
     t.string "trello_id_card"
     t.string "status", default: "form_filled"
+    t.string "project_type"
+    t.boolean "has_messenger"
+    t.text "specific_criteria"
+    t.text "additional_question"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
