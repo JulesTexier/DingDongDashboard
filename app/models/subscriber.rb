@@ -5,8 +5,8 @@ class Subscriber < ApplicationRecord
   after_create :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
-  validates_uniqueness_of :facebook_id, :case_sensitive => false
-  validates :facebook_id
+  # validates_uniqueness_of :facebook_id, :case_sensitive => false
+  # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
   validates :firstname, presence: true 
@@ -159,7 +159,7 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} €"
     desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
     desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
-    desc += "\u000A**Arrondissements** : #{self.areas}"
+    desc += "\u000A**Arrondissements** : #{self.get_areas_list}"
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
@@ -172,6 +172,15 @@ class Subscriber < ApplicationRecord
 
   def get_fullname
     return self.firstname + " " + self.lastname
+  end
+
+  def get_areas_list
+    areas = ""
+    self.areas.each do |area|
+      areas += area.name + ", "
+    end
+    byebug
+    return areas
   end
 
   private
