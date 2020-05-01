@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_30_124700) do
+ActiveRecord::Schema.define(version: 2020_05_01_081156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_124700) do
     t.string "zone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "group_type"
   end
 
   create_table "selected_areas", force: :cascade do |t|
@@ -243,6 +244,11 @@ ActiveRecord::Schema.define(version: 2020_04_30_124700) do
     t.integer "min_elevator_floor"
     t.bigint "broker_id"
     t.string "trello_id_card"
+    t.string "status", default: "form_filled"
+    t.string "project_type"
+    t.boolean "has_messenger"
+    t.text "specific_criteria"
+    t.text "additional_question"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
