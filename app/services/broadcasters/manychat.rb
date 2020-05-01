@@ -32,9 +32,9 @@ class Manychat
     first_call = handle_manychat_response(send_content(subscriber, create_gallery_images_property(property, subscriber)))
   end
 
-  # This methd is sending a simple text message to subscriber 
+  # This methd is sending a simple text message to subscriber
   def send_text_message(subscriber, message)
-    handle_manychat_response(send_content(subscriber,[create_message_text_hash(message)]))
+    handle_manychat_response(send_content(subscriber, [create_message_text_hash(message)]))
   end
 
   # ------
@@ -199,7 +199,7 @@ class Manychat
       direct_source = true
     end
 
-    # properties 
+    # properties
     properties.each do |property|
       elements.push(create_property_element(property, subscriber, direct_source))
     end
@@ -268,10 +268,9 @@ class Manychat
 
   # Getter method for default quick_replies menu
   def get_default_qr(subscriber = nil)
-    
-    if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil? 
-       broker_name = subscriber.broker.firstname 
-    else 
+    if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil?
+      broker_name = subscriber.broker.firstname
+    else
       broker_name = "conseiller"
     end
     qr = [{
@@ -283,11 +282,11 @@ class Manychat
       "type": "flow",
       "caption": "📞 Appeler #{broker_name}",
       "target": ENV["QR_CALL_BROKER"],
-    },  {
+    }, {
       "type": "flow",
       "caption": "🧐 Préparer visite",
       "target": ENV["QR_VISIT"],
-    },{
+    }, {
       "type": "flow",
       "caption": "🤝 Négocier",
       "target": ENV["QR_NEGO"],
@@ -297,7 +296,7 @@ class Manychat
       "caption": "📝​ Faire une offre",
       "target": ENV["QR_MAKE_OFFER"],
     },
-    {
+          {
       "type": "flow",
       "caption": "⛔ Stop",
       "target": ENV["QR_UNSUBS"],
@@ -448,8 +447,10 @@ class Manychat
   #----------------
   # This method is sending to a subscriber the json_data via ManyChat API
   def send_content(subscriber, message_array)
-    puts "*******"
-    puts message_array
+    unless Rails.env.test?
+      puts "*******"
+      puts message_array
+    end
     json_data = create_final_json(subscriber, message_array).to_json
 
     request = Typhoeus::Request.new(
