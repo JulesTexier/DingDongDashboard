@@ -1,0 +1,39 @@
+
+    <% if !@subscriber.broker.nil?%>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400">⬇️À tout de suite ⬇️</h4>
+        <h5 class="text-center mt-4" style="color: #0470C1; font-weight:400">Tu as la chance d'avoir <%=@subscriber.broker.firstname%> comme conseiller ! </h5>
+        <div class="d-flex justify-content-center mt-3 ">
+            <img class="img_broker_responsive" src="<%=@subscriber.broker.profile_picture%>" alt="Conseiller"><img>
+        </div>
+        <h5 class="text-center mt-3" style="color: #0470C1; font-weight:400">📞 <%=@subscriber.broker.firstname%> va t'appeler 5 min  pour : </h5>
+        <h5 class="text-center mt-3 row" style="color: #0470C1; font-weight:400">
+            <div class="col-lg-4 mb-2">
+            🙂Comprendre ton projet + en détail,
+            </div>
+            <div class="col-lg-4 mb-2">
+            📱Te donner accès à l'application,
+            </div>
+            <div class="col-lg-4 mb-2">
+            🚀Répondre à toutes tes questions  
+            </div>
+        </h5>
+
+    
+        <div class="d-flex justify-content-center mt-4 mb-6">
+        🧡
+        </div>
+        </p>
+    <% elsif !@subscriber.has_messenger %>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400">Désolé mais notre alerte n'est disponible pour le moment que sur messenger 😥</h4>
+    <% elsif @subscriber.project_type == "Chasseur Immobilier" %>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400">Tu as indiqué être un chasseur immobilier</h4>
+         <h5 class="text-center mt-4" style="color: #0470C1; font-weight:400"> Nous sommes désolés mais notre alerte n'est disponible pour de la multi-recherche. Nous sommes en train de travailler sur un produit spécialement dédié à tes besoins, nous te tiendrons informés !</h5>
+    <% end %>
+
+
+
+
+
+
+
+

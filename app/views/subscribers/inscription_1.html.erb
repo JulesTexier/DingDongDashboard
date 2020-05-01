@@ -1,0 +1,88 @@
+
+    <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400">Bienvenue chez Ding Dong !</h4>
+
+    <div class="d-flex justify-content-center mt-5" style="background:white">
+        <img class="img_responsive" src="https://hellodingdong.com/ressources/team.jpg" alt="Equipe Ding Dong"><img>
+    </div>
+
+    <h5 class="text-center mt-5" style="color: #0470C1; font-weight:400">Voici quelques questions pour mieux cerner ton projet d'achat 🙂</h5>
+
+    <div class="d-flex justify-content-center align-items-center mt-2">
+        <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/chrono.png" alt="Chrone Ding Dong"><img>
+        <h5 class="text-center mb-0" style="color: #0470C1; font-weight:400">
+            30 sec chrono !
+        </h5>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h5 class="mt-5 mb-3" style="color: #0470C1; font-weight:400">🔎 Où recherches-tu ? *</h5>
+                <%= form_tag('/subscribers/inscription-2', :id => 'zone_selection_form', method: :get) do |f| %>
+
+                <div class="d-flex flex-wrap">
+                    <% @zone_select.each do |zone| %>
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+                        <% if zone == "Paris" %>
+                            <img style="width: 80px;" class="mr-2" src="https://hellodingdong.com/ressources/paris.png" alt="Equipe Ding Dong"><img>
+                        <% elsif zone == "Banlieue-Ouest" %>
+                            <img style="width: 80px;" class="mr-2" src="https://hellodingdong.com/ressources/idf-ouest.png" alt="Equipe Ding Dong"><img>
+                        <% end %>
+                        </div>
+                        <label
+                            for="<%=zone%>" 
+                            class="form-check mr-3 <%=zone%> d-flex box_hover label_non_active" 
+                            onclick="changeColorCheckbox(className)" >
+                            <div>
+                                <%= check_box_tag 'selected_zones[]', 
+                                    zone, 
+                                    false, 
+                                    class: "box_hover",
+                                    style: "display:none",
+                                    id: zone
+                                %>
+                            </div>
+                            <div>
+                                +
+                            </div>
+                            <span class="form-check-label mb-2 ml-2 box_hover" >
+                                <%= zone %>
+                            </span>
+                        </label>
+                    </div>
+                    <% end %>
+                </div>
+                <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+                    <div class="d-flex justify-content-center mt-2 mb-2">
+                        <%= submit_tag "C'est parti ! 🚀", :name => 'commit', class: "btn btn-outline-light", style:"font-weight:600" %>
+                    </div>
+                </nav>
+                <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-12 d-flex justify-content-center mt-4 mb-5">🧡</div>
+    </div>
+
+
+
+<script>
+    
+    function changeColorCheckbox(className) {
+      let label = document.getElementsByClassName(className)[0]
+      let image = label.children[1]
+      let checkboxValue = label.children[0].children[0].checked
+      if(checkboxValue){ 
+          image.innerHTML = "👌";
+          label.classList.remove('label_non_active')
+          label.className += " label_active"
+        }
+      else{
+          image.innerHTML = "+";
+          label.classList.remove('label_active')
+          label.className += " label_non_active"
+        }
+    }
+
+
+</script>

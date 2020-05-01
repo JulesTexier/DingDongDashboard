@@ -51,13 +51,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscribers, only: [:show, :update, :edit]
+  resources :subscribers, only: [:create, :update, :edit]
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
 
-  get "/lead/inscription-1" => "lead#inscription_1"
-  get "/lead/inscription-2" => "lead#inscription_2"
-  get "/lead/inscription-finalisee" => "lead#inscription_4"
+  get "/subscribers/inscription-1" => "subscribers#inscription_1"
+  get "/subscribers/inscription-2" => "subscribers#inscription_2"
+  get "/subscribers/inscription-3" => "subscribers#inscription_3"
+  get "/subscribers/inscription-finalisee" => "subscribers#inscription_4"
   
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
