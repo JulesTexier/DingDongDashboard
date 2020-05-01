@@ -43,8 +43,11 @@ class Lead < ApplicationRecord
   private 
   
   def handle_onboarding
+    # 0 • Handle case lead is duplicated
+    if !Lead.where(email: self.email).empty?
+      handle_duplicate
     # 1 • Handle case lead is a real estate hunter 
-    if self.project_type.downcase.include?("chasseur")
+    elsif self.project_type.downcase.include?("chasseur")
       onboarding_hunter
     # 2 • Handle case lead has not Messenger 
     elsif !self.has_messenger 
@@ -52,6 +55,11 @@ class Lead < ApplicationRecord
     else 
       onboarding_broker
     end
+  end
+
+  def handle_duplicate
+    self.update(status: "duplicates")
+    PostmarkMailer.send_lead_dulicate_email(self).deliver_now if !self.email.nil?
   end
   
   def onboarding_hunter
@@ -63,6 +71,7 @@ class Lead < ApplicationRecord
     # Send email to lead with explainations 
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
   end
+
 
   def onboarding_broker
     self.update(broker: Broker.get_current_broker) if self.broker.nil?

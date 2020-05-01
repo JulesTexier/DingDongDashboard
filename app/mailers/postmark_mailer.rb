@@ -8,9 +8,14 @@ class PostmarkMailer < ApplicationMailer
     mail from: 'etienne@hellodingdong.com', to: lead.broker.email, postmark_template_alias: 'broker-new-lead-notification'
   end
 
-  def send_chatbot_link(lead)
-    self.template_model = { name: lead.firstname, action_url: lead.get_chatbot_link, broker_name:lead.broker.firstname, broker_phone: lead.broker.phone, broker_email: lead.broker.email }
-    mail from: 'etienne@hellodingdong.com', to: lead.email, postmark_template_alias: 'welcome'
+  def send_new_lead_notification_to_broker(lead)
+    self.template_model = { broker_firstname: lead.broker.firstname, lead_info: lead.get_fullname, trello_board_url: lead.broker.get_board_url }
+    mail from: 'etienne@hellodingdong.com', to: lead.broker.email, postmark_template_alias: 'broker-new-lead-notification'
+  end
+
+  def send_lead_dulicate_email(lead)
+    self.template_model = { lead_firstname: lead.firstname }
+    mail from: 'etienne@hellodingdong.com', to: lead.email, postmark_template_alias: 'lead-duplicate'
   end
 
   def send_email_to_lead_with_no_messenger(lead)
