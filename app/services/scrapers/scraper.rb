@@ -155,7 +155,14 @@ class Scraper
   ## PROXY SERVICES  ##
   #####################
 
-  def fetch_proxy_params
+  def get_api_list
+    url = "http://falcon.proxyrotator.com:51337/proxy-list/?apiKey=#{ENV["ROTATING_PROXY_API"]}"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    return JSON.parse(response)
+  end
+
+  def fetch_rotating_proxy_params
     proxy_url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}&country=US"
     uri = URI(proxy_url)
     return JSON.parse(Net::HTTP.get(uri))
@@ -168,17 +175,25 @@ class Scraper
     open(user_agent_url, "User-Agent" => user_agent, "read_timeout" => "10").read
   end
 
+  def fetch_static_page_proxy(url)
+    ips = get_proxy_ip
+    user_agent = fetch_rotating_proxy_params["randomUserAgent"]
+    proxy_ip = "http://" + ips.sample
+    byebug
+    # open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
+  end
+
   def get_whole_header(proxy_params)
     header_url = "https://httpbin.org/headers"
     ip_url = "https://httpbin.org/ip"
     user_agent_url = "https://httpbin.org/user-agent"
-    user_agent = proxy_params["randomUserAgent"]
-    proxy_ip = "http://" + proxy_params["proxy"]
-    puts "This is the User_Agent => " + user_agent
+    # user_agent = proxy_params["randomUserAgent"]
+    proxy_ip = "http://" + proxy_params
+    # puts "This is the User_Agent => " + user_agent
     puts "This is our Proxy => " + proxy_ip
-    user_agent_page = open(user_agent_url, "User-Agent" => user_agent).read
+    # user_agent_page = open(user_agent_url, "User-Agent" => user_agent).read
     ip_page = open(ip_url, proxy: URI.parse(proxy_ip)).read
-    header_page = open(header_url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
+    # header_page = open(header_url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
   end
 
   def change_ip(proxy_params, url)
@@ -193,11 +208,9 @@ class Scraper
     puts response.body
   end
 
-  def get_ip(proxy_params)
-    ip_url = "https://httpbin.org/ip"
-    proxy_ip = "http://" + proxy_params["proxy"]
-    puts proxy_ip
-    puts open(ip_url, "proxy" => URI.parse(proxy_ip)).read
+  def get_proxy_ip
+    ips = YAML.load_file("./db/data/proxy_ip.yml")
+    ips["ip"]
   end
 
   def get_website(url, proxy_params)
