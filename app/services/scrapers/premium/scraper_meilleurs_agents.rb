@@ -1,44 +1,41 @@
 class Premium::ScraperMeilleursAgents < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :properties, :source, :params
 
   def initialize
-    @url = "https://www.meilleursagents.com/annonces/achat/paris-75000/"
     @source = "MeilleursAgents"
-    @main_page_cls = "div.listing-item.search-listing-result__item"
-    @scraper_type = "Captcha"
-    @waiting_cls = nil
-    @multi_page = false
-    @page_nbr = 1
+    @params = fetch_init_params(@source)
     @properties = []
   end
 
   def launch(limit = nil)
     i = 0
-    xml = fetch_main_page(self)
-    if !xml[0].to_s.strip.empty?
-      hashed_properties = []
-      xml.each do |item|
-        begin
-          hashed_property = extract_each_flat(item)
-          property_checker_hash = {}
-          property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
-          property_checker_hash[:surface] = hashed_property[:surface]
-          property_checker_hash[:price] = hashed_property[:price]
-          property_checker_hash[:area] = hashed_property[:area]
-          property_checker_hash[:link] = hashed_property[:link]
-          if go_to_prop?(property_checker_hash, 60)
-            @properties.push(hashed_property)
-            enrich_then_insert_v2(hashed_property)
-            i += 1
+    self.params.each do |args|
+      xml = fetch_main_page(args)
+      if !xml[0].to_s.strip.empty?
+        hashed_properties = []
+        xml.each do |item|
+          begin
+            hashed_property = extract_each_flat(item)
+            property_checker_hash = {}
+            property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
+            property_checker_hash[:surface] = hashed_property[:surface]
+            property_checker_hash[:price] = hashed_property[:price]
+            property_checker_hash[:area] = hashed_property[:area]
+            property_checker_hash[:link] = hashed_property[:link]
+            if go_to_prop?(property_checker_hash, 60)
+              @properties.push(hashed_property)
+              enrich_then_insert_v2(hashed_property)
+              i += 1
+            end
+            break if i == limit
+          rescue StandardError => e
+            error_outputs(e, @source)
+            next
           end
-          break if i == limit
-        rescue StandardError => e
-          error_outputs(e, @source)
-          next
         end
+      else
+        puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
       end
-    else
-      puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
     return @properties
   end

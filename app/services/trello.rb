@@ -58,7 +58,11 @@ class Trello
     card_id = user.trello_id_card
     params = {}
     params[:text] = comment
+<<<<<<< HEAD
     params[:text] += " #{user.broker.trello_username }" if !user.broker.trello_username.nil?
+=======
+    params[:text] += " @#{lead.broker.trello_username }" if !lead.broker.trello_username.nil?
+>>>>>>> master
     if !card_id.nil? 
       add_comment_to_card(card_id, params)
     end

@@ -9,8 +9,8 @@ class Subscriber < ApplicationRecord
   # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true 
-  validates :lastname, presence: true 
+  validates :firstname, presence: true
+  validates :lastname, presence: true
 
   belongs_to :broker, optional: true
 
@@ -96,10 +96,12 @@ class Subscriber < ApplicationRecord
   end
 
   def get_morning_props
-    t = Time.now
-    t.in_time_zone("Europe/Paris")
-    start_date = t.change(day: t.day - 1, hour: 22)
-    end_date = t.change(hour: 9)
+    # t = Time.now
+    # t.in_time_zone("Europe/Paris")
+    # byebug
+    now = DateTime.now.in_time_zone("Europe/Paris")
+    start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
+    end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
 
     props = Property.where("created_at BETWEEN ? AND ?", start_date, end_date)
 
@@ -254,7 +256,7 @@ class Subscriber < ApplicationRecord
 
   def is_matching_property_elevator_floor(property)
     if self.min_elevator_floor.nil?
-      return true 
+      return true
     else
       if !property.has_elevator.nil?
         if property.has_elevator
@@ -273,11 +275,10 @@ class Subscriber < ApplicationRecord
   end
 
   def notify_broker_if_max_price_is_changed
-    if !previous_changes['max_price'].nil? && !self.broker.nil? && !self.trello_id_card.nil?
-      old_price = previous_changes['max_price'][0]
-      new_price = previous_changes['max_price'][1]
+    if !previous_changes["max_price"].nil? && !self.broker.nil? && !self.trello_id_card.nil?
+      old_price = previous_changes["max_price"][0]
+      new_price = previous_changes["max_price"][1]
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end
-
 end
