@@ -73,7 +73,7 @@
         <%= f.hidden_field :min_surface, value:@draft_subscriber["min_surface"]  %>
         <%= f.hidden_field :min_rooms_number, value:@draft_subscriber["min_rooms_number"]  %>
         <%= f.hidden_field :specific_criteria, value:@draft_subscriber["specific_criteria"]  %>
-        <%= hidden_field_tag 'areas', @draft_subscriber["selected_areas"]  %>
+        <%= f.hidden_field :initial_areas, value:@draft_subscriber["selected_areas"]  %>
         <%= f.hidden_field :project_type, value:@draft_subscriber["project_type"]  %>
 
 

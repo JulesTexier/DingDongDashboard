@@ -41,7 +41,7 @@ class SubscribersController < ApplicationController
     subscriber = Subscriber.new(subscriber_params)
     subscriber.status = "form_filled"
     if subscriber.save 
-      params['areas'].split(",").each do |area_id|
+      subscriber.initial_areas.split(",").each do |area_id|
         SelectedArea.create(subscriber: subscriber, area_id: area_id)
       end
       flash[:success] = "Nous avons bien reçu ta demande 🙂 Merci !"
@@ -86,7 +86,7 @@ class SubscribersController < ApplicationController
   private
 
   def subscriber_params
-    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status)
+    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas)
   end 
 
 end
