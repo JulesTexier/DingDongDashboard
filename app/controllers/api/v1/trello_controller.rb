@@ -48,7 +48,7 @@ class Api::V1::TrelloController < ApplicationController
     old_card_id = user.trello_id_card
     new_broker = Broker.where(trello_username: document["brokerUsername"]).first
     if !user.nil? && !new_broker.nil?
-      # 1 • Update du lead avec le nouveau Broker
+      # 1 • Update du user avec le nouveau Broker
       user.update(broker: new_broker)
       # 2 • Créer carte dans le tableau du courtier
         is_new_card = @trello.add_new_user_on_trello(user)
