@@ -187,10 +187,10 @@ class Subscriber < ApplicationRecord
 
   # Onboarding methods 
   def handle_onboarding
-    # 1 • Handle case lead is a real estate hunter 
+    # 1 • Handle case user is a real estate hunter 
     if self.project_type.downcase.include?("chasseur")
       onboarding_hunter
-    # 2 • Handle case lead has not Messenger 
+    # 2 • Handle case user has not Messenger 
     elsif !self.has_messenger 
       onboarding_no_messenger
     else 
