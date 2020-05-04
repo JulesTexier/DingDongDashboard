@@ -19,7 +19,7 @@ class Broker < ApplicationRecord
 
   def self.get_current_broker(date = Time.now)
 
-    if !ENV['BROKER'].nil?
+    if !ENV['BROKER'].nil? && !Rails.env.test?
       b = self.where(trello_username:ENV['BROKER']).first
     else
       

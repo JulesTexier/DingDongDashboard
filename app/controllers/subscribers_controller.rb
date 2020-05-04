@@ -35,7 +35,7 @@ class SubscribersController < ApplicationController
 
   def inscription_4
     @subscriber = Subscriber.find(params["id"])
-    @properties = @subscriber.get_x_last_props(5)
+    # @properties = @subscriber.get_x_last_props(5)
   end
 
   def create
