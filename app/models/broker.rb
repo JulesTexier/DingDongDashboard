@@ -9,8 +9,8 @@ class Broker < ApplicationRecord
     return "https://trello.com/b/" + self.trello_board_id
   end
 
-  def send_email_notification(lead)
-    PostmarkMailer.send_new_lead_notification_to_broker(lead).deliver_now if !self.email.nil?
+  def send_email_notification(user)
+    PostmarkMailer.send_new_lead_notification_to_broker(user).deliver_now if !self.email.nil?
   end
 
   def self.get_broker_by_username(username)
@@ -19,7 +19,7 @@ class Broker < ApplicationRecord
 
   def self.get_current_broker(date = Time.now)
 
-    if !ENV['BROKER'].nil?
+    if !ENV['BROKER'].nil? && !Rails.env.test?
       b = self.where(trello_username:ENV['BROKER']).first
     else
       

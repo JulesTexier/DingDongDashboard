@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_081156) do
+ActiveRecord::Schema.define(version: 2020_05_04_071946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_081156) do
     t.string "email"
     t.string "phone"
     t.string "facebook_id"
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "max_price"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_081156) do
     t.boolean "has_messenger"
     t.text "specific_criteria"
     t.text "additional_question"
+    t.string "initial_areas"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
