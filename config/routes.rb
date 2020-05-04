@@ -55,10 +55,10 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
 
-  get "/subscribers/inscription-1" => "subscribers#inscription_1"
-  get "/subscribers/inscription-2" => "subscribers#inscription_2"
-  get "/subscribers/inscription-3" => "subscribers#inscription_3"
-  get "/subscribers/inscription-finalisee" => "subscribers#inscription_4"
+  get "inscription-1" => "subscribers#inscription_1"
+  get "inscription-2" => "subscribers#inscription_2"
+  get "inscription-3" => "subscribers#inscription_3"
+  get "inscription-finalisee" => "subscribers#inscription_4"
   
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"

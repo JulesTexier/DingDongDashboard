@@ -13,7 +13,7 @@ class SubscribersController < ApplicationController
     selected_zones = params[:selected_zones]
     if selected_zones.nil? || Area.where(zone: selected_zones).empty?
       flash[:danger] = "Zone de recherche non reconnue"
-      redirect_to "/subscribers/inscription-1"
+      redirect_to "/inscription-1"
     else
       @subscriber = Subscriber.new
       @zone = "Banlieue-Ouest"
@@ -27,7 +27,7 @@ class SubscribersController < ApplicationController
     @draft_subscriber["project_type"] = params["selected_project_types"].join(",")
     if @draft_subscriber.nil? 
       flash[:danger] = "Un erreur est apparue, veuillez recommencer svp"
-      redirect_to "/susbcribers/inscription-1"
+      redirect_to "/inscription-1"
     else
       @subscriber = Subscriber.new
     end
@@ -46,11 +46,11 @@ class SubscribersController < ApplicationController
         SelectedArea.create(subscriber: subscriber, area_id: area_id)
       end
       flash[:success] = "Nous avons bien reçu ta demande 🙂 Merci !"
-      redirect_to "/subscribers/inscription-finalisee?id=#{subscriber.id}"
+      redirect_to "/inscription-finalisee?id=#{subscriber.id}"
     else 
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
       puts "ohoh, probleme"
-      redirect_to "/subscribers/inscription-1"
+      redirect_to "/inscription-1"
     end
   end
   

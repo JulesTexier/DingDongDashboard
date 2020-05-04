@@ -222,10 +222,14 @@ class Subscriber < ApplicationRecord
     self.update(broker: Broker.get_current_broker) if self.broker.nil?
       trello = Trello.new
       sms = SmsMode.new
-      if trello.add_new_user_on_trello(self)
-        self.broker.send_email_notification(self) if Rails.env.production?
-        sms.send_sms_to_broker(self, self.broker) if Rails.env.production?
-      end
+      if Rails.env.production?
+        if trello.add_new_user_on_trello(self)
+          self.broker.send_email_notification(self) 
+          sms.send_sms_to_broker(self, self.broker)
+        end
+      else
+        puts "Subscriber créé, mais on le l'a pas mis sur le Trello car on est en dev"
+    end
   end
 
   # Matching methods 
