@@ -2,10 +2,10 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
         <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/search.png" alt="Recherche png"><img>
         <h4 class="text-center mb-0" style="color: #0470C1; font-weight:400">
-            Projet immobilier
+            <b>Projet immobilier</b>
         </h4>
     </div>
-      <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">🤔 Type de projet </h5>
+      <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">🤔 Type de projet *</h5>
       <% project_types = ["1er achat", "2e achat ou +", "Investissement Locatif", "Chasseur Immobilier"]%>
       <div class="d-flex flex-wrap">
         <% project_types.each do |project_type| %>
@@ -130,7 +130,7 @@
       let checkboxes = document.querySelectorAll('input[type="checkbox"]')
       let checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
       if (!checkedOne) {
-        alert('Sélectionne au moins un quartier 📍')
+        alert('Sélectionnez au moins un quartier 📍')
       }
     }
     function changeColorCheckbox(className) {

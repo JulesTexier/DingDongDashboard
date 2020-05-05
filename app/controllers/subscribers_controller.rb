@@ -12,7 +12,7 @@ class SubscribersController < ApplicationController
   def inscription_2
     selected_zones = params[:selected_zones]
     if selected_zones.nil? || Area.where(zone: selected_zones).empty?
-      flash[:danger] = "Zone de recherche non reconnue"
+      flash[:danger] = "Veuillez sélectionner une ou plusieurs zones de recherche 👇"
       redirect_to "/inscription-1"
     else
       @subscriber = Subscriber.new
@@ -26,7 +26,7 @@ class SubscribersController < ApplicationController
     @draft_subscriber["selected_areas"] = params["selected_areas"].join(",")
     @draft_subscriber["project_type"] = params["selected_project_types"].join(",")
     if @draft_subscriber.nil? 
-      flash[:danger] = "Un erreur est apparue, veuillez recommencer svp"
+      flash[:danger] = "Une erreur est apparue, veuillez recommencer svp"
       redirect_to "/inscription-1"
     else
       @subscriber = Subscriber.new
@@ -45,7 +45,11 @@ class SubscribersController < ApplicationController
       subscriber.initial_areas.split(",").each do |area_id|
         SelectedArea.create(subscriber: subscriber, area_id: area_id)
       end
-      flash[:success] = "Nous avons bien reçu ta demande 🙂 Merci !"
+      if subscriber.status == "duplicates"
+        flash[:danger] = "Oups, nous avons déjà une demande avec ce mail !"
+      else
+        flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
+      end
       redirect_to "/inscription-finalisee?id=#{subscriber.id}"
     else 
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
@@ -72,9 +76,9 @@ class SubscribersController < ApplicationController
       params[:selected_areas].each do |area_id|
         SelectedArea.create(subscriber:@subscriber, area_id:area_id)
       end
-      flash[:success] = "Les critères sont enregistrés ! Ferme cette fenêtre pour continuer."
+      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else 
-      flash[:danger] = "Sélectionne des arrondissements..."
+      flash[:danger] = "Sélectionnez des arrondissements..."
       # @subscriber.errors.full_messages.each do |message|
       #   flash[:danger] << message
       # end
