@@ -196,17 +196,19 @@ class Subscriber < ApplicationRecord
 
   # Onboarding methods 
   def handle_onboarding
-    #0 • Handle duplicate
-    if Subscriber.where(email: self.email).size > 1
-      handle_duplicate
-    # 1 • Handle case user is a real estate hunter 
-    elsif self.project_type.downcase.include?("chasseur")
-      onboarding_hunter
-    # 2 • Handle case user has not Messenger 
-    elsif !self.has_messenger 
-      onboarding_no_messenger
-    else 
-      onboarding_broker
+    if self.status != "onboarding_started" 
+      #0 • Handle duplicate
+      if Subscriber.where(email: self.email).size > 1
+        handle_duplicate
+      # 1 • Handle case user is a real estate hunter 
+      elsif self.project_type.downcase.include?("chasseur")
+        onboarding_hunter
+      # 2 • Handle case user has not Messenger 
+      elsif !self.has_messenger 
+        onboarding_no_messenger
+      else 
+        onboarding_broker
+      end
     end
   end
 
