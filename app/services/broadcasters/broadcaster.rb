@@ -69,7 +69,7 @@ class Broadcaster
               btn_caption = '🚀 Recevoir !'
               @manychat_client.send_dynamic_button_message(sub, btn_caption, webhook, 'get', text, body = {})
           elsif border
-              text = "🔔 Ton alerte est en pause ! 🔔\u000A Nous stoppons les messages automatiques au bout d'une semaine sans action de ta part 😊🙏\u000AContinue à recevoir les annonces simplement en cliquant ici"
+              text = "🔔 Votre alerte est en pause ! 🔔\u000A Nous stoppons les messages automatiques au bout d'une semaine sans action de votre part 😊🙏\u000AContinuez à recevoir les annonces en cliquant simplement ici"
               webhook = ENV['BASE_URL'] + "api/v1/manychat/s/#{sub.id}/update"
               btn_caption = '🚀 Continuer !'
               body = {}
@@ -102,11 +102,11 @@ class Broadcaster
 
   def good_morning_text(prop_nbr)
     if prop_nbr > 9
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, 10 annonces sont tombées cette nuit. Clique ici pour les recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, 10 annonces sont tombées cette nuit. Cliquez ici pour les recevoir ! 👇"
     elsif prop_nbr > 1
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, #{prop_nbr} annonces sont tombées cette nuit. Clique ici pour les recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, #{prop_nbr} annonces sont tombées cette nuit. Cliquez ici pour les recevoir ! 👇"
     else
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, une annonce est tombée cette nuit. Clique ici pour la recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, une annonce est tombée cette nuit. Cliquez ici pour la recevoir ! 👇"
     end
     return text
   end
