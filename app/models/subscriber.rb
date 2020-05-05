@@ -169,7 +169,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_chatbot_link
-    return "https://m.me/HiDingDong?ref=welcome--#{self.id}"
+    return "https://m.me/HiDingDong?ref=hello--#{self.id}"
   end
 
   def get_fullname

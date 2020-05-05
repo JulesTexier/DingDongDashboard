@@ -8,9 +8,9 @@ class PostmarkMailer < ApplicationMailer
     mail from: "etienne@hellodingdong.com", to: lead.broker.email, postmark_template_alias: "broker-new-lead-notification"
   end
 
-  def send_chatbot_link(lead)
-    self.template_model = { name: lead.firstname, action_url: lead.get_chatbot_link, broker_name: lead.broker.firstname, broker_phone: lead.broker.phone, broker_email: lead.broker.email }
-    mail from: "etienne@hellodingdong.com", to: lead.email, postmark_template_alias: "welcome"
+  def send_chatbot_link(user)
+    self.template_model = { name: user.firstname, action_url: user.get_chatbot_link, broker_name: user.broker.firstname, broker_phone: user.broker.phone, broker_email: user.broker.email }
+    mail from: "etienne@hellodingdong.com", to: user.email, postmark_template_alias: "welcome"
   end
 
   def send_new_lead_notification_to_broker(lead)
