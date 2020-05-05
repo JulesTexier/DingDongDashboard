@@ -181,7 +181,6 @@ class Subscriber < ApplicationRecord
     self.areas.each do |area|
       areas += area.name + ", "
     end
-    byebug
     return areas
   end
 
@@ -197,7 +196,6 @@ class Subscriber < ApplicationRecord
 
   # Onboarding methods 
   def handle_onboarding
-    byebug
     #0 • Handle duplicate
     if Subscriber.where(email: self.email).size > 1
       handle_duplicate
