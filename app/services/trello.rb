@@ -8,20 +8,20 @@ class Trello
     @token = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
   end
 
-  def add_new_lead_on_trello(lead)
+  def add_new_user_on_trello(user)
 
     # 1• Create card on tello Board 
-    list_id = lead.broker.trello_lead_list_id
+    list_id = user.broker.trello_lead_list_id
     params = {}
-    params[:name] = lead.get_fullname
-    params[:desc] = lead.trello_description
+    params[:name] = user.get_fullname
+    params[:desc] = user.trello_description
     params[:pos] = 'top'
     new_card_response = create_new_card(list_id, params)
     return false if new_card_response.code != (200 || 204)
     
     # 2• Add checklist 'Action' to created card
     card_id = JSON.parse(new_card_response.body)["id"]
-    lead.update(trello_id_card: card_id)
+    user.update(trello_id_card: card_id)
     new_checklist_response = add_checklist_to_card(card_id)
     return false if new_checklist_response.code != (200 || 204)
 
@@ -29,14 +29,14 @@ class Trello
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{lead.get_fullname}"
+    check_items_params[:name] = "Rentrer en contact avec #{user.get_fullname}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
 
     # 4• Add dedicated label if old user
-    if !lead.status.nil?
-      if lead.status.include?("old user")
-        add_label_old_user(lead)
+    if !user.status.nil?
+      if user.status.include?("old user")
+        add_label_old_user(user)
       end
     end
     
@@ -54,11 +54,11 @@ class Trello
     b = Broker.where(trello_id: broker_trello_id).first
   end
 
-  def add_comment_to_lead_card(lead, comment)
-    card_id = lead.trello_id_card
+  def add_comment_to_user_card(user, comment)
+    card_id = user.trello_id_card
     params = {}
     params[:text] = comment
-    params[:text] += " @#{lead.broker.trello_username }" if !lead.broker.trello_username.nil?
+    params[:text] += " @#{user.broker.trello_username }" if !user.broker.trello_username.nil?
     if !card_id.nil? 
       add_comment_to_card(card_id, params)
     end
@@ -73,17 +73,17 @@ class Trello
     end
   end
 
-  def add_label_old_user(lead)
+  def add_label_old_user(user)
     # Add label on card 
-    label_id = get_label_id_by_name(lead.broker.trello_board_id, "UTILISATEUR HISTORIQUE DING DONG")
-    add_label_to_card(lead.trello_id_card, label_id)
+    label_id = get_label_id_by_name(user.broker.trello_board_id, "UTILISATEUR HISTORIQUE DING DONG")
+    add_label_to_card(user.trello_id_card, label_id)
     # Add comment on carte to advise broker 
     params = {}
     params[:text] = "NE PAS ENVOYER LE MAIL DING DONG \u000A Utilisateur déjà sur le chatbot Ding Dong mais n'ayant jamais pris rdv avec un courtier Ding Dong"
-    add_comment_to_card(lead.trello_id_card, params)
+    add_comment_to_card(user.trello_id_card, params)
   end
 
-  def archive_card_after_lead_transfer(old_card_id, new_broker)
+  def archive_card_after_user_transfer(old_card_id, new_broker)
     params = {}
     params[:closed] = true
     params[:desc] = "Transféré à #{new_broker.firstname}, le #{Time.now.in_time_zone("Paris")}"
