@@ -61,7 +61,7 @@ class Api::V1::ManychatController < ApplicationController
           data[:districts_list] = subscriber.get_districts_list
           data[:edit_path] = subscriber.get_edit_path
           data[:project_type] = subscriber.project_type
-          render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
+          render json: { status: "SUCCESS", message: "Subscriber updated", data: data }, status: 200
         end
       else
         if subscriber_params[:message] == "reactivation"
@@ -254,7 +254,7 @@ class Api::V1::ManychatController < ApplicationController
 
   def subscriber_params
     # params.permit(:firstname, :lastname, :email, :phone, :is_active)
-    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message)
+    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status)
   end
 
   def lead_params
