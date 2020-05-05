@@ -49,13 +49,13 @@ class Manychat
   # This method send message after a property has been added to favorites
   def send_message_post_fav_added(subscriber, msg)
     if msg == "success"
-      text = "L'annonce a été ajoutée à tes favoris !"
+      text = "L'annonce a été ajoutée à vos favoris !"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     elsif msg == "error_already_exists"
-      text = "L'annonce est déjà dans tes favoris !"
+      text = "L'annonce est déjà dans vos favoris !"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     else
-      text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été ajoutée à tes favoris"
+      text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été ajoutée à vos favoris"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     end
     return response
@@ -64,10 +64,10 @@ class Manychat
   # This method send message after a favory has been removed
   def send_message_post_fav_deleted(subscriber, msg)
     if msg == "success"
-      text = "L'annonce a été supprimée de tes favoris !"
+      text = "L'annonce a été supprimée de vos favoris !"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     else
-      text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été supprimée de des favoris"
+      text = "Oops, il semblerait qu'une erreur se soit produite, l'annonce n'a pas été supprimée de vos favoris"
       response = handle_manychat_response(send_content(subscriber, [create_message_text_hash(text)]))
     end
     return response
@@ -123,9 +123,9 @@ class Manychat
 
   def create_no_props_msg(subscriber, template = nil)
     text = "😕 Oops, aucune annonce ne correspond ..."
-    text = "Aucune annonce récente ne répond à tes critères de recherche 😕." if template == "last_properties"
-    text = "Aucune annonce correspondant à tes critères n'est tombée cette nuit 😕." if template == "morning_properties"
-    text += "\u000ANous t'invitions à modifier tes critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
+    text = "Aucune annonce récente ne répond à vos critères de recherche 😕." if template == "last_properties"
+    text = "Aucune annonce correspondant à vos critères n'est tombée cette nuit 😕." if template == "morning_properties"
+    text += "\u000ANous t'invitions à modifier vos critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
     return [create_message_text_hash(text)]
   end
 
@@ -140,8 +140,8 @@ class Manychat
 
   def create_header_gallery_element_last_properties(number_of_properties)
     title = "🌟 "
-    number_of_properties == 1 ? title += "Voici ta dernière annonce !" : title += "Voici tes #{number_of_properties} dernières annonces !"
-    number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
+    number_of_properties == 1 ? title += "Voici votre dernière annonce !" : title += "Voici vos #{number_of_properties} dernières annonces !"
+    number_of_properties == 1 ? subtitle = "Faites défiler pour la découvrir ! ️↪️" : subtitle = "Faites défiler pour les découvrir ! ️↪️"
     image_url = "https://www.hellodingdong.com/content/gallery/rectangle/last_x_props/#{number_of_properties}.jpg"
     action_url = "https://hellodingdong.com/"
     create_header_gallery_element(title, subtitle, image_url)
@@ -149,7 +149,7 @@ class Manychat
 
   def create_header_gallery_element_favorites
     title = "❤️ Favoris"
-    subtitle = "Retrouve ici tous tes favoris! ️↪️"
+    subtitle = "Retrouvez ici tous vos favoris! ️↪️"
     image_url = "https://www.hellodingdong.com/content/gallery/rectangle/favorites/favoris.jpg"
     action_url = "https://hellodingdong.com/"
     create_header_gallery_element(title, subtitle, image_url)
@@ -280,26 +280,26 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": "📞 Appeler #{broker_name}",
+      "caption": "📞 #{broker_name}",
       "target": ENV["QR_CALL_BROKER"],
     }, {
       "type": "flow",
-      "caption": "🧐 Préparer visite",
+      "caption": "🧐 Visite",
       "target": ENV["QR_VISIT"],
     }, {
       "type": "flow",
-      "caption": "🤝 Négocier",
+      "caption": "🤝 Négo",
       "target": ENV["QR_NEGO"],
     },
-          {
+    {
       "type": "flow",
-      "caption": "📝​ Faire une offre",
+      "caption": "📝​ Offre",
       "target": ENV["QR_MAKE_OFFER"],
     },
-          {
+    {
       "type": "flow",
-      "caption": "⛔ Stop",
-      "target": ENV["QR_UNSUBS"],
+      "caption": "👨‍⚖️ Notaire",
+      "target": ENV["QR_NOTARY"],
     }]
     return qr
   end
