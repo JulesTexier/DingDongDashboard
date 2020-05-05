@@ -197,8 +197,12 @@ class Subscriber < ApplicationRecord
 
   # Onboarding methods 
   def handle_onboarding
+    byebug
+    #0 • Handle duplicate
+    if Subscriber.where(email: self.email).size > 1
+      handle_duplicate
     # 1 • Handle case user is a real estate hunter 
-    if self.project_type.downcase.include?("chasseur")
+    elsif self.project_type.downcase.include?("chasseur")
       onboarding_hunter
     # 2 • Handle case user has not Messenger 
     elsif !self.has_messenger 
@@ -206,6 +210,11 @@ class Subscriber < ApplicationRecord
     else 
       onboarding_broker
     end
+  end
+
+  def handle_duplicate
+    self.update(status: "duplicates")
+    PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
   end
   
   def onboarding_hunter

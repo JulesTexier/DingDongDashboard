@@ -18,9 +18,9 @@ class PostmarkMailer < ApplicationMailer
     mail from: "etienne@hellodingdong.com", to: lead.broker.email, postmark_template_alias: "broker-new-lead-notification"
   end
 
-  def send_lead_dulicate_email(lead)
-    self.template_model = { lead_firstname: lead.firstname }
-    mail from: "etienne@hellodingdong.com", to: lead.email, postmark_template_alias: "lead-duplicate"
+  def send_user_dulicate_email(user)
+    self.template_model = { lead_firstname: user.firstname }
+    mail from: "etienne@hellodingdong.com", to: user.email, postmark_template_alias: "lead-duplicate"
   end
 
   def send_email_to_lead_with_no_messenger(lead)
