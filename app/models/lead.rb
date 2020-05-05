@@ -59,7 +59,7 @@ class Lead < ApplicationRecord
 
   def handle_duplicate
     self.update(status: "duplicates")
-    PostmarkMailer.send_lead_dulicate_email(self).deliver_now if !self.email.nil?
+    PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
   end
   
   def onboarding_hunter

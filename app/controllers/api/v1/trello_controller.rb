@@ -11,6 +11,7 @@ class Api::V1::TrelloController < ApplicationController
   def send_chatbot_link_from_trello_btn
     document = JSON.parse(request.body.read)
     user = Subscriber.where(trello_id_card: document["cardId"]).first
+    user = Lead.where(trello_id_card: document["cardId"]).first if user.nil?
 
     if !user.nil?
       PostmarkMailer.send_chatbot_link(user).deliver_now
