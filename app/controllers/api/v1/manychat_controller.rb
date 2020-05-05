@@ -56,7 +56,12 @@ class Api::V1::ManychatController < ApplicationController
         if subscriber_params[:message] == "reactivation"
           render json: send_text_message(subscriber, "🔥 Ton alerte a été réactivée !", 'success')
         else
-          render json: { status: "SUCCESS", message: "Subscriber updated", data: subscriber }, status: 200
+          data = subscriber.as_json
+          data[:areas_list] = subscriber.get_areas_list
+          data[:districts_list] = subscriber.get_districts_list
+          data[:edit_path] = subscriber.get_edit_path
+          data[:project_type] = subscriber.project_type
+          render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
         end
       else
         if subscriber_params[:message] == "reactivation"
