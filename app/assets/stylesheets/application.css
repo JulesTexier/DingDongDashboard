@@ -14,6 +14,11 @@
  *= require_self
  */
 
+ body {
+  font-family: 'Nunito Sans', serif !important;
+  font-size: 48px ;
+}
+
  .font-grey-style {
     color: #525f7f;
   }
@@ -46,7 +51,7 @@
   }
 
   .img_responsive{
-    max-width: 690px;
+    max-width: 300px;
     width: -webkit-fill-available;
     height: min-intrinsic;
     max-height: 460px;

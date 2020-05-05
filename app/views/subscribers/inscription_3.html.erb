@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center align-items-center mt-4">
         <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/identite.png" alt="identité Ding Dong"><img>
         <h4 class="text-center mb-0" style="color: #0470C1; font-weight:400">
-            Identité
+            <b>Identité</b>
         </h4>
     </div>
       <div class="row">
@@ -41,7 +41,7 @@
             <%= f.text_area :additional_question, class: "form-control", placeholder:"", rows:5, cols:5, :required => false   %>
         </div>
 
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📱 Notre alerte est uniquement disponible sur Messenger, as-tu un compte Facebook ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📱 Notre alerte est uniquement disponible sur Messenger, avez-vous un compte Facebook ? *</h5>
         <% messenger_choices = [true, false]%>
         <% messenger_choices_labels = ["Oui", "Non"]%>
         <div class="input-group mb-3">
