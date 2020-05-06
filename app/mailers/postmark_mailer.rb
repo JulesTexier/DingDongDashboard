@@ -37,4 +37,12 @@ class PostmarkMailer < ApplicationMailer
     self.template_model = { lead_firstname: lead.firstname }
     mail from: "etienne@hellodingdong.com", to: lead.email, bcc: "maxime@hellodingdong.com", postmark_template_alias: "onboarding-hunter"
   end
+
+  def send_growth_step_email(step, subscriber)
+    template = "growth-step-email"
+    template = step.postmark_email if !step.postmark_email.nil?
+    self.template_model = { subject: step.email_subject, content: step.email_content }
+    mail from: step.sender_email, to: subscriber.email, postmark_template_alias: template, tag: step.tag
+  end
+
 end
