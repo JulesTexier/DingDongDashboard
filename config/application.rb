@@ -26,6 +26,7 @@ module GiantCat
     config.autoload_paths += [
       "#{Rails.root}/app/services/broadcasters",
       "#{Rails.root}/app/services/scrapers",
+      "#{Rails.root}/app/services/growths",
       "#{Rails.root}/app/workers"
     ]
 
