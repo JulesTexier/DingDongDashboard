@@ -373,7 +373,6 @@ class Scraper
       surface: hashed_property[:surface],
       price: hashed_property[:price],
       area: Area.where(name: hashed_property[:area]).first,
-      rooms_number: hashed_property[:rooms_number],
     )
 
     properties.each do |property|
@@ -385,7 +384,7 @@ class Scraper
 
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
   def is_it_unwanted_prop?(str)
-    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)/i).is_a?(MatchData)
+    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
   end
 
   def is_it_night?
