@@ -1,0 +1,46 @@
+<h1>Doublons de cette semaine </h1>
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col"><h2>🏠 Doublons</h2></th>
+      <th scope="col">➕Cette semaine</th>
+      <th scope="col">📈 Semaine dernière</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Nombres</th>
+        <td><%= @duplicated_props_this_week.length %></td>
+        <td><%= @duplicated_props_last_week.length %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table mt-5">
+<% if @duplicated_props_this_week.length == 0 %>
+  <h2> Pas de doublons ces 7 derniers jours ! Bien joué à toute l'équipe, encore bravo. </h2>
+<% else %>
+  <% @duplicated_props_this_week.each do |duplicate_attr| %>
+    <thead>
+      <tr>
+        <% dbln_nbr = Property.where(price: duplicate_attr.price, surface: duplicate_attr.surface, rooms_number: duplicate_attr.rooms_number).count %>
+          <th scope="col"><h2>🏠 <%= dbln_nbr %> biens</h2></th>
+          <th scope="col">Prix : <%= duplicate_attr.price %></th>
+          <th scope="col">Surface : <%= duplicate_attr.surface %></th>
+          <th scope="col">Pièces : <%= duplicate_attr.rooms_number %></th>
+        </tr>
+    </thead>
+    <tbody>
+      <% Property.where(price: duplicate_attr.price, surface: duplicate_attr.surface, rooms_number: duplicate_attr.rooms_number).each do |prop| %>
+        <tr>
+          <th scope="row"><a href="<%= prop.link %>"><%= prop.source %></a> - ID <%= prop.id %> </th>
+          <td><%= prop.price %> €</td>
+          <td><%= prop.surface %> m2</td>
+          <td><%= prop.rooms_number %> pièce(s)</td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+<% end %>
+</table>

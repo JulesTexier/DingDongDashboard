@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   devise_for :admins
-  get 'lead/create'
+  get "lead/create"
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
 
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace "api" do
     namespace "v1" do
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
+
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
       end
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
       resources :favorites, only: [:create, :destroy]
 
       # Manychat routes
-        # Subscriber
+      # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
       post "/manychat/s/create-from-lead" => "manychat#create_subscriber_from_lead"
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days"
@@ -32,22 +33,21 @@ Rails.application.routes.draw do
       # Lead
       post "/manychat/l/:lead_id/update" => "manychat#update_lead"
 
-      # Typeform resources 
+      # Typeform resources
       post "/typeform/lead/new" => "typeform#generate_lead"
 
-      # Trello resources 
+      # Trello resources
       post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn"
       post "/trello/add_action" => "trello#add_action_to_broker"
       post "/trello/move-card-to-broker" => "trello#update_user_broker"
 
-      # Webhooks resources 
+      # Webhooks resources
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
 
       #data
       get "data/subscribers" => "data#get_subscribers"
       get "data/subscribers/active" => "data#get_active_subscribers"
       get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
-
     end
   end
 
@@ -59,12 +59,12 @@ Rails.application.routes.draw do
   get "inscription-2" => "subscribers#inscription_2"
   get "inscription-3" => "subscribers#inscription_3"
   get "inscription-finalisee" => "subscribers#inscription_4"
-  
+
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
   get "/dashboard/stats" => "static_pages#stats"
   get "/dashboard/chart" => "static_pages#chart"
   get "/dashboard/price" => "static_pages#property_price"
   get "/dashboard/source" => "static_pages#sources"
-
+  get "/dashboard/duplicates" => "static_pages#duplicates"
 end
