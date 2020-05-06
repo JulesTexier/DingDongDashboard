@@ -24,7 +24,12 @@ class Subscriber < ApplicationRecord
   has_many :fav_properties, through: :favorites, source: :property
 
   def is_client?
-    self.status == ("form_filled" || "chatbot_invite_sent" || "onboarding_started" || "onboarded")
+    case self.status 
+    when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
+      true 
+    else
+      false
+    end
   end
 
   def get_areas_list
