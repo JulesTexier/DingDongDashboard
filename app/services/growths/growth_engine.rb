@@ -10,8 +10,8 @@ class GrowthEngine
     end
 
     def handle_lead
-      parser = EmailParser.new
-      lead_email = parser.get_email(json_content)
+      parser = EmailParser.new(json_content)
+      lead_email = parser.get_reply_to_email
 
       # 1 • Check if email is in DB
       subscriber = get_subscriber(lead_email)
