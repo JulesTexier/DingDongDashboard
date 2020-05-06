@@ -21,4 +21,18 @@ class Api::V1::WebhooksController < ApplicationController
     end
   end
 
+  def handle_postmark_growth_emailing
+    tag = params["Tag"] #IMPORTANT : ALL EMAILS IN MAILER MUST HAVE A TAG
+    step = Step.find_by(tag: tag)
+
+    # Only when tag is corresponding to a step 
+    if !step.nil?
+      s = subscriber.find_by(email: params["Recipient"])
+      if !s.nil?
+        s.update(status: step.subscriber_status)
+      end
+    end
+    
+  end
+
 end
