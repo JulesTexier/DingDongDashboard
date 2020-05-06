@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_071946) do
+ActiveRecord::Schema.define(version: 2020_05_06_125040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_071946) do
     t.string "trello_username"
     t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
     t.string "description"
+    t.string "alias_email"
   end
 
   create_table "districts", force: :cascade do |t|
