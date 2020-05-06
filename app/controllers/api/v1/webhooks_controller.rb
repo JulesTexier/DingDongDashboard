@@ -35,4 +35,8 @@ class Api::V1::WebhooksController < ApplicationController
     
   end
 
+  def handle_postmark_new_contact
+    ge = GrowthEngine.new(request.body.string).handle_lead
+  end
+
 end
