@@ -9,8 +9,8 @@ class Subscriber < ApplicationRecord
   # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true
-  validates :lastname, presence: true
+  validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -22,6 +22,10 @@ class Subscriber < ApplicationRecord
 
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
+
+  def is_client?
+    self.status == ("form_filled" || "chatbot_invite_sent" || "onboarding_started" || "onboarded")
+  end
 
   def get_areas_list
     list = ""
