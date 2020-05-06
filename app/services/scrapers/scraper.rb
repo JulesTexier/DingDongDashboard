@@ -3,7 +3,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+    if !final_check_with_desc(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -366,7 +366,7 @@ class Scraper
     end
   end
 
-  def is_already_exists_by_desc?(hashed_property)
+  def final_check_with_desc(hashed_property)
     response = false
 
     properties = Property.where(
@@ -379,6 +379,9 @@ class Scraper
       response = desc_comparator(property.description, hashed_property[:description])
       break if response
     end
+
+    response = true if hashed_property[:rooms_number].nil? && !response
+
     return response
   end
 
