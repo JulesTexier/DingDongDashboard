@@ -10,24 +10,24 @@ class GrowthEngine
     end
 
     def handle_lead
-      parser = EmailParser.new(json_content)
+      parser = EmailParser.new(@json_content)
       lead_email = parser.get_reply_to_email
 
       # 1 • Check if email is in DB
       subscriber = get_subscriber(lead_email)
-
-      # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
-      if !is_in_sequence_timeframe?(subscriber, @first_time_frame)
-        # Determination de la déquence à lancer !
-        sequence = get_adequate_sequence(subscriber)
-        sequence.execute(subscriber)
-      end
+      byebug
+      # # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
+      # if !is_in_sequence_timeframe?(subscriber, @first_time_frame)
+      #   # Determination de la déquence à lancer !
+      #   sequence = get_adequate_sequence(subscriber)
+      #   sequence.execute(subscriber)
+      # end
     end
 
     private
 
     def get_subscriber(email_address)
-      s = Subscriber.where(email: email_address).last.nil? ?  Subscriber.create(email: email_address, status: "new_lead") :  Subscriber.where(email: email_address).last
+      s = Subscriber.where(email: email_address).where.not(status: "duplicates").last.nil? ?  Subscriber.create(email: email_address, status: "new_lead") :  Subscriber.where(email: email_address).where.not(status: "duplicates").last
     end
 
     def is_in_sequence_timeframe?(subscriber, timeframe)
