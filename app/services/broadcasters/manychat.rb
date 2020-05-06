@@ -280,7 +280,7 @@ class Manychat
     },
           {
       "type": "flow",
-      "caption": "📞 #{broker_name}",
+      "caption": "💬 #{broker_name}",
       "target": ENV["QR_CALL_BROKER"],
     }, {
       "type": "flow",
