@@ -2,7 +2,7 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
-  after_create :handle_onboarding
+  after_update :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
   # validates_uniqueness_of :facebook_id, :case_sensitive => false
@@ -208,7 +208,7 @@ class Subscriber < ApplicationRecord
 
   # Onboarding methods 
   def handle_onboarding
-    if self.status != "onboarding_started" 
+    if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
       #0 • Handle duplicate
       if Subscriber.where(email: self.email).size > 1
         handle_duplicate
@@ -306,4 +306,5 @@ class Subscriber < ApplicationRecord
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end
+
 end
