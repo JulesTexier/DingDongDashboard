@@ -21,11 +21,9 @@ class Broker < ApplicationRecord
     now = DateTime.now.in_time_zone("Europe/Paris")
     time_limit = DateTime.new(now.year, now.month, now.day, 20, 0, 0, now.zone) - 1
     sms = SmsMode.new
-    if Rails.env.production?
-      self.all.each do |broker|
-        nb_lead = broker.subscribers.where("status = 'form_filled' AND created_at > ? ", time_limit).size
-        sms.send_good_morning_sms_to_broker(broker, nb_lead) if nb_lead > 0
-      end
+    self.all.each do |broker|
+      nb_lead = broker.subscribers.where("status = 'form_filled' AND created_at > ? ", time_limit).size
+      sms.send_good_morning_sms_to_broker(broker, nb_lead) if nb_lead > 0
     end
   end
 
