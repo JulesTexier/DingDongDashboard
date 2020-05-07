@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_125040) do
+ActiveRecord::Schema.define(version: 2020_05_07_091935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -227,6 +227,17 @@ ActiveRecord::Schema.define(version: 2020_05_06_125040) do
     t.index ["district_id"], name: "index_selected_districts_on_district_id"
     t.index ["subscriber_id", "district_id"], name: "index_selected_districts_on_subscriber_id_and_district_id", unique: true
     t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
+  end
+
+  create_table "sequence_emails", force: :cascade do |t|
+    t.string "name"
+    t.string "sender_email"
+    t.string "sender_name"
+    t.string "source"
+    t.boolean "is_active"
+    t.text "trigger_ads", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subscribers", force: :cascade do |t|
