@@ -1,8 +1,11 @@
+# coding: utf-8
 class EmailParser
   attr_reader :json_content
+
   def initialize(json_response)
     @json_content = JSON.parse(json_response)
   end
+
   def get_reply_to_email
     email_regex = '[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}'
     email = []
@@ -11,6 +14,7 @@ class EmailParser
     end
     email.uniq.one? ? email.uniq.join : email.uniq
   end
+
   def get_email_from_value(json_value)
     email_regex = '[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}'
     res = {}
@@ -20,6 +24,11 @@ class EmailParser
     end
     res[:email].uniq
   end
+
+  def get_value(value)
+    self.json_content[value]
+  end
+
   def ad_data_parser_se_loger
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
@@ -36,6 +45,7 @@ class EmailParser
     end
     ad_infos
   end
+
   # Handle different kinds of trigger according ti source (ref, ad link, ...)
   def get_sequence_trigger
     if @json_content["FromName"] == "SeLoger-Logic"
