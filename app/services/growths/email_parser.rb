@@ -20,7 +20,7 @@ class EmailParser
     end
     res[:email].uniq
   end
-  def ad_data_parser
+  def ad_data_parser_se_loger
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
     surface_regex = '(\d+)(.?)(\d+)(.?)(m)'
@@ -35,5 +35,11 @@ class EmailParser
       end
     end
     ad_infos
+  end
+  # Handle different kinds of trigger according ti source (ref, ad link, ...)
+  def get_sequence_trigger
+    if @json_content["FromName"] == "SeLoger-Logic"
+      return ad_data_parser_se_loger[:ref]
+    end
   end
 end
