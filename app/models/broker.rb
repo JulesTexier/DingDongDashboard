@@ -55,7 +55,7 @@ class Broker < ApplicationRecord
       greg = "gregrouxeloldra"
 
       morning_end = 13
-      afternooon_end = 18
+      afternooon_end = 20
       date = date.in_time_zone("Paris")
       case date.wday
       when 0
