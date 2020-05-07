@@ -6,7 +6,7 @@ class CreateSequenceEmails < ActiveRecord::Migration[6.0]
       t.string :sender_name
       t.string :source
       t.boolean :is_active
-
+      t.text :trigger_ads, array: true, default: []
       t.timestamps
     end
   end
