@@ -1,0 +1,2 @@
+class SequenceEmail < ApplicationRecord
+end
