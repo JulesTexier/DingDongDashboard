@@ -1,14 +1,15 @@
 class GrowthEngine
-  attr_reader :json_content, :email_parser, :source, :trigger, :sender_email
+  attr_reader :json_content, :email_parser, :source, :trigger, :sender_email, :sequence_type
   attr_accessor :first_time_frame, :second_time_frame
 
-  def initialize(json_content, first_time_frame = 48, second_time_frame = 240)
+  def initialize(json_content, first_time_frame = 48, second_time_frame = 240, sequence_type = "Mail")
     @json_content = json_content
     @first_time_frame = first_time_frame
     @second_time_frame = second_time_frame
     @email_parser = EmailParser.new(@json_content)
     @source = @email_parser.get_value("FromName")
     @sender_email = @email_parser.get_value("To")
+    @sequence_type = sequence_type
   end
 
   def handle_lead
@@ -21,8 +22,8 @@ class GrowthEngine
       # Determination de la déquence à lancer !
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
-      subscriber_to_sequence = create_subscriber_to_sequence(subscriber, sequence)
-      sequence.execute(subscriber)
+      create_subscriber_to_sequence(subscriber, sequence)
+      sequence.execute_sequence(subscriber)
     end
   end
 
@@ -41,12 +42,12 @@ class GrowthEngine
     if subscriber.is_client? && subscriber.is_active
       ## If the sub is a client and is active
       ## we execute a regular sequence
-      type = "regular"
+      marketing_type = "regular"
     else
       ## If the sub is not a client, or is an inactive client, we want to make some publicity for dingdong
-      type = is_sequence_created_in_timeframe?(subscriber, self.second_time_frame) ? "regular" : "hack"
+      marketing_type = is_sequence_created_in_timeframe?(subscriber, @second_time_frame) ? "regular" : "hack"
     end
-    Sequence.get_adequate_sequence(type, @source, @sender_email)
+    Sequence.get_adequate_sequence(marketing_type, @source, @sender_email, @sequence_type)
   end
 
   def create_subscriber_to_sequence(subscriber, sequence)
