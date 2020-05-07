@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_092550) do
+ActiveRecord::Schema.define(version: 2020_05_07_155046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -229,7 +229,20 @@ ActiveRecord::Schema.define(version: 2020_05_07_092550) do
     t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
-  create_table "sequence_emails", force: :cascade do |t|
+  create_table "sequence_steps", force: :cascade do |t|
+    t.integer "step"
+    t.string "name"
+    t.text "description"
+    t.string "sequence_type"
+    t.integer "time_frame"
+    t.string "template"
+    t.bigint "sequence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sequence_id"], name: "index_sequence_steps_on_sequence_id"
+  end
+
+  create_table "sequences", force: :cascade do |t|
     t.string "name"
     t.string "sender_email"
     t.string "sender_name"
@@ -240,13 +253,13 @@ ActiveRecord::Schema.define(version: 2020_05_07_092550) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "subscriber_sequence_emails", force: :cascade do |t|
-    t.bigint "sequence_email_id", null: false
+  create_table "subscriber_sequences", force: :cascade do |t|
+    t.bigint "sequence_id", null: false
     t.bigint "subscriber_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["sequence_email_id"], name: "index_subscriber_sequence_emails_on_sequence_email_id"
-    t.index ["subscriber_id"], name: "index_subscriber_sequence_emails_on_subscriber_id"
+    t.index ["sequence_id"], name: "index_subscriber_sequences_on_sequence_id"
+    t.index ["subscriber_id"], name: "index_subscriber_sequences_on_subscriber_id"
   end
 
   create_table "subscribers", force: :cascade do |t|
@@ -284,6 +297,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_092550) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
-  add_foreign_key "subscriber_sequence_emails", "sequence_emails"
-  add_foreign_key "subscriber_sequence_emails", "subscribers"
+  add_foreign_key "sequence_steps", "sequences"
+  add_foreign_key "subscriber_sequences", "sequences"
+  add_foreign_key "subscriber_sequences", "subscribers"
 end
