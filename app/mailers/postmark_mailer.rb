@@ -39,10 +39,8 @@ class PostmarkMailer < ApplicationMailer
   end
 
   def send_growth_step_email(step, subscriber)
-    template = "growth-step-email"
-    template = step.postmark_email if !step.postmark_email.nil?
-    self.template_model = { subject: step.email_subject, content: step.email_content }
+    template = step.template
+    self.template_model = { content: step.email_content }
     mail from: step.sender_email, to: subscriber.email, postmark_template_alias: template, tag: step.tag
   end
-
 end
