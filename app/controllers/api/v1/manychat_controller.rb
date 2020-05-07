@@ -25,6 +25,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber_hash[:trello_id_card] = lead.trello_id_card
       subscriber_hash[:facebook_id] = params[:facebook_id]
       subscriber_hash[:status] = "onboarding_started"
+      subscriber_hash[:is_active] = true
       s = Subscriber.new(subscriber_hash)
 
       if s.save
