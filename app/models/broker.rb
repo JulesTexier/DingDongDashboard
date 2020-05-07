@@ -17,9 +17,9 @@ class Broker < ApplicationRecord
     return self.where(trello_username:username).first
   end
 
-  def self.send_good_mornong_message_leads
+  def self.send_good_morning_message_leads
     now = DateTime.now.in_time_zone("Europe/Paris")
-    time_limit = DateTime.new(now.year, now.month, now.day, 18, 0, 0, now.zone) - 1
+    time_limit = DateTime.new(now.year, now.month, now.day, 20, 0, 0, now.zone) - 1
     sms = SmsMode.new
     if Rails.env.production?
       self.all.each do |broker|
