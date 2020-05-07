@@ -23,6 +23,9 @@ class Subscriber < ApplicationRecord
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
 
+  has_many :subscriber_sequence_emails
+  has_many :sequence_emails, through: :subscriber_sequence_emails
+
   def is_client?
     case self.status 
     when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
