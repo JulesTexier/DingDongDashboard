@@ -17,6 +17,18 @@ class Broker < ApplicationRecord
     return self.where(trello_username:username).first
   end
 
+  def self.send_good_mornong_message_leads
+    now = DateTime.now.in_time_zone("Europe/Paris")
+    time_limit = DateTime.new(now.year, now.month, now.day, 18, 0, 0, now.zone) - 1
+    sms = SmsMode.new
+    if Rails.env.production?
+      self.all.each do |broker|
+        nb_lead = broker.subscribers.where("status = 'form_filled' AND created_at > ? ", time_limit).size
+        sms.send_good_morning_sms_to_broker(broker, nb_lead) if nb_lead > 0
+      end
+    end
+  end
+
   def self.get_current_broker(date = Time.now)
 
     if !ENV['BROKER'].nil? && !Rails.env.test?
