@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_155046) do
+ActiveRecord::Schema.define(version: 2020_05_07_162801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_155046) do
     t.integer "step"
     t.string "name"
     t.text "description"
-    t.string "sequence_type"
+    t.string "step_type"
     t.integer "time_frame"
     t.string "template"
     t.bigint "sequence_id", null: false
@@ -251,6 +251,9 @@ ActiveRecord::Schema.define(version: 2020_05_07_155046) do
     t.text "trigger_ads", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sequence_type"
+    t.text "description"
+    t.string "marketing_type"
   end
 
   create_table "subscriber_sequences", force: :cascade do |t|
