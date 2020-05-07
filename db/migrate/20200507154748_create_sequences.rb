@@ -1,6 +1,6 @@
-class CreateSequenceEmails < ActiveRecord::Migration[6.0]
+class CreateSequences < ActiveRecord::Migration[6.0]
   def change
-    create_table :sequence_emails do |t|
+    create_table :sequences do |t|
       t.string :name
       t.string :sender_email
       t.string :sender_name
