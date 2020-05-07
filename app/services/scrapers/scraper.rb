@@ -380,7 +380,7 @@ class Scraper
       break if response
     end
 
-    response = true if hashed_property[:rooms_number].nil? && !response
+    response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
 
     return response
   end
