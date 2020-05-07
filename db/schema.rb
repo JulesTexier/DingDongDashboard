@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_091935) do
+ActiveRecord::Schema.define(version: 2020_05_07_092550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -240,6 +240,15 @@ ActiveRecord::Schema.define(version: 2020_05_07_091935) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subscriber_sequence_emails", force: :cascade do |t|
+    t.bigint "sequence_email_id", null: false
+    t.bigint "subscriber_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sequence_email_id"], name: "index_subscriber_sequence_emails_on_sequence_email_id"
+    t.index ["subscriber_id"], name: "index_subscriber_sequence_emails_on_subscriber_id"
+  end
+
   create_table "subscribers", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -275,4 +284,6 @@ ActiveRecord::Schema.define(version: 2020_05_07_091935) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
+  add_foreign_key "subscriber_sequence_emails", "sequence_emails"
+  add_foreign_key "subscriber_sequence_emails", "subscribers"
 end
