@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_125040) do
+ActiveRecord::Schema.define(version: 2020_05_08_125519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -192,6 +192,16 @@ ActiveRecord::Schema.define(version: 2020_05_06_125040) do
     t.index ["subway_id"], name: "index_property_subways_on_subway_id"
   end
 
+  create_table "referrals", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "phone"
+    t.string "email"
+    t.string "referral_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scraper_parameters", force: :cascade do |t|
     t.string "url"
     t.string "source"
@@ -229,6 +239,42 @@ ActiveRecord::Schema.define(version: 2020_05_06_125040) do
     t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
+  create_table "sequence_steps", force: :cascade do |t|
+    t.integer "step"
+    t.string "name"
+    t.text "description"
+    t.string "step_type"
+    t.integer "time_frame"
+    t.string "template"
+    t.bigint "sequence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sequence_id"], name: "index_sequence_steps_on_sequence_id"
+  end
+
+  create_table "sequences", force: :cascade do |t|
+    t.string "name"
+    t.string "sender_email"
+    t.string "sender_name"
+    t.string "source"
+    t.boolean "is_active"
+    t.text "trigger_ads", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "sequence_type"
+    t.text "description"
+    t.string "marketing_type"
+  end
+
+  create_table "subscriber_sequences", force: :cascade do |t|
+    t.bigint "sequence_id", null: false
+    t.bigint "subscriber_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sequence_id"], name: "index_subscriber_sequences_on_sequence_id"
+    t.index ["subscriber_id"], name: "index_subscriber_sequences_on_subscriber_id"
+  end
+
   create_table "subscribers", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -264,4 +310,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_125040) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
+  add_foreign_key "sequence_steps", "sequences"
+  add_foreign_key "subscriber_sequences", "sequences"
+  add_foreign_key "subscriber_sequences", "subscribers"
 end
