@@ -22,7 +22,7 @@ class Trello
     # 2• Add checklist 'Action' to created card
     card_id = JSON.parse(new_card_response.body)["id"]
     user.update(trello_id_card: card_id)
-    new_checklist_response = add_checklist_to_card(card_id)
+    new_checklist_response = add_checklist_action_to_card(card_id)
     return false if new_checklist_response.code != (200 || 204)
 
     
@@ -84,6 +84,21 @@ class Trello
     response.code == 200 ? true : false
   end
 
+  def add_referral_sending_to_action_log(subscriber, referral)
+    # 1 • Get "Actions" checklist id
+    checklists = JSON.parse(get_checklists_on_card(subscriber.trello_id_card).body)
+    checklist_id = nil
+    checklists.each do |list|
+      checklist_id = list["id"] if list["name"] = "ACTIONS"
+    end
+
+    # 2 • Log action in checklist 
+    check_items_params = {}
+    check_items_params[:name] = "Contact mis en relation avec #{referral.firstname} (#{referral.referral_type})"
+    response = add_checkitem_to_checklist(checklist_id, check_items_params)
+    return response.return_code == :ok ? true : false
+  end
+
   private 
   
   def create_new_card(list_id, params)
@@ -95,7 +110,7 @@ class Trello
     response = request.run
   end
 
-  def add_checklist_to_card(card_id)
+  def add_checklist_action_to_card(card_id)
     checklist_params = {}
     checklist_params[:name] = "ACTIONS"
     request = Typhoeus::Request.new(
@@ -165,6 +180,14 @@ class Trello
       "https://api.trello.com/1/cards/#{card_id}/?" + @token,
       method: :put,
       params: params
+    )
+    response = request.run
+  end
+
+  def get_checklists_on_card(card_id)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/cards/#{card_id}/checklists?" + @token,
+      method: :get,
     )
     response = request.run
   end
