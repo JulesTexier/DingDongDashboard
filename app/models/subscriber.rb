@@ -191,10 +191,6 @@ class Subscriber < ApplicationRecord
       self.initial_areas.split(",").each do |area|
         areas_name.push(Area.find(area).name)
       end
-    elsif !self.areas.nil?
-      areas.each do |area|
-        areas_name.push(Area.find(area).name)
-      end
     end 
     return areas_name.join(", ")
   end
