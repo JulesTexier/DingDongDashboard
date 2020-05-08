@@ -192,6 +192,11 @@ class Subscriber < ApplicationRecord
     return areas_name.join(", ")
   end
 
+  def onboarding_old_user
+    onboarding_broker
+    Trello.new.add_label_old_user(self)
+  end
+
   private
 
   # Onboarding methods 
@@ -229,18 +234,18 @@ class Subscriber < ApplicationRecord
 
   def onboarding_broker
     self.update(broker: Broker.get_current_broker) if self.broker.nil?
-      trello = Trello.new
-      sms = SmsMode.new
-      if Rails.env.production?
-        if trello.add_new_user_on_trello(self)
-          # self.broker.send_email_notification(self) 
-          now = Time.now.in_time_zone('Paris')
-          if now.hour < 20 && now.hour > 9 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
-            sms.send_sms_to_broker(self, self.broker) 
-          end
+    trello = Trello.new
+    sms = SmsMode.new
+    if Rails.env.production?
+      if trello.add_new_user_on_trello(self)
+        # self.broker.send_email_notification(self) 
+        now = Time.now.in_time_zone('Paris')
+        if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
+          sms.send_sms_to_broker(self, self.broker) 
         end
-      else
-        puts "Subscriber créé, mais on le l'a pas mis sur le Trello car on est en dev"
+      end
+    else
+      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"
     end
   end
 
