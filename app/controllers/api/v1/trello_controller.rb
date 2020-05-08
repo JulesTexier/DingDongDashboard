@@ -68,4 +68,22 @@ class Api::V1::TrelloController < ApplicationController
     end
   end
 
+  def send_referral
+    document = JSON.parse(request.body.read)
+    subscriber = Subscriber.where(trello_id_card: document["cardId"]).last
+    referral = Referral.where(referral_type: document["referralType"]).last
+
+    if !subscriber.nil? && !subscriber.broker.nil? && !referral.nil? 
+      # 1. Send email 
+      PostmarkMailer.send_referral(subscriber, referral).deliver_now      
+      # 2 • Log action in trello 
+      # response = @trello.add_referral_sending_to_action_log(subscriber, referral)
+
+      render json: {status: 'SUCCESS', message: "Email sent and action logged in Trello", data: subscriber}, status: 200
+    else 
+      render json: {status: 'ERROR', message: 'User and/or broker and/or referral not found !', data: nil}, status: 500 
+    end
+
+  end
+
 end
