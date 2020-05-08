@@ -39,8 +39,7 @@ class PostmarkMailer < ApplicationMailer
   end
 
   def send_growth_step_email(step, subscriber)
-    template = step.template
-    self.template_model = { content: step.email_content }
-    mail from: step.sender_email, to: subscriber.email, postmark_template_alias: template, tag: step.tag
+    self.template_model = { sender_name: step.sequence.sender_name, subscriber_id: subscriber.id}
+    mail from: "maxime@hellodingdong.com", to: subscriber.email, postmark_template_alias: step.template, tag: step.id
   end
 end
