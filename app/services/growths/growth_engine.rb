@@ -27,6 +27,12 @@ class GrowthEngine
     end
   end
 
+  def send_test_email
+    mail = GrowthMailer.new_growth_email("adriencoste17@gmail.com","D!ngDong75018")
+    byebug    
+    mail.deliver_now
+  end
+
   private
 
   def get_subscriber(email_address)
