@@ -27,8 +27,8 @@ class Api::V1::ManychatController < ApplicationController
       s = Subscriber.new(subscriber_hash)
 
       if s.save
-        lead.areas.split(",").each do  |area|
-          area = Area.where(name: area).first 
+        lead.areas.split(",").each do |area|
+          area = Area.where(name: area).first
           SelectedArea.create(subscriber: s, area: area) if !area.nil?
         end
 
@@ -41,11 +41,9 @@ class Api::V1::ManychatController < ApplicationController
       else
         render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
       end
-
     else
       render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
     end
-    
   end
 
   # POST  (update subscriber) /manychat/s/:subscriber_id/update
@@ -54,13 +52,17 @@ class Api::V1::ManychatController < ApplicationController
       subscriber = Subscriber.find(params[:subscriber_id])
       if subscriber.update(subscriber_params.except(:subscriber_id, :message))
         if subscriber_params[:message] == "reactivation"
-          render json: send_text_message(subscriber, "🔥 Ton alerte a été réactivée !", 'success')
+          if subscriber.broker.nil?
+            render json: send_flow_sequence(subscriber, "content20200511081309_374734")
+          else
+            render json: send_text_message(subscriber, "🔥 Votre alerte a été réactivée !", "success")
+          end
         else
           render json: { status: "SUCCESS", message: "Subscriber updated", data: subscriber }, status: 200
         end
       else
         if subscriber_params[:message] == "reactivation"
-          render json: send_text_message(subscriber, "Oups, un probleme a eu lieu, écris nous directement dans le chat, nous reviendrons vers toi au plus vite!", 'error')
+          render json: send_text_message(subscriber, "Oups, un probleme a eu lieu, écris nous directement dans le chat, nous reviendrons vers toi au plus vite!", "error")
         else
           render json: { status: "ERROR", message: "Subscriber not updated", data: nil }, status: 500
         end
@@ -159,28 +161,25 @@ class Api::V1::ManychatController < ApplicationController
   # POST "/manychat/s/:subscriber_id/onboard_broker"
   # One click btn to atatch user to broker
   def onboard_old_users
-
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      
+
       # 1 • Créer le lead avec un statut particulier
       areas = ""
       subscriber.areas.each do |area|
         areas += area.name + ","
       end
-      lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas, project_type: "N/C" )
+      lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas, project_type: "N/C")
       if lead.save
-        #Ajout de la trello_id_card au lead et au sub 
+        #Ajout de la trello_id_card au lead et au sub
         subscriber.update(trello_id_card: lead.trello_id_card)
         render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: subscriber }, status: 200
       else
         render json: { status: "ERROR", message: "Lead not created", data: nil }, status: 500
       end
-      
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
-
   end
 
   private
@@ -238,9 +237,9 @@ class Api::V1::ManychatController < ApplicationController
   def send_text_message(subscriber, text, status)
     m = Manychat.new
     response = m.send_text_message(subscriber, text)
-    if response[0] && status == 'success'
+    if response[0] && status == "success"
       return { status: "SUCCESS", message: "Message sent to subscriber", data: response[1] }, status: 200
-    elsif response[0] && status == 'error'
+    elsif response[0] && status == "error"
       return { status: "ERROR", message: "Bad operation, but a message has been sent to subscriber", data: response[1] }, status: 500
     else
       return { status: "ERROR", message: "A error occur in manychat call, no message sent to subscriber", data: response[1] }, status: 500
@@ -262,4 +261,3 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 end
-
