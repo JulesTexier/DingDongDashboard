@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_162801) do
+ActiveRecord::Schema.define(version: 2020_05_11_140405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -192,6 +192,16 @@ ActiveRecord::Schema.define(version: 2020_05_07_162801) do
     t.index ["subway_id"], name: "index_property_subways_on_subway_id"
   end
 
+  create_table "referrals", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "phone"
+    t.string "email"
+    t.string "referral_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scraper_parameters", force: :cascade do |t|
     t.string "url"
     t.string "source"
@@ -239,6 +249,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_162801) do
     t.bigint "sequence_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "content"
+    t.string "subject"
     t.index ["sequence_id"], name: "index_sequence_steps_on_sequence_id"
   end
 
