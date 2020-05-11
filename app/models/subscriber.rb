@@ -1,10 +1,12 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
+
+  after_create :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
-  validates_uniqueness_of :facebook_id, :case_sensitive => false
-  validates :facebook_id, presence: true
+  # validates_uniqueness_of :facebook_id, :case_sensitive => false
+  # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
   validates :firstname, presence: true
@@ -133,11 +135,124 @@ class Subscriber < ApplicationRecord
     self.where(facebook_id: facebook_id)
   end
 
-  def notify_broker_trello(comment)
-    Trello.new.add_comment_to_lead_card(self, comment)
+  def notify_broker_trello(comment) 
+    Trello.new.add_comment_to_user_card(self, comment)
+  end
+
+  # TRELLO METHODS 
+  def trello_description
+    desc = ""
+    desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
+    desc += "\u000A**PROJET**\u000A"
+    desc += "\u000A**FINANCEMENT**\u000A"
+    desc += "\u000A**CLIENTE**\u000A"
+    desc += "\u000A**NOTES**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (inscription) :**\u000A"
+    desc += "\u000A**SUITE RDV COURTAGE :**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (courtage) :**\u000A"
+    desc += "\u000A\u000A---\u000A\u000A"
+    desc += trello_summary
+  end
+
+  def trello_summary
+    desc = ""
+    desc += "**#{self.get_fullname.upcase}**"
+    desc += "\u000A**Projet d'achat** : #{self.project_type}"
+    desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} €"
+    desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
+    desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
+    desc += "\u000A**Arrondissements** : #{self.get_initial_areas}"
+    desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
+    desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
+    desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
+    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+  end
+
+  def get_chatbot_link
+    return "https://m.me/HiDingDong?ref=hello--#{self.id}"
+  end
+
+  def get_fullname
+    return self.firstname + " " + self.lastname
+  end
+
+  def get_areas_list
+    areas = ""
+    self.areas.each do |area|
+      areas += area.name + ", "
+    end
+    return areas
+  end
+
+  def get_initial_areas
+    
+    areas_name = []
+    if !self.initial_areas.nil?
+      self.initial_areas.split(",").each do |area|
+        areas_name.push(Area.find(area).name)
+      end
+    end 
+    return areas_name.join(", ")
+  end
+
+  def onboarding_old_user
+    onboarding_broker
+    Trello.new.add_label_old_user(self)
   end
 
   private
+
+  # Onboarding methods 
+  def handle_onboarding
+    if self.status != "onboarding_started" 
+      #0 • Handle duplicate
+      if Subscriber.where(email: self.email).size > 1
+        handle_duplicate
+      # 1 • Handle case user is a real estate hunter 
+      elsif self.project_type.downcase.include?("chasseur")
+        onboarding_hunter
+      # 2 • Handle case user has not Messenger 
+      elsif !self.has_messenger 
+        onboarding_no_messenger
+      else 
+        onboarding_broker
+      end
+    end
+  end
+
+  def handle_duplicate
+    self.update(status: "duplicates")
+    PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
+  end
+  
+  def onboarding_hunter
+    # Send email to lead with Max in C/C
+    PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
+  end
+
+  def onboarding_no_messenger
+    # Send email to lead with explainations 
+    PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
+  end
+
+  def onboarding_broker
+    self.update(broker: Broker.get_current_broker) if self.broker.nil?
+    trello = Trello.new
+    sms = SmsMode.new
+    if Rails.env.production?
+      if trello.add_new_user_on_trello(self)
+        # self.broker.send_email_notification(self) 
+        now = Time.now.in_time_zone('Paris')
+        if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
+          sms.send_sms_to_broker(self, self.broker) 
+        end
+      end
+    else
+      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"
+    end
+  end
+
+  # Matching methods 
 
   def is_matching_property_price(property)
     (property.price <= self.max_price ? true : false) if !self.max_price.nil?

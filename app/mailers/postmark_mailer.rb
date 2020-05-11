@@ -8,9 +8,9 @@ class PostmarkMailer < ApplicationMailer
     mail from: "etienne@hellodingdong.com", to: lead.broker.email, postmark_template_alias: "broker-new-lead-notification"
   end
 
-  def send_chatbot_link(lead)
-    self.template_model = { name: lead.firstname, action_url: lead.get_chatbot_link, broker_name: lead.broker.firstname, broker_phone: lead.broker.phone, broker_email: lead.broker.email }
-    mail from: "etienne@hellodingdong.com", to: lead.email, postmark_template_alias: "welcome"
+  def send_chatbot_link(user)
+    self.template_model = { name: user.firstname, action_url: user.get_chatbot_link, broker_name: user.broker.firstname, broker_phone: user.broker.phone, broker_email: user.broker.email }
+    mail from: "etienne@hellodingdong.com", to: user.email, postmark_template_alias: "welcome"
   end
 
   def send_new_lead_notification_to_broker(lead)
@@ -18,9 +18,9 @@ class PostmarkMailer < ApplicationMailer
     mail from: "etienne@hellodingdong.com", to: lead.broker.email, postmark_template_alias: "broker-new-lead-notification"
   end
 
-  def send_lead_dulicate_email(lead)
-    self.template_model = { lead_firstname: lead.firstname }
-    mail from: "etienne@hellodingdong.com", to: lead.email, postmark_template_alias: "lead-duplicate"
+  def send_user_dulicate_email(user)
+    self.template_model = { lead_firstname: user.firstname }
+    mail from: "etienne@hellodingdong.com", to: user.email, postmark_template_alias: "lead-duplicate"
   end
 
   def send_email_to_lead_with_no_messenger(lead)
@@ -36,5 +36,10 @@ class PostmarkMailer < ApplicationMailer
   def send_onboarding_hunter_email(lead)
     self.template_model = { lead_firstname: lead.firstname }
     mail from: "etienne@hellodingdong.com", to: lead.email, bcc: "maxime@hellodingdong.com", postmark_template_alias: "onboarding-hunter"
+  end
+
+  def send_referral(subscriber, referral)
+    self.template_model = {broker_firstname: subscriber.broker.firstname, referral_type: referral.referral_type, referral_firstname: referral.firstname, subscriber_fullname: subscriber.get_fullname, subscriber_email: subscriber.email, subscriber_phone: subscriber.phone}
+    mail from: "etienne@hellodingdong.com", to: [subscriber.email,referral.email], cc: subscriber.broker.email ,bcc: "etienne@hellodingdong.com", postmark_template_alias: "referral_template"
   end
 end

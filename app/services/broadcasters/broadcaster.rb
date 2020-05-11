@@ -96,11 +96,11 @@ class Broadcaster
 
   def good_morning_text(prop_nbr)
     if prop_nbr > 9
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, 10 annonces sont tombées cette nuit. Clique ici pour les recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, 10 annonces sont tombées cette nuit. Cliquez ici pour les recevoir ! 👇"
     elsif prop_nbr > 1
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, #{prop_nbr} annonces sont tombées cette nuit. Clique ici pour les recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, #{prop_nbr} annonces sont tombées cette nuit. Cliquez ici pour les recevoir ! 👇"
     else
-      text = "🔔 Ding Dong 🔔\u000APour bien commencer ta journée, une annonce est tombée cette nuit. Clique ici pour la recevoir ! 👇"
+      text = "🔔 Ding Dong 🔔\u000APour bien commencer votre journée, une annonce est tombée cette nuit. Cliquez ici pour la recevoir ! 👇"
     end
     return text
   end
