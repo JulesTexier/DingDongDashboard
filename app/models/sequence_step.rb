@@ -28,7 +28,6 @@ class SequenceStep < ApplicationRecord
 
   def respectable_sending_hours(start_day, end_day)
     a = DateTime.now + self.time_frame
-    byebug
     if a.hour < start_day
       time_frame_adjustment = start_day - a.hour
       self.time_frame + time_frame_adjustment
