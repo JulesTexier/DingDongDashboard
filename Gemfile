@@ -94,6 +94,7 @@ group :test do
   gem "factory_bot_rails"
   gem "webmock"
   gem "vcr"
+  gem "timecop"
   gem "letter_opener"
 end
 
