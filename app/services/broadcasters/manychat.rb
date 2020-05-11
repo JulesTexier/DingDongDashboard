@@ -37,6 +37,10 @@ class Manychat
     handle_manychat_response(send_content(subscriber, [create_message_text_hash(message)]))
   end
 
+  def send_flow_sequence(subscriber, flow)
+    handle_manychat_response(send_flow(subscriber, flow))
+  end
+
   # ------
   # FAVORITE MANAGEMENT
   # ------
@@ -108,7 +112,7 @@ class Manychat
     inactive_subscribers = Subscriber.inactive
     inactive_subscribers.each do |inactive_subscriber|
       mc_sub_infos = self.fetch_subscriber_mc_infos(inactive_subscriber)
-      if mc_sub_infos[0] && inactive_subscriber.has_interacted(mc_sub_infos[1]["data"]["last_interaction"], 3) && mc_sub_infos[1]["data"]["status"] == "active"
+      if mc_sub_infos[0] && inactive_subscriber.has_interacted(mc_sub_infos[1]["data"]["last_interaction"], 3) && mc_sub_infos[1]["data"]["status"] == "active" && !inactive_subscriber.broker.nil?
         puts "\nSuccessful update for : #{inactive_subscriber.firstname} - ID: #{inactive_subscriber.id}\n\n"
         inactive_subscriber.update(is_active: true)
       end
@@ -442,6 +446,20 @@ class Manychat
     }
   end
 
+  def create_final_json_send(subscriber, quick_replies_array = get_default_qr(subscriber), flow)
+    {
+      "subscriber_id": subscriber.facebook_id,
+      "flow_ns": flow,
+      "data": {
+        "version": "v2",
+        "content": {
+          "quick_replies": quick_replies_array,
+        },
+      },
+      "message_tag": "POST_PURCHASE_UPDATE",
+    }
+  end
+
   #----------------
   # sending HTTP Request
   #----------------
@@ -455,6 +473,19 @@ class Manychat
 
     request = Typhoeus::Request.new(
       "https://api.manychat.com/fb/sending/sendContent",
+      method: :post,
+      body: json_data,
+      headers: { "Content-type" => "application/json", "Authorization" => self.token },
+    )
+    request.run
+    response = request.response
+    return response
+  end
+
+  def send_flow(subscriber, flow)
+    json_data = create_final_json_send(subscriber, quick_replies_array = get_default_qr(subscriber), flow).to_json
+    request = Typhoeus::Request.new(
+      "https://api.manychat.com/fb/sending/sendFlow",
       method: :post,
       body: json_data,
       headers: { "Content-type" => "application/json", "Authorization" => self.token },
