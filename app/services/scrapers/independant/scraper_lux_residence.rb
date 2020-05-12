@@ -18,7 +18,9 @@ class Independant::ScraperLuxResidence < Scraper
           sub_item = access_xml_array_to_text(item, "div.prod-r.prod-desc")
           hashed_property[:area] = perform_district_regex(sub_item)
           hashed_property[:surface] = regex_gen(sub_item, '(\d+(.?)(\d*))(.)(m2)').to_float_to_int_scrp
-          hashed_property[:rooms_number] = regex_gen(sub_item, '(\d+)(.?)(Pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:rooms_number] = regex_gen(sub_item.remove_acc_scrp, '(\d+)(.?)(piece(s?))').to_int_scrp
+          hashed_property[:bedrooms_number] = regex_gen(access_xml_raw(item, 'img[itemprop="image"]')[0].attributes["alt"].text, '(\d+)(.?)(chambre(s?))').to_int_scrp
+          hashed_property[:rooms_number] = hashed_property[:bedrooms_number] + 1 if hashed_property[:rooms_number].nil? && !hashed_property[:bedrooms_number].nil?
           hashed_property[:flat_type] = regex_gen(sub_item, "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
           if go_to_prop?(hashed_property, 7) # Just to check but I don't load HTML show
             hashed_property[:description] = access_xml_text(item, "p.description").strip

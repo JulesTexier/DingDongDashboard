@@ -16,11 +16,15 @@ class Independant::ScraperAgenceTroisFreres < Scraper
           hashed_property[:link] = access_xml_link(item, "h3 > a", "href")[0]
           hashed_property[:surface] = access_xml_text(item, "span.property-box-meta-item-area").to_float_to_int_scrp
           hashed_property[:rooms_number] = access_xml_text(item, "span.property-box-meta-item-beds:nth-child(3)").to_int_scrp
+          item.css("span.property-box-meta-item-beds").each do |room|
+            hashed_property[:rooms_number] = room.text.to_int_scrp if room.at("i").attributes["class"].value.include?("pp-normal-door-in")
+          end
           hashed_property[:price] = access_xml_text(item, "div.property-box-image-price").to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.property-description > p").tr("\n\t\r", "").strip
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.property-overview").split("Localisation")[1])
+            next if hashed_property[:area] == "N/C"
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])

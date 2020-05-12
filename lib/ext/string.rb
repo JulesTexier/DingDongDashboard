@@ -11,7 +11,8 @@ class String
   end
 
   def to_int_scrp
-    self.tr("^0-9", "").to_i
+    str = self.tr("^0-9", "")
+    str.to_s.strip.empty? ? nil : str.to_i
   end
 
   def to_float_to_int_scrp

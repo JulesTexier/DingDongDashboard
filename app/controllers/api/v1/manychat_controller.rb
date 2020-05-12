@@ -25,6 +25,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber_hash[:trello_id_card] = lead.trello_id_card
       subscriber_hash[:facebook_id] = params[:facebook_id]
       subscriber_hash[:status] = "onboarding_started"
+      subscriber_hash[:is_active] = true
       s = Subscriber.new(subscriber_hash)
 
       if s.save
@@ -165,26 +166,12 @@ class Api::V1::ManychatController < ApplicationController
   # POST "/manychat/s/:subscriber_id/onboard_broker"
   # One click btn to atatch user to broker
   def onboard_old_users
-
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      
-      # 1 • Créer le lead avec un statut particulier
-      areas = ""
-      subscriber.areas.each do |area|
-        areas += area.name + ","
-      end
-      lead = Lead.new(firstname: subscriber.firstname, lastname: subscriber.lastname, email: subscriber.email, phone: subscriber.phone, has_messenger: true, status: "old user", max_price: subscriber.max_price, min_surface: subscriber.min_surface, min_rooms_number: subscriber.min_rooms_number, areas: areas, project_type: "N/C" )
-      if lead.save
-        #Ajout de la trello_id_card au lead et au sub 
-        subscriber.update(trello_id_card: lead.trello_id_card)
-        render json: { status: "SUCCESS", message: "Subscriber added to #{lead.broker.firstname}'s Trello", data: subscriber }, status: 200
-      else
-        render json: { status: "ERROR", message: "Lead not created", data: nil }, status: 500
-      end
-      
+      subscriber.onboarding_old_user
+      render json: { status: "SUCCESS", message: "Subscriber added to #{subscriber.broker.firstname}'s Trello", data: subscriber }, status: 200
     rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
+      render json: { status: "ERROR", message: "An error occurred", data: nil }, status: 500
     end
 
   end
