@@ -4,6 +4,16 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p><%=@content%></p>
+      <% @content.split.each do |word| %>
+        <% if word.include?("[[tracking_link]]") %>
+          <a href="<%= @tracking_link %>">hellodingdong.com</a>
+        <% elsif word.include?("[[line_break]]") %>
+          <br><br>
+        <% else %>
+          <%= word %>
+        <% end %>
+      <% end %>
+      <br><br>
+    <%= @sender_name %>
   </body>
 </html>
