@@ -124,7 +124,7 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       ## On a crée une séquence il y a plus de 48h et moins de 10 jours, on doit donc envoyer une séquence régulière
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is a new lead with a a sequence created 3 days ago so we return a regular sequence " do
         @subscriber_to_sequence = FactoryBot.create(:subscriber_sequence, sequence: @sequence_hack, subscriber: @new_lead_subscriber, created_at: 3.days.ago)
         @ge.send(:handle_lead_email, @new_lead_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(2)
@@ -132,21 +132,21 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       ## C'est un nouveau lead qui n'a pas de séquence, ca doit envoyer le hack
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is a new lead with no sequences so we sent a hack" do
         @ge.send(:handle_lead_email, @new_lead_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(1)
         expect(SubscriberSequence.last.sequence).to eq(@sequence_hack)
       end
 
       ## C'est un client actif de Ding Dong donc on lui envoie une séquence régulière quoiqu'il
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is an activer client so we return a regular sequence" do
         @ge.send(:handle_lead_email, @client_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(1)
         expect(SubscriberSequence.last.sequence).to eq(@sequence_regular)
       end
 
       ## C'est un client inactif de Ding Dong donc on lui envoie une séquence hack quoiqu'il
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is an inactive client so we send a hack sequence" do
         @client_subscriber.update(is_active: false)
         @ge.send(:handle_lead_email, @client_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(1)
@@ -154,7 +154,7 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       ## C'est un new_lead qui nous contacte 11 jours après sa dernière séquence, on lui renvoie un hack
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is a new lead that contacts us 11 days ago so we should return hack sequence" do
         @subscriber_to_sequence = FactoryBot.create(:subscriber_sequence, sequence: @sequence_hack, subscriber: @new_lead_subscriber, created_at: 11.days.ago)
         @ge.send(:handle_lead_email, @new_lead_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(2)
@@ -162,7 +162,7 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       ## C'est un new_lead qui nous contacte 11 jours puis 8 jours après sa dernière séquence, on lui renvoie un regular
-      it "should create new sequence because a sequence has not been created in first_time_frame" do
+      it "is a new lead that contact us 11 days then 8 days ago so we should return regular sequence" do
         @subscriber_to_sequence = FactoryBot.create(:subscriber_sequence, sequence: @sequence_hack, subscriber: @new_lead_subscriber, created_at: 11.days.ago)
         @subscriber_to_sequence_2 = FactoryBot.create(:subscriber_sequence, sequence: @sequence_regular, subscriber: @new_lead_subscriber, created_at: 8.days.ago)
         @ge.send(:handle_lead_email, @new_lead_subscriber.email)
