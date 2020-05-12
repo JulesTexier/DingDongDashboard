@@ -30,7 +30,7 @@ module GiantCat
       "#{Rails.root}/app/workers"
     ]
 
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
 
   end
 end
