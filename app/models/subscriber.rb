@@ -196,6 +196,7 @@ class Subscriber < ApplicationRecord
   end
 
   def onboarding_old_user
+    self.update(has_messenger: true)
     onboarding_broker
     Trello.new.add_label_old_user(self)
   end
