@@ -10,8 +10,9 @@ class Premium::ScraperMeilleursAgents < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      xml = fetch_main_page(args)
-      if !xml[0].to_s.strip.empty?
+      html = fetch_static_page_proxy(args.url)
+      xml = access_xml_raw(html, args.main_page_cls)
+      # if !xml[0].to_s.strip.empty?
         hashed_properties = []
         xml.each do |item|
           begin
@@ -33,9 +34,9 @@ class Premium::ScraperMeilleursAgents < Scraper
             next
           end
         end
-      else
-        puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
-      end
+      # else
+      #   puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
+      # end
     end
     return @properties
   end
@@ -57,6 +58,7 @@ class Premium::ScraperMeilleursAgents < Scraper
     hashed_property[:source] = @source
     hashed_property[:provider] = "Agence"
     hashed_property[:description] = ""
+    puts JSON.pretty_generate(hashed_property)
     return hashed_property
   end
 end

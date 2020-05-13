@@ -140,50 +140,39 @@ class Scraper
     return JSON.parse(response)
   end
 
-  def fetch_rotating_proxy_params
-    proxy_url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}&country=US"
-    uri = URI(proxy_url)
-    return JSON.parse(Net::HTTP.get(uri))
+  def get_us_proxy
+    url = "http://falcon.proxyrotator.com:51337/proxy-list/?apiKey=#{ENV["ROTATING_PROXY_API"]}&country=US"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    response.split("\r\n")
   end
 
-  def get_user_agent(proxy_params)
-    user_agent_url = "https://httpbin.org/user-agent"
-    user_agent = proxy_params["randomUserAgent"]
-    puts user_agent
-    open(user_agent_url, "User-Agent" => user_agent, "read_timeout" => "10").read
+  def get_proxy_params
+    url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}&connectionType=Datacenter"
+    uri = URI(url)
+    JSON.parse(Net::HTTP.get(uri))
+  end
+
+  def get_save_proxy_list
+    url = "http://falcon.proxyrotator.com:51337/proxy-list/?apiKey=#{ENV["ROTATING_PROXY_API"]}"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    hsh = {}
+    hsh["ip"] = response.split("\r\n")
+    File.open("db/data/proxy_ip.yml", "w") { |file| file.write(hsh.to_yaml) }
   end
 
   def fetch_static_page_proxy(url)
-    ips = get_proxy_ip
-    user_agent = fetch_rotating_proxy_params["randomUserAgent"]
-    proxy_ip = "http://" + ips.sample
-    byebug
-    # open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
-  end
-
-  def get_whole_header(proxy_params)
-    header_url = "https://httpbin.org/headers"
-    ip_url = "https://httpbin.org/ip"
-    user_agent_url = "https://httpbin.org/user-agent"
-    # user_agent = proxy_params["randomUserAgent"]
-    proxy_ip = "http://" + proxy_params
-    # puts "This is the User_Agent => " + user_agent
-    puts "This is our Proxy => " + proxy_ip
-    # user_agent_page = open(user_agent_url, "User-Agent" => user_agent).read
-    ip_page = open(ip_url, proxy: URI.parse(proxy_ip)).read
-    # header_page = open(header_url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
-  end
-
-  def change_ip(proxy_params, url)
-    uri = URI("https://httpbin.org/ip")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.local_host = proxy_params["ip"]
-    http.use_ssl = true
-    request = Net::HTTP::Get.new("/")
-    request.content_type = "application/json"
-    request.initialize_http_header("Content-Type" => "application/json")
-    response = http.request(request)
-    puts response.body
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    proxy_params = get_proxy_params
+    puts proxy_params
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_ip = "http://" + "199.189.86.111:8080"
+    puts proxy_ip
+    page = Nokogiri::HTML.parse(open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent))
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "The Reactivation script took #{ending - starting} seconds to run"
+    return page
   end
 
   def get_proxy_ip

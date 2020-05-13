@@ -10,7 +10,8 @@ class Premium::ScraperLeBonCoin < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      xml = fetch_main_page(args)
+      html = fetch_static_page_proxy(args.url)
+      xml = access_xml_raw(html, args.main_page_cls)
       if !xml[0].to_s.strip.empty?
         json = extract_json(xml)
         hashed_properties = []
@@ -30,6 +31,7 @@ class Premium::ScraperLeBonCoin < Scraper
               property_checker_hash[:area] = hashed_property[:area]
               property_checker_hash[:link] = hashed_property[:link]
               if go_to_prop?(property_checker_hash, 7)
+                puts JSON.pretty_generate(hashed_property)
                 @properties.push(hashed_property)
                 enrich_then_insert_v2(hashed_property)
                 i += 1

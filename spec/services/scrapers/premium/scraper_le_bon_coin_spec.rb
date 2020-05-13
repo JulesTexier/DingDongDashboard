@@ -13,11 +13,11 @@ RSpec.describe Premium::ScraperLeBonCoin, type: :service do
   end
 
   it "should launch and return proper number of properties" do
-    VCR.use_cassette(@s.source) do
-      expect(@s.launch(@limit)).to be_a(Array)
-      expect(Property.where(source: @s.source).count).to be >= 1
-      expect(Property.where(source: @s.source).count).to be == @s.properties.count
-    end
+    # VCR.use_cassette(@s.source) do
+    expect(@s.launch(@limit)).to be_a(Array)
+    expect(Property.where(source: @s.source).count).to be >= 1
+    expect(Property.where(source: @s.source).count).to be == @s.properties.count
+    # end
   end
 
   it "should return the right keys" do
