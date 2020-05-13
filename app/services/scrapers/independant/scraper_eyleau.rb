@@ -1,46 +1,42 @@
 class Independant::ScraperEyleau < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
+  attr_accessor :properties, :source, :params
 
   def initialize
-    @url = "https://www.eylauimmobilier.com/vente-appartement-paris-75016-eylau-immobilier/tri=id&ordre=DESC"
     @source = "Eyleau Immo"
-    @main_page_cls = "div.annonce_listing"
-    @type = "Static"
-    @waiting_cls = nil
-    @multi_page = false
-    @page_nbr = 1
+    @params = fetch_init_params(@source)
     @properties = []
-    @wait = 1
   end
 
   def launch(limit = nil)
     i = 0
-    fetch_main_page(self).each do |item|
-      begin
-        hashed_property = {}
-        hashed_property[:link] = "https://www.eylauimmobilier.com" + access_xml_link(item, "a", "href")[0].to_s
-        hashed_property[:surface] = regex_gen(access_xml_text(item, "p.info > span:nth-child(1)"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
-        hashed_property[:price] = access_xml_text(item, "span.always > p:nth-child(2)").to_int_scrp
-        hashed_property[:rooms_number] = access_xml_text(item, "p.info > span:nth-child(2)").to_int_scrp
-        hashed_property[:flat_type] = regex_gen(access_xml_text(item, "p.type"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
-        hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.always > p:nth-child(1)"))
-        if go_to_prop?(hashed_property, 7)
-          html = fetch_static_page(hashed_property[:link])
-          hashed_property[:description] = access_xml_text(html, "p.detail_description").strip
-          hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-          hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-          hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
-          hashed_property[:provider] = "Agence"
-          hashed_property[:source] = @source
-          hashed_property[:contact_number] = "+33182839983"
-          hashed_property[:images] = []
-          access_xml_array_to_text(html, "script").each_line do |line|
-            hashed_property[:images].push("https://www.eylauimmobilier.com" + line.split('src:"')[1].split('", alt:')[0]) if line.include?('slides.push({ src:"/datas/biens')
+    self.params.each do |args|
+      fetch_main_page(args).each do |item|
+        begin
+          hashed_property = {}
+          hashed_property[:link] = "https://www.eylauimmobilier.com" + access_xml_link(item, "a", "href")[0].to_s
+          hashed_property[:surface] = regex_gen(access_xml_text(item, "p.info > span:nth-child(1)"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
+          hashed_property[:price] = access_xml_text(item, "span.always > p:nth-child(2)").to_int_scrp
+          hashed_property[:rooms_number] = access_xml_text(item, "p.info > span:nth-child(2)").to_int_scrp
+          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "p.type"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.always > p:nth-child(1)"))
+          if go_to_prop?(hashed_property, 7)
+            html = fetch_static_page(hashed_property[:link])
+            hashed_property[:description] = access_xml_text(html, "p.detail_description").strip
+            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
+            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:provider] = "Agence"
+            hashed_property[:source] = @source
+            hashed_property[:contact_number] = "+33182839983"
+            hashed_property[:images] = []
+            access_xml_array_to_text(html, "script").each_line do |line|
+              hashed_property[:images].push("https://www.eylauimmobilier.com" + line.split('src:"')[1].split('", alt:')[0]) if line.include?('slides.push({ src:"/datas/biens')
+            end
+            @properties.push(hashed_property) ##testing purpose
+            enrich_then_insert_v2(hashed_property)
+            i += 1
+            break if i == limit
           end
-          @properties.push(hashed_property) ##testing purpose
-          enrich_then_insert_v2(hashed_property)
-          i += 1
-          break if i == limit
         end
       rescue StandardError => e
         error_outputs(e, @source)

@@ -10,12 +10,12 @@ class Hub::ScraperBienIci < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      fetch_main_page_multi_city(args)["realEstateAds"].each do |item|
+      fetch_main_page(args)["realEstateAds"].each do |item|
         begin
           hashed_property = {}
           hashed_property[:link] = "https://www.bienici.com/annonce/vente/" + item["id"]
           hashed_property[:surface] = item["surfaceArea"].round if item["surfaceArea"].is_a?(Integer) ## the json is sometimes an array for bad properties
-          hashed_property[:area] = perform_district_regex(item["postalCode"], args["zone"])
+          hashed_property[:area] = perform_district_regex(item["postalCode"], args.zone)
           hashed_property[:rooms_number] = item["roomsQuantity"]
           hashed_property[:price] = item["price"] if item["price"].is_a?(Integer)
           next if hashed_property[:link].match(/(visiteonline-)/i).is_a?(MatchData)
@@ -26,7 +26,7 @@ class Hub::ScraperBienIci < Scraper
             hashed_property[:flat_type] = item["propertyType"]
             hashed_property[:floor] = item["floorQuantity"]
             hashed_property[:has_elevator] = item["hasElevator"]
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args["zone"])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []

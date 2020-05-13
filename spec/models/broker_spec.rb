@@ -42,6 +42,7 @@ RSpec.describe Broker, type: :model do
           expect(Broker.get_current_broker(@tuesday_evening).trello_username).to eq(@hugo.trello_username)
           expect(Broker.get_current_broker(@wednesday_am).trello_username).to eq(@hugo.trello_username)
           expect(Broker.get_current_broker(@wednesday_pm).trello_username).not_to eq(@hugo.trello_username)
+          expect(Broker.get_current_broker(@friday_pm).trello_username).to eq(@hugo.trello_username)
 
         end
         it "should return Veronique" do
@@ -50,7 +51,7 @@ RSpec.describe Broker, type: :model do
           expect(Broker.get_current_broker(@monday_evening).trello_username).not_to eq(@veronique.trello_username)
 
           # Créneau 2 : Vendredi aprem
-          expect(Broker.get_current_broker(@friday_pm).trello_username).to eq(@veronique.trello_username)
+          # expect(Broker.get_current_broker(@friday_pm).trello_username).to eq(@veronique.trello_username)
           expect(Broker.get_current_broker(@friday_evening).trello_username).not_to eq(@veronique.trello_username)
         end
         it "should return Aurelien" do

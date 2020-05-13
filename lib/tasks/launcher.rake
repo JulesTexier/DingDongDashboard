@@ -68,3 +68,10 @@ namespace :test do
     Rake::Task["spec"].execute
   end
 end
+
+namespace :broker do 
+  desc "Tasks related to brokers"
+  task :good_morning_message do 
+    Broker.send_good_morning_message_leads
+  end
+end

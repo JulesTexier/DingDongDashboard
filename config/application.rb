@@ -26,10 +26,11 @@ module GiantCat
     config.autoload_paths += [
       "#{Rails.root}/app/services/broadcasters",
       "#{Rails.root}/app/services/scrapers",
+      "#{Rails.root}/app/services/growths",
       "#{Rails.root}/app/workers"
     ]
 
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
 
   end
 end

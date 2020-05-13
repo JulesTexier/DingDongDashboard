@@ -30,7 +30,7 @@ class Email::ScraperSeLogerMultiple < Scraper
         hashed_property[:provider] = "Agence"
         hashed_property[:source] = @source
         hashed_property[:has_elevator] = nil
-        if go_to_prop?(hashed_property, 7)
+        if go_to_prop?(hashed_property, 30)
           @properties.push(hashed_property) ##testing purpose
           enrich_then_insert_v2(hashed_property)
         end

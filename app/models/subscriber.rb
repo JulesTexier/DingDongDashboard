@@ -2,14 +2,15 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
+  after_update :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
-  validates_uniqueness_of :facebook_id, :case_sensitive => false
-  validates :facebook_id, presence: true 
+  # validates_uniqueness_of :facebook_id, :case_sensitive => false
+  # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true 
-  validates :lastname, presence: true 
+  validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -21,6 +22,18 @@ class Subscriber < ApplicationRecord
 
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
+
+  has_many :subscriber_sequences
+  has_many :sequences, through: :subscriber_sequences
+
+  def is_client?
+    case self.status 
+    when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
+      true 
+    else
+      false
+    end
+  end
 
   def get_areas_list
     list = ""
@@ -95,10 +108,12 @@ class Subscriber < ApplicationRecord
   end
 
   def get_morning_props
-    t = Time.now
-    t.in_time_zone("Europe/Paris")
-    start_date = t.change(day: t.day - 1, hour: 22)
-    end_date = t.change(hour: 9)
+    # t = Time.now
+    # t.in_time_zone("Europe/Paris")
+    # byebug
+    now = DateTime.now.in_time_zone("Europe/Paris")
+    start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
+    end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
 
     props = Property.where("created_at BETWEEN ? AND ?", start_date, end_date)
 
@@ -133,10 +148,124 @@ class Subscriber < ApplicationRecord
   end
 
   def notify_broker_trello(comment) 
-    Trello.new.add_comment_to_lead_card(self, comment)
+    Trello.new.add_comment_to_user_card(self, comment)
+  end
+
+  # TRELLO METHODS 
+  def trello_description
+    desc = ""
+    desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
+    desc += "\u000A**PROJET**\u000A"
+    desc += "\u000A**FINANCEMENT**\u000A"
+    desc += "\u000A**CLIENTE**\u000A"
+    desc += "\u000A**NOTES**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (inscription) :**\u000A"
+    desc += "\u000A**SUITE RDV COURTAGE :**\u000A"
+    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (courtage) :**\u000A"
+    desc += "\u000A\u000A---\u000A\u000A"
+    desc += trello_summary
+  end
+
+  def trello_summary
+    desc = ""
+    desc += "**#{self.get_fullname.upcase}**"
+    desc += "\u000A**Projet d'achat** : #{self.project_type}"
+    desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} €"
+    desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
+    desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
+    desc += "\u000A**Arrondissements** : #{self.get_initial_areas}"
+    desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
+    desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
+    desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
+    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+  end
+
+  def get_chatbot_link
+    return "https://m.me/HiDingDong?ref=hello--#{self.id}"
+  end
+
+  def get_fullname
+    return self.firstname + " " + self.lastname
+  end
+
+  def get_areas_list
+    areas = ""
+    self.areas.each do |area|
+      areas += area.name + ", "
+    end
+    return areas
+  end
+
+  def get_initial_areas
+    
+    areas_name = []
+    if !self.initial_areas.nil?
+      self.initial_areas.split(",").each do |area|
+        areas_name.push(Area.find(area).name)
+      end
+    end 
+    return areas_name.join(", ")
+  end
+
+  def onboarding_old_user
+    self.update(has_messenger: true)
+    onboarding_broker
+    Trello.new.add_label_old_user(self)
   end
 
   private
+
+  # Onboarding methods 
+  def handle_onboarding
+    if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
+      #0 • Handle duplicate
+      if Subscriber.where(email: self.email).size > 1
+        handle_duplicate
+      # 1 • Handle case user is a real estate hunter 
+      elsif self.project_type.downcase.include?("chasseur")
+        onboarding_hunter
+      # 2 • Handle case user has not Messenger 
+      elsif !self.has_messenger 
+        onboarding_no_messenger
+      else 
+        onboarding_broker
+      end
+    end
+  end
+
+  def handle_duplicate
+    self.update(status: "duplicates")
+    PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
+  end
+  
+  def onboarding_hunter
+    # Send email to lead with Max in C/C
+    PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
+  end
+
+  def onboarding_no_messenger
+    # Send email to lead with explainations 
+    PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
+  end
+
+  def onboarding_broker
+    self.update(broker: Broker.get_current_broker) if self.broker.nil?
+    trello = Trello.new
+    sms = SmsMode.new
+    if Rails.env.production?
+      if trello.add_new_user_on_trello(self)
+        # self.broker.send_email_notification(self) 
+        now = Time.now.in_time_zone('Paris')
+        if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
+          sms.send_sms_to_broker(self, self.broker) 
+        end
+      end
+    else
+      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"
+    end
+  end
+
+  # Matching methods 
 
   def is_matching_property_price(property)
     (property.price <= self.max_price ? true : false) if !self.max_price.nil?
@@ -164,7 +293,7 @@ class Subscriber < ApplicationRecord
 
   def is_matching_property_elevator_floor(property)
     if self.min_elevator_floor.nil?
-      return true 
+      return true
     else
       if !property.has_elevator.nil?
         if property.has_elevator
@@ -183,9 +312,9 @@ class Subscriber < ApplicationRecord
   end
 
   def notify_broker_if_max_price_is_changed
-    if !previous_changes['max_price'].nil? && !self.broker.nil? && !self.trello_id_card.nil?
-      old_price = previous_changes['max_price'][0]
-      new_price = previous_changes['max_price'][1]
+    if !previous_changes["max_price"].nil? && !self.broker.nil? && !self.trello_id_card.nil?
+      old_price = previous_changes["max_price"][0]
+      new_price = previous_changes["max_price"][1]
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end

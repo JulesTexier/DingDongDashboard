@@ -1,54 +1,51 @@
 class Premium::ScraperLeBonCoin < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :properties, :source, :params
 
   def initialize
-    @url = "https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max"
     @source = "LeBonCoin"
-    @main_page_cls = "body"
-    @type = "Captcha"
-    @waiting_cls = nil
-    @multi_page = false
-    @page_nbr = 1
+    @params = fetch_init_params(@source)
     @properties = []
   end
 
   def launch(limit = nil)
     i = 0
-    xml = fetch_main_page(self)
-    if !xml[0].to_s.strip.empty?
-      json = extract_json(xml)
-      hashed_properties = []
-      if !json.nil?
-        json["data"]["ads"].each do |item|
-          begin
-            unless Rails.env.test?
-              ## Some tape to prevent LBC lack of properties and random old properties showing up on main page
-              ## wrapped it in a condition for test env, otherwise every fixtures will be outdated in two days
-              next if Time.parse(item["first_publication_date"]) < Time.now - 2.days
+    self.params.each do |args|
+      xml = fetch_main_page(args)
+      if !xml[0].to_s.strip.empty?
+        json = extract_json(xml)
+        hashed_properties = []
+        if !json.nil?
+          json["data"]["ads"].each do |item|
+            begin
+              unless Rails.env.test?
+                ## Some tape to prevent LBC lack of properties and random old properties showing up on main page
+                ## wrapped it in a condition for test env, otherwise every fixtures will be outdated in two days
+                next if Time.parse(item["first_publication_date"]) < Time.now - 2.days
+              end
+              hashed_property = extract_each_flat(item)
+              property_checker_hash = {}
+              property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
+              property_checker_hash[:surface] = hashed_property[:surface]
+              property_checker_hash[:price] = hashed_property[:price]
+              property_checker_hash[:area] = hashed_property[:area]
+              property_checker_hash[:link] = hashed_property[:link]
+              if go_to_prop?(property_checker_hash, 7)
+                @properties.push(hashed_property)
+                enrich_then_insert_v2(hashed_property)
+                i += 1
+              end
+              break if i == limit
+            rescue StandardError => e
+              error_outputs(e, @source)
+              next
             end
-            hashed_property = extract_each_flat(item)
-            property_checker_hash = {}
-            property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
-            property_checker_hash[:surface] = hashed_property[:surface]
-            property_checker_hash[:price] = hashed_property[:price]
-            property_checker_hash[:area] = hashed_property[:area]
-            property_checker_hash[:link] = hashed_property[:link]
-            if go_to_prop?(property_checker_hash, 7)
-              @properties.push(hashed_property)
-              enrich_then_insert_v2(hashed_property)
-              i += 1
-            end
-            break if i == limit
-          rescue StandardError => e
-            error_outputs(e, @source)
-            next
           end
+        else
+          puts "Error Parsing JSON.\n\n"
         end
       else
-        puts "Error Parsing JSON.\n\n"
+        puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
       end
-    else
-      puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
     end
     return @properties
   end

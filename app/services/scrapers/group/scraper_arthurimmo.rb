@@ -1,20 +1,16 @@
 class Group::ScraperArthurimmo < Scraper
-  attr_accessor :url, :properties, :source, :main_page_cls, :type, :waiting_cls, :multi_page, :page_nbr
+  attr_accessor :properties, :source, :params
 
   def initialize
-    @url = "https://www.arthurimmo.com/recherche,incl_recherche_prestige_ajax.htm?idpays=250&ci=750056&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&tri=d_dt_crea%2Cd_dt_crea&idtypebien=1%2C2&tri=d_dt_crea&_=1587115724817"
     @source = "Arthurimmo"
-    @main_page_cls = "div.recherche-annonces-vente"
-    @type = "Static"
-    @waiting_cls = nil
-    @multi_page = false
-    @page_nbr = 1
+    @params = fetch_init_params(@source)
     @properties = []
   end
-
+  
   def launch(limit = nil)
     i = 0
-    fetch_main_page(self).each do |item|
+    self.params.each do |args|
+      fetch_main_page(args).each do |item|
       begin
         hashed_property = {}
         hashed_property[:link] = access_xml_link(item, "a", "href")[0]
@@ -41,6 +37,7 @@ class Group::ScraperArthurimmo < Scraper
           i += 1
           break if i == limit
         end
+      end
       rescue StandardError => e
         error_outputs(e, @source)
         next

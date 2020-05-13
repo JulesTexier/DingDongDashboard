@@ -1,8 +1,9 @@
+# coding: utf-8
 require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !is_already_exists_by_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+    if !final_check_with_desc(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -19,7 +20,7 @@ class Scraper
 
   def fetch_main_page(args)
     if !args.multi_page
-      case args.type
+      case args.scraper_type
       when "Static"
         html = fetch_static_page(args.url)
       when "Dynamic"
@@ -41,31 +42,6 @@ class Scraper
       json.nil? ? access_xml_raw(html, args.main_page_cls) : json
     else
       card = fetch_many_pages(args.url, args.page_nbr, args.main_page_cls)
-    end
-  end
-
-  def fetch_main_page_multi_city(args)
-    if !args["multi_page"]
-      case args["type"]
-      when "Static"
-        html = fetch_static_page(args["url"])
-      when "Captcha"
-        html = fetch_captcha_page(args["url"])
-      when "HTTPRequest"
-        case args["http_type"]
-        when "get_json"
-          json = fetch_json_get(args["url"])
-        when "post_json"
-          json = fetch_json_post(args["url"], args["http_request"])
-        when "post"
-          html = fetch_http_page(args["url"], args["http_request"])
-        end
-      else
-        puts "Error"
-      end
-      json.nil? ? access_xml_raw(html, args["main_page_cls"]) : json
-    else
-      card = fetch_many_pages(args["url"], args["page_nbr"], args["main_page_cls"])
     end
   end
 
@@ -104,17 +80,18 @@ class Scraper
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n°#{attempt_count} for #{source}\n\n" unless Rails.env.test?
+      puts "Worked on attempt n#{attempt_count} for #{source}\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
   end
 
   def fetch_http_page(url, http_request)
+    header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
       method: :post,
-      headers: http_request[0],
+      headers: header,
       body: http_request[1],
     )
     request.run
@@ -122,10 +99,11 @@ class Scraper
   end
 
   def fetch_json_post(url, http_request)
+    header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
       method: :post,
-      headers: http_request[0],
+      headers: header,
       body: http_request[1],
     )
     response = request.run
@@ -419,26 +397,28 @@ class Scraper
     end
   end
 
-  def is_already_exists_by_desc?(hashed_property)
+  def final_check_with_desc(hashed_property)
     response = false
 
     properties = Property.where(
       surface: hashed_property[:surface],
       price: hashed_property[:price],
       area: Area.where(name: hashed_property[:area]).first,
-      rooms_number: hashed_property[:rooms_number],
     )
 
     properties.each do |property|
       response = desc_comparator(property.description, hashed_property[:description])
       break if response
     end
+
+    response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
+
     return response
   end
 
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
   def is_it_unwanted_prop?(str)
-    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)/i).is_a?(MatchData)
+    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
   end
 
   def is_it_night?
@@ -517,13 +497,10 @@ class Scraper
   #####################################
 
   def fetch_init_params(source)
-    yaml_file = YAML.load_file("./db/data/scraper_params.yml")
+    parameters = ScraperParameter.where(source: source)
     data = []
-
-    yaml_file.each do |scraper|
-      if scraper["source"] == source
-        data = scraper["params"]
-      end
+    parameters.each do |param|
+      data.push(param) unless param.is_active == false
     end
     return data
   end
