@@ -48,7 +48,7 @@ Return true or false
 This method is the first checker to determine if we have a property in our data base.
 
 The "prop" parameters is a hash composed with 3 or 4 keys :
-``` surface``` ``` price``` ``` area``` ``` link```
+``` surface``` ``` price``` ``` area``` ``` link``` ```rooms_number```
 
 The ```time```parameters is an integer that determines a time frame in days. (ex: ```time = 1``` is a one day time frame)
 
@@ -56,7 +56,7 @@ The ```time```parameters is an integer that determines a time frame in days. (ex
 
 If we have the value of price and surface (it isn't ```nil``` or equal to ```0```) we check if the square meter price is under 5000€ in Paris, or 1000€ in other zones, then we determined that this isn't a property we want to insert. 
 
-If we don't have those values (price and surface), we decide to keep up a further inspection because maybe we can get those values in the show of the property, so it's not discrimated.
+If we don't have those values (price and surface), we decide to keep up a further inspection because maybe we can get those values in the show of the property, so it's not discriminated.
 
 
 
