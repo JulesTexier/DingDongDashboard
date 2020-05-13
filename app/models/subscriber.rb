@@ -2,15 +2,15 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
-  after_create :handle_onboarding
+  after_update :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
   # validates_uniqueness_of :facebook_id, :case_sensitive => false
   # validates :facebook_id, presence: true 
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true
-  validates :lastname, presence: true
+  validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -22,6 +22,18 @@ class Subscriber < ApplicationRecord
 
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
+
+  has_many :subscriber_sequences
+  has_many :sequences, through: :subscriber_sequences
+
+  def is_client?
+    case self.status 
+    when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
+      true 
+    else
+      false
+    end
+  end
 
   def get_areas_list
     list = ""
@@ -185,18 +197,27 @@ class Subscriber < ApplicationRecord
   end
 
   def get_initial_areas
+    
     areas_name = []
-    self.initial_areas.split(",").each do |area|
-      areas_name.push(Area.find(area).name)
-    end
+    if !self.initial_areas.nil?
+      self.initial_areas.split(",").each do |area|
+        areas_name.push(Area.find(area).name)
+      end
+    end 
     return areas_name.join(", ")
+  end
+
+  def onboarding_old_user
+    self.update(has_messenger: true)
+    onboarding_broker
+    Trello.new.add_label_old_user(self)
   end
 
   private
 
   # Onboarding methods 
   def handle_onboarding
-    if self.status != "onboarding_started" 
+    if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
       #0 • Handle duplicate
       if Subscriber.where(email: self.email).size > 1
         handle_duplicate
@@ -229,15 +250,18 @@ class Subscriber < ApplicationRecord
 
   def onboarding_broker
     self.update(broker: Broker.get_current_broker) if self.broker.nil?
-      trello = Trello.new
-      sms = SmsMode.new
-      if Rails.env.production?
-        if trello.add_new_user_on_trello(self)
-          self.broker.send_email_notification(self) 
-          sms.send_sms_to_broker(self, self.broker)
+    trello = Trello.new
+    sms = SmsMode.new
+    if Rails.env.production?
+      if trello.add_new_user_on_trello(self)
+        # self.broker.send_email_notification(self) 
+        now = Time.now.in_time_zone('Paris')
+        if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
+          sms.send_sms_to_broker(self, self.broker) 
         end
-      else
-        puts "Subscriber créé, mais on le l'a pas mis sur le Trello car on est en dev"
+      end
+    else
+      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"
     end
   end
 
@@ -294,4 +318,5 @@ class Subscriber < ApplicationRecord
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end
+
 end

@@ -26,6 +26,12 @@ class SmsMode
     send_sms_get(message, team_phone_numbers, "DingDong")
   end
 
+  def send_good_morning_sms_to_broker(broker, count)
+    message = "Bonjour #{broker.firstname}, #{count} nouveau(x) contact(s) se sont inscris depuis hier soir et attendent ton appel."
+    message += "\u000ABonne journée !"
+    send_sms_get(message, [broker.phone], "DingDong", option_stop = "")
+  end
+
   private
 
   def send_sms_get(message, destinataires, emetteur, option_stop = "")

@@ -37,4 +37,9 @@ class PostmarkMailer < ApplicationMailer
     self.template_model = { lead_firstname: lead.firstname }
     mail from: "etienne@hellodingdong.com", to: lead.email, bcc: "maxime@hellodingdong.com", postmark_template_alias: "onboarding-hunter"
   end
+
+  def send_referral(subscriber, referral)
+    self.template_model = { broker_firstname: subscriber.broker.firstname, referral_type: referral.referral_type, referral_firstname: referral.firstname, subscriber_fullname: subscriber.get_fullname, subscriber_email: subscriber.email, subscriber_phone: subscriber.phone }
+    mail from: "etienne@hellodingdong.com", to: [subscriber.email, referral.email], cc: subscriber.broker.email, bcc: "etienne@hellodingdong.com", postmark_template_alias: "referral_template"
+  end
 end
