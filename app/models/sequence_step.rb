@@ -23,7 +23,7 @@ class SequenceStep < ApplicationRecord
       if Rails.env.production?
         GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
       else
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver
+        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
       end
     else
       puts "error"

@@ -1,9 +1,14 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   devise_for :admins
   get "lead/create"
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
+  authenticate :admin do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root "static#home"
 
@@ -19,7 +24,7 @@ Rails.application.routes.draw do
       resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
-
+      
       # Manychat routes
       # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
