@@ -23,6 +23,7 @@ class Independant::ScraperImmobilierSurMesure < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.infos-long > h2")) if hashed_property[:area] == "N/C"
+            next if hashed_property[:area] == "N/C"
             hashed_property[:description] = access_xml_text(html, ".text-bien > p").strip
             hashed_property[:flat_type] = regex_gen(access_xml_text(html, "strong.bread-current"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
             hashed_property[:agency_name] = "Immo Sur Mesure"

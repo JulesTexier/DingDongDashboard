@@ -56,7 +56,7 @@ class Premium::ScraperMeilleursAgents < Scraper
     hashed_property[:floor] = nil
     hashed_property[:source] = @source
     hashed_property[:provider] = "Agence"
-    hashed_property[:description] = "Aouch! Ding Dong n'est pas en mesure de vous fournir une description pour ce bien."
+    hashed_property[:description] = ""
     return hashed_property
   end
 end
