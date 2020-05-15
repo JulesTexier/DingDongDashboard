@@ -39,17 +39,9 @@ class SubscribersController < ApplicationController
   end
 
   def create
-    subscriber = Subscriber.new(subscriber_params)
-    subscriber.status = "form_filled"
-    if subscriber.save 
-      subscriber.initial_areas.split(",").each do |area_id|
-        SelectedArea.create(subscriber: subscriber, area_id: area_id)
-      end
-      if subscriber.status == "duplicates"
-        flash[:danger] = "Oups, nous avons déjà une demande avec ce mail !"
-      else
-        flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
-      end
+    subscriber = Subscriber.where(email: subscriber_params["email"]).empty? ? Subscriber.new(subscriber_params) : Subscriber.where(email: subscriber_params["email"]).last
+    if subscriber.handle_form_filled(subscriber_params)
+      flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
       redirect_to "/inscription-finalisee?id=#{subscriber.id}"
     else 
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
