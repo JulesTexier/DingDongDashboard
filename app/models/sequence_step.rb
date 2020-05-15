@@ -46,11 +46,11 @@ class SequenceStep < ApplicationRecord
     end
   end
 
-  private
-
   def get_status_name
     "sequence_" + self.sequence.id.to_s + "_step_" + self.id.to_s
   end
+
+  private
 
   def create_adequate_status
     Status.create(name: get_status_name, description: self.description, status_type: "acquisition")
