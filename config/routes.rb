@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
   authenticate :admin do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => "/sidekiq"
   end
 
   root "static#home"
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
-      
+
       # Manychat routes
       # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
       post "webhooks/postmark/growth-emailing" => "webhooks#handle_postmark_growth_emailing"
       post "webhooks/postmark/growth-new-contact" => "webhooks#handle_postmark_new_contact"
+      post "webhooks/funnel/website_visited" => "webhooks#handle_website_link_clicked"
 
       #data
       get "data/subscribers" => "data#get_subscribers"
