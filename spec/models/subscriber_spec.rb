@@ -179,6 +179,8 @@ RSpec.describe Subscriber, type: :model do
         @sub = FactoryBot.create(:subscriber, broker: nil)
         @sub.handle_form_filled(@subscriber_params)
         expect(@sub.statuses.last).to eq(@form_filled_status)
+        expect(@sub.statuses.last).to eq(@form_filled_status)
+        expect(@sub.broker).to eq(Broker.get_current_broker)
       end
     end
   end
