@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Subscriber, type: :model do
-  # let (:property) { FactoryBot.create(:property) }
-
   describe Subscriber do
     describe "model" do
       it "has a valid factory" do
@@ -12,11 +10,7 @@ RSpec.describe Subscriber, type: :model do
       context "validations" do
         before { FactoryBot.build(:subscriber) }
         it do
-          # should validate_uniqueness_of(:facebook_id).case_insensitive
-          # should validate_presence_of(:facebook_id)
           should validate_presence_of(:firstname)
-          # should validate_presence_of(:email)
-          # should validate_presence_of(:phone)
         end
       end
 
@@ -135,6 +129,56 @@ RSpec.describe Subscriber, type: :model do
             end
           end
         end
+      end
+    end
+  end
+
+  describe "all #handle_form_filled use cases" do
+    before :each do
+      @sub = FactoryBot.create(:subscriber)
+      @form_filled_status = FactoryBot.create(:status, name: "form_filled")
+      @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
+      @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
+      FactoryBot.create(:area)
+      @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
+    end
+    context "testing if adequate status is create" do
+      it "should return true because the update is working correctly" do
+        expect(@sub.handle_form_filled(@subscriber_params)).to eq(true)
+      end
+
+      it "should check if subscriber has been updated" do
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.firstname).to eq("Maxime")
+        expect(@sub.lastname).to eq("Le Segretain")
+        expect(@sub.firstname).not_to eq("Jean")
+        expect(@sub.lastname).not_to eq("Foutre")
+      end
+
+      it "should check if subscriber status form_filled has been created" do
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.statuses.last).to eq(@form_filled_status)
+      end
+
+      it "should check if subscriber status form_filled has been created, and has_not_messenger as will if user hasnt messenger" do
+        @subscriber_params["has_messenger"] = "false"
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.statuses.first).to eq(@form_filled_status)
+        expect(@sub.statuses.last).to eq(@has_not_messenger)
+        expect(@sub.has_messenger).to eq(false)
+      end
+
+      it "should check if subscriber status form_filled and real_estate_hunter has been created" do
+        @subscriber_params["project_type"] = "Chasseur"
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.statuses.first).to eq(@form_filled_status)
+        expect(@sub.statuses.last).to eq(@hunter_status)
+      end
+
+      it "should only create form_filled status and launch onboarding broker method" do
+        @sub = FactoryBot.create(:subscriber, broker: nil)
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.statuses.last).to eq(@form_filled_status)
       end
     end
   end
