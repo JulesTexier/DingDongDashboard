@@ -10,32 +10,32 @@ class Premium::ScraperSeLoger < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      html = fetch_static_page_proxy(args.url)
+      html = fetch_static_page_proxy_auth(args.url)
       xml = access_xml_raw(html, args.main_page_cls)
-        json = extract_json(xml)
-        json["cards"]["list"].each do |item|
-          if item["cardType"] == "classified"
-            begin
-              hashed_property = extract_each_flat(item)
-              property_checker_hash = {}
-              property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
-              property_checker_hash[:surface] = hashed_property[:surface]
-              property_checker_hash[:price] = hashed_property[:price]
-              property_checker_hash[:area] = hashed_property[:area]
-              property_checker_hash[:link] = hashed_property[:link]
-              if go_to_prop?(property_checker_hash, 7) && hashed_property[:agency_name] != "Ding Dong"
-                puts JSON.pretty_generate(hashed_property)
-                @properties.push(hashed_property)
-                enrich_then_insert_v2(hashed_property)
-                i += 1
-              end
-              break if i == limit
-            rescue StandardError => e
-              error_outputs(e, @source)
-              next
+      json = extract_json(xml)
+      json["cards"]["list"].each do |item|
+        if item["cardType"] == "classified"
+          begin
+            hashed_property = extract_each_flat(item)
+            property_checker_hash = {}
+            property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
+            property_checker_hash[:surface] = hashed_property[:surface]
+            property_checker_hash[:price] = hashed_property[:price]
+            property_checker_hash[:area] = hashed_property[:area]
+            property_checker_hash[:link] = hashed_property[:link]
+            if go_to_prop?(property_checker_hash, 7) && hashed_property[:agency_name] != "Ding Dong"
+              puts JSON.pretty_generate(hashed_property)
+              @properties.push(hashed_property)
+              enrich_then_insert_v2(hashed_property)
+              i += 1
             end
+            break if i == limit
+          rescue StandardError => e
+            error_outputs(e, @source)
+            next
           end
         end
+      end
       # else
       #   puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
       # end

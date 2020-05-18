@@ -12,6 +12,7 @@ RSpec.describe Premium::ScraperMeilleursAgents, type: :service do
   end
 
   it "should launch and return proper number of properties" do
+    byebug
     # VCR.use_cassette(@s.source) do
     expect(@s.launch).to be_a(Array)
     expect(Property.where(source: @s.source).count).to be >= 1

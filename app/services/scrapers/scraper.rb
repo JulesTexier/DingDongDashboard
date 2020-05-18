@@ -162,6 +162,19 @@ class Scraper
     File.open("db/data/proxy_ip.yml", "w") { |file| file.write(hsh.to_yaml) }
   end
 
+  def fetch_static_page_proxy_auth(url)
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    proxy_params = get_proxy_params
+    puts proxy_params
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_uri = URI.parse("http://" + "199.189.86.111:9500")
+    puts proxy_uri
+    page = Nokogiri::HTML.parse(open(url, :proxy_http_basic_authentication => [proxy_uri, ENV["USERNAME_ROT_PROXY"], ENV["PASSWORD_ROT_PROXY"]], "User-Agent" => user_agent))
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "The PROXY FETCHING script took #{ending - starting} seconds to run"
+    return page
+  end
+
   def fetch_static_page_proxy(url)
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     proxy_params = get_proxy_params
@@ -358,9 +371,9 @@ class Scraper
         prop.except(:area)
       ).where("created_at >= ?", time.days.ago)
     else
+      prop[:area] = Area.where(name: prop[:area]).first
       props = Property.where(
-        prop.except(:area),
-        area: Area.where(name: prop[:area]).first,
+        prop
       ).where("created_at >= ?", time.days.ago)
     end
     props.count == 0 ? false : true
@@ -399,6 +412,8 @@ class Scraper
       response = desc_comparator(property.description, hashed_property[:description])
       break if response
     end
+
+    Property.where(surface: hashed_property[:surface], price: hashed_property[:price], area: Area.where(name: hashed_property[:area]).first)
 
     response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
 

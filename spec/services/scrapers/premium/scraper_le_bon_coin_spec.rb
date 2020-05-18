@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.describe Premium::ScraperLeBonCoin, type: :service do
   before(:all) do
     @s = Premium::ScraperLeBonCoin.new
-    @limit = 10
     area_yaml = YAML.load_file("db/data/areas.yml")
     area_yaml.each do |district_data|
       district_data["datas"].each do |data|
@@ -14,7 +13,7 @@ RSpec.describe Premium::ScraperLeBonCoin, type: :service do
 
   it "should launch and return proper number of properties" do
     # VCR.use_cassette(@s.source) do
-    expect(@s.launch(@limit)).to be_a(Array)
+    expect(@s.launch).to be_a(Array)
     expect(Property.where(source: @s.source).count).to be >= 1
     expect(Property.where(source: @s.source).count).to be == @s.properties.count
     # end
