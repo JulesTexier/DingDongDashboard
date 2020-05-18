@@ -338,9 +338,9 @@ class Scraper
         prop.except(:area)
       ).where("created_at >= ?", time.days.ago)
     else
+      prop[:area] = Area.where(name: prop[:area]).first
       props = Property.where(
-        prop.except(:area),
-        area: Area.where(name: prop[:area]).first,
+        prop
       ).where("created_at >= ?", time.days.ago)
     end
     props.count == 0 ? false : true
