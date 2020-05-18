@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :area do
-    name { "75018" }
+    name { "Paris 1er" }
     description { "Magnifique arondissement de Montmartre" }
   end
 end

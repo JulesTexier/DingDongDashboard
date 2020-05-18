@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :subscriber do
-    firstname { "Jean" } 
+    firstname { "Jean" }
     lastname { "Foutre" }
     email { "#{firstname}.#{lastname}@email.com".downcase }
     phone { "0680088008" }
@@ -10,7 +10,7 @@ FactoryBot.define do
     facebook_id { "fb000001" }
     project_type { "1er achat" }
     has_messenger { true }
-    status {"form filled" }
+    status { "form filled" }
     broker { FactoryBot.create(:broker) }
     initial_areas { FactoryBot.create(:area).id }
 
