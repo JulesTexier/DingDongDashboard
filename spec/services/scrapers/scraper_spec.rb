@@ -130,42 +130,42 @@ RSpec.describe Scraper, type: :service do
     context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
       before(:each) do
         @s = Scraper.new
-        area = FactoryBot.create(:area, name: "Paris 17ème", zone: "Paris")
-        FactoryBot.create(:property, created_at: 6.days.ago, area: area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
-        @prop = { area: "Paris 17ème", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
+        @propp = FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Fourqueux"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
       end
 
       it "should return true because the two properties are the same" do
-        expect(@s.does_prop_exists?(@prop.except(:area), 7)).to eq(true)
-        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 7)).to eq(true)
-        expect(@s.does_prop_exists?(@prop.except(:surface), 7)).to eq(true)
-        expect(@s.does_prop_exists?(@prop.except(:price), 7)).to eq(true)
+        filtered_prop = @prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
+        expect(@s.does_prop_exists?(filtered_prop.except(:area), 8)).to eq(true)
+        expect(@s.does_prop_exists?(filtered_prop.except(:rooms_number), 8)).to eq(true)
+        expect(@s.does_prop_exists?(filtered_prop.except(:surface), 8)).to eq(true)
+        expect(@s.does_prop_exists?(filtered_prop.except(:price), 8)).to eq(true)
       end
 
       it "should return false because the two properties are the same, but the timeframe is outside the property created_at" do
-        expect(@s.does_prop_exists?(@prop, 3)).to eq(false)
-        expect(@s.does_prop_exists?(@prop, 4)).to eq(false)
-        expect(@s.does_prop_exists?(@prop, 6)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:area), 3)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:area), 4)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:area), 6)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 3)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 4)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:rooms_number), 6)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:price), 3)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:price), 4)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:price), 6)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:surface), 3)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:surface), 4)).to eq(false)
-        expect(@s.does_prop_exists?(@prop.except(:surface), 6)).to eq(false)
+        filtered_prop = @prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
+        expect(@s.does_prop_exists?(filtered_prop, 3)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop, 4)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop, 6)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:area), 3)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:area), 4)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:area), 6)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:rooms_number), 3)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:rooms_number), 4)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:rooms_number), 6)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:price), 3)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:price), 4)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:price), 6)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:surface), 3)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:surface), 4)).to eq(false)
+        expect(@s.does_prop_exists?(filtered_prop.except(:surface), 6)).to eq(false)
       end
     end
 
     context "Testing go_to_prop?(prop, time)" do
       before(:each) do
         @s = Scraper.new
-        @area = FactoryBot.create(:area, name: "Paris 18ème", zone: "Paris")
-        FactoryBot.create(:property, created_at: 6.days.ago, area: @area, surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
+        FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Paris 18ème"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
       end
 
       it "should return false because @prop is the same as a property inside DB" do
