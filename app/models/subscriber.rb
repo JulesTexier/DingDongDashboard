@@ -214,22 +214,22 @@ class Subscriber < ApplicationRecord
     Trello.new.add_label_old_user(self)
   end
 
-  private
-
   def handle_form_filled(subscriber_params)
     has_been_updated = self.update(subscriber_params)
-    SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "form_filled"))
+    SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "form_filled"))
     if self.project_type.downcase.include?("chasseur")
-      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "real_estate_hunter"))
+      SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "real_estate_hunter"))
       onboarding_hunter
     elsif !self.has_messenger
-      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "has_not_messenger"))
+      SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "has_not_messenger"))
       onboarding_no_messenger
     elsif self.broker.nil?
       onboarding_broker
     end
     return has_been_updated
   end
+
+  private
 
   # Onboarding methods
   # def handle_onboarding
