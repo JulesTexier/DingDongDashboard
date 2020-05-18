@@ -1,10 +1,10 @@
 class SubscribersController < ApplicationController
 
-  # Onboarding form 
+  # Onboarding form
   def inscription_1
     @zone_select = []
     Area.all.each do |area|
-      @zone_select << area.zone 
+      @zone_select << area.zone
     end
     @zone_select = @zone_select.uniq
   end
@@ -25,7 +25,7 @@ class SubscribersController < ApplicationController
     @draft_subscriber = params["subscriber"]
     @draft_subscriber["selected_areas"] = params["selected_areas"].join(",")
     @draft_subscriber["project_type"] = params["selected_project_types"].join(",")
-    if @draft_subscriber.nil? 
+    if @draft_subscriber.nil?
       flash[:danger] = "Une erreur est apparue, veuillez recommencer svp"
       redirect_to "/inscription-1"
     else
@@ -43,14 +43,14 @@ class SubscribersController < ApplicationController
     if subscriber.handle_form_filled(subscriber_params)
       flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
       redirect_to "/inscription-finalisee?id=#{subscriber.id}"
-    else 
+    else
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
       puts "ohoh, probleme"
       redirect_to "/inscription-1"
     end
   end
-  
-  # Edit form 
+
+  # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
     zone_areas = []
@@ -58,7 +58,7 @@ class SubscribersController < ApplicationController
       zone_areas.push(area.zone)
     end
     zone_areas.uniq
-    @areas = Area.where(zone:zone_areas)
+    @areas = Area.where(zone: zone_areas)
   end
 
   def update
@@ -66,10 +66,10 @@ class SubscribersController < ApplicationController
     SelectedArea.where(subscriber: @subscriber).destroy_all
     if @subscriber.update(subscriber_params) && !params[:selected_areas].nil?
       params[:selected_areas].each do |area_id|
-        SelectedArea.create(subscriber:@subscriber, area_id:area_id)
+        SelectedArea.create(subscriber: @subscriber, area_id: area_id)
       end
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
-    else 
+    else
       flash[:danger] = "Sélectionnez des arrondissements..."
       # @subscriber.errors.full_messages.each do |message|
       #   flash[:danger] << message
@@ -79,11 +79,9 @@ class SubscribersController < ApplicationController
     redirect_to edit_subscriber_path
   end
 
-
   private
 
   def subscriber_params
     params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas)
-  end 
-
+  end
 end
