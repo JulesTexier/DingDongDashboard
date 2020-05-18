@@ -16,6 +16,8 @@ class Api::V1::TrelloController < ApplicationController
     if !user.nil?
       PostmarkMailer.send_chatbot_link(user).deliver_now
       user.update(status: 'chatbot_invite_sent')
+      status = Status.find_by(name: 'email_chatbot_sent')
+      SubscriberStatus.create(subscriber: user, status: status) if !status.nil?
       render json: {status: 'SUCCESS', message: 'User found', data: user}, status: 200
     else
       b = @trello.get_trello_card_broker(document["cardId"])

@@ -23,5 +23,11 @@
   - name: new_lead
     description: User has been created
     status_type: acquisition
+  - name: real_estate_hunter
+    description: User is a real estate hunter
+    status_type: drop
+  - name: has_not_messenger
+    description: User has not Messenger
+    status_type: drop
 
     

@@ -1,7 +1,7 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
-  after_update :handle_onboarding
+  # after_update :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
   # validates_uniqueness_of :facebook_id, :case_sensitive => false
@@ -175,7 +175,7 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/, '\& ').reverse} €"
     desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
     desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
-    desc += "\u000A**Arrondissements** : #{self.get_initial_areas}"
+    desc += "\u000A**Arrondissements** : #{self.get_areas_list}"
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
@@ -216,23 +216,38 @@ class Subscriber < ApplicationRecord
 
   private
 
-  # Onboarding methods
-  def handle_onboarding
-    if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
-      #0 • Handle duplicate
-      if Subscriber.where(email: self.email).size > 1
-        handle_duplicate
-        # 1 • Handle case user is a real estate hunter
-      elsif self.project_type.downcase.include?("chasseur")
-        onboarding_hunter
-        # 2 • Handle case user has not Messenger
-      elsif !self.has_messenger
-        onboarding_no_messenger
-      else
-        onboarding_broker
-      end
+  def handle_form_filled(subscriber_params)
+    has_been_updated = self.update(subscriber_params)
+    SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "form_filled"))
+    if self.project_type.downcase.include?("chasseur")
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "real_estate_hunter"))
+      onboarding_hunter
+    elsif !self.has_messenger
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: "has_not_messenger"))
+      onboarding_no_messenger
+    elsif self.broker.nil?
+      onboarding_broker
     end
+    return has_been_updated
   end
+
+  # Onboarding methods
+  # def handle_onboarding
+  #   if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
+  #     #0 • Handle duplicate
+  #     if Subscriber.where(email: self.email).size > 1
+  #       handle_duplicate
+  #       # 1 • Handle case user is a real estate hunter
+  #     elsif self.project_type.downcase.include?("chasseur")
+  #       onboarding_hunter
+  #       # 2 • Handle case user has not Messenger
+  #     elsif !self.has_messenger
+  #       onboarding_no_messenger
+  #     else
+  #       onboarding_broker
+  #     end
+  #   end
+  # end
 
   def handle_duplicate
     self.update(status: "duplicates")
