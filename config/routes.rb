@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites"
       get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props"
       post "/manychat/s/:subscriber_id/onboard_broker" => "manychat#onboard_old_users"
+      post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status"
       # Lead
       post "/manychat/l/:lead_id/update" => "manychat#update_lead"
 

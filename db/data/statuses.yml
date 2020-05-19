@@ -29,5 +29,8 @@
   - name: has_not_messenger
     description: User has not Messenger
     status_type: drop
+  - name: research_ended
+    description: User is not researching a property anymore
+    status_type: drop
 
     
