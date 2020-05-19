@@ -39,6 +39,7 @@ class Api::V1::WebhooksController < ApplicationController
   end
 
   def handle_website_link_clicked
+    params = JSON.parse(request.body.string)
     unless params["id"].nil? || params["ss"].nil?
       subscriber = Subscriber.find(params["id"])
       ss = SequenceStep.find(params["ss"])
@@ -50,6 +51,7 @@ class Api::V1::WebhooksController < ApplicationController
   end
 
   def handle_form_link_clicked
+    params = JSON.parse(request.body.string)
     unless params["id"].nil? || params["ss"].nil?
       subscriber = Subscriber.find(params["id"])
       ss = SequenceStep.find(params["ss"])
