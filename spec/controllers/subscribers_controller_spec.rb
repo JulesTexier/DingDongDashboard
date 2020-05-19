@@ -2,12 +2,6 @@ require "rails_helper"
 
 RSpec.describe SubscribersController, type: :controller do
   before(:all) do
-    area_yaml = YAML.load_file("db/data/areas.yml")
-    area_yaml.each do |district_data|
-      district_data["datas"].each do |data|
-        FactoryBot.create(:area, name: data["name"], zone: district_data["zone"])
-      end
-    end
   end
   describe "GET #edit" do
     before do

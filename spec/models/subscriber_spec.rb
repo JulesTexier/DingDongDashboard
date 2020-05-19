@@ -87,7 +87,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "Area is not ok" do
           it "should NOT match user and property because of area !" do
-            @property.area = FactoryBot.create(:area, name: "Paris 1er")
+            @property.area = Area.find_by(name: "Paris 1er")
             expect(@subscriber.is_matching_property?(@property)).to eq(false)
           end
         end
@@ -139,7 +139,6 @@ RSpec.describe Subscriber, type: :model do
       @form_filled_status = FactoryBot.create(:status, name: "form_filled")
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
-      FactoryBot.create(:area)
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
     end
     context "testing if adequate status is create" do
