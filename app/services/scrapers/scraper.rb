@@ -144,20 +144,20 @@ class Scraper
   def fetch_static_page_proxy_auth(url)
     proxy_params = get_proxy_params
     user_agent = proxy_params["randomUserAgent"]
-    proxy_uri = URI.parse("http://" + "199.189.86.111:9500")
+    proxy_uri = URI.parse("http://199.189.86.111:#{ENV["PROXY_PORT"]}")
     attempt_count = 0
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Proxy - #{source}" unless Rails.env.test?
+      puts "\nAttempt ##{attempt_count} for Proxy - #{source}"
       res = open(url, :proxy_http_basic_authentication => [proxy_uri, ENV["USERNAME_ROT_PROXY"], ENV["PASSWORD_ROT_PROXY"]], "User-Agent" => user_agent)
       raise ProxyError unless res.status[0] == "200"
     rescue
-      puts "Trying again for #{source} - Proxy\n\n" unless Rails.env.test?
+      puts "Trying again for #{source} - Proxy\n\n"
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt number #{attempt_count} for #{source} - Proxy \n\n" unless Rails.env.test?
+      puts "Worked on attempt number #{attempt_count} for #{source} - Proxy \n\n"
       page = Nokogiri::HTML.parse(res)
       return page
     end
