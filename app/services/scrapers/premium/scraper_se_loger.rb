@@ -10,35 +10,45 @@ class Premium::ScraperSeLoger < Scraper
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
-      html = fetch_static_page_proxy_auth(args.url)
-      xml = access_xml_raw(html, args.main_page_cls)
-      json = extract_json(xml)
-      json["cards"]["list"].each do |item|
-        if item["cardType"] == "classified"
-          begin
-            hashed_property = extract_each_flat(item)
-            property_checker_hash = {}
-            property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
-            property_checker_hash[:surface] = hashed_property[:surface]
-            property_checker_hash[:price] = hashed_property[:price]
-            property_checker_hash[:area] = hashed_property[:area]
-            property_checker_hash[:link] = hashed_property[:link]
-            if go_to_prop?(property_checker_hash, 7) && hashed_property[:agency_name] != "Ding Dong"
-              puts JSON.pretty_generate(hashed_property)
+      xml = access_xml_raw(fetch_static_page_proxy_auth(args.url), args.main_page_cls)
+      extract_json(xml)["cards"]["list"].each do |item|
+        begin
+          if item["cardType"] == "classified" && item.keys[0] == "id"
+            hashed_property = {}
+            hashed_property[:price] = item["pricing"]["price"].to_int_scrp
+            hashed_property[:images] = item["photos"].map { |img| img.gsub("/400/visuels", "/800/visuels") }
+            hashed_property[:area] = perform_district_regex(item["zipCode"])
+            hashed_property[:link] = item["classifiedURL"]
+            item["tags"].each do |infos|
+              surface_regex = '\d(.)*m²'
+              rooms_regex = '\d(.)*p'
+              bedrooms_regex = '\d(.)*ch'
+              hashed_property[:surface] = infos.to_float_to_int_scrp if infos.match(surface_regex)
+              hashed_property[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
+              hashed_property[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
+            end
+            next if hashed_property[:surface].nil? || hashed_property[:rooms_number].nil?
+            hashed_property[:flat_type] = item["estateType"]
+            hashed_property[:agency_name] = item["contact"]["contactName"]
+            hashed_property[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
+            hashed_property[:source] = @source
+            hashed_property[:provider] = "Agence"
+            hashed_property[:description] = item["description"]
+            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
+            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
+            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            if go_to_prop?(hashed_property, 7)
               @properties.push(hashed_property)
               enrich_then_insert_v2(hashed_property)
               i += 1
             end
             break if i == limit
-          rescue StandardError => e
-            error_outputs(e, @source)
-            next
           end
+        rescue StandardError => e
+          error_outputs(e, @source)
+          next
         end
       end
-      # else
-      #   puts "\nERROR : Couldn't fetch #{@source} datas.\n\n"
-      # end
     end
     return @properties
   end
@@ -63,36 +73,5 @@ class Premium::ScraperSeLoger < Scraper
       end
     end
     return json[0]
-  end
-
-  def extract_each_flat(item)
-    if item.keys[0] === "id"
-      flat_data = {}
-      flat_data[:price] = item["pricing"]["price"].to_int_scrp
-      flat_data[:images] = []
-      item["photos"].each do |img|
-        flat_data[:images].push(img.gsub("/400/visuels", "/800/visuels"))
-      end
-      flat_data[:area] = perform_district_regex(item["zipCode"])
-      flat_data[:description] = item["description"] + " ... - #{flat_data[:area_district]}"
-      flat_data[:link] = item["classifiedURL"]
-      item["tags"].each do |infos|
-        surface_regex = '\d(.)*m²'
-        rooms_regex = '\d(.)*p'
-        bedrooms_regex = '\d(.)*ch'
-        flat_data[:surface] = infos.to_float_to_int_scrp if infos.match(surface_regex)
-        flat_data[:rooms_number] = infos.to_int_scrp if infos.match(rooms_regex)
-        flat_data[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
-      end
-      flat_data[:flat_type] = item["estateType"]
-      flat_data[:agency_name] = item["contact"]["contactName"]
-      flat_data[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
-      flat_data[:floor] = perform_floor_regex(flat_data[:description])
-      flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description])
-      flat_data[:subway_ids] = perform_subway_regex(flat_data[:description])
-      flat_data[:source] = @source
-      flat_data[:provider] = "Agence"
-      return flat_data
-    end
   end
 end
