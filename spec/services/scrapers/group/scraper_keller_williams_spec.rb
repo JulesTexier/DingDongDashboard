@@ -3,12 +3,6 @@ require "rails_helper"
 RSpec.describe Group::ScraperKellerWilliams, type: :service do
   before(:all) do
     @s = Group::ScraperKellerWilliams.new
-    area_yaml = YAML.load_file("db/data/areas.yml")
-    area_yaml.each do |district_data|
-      district_data["datas"].each do |data|
-        FactoryBot.create(:area, name: data["name"], zone: district_data["zone"])
-      end
-    end
   end
 
   it "should launch and return proper number of properties" do

@@ -66,5 +66,18 @@ end
 statuses_file = YAML.load(File.read("./db/data/statuses.yml"))
 
 statuses_file.each do |status|
-  Status.create(name: status["name"], description: status["description"], status_type: status["status_type"]) if Status.where(name: status["name"]).empty?
+  if Status.where(name: status["name"]).empty?
+    Status.create(name: status["name"], description: status["description"], status_type: status["status_type"])
+    puts "Status - #{status["name"]} created"
+  end
+end
+
+area_yaml = YAML.load_file("./db/data/areas.yml")
+area_yaml.each do |district_data|
+  district_data["datas"].each do |data|
+    if Area.where(name: data["name"]).empty?
+      Area.create(name: data["name"], zone: district_data["zone"])
+      puts "Area - #{data["name"]} created"
+    end
+  end
 end

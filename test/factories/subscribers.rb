@@ -12,7 +12,7 @@ FactoryBot.define do
     has_messenger { true }
     status { "form filled" }
     broker { FactoryBot.create(:broker) }
-    initial_areas { FactoryBot.create(:area).id }
+    initial_areas { Area.first.id }
 
     factory :subscriber_fred do
       facebook_id { "3558864844155233" }
