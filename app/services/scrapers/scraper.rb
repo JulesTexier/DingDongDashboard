@@ -149,15 +149,15 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Proxy - #{source}"
+      puts "\nAttempt ##{attempt_count} for Proxy - #{source}" unless Rails.env.test?
       res = open(url, :proxy_http_basic_authentication => [proxy_uri, ENV["USERNAME_ROT_PROXY"], ENV["PASSWORD_ROT_PROXY"]], "User-Agent" => user_agent)
       raise ProxyError unless res.status[0] == "200"
     rescue
-      puts "Trying again for #{source} - Proxy\n\n"
+      puts "Trying again for #{source} - Proxy\n\n" unless Rails.env.test?
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt number #{attempt_count} for #{source} - Proxy \n\n"
+      puts "Worked on attempt number #{attempt_count} for #{source} - Proxy \n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res)
       return page
     end
