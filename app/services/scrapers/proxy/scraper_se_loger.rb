@@ -1,4 +1,4 @@
-class Premium::ScraperSeLoger < Scraper
+class Proxy::ScraperSeLoger < Scraper
   attr_accessor :properties, :source, :params
 
   def initialize

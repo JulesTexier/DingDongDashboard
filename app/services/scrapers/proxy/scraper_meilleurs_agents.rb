@@ -1,4 +1,4 @@
-class Premium::ScraperMeilleursAgents < Scraper
+class Proxy::ScraperMeilleursAgents < Scraper
   attr_accessor :properties, :source, :params
 
   def initialize
