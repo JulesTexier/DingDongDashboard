@@ -16,6 +16,14 @@ module GiantCat
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { api_token: '84616c63-f0f7-4cf7-8590-90e1dcc11302' }
 
+    # Setting up CORS via cors-rack gem
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'https://hellodingdong.com'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
+
 
 
     # Settings in config/environments/* take precedence over those specified here.
