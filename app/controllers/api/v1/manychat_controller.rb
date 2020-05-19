@@ -8,6 +8,19 @@ class Api::V1::ManychatController < ApplicationController
 
   before_action :authentificate
 
+  # POST : Create SubscriberStatus 
+  def create_subscriber_status
+    subscriber = Subscriber.find(params[:subscriber_id])
+    status = Status.find_by(name: params[:status_name])
+
+    if !subscriber.nil? && !status.nil? 
+      ss = SubscriberStatus.create(subscriber: subscriber, status: status)
+      render json: { status: "SUCCESS", message: "SubscriberStatus created", data: ss }, status: 200
+    else 
+      render json: { status: "ERROR", message: "subscriber or status not found", data: nil }, status: 500
+    end
+  end
+
   #POST (create subscriber in manychat) /manychat/s/create-from-lead
   def create_subscriber_from_lead
     lead = Lead.find(params[:lead_id])
