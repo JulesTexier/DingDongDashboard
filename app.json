@@ -34,7 +34,11 @@
         "QR_UNSUBS":"system_unsubscribe20200304091552_543306",
         "TRELLO_KEY": "bd3b7da95b0121bd8bdea25ff2ab5d50",
         "TRELLO_SECRET":"11e09ded7eeceabe509408840639cd97864ca350310fa85ec3cd4ab5389bd97d",
-        "POSTMARK_TOKEN":"84616c63-f0f7-4cf7-8590-90e1dcc11302"
+        "POSTMARK_TOKEN":"84616c63-f0f7-4cf7-8590-90e1dcc11302",
+        "ROTATING_PROXY_API":"doaB65LrNunVGsCQmW8c7SpZKtgy9Hzk",
+        "USERNAME_ROT_PROXY":"586c13e3d304b3840415fc2d02ef3827",
+        "PASSWORD_ROT_PROXY":"c888107fc74280f11bb81971c008df45",
+        "PROXY_PORT":"9500"
       },
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":

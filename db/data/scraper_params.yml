@@ -191,7 +191,7 @@
     - zone: Paris
       url: https://www.meilleursagents.com/annonces/achat/paris-75000/
       main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Captcha
+      scraper_type: Proxy
       waiting_cls: nil
       multi_page: false
       page_nbr:  1
@@ -202,7 +202,7 @@
     - zone: Paris
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
-      scraper_type: Captcha
+      scraper_type: Proxy
       waiting_cls: nil
       multi_page: false
       page_nbr:  1

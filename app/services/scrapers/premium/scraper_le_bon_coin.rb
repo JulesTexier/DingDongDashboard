@@ -97,7 +97,6 @@ class Premium::ScraperLeBonCoin < Scraper
     elsif !item["images"]["urls"].nil?
       flat_data[:images] = item["images"]["urls"]
     end
-
     flat_data[:source] = @source
 
     case item["owner"]["type"]

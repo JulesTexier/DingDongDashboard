@@ -27,6 +27,8 @@ class Scraper
         html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
+      when "Proxy"
+        html = fetch_static_page_proxy_auth(args.url)
       when "HTTPRequest"
         case args.http_type
         when "get_json"
@@ -129,41 +131,47 @@ class Scraper
     return xml.flatten
   end
 
-  ######################################
-  ## WATIR INTERACTIVE CLICKS METHODS ##
-  ######################################
+  #####################
+  ## PROXY SERVICES  ##
+  #####################
 
-  ##############################
-  ## PENDING METHODS BECAUSE ##
-  ## IT DOESNT WORK YET      ##
-  #############################
+  def get_proxy_params
+    url = "http://falcon.proxyrotator.com:51337/?apiKey=#{ENV["ROTATING_PROXY_API"]}&connectionType=Datacenter"
+    uri = URI(url)
+    JSON.parse(Net::HTTP.get(uri))
+  end
 
-  def click_those_btns(browser, click_args)
-    click_args.each do |click_arg|
+  def fetch_static_page_proxy_auth(url)
+    proxy_params = get_proxy_params
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_uri = URI.parse("http://199.189.86.111:#{ENV["PROXY_PORT"]}")
+    attempt_count = 0
+    max_attempts = 3
+    begin
+      attempt_count += 1
+      puts "\nAttempt ##{attempt_count} for Proxy - #{source}" unless Rails.env.test?
+      res = open(url, :proxy_http_basic_authentication => [proxy_uri, ENV["USERNAME_ROT_PROXY"], ENV["PASSWORD_ROT_PROXY"]], "User-Agent" => user_agent)
+      raise ProxyError unless res.status[0] == "200"
+    rescue
+      puts "Trying again for #{source} - Proxy\n\n" unless Rails.env.test?
       sleep 1
-      click_this_element(browser, click_arg)
+      retry if attempt_count < max_attempts
+    else
+      puts "Worked on attempt number #{attempt_count} for #{source} - Proxy \n\n" unless Rails.env.test?
+      page = Nokogiri::HTML.parse(res)
+      return page
     end
   end
 
-  def click_this_element(browser, click_arg)
-    case click_arg[:element]
-    when "div"
-      browser.div(click_arg[:values]).click
-    when "li"
-      browser.li(click_arg[:values]).click
-    when "button"
-      browser.button(click_arg[:values]).click
-    when "a"
-      browser.a(click_arg[:values]).click
-    when "span"
-      browser.span(click_arg[:values]).click
-    when "option"
-      browser.option(click_arg[:values]).click
-    when "select"
-      browser.select(click_arg[:values]).click
-    else
-      puts "Error on Click_this_btn"
-    end
+  def get_proxy_ip
+    ips = YAML.load_file("./db/data/proxy_ip.yml")
+    ips["ip"]
+  end
+
+  def get_website(url, proxy_params)
+    user_agent = proxy_params["randomUserAgent"]
+    proxy_ip = proxy_params["proxy"]
+    open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent).read
   end
 
   ###########################
@@ -380,6 +388,8 @@ class Scraper
       response = desc_comparator(property.description, hashed_property[:description])
       break if response
     end
+
+    Property.where(surface: hashed_property[:surface], price: hashed_property[:price], area: Area.where(name: hashed_property[:area]).first)
 
     response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
 

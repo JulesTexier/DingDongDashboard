@@ -18,6 +18,11 @@ namespace :scraper do
     ScraperPremiumSitesWorker.scrap
   end
 
+  task :proxy do
+    puts "Launching Premium Worker"
+    ScraperProxySitesWorker.scrap
+  end
+
   task :independant do
     puts "Launching Independant Worker"
     ScraperIndependantSitesWorker.scrap
@@ -69,9 +74,9 @@ namespace :test do
   end
 end
 
-namespace :broker do 
+namespace :broker do
   desc "Tasks related to brokers"
-  task :good_morning_message do 
+  task :good_morning_message do
     Broker.send_good_morning_message_leads
   end
 end
