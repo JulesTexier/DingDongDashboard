@@ -1,6 +1,8 @@
 class SequenceStep < ApplicationRecord
   belongs_to :sequence
 
+  after_create :create_adequate_status
+
   validates :step, presence: true, numericality: { only_integer: true }
   validates :step_type, presence: true
   validates :template, presence: true
@@ -23,8 +25,10 @@ class SequenceStep < ApplicationRecord
       if Rails.env.production?
         GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
       else
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver
+        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
       end
+      ## TODO - CREATE JOBS !!!!!!
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: get_status_name))
     else
       puts "error"
     end
@@ -40,5 +44,15 @@ class SequenceStep < ApplicationRecord
     else
       self.time_frame
     end
+  end
+
+  def get_status_name
+    "sequence_" + self.sequence.id.to_s + "_step_" + self.id.to_s
+  end
+
+  private
+
+  def create_adequate_status
+    Status.create(name: get_status_name, description: self.description, status_type: "acquisition")
   end
 end

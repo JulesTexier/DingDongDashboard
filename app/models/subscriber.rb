@@ -1,12 +1,11 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
-
-  after_update :handle_onboarding
+  # after_update :handle_onboarding
   after_update :notify_broker_if_max_price_is_changed
 
   # validates_uniqueness_of :facebook_id, :case_sensitive => false
-  # validates :facebook_id, presence: true 
+  # validates :facebook_id, presence: true
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
   validates :firstname, presence: true, unless: -> { status == "new_lead" }
@@ -26,10 +25,13 @@ class Subscriber < ApplicationRecord
   has_many :subscriber_sequences
   has_many :sequences, through: :subscriber_sequences
 
+  has_many :subscriber_statuses
+  has_many :statuses, through: :subscriber_statuses
+
   def is_client?
-    case self.status 
+    case self.status
     when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
-      true 
+      true
     else
       false
     end
@@ -147,11 +149,11 @@ class Subscriber < ApplicationRecord
     self.where(facebook_id: facebook_id)
   end
 
-  def notify_broker_trello(comment) 
+  def notify_broker_trello(comment)
     Trello.new.add_comment_to_user_card(self, comment)
   end
 
-  # TRELLO METHODS 
+  # TRELLO METHODS
   def trello_description
     desc = ""
     desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
@@ -170,10 +172,10 @@ class Subscriber < ApplicationRecord
     desc = ""
     desc += "**#{self.get_fullname.upcase}**"
     desc += "\u000A**Projet d'achat** : #{self.project_type}"
-    desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} €"
+    desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/, '\& ').reverse} €"
     desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
     desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
-    desc += "\u000A**Arrondissements** : #{self.get_initial_areas}"
+    desc += "\u000A**Arrondissements** : #{self.get_areas_list}"
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
@@ -197,13 +199,12 @@ class Subscriber < ApplicationRecord
   end
 
   def get_initial_areas
-    
     areas_name = []
     if !self.initial_areas.nil?
       self.initial_areas.split(",").each do |area|
         areas_name.push(Area.find(area).name)
       end
-    end 
+    end
     return areas_name.join(", ")
   end
 
@@ -213,38 +214,53 @@ class Subscriber < ApplicationRecord
     Trello.new.add_label_old_user(self)
   end
 
+  def handle_form_filled(subscriber_params)
+    has_been_updated = self.update(subscriber_params)
+    SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "form_filled"))
+    if self.project_type.downcase.include?("chasseur")
+      SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "real_estate_hunter"))
+      onboarding_hunter
+    elsif !self.has_messenger
+      SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "has_not_messenger"))
+      onboarding_no_messenger
+    elsif self.broker.nil?
+      onboarding_broker
+    end
+    return has_been_updated
+  end
+
   private
 
-  # Onboarding methods 
-  def handle_onboarding
-    if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
-      #0 • Handle duplicate
-      if Subscriber.where(email: self.email).size > 1
-        handle_duplicate
-      # 1 • Handle case user is a real estate hunter 
-      elsif self.project_type.downcase.include?("chasseur")
-        onboarding_hunter
-      # 2 • Handle case user has not Messenger 
-      elsif !self.has_messenger 
-        onboarding_no_messenger
-      else 
-        onboarding_broker
-      end
-    end
-  end
+  # Onboarding methods
+  # def handle_onboarding
+  #   if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
+  #     #0 • Handle duplicate
+  #     if Subscriber.where(email: self.email).size > 1
+  #       handle_duplicate
+  #       # 1 • Handle case user is a real estate hunter
+  #     elsif self.project_type.downcase.include?("chasseur")
+  #       onboarding_hunter
+  #       # 2 • Handle case user has not Messenger
+  #     elsif !self.has_messenger
+  #       onboarding_no_messenger
+  #     else
+  #       onboarding_broker
+  #     end
+  #   end
+  # end
 
   def handle_duplicate
     self.update(status: "duplicates")
     PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
   end
-  
+
   def onboarding_hunter
     # Send email to lead with Max in C/C
     PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
   end
 
   def onboarding_no_messenger
-    # Send email to lead with explainations 
+    # Send email to lead with explainations
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
   end
 
@@ -254,10 +270,10 @@ class Subscriber < ApplicationRecord
     sms = SmsMode.new
     if Rails.env.production?
       if trello.add_new_user_on_trello(self)
-        # self.broker.send_email_notification(self) 
-        now = Time.now.in_time_zone('Paris')
+        # self.broker.send_email_notification(self)
+        now = Time.now.in_time_zone("Paris")
         if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
-          sms.send_sms_to_broker(self, self.broker) 
+          sms.send_sms_to_broker(self, self.broker)
         end
       end
     else
@@ -265,7 +281,7 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  # Matching methods 
+  # Matching methods
 
   def is_matching_property_price(property)
     (property.price <= self.max_price ? true : false) if !self.max_price.nil?
@@ -318,5 +334,4 @@ class Subscriber < ApplicationRecord
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end
-
 end

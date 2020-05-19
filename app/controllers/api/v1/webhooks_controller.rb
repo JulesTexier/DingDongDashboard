@@ -1,5 +1,6 @@
 class Api::V1::WebhooksController < ApplicationController
   protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
@@ -35,5 +36,29 @@ class Api::V1::WebhooksController < ApplicationController
   def handle_postmark_new_contact
     ge = GrowthEngine.new
     ge.perform_email_webhook(request.body.string)
+  end
+
+  def handle_website_link_clicked
+    params = JSON.parse(request.body.string)
+    unless params["id"].nil? || params["ss"].nil?
+      subscriber = Subscriber.find(params["id"])
+      ss = SequenceStep.find(params["ss"])
+      status_name = ss.get_status_name + "_website_clicked"
+      status = Status.find_by(name: status_name)
+      status = Status.create(name: status_name, description: "[[WEBSITE_CLICKED]] - " + ss.description.to_s, status_type: "acquisition") if status.nil?
+      SubscriberStatus.create(subscriber: subscriber, status: status)
+    end
+  end
+
+  def handle_form_link_clicked
+    params = JSON.parse(request.body.string)
+    unless params["id"].nil? || params["ss"].nil?
+      subscriber = Subscriber.find(params["id"])
+      ss = SequenceStep.find(params["ss"])
+      status_name = ss.get_status_name + "_form_clicked"
+      status = Status.find_by(name: status_name)
+      status = Status.create(name: status_name, description: "[[FORM_CLICKED]] - " + ss.description.to_s, status_type: "acquisition") if status.nil?
+      SubscriberStatus.create(subscriber: subscriber, status: status)
+    end
   end
 end
