@@ -1,0 +1,33 @@
+---
+  - name: onboarded
+    description: Subscriber is onboarded on ManyChat
+    status_type: activation
+  - name: form_filled
+    description: User has filled a form on hellodingdong website
+    status_type: acquisition
+  - name: email_chatbot_sent
+    description: Broker has sent an email to subscribe on our chatbot
+    status_type: activation
+  - name: form_opened
+    description: User has opened the form link on our website
+    status_type: acquisition
+  - name: website_visited
+    description: User has visited our website and we tracked him
+    status_type: acquisition
+  - name: chatbot_dropped
+    description: User stopped manychat alert
+    status_type: drop
+  - name: broker_dropped
+    description: User is not interested by broker
+    status_type: drop
+  - name: new_lead
+    description: User has been created
+    status_type: acquisition
+  - name: real_estate_hunter
+    description: User is a real estate hunter
+    status_type: drop
+  - name: has_not_messenger
+    description: User has not Messenger
+    status_type: drop
+
+    

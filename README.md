@@ -6,6 +6,99 @@ No worries, here at Ding Dong ™, we like to document every step we take every 
 
 This documentation will explain how we can make a beautiful scraper with the methods we developped. It's not rocket science, don't worry.
 
+# DB Schema - Property
+
+When we scrap a website, we insert in our db a property, composed with those columns : 
+
+```ruby
+price:integer
+title:string (deprecated)
+description:text
+link:string
+rooms_number:integer
+bedrooms_number:integer
+surface:integer
+flat_type:string, default: "N/C"
+agency_name:string, default: "N/C"
+contact_number:string, default: "N/C"
+source:string
+floor:integer
+has_elevator:boolean
+images:text, default: [], array=true
+area_id:integer 
+```
+
+Rules about rooms_number, bedrooms_number, floor, has_elevator, price and surface, if we don't have the information, we pass a value of null. 
+
+
+There's others column but we will delete it, because they are deprecated
+
+# Logic for Property Insertion
+
+When we scrap a website, we first go to a main page to see a list composed with the latests properties uploaded by agencies, that displays for their users many cards with, generally the price, the surface, the area and a link.
+
+With those 4 informations, or sometimes only 3 informations, we want to determine if we already scraped the property or not. 
+
+We only do this for performance reasons, we don't want to go on a webpage if we already have scrapped this property. And we don't want to slow down our scrapers.
+
+
+## go_to_prop?(prop, time)
+Return true or false
+
+This method is the first checker to determine if we have a property in our data base.
+
+The "prop" parameters is a hash composed with 3 or 4 keys :
+``` surface``` ``` price``` ``` area``` ``` link``` ```rooms_number```
+
+The ```time```parameters is an integer that determines a time frame in days. (ex: ```time = 1``` is a one day time frame)
+
+### is_prop_fake? First Step
+
+If we have the value of price and surface (it isn't ```nil``` or equal to ```0```) we check if the square meter price is under 5000€ in Paris, or 1000€ in other zones, then we determined that this isn't a property we want to insert. 
+
+If we don't have those values (price and surface), we decide to keep up a further inspection because maybe we can get those values in the show of the property, so it's not discriminated.
+
+
+
+### is_link_in_db? Second Step
+We check if the link is in our DB, if it's in our DB, that means that we already scraped this card and then we don't have to go to the property show.
+
+### does_prop_exists?(filtered_prop, time)
+```filtered_prop``` is a hash of non-nil values of the prop hash previously filtered. 
+
+We did that because sometimes, we can't have certain values, like ```area``` or ```surface``` and we don't want to check in our DB with 4 values with one equal to nil, it doesn't make sense.
+
+But if we have only 2 non-nil values, we can't go to the property show, because it's too light to check in our DB a combinaison of only 2 values.
+
+```time``` is an integer that determines a time frame range of properties that we have in our db. For example, if ```time = 4```, we will check all the properties that we inserted in our DB with the filtered_prop hash quadriptic/triptic from 4 days ago to today.
+
+## et Voila !!!!! What? oh no it's not over
+After all thoses checks, if go_to_props return ```true```, ONLY NOW we will go to the property show. But it's not over. 
+
+## final_check_with_desc(hashed_property)
+
+This is the last check to determine if we don"t have any duplicates by the description. 
+
+We check only with a triptique of data if we have this property : ```surface```, ```area``` and ```price```
+
+If it returns one or many properties, we check every property's description with the method desc_comparator.
+
+The logic is quite complex, we remove every space, commas, dots, hyphen and encoded characters, and we check every sequence of 44 characters. If one matches the description of the property we just scraped, then it means that this is a duplicate. Therefore, NO INSERTION.
+
+NB: We decided to remove the rooms_number from the final check, because sometimes agencies are uploading a property with a rooms_number, then they realize that they made a mistake, so they change the rooms_number, replublish it and we re-scrap it, making it a false positive (stupid agents).
+
+## et voilaa... no not yet 
+ 
+We check if it is a unwanted prop, so basically, given the description we now have, we look if the property is ```viager```, ```local commercial```,```bien déjà vendu```, ```bien sous compromis```, ```sous offre actuellement```, ```ehpad```, etc.
+
+Aaaand we recheck if it's a fake property, because normally we have all the data we need to determine the square meter price.
+
+After all thoses checks, we can insert a property.
+
+
+# 
+
+# If you want to scrap, be our guest
 ## Scraper Class
 
 The Scraper Class is located to app/services/scrapers/scraper.rb

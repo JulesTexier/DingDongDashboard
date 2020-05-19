@@ -1,9 +1,14 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   devise_for :admins
   get "lead/create"
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
+  authenticate :admin do
+    mount Sidekiq::Web => "/sidekiq"
+  end
 
   root "static#home"
 
@@ -44,6 +49,10 @@ Rails.application.routes.draw do
 
       # Webhooks resources
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
+      post "webhooks/postmark/growth-emailing" => "webhooks#handle_postmark_growth_emailing"
+      post "webhooks/postmark/growth-new-contact" => "webhooks#handle_postmark_new_contact"
+      post "webhooks/funnel/website_clicked" => "webhooks#handle_website_link_clicked"
+      post "webhooks/funnel/form_clicked" => "webhooks#handle_form_link_clicked"
 
       #data
       get "data/subscribers" => "data#get_subscribers"

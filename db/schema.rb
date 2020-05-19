@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_125519) do
+ActiveRecord::Schema.define(version: 2020_05_15_081010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -249,6 +249,8 @@ ActiveRecord::Schema.define(version: 2020_05_08_125519) do
     t.bigint "sequence_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "content"
+    t.string "subject"
     t.index ["sequence_id"], name: "index_sequence_steps_on_sequence_id"
   end
 
@@ -266,6 +268,14 @@ ActiveRecord::Schema.define(version: 2020_05_08_125519) do
     t.string "marketing_type"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "status_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "subscriber_sequences", force: :cascade do |t|
     t.bigint "sequence_id", null: false
     t.bigint "subscriber_id", null: false
@@ -273,6 +283,15 @@ ActiveRecord::Schema.define(version: 2020_05_08_125519) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["sequence_id"], name: "index_subscriber_sequences_on_sequence_id"
     t.index ["subscriber_id"], name: "index_subscriber_sequences_on_subscriber_id"
+  end
+
+  create_table "subscriber_statuses", force: :cascade do |t|
+    t.bigint "status_id"
+    t.bigint "subscriber_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["status_id"], name: "index_subscriber_statuses_on_status_id"
+    t.index ["subscriber_id"], name: "index_subscriber_statuses_on_subscriber_id"
   end
 
   create_table "subscribers", force: :cascade do |t|
