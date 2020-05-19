@@ -27,6 +27,8 @@ class Scraper
         html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when "Captcha"
         html = fetch_captcha_page(args.url)
+      when "Proxy"
+        html = fetch_static_page_proxy_auth(args.url)
       when "HTTPRequest"
         case args.http_type
         when "get_json"
@@ -165,10 +167,8 @@ class Scraper
   def fetch_static_page_proxy_auth(url)
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     proxy_params = get_proxy_params
-    puts proxy_params
     user_agent = proxy_params["randomUserAgent"]
     proxy_uri = URI.parse("http://" + "199.189.86.111:9500")
-    puts proxy_uri
     page = Nokogiri::HTML.parse(open(url, :proxy_http_basic_authentication => [proxy_uri, ENV["USERNAME_ROT_PROXY"], ENV["PASSWORD_ROT_PROXY"]], "User-Agent" => user_agent))
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The PROXY FETCHING script took #{ending - starting} seconds to run"
@@ -178,8 +178,8 @@ class Scraper
   def fetch_static_page_proxy(url)
     starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     proxy_params = get_proxy_params
-    puts proxy_params
     user_agent = proxy_params["randomUserAgent"]
+    puts user_agent
     proxy_ip = "http://" + "199.189.86.111:8080"
     puts proxy_ip
     page = Nokogiri::HTML.parse(open(url, proxy: URI.parse(proxy_ip), "User-Agent" => user_agent))
