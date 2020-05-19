@@ -191,7 +191,7 @@
     - zone: Paris
       url: https://www.meilleursagents.com/annonces/achat/paris-75000/
       main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Captcha
+      scraper_type: Proxy
       waiting_cls: nil
       multi_page: false
       page_nbr:  1
