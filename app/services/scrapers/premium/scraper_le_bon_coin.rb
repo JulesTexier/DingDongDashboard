@@ -20,7 +20,6 @@ class Premium::ScraperLeBonCoin < Scraper
               unless Rails.env.test?
                 ## Some tape to prevent LBC lack of properties and random old properties showing up on main page
                 ## wrapped it in a condition for test env, otherwise every fixtures will be outdated in two days
-                byebug if Time.parse(item["first_publication_date"]) < Time.now - 2.days
                 next if Time.parse(item["first_publication_date"]) < Time.now - 2.days
               end
               hashed_property = extract_each_flat(item)
@@ -30,8 +29,6 @@ class Premium::ScraperLeBonCoin < Scraper
               property_checker_hash[:price] = hashed_property[:price]
               property_checker_hash[:area] = hashed_property[:area]
               property_checker_hash[:link] = hashed_property[:link]
-              puts JSON.pretty_generate(hashed_property)
-              byebug if !go_to_prop?(property_checker_hash, 7)
               if go_to_prop?(property_checker_hash, 7)
                 @properties.push(hashed_property)
                 enrich_then_insert_v2(hashed_property)
