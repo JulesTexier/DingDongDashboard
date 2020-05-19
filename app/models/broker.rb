@@ -88,7 +88,7 @@ class Broker < ApplicationRecord
         if date.hour < morning_end
           b = self.get_broker_by_username(melanie)
         elsif date.hour >= morning_end && date.hour < afternooon_end
-          b = self.get_broker_by_username(aurelien)
+          b = self.get_broker_by_username(greg)
         else 
           b = self.get_broker_by_username(amelie)
         end
@@ -116,11 +116,16 @@ class Broker < ApplicationRecord
 
       aurelien = "aurelienguichard1"
       greg = "gregrouxeloldra"
+      b = self.find_by(trello_username: greg)
 
       morning_end = 13
       afternooon_end = 20
       date = date.in_time_zone("Paris")
       case date.wday
+      when 1 #Lundi  : Soirée : Aurélien
+        if date.hour >= afternooon_end
+          b = self.get_broker_by_username(aurelien)
+        end
       when 2 #Mardi  : Matin Aurélien
         if date.hour < morning_end
           b = self.get_broker_by_username(aurelien)
@@ -130,7 +135,7 @@ class Broker < ApplicationRecord
           b = self.get_broker_by_username(aurelien)
         end
       else
-        b = self.get_broker_by_username(greg)
+        b = self.find_by(trello_username: "gregrouxeloldra")
       end
     end
     return b
