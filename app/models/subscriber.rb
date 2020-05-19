@@ -265,7 +265,7 @@ class Subscriber < ApplicationRecord
   end
 
   def onboarding_broker
-    self.attribute_adequate_broker 
+    attribute_adequate_broker 
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
@@ -339,7 +339,7 @@ class Subscriber < ApplicationRecord
   def attribute_adequate_broker
     if self.broker.nil? 
       # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement 
-      if !SubscriberSequence.where(subscriber: subscriber, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
+      if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
         self.update(broker: Broker.get_current_broker_subscription_bm)
       else #Sinon on attribue un courtier 'normalement' 
         self.update(broker: Broker.get_current_broker)
