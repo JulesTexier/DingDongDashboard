@@ -140,6 +140,13 @@ RSpec.describe Subscriber, type: :model do
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
+      # // Broker creation 
+      @aurelien = FactoryBot.create(:subscriber_aurelien)
+      @melanie = FactoryBot.create(:subscriber_melanie)
+      @hugo = FactoryBot.create(:subscriber_hugo)
+      @amelie = FactoryBot.create(:subscriber_amelie)
+      @veronique = FactoryBot.create(:subscriber_veronique)
+      @greg = FactoryBot.create(:subscriber_greg)
     end
     context "testing if adequate status is create" do
       it "should return true because the update is working correctly" do
@@ -174,12 +181,21 @@ RSpec.describe Subscriber, type: :model do
         expect(@sub.statuses.last).to eq(@hunter_status)
       end
 
-      it "should only create form_filled status and launch onboarding broker method" do
+      it "should only create form_filled status and attribute regular broker" do
         @sub = FactoryBot.create(:subscriber, broker: nil)
         @sub.handle_form_filled(@subscriber_params)
         expect(@sub.statuses.last).to eq(@form_filled_status)
         expect(@sub.statuses.last).to eq(@form_filled_status)
         expect(@sub.broker).to eq(Broker.get_current_broker)
+        expect(@sub.broker).not_to eq(Broker.get_current_broker_subscription_bm)
+      end
+
+      it "should only create form_filled status and attribute subscription test broker if subscriber comes from adequate sequence ..." do
+        @sub = FactoryBot.create(:subscriber, broker: nil)
+        @subscriber_sequence = SubscriberSequence.create(subscriber: @sub, sequence: FactoryBot.create(:sequence_subscriber_bm))
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.broker).to eq(Broker.get_current_broker_subscription_bm)
+        expect(@sub.broker).not_to eq(Broker.get_current_broker)
       end
     end
   end
