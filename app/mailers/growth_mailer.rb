@@ -2,7 +2,7 @@ class GrowthMailer < ApplicationMailer
   default delivery_method: :smtp
 
   def send_growth_email_gmail(sequence_step, subscriber)
-    @tracking_link = "https://hellodingdong.com/?ss=" + sequence_step.id.to_s + "&id=" + subscriber.id.to_s
+    @tracking_link = "https://hellodingdong.com/home.html?ss=" + sequence_step.id.to_s + "&id=" + subscriber.id.to_s
     @sender_name = sequence_step.sequence.sender_name
     @content = sequence_step.content
     mail(from: "#{@sender_name} <#{sequence_step.sequence.sender_email}>", to: subscriber.email, subject: sequence_step.subject)
