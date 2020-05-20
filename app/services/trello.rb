@@ -47,11 +47,11 @@ class Trello
     b = Broker.where(trello_id: broker_trello_id).first
   end
 
-  def add_comment_to_user_card(user, comment)
+  def add_comment_to_user_card(user, comment, mentionned = false)
     card_id = user.trello_id_card
     params = {}
     params[:text] = comment
-    params[:text] += " @#{user.broker.trello_username }" if !user.broker.trello_username.nil?
+    params[:text] += " @#{user.broker.trello_username }" if (!user.broker.trello_username.nil? && mentionned)
     if !card_id.nil? 
       add_comment_to_card(card_id, params)
     end
