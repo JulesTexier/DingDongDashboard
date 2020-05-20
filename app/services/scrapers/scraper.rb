@@ -348,8 +348,10 @@ class Scraper
     else
       area = Area.find_by(name: prop[:area]).id
       props = Property.where(
-        prop.except(:area),
+        surface: prop[:surface],
         area_id: area,
+        rooms_number: prop[:rooms_number],
+        price: prop[:price],
       ).where("created_at >= ?", time.days.ago)
     end
     props.count == 0 ? false : true
