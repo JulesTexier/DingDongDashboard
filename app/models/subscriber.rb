@@ -272,10 +272,10 @@ class Subscriber < ApplicationRecord
     if Rails.env.production?
       if trello.add_new_user_on_trello(self)
         # self.broker.send_email_notification(self)
-        now = Time.now.in_time_zone("Paris")
-        if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
-          sms.send_sms_to_broker(self, self.broker)
-        end
+        # now = Time.now.in_time_zone("Paris")
+        # if now.hour < 20 && now.hour > 8 && (now.wday != 6 && now.wday != 0) # On envoi pas si on est pas en soirée ou si on est en WE
+        #   sms.send_sms_to_broker(self, self.broker)
+        # end
       end
     else
       puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"

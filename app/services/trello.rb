@@ -29,7 +29,7 @@ class Trello
     # 3• Add first action on the checklist
     checklist_id = JSON.parse(new_checklist_response.body)["id"]
     check_items_params = {}
-    check_items_params[:name] = "Rentrer en contact avec #{user.get_fullname}"
+    check_items_params[:name] = "Rentrer en contact avec #{user.get_fullname} + @#{user.broker.trello_username}"
     new_checkitem_response = add_checkitem_to_checklist(checklist_id, check_items_params)
     return false if new_checkitem_response.code != (200 || 204)
     
@@ -47,11 +47,11 @@ class Trello
     b = Broker.where(trello_id: broker_trello_id).first
   end
 
-  def add_comment_to_user_card(user, comment)
+  def add_comment_to_user_card(user, comment, mentionned = false)
     card_id = user.trello_id_card
     params = {}
     params[:text] = comment
-    params[:text] += " @#{user.broker.trello_username }" if !user.broker.trello_username.nil?
+    params[:text] += " @#{user.broker.trello_username }" if (!user.broker.trello_username.nil? && mentionned)
     if !card_id.nil? 
       add_comment_to_card(card_id, params)
     end
