@@ -66,11 +66,11 @@ class Broker < ApplicationRecord
         elsif date.hour >= morning_end && date.hour < afternooon_end
           b = self.get_broker_by_username(veronique)
         else 
-          b = self.get_broker_by_username(greg)
+          b = self.get_broker_by_username(aurelien)
         end
       when 2 #Mardi  : Matin Aurélien, Aprem : Mélanie
         if date.hour < morning_end
-          b = self.get_broker_by_username(greg)
+          b = self.get_broker_by_username(aurelien)
         elsif date.hour >= morning_end && date.hour < afternooon_end
           b = self.get_broker_by_username(melanie)
         else 
@@ -88,7 +88,7 @@ class Broker < ApplicationRecord
         if date.hour < morning_end
           b = self.get_broker_by_username(melanie)
         elsif date.hour >= morning_end && date.hour < afternooon_end
-          b = self.get_broker_by_username(greg)
+          b = self.get_broker_by_username(aurelien)
         else 
           b = self.get_broker_by_username(amelie)
         end
@@ -114,29 +114,29 @@ class Broker < ApplicationRecord
       b = self.where(trello_username:ENV['BROKER']).first
     else
 
-      aurelien = "aurelienguichard1"
+      # aurelien = "aurelienguichard1"
       greg = "gregrouxeloldra"
       b = self.find_by(trello_username: greg)
 
-      morning_end = 13
-      afternooon_end = 20
-      date = date.in_time_zone("Paris")
-      case date.wday
-      when 1 #Lundi  : Soirée : Aurélien
-        if date.hour >= afternooon_end
-          b = self.get_broker_by_username(aurelien)
-        end
-      when 2 #Mardi  : Matin Aurélien
-        if date.hour < morning_end
-          b = self.get_broker_by_username(aurelien)
-        end
-      when 4  #Jeudi  : Aprem : Aurélien
-        if date.hour >= morning_end && date.hour < afternooon_end
-          b = self.get_broker_by_username(aurelien)
-        end
-      else
-        b = self.find_by(trello_username: "gregrouxeloldra")
-      end
+      # morning_end = 13
+      # afternooon_end = 20
+      # date = date.in_time_zone("Paris")
+      # case date.wday
+      # when 1 #Lundi  : Soirée : Aurélien
+      #   if date.hour >= afternooon_end
+      #     b = self.get_broker_by_username(aurelien)
+      #   end
+      # when 2 #Mardi  : Matin Aurélien
+      #   if date.hour < morning_end
+      #     b = self.get_broker_by_username(aurelien)
+      #   end
+      # when 4  #Jeudi  : Aprem : Aurélien
+      #   if date.hour >= morning_end && date.hour < afternooon_end
+      #     b = self.get_broker_by_username(aurelien)
+      #   end
+      # else
+      #   b = self.find_by(trello_username: "gregrouxeloldra")
+      # end
     end
     return b
 
