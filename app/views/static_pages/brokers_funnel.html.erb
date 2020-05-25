@@ -1,0 +1,28 @@
+<h1>Statistiques des brokers</h1>
+
+<% @brokers_data.each do |item|%>
+<div class="broker-section mt-5" >  
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3"><%= item[:name]%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nombre total de leads</td>
+        <td>NOMBRE</td>
+      </tr>
+       <tr>
+        <td>Leads gagnés</td>
+        <td>NOMBRE</td>
+      </tr>
+       <tr>
+        <td>Leads pas interessés</td>
+        <td>NOMBRE</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<%end%>

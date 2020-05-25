@@ -176,6 +176,17 @@ class StaticPagesController < ApplicationController
     @duplicated_props_last_week = Property.where("created_at BETWEEN ? AND ?", DateTime.now.beginning_of_day - 14.days, DateTime.now.beginning_of_day - 7.days).select(:price, :rooms_number, :surface).group(:price, :rooms_number, :surface).having("count(*) > 1")
   end
 
+  # //Brokers stats 
+  def brokers_funnel
+    @brokers_data = []
+    Broker.all.each do |broker|
+      item = {}
+      item[:name] = broker.firstname
+      item[:total_leads] = Subscriber.where(broker: broker) 
+      @brokers_data.push(item)
+    end
+  end
+
   private
 
   def authenticate_admin
