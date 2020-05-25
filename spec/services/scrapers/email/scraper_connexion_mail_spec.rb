@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Email::ScraperConnexionMail, type: :service do
   before(:all) do
-    @s = Email::ScraperConnexionMail.new(YAML.load_file("fixtures/vcr_cassettes/connexion_immobilier_mail.yml")[0])
+    @s = Email::ScraperConnexionMail.new('<html><a href="https://ap.immo/p/3823591?u=11847481&p=576aef98504be65f477e9fdb179cf4d230b2c347"></html>')
   end
 
   it "should launch and return proper number of properties" do
