@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Email::ScraperConnexionMail, type: :service do
   before(:all) do
-    @s = Email::ScraperConnexionMail.new(YAML.load_file("fixtures/vcr_cassettes/connexion_immobilier_mail.yml"))
+    @s = Email::ScraperConnexionMail.new(YAML.load_file("fixtures/connexion_immobilier_mail.txt"))
   end
 
   it "should launch and return proper number of properties" do
