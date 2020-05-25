@@ -209,8 +209,10 @@ class Subscriber < ApplicationRecord
   end
 
   def add_initial_areas(areas_ad_list) 
-    areas_ad_list.split(',').each do |area_id|
-      self.areas << Area.find(area_id) if !Area.find(area_id).nil?
+    if !areas_ad_list.nil?
+      areas_ad_list.split(',').each do |area_id|
+        self.areas << Area.find(area_id) if !Area.find(area_id).nil?
+      end
     end
   end
 
