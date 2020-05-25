@@ -54,15 +54,15 @@ RSpec.describe Broker, type: :model do
           # expect(Broker.get_current_broker(@friday_pm).trello_username).to eq(@veronique.trello_username)
           expect(Broker.get_current_broker(@friday_evening).trello_username).not_to eq(@veronique.trello_username)
         end
-        it "should return Greg" do
+        it "should return Aurélien" do
           # Créneau 1 : Mardi matin
-          expect(Broker.get_current_broker(@monday_evening).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker(@tuesday_am).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker(@tuesday_pm).trello_username).not_to eq(@greg.trello_username)
+          expect(Broker.get_current_broker(@monday_evening).trello_username).to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker(@tuesday_am).trello_username).to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker(@tuesday_pm).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 2 : Jeudi aprem
-          expect(Broker.get_current_broker(@thursday_pm).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker(@thursday_evening).trello_username).not_to eq(@greg.trello_username)
+          expect(Broker.get_current_broker(@thursday_pm).trello_username).to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker(@thursday_evening).trello_username).not_to eq(@aurelien.trello_username)
         end
         it "should return Melanie" do
           # Créneau 1 : Mardi aprem
@@ -91,50 +91,50 @@ RSpec.describe Broker, type: :model do
         it "should return Greg" do
           # Créneau 1 : Lundi aprem
           expect(Broker.get_current_broker_subscription_bm(@monday_pm).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@monday_evening).trello_username).not_to eq(@greg.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@monday_evening).trello_username).not_to eq(@greg.trello_username)
 
           # Créneau 2 : Vendredi aprem
-          # expect(Broker.get_current_broker(@friday_pm).trello_username).to eq(@veronique.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@friday_evening).trello_username).not_to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker_subscription_bm(@friday_pm).trello_username).to eq(@greg.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@friday_evening).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 3 : Mardi aprem
           expect(Broker.get_current_broker_subscription_bm(@tuesday_pm).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@tuesday_evening).trello_username).not_to eq(@aurelien.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@tuesday_evening).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 4 : Jeudi matin
           expect(Broker.get_current_broker_subscription_bm(@wednesday_evening).trello_username).to eq(@greg.trello_username)
           expect(Broker.get_current_broker_subscription_bm(@thursday_am).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@thursday_pm).trello_username).not_to eq(@greg.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@thursday_pm).trello_username).not_to eq(@greg.trello_username)
           
           # Créneau 5 : Mercredi aprem
           expect(Broker.get_current_broker_subscription_bm(@wednesday_pm).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@wednesday_evening).trello_username).not_to eq(@aurelien.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@wednesday_evening).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 6 : Vendredi matin
           expect(Broker.get_current_broker_subscription_bm(@thursday_evening).trello_username).to eq(@greg.trello_username)
           expect(Broker.get_current_broker_subscription_bm(@friday_am).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@friday_pm).trello_username).not_to eq(@aurelien.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@friday_pm).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 7 : WE et lundi matin
           expect(Broker.get_current_broker_subscription_bm(@sunday_pm).trello_username).to eq(@greg.trello_username)
           expect(Broker.get_current_broker_subscription_bm(@monday_am).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@monday_pm).trello_username).not_to eq(@aurelien.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@monday_pm).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 8 : Mercredi matin
           expect(Broker.get_current_broker_subscription_bm(@tuesday_evening).trello_username).to eq(@greg.trello_username)
           expect(Broker.get_current_broker_subscription_bm(@wednesday_am).trello_username).to eq(@greg.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@wednesday_pm).trello_username).not_to eq(@aurelien.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@wednesday_pm).trello_username).not_to eq(@aurelien.trello_username)
           expect(Broker.get_current_broker_subscription_bm(@friday_pm).trello_username).to eq(@greg.trello_username)
         end
         it "should return Aurelien" do
           # Créneau 1 : Mardi matin
-          expect(Broker.get_current_broker_subscription_bm(@monday_evening).trello_username).to eq(@aurelien.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@tuesday_am).trello_username).to eq(@aurelien.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@tuesday_pm).trello_username).not_to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker_subscription_bm(@monday_evening).trello_username).to eq(@greg.trello_username)
+          expect(Broker.get_current_broker_subscription_bm(@tuesday_am).trello_username).to eq(@greg.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@tuesday_pm).trello_username).not_to eq(@aurelien.trello_username)
 
           # Créneau 2 : Jeudi aprem
-          expect(Broker.get_current_broker_subscription_bm(@thursday_pm).trello_username).to eq(@aurelien.trello_username)
-          expect(Broker.get_current_broker_subscription_bm(@thursday_evening).trello_username).not_to eq(@aurelien.trello_username)
+          expect(Broker.get_current_broker_subscription_bm(@thursday_pm).trello_username).to eq(@greg.trello_username)
+          # expect(Broker.get_current_broker_subscription_bm(@thursday_evening).trello_username).not_to eq(@aurelien.trello_username)
         end
 
       end
