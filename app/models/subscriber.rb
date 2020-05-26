@@ -217,9 +217,10 @@ class Subscriber < ApplicationRecord
   end
 
   def onboarding_old_user
-    self.update(has_messenger: true)
-    onboarding_broker
-    Trello.new.add_label_old_user(self)
+    self.update(has_messenger: true, broker: Broker.find_by(trello_username: "gregrouxeloldra"))
+    trello = Trello.new
+    trello.add_new_user_on_trello(self)
+    trello.add_label_old_user(self)
   end
 
   def handle_form_filled(subscriber_params)
