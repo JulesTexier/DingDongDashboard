@@ -95,7 +95,7 @@ class StaticPagesController < ApplicationController
   end
 
   def property_price
-    props = Property.where("surface > 0 AND price > 0").select(:surface, :price, :area, :created_at).order("created_at ASC")
+    props = Property.where.not(area: nil).where("surface > 0 AND price > 0").select(:surface, :price, :area, :created_at).order("created_at ASC")
     colors = ["#FF6633", "#FFB399", "#FF33FF", "#FFFF99", "#00B3E6",
               "#E6B333", "#3366E6", "#999966", "#99FF99", "#B34D4D",
               "#80B300", "#809900", "#E6B3B3", "#6680B3", "#66991A",
@@ -109,7 +109,7 @@ class StaticPagesController < ApplicationController
       averages[area_index][0] = area
       averages[area_index][1] = []
       averages[area_index][2] = colors[area_index]
-      props_xx = props.reject { |prop| prop.area != area }.group_by { |prop| prop.created_at.strftime("%W") }
+      props_xx = props.reject { |prop| prop.area.name != area }.group_by { |prop| prop.created_at.strftime("%W") }
       props_xx.each do |key, value|
         props_xx.fetch(key).each_with_index do |prop_xx, index|
           if prop_xx.surface.to_i > 0

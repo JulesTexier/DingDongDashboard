@@ -11,8 +11,10 @@ class Api::V1::WebhooksController < ApplicationController
       else
         Email::ScraperSeLogerSingle.new(params["HtmlBody"]).launch
       end
-      # Gérer des condtitions pour savoir si on a bien inséré la property ou pas ... (doublon, 500 ou succès)
       render json: { status: "SUCCESS", message: "Mail from SeLoger", data: nil }, status: 200
+    elsif params["From"].match(/(@connexion-immobilier.com)/i).is_a?(MatchData)
+      Email::ScraperConnexionMail.new(params["HtmlBody"]).launch
+      render json: { status: "SUCCESS", message: "Mail from Connexion Immobilier", data: nil }, status: 200
     elsif params["FromName"] == "Postmarkapp Support"
       render json: { status: "SUCCESS", message: "Mail from PostMark Support", data: nil }, status: 200
     else

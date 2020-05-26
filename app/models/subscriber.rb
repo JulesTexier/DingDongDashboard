@@ -208,6 +208,14 @@ class Subscriber < ApplicationRecord
     return areas_name.join(", ")
   end
 
+  def add_initial_areas(areas_ad_list) 
+    if !areas_ad_list.nil?
+      areas_ad_list.split(',').each do |area_id|
+        self.areas << Area.find(area_id) if !Area.find(area_id).nil?
+      end
+    end
+  end
+
   def onboarding_old_user
     self.update(has_messenger: true)
     onboarding_broker
@@ -216,6 +224,7 @@ class Subscriber < ApplicationRecord
 
   def handle_form_filled(subscriber_params)
     has_been_updated = self.update(subscriber_params)
+    self.add_initial_areas(subscriber_params[:initial_areas])
     SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "form_filled"))
     if self.project_type.downcase.include?("chasseur")
       SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "real_estate_hunter"))
