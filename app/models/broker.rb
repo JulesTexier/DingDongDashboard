@@ -141,5 +141,19 @@ class Broker < ApplicationRecord
     return b
 
   end
+  
+  def get_users_by_column
+    trello = Trello.new
+    results = []
+    status = ["En attente", "Interessé", "Peu interessé", "Pas interessé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle"]
+    lists = trello.get_broker_lists(self)
+    lists.each do |item|
+      if status.include?(item["name"])
+        self.trello_board_id.nil? ? cards = 0 : cards = trello.get_cards_on_list(item["id"])
+        results.push({category: item["name"], count: cards.count })
+      end
+    end
+    return results
+  end
 
 end
