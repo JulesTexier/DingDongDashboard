@@ -1,0 +1,281 @@
+---
+- source: SuperImmo
+  params:
+  - zone: Paris
+    url: https://www.superimmo.com/achat/ile-de-france/paris?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://www.superimmo.com/achat/appartement/rueil-malmaison-92500,sartrouville-78500,houilles-78800,chatou-78400,maisons-laffitte-78600,marly-le-roi-78160,le-vesinet-78110,montesson-78360,carrieres-sur-seine-78420,croissy-sur-seine-78290,chambourcy-78240,l-etang-la-ville-78620,mareil-marly-78750,saint-germain-en-laye-78/p/1?option%5B%5D=old_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.superimmo.com/achat/appartement/boulogne-billancourt-92100,levallois-perret-92300,issy-les-moulineaux-92130,neuilly-sur-seine-92200,clichy-92110,montrouge-92120,puteaux-92800,suresnes-92150,malakoff-92240,saint-cloud-92210,vanves-92170,montreuil-93100,aubervilliers-93300,pantin-93500,saint-ouen-93400,bagnolet-93170,les-lilas-93260,le-pre-saint-gervais-93310,saint-mande-94160,saint-denis-93?option%5B%5D=old_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.superimmo.com/achat/appartement/ivry-sur-seine-94200,fontenay-sous-bois-94120,vincennes-94300,nogent-sur-marne-94130,charenton-le-pont-94220,le-kremlin-bicetre-94270,arcueil-94110,joinville-le-pont-94340,gentilly-94250,saint-maurice-94410?option%5B%5D=old_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+- source: BienIci
+  params:
+  - zone: Paris
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-7444%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-72261%22%2C%22-75022%22%2C%22-75003%22%2C%22-73610%22%2C%22-75453%22%2C%22-73330%22%2C%22-59958%22%2C%22-58170%22%2C%22-73619%22%2C%22-73609%22%2C%22-121217%22%2C%22-82656%22%2C%22-932299%22%2C%22-75454%22%2C%22-932293%22%5D%7D%7D&extensionType=extendedIfNoResult&enableAggregates=true&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.bienici.com/agency/localExperts?postalCodes%5B%5D=92150&postalCodes%5B%5D=92800&postalCodes%5B%5D=92200&postalCodes%5B%5D=92210&postalCodes%5B%5D=92300&postalCodes%5B%5D=92110&postalCodes%5B%5D=92120&postalCodes%5B%5D=92130&postalCodes%5B%5D=92240&postalCodes%5B%5D=92170&postalCodes%5B%5D=92100&postalCodes%5B%5D=93400&postalCodes%5B%5D=93200&postalCodes%5B%5D=93210&postalCodes%5B%5D=93300&postalCodes%5B%5D=93500&postalCodes%5B%5D=93310&postalCodes%5B%5D=93260&postalCodes%5B%5D=93170&postalCodes%5B%5D=93100&postalCodes%5B%5D=94160&postalCodes%5B%5D=94300&postalCodes%5B%5D=94120&postalCodes%5B%5D=94130&postalCodes%5B%5D=94340&postalCodes%5B%5D=94410&postalCodes%5B%5D=94220&postalCodes%5B%5D=94200&postalCodes%5B%5D=94270&postalCodes%5B%5D=94250&postalCodes%5B%5D=94110&transactionType=buy
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+- source: Figaro
+  params:
+  - zone: Paris
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=paris&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.item-main-infos
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Saint-Germain-en-Laye%20(78),Fourqueux%20(78),Le%20Vesinet%20(78),Chambourcy%20(78),Maisons-Laffitte%20(78),Mareil-Marly%20(78),L%27Etang-la-Ville%20(78),Croissy-sur-Seine%20(78),Chatou%20(78),Montesson%20(78),Houilles%20(78),Sartrouville%20(78),Carrieres-sur-seine%20(78),Rueil-Malmaison%20(92)&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa
+    scraper_type: Static
+    main_page_cls: div.item-main-infos
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=suresnes%20%2892150%29,arcueil%20%2894110%29,aubervilliers%20%2893300%29,bagnolet%20%2893170%29,boulogne%20billancourt%20%2892100%29,charenton%20le%20pont%20%2894220%29,clichy%20%2892110%29,fontenay%20sous%20bois%20%2894120%29,gentilly%20%2894250%29,issy%20les%20moulineaux%20%2892130%29,ivry%20sur%20seine%20%2894200%29,joinville%20le%20pont%20%2894340%29,le%20kremlin%20bicetre%20%2894270%29,le%20pre%20saint%20gervais%20%2893310%29,les%20lilas%20%2893260%29,levallois%20perret%20%2892300%29,malakoff%20%2892240%29,montreuil%20%2893100%29,montrouge%20%2892120%29,neuilly%20sur%20seine%20%2892200%29,nogent%20sur%20marne%20%2894130%29,pantin%20%2893500%29,puteaux%20%2892800%29,saint%20cloud%20%2892210%29,saint%20denis%20%2893200%29,saint%20mande%20%2894160%29,saint%20maurice%20%2894410%29,saint%20ouen%20%2893400%29,vanves%20%2892170%29,vincennes%20%2894300%29&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.item-main-infos
+    is_active: true
+    group_type: Hub
+- source: Propr. Figaro
+  params:
+  - zone: Paris
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-paris-ile+de+france-france/?tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-yvelines-ile+de+france-france/?ville=st+germain+laye&ville=34233&ville=34290&ville=34190&ville=34310&ville=34315&ville=34317&ville=34268&ville=34210&ville=34194&ville=34338&ville=34259&ville=34381&ville=34188&ville=38661&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?localisation=48.88276,2.236816,48.859284,2.199768,FR,Suresnes&localisation=48.895651,2.254374,48.869065,2.2224329,FR,Puteaux&localisation=48.898395,2.2845899,48.8740669,2.245686,FR,Neuilly-sur-Seine&localisation=48.861685,2.225653,48.8263419,2.1807309,FR,Saint-Cloud&localisation=48.9035979,2.3037559,48.885715,2.271046,FR,Levallois-Perret&localisation=48.914041,2.320847,48.89415,2.287272,FR,Clichy&localisation=48.822288,2.332443,48.809588,2.30008,FR,Montrouge&localisation=48.8346259,2.28939,48.813305,2.23609,FR,Issy-les-Moulineaux&localisation=48.8251341,2.3141281,48.808941,2.2744729,FR,Malakoff&localisation=48.828466,2.301202,48.8142449,2.272543,FR,Vanves&localisation=48.853513,2.262718,48.8214679,2.222912,FR,Boulogne-Billancourt&localisation=48.9232019,2.3519649,48.9004381,2.3137491,FR,Saint-Ouen&localisation=48.952109,2.3981399,48.901482,2.333227,FR,Saint-Denis&localisation=48.924462,2.411483,48.9011579,2.365601,FR,Aubervilliers&localisation=48.918039,2.4277121,48.883039,2.3893131,FR,Pantin&localisation=48.8896438,2.4119279,48.878443,2.398923,FR,Le%20Pr%C3%A9-Saint-Gervais&localisation=48.8909731,2.430578,48.8731381,2.4107939,FR,Les%20Lilas&localisation=48.879016,2.4371299,48.855171,2.413412,FR,Bagnolet&localisation=48.878749,2.482805,48.8487431,2.415296,FR,Montreuil&localisation=48.849389,2.428297,48.8334881,2.411257,FR,Saint-Mand%C3%A9&localisation=48.853358,2.4579331,48.840891,2.418554,FR,Vincennes&localisation=48.861484,2.499984,48.8391259,2.447135,FR,Fontenay-sous-Bois&localisation=48.8477741,2.497628,48.826135,2.4645891,FR,Nogent-sur-Marne&localisation=48.830867,2.4825311,48.809299,2.4544819,FR,Joinville-le-Pont&localisation=48.824187,2.4654831,48.812691,2.4196059,FR,Saint-Maurice&localisation=48.8295341,2.419942,48.81618,2.390053,FR,Charenton-le-Pont&localisation=48.82569,2.410251,48.7993,2.364116,FR,Ivry-sur-Seine&localisation=48.816379,2.368172,48.801084,2.3439819,FR,Le%20Kremlin-Bic%C3%AAtre&localisation=48.8184889,2.356331,48.80537,2.3290449,FR,Gentilly&localisation=48.8137801,2.3477389,48.796902,2.3178419,FR,Arcueil&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+- source: LogicImmo
+  params:
+  - zone: Paris
+    url: https://www.logic-immo.com/vente-immobilier-paris-75,100_1/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-details-wrapper
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=28016_2,11603_2,17331_2,6361_2,19095_2,19440_2,19563_2,17892_2,8875_2,7021_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-details-wrapper
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=32369_2,25200_2,22397_2,27405_2,17928_2,7736_2,21649_2,14030_2,19126_2,33918_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-details-wrapper
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=4285_2,29475_2,316_99,1482_2,23528_2,17154_2,17679_2,2084_2,21595_2,28901_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-details-wrapper
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=35460_2,11413_2,22616_2,14203_2,29233_2,6686_2,14052_2,16866_2,12229_2,1053_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-details-wrapper
+    is_active: true
+    group_type: Hub
+- source: PAP
+  params:
+  - zone: Paris
+    url: https://www.pap.fr/annonce/vente-appartement-maison-paris-75-g439-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item
+    is_active: true
+    group_type: Hub
+  - zone: Banlieue-Ouest
+    url: https://www.pap.fr/annonce/vente-appartement-maison-fourqueux-78112-g39064g39073g39088g39105g39145g39153g39154g39206g39216g39221g39254g39279g43298-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.pap.fr/annonce/vente-appartement-maison-boulogne-billancourt-92100-g43267g43269g43270g43272g43273g43274g43281g43282g43283g43289g43301g43303g43308g43313g43321g43324g43335g43339g43350g43705-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item
+    is_active: true
+    group_type: Hub
+  - zone: Première Couronne
+    url: https://www.pap.fr/annonce/vente-appartements-arcueil-94110-g43345g43346g43348g43354g43356g43357g43359g43364g43370g43379-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item
+    is_active: true
+    group_type: Hub
+    ## Me suis arrêté là
+- source: Stephane Plaza
+  params:
+  - zone: Paris
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=75&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=78551&location[]=78650&location[]=78251&location[]=78133&location[]=78358&location[]=78367&location[]=78372&location[]=78224&location[]=78190&location[]=78146&location[]=78418&location[]=78311&location[]=78586&location[]=78124&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+- source: Orpi
+  params:
+  - zone: Paris
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=paris&locations%5B0%5D%5Blabel%5D=Paris&minSurface=10&maxSurface=1000&nbRooms%5B%5D=1&nbRooms%5B%5D=2&nbRooms%5B%5D=3&nbRooms%5B%5D=4&nbRooms%5B%5D=5&nbRooms%5B%5D=6&newBuild=true&oldBuild=true&minPrice=0&maxPrice=7000000&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-germain-en-laye&locations%5B0%5D%5Blabel%5D=Saint-Germain-en-Laye+(78100)&locations%5B1%5D%5Bvalue%5D=le-vesinet&locations%5B1%5D%5Blabel%5D=Le+V%C3%A9sinet+(78110)&locations%5B2%5D%5Bvalue%5D=fourqueux&locations%5B2%5D%5Blabel%5D=Fourqueux+(78112)&locations%5B3%5D%5Bvalue%5D=chambourcy&locations%5B3%5D%5Blabel%5D=Chambourcy+(78240)&locations%5B4%5D%5Bvalue%5D=maisons-laffitte&locations%5B4%5D%5Blabel%5D=Maisons-Laffitte+(78600)&locations%5B5%5D%5Bvalue%5D=mareil-marly&locations%5B5%5D%5Blabel%5D=Mareil-Marly+(78750)&locations%5B6%5D%5Bvalue%5D=marly-le-roi&locations%5B6%5D%5Blabel%5D=Marly-le-Roi+(78160)&locations%5B7%5D%5Bvalue%5D=l-etang-la-ville&locations%5B7%5D%5Blabel%5D=L%27%C3%89tang-la-Ville+(78620)&locations%5B8%5D%5Bvalue%5D=croissy-sur-seine&locations%5B8%5D%5Blabel%5D=Croissy-sur-Seine+(78290)&locations%5B9%5D%5Bvalue%5D=chatou&locations%5B9%5D%5Blabel%5D=Chatou+(78400)&locations%5B10%5D%5Bvalue%5D=montesson&locations%5B10%5D%5Blabel%5D=Montesson+(78360)&locations%5B11%5D%5Bvalue%5D=houilles&locations%5B11%5D%5Blabel%5D=Houilles+(78800)&locations%5B12%5D%5Bvalue%5D=sartrouville&locations%5B12%5D%5Blabel%5D=Sartrouville+(78500)&locations%5B13%5D%5Bvalue%5D=carrieres-sur-seine&locations%5B13%5D%5Blabel%5D=Carri%C3%A8res-sur-Seine+(78420)&locations%5B14%5D%5Bvalue%5D=rueil-malmaison&locations%5B14%5D%5Blabel%5D=Rueil-Malmaison+(92500)&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+- source: Laforet
+  params:
+  - zone: Paris
+    url: https://www.laforet.com/api/immo/properties?cities=75&transaction=buy
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=17930265%2C17926685%2C17895588%2C17892236%2C17890052%2C17888110%2C17885459%2C17871368%2C17852869%2C17787979%2C17787083%2C17769591%2C17758177%2C17445548%2C17111837%2C4468262&cities=92063%2C78586%2C78551%2C78311%2C78146%2C78358%2C78372%2C78650%2C78418%2C78124%2C78190%2C78133%2C78224%2C78367%2C78224&types=house%2Capartment&transaction=buy
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+- source: Century21
+  params:
+  - zone: Paris
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-le+vesinet-fourqueux-rueil+malmaison/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/page-1/#/annonces/achat-maison-appartement/v-maisons+laffitte-montesson-rueil+malmaison-fourqueux-l+etang+la+ville-le+vesinet-houilles-mareil+marly-marly+le+roi-chambourcy-chatou-croissy+sur+seine-sartrouville-carrieres+sur+seine/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+- source: ERA France
+  params:
+  - zone: Paris
+    url: https://www.erafrance.com/catalog/advanced_search_result_carto.php?action=update_search&ville=75&map_polygone=&latlngsearch=2.3318341000%2C48.8357218000&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_28_tmp=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30min=&C_30_MAX=&C_30_tmp=&C_65_modal=75&check_C_28=Vente&C_33_search=EGAL&C_33_type=NUMBER&C_33_MIN=&C_33=&C_38_search=EGAL&C_38_type=NUMBER&C_38_MIN=&C_38=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30min=&30max=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_47_search=SUPERIEUR&C_47_type=NUMBER&C_46_search=SUPERIEUR&C_46_type=NUMBER&C_41_search=EGAL&C_41_type=NUMBER&C_50_search=SUPERIEUR&C_50_type=NUMBER&C_110_search=EGAL&C_110_type=NUMBER&C_1737_search=EGAL&C_1737_type=NUMBER&C_49_search=SUPERIEUR&C_49_type=NUMBER&C_48_search=SUPERIEUR&C_48_type=NUMBER&keywords=
+    scraper_type: HTTPRequest
+    main_page_cls: div.bien
+    http_type: post
+    http_request:
+      - {} 
+      - jquery_aa_afunc=call&remote_function=get_products_search_ajax_perso&params%5B0%5D%5Baction%5D=update_search&params%5B0%5D%5Bmap_polygone%5D=2.6151395347251336%2C48.88486332629924%2F2.6151395347251336%2C48.66539593292907%2F2.009383468675534%2C48.66539593292907%2F2.009383468675534%2C48.88486332629924&params%5B0%5D%5Bpage%5D=1&params%5B0%5D%5Bsort%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5Bsort_liste%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5BC_28_search%5D=EGAL&params%5B0%5D%5BC_28_type%5D=UNIQUE&params%5B0%5D%5BC_28%5D=Vente&params%5B0%5D%5Bkeywords%5D=&params%5B0%5D%5Bcfamille_id_search%5D=EGAL&params%5B0%5D%5Bcfamille_id_type%5D=TEXT&params%5B0%5D%5Bcfamille_id%5D=1%2C2&params%5B0%5D%5BC_65_search%5D=CONTIENT&params%5B0%5D%5BC_65_type%5D=TEXT&params%5B0%5D%5BC_65%5D=75&params%5B0%5D%5BC_30_search%5D=COMPRIS&params%5B0%5D%5BC_30_type%5D=NUMBER&params%5B0%5D%5BC_30_MIN%5D=&params%5B0%5D%5BC_30_MAX%5D=&params%5B0%5D%5BC_47_search%5D=SUPERIEUR&params%5B0%5D%5BC_47_type%5D=NUMBER&params%5B0%5D%5BC_47%5D=&params%5B0%5D%5BC_46_search%5D=SUPERIEUR&params%5B0%5D%5BC_46_type%5D=NUMBER&params%5B0%5D%5BC_46%5D=&params%5B0%5D%5BC_41_search%5D=SUPERIEUR&params%5B0%5D%5BC_41_type%5D=NUMBER&params%5B0%5D%5BC_41%5D=&params%5B0%5D%5BC_50_search%5D=SUPERIEUR&params%5B0%5D%5BC_50_type%5D=NUMBER&params%5B0%5D%5BC_50%5D=&params%5B0%5D%5BC_110_search%5D=EGAL&params%5B0%5D%5BC_110_type%5D=FLAG&params%5B0%5D%5BC_110%5D=&params%5B0%5D%5BC_1737_search%5D=EGAL&params%5B0%5D%5BC_1737_type%5D=FLAG&params%5B0%5D%5BC_1737%5D=&params%5B0%5D%5BC_49_search%5D=SUPERIEUR&params%5B0%5D%5BC_49_type%5D=NUMBER&params%5B0%5D%5BC_49%5D=&params%5B0%5D%5BC_48_search%5D=SUPERIEUR&params%5B0%5D%5BC_48_type%5D=NUMBER&params%5B0%5D%5BC_48%5D=&params%5B0%5D%5BC_34_search%5D=COMPRIS&params%5B0%5D%5BC_34_type%5D=NUMBER&params%5B0%5D%5BC_34_MIN%5D=&params%5B0%5D%5BC_34_MAX%5D=&params%5B0%5D%5BC_33_search%5D=COMPRIS&params%5B0%5D%5BC_33_type%5D=NUMBER&params%5B0%5D%5BC_33_MIN%5D=&params%5B%5D=pagination&params%5B%5D=400&params%5B%5D=map_carto&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=false&params%5B%5D=images%2Fmarker_2017.png
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://www.erafrance.com/catalog/advanced_search_result_carto.php?action=update_search&ville=75&map_polygone=&latlngsearch=2.3318341000%2C48.8357218000&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_28_tmp=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30min=&C_30_MAX=&C_30_tmp=&C_65_modal=75&check_C_28=Vente&C_33_search=EGAL&C_33_type=NUMBER&C_33_MIN=&C_33=&C_38_search=EGAL&C_38_type=NUMBER&C_38_MIN=&C_38=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30min=&30max=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_47_search=SUPERIEUR&C_47_type=NUMBER&C_46_search=SUPERIEUR&C_46_type=NUMBER&C_41_search=EGAL&C_41_type=NUMBER&C_50_search=SUPERIEUR&C_50_type=NUMBER&C_110_search=EGAL&C_110_type=NUMBER&C_1737_search=EGAL&C_1737_type=NUMBER&C_49_search=SUPERIEUR&C_49_type=NUMBER&C_48_search=SUPERIEUR&C_48_type=NUMBER&keywords=
+    scraper_type: HTTPRequest
+    main_page_cls: div.bien
+    http_type: post
+    http_request:
+      - {} 
+      - jquery_aa_afunc=call&remote_function=get_products_search_ajax_perso&params%5B0%5D%5Baction%5D=update_search&params%5B0%5D%5Bmap_polygone%5D=2.2306121652985005%2C48.92104510963347%2F2.2306121652985005%2C48.81795378572542%2F2.125167931701984%2C48.81795378572542%2F2.125167931701984%2C48.92104510963347&params%5B0%5D%5Bpage%5D=1&params%5B0%5D%5Bsort%5D=PRODUCT_LIST_EXCLUSa&params%5B0%5D%5Bsort_liste%5D=PRODUCT_LIST_EXCLUSa&params%5B0%5D%5BC_28_search%5D=EGAL&params%5B0%5D%5BC_28_type%5D=UNIQUE&params%5B0%5D%5BC_28%5D=Vente&params%5B0%5D%5Bkeywords%5D=&params%5B0%5D%5Bcfamille_id_search%5D=EGAL&params%5B0%5D%5Bcfamille_id_type%5D=TEXT&params%5B0%5D%5Bcfamille_id%5D=1%2C2&params%5B0%5D%5BC_65_search%5D=CONTIENT&params%5B0%5D%5BC_65_type%5D=TEXT&params%5B0%5D%5BC_65%5D=92500+RUEIL+MALMAISON&params%5B0%5D%5BC_30_search%5D=COMPRIS&params%5B0%5D%5BC_30_type%5D=NUMBER&params%5B0%5D%5BC_30_MIN%5D=&params%5B0%5D%5BC_30_MAX%5D=&params%5B0%5D%5BC_47_search%5D=SUPERIEUR&params%5B0%5D%5BC_47_type%5D=NUMBER&params%5B0%5D%5BC_47%5D=&params%5B0%5D%5BC_46_search%5D=SUPERIEUR&params%5B0%5D%5BC_46_type%5D=NUMBER&params%5B0%5D%5BC_46%5D=&params%5B0%5D%5BC_41_search%5D=SUPERIEUR&params%5B0%5D%5BC_41_type%5D=NUMBER&params%5B0%5D%5BC_41%5D=&params%5B0%5D%5BC_50_search%5D=SUPERIEUR&params%5B0%5D%5BC_50_type%5D=NUMBER&params%5B0%5D%5BC_50%5D=&params%5B0%5D%5BC_110_search%5D=EGAL&params%5B0%5D%5BC_110_type%5D=FLAG&params%5B0%5D%5BC_110%5D=&params%5B0%5D%5BC_1737_search%5D=EGAL&params%5B0%5D%5BC_1737_type%5D=FLAG&params%5B0%5D%5BC_1737%5D=&params%5B0%5D%5BC_49_search%5D=SUPERIEUR&params%5B0%5D%5BC_49_type%5D=NUMBER&params%5B0%5D%5BC_49%5D=&params%5B0%5D%5BC_48_search%5D=SUPERIEUR&params%5B0%5D%5BC_48_type%5D=NUMBER&params%5B0%5D%5BC_48%5D=&params%5B0%5D%5BC_34_search%5D=COMPRIS&params%5B0%5D%5BC_34_type%5D=NUMBER&params%5B0%5D%5BC_34_MIN%5D=&params%5B0%5D%5BC_34_MAX%5D=&params%5B0%5D%5BC_33_search%5D=COMPRIS&params%5B0%5D%5BC_33_type%5D=NUMBER&params%5B0%5D%5BC_33_MIN%5D=&params%5B%5D=pagination&params%5B%5D=400&params%5B%5D=map_carto&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=false&params%5B%5D=images%2Fmarker_2017.png
+    is_active: true
+    group_type: Group
+- source: Foncia
+  params:
+  - zone: Paris
+    url: https://fr.foncia.com/achat/paris-75/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Banlieue-Ouest
+    url: https://fr.foncia.com/achat/chatou-78400--saint-germain-en-laye-78100--fourqueux-78112--le-vesinet-78110--chambourcy-78240--maisons-laffitte-78600--mareil-marly-78750--marly-le-roi-78160--l-etang-la-ville-78620--croissy-sur-seine-78290--montesson-78360--houilles-78800--sartrouville-78500--carrieres-sur-seine-78420--rueil-malmaison-92500/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+- source: LeBonCoin
+  params:
+    - zone: Paris
+      url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+      main_page_cls: body
+      scraper_type: Captcha
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Premium
+- source: MeilleursAgents
+  params:
+    - zone: Paris
+      url: https://www.meilleursagents.com/annonces/achat/paris-75000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+- source: SeLoger
+  params:
+    - zone: Paris
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+- source: ParuVendu
+  params:
+    - zone: Paris
+      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
+      main_page_cls: "#bloc_liste > div.ergov3-annonce"
+      scraper_type: Proxy
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy

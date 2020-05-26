@@ -208,6 +208,16 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+- source: ParuVendu
+  params:
+    - zone: Paris
+      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
+      main_page_cls: "#bloc_liste > div.ergov3-annonce"
+      scraper_type: Proxy
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
 - source: Arthurimmo
   params:
     - zone: Paris
@@ -1221,13 +1231,3 @@
       page_nbr:  1
       is_active: true
       group_type: Independant
-- source: ParuVendu
-  params:
-    - zone: Paris
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
