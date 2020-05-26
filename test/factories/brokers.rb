@@ -29,8 +29,12 @@ FactoryBot.define do
       trello_username {'kleinamelie'}
     end
 
-    factory :subscriber_greg do 
+    factory :broker_greg do 
       trello_username {'gregrouxeloldra'}
+    end
+
+    factory :broker_etienne do 
+      trello_username {'etienne_dingdong'}
     end
 
 

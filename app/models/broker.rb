@@ -115,8 +115,8 @@ class Broker < ApplicationRecord
     else
 
       # aurelien = "aurelienguichard1"
-      greg = "gregrouxeloldra"
-      b = self.find_by(trello_username: greg)
+      etienne = "etienne_dingdong"
+      b = self.find_by(trello_username: etienne)
 
       # morning_end = 13
       # afternooon_end = 20
@@ -140,6 +140,20 @@ class Broker < ApplicationRecord
     end
     return b
 
+  end
+  
+  def get_users_by_column
+    trello = Trello.new
+    results = []
+    status = ["En attente", "Interessé", "Peu interessé", "Pas interessé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle"]
+    lists = trello.get_broker_lists(self)
+    lists.each do |item|
+      if status.include?(item["name"])
+        self.trello_board_id.nil? ? cards = 0 : cards = trello.get_cards_on_list(item["id"])
+        results.push({category: item["name"], count: cards.count })
+      end
+    end
+    return results
   end
 
 end

@@ -146,7 +146,7 @@ RSpec.describe Subscriber, type: :model do
       @hugo = FactoryBot.create(:subscriber_hugo)
       @amelie = FactoryBot.create(:subscriber_amelie)
       @veronique = FactoryBot.create(:subscriber_veronique)
-      @greg = FactoryBot.create(:subscriber_greg)
+      @greg = FactoryBot.create(:broker_greg)
     end
     context "testing if adequate status is create" do
       it "should return true because the update is working correctly" do

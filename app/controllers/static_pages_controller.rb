@@ -176,6 +176,18 @@ class StaticPagesController < ApplicationController
     @duplicated_props_last_week = Property.where("created_at BETWEEN ? AND ?", DateTime.now.beginning_of_day - 14.days, DateTime.now.beginning_of_day - 7.days).select(:price, :rooms_number, :surface).group(:price, :rooms_number, :surface).having("count(*) > 1")
   end
 
+  # //Brokers stats 
+  def brokers_funnel
+    trello = Trello.new
+    @brokers_data = []
+    Broker.where.not(trello_board_id: nil).each do |broker|
+      broker_data = {}
+      broker_data[:name] = broker.firstname
+      broker_data[:data] = broker.get_users_by_column if !broker.trello_board_id.nil?
+      @brokers_data.push(broker_data)
+    end
+  end
+
   private
 
   def authenticate_admin
