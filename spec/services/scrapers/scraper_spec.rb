@@ -465,4 +465,33 @@ RSpec.describe Scraper, type: :service do
       end
     end
   end
+
+  describe "fetch init params" do
+    before :each do
+      @s = Scraper.new
+    end
+    it "should, given the source give the correct format, which is array" do
+      params = @s.fetch_init_params("Connexion Immobilier")
+      expect(params).to be_a(Array)
+    end
+
+    it "should, given the source and is mail alert, give the correct group type" do
+      params = @s.fetch_init_params("Connexion Immobilier")
+      expect(params.first.group_type).to eq("Group")
+    end
+
+    it "should, given the source and is mail alert, give the correct group type" do
+      params = @s.fetch_init_params("Connexion Immobilier", is_mail_alert = true)
+      expect(params.first.group_type).to eq("Email")
+    end
+
+    it "should, given the fact that it is a hub give array of more than one hash of params" do
+      params = @s.fetch_init_params("BienIci")
+      expect(params).to be_a(Array)
+      expect(params.length).to be >= 1
+      params.each do |param|
+        expect(param).to be_a(ScraperParameter)
+      end
+    end
+  end
 end
