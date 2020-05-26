@@ -475,11 +475,17 @@ class Scraper
   ## PARAMS METHODS FOR CITY OPENING ##
   #####################################
 
-  def fetch_init_params(source)
+  def fetch_init_params(source, is_mail_alert = false)
     parameters = ScraperParameter.where(source: source)
     data = []
     parameters.each do |param|
-      data.push(param) unless param.is_active == false
+      if param.is_active == true
+        if is_mail_alert
+          data.push(param) if param.group_type == "Email"
+        else
+          data.push(param) if param.group_type != "Email"
+        end
+      end
     end
     return data
   end
