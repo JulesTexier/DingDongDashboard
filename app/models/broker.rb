@@ -115,8 +115,8 @@ class Broker < ApplicationRecord
     else
 
       # aurelien = "aurelienguichard1"
-      greg = "gregrouxeloldra"
-      b = self.find_by(trello_username: greg)
+      etienne = "etienne_dingdong"
+      b = self.find_by(trello_username: etienne)
 
       # morning_end = 13
       # afternooon_end = 20
