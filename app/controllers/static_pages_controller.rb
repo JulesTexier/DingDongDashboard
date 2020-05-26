@@ -178,12 +178,13 @@ class StaticPagesController < ApplicationController
 
   # //Brokers stats 
   def brokers_funnel
+    trello = Trello.new
     @brokers_data = []
-    Broker.all.each do |broker|
-      item = {}
-      item[:name] = broker.firstname
-      item[:total_leads] = Subscriber.where(broker: broker) 
-      @brokers_data.push(item)
+    Broker.where.not(trello_board_id: nil).each do |broker|
+      broker_data = {}
+      broker_data[:name] = broker.firstname
+      broker_data[:data] = broker.get_users_by_column if !broker.trello_board_id.nil?
+      @brokers_data.push(broker_data)
     end
   end
 
