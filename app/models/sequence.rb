@@ -6,7 +6,7 @@ class Sequence < ApplicationRecord
 
   validates :name, presence: true
   validates :sender_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  validates :is_active, presence: true
+  # validates :is_active, presence: true
   validates :sequence_type, presence: true
   validates :marketing_type, presence: true
 
