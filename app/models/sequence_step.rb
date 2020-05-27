@@ -23,12 +23,13 @@ class SequenceStep < ApplicationRecord
     case self.sequence.sequence_type
     when "Mail"
       if Rails.env.production?
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
+        GrowthEngineJob.perform_later(self.id, subscriber.id, wait: self.respectable_sending_hours(8, 23).hour)
+        # GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
       else
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
+        GrowthEngineJob.perform_later(self.id, subscriber.id, wait: 5.second)
+        # GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
       end
-      ## TODO - CREATE JOBS !!!!!!
-      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: get_status_name))
+      
     else
       puts "error"
     end
