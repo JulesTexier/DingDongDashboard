@@ -1,5 +1,5 @@
 class GrowthEngine
-  attr_reader :source, :sender_email, :sequence_type, :lead_email
+  attr_reader :source, :sender_email, :sequence_type, :lead_email, :property_data
   attr_accessor :first_time_frame, :second_time_frame
 
   def initialize(first_time_frame = 48, second_time_frame = 240, sequence_type = "Mail")
@@ -20,6 +20,7 @@ class GrowthEngine
     @source = email_parser.get_value("FromName")
     @sender_email = email_parser.get_value("To")
     @lead_email = email_parser.get_reply_to_email
+    @property_data = email_parser.ad_data_parser_se_loger
   end
 
   def handle_lead_email(email)
@@ -32,7 +33,7 @@ class GrowthEngine
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
       create_subscriber_to_sequence(subscriber, sequence)
-      sequence.execute_sequence(subscriber)
+      sequence.execute_sequence(subscriber, @property_data)
     end
   end
 

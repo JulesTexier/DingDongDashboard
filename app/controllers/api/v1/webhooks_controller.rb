@@ -36,8 +36,15 @@ class Api::V1::WebhooksController < ApplicationController
   end
 
   def handle_postmark_new_contact
-    ge = GrowthEngine.new
-    ge.perform_email_webhook(request.body.string)
+    if params["FromName"] == "SeLoger-Logic"
+      ge = GrowthEngine.new
+      ge.perform_email_webhook(request.body.string)
+      render json: { status: "SUCCESS", message: "Mail handled", data: nil }, status: 200
+    elsif params["FromName"] == "Postmarkapp Support"
+      render json: { status: "SUCCESS", message: "Mail from PostMark Support", data: nil }, status: 200
+    else
+      render json: { status: "ERROR", message: "Can't handle this email" }, status: 500
+    end
   end
 
   def handle_website_link_clicked
