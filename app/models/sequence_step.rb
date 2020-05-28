@@ -20,18 +20,10 @@ class SequenceStep < ApplicationRecord
   end
 
   def execute_step(subscriber)
-    case self.sequence.sequence_type
-    when "Mail"
-      if Rails.env.production?
-        GrowthEngineJob.perform_later(self.id, subscriber.id, wait: self.respectable_sending_hours(8, 23).hour)
-        # GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
-      else
-        GrowthEngineJob.perform_later(self.id, subscriber.id, wait: 5.second)
-        # GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
-      end
-      
+    if Rails.env.production?
+      GrowthEngineJob.set(wait: self.respectable_sending_hours(8, 23).hour).perform_later(self.id, subscriber.id)
     else
-      puts "error"
+      GrowthEngineJob.set(wait: 5.second).perform_later(self.id, subscriber.id)
     end
   end
 

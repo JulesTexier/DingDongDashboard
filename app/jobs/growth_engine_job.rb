@@ -2,13 +2,15 @@ class GrowthEngineJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    sequence = Sequence.find(sequence_id)
-    subscriber = Sequence.find(subscriber_id)
+    sequence_step = SequenceStep.find(args[0])
+    subscriber = Subscriber.find(args[1])
 
-    # 1 • Add a SubscriberStatus 
-    SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: sequence.get_status_name))
+    if !sequence_step.nil? && !subscriber.nil?
+      # 1 • Add a SubscriberStatus 
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: sequence_step.get_status_name))
 
-    # 2 • Send email 
-    GrowthMailer.send_growth_email_gmail(sequence, subscriber).deliver_now
+      # 2 • Send email 
+      GrowthMailer.send_growth_email_gmail(sequence_step, subscriber).deliver_now if sequence_step.step_type = "shoot_mail"
+    end
   end
 end
