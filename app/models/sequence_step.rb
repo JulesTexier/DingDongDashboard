@@ -19,11 +19,11 @@ class SequenceStep < ApplicationRecord
     puts "*** END OF STEP INFO **\n\n"
   end
 
-  def execute_step(subscriber)
+  def execute_step(subscriber, property_data)
     if Rails.env.production?
-      GrowthEngineJob.set(wait: self.respectable_sending_hours(8, 23).hour).perform_later(self.id, subscriber.id)
+      GrowthEngineJob.set(wait: self.respectable_sending_hours(8, 23).hour).perform_later(self.id, subscriber.id, property_data)
     else
-      GrowthEngineJob.set(wait: 5.second).perform_later(self.id, subscriber.id)
+      GrowthEngineJob.set(wait: 5.second).perform_later(self.id, subscriber.id, property_data)
     end
   end
 
