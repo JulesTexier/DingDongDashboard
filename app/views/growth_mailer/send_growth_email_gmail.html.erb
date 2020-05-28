@@ -9,6 +9,8 @@
           <a href="<%= @tracking_link %>">hellodingdong.com</a>
         <% elsif word.include?("[[line_break]]") %>
           <br><br>
+        <% elsif word.include?("[[property_data]]") %>
+          <p><%= @property_data %></p>
         <% else %>
           <%= word %>
         <% end %>

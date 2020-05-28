@@ -99,6 +99,21 @@ class Trello
     return response.return_code == :ok ? true : false
   end
 
+  # Broker funnel 
+  def get_broker_lists(broker)
+    results = get_lists_on_board(broker.trello_board_id)
+    return JSON.parse(results.body)
+  end
+
+  def get_cards_on_list(list_id)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/lists/#{list_id}/cards?" + @token,
+      method: :get,
+    )
+    response = request.run
+    return JSON.parse(response.body)
+  end
+
   private 
   
   def create_new_card(list_id, params)
@@ -187,6 +202,14 @@ class Trello
   def get_checklists_on_card(card_id)
     request = Typhoeus::Request.new(
       "https://api.trello.com/1/cards/#{card_id}/checklists?" + @token,
+      method: :get,
+    )
+    response = request.run
+  end
+
+  def get_lists_on_board(board_id)
+    request = Typhoeus::Request.new(
+      "https://api.trello.com/1/boards/#{board_id}/lists?" + @token,
       method: :get,
     )
     response = request.run

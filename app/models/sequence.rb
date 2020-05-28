@@ -6,7 +6,7 @@ class Sequence < ApplicationRecord
 
   validates :name, presence: true
   validates :sender_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  validates :is_active, presence: true
+  # validates :is_active, presence: true
   validates :sequence_type, presence: true
   validates :marketing_type, presence: true
 
@@ -33,9 +33,9 @@ class Sequence < ApplicationRecord
     puts "*** END OF SEQUENCE INFOS ***\n\n"
   end
 
-  def execute_sequence(subscriber)
+  def execute_sequence(subscriber, property_data = nil)
     self.sequence_steps.each do |step|
-      step.execute_step(subscriber)
+      step.execute_step(subscriber, property_data)
     end
   end
 end
