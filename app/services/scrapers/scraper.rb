@@ -3,7 +3,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !final_check_with_desc(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+    if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -374,23 +374,26 @@ class Scraper
     end
   end
 
-  def final_check_with_desc(hashed_property)
+  ## Is a final check, and check if it already exists with description
+  ## check also if rooms_number or price is nil, if it is, then no insertion
+  ## check also if the area is not found, if so, no insertion
+  def already_exists_with_desc?(hashed_property)
     response = false
 
-    properties = Property.where(
-      surface: hashed_property[:surface],
-      price: hashed_property[:price],
-      area: Area.where(name: hashed_property[:area]).first,
-    )
+    if hashed_property[:area] == "N/C" || hashed_property[:rooms_number].nil? || hashed_property[:price].nil?
+      response = true
+    else
+      properties = Property.where(
+        surface: hashed_property[:surface],
+        price: hashed_property[:price],
+        area: Area.where(name: hashed_property[:area]).first,
+      )
 
-    properties.each do |property|
-      response = desc_comparator(property.description, hashed_property[:description])
-      break if response
+      properties.each do |property|
+        response = desc_comparator(property.description, hashed_property[:description])
+        break if response
+      end
     end
-
-    Property.where(surface: hashed_property[:surface], price: hashed_property[:price], area: Area.where(name: hashed_property[:area]).first)
-
-    response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
 
     return response
   end
