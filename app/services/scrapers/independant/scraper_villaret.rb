@@ -39,7 +39,6 @@ class Independant::ScraperVillaret < Scraper
             break if i == limit
           end
         end
-        puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
         next
