@@ -208,6 +208,12 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+- source: SeLoger
+  params:
+    - zone: Paris
+      is_active: true
+      main_page_cls: li.property.initial
+      group_type: Email
 - source: Arthurimmo
   params:
     - zone: Paris
@@ -230,6 +236,11 @@
       page_nbr:  1
       is_active: true
       group_type: Group
+- source: Connexion Immobilier
+  params:
+    - zone: Paris
+      is_active: true
+      group_type: Email
 - source: Daniel Feau
   params:
     - zone: Paris
@@ -1209,17 +1220,6 @@
       http_request: 
         - {}
         - '{"requests":[{"indexName":"prod_listings","params":"highlightPreTag=%3Cais-highlight-0000000000%3E&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&hitsPerPage=18&filters=surface%20%3C%3D%2010000%20AND%20localisation%3A%22Paris%22&attributesToHighlight=%5B%5D&page=0&facets=%5B%5D&tagFilters="}]}'
-      group_type: Independant
-- source: Connexion
-  params:
-    - zone: Paris
-      url: https://ap.immo/p/3701206?u=12078511&p=1b1a6930becf16ee48cf6d33f6b5b824e1983f08
-      main_page_cls: ".estateshow"
-      scraper_type: Static
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
       group_type: Independant
 - source: ParuVendu
   params:
