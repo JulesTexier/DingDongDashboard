@@ -23,7 +23,6 @@ class Proxy::ScraperParuVendu < Scraper
             html = fetch_static_page_proxy_auth(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div#txtAnnonceTrunc").strip
             hashed_property[:description] = access_xml_text(html, "#rdmob13_description").strip if hashed_property[:description].to_s.empty?
-            byebug if hashed_property[:description].to_s.empty?
             hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "#itemprop-appartements"))
             hashed_property[:agency_name] = access_xml_text(html, "header > div.media-body > b")
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
