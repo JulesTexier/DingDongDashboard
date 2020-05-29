@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_081010) do
+ActiveRecord::Schema.define(version: 2020_05_29_084718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -172,6 +172,25 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["district_id"], name: "index_property_districts_on_district_id"
     t.index ["property_id"], name: "index_property_districts_on_property_id"
+  end
+
+  create_table "property_histories", force: :cascade do |t|
+    t.integer "price"
+    t.text "description"
+    t.string "link"
+    t.integer "rooms_number"
+    t.integer "bedrooms_number"
+    t.integer "surface"
+    t.string "flat_type"
+    t.string "agency_name"
+    t.string "contact_number"
+    t.string "reference"
+    t.string "source"
+    t.string "method_name"
+    t.string "error"
+    t.text "images", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "property_images", force: :cascade do |t|
