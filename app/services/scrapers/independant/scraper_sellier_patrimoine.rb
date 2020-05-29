@@ -27,7 +27,7 @@ class Independant::ScraperSellierPatrimoine < Scraper
             hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
-            hashed_property[:contact_number] = access_xml_text(html, "span#numero-telephonez-nous-detail").strip.tr("\r\n\t() ", "").split("+33")[1].convert_phone_nbr_scrp
+            hashed_property[:contact_number] = "+33142750111"
             hashed_property[:images] = access_xml_link(html, "#slider > a", "href")
             @properties.push(hashed_property) ##testing purpose
             enrich_then_insert_v2(hashed_property)

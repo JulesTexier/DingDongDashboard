@@ -15,7 +15,8 @@ class Hub::ScraperPap < Scraper
           hashed_property = {}
           hashed_property[:link] = "https://www.pap.fr" + access_xml_link_matchdata(item, "div.col-right > a", "href", "(#dialog_mensualite|www.immoneuf.com/)")[0].to_s
           hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul").specific_trim_scrp("\n\r\t"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > p.item-description"), args.zone)
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > a.item-title > span.h1"), args.zone)
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > p.item-description"), args.zone) if hashed_property[:area] == "N/C"
           hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-right > a.item-title > span.item-price"), '(\d)(.*)(€)').to_int_scrp
           if go_to_prop?(hashed_property, 7)

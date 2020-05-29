@@ -17,7 +17,9 @@ class Independant::ScraperVillaret < Scraper
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.product-criteres"), '(\d+)(.?)(m)').to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.product-city"))
           hashed_property[:rooms_number] = access_xml_text(item, "div.product-type").to_int_scrp
-          hashed_property[:price] = access_xml_text(item, "div.product-price").to_int_scrp
+          price = access_xml_text(item, "div.product-price")
+          hashed_property[:price] = price.include?("dont") ? price.split("dont")[0].to_int_scrp : access_xml_text(item, "div.product-price").to_int_scrp
+          next if hashed_property[:price].nil?
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.product-desc").strip

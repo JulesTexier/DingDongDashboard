@@ -128,7 +128,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @propp = FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Fourqueux"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
         @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
@@ -163,7 +163,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing go_to_prop?(prop, time)" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Paris 18ème"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
       end
@@ -199,7 +199,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing desc_comparator" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @old_property = FactoryBot.create(:property, created_at: Time.now - 25.days, price: 600000, surface: 60)
         @c = { description: "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets, moulures, cheminée. 1er étage vue sur l’église. À rafraichir. EXCLUSIVITÉ ACOPA." }
@@ -225,8 +225,55 @@ RSpec.describe Scraper, type: :service do
     end
   end
 
+  context "already_exists_with_desc" do
+    before :each do
+      @s = Scraper.new
+      FactoryBot.create(:property, surface: 20, price: 500000, rooms_number: 1, description: "this description is really close to what we want to test my man i love you so much", area: Area.find_by(name: "Paris 1er"), created_at: 30.days.ago)
+    end
+
+    it "should return true because it is the same prop" do
+      prop = { price: 500000, surface: 20, description: "this description is really close to what we want to test my man i love you so much", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return false because it isnt the same prop" do
+      prop = { price: 500000, surface: 19, rooms_number: 1, description: "this description is really close to what we want to test my man i love you so much", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(false)
+    end
+
+    it "should return false because it isnt the same prop" do
+      prop = { price: 500000, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(false)
+    end
+
+    it "should return true because the area is n/c" do
+      prop = { price: 500000, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "N/C" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: nil, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: nil, rooms_number: nil, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: 200000, surface: 20, rooms_number: nil, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+  end
+
   describe "GENERIC METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
     end
     context "testing simple gsub for many pages methods" do
@@ -241,7 +288,7 @@ RSpec.describe Scraper, type: :service do
   end
 
   describe "XML ACCESSORS METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
       @sai = Independant::ScraperAabiImmo.new
     end
@@ -291,7 +338,7 @@ RSpec.describe Scraper, type: :service do
   end
 
   describe "REGEX_METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
     end
     context "perform_floor_regex(str)" do
@@ -443,7 +490,7 @@ RSpec.describe Scraper, type: :service do
 
   describe "simple fetch methods" do
     context "FETCH METHODS" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @sai = Independant::ScraperAabiImmo.new
       end
