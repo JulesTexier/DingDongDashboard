@@ -401,8 +401,9 @@ class Scraper
         break if response
       end
     end
-
-    scrap_historisation(hashed_property, __method__) if response
+    if response
+      scrap_historisation(hashed_property, __method__)
+    end
     return response
   end
 
@@ -508,10 +509,7 @@ class Scraper
   ########################
 
   def scrap_historisation(hashed_property, method_name)
-    if PropertyHistory.where(link: hashed_property[:link]).empty?
-      history_prop = insert_property_history(hashed_property, method_name)
-      return history_prop
-    end
+    insert_property_history(hashed_property, method_name) if PropertyHistory.where(link: hashed_property[:link]).empty?
   end
 
   private
@@ -521,7 +519,7 @@ class Scraper
   ##############################
 
   def insert_property_history(hashed_property, method_name)
-    prop_history = PropertyHistory.new(hashed_property.except(:reference, :floor, :subway_ids, :has_elevator))
+    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street))
     prop_history.method_name = method_name
     if prop_history.save
       puts "\n\nInsertion of historization of property from #{hashed_property[:source]}\n" unless Rails.env.test?
