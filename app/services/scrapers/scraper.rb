@@ -351,12 +351,16 @@ class Scraper
         prop.except(:area),
       ).where("created_at >= ?", time.days.ago)
     end
-    props.count == 0 ? false : true
+    response = props.count == 0 ? false : true
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_link_in_db?(prop)
     props = Property.where(link: prop[:link].strip)
-    props.count == 0 ? false : true
+    response = props.count == 0 ? false : true
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_prop_fake?(prop)
@@ -364,14 +368,16 @@ class Scraper
       ## delibarately not enough informations, we should further check
       ## if we put thoses attributes to nil, it means that we can't have informations on the main page
       ## but that we probably can retrieve it in property show
-      false
+      response = false
     elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
       price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
       sqm = prop[:price].to_i / prop[:surface].to_i
-      sqm < price_threshold ? true : false
+      response = sqm < price_threshold ? true : false
     else
-      true ## not enough informations, we should further check
+      response = true ## not enough informations, we should further check
     end
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   ## Is a final check, and check if it already exists with description
@@ -394,6 +400,8 @@ class Scraper
         break if response
       end
     end
+
+    scrap_historisation(hashed_property, __method__) if response
 
     return response
   end
@@ -493,11 +501,30 @@ class Scraper
     return data
   end
 
+  ########################
+  ## PROP HISTORIZATION ##
+  ########################
+
+  def scrap_historisation(hashed_property, method_name)
+    unless PropertyHistory.where(link: hashed_property[:link]).empty?
+      insert_property_history(hashed_property, method_name)
+    end
+  end
+
   private
 
   ##############################
   ## PRIVATE DATABASE METHODS ##
   ##############################
+
+  def insert_property_history(hashed_property, method_name)
+    hashed_property[:method] = method_name
+    prop_history = PropertyHistory.create(hashed_property)
+    if prop_history.save
+      puts "Insertion of historization of property from #{prop_hash[:source]}" unless Rails.env.test?
+      return prop_history
+    end
+  end
 
   def insert_property(prop_hash)
     prop_hash[:has_been_processed] = true if is_it_night?
