@@ -553,49 +553,42 @@ RSpec.describe Scraper, type: :service do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com" }
         @s.go_to_prop?(prop, 7)
         expect(PropertyHistory.last.method_name).to eq("is_link_in_db?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with expected method name" do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
         expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with expected method name" do
         prop = { price: nil, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
         expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with already_exists_with_desc? method name" do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://yahoo.com/id_lol", description: "this description is really close to what we want to test my man i love you so much" }
         @s.already_exists_with_desc?(prop)
         expect(PropertyHistory.last.method_name).to eq("already_exists_with_desc?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with expected method name" do
         prop = { price: nil, surface: nil, rooms_number: nil, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
         expect(PropertyHistory.last.method_name).to eq("go_to_prop?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with expected method name" do
         prop = { price: 500500, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
         @s.is_it_unwanted_prop?(prop)
         expect(PropertyHistory.last.method_name).to eq("is_it_unwanted_prop?")
-        expect(Property.all.count).to eq(1)
       end
 
       it "should insert PropertyHistory with expected method name" do
         prop = { price: 10000, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
         @s.go_to_prop?(prop, 7)
         expect(PropertyHistory.last.method_name).to eq("is_prop_fake?")
-        expect(Property.all.count).to eq(1)
       end
     end
   end
