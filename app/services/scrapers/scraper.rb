@@ -3,7 +3,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+    if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -330,8 +330,9 @@ class Scraper
       else ## it doesnt exist in db so we check by 3 - 4 keys if its already in DB from another source
         filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## we only keep existants arguments
         if filtered_prop.length > 2 ## we verify that theres at least 3 arguements
-          does_prop_exists?(filtered_prop, time) ? false : true ## if it doesnt exist, we go to the show
+          does_prop_exists?(prop, time) ? false : true ## if it doesnt exist, we go to the show
         else ## not enought args, so fuck off we dont go to the show
+          scrap_historisation(prop, __method__)
           false
         end
       end
@@ -341,14 +342,15 @@ class Scraper
   end
 
   def does_prop_exists?(prop, time)
-    if prop[:area].nil?
+    filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
+    if filtered_prop[:area].nil?
       props = Property.where(
-        prop.except(:area)
+        filtered_prop.except(:area)
       ).where("created_at >= ?", time.days.ago)
     else
-      prop[:area_id] = Area.find_by(name: prop[:area]).id
+      filtered_prop[:area_id] = Area.find_by(name: filtered_prop[:area]).id
       props = Property.where(
-        prop.except(:area),
+        filtered_prop.except(:area),
       ).where("created_at >= ?", time.days.ago)
     end
     response = props.count == 0 ? false : true
@@ -394,7 +396,6 @@ class Scraper
         price: hashed_property[:price],
         area: Area.where(name: hashed_property[:area]).first,
       )
-
       properties.each do |property|
         response = desc_comparator(property.description, hashed_property[:description])
         break if response
@@ -402,13 +403,14 @@ class Scraper
     end
 
     scrap_historisation(hashed_property, __method__) if response
-
     return response
   end
 
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
-  def is_it_unwanted_prop?(str)
-    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
+  def is_it_unwanted_prop?(prop)
+    response = prop[:description].remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_it_night?
@@ -506,8 +508,9 @@ class Scraper
   ########################
 
   def scrap_historisation(hashed_property, method_name)
-    unless PropertyHistory.where(link: hashed_property[:link]).empty?
-      insert_property_history(hashed_property, method_name)
+    if PropertyHistory.where(link: hashed_property[:link]).empty?
+      history_prop = insert_property_history(hashed_property, method_name)
+      return history_prop
     end
   end
 
@@ -518,11 +521,10 @@ class Scraper
   ##############################
 
   def insert_property_history(hashed_property, method_name)
-    hashed_property[:method] = method_name
-    prop_history = PropertyHistory.create(hashed_property)
+    prop_history = PropertyHistory.new(hashed_property.except(:reference, :floor, :subway_ids, :has_elevator))
+    prop_history.method_name = method_name
     if prop_history.save
-      puts "Insertion of historization of property from #{prop_hash[:source]}" unless Rails.env.test?
-      return prop_history
+      puts "\n\nInsertion of historization of property from #{hashed_property[:source]}\n" unless Rails.env.test?
     end
   end
 

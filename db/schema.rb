@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2020_05_29_084718) do
     t.integer "price"
     t.text "description"
     t.string "link"
+    t.string "area"
     t.integer "rooms_number"
     t.integer "bedrooms_number"
     t.integer "surface"

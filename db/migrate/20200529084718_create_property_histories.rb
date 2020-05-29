@@ -4,6 +4,7 @@ class CreatePropertyHistories < ActiveRecord::Migration[6.0]
       t.integer "price"
       t.text "description"
       t.string "link"
+      t.string "area"
       t.integer "rooms_number"
       t.integer "bedrooms_number"
       t.integer "surface"
