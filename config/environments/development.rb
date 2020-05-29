@@ -66,7 +66,7 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.perform_deliveries = true
 
-  Watir::Rails.ignore_exceptions = true
+  # Watir::Rails.ignore_exceptions = true
 
   # config.active_job.queue_adapter= :sidekiq
 
