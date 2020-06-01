@@ -342,25 +342,24 @@ class Scraper
   end
 
   def does_prop_exists?(prop, time)
+    response = false
     filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
     if filtered_prop[:area].nil?
-      props = Property.where(
+      response = Property.where(
         filtered_prop.except(:area)
-      ).where("created_at >= ?", time.days.ago)
+      ).where("created_at >= ?", time.days.ago).exists?
     else
       filtered_prop[:area_id] = Area.find_by(name: filtered_prop[:area]).id
-      props = Property.where(
+      response = Property.where(
         filtered_prop.except(:area),
-      ).where("created_at >= ?", time.days.ago)
+      ).where("created_at >= ?", time.days.ago).exists?
     end
-    response = props.count == 0 ? false : true
     scrap_historisation(prop, __method__) if response
     return response
   end
 
   def is_link_in_db?(prop)
-    props = Property.where(link: prop[:link].strip)
-    response = props.count == 0 ? false : true
+    response = Property.where(link: prop[:link].strip).exists? ? true : false
     scrap_historisation(prop, __method__) if response
     return response
   end
@@ -395,9 +394,10 @@ class Scraper
         surface: hashed_property[:surface],
         price: hashed_property[:price],
         area: Area.where(name: hashed_property[:area]).first,
-      )
-      properties.each do |property|
-        response = desc_comparator(property.description, hashed_property[:description])
+      ).pluck(:description)
+
+      properties.each do |property_desc|
+        response = desc_comparator(property_desc, hashed_property[:description])
         break if response
       end
     end
@@ -509,7 +509,7 @@ class Scraper
   ########################
 
   def scrap_historisation(hashed_property, method_name)
-    insert_property_history(hashed_property, method_name) if PropertyHistory.where(link: hashed_property[:link]).empty?
+    insert_property_history(hashed_property, method_name) if !PropertyHistory.where(link: hashed_property[:link]).exists?
   end
 
   private
@@ -540,7 +540,7 @@ class Scraper
 
   def insert_property_subways(subway_ids, prop)
     subway_ids.each do |subway_id|
-      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if PropertySubway.where(property_id: prop.id, subway_id: subway_id).empty?
+      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if !PropertySubway.where(property_id: prop.id, subway_id: subway_id).exists?
     end
   end
 end
