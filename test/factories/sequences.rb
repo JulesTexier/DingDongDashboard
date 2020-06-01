@@ -5,7 +5,6 @@ FactoryBot.define do
     sender_name { "Christine" }
     source { "SeLoger-Logic" }
     is_active { true }
-    trigger_ads { [] }
     description { "Super description pour cette sequence" }
     marketing_type { "regular" }
     marketing_link { "https://hellodingdong.com/home.html" }
