@@ -13,7 +13,8 @@ class Group::ScraperEraFrance < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.erafrance.com" + access_xml_link(item, "a", "href")[0].to_s.gsub("..", "")
+          link = "https://www.erafrance.com" + access_xml_link(item, "a", "href")[0].to_s.gsub("..", "")
+          hashed_property[:link] = link.split("?search")[0]
           hashed_property[:surface] = access_xml_text(item, "div.bien_infos > p").to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(.?)(\d+)(...)dont').tr("^0-9", "") != "" ? regex_gen(access_xml_text(item, "div.prix"), '(\d+)(.?)(\d+)(.?)(\d+)(...)dont').tr("^0-9", "").to_float_to_int_scrp : access_xml_text(item, "div.prix").tr("^0-9", "").to_float_to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".bien_type"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp

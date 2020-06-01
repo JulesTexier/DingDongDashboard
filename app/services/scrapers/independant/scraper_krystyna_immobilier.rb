@@ -13,7 +13,8 @@ class Independant::ScraperKrystynaImmobilier < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.krystyna-immobilier.com" + access_xml_link(item, "> a", "href")[0].to_s.gsub("..", "")
+          link = "https://www.krystyna-immobilier.com" + access_xml_link(item, "> a", "href")[0].to_s.gsub("..", "")
+          hashed_property[:link] = link.split("?search")[0]
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.products-name"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.products-localisation"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.products-name").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp

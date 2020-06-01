@@ -13,7 +13,8 @@ class Group::ScraperLadresse < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.ladresse.com" + access_xml_link(item, "div.products-img > a", "href")[0].tr("..", "").to_s
+          link = "https://www.ladresse.com" + access_xml_link(item, "div.products-img > a", "href")[0].tr("..", "").to_s
+          hashed_property[:link] = link.split("?search_id")[0]
           hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "ul.products-infos-pictos"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.products-name"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
           price_element = access_xml_text(item, "div.products-price")
