@@ -8,6 +8,7 @@ FactoryBot.define do
     trigger_ads { [] }
     description { "Super description pour cette sequence" }
     marketing_type { "regular" }
+    marketing_link { "https://hellodingdong.com/home.html" }
 
     factory :sequence_subscriber_bm do
       name { "HACK - test abonnement payant" }
