@@ -5,12 +5,8 @@ class Sequence < ApplicationRecord
   has_many :sequence_steps
 
   validates :name, presence: true
-  validates :sender_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  # validates :is_active, presence: true
-  validates :sequence_type, presence: true
+  validates :sender_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :marketing_type, presence: true
-
-
 
   def self.get_adequate_sequence(marketing_type, source, sender_email, sequence_type)
     self.where(marketing_type: marketing_type, source: source, sender_email: sender_email, sequence_type: sequence_type, is_active: true).last
