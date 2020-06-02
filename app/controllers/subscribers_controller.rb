@@ -106,12 +106,14 @@ class SubscribersController < ApplicationController
     if params["free_financial_plan"].include?("true")
       subscriber = Subscriber.find(params["id"])
       desc =  "Souhaite être recontacté #{params["shift"][0]} - Il est interessé par les services suivants : #{params["services"]}"
-      subscriber.update(additional_question: desc)
       SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
+    else  
+      desc = "Il n'a pas souhaité prendre l'audit gratuit !"
     end
+    subscriber.update(additional_question: desc)
     redirect_to subscriber.get_chatbot_link
   end
-  
+
   # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
