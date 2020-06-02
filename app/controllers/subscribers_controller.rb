@@ -105,7 +105,7 @@ class SubscribersController < ApplicationController
   def subscribed_update
     if params["free_financial_plan"].include?("true")
       subscriber = Subscriber.find(params["id"])
-      desc =  "Souhaite être recontacté #{params["shift"][0]} - Il est interessé par les services suivants : #{params["services"]}"
+      desc =  "Souhaite être recontacté #{params["shift"][0] if !params["shift"].nil?} - Il est interessé par les services suivants : #{params["services"]}"
       SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
     else  
       desc = "Il n'a pas souhaité prendre l'audit gratuit !"

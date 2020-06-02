@@ -1,83 +1,96 @@
 
     <% if !@subscriber.broker.nil?%>
+    <script>
+      function showForm() {
+        document.getElementById("form").style.display = "block";
+      }
+      setTimeout("showForm()", 55000); // after 5 secs
+    </script>
         <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇Découvre comment Ding Dong va t'accompagner dans ton projet👇</b></h4>
         <div class="d-flex justify-content-center mt-3 ">
            <iframe width="700" height="394" src="https://www.youtube.com/embed/aiQl7LBxwoQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <%= form_tag('/subscribed-update') do |f| %>
-        <div class="row">
-          <div class="col-12">
-            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Audit de votre situation financière offerte</h5>
-            <%= check_box_tag 'free_financial_plan', 'true', true %>
-            <label for= "free_financial_plan"> Je souhaite être contacté pour un audit financier de ma situation</label>
-            <p><i> NB : Notre expert négocie les meilleurs taux tous les mois en partenariat avec toutes les banques du marché, il pourra vous donner rapidement une estimation de votre capacité d'emprunt maximale et de votre taux d’intérêt minimal !</i></p>
+        <div id="form" style="display:none">
+          <%= form_tag('/subscribed-update') do |f| %>
+          <div class="row">
+            <div class="col-12">
+              <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Audit de votre situation financière offerte</h5>
+              <div class="form-check form-check-inline">
+                <%= check_box_tag 'free_financial_plan', 'true', true, class:"form-check-input" %>
+                <label class="form-check-label" for= "free_financial_plan"> Je souhaite être contacté pour un audit financier de ma situation</label>
+              </div>
+              <p class="mt-2"><i> NB : Notre expert négocie les meilleurs taux tous les mois en partenariat avec toutes les banques du marché, il pourra vous donner rapidement une estimation de votre capacité d'emprunt maximale et de votre taux d’intérêt minimal !</i></p>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Quelles sont vos disponibilités pour être recontacté ?</h5>
-            
-            <%# Shift %>
-            <div class="d-flex flex-wrap">
-              <% @shifts.each do |shift| %>
-                <label 
-                    for="<%=shift%>"
-                    class="form-check mr-3 mb-2 <%=shift%> d-flex radio-button box_hover label_non_active"
-                    onclick="changeColorRadioButton(className)">       
-                <div>
-                  <%= radio_button_tag 'shift[]', 
-                      shift, 
-                      false, 
-                      class: "box_hover",
-                      id: shift,
-                      required: true
-                  %>
-                </div>
-                <span class="form-check-label mb-2 ml-2 box_hover" >
-                    <%= shift %>
-                </span>
+          <div class="row">
+            <div class="col-12">
+              <h6 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Quelles sont vos disponibilités pour être recontacté ?</h6>
+              
+              <%# Shift %>
+              <div class="d-flex flex-wrap">
+                <% @shifts.each do |shift| %>
+                  <label 
+                      for="<%=shift%>"
+                      class="form-check mr-3 mb-2 <%=shift%> d-flex radio-button box_hover label_non_active"
+                      onclick="changeColorRadioButton(className)">       
+                  <div>
+                    <%= radio_button_tag 'shift[]', 
+                        shift, 
+                        false, 
+                        class: "box_hover",
+                        id: shift
+                    %>
+                  </div>
+                  <span class="form-check-label mb-2 ml-2 box_hover" >
+                      <%= shift %>
+                  </span>
+                  </label>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <%# Services %>
+              <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">De quels services pourriez vous avoir besoin ?</h5>
+                          <div class="d-flex flex-wrap">
+                <% @services.each do |service| %>
+                  <label 
+                  for="<%=service%>"
+                  class="form-check mr-3 mb-2 <%=service%> d-flex checkbox-button box_hover label_non_active"
+                  onclick="changeColorCheckbox(className)"
+              >       <div>
+                          <%= check_box_tag 'services[]', 
+                              service, 
+                              false, 
+                              class: "checkbox-button-input box_hover",
+                              style: "display : none",
+                              id: service
+                          %>
+                      </div>
+                      <div>
+                          +
+                  </div>
+                  <span class="form-check-label mb-2 ml-1 box_hover" >
+                    <%= service %>
+                  </span>
                 </label>
               <% end %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <%# Services %>
-            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">De quels services pourriez vous avoir besoin ?</h5>
-                        <div class="d-flex flex-wrap">
-              <% @services.each do |service| %>
-                <label 
-                for="<%=service%>"
-                class="form-check mr-3 mb-2 <%=service%> d-flex checkbox-button box_hover label_non_active"
-                onclick="changeColorCheckbox(className)"
-            >       <div>
-                        <%= check_box_tag 'services[]', 
-                            service, 
-                            false, 
-                            class: "checkbox-button-input box_hover",
-                            style: "display : none",
-                            id: service
-                        %>
-                    </div>
-                    <div>
-                        +
-                </div>
-                <span class="form-check-label mb-2 ml-1 box_hover" >
-                  <%= service %>
-                </span>
-              </label>
-            <% end %>
+          <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+            <%= hidden_field_tag 'id', @subscriber.id  %>
+            <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+              <div class="d-flex justify-content-center mt-2 mb-2">
+                <%= submit_tag "Essayer gratuitement ! 🚀", :name => 'commit', class: "btn btn-outline-light", style:"font-weight:600" %>
+              </div>
+            </nav>
             </div>
           </div>
+          <% end %>
         </div>
-        <div class="row mt-4">
-          <div class="col-12 d-flex justify-content-center">
-          <%= hidden_field_tag 'id', @subscriber.id  %>
-          <%= submit_tag "Accéder à l'alerte immobilière", class: "btn btn-success"%>
-          </div>
-        </div>
-        <% end %>
 
 
     
