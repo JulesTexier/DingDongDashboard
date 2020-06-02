@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_081010) do
+ActiveRecord::Schema.define(version: 2020_06_01_081945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -174,6 +174,26 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.index ["property_id"], name: "index_property_districts_on_property_id"
   end
 
+  create_table "property_histories", force: :cascade do |t|
+    t.integer "price"
+    t.text "description"
+    t.string "link"
+    t.string "area"
+    t.integer "rooms_number"
+    t.integer "bedrooms_number"
+    t.integer "surface"
+    t.string "flat_type"
+    t.string "agency_name"
+    t.string "contact_number"
+    t.string "reference"
+    t.string "source"
+    t.string "method_name"
+    t.string "error"
+    t.text "images", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "property_images", force: :cascade do |t|
     t.string "url"
     t.bigint "property_id"
@@ -245,7 +265,6 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.text "description"
     t.string "step_type"
     t.integer "time_frame"
-    t.string "template"
     t.bigint "sequence_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -260,12 +279,11 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.string "sender_name"
     t.string "source"
     t.boolean "is_active"
-    t.text "trigger_ads", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "sequence_type"
     t.text "description"
     t.string "marketing_type"
+    t.string "marketing_link"
   end
 
   create_table "statuses", force: :cascade do |t|

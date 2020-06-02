@@ -7,7 +7,7 @@ class Group::ScraperLaforet < Scraper
     @properties = []
   end
 
-  def launch(limit = 20)
+  def launch(limit = nil)
     i = 0
     self.params.each do |args|
       fetch_main_page(args)["data"].each do |item|
@@ -37,6 +37,7 @@ class Group::ScraperLaforet < Scraper
             break if i == limit
           end
         end
+        # puts JSON.pretty_generate(hashed_property)
       rescue StandardError => e
         error_outputs(e, @source)
         next

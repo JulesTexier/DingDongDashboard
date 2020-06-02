@@ -5,6 +5,5 @@ FactoryBot.define do
     description { "Premier email qu'on envoie" }
     step_type { "shoot_mail" }
     time_frame { 0 }
-    template { "first_mail_regular" }
   end
 end

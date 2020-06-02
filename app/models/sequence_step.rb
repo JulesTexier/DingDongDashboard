@@ -5,7 +5,6 @@ class SequenceStep < ApplicationRecord
 
   validates :step, presence: true, numericality: { only_integer: true }
   validates :step_type, presence: true
-  validates :template, presence: true
   validates :time_frame, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def get_step_infos

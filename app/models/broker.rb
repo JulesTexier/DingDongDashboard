@@ -57,14 +57,14 @@ class Broker < ApplicationRecord
       date = date.in_time_zone("Paris")
       case date.wday
       when 0
-        b = self.get_broker_by_username(hugo)
+        b = self.get_broker_by_username(greg)
       when 6
-        b = self.get_broker_by_username(hugo)
+        b = self.get_broker_by_username(greg)
       when 1 #Lundi  : Aprem : Véronique
         if date.hour < morning_end
-          b = self.get_broker_by_username(hugo)
+          b = self.get_broker_by_username(greg)
         elsif date.hour >= morning_end && date.hour < afternooon_end
-          b = self.get_broker_by_username(veronique)
+          b = self.get_broker_by_username(greg)
         else 
           b = self.get_broker_by_username(greg)
         end
@@ -98,7 +98,7 @@ class Broker < ApplicationRecord
         elsif date.hour >= morning_end && date.hour < afternooon_end
           b = self.get_broker_by_username(hugo)
         else 
-          b = self.get_broker_by_username(hugo)
+          b = self.get_broker_by_username(greg)
         end
       else
         b = self.get_broker_by_username("gregrouxeloldra")
