@@ -8,15 +8,15 @@ class Api::V1::ManychatController < ApplicationController
 
   before_action :authentificate
 
-  # POST : Create SubscriberStatus 
+  # POST : Create SubscriberStatus
   def create_subscriber_status
     subscriber = Subscriber.find(params[:subscriber_id])
     status = Status.find_by(name: params[:status_name])
 
-    if !subscriber.nil? && !status.nil? 
+    if !subscriber.nil? && !status.nil?
       ss = SubscriberStatus.create(subscriber: subscriber, status: status)
       render json: { status: "SUCCESS", message: "SubscriberStatus created", data: ss }, status: 200
-    else 
+    else
       render json: { status: "ERROR", message: "subscriber or status not found", data: nil }, status: 500
     end
   end
@@ -111,8 +111,8 @@ class Api::V1::ManychatController < ApplicationController
   def send_props_x_days
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props = subscriber.get_props_in_lasts_x_days(params[:x])
-      handle_sending(subscriber, props)
+      props_ids = subscriber.get_props_in_lasts_x_days(params[:x])
+      handle_sending(subscriber, props_ids)
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -123,8 +123,8 @@ class Api::V1::ManychatController < ApplicationController
   def send_x_last_props
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props = subscriber.get_x_last_props(params[:x])
-      handle_sending(subscriber, props, "last_properties")
+      props_ids = subscriber.get_x_last_props(params[:x])
+      handle_sending(subscriber, props_ids, "last_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -136,8 +136,8 @@ class Api::V1::ManychatController < ApplicationController
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
-      props = subscriber.get_morning_props
-      handle_sending(subscriber, props, "morning_properties")
+      props_ids = subscriber.get_morning_props
+      handle_sending(subscriber, props_ids, "morning_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -192,7 +192,8 @@ class Api::V1::ManychatController < ApplicationController
 
   private
 
-  def handle_sending(subscriber, props, template = nil)
+  def handle_sending(subscriber, props_ids, template = nil)
+    props = Property.where(id: props_ids)
     if props.length > 0
       response = send_multiple_properties(subscriber, props, template)
       render json: response[:json_response], status: response[:status]
