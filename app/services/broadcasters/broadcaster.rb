@@ -25,12 +25,15 @@ class Broadcaster
   end
 
   def new_properties_gallery
-    properties = Property.unprocessed
+    properties = Property
+      .unprocessed
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
     subscribers = Subscriber.active
     subscribers.each do |sub|
+      subs_area = sub.areas.ids
       matched_props = []
       properties.each do |prop|
-        matched_props.push(prop) if sub.is_matching_property?(prop)
+        matched_props.push(Property.find(prop[0])) if sub.is_matching_property?(prop, subs_area)
       end
       if matched_props.length > 0
         if matched_props.length < 9

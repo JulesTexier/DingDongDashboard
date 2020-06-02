@@ -59,13 +59,14 @@ class Subscriber < ApplicationRecord
     return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/edit"
   end
 
-  def is_matching_property?(property)
-    test_price = is_matching_property_price(property)
-    test_surface = is_matching_property_surface(property)
-    test_rooms_number = is_matching_property_rooms_number(property)
-    test_floor = is_matching_property_floor(property)
-    test_elevator = is_matching_property_elevator_floor(property)
-    test_areas = is_matching_property_area(property)
+  def is_matching_property?(args, subs_areas)
+    ##We receive args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
+    test_rooms_number = is_matching_property_rooms_number(args[1])
+    test_surface = is_matching_property_surface(args[2])
+    test_price = is_matching_property_price(args[3])
+    test_floor = is_matching_property_floor(args[4])
+    test_areas = is_matching_property_area(args[5], subs_areas)
+    test_elevator = is_matching_property_elevator_floor(args[4], args[6])
 
     test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
   end
@@ -80,51 +81,53 @@ class Subscriber < ApplicationRecord
   end
 
   def get_x_last_props(max_number)
-    props = Property.order(id: :desc)
+    props = Property
+      .order(id: :desc)
+      .limit(1000)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
     props_to_send = []
-
+    subs_areas = self.areas.ids
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
-
-      props_to_send.length == max_number.to_i ? break : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      break if props_to_send.length == max_number.to_i
     end
+
     return props_to_send
   end
 
   def get_props_in_lasts_x_days(x_previous_days)
-    t = Time.now
-    t.in_time_zone("Europe/Paris")
-    start_date = t - x_previous_days.to_i.days
+    start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
 
-    puts start_date
-
-    props = Property.where("created_at >= ?", start_date)
+    props = Property
+      .where("created_at >= ?", start_date)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
 
     props_to_send = []
+    subs_areas = self.areas.ids
 
+    ##We pass args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
     end
 
     return props_to_send
   end
 
   def get_morning_props
-    # t = Time.now
-    # t.in_time_zone("Europe/Paris")
-    # byebug
     now = DateTime.now.in_time_zone("Europe/Paris")
     start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
     end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
 
-    props = Property.where("created_at BETWEEN ? AND ?", start_date, end_date)
+    props = Property
+      .where("created_at BETWEEN ? AND ?", start_date, end_date)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
 
     props_to_send = []
 
+    subs_areas = self.areas.ids
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
-
-      props_to_send.length == 10 ? break : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      break if props_to_send.length == 10
     end
     return props_to_send
   end
@@ -208,9 +211,9 @@ class Subscriber < ApplicationRecord
     return areas_name.join(", ")
   end
 
-  def add_initial_areas(areas_ad_list) 
+  def add_initial_areas(areas_ad_list)
     if !areas_ad_list.nil?
-      areas_ad_list.split(',').each do |area_id|
+      areas_ad_list.split(",").each do |area_id|
         self.areas << Area.find(area_id) if !Area.find(area_id).nil?
       end
     end
@@ -241,24 +244,6 @@ class Subscriber < ApplicationRecord
 
   private
 
-  # Onboarding methods
-  # def handle_onboarding
-  #   if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
-  #     #0 • Handle duplicate
-  #     if Subscriber.where(email: self.email).size > 1
-  #       handle_duplicate
-  #       # 1 • Handle case user is a real estate hunter
-  #     elsif self.project_type.downcase.include?("chasseur")
-  #       onboarding_hunter
-  #       # 2 • Handle case user has not Messenger
-  #     elsif !self.has_messenger
-  #       onboarding_no_messenger
-  #     else
-  #       onboarding_broker
-  #     end
-  #   end
-  # end
-
   def handle_duplicate
     self.update(status: "duplicates")
     PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
@@ -275,7 +260,7 @@ class Subscriber < ApplicationRecord
   end
 
   def onboarding_broker
-    attribute_adequate_broker 
+    attribute_adequate_broker
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
@@ -294,39 +279,39 @@ class Subscriber < ApplicationRecord
 
   # Matching methods
 
-  def is_matching_property_price(property)
-    (property.price <= self.max_price ? true : false) if !self.max_price.nil?
+  def is_matching_property_price(price)
+    (price <= self.max_price ? true : false) if !self.max_price.nil?
   end
 
-  def is_matching_property_surface(property)
-    (property.surface >= self.min_surface ? true : false) if !self.min_surface.nil?
+  def is_matching_property_surface(surface)
+    (surface >= self.min_surface ? true : false) if !self.min_surface.nil?
   end
 
-  def is_matching_property_rooms_number(property)
-    (property.rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
+  def is_matching_property_rooms_number(rooms_number)
+    (rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
   end
 
-  def is_matching_property_floor(property)
+  def is_matching_property_floor(floor)
     if self.min_floor.nil?
       return true
     else
-      if !property.floor.nil?
-        (property.floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
+      if !floor.nil?
+        (floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
       else
         return true
       end
     end
   end
 
-  def is_matching_property_elevator_floor(property)
+  def is_matching_property_elevator_floor(floor, has_elevator)
     if self.min_elevator_floor.nil?
       return true
     else
-      if !property.has_elevator.nil?
-        if property.has_elevator
+      if !has_elevator.nil?
+        if has_elevator
           return true
         else
-          property.floor.to_i < self.min_elevator_floor.to_i ? true : false
+          floor.to_i < self.min_elevator_floor.to_i ? true : false
         end
       else
         return true
@@ -334,8 +319,8 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  def is_matching_property_area(property)
-    self.areas.include?(property.area) ? true : false
+  def is_matching_property_area(area_id, sub_areas = self.areas.ids)
+    sub_areas.include?(area_id) ? true : false
   end
 
   def notify_broker_if_max_price_is_changed
@@ -347,14 +332,13 @@ class Subscriber < ApplicationRecord
   end
 
   def attribute_adequate_broker
-    if self.broker.nil? 
-      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement 
+    if self.broker.nil?
+      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement
       if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
         self.update(broker: Broker.get_current_broker_subscription_bm)
-      else #Sinon on attribue un courtier 'normalement' 
+      else #Sinon on attribue un courtier 'normalement'
         self.update(broker: Broker.get_current_broker)
       end
     end
   end
-
 end
