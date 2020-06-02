@@ -276,10 +276,46 @@
       page_nbr:  1
       is_active: true
       group_type: Premium
+    - zone: Première Couronne
+      url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000_5000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+      main_page_cls: body
+      scraper_type: Captcha
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Premium
 - source: MeilleursAgents
   params:
     - zone: Paris
       url: https://www.meilleursagents.com/annonces/achat/paris-75000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Première Couronne
+      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38488%2C38483%2C38481%2C38485%2C38474%2C38466%2C38479%2C38473%2C38475%2C38489&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Première Couronne
+      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38460%2C38530%2C38528%2C38497%2C38521%2C38524%2C38513%2C38499%2C38516%2C38571&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Première Couronne
+      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38584%2C38551%2C38562%2C38556%2C38574%2C38546%2C38555%2C38557%2C38553%2C38540&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
       main_page_cls: div.listing-item.search-listing-result__item
       scraper_type: Proxy
       waiting_cls: nil
