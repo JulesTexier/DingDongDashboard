@@ -34,98 +34,122 @@ RSpec.describe Subscriber, type: :model do
 
     describe "is_matching_property?" do
       before :each do
-        @subscriber = FactoryBot.build(:subscriber, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
+        @subscriber = FactoryBot.create(:subscriber, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
         @subscriber.areas << Area.new(name: "Paris 10ème")
       end
 
       describe "case subscriber matching properties values" do
         before :each do
-          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
         end
 
         context "floor and elevator are unknown" do
           it "should match user and property !" do
-            expect(@subscriber.is_matching_property?(@property)).to eq(true)
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+            end
           end
         end
 
         context "floor is known (and ok) and elevator is not false" do
           before :each do
-            @property.floor = @subscriber.min_floor
+            @property.first[4] = @subscriber.min_floor
           end
 
           it "should match user and property (known floor)" do
-            expect(@subscriber.is_matching_property?(@property)).to eq(true)
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+            end
           end
 
           it "should match user and property (known floor)" do
-            @property.has_elevator = true
-            expect(@subscriber.is_matching_property?(@property)).to eq(true)
+            @property.first[6] = true
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+            end
           end
         end
 
         context "floor is equal to min_elevator_floor and elevator is true" do
           it "should match user and property (known floor)" do
-            @property.floor = @subscriber.min_elevator_floor
-            @property.has_elevator = true
-            expect(@subscriber.is_matching_property?(@property)).to eq(true)
+            @property.first[4] = @subscriber.min_elevator_floor
+            @property.first[6] = true
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+            end
           end
         end
       end
 
       describe "Property NOT matchs" do
         before :each do
-          @property = FactoryBot.build(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
         end
 
         context "Surface is not ok" do
           it "should NOT match user and property because of surface !" do
-            @property.surface = @subscriber.min_surface - 1
-            expect(@subscriber.is_matching_property?(@property)).to eq(false)
+            @property.first[2] = @subscriber.min_surface - 1
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
           end
         end
 
         context "Area is not ok" do
           it "should NOT match user and property because of area !" do
-            @property.area = Area.find_by(name: "Paris 1er")
-            expect(@subscriber.is_matching_property?(@property)).to eq(false)
+            @property.first[5] = Area.find_by(name: "Paris 1er").id
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
           end
         end
 
         context "Rooms_number is not ok" do
           it "should NOT match user and property because of rooms_number !" do
-            @property.rooms_number = @subscriber.min_rooms_number - 1
-            expect(@subscriber.is_matching_property?(@property)).to eq(false)
+            @property.first[1] = @subscriber.min_rooms_number - 1
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
           end
         end
 
         context "Price is not ok" do
           it "should NOT match user and property because of price !" do
-            @property.price = @subscriber.max_price + 1
-            expect(@subscriber.is_matching_property?(@property)).to eq(false)
+            @property.first[3] = @subscriber.max_price + 1
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
           end
         end
 
         context "Floor is not ok" do
           it "should NOT match user and property because of floor !" do
-            @property.floor = @subscriber.min_floor - 1
-            expect(@subscriber.is_matching_property?(@property)).to eq(false)
+            @property.first[4] = @subscriber.min_floor - 1
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
           end
         end
 
         describe "elevator contraints" do
           describe "elevator is true but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
-              @property.has_elevator = false
-              @property.floor = @subscriber.min_elevator_floor - 1
-              expect(@subscriber.is_matching_property?(@property)).to eq(true)
+              @property.first[6] = false
+              @property.first[4] = @subscriber.min_elevator_floor - 1
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+              end
             end
           end
           describe "floor is equal to min_elevator_floor but elevator is false" do
             it "should NOT match user and property (known elevator absence)" do
-              @property.has_elevator = false
-              @property.floor = @subscriber.min_elevator_floor
-              expect(@subscriber.is_matching_property?(@property)).to eq(false)
+              @property.first[6] = false
+              @property.first[4] = @subscriber.min_elevator_floor
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+              end
             end
           end
         end
@@ -140,7 +164,7 @@ RSpec.describe Subscriber, type: :model do
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
-      # // Broker creation 
+      # // Broker creation
       @aurelien = FactoryBot.create(:subscriber_aurelien)
       @melanie = FactoryBot.create(:subscriber_melanie)
       @hugo = FactoryBot.create(:subscriber_hugo)
