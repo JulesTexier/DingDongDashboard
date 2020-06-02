@@ -13,7 +13,8 @@ class Independant::ScraperMontparnasse < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.montparnasseimmobilier.com/" + access_xml_link(item, "a", "href")[1].gsub("../", "")
+          link = "https://www.montparnasseimmobilier.com/" + access_xml_link(item, "a", "href")[1].gsub("../", "")
+          hashed_property[:link] = link.split("?search")[0]
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.products-localisation"))
           hashed_property[:description] = access_xml_text(item, "div.products-description").specific_trim_scrp("\n").strip
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.products-description").remove_acc_scrp.specific_trim_scrp("\n"), '(\d+)(.?)(\d+)(.?)(m)').to_float_to_int_scrp
