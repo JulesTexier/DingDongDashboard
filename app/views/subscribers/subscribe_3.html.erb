@@ -1,4 +1,4 @@
-<%= form_for @subscriber, url: '/subscribe-create' do |f| %>
+  <%= form_for @subscriber, url: '/subscribe-create' do |f| %>
    
     <div class="d-flex justify-content-center align-items-center mt-4">
         <img style="width: 40px;" class="mr-2" src="https://hellodingdong.com/ressources/identite.png" alt="identité Ding Dong"><img>
@@ -36,45 +36,42 @@
         </div>
       </div>
 
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">✋ Une question en particulier ? </h5>
-        <div class="input-group mb-3">
-            <%= f.text_area :additional_question, class: "form-control", placeholder:"", rows:5, cols:5, :required => false   %>
-        </div>
+    
 
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📱 Notre alerte est uniquement disponible sur Messenger, avez-vous un compte Facebook ? *</h5>
-        <% messenger_choices = [true, false]%>
-        <% messenger_choices_labels = ["Oui", "Non"]%>
-        <div class="input-group mb-3">
-          <div class="d-flex flex-wrap">
-            <% messenger_choices.each_with_index do |messenger_choice, index| %>
-              <label 
-                  for="<%=messenger_choice%>"
-                  class="form-check mr-3 mb-2 <%=messenger_choice%> d-flex radio-button box_hover label_non_active"
-                  onclick="changeColorRadioButton(className)"
-              >       <div>
-                          <%= f.radio_button :has_messenger,
-                              messenger_choice, 
-                              class: "box_hover",
-                              id: messenger_choice,
-                              required: true
-                          %>
-                      </div>
-                      <span class="form-check-label mb-2 ml-2 box_hover" >
-                          <%= messenger_choices_labels[index] %>
-                      </span>
+      <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">📱 Notre alerte est uniquement disponible sur Messenger, avez-vous un compte Facebook ? *</h5>
+      <% messenger_choices = [true, false]%>
+      <% messenger_choices_labels = ["Oui", "Non"]%>
+      <div class="input-group mb-3">
+        <div class="d-flex flex-wrap">
+          <% messenger_choices.each_with_index do |messenger_choice, index| %>
+            <label 
+                for="<%=messenger_choice%>"
+                class="form-check mr-3 mb-2 <%=messenger_choice%> d-flex radio-button box_hover label_non_active"
+                onclick="changeColorRadioButton(className)"
+            >       <div>
+                        <%= f.radio_button :has_messenger,
+                            messenger_choice, 
+                            class: "box_hover",
+                            id: messenger_choice,
+                            required: true
+                        %>
+                    </div>
+                    <span class="form-check-label mb-2 ml-2 box_hover" >
+                        <%= messenger_choices_labels[index] %>
+                    </span>
 
-              </label>
-            <% end %>
-          </div>        
-        </div>
+            </label>
+          <% end %>
+        </div>        
+      </div>
 
-        <%= f.hidden_field :project_type, value:@draft_subscriber["project_type"]  %>
-        <%= f.hidden_field :max_price, value:@draft_subscriber["max_price"]  %>
-        <%= f.hidden_field :min_surface, value:@draft_subscriber["min_surface"]  %>
-        <%= f.hidden_field :min_rooms_number, value:@draft_subscriber["min_rooms_number"]  %>
-        <%= f.hidden_field :specific_criteria, value:@draft_subscriber["specific_criteria"]  %>
-        <%= f.hidden_field :initial_areas, value:@draft_subscriber["selected_areas"]  %>
-        <%= f.hidden_field :project_type, value:@draft_subscriber["project_type"]  %>
+      <%= f.hidden_field :project_type, value:@draft_subscriber["project_type"]  %>
+      <%= f.hidden_field :max_price, value:@draft_subscriber["max_price"]  %>
+      <%= f.hidden_field :min_surface, value:@draft_subscriber["min_surface"]  %>
+      <%= f.hidden_field :min_rooms_number, value:@draft_subscriber["min_rooms_number"]  %>
+      <%= f.hidden_field :specific_criteria, value:@draft_subscriber["specific_criteria"]  %>
+      <%= f.hidden_field :initial_areas, value:@draft_subscriber["selected_areas"]  %>
+      <%= f.hidden_field :project_type, value:@draft_subscriber["project_type"]  %>
 
 
         

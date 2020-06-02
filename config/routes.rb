@@ -66,13 +66,14 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
 
-  # Subscription 'regular'
+  # Subscription 'subscription'
   get "subscribe-1" => "subscribers#subscribe_1"
   get "subscribe-2" => "subscribers#subscribe_2"
   get "subscribe-3" => "subscribers#subscribe_3"
-  get "subscribe-finalisee" => "subscribers#subscribe_4"
+  post "subscribe-create" => "subscribers#subscribe_create"
+  get "subscribed" => "subscribers#subscribe_4"
 
-  # Subscription 'subscription'
+  # Subscription 'regular'
   get "inscription-1" => "subscribers#inscription_1"
   get "inscription-2" => "subscribers#inscription_2"
   get "inscription-3" => "subscribers#inscription_3"

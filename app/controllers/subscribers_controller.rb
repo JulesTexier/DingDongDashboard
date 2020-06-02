@@ -92,7 +92,7 @@ class SubscribersController < ApplicationController
     subscriber = Subscriber.where(email: subscriber_params["email"]).empty? ? Subscriber.new(subscriber_params) : Subscriber.where(email: subscriber_params["email"]).last
     if subscriber.handle_form_filled(subscriber_params)
       flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
-      redirect_to "/inscription-finalisee?id=#{subscriber.id}"
+      redirect_to "/subscribed?id=#{subscriber.id}"
     else
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
       puts "ohoh, probleme"
