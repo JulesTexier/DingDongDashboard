@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   get "subscribe-3" => "subscribers#subscribe_3"
   post "subscribe-create" => "subscribers#subscribe_create"
   get "subscribed" => "subscribers#subscribe_4"
+  post "subscribed-update" => "subscribers#subscribed_update"
 
   # Subscription 'regular'
   get "inscription-1" => "subscribers#inscription_1"

@@ -85,6 +85,8 @@ class SubscribersController < ApplicationController
 
   def subscribe_4
     @subscriber = Subscriber.find(params["id"])
+    @shifts = ["Lundi matin", "Lundi après-midi"]
+    @services = ["Chasseur immobilier", "Architecte d'intérieur", "Travaux", "Notaire", "Démenagement"]
     # @properties = @subscriber.get_x_last_props(5)
   end
 
@@ -100,6 +102,16 @@ class SubscribersController < ApplicationController
     end
   end
 
+  def subscribed_update
+    if params["free_financial_plan"].include?("true")
+      subscriber = Subscriber.find(params["id"])
+      desc =  "Souhaite être recontacté #{params["shift"][0]} - Il est interessé par les services suivants : #{params["services"]}"
+      subscriber.update(additional_question: desc)
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
+    end
+    redirect_to subscriber.get_chatbot_link
+  end
+  
   # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])

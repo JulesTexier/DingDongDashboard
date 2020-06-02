@@ -1,22 +1,84 @@
 
     <% if !@subscriber.broker.nil?%>
-        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇À tout de suite👇</b></h4>
-        <h5 class="text-center mt-4" style="color: #0470C1; font-weight:400">Vous avez la chance d'avoir <%=@subscriber.broker.firstname%> comme conseiller ! </h5>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇Découvre comment Ding Dong va t'accompagner dans ton projet👇</b></h4>
         <div class="d-flex justify-content-center mt-3 ">
-            <img class="img_broker_responsive" src="<%=@subscriber.broker.profile_picture%>" alt="Conseiller"><img>
+           <iframe width="700" height="394" src="https://www.youtube.com/embed/aiQl7LBxwoQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <h5 class="text-center mt-3 mb-4" style="color: #0470C1; font-weight:400">📞 <%=@subscriber.broker.firstname%> va vous appeler 5 min  pour : </h5>
-        <h5 class="text-center mt-3 row" style="color: #0470C1; font-weight:400">
-            <div class="col-lg-4 mb-2">
-            🙂Comprendre votre projet en détail,
+        <%= form_tag('/subscribed-update') do |f| %>
+        <div class="row">
+          <div class="col-12">
+            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Audit de votre situation financière offerte</h5>
+            <%= check_box_tag 'free_financial_plan', 'true', true %>
+            <label for= "free_financial_plan"> Je souhaite être contacté pour un audit financier de ma situation</label>
+            <p><i> NB : Notre expert négocie les meilleurs taux tous les mois en partenariat avec toutes les banques du marché, il pourra vous donner rapidement une estimation de votre capacité d'emprunt maximale et de votre taux d’intérêt minimal !</i></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Quelles sont vos disponibilités pour être recontacté ?</h5>
+            
+            <%# Shift %>
+            <div class="d-flex flex-wrap">
+              <% @shifts.each do |shift| %>
+                <label 
+                    for="<%=shift%>"
+                    class="form-check mr-3 mb-2 <%=shift%> d-flex radio-button box_hover label_non_active"
+                    onclick="changeColorRadioButton(className)">       
+                <div>
+                  <%= radio_button_tag 'shift[]', 
+                      shift, 
+                      false, 
+                      class: "box_hover",
+                      id: shift,
+                      required: true
+                  %>
+                </div>
+                <span class="form-check-label mb-2 ml-2 box_hover" >
+                    <%= shift %>
+                </span>
+                </label>
+              <% end %>
             </div>
-            <div class="col-lg-4 mb-2">
-            📱Vous donner accès à l'appli,
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <%# Services %>
+            <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">De quels services pourriez vous avoir besoin ?</h5>
+                        <div class="d-flex flex-wrap">
+              <% @services.each do |service| %>
+                <label 
+                for="<%=service%>"
+                class="form-check mr-3 mb-2 <%=service%> d-flex checkbox-button box_hover label_non_active"
+                onclick="changeColorCheckbox(className)"
+            >       <div>
+                        <%= check_box_tag 'services[]', 
+                            service, 
+                            false, 
+                            class: "checkbox-button-input box_hover",
+                            style: "display : none",
+                            id: service
+                        %>
+                    </div>
+                    <div>
+                        +
+                </div>
+                <span class="form-check-label mb-2 ml-1 box_hover" >
+                  <%= service %>
+                </span>
+              </label>
+            <% end %>
             </div>
-            <div class="col-lg-4 mb-2">
-            🚀Répondre à toutes vos questions  
-            </div>
-        </h5>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12 d-flex justify-content-center">
+          <%= hidden_field_tag 'id', @subscriber.id  %>
+          <%= submit_tag "Accéder à l'alerte immobilière", class: "btn btn-success"%>
+          </div>
+        </div>
+        <% end %>
+
 
     
         <div class="d-flex justify-content-center mt-4 mb-6">
@@ -36,6 +98,76 @@
     <% end %>
 
 
+<script>
+
+    function areasChecked(){
+      let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+      let checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+      if (!checkedOne) {
+        alert('Sélectionnez au moins un quartier 📍')
+      }
+    }
+    function changeColorCheckbox(className) {
+      let label = document.getElementsByClassName(className)[0]
+      let image = label.children[1]
+      let checkboxValue = label.children[0].children[0].checked
+      if(checkboxValue){ 
+          image.innerHTML = "👌";
+          label.classList.remove('label_non_active')
+          label.className += " label_active"
+        }
+      else{
+          image.innerHTML = "+";
+          label.classList.remove('label_active')
+          label.className += " label_non_active"
+        }
+    }
+
+    function selectAll(className) {
+        let all_labels = document.getElementsByClassName(className)
+        let all_label = document.getElementsByClassName("checkbox-allbutton-label")
+
+        if(all_labels[0].checked){
+          all_label[0].innerHTML = "🌟Tous / Aucun"
+          all_label[0].parentNode.classList.remove('label_non_active')
+          all_label[0].parentNode.className += " label_active"
+            for(i=1; i < all_labels.length; i++){
+                all_labels[i].checked = true;
+                all_labels[i].parentNode.parentNode.classList.remove('label_non_active')
+                all_labels[i].parentNode.parentNode.className += " label_active"
+                all_labels[i].parentNode.nextElementSibling.innerHTML = "👌"
+            }
+        }
+        else{
+          all_label[0].innerHTML = "+ Tous / Aucun"
+          all_label[0].parentNode.classList.remove('label_active')
+          all_label[0].parentNode.className += " label_non_active"
+            for(i=1; i < all_labels.length; i++){
+                all_labels[i].checked = false;
+                all_labels[i].parentNode.parentNode.classList.remove('label_active')
+                all_labels[i].parentNode.parentNode.className += " label_non_active"
+                all_labels[i].parentNode.nextElementSibling.innerHTML = "+"
+            }
+        }
+    }
+
+    function changeColorRadioButton(className) {
+      let labels = document.getElementsByClassName("radio-button")
+      let item = document.getElementsByClassName(className)[0]
+      let checkboxValue = item.children[0].children[0].checked
+    
+      if(checkboxValue){ 
+          for(i=0; i < labels.length; i++){
+              labels[i].classList.remove('label_active')
+              labels[i].className += " label_non_active"
+          }
+          item.classList.remove('label_non_active')
+          item.className += " label_active"
+        }
+    }
+
+
+</script>
 
 
 
