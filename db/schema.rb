@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_044835) do
+ActiveRecord::Schema.define(version: 2020_06_03_045348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -147,6 +147,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_044835) do
     t.string "lastname"
     t.integer "min_rooms_number"
     t.index ["broker_id"], name: "index_leads_on_broker_id"
+  end
+
+  create_table "permanences", force: :cascade do |t|
+    t.bigint "broker_id"
+    t.bigint "broker_shift_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["broker_id"], name: "index_permanences_on_broker_id"
+    t.index ["broker_shift_id"], name: "index_permanences_on_broker_shift_id"
   end
 
   create_table "properties", force: :cascade do |t|
