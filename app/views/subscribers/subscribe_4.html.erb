@@ -26,36 +26,19 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <h6 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Quelles sont vos disponibilités pour être recontacté ?</h6>
+              <h6 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Quand souhaitez vous être recontacté ?</h6>
               
               <%# Shift %>
               <div class="d-flex flex-wrap">
-                <% @shifts.each do |shift| %>
-                  <label 
-                      for="<%=shift%>"
-                      class="form-check mr-3 mb-2 <%=shift%> d-flex radio-button box_hover label_non_active"
-                      onclick="changeColorRadioButton(className)">       
-                  <div>
-                    <%= radio_button_tag 'shift[]', 
-                        shift, 
-                        false, 
-                        class: "box_hover",
-                        id: shift
-                    %>
-                  </div>
-                  <span class="form-check-label mb-2 ml-2 box_hover" >
-                      <%= shift %>
-                  </span>
-                  </label>
-                <% end %>
+                <%= select_tag "shift", options_for_select(@shifts), class:"form-control" %>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
-              <%# Services %>
+          <%# Services %>
               <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">De quels services pourriez vous avoir besoin ?</h5>
-                          <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap">
                 <% @services.each do |service| %>
                   <label 
                   for="<%=service%>"

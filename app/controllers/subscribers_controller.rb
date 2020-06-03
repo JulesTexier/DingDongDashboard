@@ -85,7 +85,7 @@ class SubscribersController < ApplicationController
 
   def subscribe_4
     @subscriber = Subscriber.find(params["id"])
-    @shifts = ["Lundi matin", "Lundi après-midi"]
+    @shifts = ["Lundi matin", "Lundi après-midi", "Mardi matin", "Mardi après-midi", "Mercredi matin", "Mercredi après-midi", "Jeudi matin", "Jeudi après-midi", "Vendredi matin", "Vendredi après-midi"]
     @services = ["Chasseur immobilier", "Architecte d'intérieur", "Travaux", "Notaire", "Démenagement"]
     # @properties = @subscriber.get_x_last_props(5)
   end
@@ -105,12 +105,13 @@ class SubscribersController < ApplicationController
   def subscribed_update
     if params["free_financial_plan"].include?("true")
       subscriber = Subscriber.find(params["id"])
-      desc =  "Souhaite être recontacté #{params["shift"][0] if !params["shift"].nil?} - Il est interessé par les services suivants : #{params["services"]}"
+      desc =  "Souhaite être recontacté #{params["shift"] if !params["shift"].nil?} - Il est interessé par les services suivants : #{params["services"]}"
       SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
     else  
       desc = "Il n'a pas souhaité prendre l'audit gratuit !"
     end
     subscriber.update(additional_question: desc)
+    Trello.new.add_comment_to_user_card(subscriber, desc) unless subscriber.trello_id_card.nil?
     redirect_to subscriber.get_chatbot_link
   end
 
