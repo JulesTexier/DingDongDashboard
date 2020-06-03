@@ -30,6 +30,16 @@ class Broker < ApplicationRecord
     end
   end
 
+  def self.get_currents(shift_type = "regular")
+    shift = BrokerShift.get_current(shift_type)
+    brokers = shift.brokers if !shift.nil?
+  end
+
+  def self.get_current(shift_type = "regular")
+    brokers = self.get_currents(shift_type)
+    return brokers[rand(0..brokers.length-1)]
+  end
+
   def self.get_current_broker(date = Time.now)
 
     if !ENV['BROKER'].nil? && !Rails.env.test?
