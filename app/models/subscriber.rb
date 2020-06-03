@@ -332,13 +332,14 @@ class Subscriber < ApplicationRecord
   end
 
   def attribute_adequate_broker
-    if self.broker.nil?
-      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement
+    if self.broker.nil? 
+      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement 
       if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
-        self.update(broker: Broker.get_current_broker_subscription_bm)
-      else #Sinon on attribue un courtier 'normalement'
-        self.update(broker: Broker.get_current_broker)
+        shift_type = "subscription"
+      else #Sinon on attribue un courtier 'normalement' 
+        shift_type = "regular"
       end
+      self.update(broker: Broker.get_current(shift_type))
     end
   end
 end
