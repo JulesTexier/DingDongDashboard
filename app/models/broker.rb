@@ -36,7 +36,7 @@ class Broker < ApplicationRecord
   end
 
   def self.get_current(shift_type = "regular")
-    brokers = self.get_currents(shift_type)
+    brokers = BrokerShift.get_currents(shift_type)
     return brokers[rand(0..brokers.length-1)]
   end
 
