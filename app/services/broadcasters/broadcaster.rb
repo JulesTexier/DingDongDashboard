@@ -25,12 +25,15 @@ class Broadcaster
   end
 
   def new_properties_gallery
-    properties = Property.unprocessed
+    properties = Property
+      .unprocessed
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
     subscribers = Subscriber.active
     subscribers.each do |sub|
+      subs_area = sub.areas.ids
       matched_props = []
       properties.each do |prop|
-        matched_props.push(prop) if sub.is_matching_property?(prop)
+        matched_props.push(Property.find(prop[0])) if sub.is_matching_property?(prop, subs_area)
       end
       if matched_props.length > 0
         if matched_props.length < 9
@@ -44,10 +47,8 @@ class Broadcaster
           @manychat_client.send_properties_gallery(sub, matched_props[19..28])
         end
       end
-
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
-
     update_processed_properties(properties)
   end
 
@@ -84,14 +85,16 @@ class Broadcaster
 
   def update_processed_properties(properties)
     properties.each do |p|
-      p.has_been_processed = true
-      p.save
+      prop = Property.find(p[0])
+      prop.has_been_processed = true
+      prop.save
     end
   end
 
-  def update_processed_property(property)
-    property.has_been_processed = true
-    property.save
+  def update_processed_property(property_id)
+    prop = Property.find(property_id)
+    prop.has_been_processed = true
+    prop.save
   end
 
   def good_morning_text(prop_nbr)
