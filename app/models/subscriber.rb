@@ -266,7 +266,7 @@ class Subscriber < ApplicationRecord
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
-    if Rails.env.production?
+    if ENV["RAILS_ENV"] == "production"
       if trello.add_new_user_on_trello(self)
         # self.broker.send_email_notification(self)
         # now = Time.now.in_time_zone("Paris")
