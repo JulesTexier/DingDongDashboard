@@ -5,8 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+    <%= yield :javascript %>
+    <%= yield :head %>
+    <%= tag :meta, name: "stripe-public-key", content: Rails.application.credentials.stripe[:publishable_key] %>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,16 +26,16 @@
 
   <body  style="background-color: #f7fafc">
     <div class="container">
-    <%if flash[:success] %>
+    <% if flash[:success] %>
       <div class="alert alert-success" role="alert">
         <%= flash[:success] %>
       </div>
-    <%end%>
-    <%if flash[:danger] %>
+    <% end %>
+    <% if flash[:danger] %>
       <div class="alert alert-danger" role="alert">
         <%= flash[:danger] %>
       </div>
-    <%end%>
+    <% end %>
       <%= yield %>
     </div>
 
