@@ -47,10 +47,8 @@ class Broadcaster
           @manychat_client.send_properties_gallery(sub, matched_props[19..28])
         end
       end
-
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
-
     update_processed_properties(properties)
   end
 
@@ -87,14 +85,16 @@ class Broadcaster
 
   def update_processed_properties(properties)
     properties.each do |p|
-      p.has_been_processed = true
-      p.save
+      prop = Property.find(p[0])
+      prop.has_been_processed = true
+      prop.save
     end
   end
 
-  def update_processed_property(property)
-    property.has_been_processed = true
-    property.save
+  def update_processed_property(property_id)
+    prop = Property.find(property_id)
+    prop.has_been_processed = true
+    prop.save
   end
 
   def good_morning_text(prop_nbr)
