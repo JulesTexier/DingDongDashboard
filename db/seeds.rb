@@ -81,3 +81,11 @@ area_yaml.each do |district_data|
     end
   end
 end
+
+
+broker_shifts_yaml = YAML.load_file("./db/data/broker_shifts.yml")
+broker_shifts_yaml.each do |shift|
+  if BrokerShift.where(name: shift[:name]).empty?
+    BrokerShift.create(shift)
+  end
+end
