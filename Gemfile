@@ -54,12 +54,13 @@ gem "rspec-retry"
 # Postmark
 gem "postmark-rails"
 
-# Mongo gem for migration purpose
-gem "mongo", "~> 2.7"
-
 # Metrics
 gem "chartkick"
 gem "groupdate"
+
+# Stripe
+gem "stripe"
+
 gem "rspec-rails", "~> 4.0.0.rc1"
 
 # Sidekiq
