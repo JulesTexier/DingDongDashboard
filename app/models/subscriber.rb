@@ -213,15 +213,10 @@ class Subscriber < ApplicationRecord
 
   def add_initial_areas(areas_ad_list)
     if !areas_ad_list.nil?
-<<<<<<< HEAD
       areas_ad_list.split(',').each do |area_id|
         if !Area.find(area_id).nil? && SelectedArea.where(subscriber: self, area_id: area_id).empty?
           self.areas << Area.find(area_id)
         end
-=======
-      areas_ad_list.split(",").each do |area_id|
-        self.areas << Area.find(area_id) if !Area.find(area_id).nil?
->>>>>>> master
       end
     end
   end
