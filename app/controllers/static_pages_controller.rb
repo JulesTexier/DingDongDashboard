@@ -180,7 +180,9 @@ class StaticPagesController < ApplicationController
   def brokers_funnel
     trello = Trello.new
     @brokers_data = []
-    Broker.where.not(trello_board_id: nil).each do |broker|
+    @status = ["En attente", "Peu intéressé", "Pas intéressé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle", "Intéressé", "En étude (rdv courtier simulation, documents, lettre de confort etc.)", "Offre acceptée (mandat + pièces)", "Instruction"]
+    scope = ["aurelienguichard1","melanieramon2","cohen172","kleinamelie","veroniquebenazet"]
+    Broker.where('trello_username IN (?)', scope).each do |broker|
       broker_data = {}
       broker_data[:name] = broker.firstname
       broker_data[:data] = broker.get_users_by_column if !broker.trello_board_id.nil?
