@@ -81,3 +81,19 @@ area_yaml.each do |district_data|
     end
   end
 end
+
+
+broker_shifts_yaml = YAML.load_file("./db/data/broker_shifts.yml")
+broker_shifts_yaml.each do |shift|
+  if BrokerShift.where(name: shift["name"]).empty?
+    BrokerShift.create(shift)
+  end
+end
+
+brokers_yaml = YAML.load_file("./db/data/brokers.yml")
+brokers_yaml.each do |broker|
+  if Broker.where(trello_id: broker["trello_id"]).empty?
+    puts "Inserting #{broker["firstname"]}"
+    Broker.create(broker)
+  end
+end

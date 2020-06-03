@@ -1,0 +1,96 @@
+---
+- name: "Lundi matin"
+  starting_hour: 9
+  ending_hour: 12
+  day: 1
+  shift_type: "regular"
+- name: "Lundi après-midi"
+  starting_hour: 13
+  ending_hour: 18
+  day: 1
+  shift_type: "regular"
+- name: "Mardi matin"
+  starting_hour: 9
+  ending_hour: 12
+  day: 2
+  shift_type: "regular"
+- name: "Mardi après-midi"
+  starting_hour: 13
+  ending_hour: 18
+  day: 2
+  shift_type: "regular"
+- name: "Mercredi matin"
+  starting_hour: 9
+  ending_hour: 12
+  day: 3
+  shift_type: "regular"
+- name: "Mercredi après-midi"
+  starting_hour: 13
+  ending_hour: 18
+  day: 3
+  shift_type: "regular"
+- name: "Jeudi matin"
+  starting_hour: 9
+  ending_hour: 12
+  day: 4
+  shift_type: "regular"
+- name: "Jeudi après-midi"
+  starting_hour: 13
+  ending_hour: 18
+  day: 4
+  shift_type: "regular"
+- name: "Vendredi matin"
+  starting_hour: 9
+  ending_hour: 12
+  day: 5
+  shift_type: "regular"
+- name: "Vendredi après-midi"
+  starting_hour: 13
+  ending_hour: 18
+  day: 5
+  shift_type: "regular"
+- name: "Samedi"
+  starting_hour: 0
+  ending_hour: 23
+  day: 0
+  shift_type: "regular"
+- name: "Dimanche"
+  starting_hour: 0
+  ending_hour: 23
+  day: 0
+  shift_type: "regular"
+- name: "Lundi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 1
+  shift_type: "subscription"
+- name: "Mardi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 2
+  shift_type: "subscription"
+- name: "Mercredi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 3
+  shift_type: "subscription"
+- name: "Jeudi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 4
+  shift_type: "subscription"
+- name: "Vendredi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 5
+  shift_type: "subscription"
+- name: "Samedi - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 6
+  shift_type: "subscription"
+- name: "Dimanche - Subscription BM"
+  starting_hour: 0
+  ending_hour: 23
+  day: 0
+  shift_type: "subscription"

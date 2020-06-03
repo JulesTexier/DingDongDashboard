@@ -266,7 +266,7 @@ class Subscriber < ApplicationRecord
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
-    if Rails.env.production?
+    if ENV["RAILS_ENV"] == "production"
       if trello.add_new_user_on_trello(self)
         # self.broker.send_email_notification(self)
         # now = Time.now.in_time_zone("Paris")
@@ -334,13 +334,14 @@ class Subscriber < ApplicationRecord
   end
 
   def attribute_adequate_broker
-    if self.broker.nil?
-      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement
+    if self.broker.nil? 
+      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement 
       if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
-        self.update(broker: Broker.get_current_broker_subscription_bm)
-      else #Sinon on attribue un courtier 'normalement'
-        self.update(broker: Broker.get_current_broker)
+        shift_type = "subscription"
+      else #Sinon on attribue un courtier 'normalement' 
+        shift_type = "regular"
       end
+      self.update(broker: Broker.get_current(shift_type))
     end
   end
 end
