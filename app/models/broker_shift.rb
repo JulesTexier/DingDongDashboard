@@ -1,0 +1,2 @@
+class BrokerShift < ApplicationRecord
+end
