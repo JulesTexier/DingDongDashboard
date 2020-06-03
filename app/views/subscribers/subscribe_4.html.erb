@@ -4,11 +4,13 @@
       function showForm() {
         document.getElementById("form").style.display = "block";
       }
-      setTimeout("showForm()", 55000); // after 5 secs
+      // setTimeout("showForm()", 55000); 
+      setTimeout("showForm()", 1000); // after 1 sec
     </script>
-        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇Découvre comment Ding Dong va t'accompagner dans ton projet👇</b></h4>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇 Comment Ding Dong va t'accompagner dans ton projet ? 👇</b></h4>
+        <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400">Tu auras accès à l'alerte dès la fin de cette vidéo</h6>
         <div class="d-flex justify-content-center mt-3 ">
-           <iframe width="700" height="394" src="https://www.youtube.com/embed/aiQl7LBxwoQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/o9vx2SkUC58?autoplay=1" frameborder="0" allow="accelerometer; autoplay=1; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div id="form" style="display:none">
           <%= form_tag('/subscribed-update') do |f| %>
