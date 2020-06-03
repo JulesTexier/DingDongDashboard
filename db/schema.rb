@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_081945) do
+ActiveRecord::Schema.define(version: 2020_06_03_044835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 2020_06_01_081945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "zone"
+  end
+
+  create_table "broker_shifts", force: :cascade do |t|
+    t.integer "starting_hour"
+    t.integer "ending_hour"
+    t.integer "day"
+    t.string "name"
+    t.string "shift_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "brokers", force: :cascade do |t|
