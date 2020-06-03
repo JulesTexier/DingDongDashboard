@@ -32,7 +32,7 @@ class Broker < ApplicationRecord
 
   def self.get_currents(shift_type = "regular")
     shift = BrokerShift.get_current(shift_type)
-    brokers = shift.brokers if !shift.nil?
+    shift.nil? ? [] : brokers = shift.brokers
   end
 
   def self.get_current(shift_type = "regular")

@@ -25,5 +25,8 @@ FactoryBot.define do
     factory :subscriber_dummy_fb_id do
       facebook_id { rand(10..99).to_s + rand(10..99).to_s + rand(10..99).to_s + rand(10..99).to_s }
     end
+    factory :subscriber_no_broker do
+      broker { nil }
+    end
   end
 end

@@ -28,6 +28,7 @@
   starting_hour: 13
   ending_hour: 18
   day: 3
+  shift_type: "regular"
 - name: "Jeudi matin"
   starting_hour: 9
   ending_hour: 12
