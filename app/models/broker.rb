@@ -5,6 +5,9 @@ class Broker < ApplicationRecord
   has_many :leads
   has_many :subscribers
 
+  has_many :permanences
+  has_many :shifts, through: :permanences, source: :broker_shift
+
   def get_board_url
     return "https://trello.com/b/" + self.trello_board_id
   end
