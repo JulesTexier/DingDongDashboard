@@ -158,7 +158,7 @@ class Broker < ApplicationRecord
   def get_users_by_column
     trello = Trello.new
     results = []
-    status = ["En attente", "Interessé", "Peu interessé", "Pas interessé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle"]
+    status = ["En attente", "Intéressé", "Peu intéressé", "Pas intéressé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle", "En étude (rdv courtier simulation, documents, lettre de confort etc.)", "Offre acceptée (mandat + pièces)", "Instruction"]
     lists = trello.get_broker_lists(self)
     lists.each do |item|
       if status.include?(item["name"])

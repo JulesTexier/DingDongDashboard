@@ -32,5 +32,8 @@
   - name: research_ended
     description: User is not researching a property anymore
     status_type: drop
+  - name: accept_free_financial_audit
+    description: User has accepted to be audited by a Broker to check his financial situation
+    status_type: acquisition
 
     
