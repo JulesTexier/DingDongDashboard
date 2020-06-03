@@ -89,3 +89,10 @@ broker_shifts_yaml.each do |shift|
     BrokerShift.create(shift)
   end
 end
+
+brokers_yaml = YAML.load_file("./db/data/brokers.yml")
+brokers_yaml.each do |broker|
+  if Broker.where(trello_id: broker[:trello_id]).empty?
+    Broker.create(broker)
+  end
+end
