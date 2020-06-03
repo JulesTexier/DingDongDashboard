@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:create, :update, :edit]
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
+  resources :subscriptions
 
   # Subscription 'subscription'
   get "subscribe-1" => "subscribers#subscribe_1"
