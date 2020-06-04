@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_081945) do
+ActiveRecord::Schema.define(version: 2020_06_04_094910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 2020_06_01_081945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "zone"
+  end
+
+  create_table "broker_shifts", force: :cascade do |t|
+    t.integer "starting_hour"
+    t.integer "ending_hour"
+    t.integer "day"
+    t.string "name"
+    t.string "shift_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -137,6 +147,15 @@ ActiveRecord::Schema.define(version: 2020_06_01_081945) do
     t.string "lastname"
     t.integer "min_rooms_number"
     t.index ["broker_id"], name: "index_leads_on_broker_id"
+  end
+
+  create_table "permanences", force: :cascade do |t|
+    t.bigint "broker_id"
+    t.bigint "broker_shift_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["broker_id"], name: "index_permanences_on_broker_id"
+    t.index ["broker_shift_id"], name: "index_permanences_on_broker_shift_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -334,7 +353,20 @@ ActiveRecord::Schema.define(version: 2020_06_01_081945) do
     t.text "specific_criteria"
     t.text "additional_question"
     t.string "initial_areas"
+    t.string "stripe_id"
+    t.string "stripe_customer_id"
+    t.boolean "is_blocked"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "plan_id"
+    t.integer "user_id"
+    t.boolean "active", default: true
+    t.datetime "current_period_ends_at"
+    t.string "stripe_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subways", force: :cascade do |t|
