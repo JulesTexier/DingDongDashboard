@@ -32,10 +32,17 @@
       </div>  
       <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
+      <% if is_subscriber_client %>
+            <%= link_to "Se désabonner de Ding Dong Premium 🚀",
+                        subscriber_end_subscription_path,
+                        class: "btn btn-outline-light",
+                        style: "font-weight:600" %>
+      <% else %>
             <%= link_to "S'abonner à Ding Dong Premium 🚀",
                         new_subscriber_subscription_path,
                         class: "btn btn-outline-light",
                         style: "font-weight:600" %>
+      <% end %>
         </div>
       </nav>
 </div>
