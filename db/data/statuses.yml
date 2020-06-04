@@ -38,5 +38,9 @@
   - name: redirected_in_messenger
     description: User has been redirected to Messenger chatbot and can start onboarding process via Manychat
     status_type: acquisition
+  - name: subscription_bm
+    description: User has been onboarded with subscription bm 
+    status_type: acquisition
+
 
     
