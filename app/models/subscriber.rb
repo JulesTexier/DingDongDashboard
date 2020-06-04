@@ -37,6 +37,10 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  def get_bm
+    bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name:"subscription_bm")).empty? ? "regular" : "subscription"
+  end
+
   def get_areas_list
     list = ""
     self.areas.each do |area|
@@ -228,7 +232,7 @@ class Subscriber < ApplicationRecord
     trello.add_label_old_user(self)
   end
 
-  def handle_form_filled(subscriber_params)
+  def handle_form_filled(subscriber_params, form_type = "regular")
     has_been_updated = self.update(subscriber_params)
     self.add_initial_areas(subscriber_params[:initial_areas])
     SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "form_filled"))
@@ -239,7 +243,7 @@ class Subscriber < ApplicationRecord
       SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "has_not_messenger"))
       onboarding_no_messenger
     elsif self.broker.nil?
-      onboarding_broker
+      onboarding_broker(form_type)
     end
     return has_been_updated
   end
@@ -261,12 +265,12 @@ class Subscriber < ApplicationRecord
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
   end
 
-  def onboarding_broker
-    attribute_adequate_broker
+  def onboarding_broker(form_type = "regular")
+    attribute_adequate_broker(form_type)
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
-    if Rails.env.production?
+    if ENV["RAILS_ENV"] == "production"
       if trello.add_new_user_on_trello(self)
         # self.broker.send_email_notification(self)
         # now = Time.now.in_time_zone("Paris")
@@ -333,14 +337,10 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  def attribute_adequate_broker
-    if self.broker.nil?
-      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement
-      if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
-        self.update(broker: Broker.get_current_broker_subscription_bm)
-      else #Sinon on attribue un courtier 'normalement'
-        self.update(broker: Broker.get_current_broker)
-      end
+  def attribute_adequate_broker(form_type = "regular")
+    if self.broker.nil? 
+      shift_type = form_type == "subscription" ? "subscription" : "regular"
+      self.update(broker: Broker.get_current(shift_type))
     end
   end
 end

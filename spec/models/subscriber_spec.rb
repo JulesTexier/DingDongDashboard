@@ -164,19 +164,25 @@ RSpec.describe Subscriber, type: :model do
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
-      # // Broker creation
-      @aurelien = FactoryBot.create(:subscriber_aurelien)
-      @melanie = FactoryBot.create(:subscriber_melanie)
-      @hugo = FactoryBot.create(:subscriber_hugo)
-      @amelie = FactoryBot.create(:subscriber_amelie)
-      @veronique = FactoryBot.create(:subscriber_veronique)
-      @greg = FactoryBot.create(:broker_greg)
+      # # // Broker creation 
+      # @aurelien = FactoryBot.create(:subscriber_aurelien)
+      # @melanie = FactoryBot.create(:subscriber_melanie)
+      # @hugo = FactoryBot.create(:subscriber_hugo)
+      # @amelie = FactoryBot.create(:subscriber_amelie)
+      # @veronique = FactoryBot.create(:subscriber_veronique)
+      # @greg = FactoryBot.create(:broker_greg)
+      @broker_shift = FactoryBot.create(:broker_shift, day: Time.now.wday, starting_hour: Time.now.hour - 1, ending_hour: Time.now.hour + 1, shift_type: "regular")
+      @broker = FactoryBot.create(:broker)
+      @broker.shifts << @broker_shift
+
+      @broker_shift_2= FactoryBot.create(:broker_shift, day: Time.now.wday, starting_hour: Time.now.hour - 1, ending_hour: Time.now.hour + 1, shift_type: "subscription")
+      @broker_2 = FactoryBot.create(:broker)
+      @broker_2.shifts << @broker_shift_2
     end
     context "testing if adequate status is create" do
       it "should return true because the update is working correctly" do
         expect(@sub.handle_form_filled(@subscriber_params)).to eq(true)
       end
-
       it "should check if subscriber has been updated" do
         @sub.handle_form_filled(@subscriber_params)
         expect(@sub.firstname).to eq("Maxime")
@@ -206,20 +212,20 @@ RSpec.describe Subscriber, type: :model do
       end
 
       it "should only create form_filled status and attribute regular broker" do
-        @sub = FactoryBot.create(:subscriber, broker: nil)
-        @sub.handle_form_filled(@subscriber_params)
-        expect(@sub.statuses.last).to eq(@form_filled_status)
-        expect(@sub.statuses.last).to eq(@form_filled_status)
-        expect(@sub.broker).to eq(Broker.get_current_broker)
-        expect(@sub.broker).not_to eq(Broker.get_current_broker_subscription_bm)
+        @sub = FactoryBot.create(:subscriber_no_broker, broker: nil)
+          @sub.handle_form_filled(@subscriber_params)
+          expect(@sub.statuses.last).to eq(@form_filled_status)
+          expect(@sub.statuses.last).to eq(@form_filled_status)
+          expect(@sub.broker).to eq(Broker.get_current)
+          # expect(@sub.broker).not_to eq(Broker.get_current("subscription"))
       end
 
       it "should only create form_filled status and attribute subscription test broker if subscriber comes from adequate sequence ..." do
         @sub = FactoryBot.create(:subscriber, broker: nil)
         @subscriber_sequence = SubscriberSequence.create(subscriber: @sub, sequence: FactoryBot.create(:sequence_subscriber_bm))
-        @sub.handle_form_filled(@subscriber_params)
-        expect(@sub.broker).to eq(Broker.get_current_broker_subscription_bm)
-        expect(@sub.broker).not_to eq(Broker.get_current_broker)
+        @sub.handle_form_filled(@subscriber_params, "subscription")
+        expect(@sub.broker).to eq(Broker.get_current("subscription"))
+        # expect(@sub.broker).not_to eq(Broker.get_current)
       end
     end
   end

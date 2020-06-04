@@ -190,6 +190,18 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def display_shifts
+    bs = BrokerShift.all
+    @data = []
+    bs.each do |doc|
+      item = {}
+      item[:shift] = doc.name
+      item[:brokers] = doc.brokers
+      @data.push(item)
+    end
+  end
+
+
   private
 
   def authenticate_admin
