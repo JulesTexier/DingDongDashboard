@@ -353,20 +353,9 @@ ActiveRecord::Schema.define(version: 2020_06_04_094910) do
     t.text "specific_criteria"
     t.text "additional_question"
     t.string "initial_areas"
-    t.string "stripe_id"
     t.string "stripe_customer_id"
     t.boolean "is_blocked"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
-  end
-
-  create_table "subscriptions", force: :cascade do |t|
-    t.string "plan_id"
-    t.integer "user_id"
-    t.boolean "active", default: true
-    t.datetime "current_period_ends_at"
-    t.string "stripe_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subways", force: :cascade do |t|
