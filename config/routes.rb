@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:index, :new]
     get "success" => "subscriptions#success"
     get "cancel" => "subscriptions#cancel"
+    get "end_subscription" => "subscriptions#end_subscription"
   end
 
   # Subscription 'subscription'
