@@ -92,13 +92,13 @@ class SubscribersController < ApplicationController
 
   def subscribe_create
     subscriber = Subscriber.where(email: subscriber_params["email"]).empty? ? Subscriber.new(subscriber_params) : Subscriber.where(email: subscriber_params["email"]).last
-    if subscriber.handle_form_filled(subscriber_params)
+    if subscriber.handle_form_filled(subscriber_params, "subscription")
       # flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
       redirect_to "/subscribed?id=#{subscriber.id}"
     else
       flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
       puts "ohoh, probleme"
-      redirect_to "/inscription-1"
+      redirect_to "/subscribe-1"
     end
   end
 
@@ -112,6 +112,7 @@ class SubscribersController < ApplicationController
     end
     subscriber.update(additional_question: desc)
     Trello.new.add_comment_to_user_card(subscriber, desc) unless subscriber.trello_id_card.nil?
+    SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"redirected_in_messenger"))
     redirect_to subscriber.get_chatbot_link
   end
 

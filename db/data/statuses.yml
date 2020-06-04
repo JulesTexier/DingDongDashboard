@@ -35,5 +35,8 @@
   - name: accept_free_financial_audit
     description: User has accepted to be audited by a Broker to check his financial situation
     status_type: acquisition
+  - name: redirected_in_messenger
+    description: User has been redirected to Messenger chatbot and can start onboarding process via Manychat
+    status_type: acquisition
 
     
