@@ -34,8 +34,6 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "watir-rails"
 
-gem "dotenv"
-
 # Swagger gem
 gem "rswag"
 
@@ -74,6 +72,7 @@ gem "scout_apm"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "dotenv-rails"
 end
 
 group :development do
