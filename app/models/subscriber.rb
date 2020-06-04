@@ -38,7 +38,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_bm
-    bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name:"subscription_bm")).empty? ? "regular" : "subscription"
+    bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name: "subscription_bm")).empty? ? "regular" : "subscription"
   end
 
   def get_areas_list
@@ -145,7 +145,7 @@ class Subscriber < ApplicationRecord
   end
 
   def self.active
-    self.where(is_active: true)
+    self.where(is_active: true, is_blocked: [nil, false])
   end
 
   def self.inactive
@@ -217,7 +217,7 @@ class Subscriber < ApplicationRecord
 
   def add_initial_areas(areas_ad_list)
     if !areas_ad_list.nil?
-      areas_ad_list.split(',').each do |area_id|
+      areas_ad_list.split(",").each do |area_id|
         if !Area.find(area_id).nil? && SelectedArea.where(subscriber: self, area_id: area_id).empty?
           self.areas << Area.find(area_id)
         end
@@ -338,7 +338,7 @@ class Subscriber < ApplicationRecord
   end
 
   def attribute_adequate_broker(form_type = "regular")
-    if self.broker.nil? 
+    if self.broker.nil?
       shift_type = form_type == "subscription" ? "subscription" : "regular"
       self.update(broker: Broker.get_current(shift_type))
     end
