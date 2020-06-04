@@ -7,9 +7,6 @@
 
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
-    <%= yield :javascript %>
-    <%= yield :head %>
-    <%= tag :meta, name: "stripe-public-key", content: Rails.application.credentials.stripe[:publishable_key] %>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
