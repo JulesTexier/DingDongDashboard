@@ -65,7 +65,13 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:create, :update, :edit]
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
-  resources :subscriptions
+
+  resources :subscribers, only: [:show] do
+    resources :subscriptions, only: [:index, :new]
+  end
+
+  get "success" => "subscriptions#success"
+  get "cancel" => "subscriptions#cancel"
 
   # Subscription 'subscription'
   get "subscribe-1" => "subscribers#subscribe_1"
