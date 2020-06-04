@@ -20,6 +20,7 @@ class Api::V1::SubscribersController < ActionController::API
             data[:areas_list] = subscriber.get_areas_list
             data[:districts_list] = subscriber.get_districts_list
             data[:edit_path] = subscriber.get_edit_path
+            data[:business_model] = subscriber.get_bm
             render json: {status: 'SUCCESS', message: 'Required subscriber', data: data}, status: 200
         rescue ActiveRecord::RecordNotFound
             render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404

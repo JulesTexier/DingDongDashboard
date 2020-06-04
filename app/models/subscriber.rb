@@ -37,6 +37,10 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  def get_bm
+    bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name:"subscription_bm")).empty? ? "regular" : "subscription"
+  end
+
   def get_areas_list
     list = ""
     self.areas.each do |area|
