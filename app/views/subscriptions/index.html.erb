@@ -1,5 +1,41 @@
-<h1> salut les mecs </h1>
+<div class="row justify-content-center mt-4 align-items-center">
 
-<h2> es-tu prêt a nous donner tes sous ? </h2>
-
-<%= link_to "clique", new_subscriber_subscription_path %>
+  <div class="col-sm-12 col-lg-8 aos-init aos-animate" data-aos="fade-up">
+    <div class="mb-4">
+      <h5 class="font-weight-bold text-primary col-12 text-center">Achetez sans stress avec</h5>
+      <h3 class="font-weight-bold text-primary col-12 text-center">Ding Dong</h3>
+    </div>
+    <div class="container"> 
+      <div class="row justify-content-center pl-2 pr-2"> 
+        <div class="card card-price-2">
+          <div class="card-body">
+            <h4 class="text-primary font-weight-bold">19.90€ / mois</h4>
+            <p class="mb-0">Sans engagement.</p>
+            <p class="mb-0">Arrêtez à tout moment.</p>
+            <hr class="ml-0 w-20">
+            <ul class="list-group list-group-minimal text-muted">
+              <li class="list-group-item text-black">
+                <span>✔️ + de 150 sites scannés en une alerte</span>
+              </li>
+              <li class="list-group-item text-black">
+                <span>✔️ Les annonces reçues avant tout le monde</span>
+              </li>
+              <li class="list-group-item text-black">
+                <span>✔️ Un conseiller unique à votre écoute</span>
+              </li>
+              <li class="list-group-item text-black">
+                <span>✔️ Un réseau de professionnels de confiance</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>  
+      <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <%= link_to "S'abonner à Ding Dong Premium 🚀",
+                        new_subscriber_subscription_path,
+                        class: "btn btn-outline-light",
+                        style: "font-weight:600" %>
+        </div>
+      </nav>
+</div>
