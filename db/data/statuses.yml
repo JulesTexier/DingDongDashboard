@@ -41,6 +41,15 @@
   - name: subscription_bm
     description: User has been onboarded with subscription bm 
     status_type: acquisition
+  - name: has_paid_subscription
+    description: User has started its subscription for Ding Dong alert
+    status_type: revenue
+  - name: has_cancelled_subscription
+    description: User hasnt been to the end of process of paying subscription
+    status_type: revenue
+  - name: has_ended_subscription
+    description: User has ended its subscription for Ding Dong alert
+    status_type: revenue
 
 
     
