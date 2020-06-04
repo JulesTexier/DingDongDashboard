@@ -1,6 +1,8 @@
 class SubscriptionsController < ApplicationController
+  helper_method :is_subscriber_client
+
   def index
-    puts params[:subscriber_id]
+    @subscriber = Subscriber.find(params[:subscriber_id])
   end
 
   def new
@@ -18,10 +20,32 @@ class SubscriptionsController < ApplicationController
   end
 
   def success
-    session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    Subscriber.find(params[:subscriber_id]).update(stripe_customer_id: session.customer, is_blocked: false)
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @subscriber.update(stripe_session_id: params[:session_id], is_blocked: false)
+    @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
   end
 
   def cancel
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+  end
+
+  def end_subscription
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    session = Stripe::Checkout::Session.retrieve(@subscriber.stripe_session_id)
+    Stripe::Subscription.delete(session.subscription) unless @subscription_id.nil?
+    @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
+  end
+
+  private
+
+  def is_subscriber_client
+    status_ids = Status.where(name: ["has_paid_subscription", "has_cancelled_subscription", "has_ended_subscription"]).pluck(:id)
+    status = Subscriber.find(params[:subscriber_id])
+      .subscriber_statuses
+      .where(status_id: status_ids)
+      .last
+      .status
+    status.name == "has_paid_subscription" ? true : false
   end
 end
