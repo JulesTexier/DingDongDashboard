@@ -165,7 +165,7 @@ class Subscriber < ApplicationRecord
     status_array = self
       .subscriber_statuses
       .where(status_id: status_ids)
-    if status_array.empty?
+    if status_array.empty? || self.stripe_session_id.nil?
       return false
     else
       status_array.last.status.name == "has_paid_subscription" ? true : false
