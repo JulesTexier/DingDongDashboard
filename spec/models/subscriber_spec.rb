@@ -223,7 +223,7 @@ RSpec.describe Subscriber, type: :model do
       it "should only create form_filled status and attribute subscription test broker if subscriber comes from adequate sequence ..." do
         @sub = FactoryBot.create(:subscriber, broker: nil)
         @subscriber_sequence = SubscriberSequence.create(subscriber: @sub, sequence: FactoryBot.create(:sequence_subscriber_bm))
-        @sub.handle_form_filled(@subscriber_params)
+        @sub.handle_form_filled(@subscriber_params, "subscription")
         expect(@sub.broker).to eq(Broker.get_current("subscription"))
         # expect(@sub.broker).not_to eq(Broker.get_current)
       end

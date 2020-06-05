@@ -19,12 +19,23 @@ class Api::V1::DataController < ApplicationController
   end
 
   def get_facebook_id_subscribers
-  subscribers = Subscriber.all
-  fb_ids = []
-  subscribers.each do |sub|
-    fb_ids.push(sub.facebook_id)
+    subscribers = Subscriber.all
+    fb_ids = []
+    subscribers.each do |sub|
+      fb_ids.push(sub.facebook_id)
+    end
+    render json: { status: "SUCCESS", message: "List of all active subscribers", data: fb_ids }, status: 200
   end
-  render json: { status: "SUCCESS", message: "List of all active subscribers", data: fb_ids }, status: 200
+
+  def display_shifts
+    bs = BrokerShift.all
+    @data = []
+    bs.each do |doc|
+      item = {}
+      item[:shift] = doc.name
+      item[:brokers] = doc.brokers
+      @data.push(item)
+    end
   end
 
   private 
