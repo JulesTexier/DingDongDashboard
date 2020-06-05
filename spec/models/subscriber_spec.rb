@@ -164,7 +164,7 @@ RSpec.describe Subscriber, type: :model do
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
-      # # // Broker creation 
+      # # // Broker creation
       # @aurelien = FactoryBot.create(:subscriber_aurelien)
       # @melanie = FactoryBot.create(:subscriber_melanie)
       # @hugo = FactoryBot.create(:subscriber_hugo)
@@ -175,7 +175,7 @@ RSpec.describe Subscriber, type: :model do
       @broker = FactoryBot.create(:broker)
       @broker.shifts << @broker_shift
 
-      @broker_shift_2= FactoryBot.create(:broker_shift, day: Time.now.wday, starting_hour: Time.now.hour - 1, ending_hour: Time.now.hour + 1, shift_type: "subscription")
+      @broker_shift_2 = FactoryBot.create(:broker_shift, day: Time.now.wday, starting_hour: Time.now.hour - 1, ending_hour: Time.now.hour + 1, shift_type: "subscription")
       @broker_2 = FactoryBot.create(:broker)
       @broker_2.shifts << @broker_shift_2
     end
@@ -213,11 +213,11 @@ RSpec.describe Subscriber, type: :model do
 
       it "should only create form_filled status and attribute regular broker" do
         @sub = FactoryBot.create(:subscriber_no_broker, broker: nil)
-          @sub.handle_form_filled(@subscriber_params)
-          expect(@sub.statuses.last).to eq(@form_filled_status)
-          expect(@sub.statuses.last).to eq(@form_filled_status)
-          expect(@sub.broker).to eq(Broker.get_current)
-          # expect(@sub.broker).not_to eq(Broker.get_current("subscription"))
+        @sub.handle_form_filled(@subscriber_params)
+        expect(@sub.statuses.last).to eq(@form_filled_status)
+        expect(@sub.statuses.last).to eq(@form_filled_status)
+        expect(@sub.broker).to eq(Broker.get_current)
+        # expect(@sub.broker).not_to eq(Broker.get_current("subscription"))
       end
 
       it "should only create form_filled status and attribute subscription test broker if subscriber comes from adequate sequence ..." do
@@ -227,6 +227,82 @@ RSpec.describe Subscriber, type: :model do
         expect(@sub.broker).to eq(Broker.get_current("subscription"))
         # expect(@sub.broker).not_to eq(Broker.get_current)
       end
+    end
+  end
+
+  describe "active_and_not_blocked" do
+    it "should return proper number of subscriber, which is one" do
+      subscriber = FactoryBot.create(:subscriber, is_blocked: false, is_active: true)
+      expect(Subscriber.active_and_not_blocked.count).to eq(1)
+    end
+
+    it "should return proper number of subscriber, which is one" do
+      subscriber = FactoryBot.create(:subscriber, is_blocked: nil, is_active: true)
+      expect(Subscriber.active_and_not_blocked.count).to eq(1)
+    end
+
+    it "should return proper number of subscriber, which is one" do
+      subscriber = FactoryBot.create(:subscriber, is_blocked: true, is_active: false)
+      expect(Subscriber.active_and_not_blocked.count).to eq(0)
+    end
+
+    it "should return proper number of subscriber, which is one" do
+      subscriber = FactoryBot.create(:subscriber, is_blocked: nil, is_active: false)
+      expect(Subscriber.active_and_not_blocked.count).to eq(0)
+    end
+  end
+
+  describe "is_subscriber_premium?" do
+    before :each do
+      @subscriber = FactoryBot.create(:subscriber)
+      FactoryBot.create(:status, name: "onboarded")
+      FactoryBot.create(:status, name: "has_paid_subscription")
+      FactoryBot.create(:status, name: "has_ended_subscription")
+      FactoryBot.create(:status, name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "onboarded")
+    end
+
+    it "should return true" do
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(true)
+    end
+
+    it "should return true" do
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(true)
+    end
+    it "should return true" do
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(true)
+    end
+    it "should return false" do
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(false)
+    end
+
+    it "should return false" do
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(false)
+    end
+
+    it "should return true" do
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(true)
+    end
+
+    it "should return false" do
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(false)
     end
   end
 end
