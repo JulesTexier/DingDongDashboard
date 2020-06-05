@@ -2,11 +2,12 @@ class SubscribersController < ApplicationController
 
   # Onboarding form "regular"
   def inscription_1
-    @zone_select = []
-    Area.all.each do |area|
-      @zone_select << area.zone
-    end
-    @zone_select = @zone_select.uniq
+    @zone_select = ["Paris"]
+    # @zone_select = []
+    # Area.all.each do |area|
+    #   @zone_select << area.zone
+    # end
+    # @zone_select = @zone_select.uniq
   end
 
   def inscription_2
@@ -52,11 +53,12 @@ class SubscribersController < ApplicationController
 
   # Onboarding form "subscription"
   def subscribe_1
-    @zone_select = []
-    Area.all.each do |area|
-      @zone_select << area.zone
-    end
-    @zone_select = @zone_select.uniq
+    @zone_select = ["Paris"]
+    # @zone_select = []
+    # Area.all.each do |area|
+    #   @zone_select << area.zone
+    # end
+    # @zone_select = @zone_select.uniq
   end
 
   def subscribe_2
