@@ -254,7 +254,7 @@ RSpec.describe Subscriber, type: :model do
 
   describe "is_subscriber_premium?" do
     before :each do
-      @subscriber = FactoryBot.create(:subscriber)
+      @subscriber = FactoryBot.create(:subscriber, stripe_session_id: "fake_session_id_123812")
       FactoryBot.create(:status, name: "onboarded")
       FactoryBot.create(:status, name: "has_paid_subscription")
       FactoryBot.create(:status, name: "has_ended_subscription")
@@ -302,6 +302,21 @@ RSpec.describe Subscriber, type: :model do
       @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
       @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
       @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(false)
+    end
+
+    it "should return false" do
+      @subscriber.stripe_session_id = nil
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
+      expect(@subscriber.is_subscriber_premium?).to eq(false)
+    end
+
+    it "should return false" do
+      @subscriber.stripe_session_id = nil
+      @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
+      @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
       expect(@subscriber.is_subscriber_premium?).to eq(false)
     end
   end
