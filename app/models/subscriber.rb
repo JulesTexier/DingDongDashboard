@@ -166,11 +166,7 @@ class Subscriber < ApplicationRecord
     desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
     desc += "\u000A**PROJET**\u000A"
     desc += "\u000A**FINANCEMENT**\u000A"
-    desc += "\u000A**CLIENTE**\u000A"
     desc += "\u000A**NOTES**\u000A"
-    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (inscription) :**\u000A"
-    desc += "\u000A**SUITE RDV COURTAGE :**\u000A"
-    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (courtage) :**\u000A"
     desc += "\u000A\u000A---\u000A\u000A"
     desc += trello_summary
   end
