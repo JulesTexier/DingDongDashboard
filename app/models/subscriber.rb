@@ -161,7 +161,7 @@ class Subscriber < ApplicationRecord
   end
 
   def is_subscriber_premium?
-    status_ids = Status.where(name: ["has_paid_subscription", "has_cancelled_subscription", "has_ended_subscription"]).pluck(:id)
+    status_ids = Status.where(name: ["has_paid_subscription", "has_ended_subscription"]).pluck(:id)
     status_array = self
       .subscriber_statuses
       .where(status_id: status_ids)
