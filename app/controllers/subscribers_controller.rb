@@ -109,7 +109,7 @@ class SubscribersController < ApplicationController
       desc =  "Souhaite être recontacté #{params["shift"] if !params["shift"].nil?} - Il est interessé par les services suivants : #{params["services"]}"
       SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
     else  
-      desc = "Il n'a pas souhaité prendre l'audit gratuit !"
+      desc = "Il n'a pas souhaité prendre l'audit gratuit ! - Il est interessé par les services suivants : #{params["services"]}"
     end
     subscriber.update(additional_question: desc)
     Trello.new.add_comment_to_user_card(subscriber, desc) unless subscriber.trello_id_card.nil?
