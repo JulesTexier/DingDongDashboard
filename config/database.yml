@@ -25,11 +25,11 @@ default: &default
 development:
   <<: *default
   # database: giant_cat_development
-  host: kandula.db.elephantsql.com
+  host: balarama.db.elephantsql.com
   port: 5432
-  database: xfwzvnqn
-  username: xfwzvnqn
-  password: It4rVmIKQ2_uKhwiRkn5mWKk50P7Wj7-
+  database: lmrkkowi
+  username: lmrkkowi
+  password: tJ2lcdKX25oJziD5WKRGAsLXmYIsLqB8
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
