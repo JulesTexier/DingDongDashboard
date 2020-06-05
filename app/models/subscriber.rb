@@ -145,6 +145,10 @@ class Subscriber < ApplicationRecord
   end
 
   def self.active
+    self.where(is_active: true)
+  end
+
+  def self.active_and_not_blocked
     self.where(is_active: true, is_blocked: [nil, false])
   end
 
@@ -154,6 +158,18 @@ class Subscriber < ApplicationRecord
 
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
+  end
+
+  def is_subscriber_premium?
+    status_ids = Status.where(name: ["has_paid_subscription", "has_cancelled_subscription", "has_ended_subscription"]).pluck(:id)
+    status_array = self
+      .subscriber_statuses
+      .where(status_id: status_ids)
+    if status_array.empty?
+      return false
+    else
+      status_array.last.status.name == "has_paid_subscription" ? true : false
+    end
   end
 
   def notify_broker_trello(comment)

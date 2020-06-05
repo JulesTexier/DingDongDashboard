@@ -1,11 +1,11 @@
 class SubscriptionsController < ApplicationController
-  helper_method :is_subscriber_client
-
   def index
     @subscriber = Subscriber.find(params[:subscriber_id])
+    @is_client = @subscriber.is_subscriber_premium?
   end
 
   def new
+    @publishable_key = ENV["STRIPE_PUBLISHABLE_KEY"]
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
     @checkout_session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
@@ -21,7 +21,7 @@ class SubscriptionsController < ApplicationController
 
   def success
     @subscriber = Subscriber.find(params[:subscriber_id])
-    @subscriber.update(stripe_session_id: params[:session_id], is_blocked: false)
+    @subscriber.update(stripe_session_id: params[:session_id], is_blocked: false, is_active: true)
     @subscriber.statuses << Status.find_by(name: "has_paid_subscription")
   end
 
@@ -35,17 +35,5 @@ class SubscriptionsController < ApplicationController
     session = Stripe::Checkout::Session.retrieve(@subscriber.stripe_session_id)
     Stripe::Subscription.delete(session.subscription) unless @subscription_id.nil?
     @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
-  end
-
-  private
-
-  def is_subscriber_client
-    status_ids = Status.where(name: ["has_paid_subscription", "has_cancelled_subscription", "has_ended_subscription"]).pluck(:id)
-    status = Subscriber.find(params[:subscriber_id])
-      .subscriber_statuses
-      .where(status_id: status_ids)
-      .last
-      .status
-    status.name == "has_paid_subscription" ? true : false
   end
 end
