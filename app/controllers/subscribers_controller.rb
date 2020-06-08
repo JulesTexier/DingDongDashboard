@@ -106,12 +106,13 @@ class SubscribersController < ApplicationController
   end
 
   def subscribed_update
-    if params["free_financial_plan"].include?("true")
-      subscriber = Subscriber.find(params["id"])
+    subscriber = Subscriber.find(params["id"])
+    if !params["free_financial_plan"].nil? && params["free_financial_plan"].include?("true")
       desc =  "Souhaite être recontacté #{params["shift"] if !params["shift"].nil?} - Il est interessé par les services suivants : #{params["services"]}"
       SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"accept_free_financial_audit"))
     else  
       desc = "Il n'a pas souhaité prendre l'audit gratuit ! - Il est interessé par les services suivants : #{params["services"]}"
+      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name:"do_not_accept_free_financial_audit"))
     end
     subscriber.update(additional_question: desc)
     Trello.new.add_comment_to_user_card(subscriber, desc) unless subscriber.trello_id_card.nil?
