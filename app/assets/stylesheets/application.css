@@ -50,6 +50,19 @@
     background-color: #0470C1;
   }
 
+  .text-blue{
+    color: #0470C1;
+  }
+
+  .text-black{
+    color: #212529;
+  }
+
+  .underline_konbini_6{
+    border-bottom: 4px solid #f96332;
+    line-height: 8px;
+  }
+
   .img_responsive{
     max-width: 300px;
     width: -webkit-fill-available;

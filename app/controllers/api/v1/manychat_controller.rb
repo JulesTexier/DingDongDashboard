@@ -119,12 +119,16 @@ class Api::V1::ManychatController < ApplicationController
   end
 
   #GET /manychat/s/:subscriber_id/send/last/:x/props
-  # Send X lasts properties that match Subscriber criteria
+  # Send X lasts properties that match Subscriber criteria unless user is blocked
   def send_x_last_props
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props_ids = subscriber.get_x_last_props(params[:x])
-      handle_sending(subscriber, props_ids, "last_properties")
+      if subscriber.is_blocked
+        send_flow(subscriber, "content20200604125739_572289")
+      else
+        props_ids = subscriber.get_x_last_props(params[:x])
+        handle_sending(subscriber, props_ids, "last_properties")
+      end
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -235,6 +239,19 @@ class Api::V1::ManychatController < ApplicationController
     response = m.send_favorites_gallery_properties_card(subscriber)
     if response[0]
       json_response = { status: "SUCCESS", message: "#{subscriber.fav_properties.length} propert(y)(ies) sent to subscriber", data: response[1] }
+      status = 200
+    else
+      json_response = { status: "ERROR", message: "A error occur in manychat call", data: response[1] }
+      status = 406
+    end
+    return { json_response: json_response.to_json, status: status }
+  end
+
+  def send_flow(subscriber, flow)
+    m = Manychat.new
+    response = m.send_flow_sequence(subscriber, flow)
+    if response[0]
+      json_response = { status: "SUCCESS", message: "The flow #{flow} has been sent to the subscriber #{subscriber.id}", data: response[1] }
       status = 200
     else
       json_response = { status: "ERROR", message: "A error occur in manychat call", data: response[1] }

@@ -28,7 +28,7 @@ class Broadcaster
     properties = Property
       .unprocessed
       .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
-    subscribers = Subscriber.active
+    subscribers = Subscriber.active_and_not_blocked
     subscribers.each do |sub|
       subs_area = sub.areas.ids
       matched_props = []
@@ -53,7 +53,7 @@ class Broadcaster
   end
 
   def good_morning
-    subs = Subscriber.active
+    subs = Subscriber.active_and_not_blocked
     subs.each do |sub|
       sub_mc_infos = @manychat_client.fetch_subscriber_mc_infos(sub)
       border = @manychat_client.is_last_interaction_borderline(sub_mc_infos[1]["data"]) if sub_mc_infos[0] == true

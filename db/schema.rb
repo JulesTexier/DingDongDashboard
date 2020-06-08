@@ -10,31 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_045348) do
+ActiveRecord::Schema.define(version: 2020_06_04_094910) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "btree_gin"
-  enable_extension "btree_gist"
-  enable_extension "citext"
-  enable_extension "cube"
-  enable_extension "dblink"
-  enable_extension "dict_int"
-  enable_extension "dict_xsyn"
-  enable_extension "earthdistance"
-  enable_extension "fuzzystrmatch"
-  enable_extension "hstore"
-  enable_extension "intarray"
-  enable_extension "ltree"
-  enable_extension "pg_stat_statements"
-  enable_extension "pg_trgm"
-  enable_extension "pgcrypto"
-  enable_extension "pgrowlocks"
-  enable_extension "pgstattuple"
   enable_extension "plpgsql"
-  enable_extension "tablefunc"
-  enable_extension "unaccent"
-  enable_extension "uuid-ossp"
-  enable_extension "xml2"
 
   create_table "admins", force: :cascade do |t|
     t.string "firstname"
@@ -100,31 +79,6 @@ ActiveRecord::Schema.define(version: 2020_06_03_045348) do
     t.index ["property_id"], name: "index_favorites_on_property_id"
     t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
-  end
-
-  create_table "hunter_searches", force: :cascade do |t|
-    t.string "research_name"
-    t.text "areas", default: [], array: true
-    t.integer "min_floor", default: 0
-    t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
-    t.integer "surface"
-    t.integer "rooms_number"
-    t.integer "max_price"
-    t.bigint "hunter_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
-  end
-
-  create_table "hunters", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "company"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "leads", force: :cascade do |t|
@@ -353,6 +307,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_045348) do
     t.text "specific_criteria"
     t.text "additional_question"
     t.string "initial_areas"
+    t.string "stripe_session_id"
+    t.boolean "is_blocked"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
