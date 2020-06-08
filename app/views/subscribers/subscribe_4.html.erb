@@ -1,24 +1,17 @@
 
     <% if !@subscriber.broker.nil?%>
-    <script>
-      function showForm() {
-        document.getElementById("form").style.display = "block";
-      }
-      setTimeout("showForm()", 55000); 
-      // setTimeout("showForm()", 1000); // after 1 sec
-    </script>
         <h4 class="text-center mt-4" style="color: #0470C1; font-weight:400"><b>👇 Comment fonctionne Ding Dong ? 👇</b></h4>
         <div class="d-flex justify-content-center mt-3 ">
            <iframe width="560" height="315" src="https://www.youtube.com/embed/o9vx2SkUC58?autoplay=1" frameborder="0" allow="accelerometer; autoplay=1; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div id="form" style="display:none">
+        <div id="form">
           <%= form_tag('/subscribed-update') do |f| %>
           <div class="row">
             <div class="col-12">
               <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">Audit de votre situation financière offerte</h5>
               <div class="form-check form-check-inline">
                 <%= check_box_tag 'free_financial_plan', 'true', true, class:"form-check-input", onclick:"displayShifts()" %>
-                <label class="form-check-label" for= "free_financial_plan" onclick="displayShifts()"> Je souhaite être contacté pour un audit financier de ma situation</label>
+                <label class="form-check-label" for= "free_financial_plan"> Je souhaite être contacté pour un audit financier de ma situation</label>
               </div>
               <p class="mt-2"><i> 👉 Notre expert négocie les meilleurs taux tous les mois en partenariat avec toutes les banques du marché, il pourra vous donner rapidement une estimation de votre capacité d'emprunt maximale et de votre taux d’intérêt minimal !</i></p>
             </div>
