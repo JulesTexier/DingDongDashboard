@@ -119,6 +119,19 @@ class Manychat
     end
   end
 
+  ## sometimes, users leaves the app and we don't update their is_active attribute, so we fetch datas from manychat to see
+  ## if they don't exist or if they've an unsubscribed status
+  def deactivate_unsubscribers
+    active_subscribers = Subscriber.active
+    active_subscribers.each do |active_subscriber|
+      mc_sub_infos = self.fetch_subscriber_mc_infos(active_subscriber)
+      if !mc_sub_infos[0] || mc_sub_infos[1]["data"]["status"] == "unsubscribed"
+        puts "\nSuccessful update to is_active: false for : #{active_subscriber.firstname} - ID: #{active_subscriber.id}\n\n"
+        active_subscriber.update(is_active: false)
+      end
+    end
+  end
+
   private
 
   ###################################
@@ -295,12 +308,12 @@ class Manychat
       "caption": "🤝 Négo",
       "target": ENV["QR_NEGO"],
     },
-    {
+          {
       "type": "flow",
       "caption": "📝​ Offre",
       "target": ENV["QR_MAKE_OFFER"],
     },
-    {
+          {
       "type": "flow",
       "caption": "👨‍⚖️ Notaire",
       "target": ENV["QR_NOTARY"],

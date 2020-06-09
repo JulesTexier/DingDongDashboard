@@ -43,6 +43,13 @@ namespace :subscriber do
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The Reactivation script took #{ending - starting} seconds to run"
   end
+
+  task :deactivation do
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    Manychat.new.deactivate_unsubscribers
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "The Deactivation script took #{ending - starting} seconds to run"
+  end
 end
 
 namespace :broadcast do

@@ -128,7 +128,7 @@ class SubscribersController < ApplicationController
       zone_areas.push(area.zone)
     end
     zone_areas.uniq
-    @areas = Area.where(zone: zone_areas)
+    @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas)
   end
 
   def update
