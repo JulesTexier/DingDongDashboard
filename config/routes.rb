@@ -15,18 +15,18 @@ Rails.application.routes.draw do
   namespace "api" do
     namespace "v1" do
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
-
+      post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
+      post "/subscribers/:id/broker/" => "subscribers#atttribute_broker"
+      
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
-        post "/fb/:facebook_id" => "subscribers#create_from_facebook_id"
-        post "/:id/broker/" => "atttribute_broker"
       end
-
+      
       resources :properties, only: [:show, :index]
       resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
-
+      
       # Manychat routes
       # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
