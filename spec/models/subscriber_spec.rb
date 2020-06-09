@@ -7,12 +7,12 @@ RSpec.describe Subscriber, type: :model do
         expect(build(:subscriber_dummy_fb_id)).to be_valid
       end
 
-      context "validations" do
-        before { FactoryBot.build(:subscriber) }
-        it do
-          should validate_presence_of(:firstname)
-        end
-      end
+      # context "validations" do
+      #   before { FactoryBot.build(:subscriber) }
+      #   it do
+      #     should validate_presence_of(:firstname)
+      #   end
+      # end
 
       context "default values" do
         it "should define user as active by default" do

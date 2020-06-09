@@ -8,8 +8,8 @@ class Subscriber < ApplicationRecord
   # validates :facebook_id, presence: true
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true, unless: -> { status == "new_lead" }
-  validates :lastname, presence: true, unless: -> { status == "new_lead" }
+  # validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  # validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -210,7 +210,7 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
-    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+    desc += "\u000A\u000A*Inscription chez DingDong : #{Time.now.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
   end
 
   def get_chatbot_link
@@ -270,6 +270,10 @@ class Subscriber < ApplicationRecord
       onboarding_broker(form_type)
     end
     return has_been_updated
+  end
+
+  def handle_onboarding_end_manychat
+    onboarding_broker("subscription")
   end
 
   private
