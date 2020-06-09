@@ -47,6 +47,32 @@ class Api::V1::SubscribersController < ActionController::API
         end
     end
 
+    # POST /suscribers/fb/:facebook_id
+    def create_from_facebook_id
+        sub  = Subscriber.find_by(facebook_id: params[:facebook_id])
+        @subscriber = sub.nil? ? Subscriber.create(facebook_id: params[:facebook_id]) : sub
+        
+        data = @subscriber.as_json
+        data[:edit_path] = subscriber.get_edit_path
+        if !@subscriber.id.nil?
+            render json: {status: 'SUCCESS', message: 'Subscriber created', data: data}, status: 200
+        else
+            render json: {status: 'ERROR', message: 'Subscriber could not be created', data: sub.errors}, status: 500
+        end
+
+    end
+
+    # POST /subscribers/:id/broker/
+    def atttribute_broker
+        @subscriber  = Subscriber.find(params[:id])
+        @subscriber.onboarding_broker("subscription")
+        if !@subscriber.trello_id_card.nil?
+            render json: {status: 'SUCCESS', message: 'Subscriber created', data: @subscriber}, status: 200
+        else 
+            render json: {status: 'ERROR', message: 'Broker not attributed => Trello card not created', data: sub.errors}, status: 500
+        end
+    end
+
     # PUT /subscribers/:id
     def update 
         begin
