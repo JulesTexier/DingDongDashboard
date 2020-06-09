@@ -37,10 +37,7 @@
       <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
       <% if @is_client %>
-            <%= link_to "Se désabonner de Ding Dong Premium 🚀",
-                        subscriber_end_subscription_path,
-                        class: "btn btn-outline-light",
-                        style: "font-weight:600" %>
+          <h5 class="font-weight-bold text-light col-12 text-center">Vous êtes déjà premium Ding Dong !</h5>
       <% else %>
             <%= link_to "S'abonner à Ding Dong Premium 🚀",
                         new_subscriber_subscription_path,
