@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
+        post "/fb/:facebook_id" => "subscribers#create_from_facebook_id"
+        post "/:id/broker/" => "atttribute_broker"
       end
 
       resources :properties, only: [:show, :index]
