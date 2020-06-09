@@ -8,8 +8,8 @@ class Subscriber < ApplicationRecord
   # validates :facebook_id, presence: true
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true, unless: -> { status == "new_lead" }
-  validates :lastname, presence: true, unless: -> { status == "new_lead" }
+  # validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  # validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -270,6 +270,10 @@ class Subscriber < ApplicationRecord
       onboarding_broker(form_type)
     end
     return has_been_updated
+  end
+
+  def handle_onboarding_end_manychat
+    onboarding_broker("subscription")
   end
 
   private
