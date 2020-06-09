@@ -29,11 +29,4 @@ class SubscriptionsController < ApplicationController
     @subscriber = Subscriber.find(params[:subscriber_id])
     @subscriber.statuses << Status.find_by(name: "has_cancelled_subscription")
   end
-
-  def end_subscription
-    @subscriber = Subscriber.find(params[:subscriber_id])
-    session = Stripe::Checkout::Session.retrieve(@subscriber.stripe_session_id)
-    Stripe::Subscription.delete(session.subscription) unless @subscription_id.nil?
-    @subscriber.statuses << Status.find_by(name: "has_ended_subscription")
-  end
 end
