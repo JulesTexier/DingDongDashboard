@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
       payment_method_types: ["card"],
       mode: "subscription",
       line_items: [{
-        price: "price_1GpwkGJ0w5Eyx13BMqa29pDs",
+        price: ENV["STRIPE_PRICE_ID"],
         quantity: 1,
       }],
       success_url: ENV["BASE_URL"] + "subscribers/" + params[:subscriber_id] + "/success?session_id={CHECKOUT_SESSION_ID}",
