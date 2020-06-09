@@ -65,7 +65,6 @@ class Api::V1::SubscribersController < ActionController::API
     def atttribute_broker
         @subscriber  = Subscriber.find(params[:id])
         @subscriber.handle_onboarding_end_manychat
-        byebug
         if !@subscriber.trello_id_card.nil?
             render json: {status: 'SUCCESS', message: 'Subscriber created', data: @subscriber}, status: 200
         else 
