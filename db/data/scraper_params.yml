@@ -500,6 +500,14 @@
         - ville%5B%5D=75001&ville%5B%5D=75002&ville%5B%5D=75003&ville%5B%5D=75004&ville%5B%5D=75005&ville%5B%5D=75006&ville%5B%5D=75007&ville%5B%5D=75008&ville%5B%5D=75009&ville%5B%5D=75010&ville%5B%5D=75011&ville%5B%5D=75012&ville%5B%5D=75013&ville%5B%5D=75014&ville%5B%5D=75010&ville%5B%5D=75015&ville%5B%5D=75016&ville%5B%5D=75017&ville%5B%5D=75018&ville%5B%5D=75019&ville%5B%5D=75020&budget=&rechercher=Rechercher
       is_active: true
       group_type: Independant
+- source: Residence Immobilier
+  params:
+    - zone: Paris
+      url: https://www.residences-immobilier.com/fr/recherche.html?lang=fr&bdgMax=&bdgMin=&departement=75&district=&enlarge_search=&keywords=&nb_piece=&setLocDep=&shortterm=&surfMax=&surfMin=&TypeAnnonceL=&TypeAnnonceV=1&TypeBien=&villes=&ville_dep=&tri=DATE
+      main_page_cls: div.row.no-gutters.px-3.px-sm-0
+      scraper_type: Static
+      is_active: true
+      group_type: Independant
 - source: Callimmo
   params:
     - zone: Paris
