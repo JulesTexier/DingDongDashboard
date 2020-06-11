@@ -39,7 +39,6 @@ class Independant::ScraperProprioo < Scraper
                 i += 1
                 break if i == limit
               end
-              puts JSON.pretty_generate(hashed_property)
             end
           rescue StandardError => e
             error_outputs(e, @source)
