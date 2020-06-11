@@ -13,12 +13,12 @@ class Hub::ScraperPap < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.pap.fr" + access_xml_link_matchdata(item, "div.col-right > a", "href", "(#dialog_mensualite|www.immoneuf.com/)")[0].to_s
-          hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul").specific_trim_scrp("\n\r\t"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > a.item-title > span.h1"), args.zone)
-          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.col-right > p.item-description"), args.zone) if hashed_property[:area] == "N/C"
-          hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.col-right > a.item-title > ul"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
-          hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-right > a.item-title > span.item-price"), '(\d)(.*)(€)').to_int_scrp
+          hashed_property[:link] = "https://www.pap.fr" + access_xml_link_matchdata(item, "a.item-title", "href", "(#dialog_mensualite|www.immoneuf.com/|construiresamaison.com/)")[0]
+          hashed_property[:surface] = regex_gen(access_xml_text(item, "ul.item-tags"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.h1"), args.zone)
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "p.item-description"), args.zone) if hashed_property[:area] == "N/C"
+          hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "ul.item-tags"), '(\d+)(.?)(pi)').to_int_scrp
+          hashed_property[:price] = regex_gen(access_xml_text(item, "span.item-price"), '(\d)(.*)(€)').to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.item-tags.margin-bottom-20").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
