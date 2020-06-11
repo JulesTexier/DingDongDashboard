@@ -48,8 +48,19 @@ class Scraper
   end
 
   def fetch_static_page(url)
-    page = Nokogiri::HTML(open(url))
-    return page
+    attempt_count = 0
+    max_attempts = 3
+    begin
+      attempt_count += 1
+      res = open(url)
+      raise StaticError unless res.status[0] == "200"
+    rescue
+      sleep 1
+      attempt_count < max_attempts ? retry : "Error in Fetch Static Page for url : #{url}."
+    else
+      page = Nokogiri::HTML.parse(res)
+      return page
+    end
   end
 
   def fetch_dynamic_page(url, waiting_class, wait, *click_args)
@@ -74,21 +85,23 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}" unless Rails.env.test?
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - Captcha" unless Rails.env.test?
       res = Net::HTTP.get_response(uri)
       raise ScrappingBeeError unless res.code == "200"
     rescue
-      puts "Trying again for #{source} - #{res.code}\n\n" unless Rails.env.test?
+      puts "Trying again for Captcha - #{res.code}\n\n" unless Rails.env.test?
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n#{attempt_count} for #{source}\n\n" unless Rails.env.test?
+      puts "Worked on attempt n#{attempt_count} for Captcha\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
   end
 
-  def fetch_http_page(url, http_request)
+  def fetch_http_page(url, http_request = [{}, {}])
+    attempt_count = 0
+    max_attempts = 3
     header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
@@ -96,8 +109,16 @@ class Scraper
       headers: header,
       body: http_request[1],
     )
-    request.run
-    return Nokogiri::HTML(request.response.body)
+    begin
+      attempt_count += 1
+      request.run
+      raise HttpPageError unless request.response.response_code == 200
+    rescue
+      sleep 1
+      attempt_count < max_attempts ? retry : "Error in HTTP Post Request Page for url : #{url}."
+    else
+      Nokogiri::HTML.parse(request.response.response_body)
+    end
   end
 
   def fetch_json_post(url, http_request)
