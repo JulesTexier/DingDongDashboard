@@ -18,6 +18,7 @@ scraper_params.each do |param|
     s.http_request = data["http_request"]
     s.group_type = data["group_type"]
     s.zone = data["zone"]
+    s.is_active = data["is_active"]
     if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type).count == 0
       if s.save
         puts "Insertion of parameters - #{s.source} - #{s.zone}"
@@ -81,7 +82,6 @@ area_yaml.each do |district_data|
     end
   end
 end
-
 
 broker_shifts_yaml = YAML.load_file("./db/data/broker_shifts.yml")
 broker_shifts_yaml.each do |shift|
