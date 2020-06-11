@@ -74,13 +74,13 @@
   - zone: Paris
     url: https://www.pap.fr/annonce/vente-appartement-maison-paris-75-g439-a-partir-du-studio
     scraper_type: Static
-    main_page_cls: div.search-list-item
+    main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
   - zone: Banlieue-Ouest
     url: https://www.pap.fr/annonce/vente-appartement-maison-fourqueux-78112-g39064g39073g39088g39105g39145g39153g39154g39206g39216g39221g39254g39279g43298-a-partir-du-studio
     scraper_type: Static
-    main_page_cls: div.search-list-item
+    main_page_cls: div.search-list-item-alt
     is_active: false
     group_type: Hub
 - source: Stephane Plaza
