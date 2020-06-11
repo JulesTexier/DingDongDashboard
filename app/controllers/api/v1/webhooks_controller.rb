@@ -15,6 +15,9 @@ class Api::V1::WebhooksController < ApplicationController
     elsif params["From"].match(/(@connexion-immobilier.com)/i).is_a?(MatchData)
       Email::ScraperConnexionMail.new(params["HtmlBody"]).launch
       render json: { status: "SUCCESS", message: "Mail from Connexion Immobilier", data: nil }, status: 200
+    elsif params["From"].match(/(@barnes-international.com)/i).is_a?(MatchData)
+      Email::ScraperBarnesInternationalMail.new(params["HtmlBody"]).launch
+      render json: { status: "SUCCESS", message: "Mail from Barnes International", data: nil }, status: 200
     elsif params["FromName"] == "Postmarkapp Support"
       render json: { status: "SUCCESS", message: "Mail from PostMark Support", data: nil }, status: 200
     else
