@@ -11,7 +11,7 @@
     url: https://www.superimmo.com/achat/appartement/rueil-malmaison-92500,sartrouville-78500,houilles-78800,chatou-78400,maisons-laffitte-78600,marly-le-roi-78160,le-vesinet-78110,montesson-78360,carrieres-sur-seine-78420,croissy-sur-seine-78290,chambourcy-78240,l-etang-la-ville-78620,mareil-marly-78750,saint-germain-en-laye-78/p/1?option%5B%5D=old_build&sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: BienIci
   params:
@@ -25,7 +25,7 @@
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-72261%22%2C%22-75022%22%2C%22-75003%22%2C%22-73610%22%2C%22-75453%22%2C%22-73330%22%2C%22-59958%22%2C%22-58170%22%2C%22-73619%22%2C%22-73609%22%2C%22-121217%22%2C%22-82656%22%2C%22-932299%22%2C%22-75454%22%2C%22-932293%22%5D%7D%7D&extensionType=extendedIfNoResult&enableAggregates=true&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
     scraper_type: HTTPRequest
     http_type: get_json
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: Figaro
   params:
@@ -39,7 +39,7 @@
     url: "https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Saint-Germain-en-Laye%20(78),Fourqueux%20(78),Le%20Vesinet%20(78),Chambourcy%20(78),Maisons-Laffitte%20(78),Mareil-Marly%20(78),L%27Etang-la-Ville%20(78),Croissy-sur-Seine%20(78),Chatou%20(78),Montesson%20(78),Houilles%20(78),Sartrouville%20(78),Carrieres-sur-seine%20(78),Rueil-Malmaison%20(92)&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa"
     scraper_type: Static
     main_page_cls: div.item-main-infos
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: Propr. Figaro
   params:
@@ -53,7 +53,7 @@
     url: https://proprietes.lefigaro.fr/annonces/immobilier-yvelines-ile+de+france-france/?ville=st+germain+laye&ville=34233&ville=34290&ville=34190&ville=34310&ville=34315&ville=34317&ville=34268&ville=34210&ville=34194&ville=34338&ville=34259&ville=34381&ville=34188&ville=38661&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: LogicImmo
   params:
@@ -67,7 +67,7 @@
     url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=28016_2,11603_2,17331_2,6361_2,19095_2,19440_2,19563_2,17892_2,8875_2,7021_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-details-wrapper
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: PAP
   params:
@@ -81,7 +81,7 @@
     url: https://www.pap.fr/annonce/vente-appartement-maison-fourqueux-78112-g39064g39073g39088g39105g39145g39153g39154g39206g39216g39221g39254g39279g43298-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item
-    is_active: true
+    is_active: false
     group_type: Hub
 - source: Stephane Plaza
   params:
@@ -95,7 +95,7 @@
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=78551&location[]=78650&location[]=78251&location[]=78133&location[]=78358&location[]=78367&location[]=78372&location[]=78224&location[]=78190&location[]=78146&location[]=78418&location[]=78311&location[]=78586&location[]=78124&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
-    is_active: true
+    is_active: false
     group_type: Group
 - source: Orpi
   params:
@@ -109,7 +109,7 @@
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-germain-en-laye&locations%5B0%5D%5Blabel%5D=Saint-Germain-en-Laye+(78100)&locations%5B1%5D%5Bvalue%5D=le-vesinet&locations%5B1%5D%5Blabel%5D=Le+V%C3%A9sinet+(78110)&locations%5B2%5D%5Bvalue%5D=fourqueux&locations%5B2%5D%5Blabel%5D=Fourqueux+(78112)&locations%5B3%5D%5Bvalue%5D=chambourcy&locations%5B3%5D%5Blabel%5D=Chambourcy+(78240)&locations%5B4%5D%5Bvalue%5D=maisons-laffitte&locations%5B4%5D%5Blabel%5D=Maisons-Laffitte+(78600)&locations%5B5%5D%5Bvalue%5D=mareil-marly&locations%5B5%5D%5Blabel%5D=Mareil-Marly+(78750)&locations%5B6%5D%5Bvalue%5D=marly-le-roi&locations%5B6%5D%5Blabel%5D=Marly-le-Roi+(78160)&locations%5B7%5D%5Bvalue%5D=l-etang-la-ville&locations%5B7%5D%5Blabel%5D=L%27%C3%89tang-la-Ville+(78620)&locations%5B8%5D%5Bvalue%5D=croissy-sur-seine&locations%5B8%5D%5Blabel%5D=Croissy-sur-Seine+(78290)&locations%5B9%5D%5Bvalue%5D=chatou&locations%5B9%5D%5Blabel%5D=Chatou+(78400)&locations%5B10%5D%5Bvalue%5D=montesson&locations%5B10%5D%5Blabel%5D=Montesson+(78360)&locations%5B11%5D%5Bvalue%5D=houilles&locations%5B11%5D%5Blabel%5D=Houilles+(78800)&locations%5B12%5D%5Bvalue%5D=sartrouville&locations%5B12%5D%5Blabel%5D=Sartrouville+(78500)&locations%5B13%5D%5Bvalue%5D=carrieres-sur-seine&locations%5B13%5D%5Blabel%5D=Carri%C3%A8res-sur-Seine+(78420)&locations%5B14%5D%5Bvalue%5D=rueil-malmaison&locations%5B14%5D%5Blabel%5D=Rueil-Malmaison+(92500)&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
-    is_active: true
+    is_active: false
     group_type: Group
 - source: Laforet
   params:
@@ -123,7 +123,7 @@
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=17930265%2C17926685%2C17895588%2C17892236%2C17890052%2C17888110%2C17885459%2C17871368%2C17852869%2C17787979%2C17787083%2C17769591%2C17758177%2C17445548%2C17111837%2C4468262&cities=92063%2C78586%2C78551%2C78311%2C78146%2C78358%2C78372%2C78650%2C78418%2C78124%2C78190%2C78133%2C78224%2C78367%2C78224&types=house%2Capartment&transaction=buy
     scraper_type: HTTPRequest
     http_type: get_json
-    is_active: true
+    is_active: false
     group_type: Group
 - source: Century21
   params:
@@ -137,7 +137,7 @@
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-le+vesinet-fourqueux-rueil+malmaison/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/page-1/#/annonces/achat-maison-appartement/v-maisons+laffitte-montesson-rueil+malmaison-fourqueux-l+etang+la+ville-le+vesinet-houilles-mareil+marly-marly+le+roi-chambourcy-chatou-croissy+sur+seine-sartrouville-carrieres+sur+seine/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/tri-date-desc/page-1/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
-    is_active: true
+    is_active: false
     group_type: Group
 - source: ERA France
   params:
@@ -159,7 +159,7 @@
     http_request:
       - {} 
       - jquery_aa_afunc=call&remote_function=get_products_search_ajax_perso&params%5B0%5D%5Baction%5D=update_search&params%5B0%5D%5Bmap_polygone%5D=2.2306121652985005%2C48.92104510963347%2F2.2306121652985005%2C48.81795378572542%2F2.125167931701984%2C48.81795378572542%2F2.125167931701984%2C48.92104510963347&params%5B0%5D%5Bpage%5D=1&params%5B0%5D%5Bsort%5D=PRODUCT_LIST_EXCLUSa&params%5B0%5D%5Bsort_liste%5D=PRODUCT_LIST_EXCLUSa&params%5B0%5D%5BC_28_search%5D=EGAL&params%5B0%5D%5BC_28_type%5D=UNIQUE&params%5B0%5D%5BC_28%5D=Vente&params%5B0%5D%5Bkeywords%5D=&params%5B0%5D%5Bcfamille_id_search%5D=EGAL&params%5B0%5D%5Bcfamille_id_type%5D=TEXT&params%5B0%5D%5Bcfamille_id%5D=1%2C2&params%5B0%5D%5BC_65_search%5D=CONTIENT&params%5B0%5D%5BC_65_type%5D=TEXT&params%5B0%5D%5BC_65%5D=92500+RUEIL+MALMAISON&params%5B0%5D%5BC_30_search%5D=COMPRIS&params%5B0%5D%5BC_30_type%5D=NUMBER&params%5B0%5D%5BC_30_MIN%5D=&params%5B0%5D%5BC_30_MAX%5D=&params%5B0%5D%5BC_47_search%5D=SUPERIEUR&params%5B0%5D%5BC_47_type%5D=NUMBER&params%5B0%5D%5BC_47%5D=&params%5B0%5D%5BC_46_search%5D=SUPERIEUR&params%5B0%5D%5BC_46_type%5D=NUMBER&params%5B0%5D%5BC_46%5D=&params%5B0%5D%5BC_41_search%5D=SUPERIEUR&params%5B0%5D%5BC_41_type%5D=NUMBER&params%5B0%5D%5BC_41%5D=&params%5B0%5D%5BC_50_search%5D=SUPERIEUR&params%5B0%5D%5BC_50_type%5D=NUMBER&params%5B0%5D%5BC_50%5D=&params%5B0%5D%5BC_110_search%5D=EGAL&params%5B0%5D%5BC_110_type%5D=FLAG&params%5B0%5D%5BC_110%5D=&params%5B0%5D%5BC_1737_search%5D=EGAL&params%5B0%5D%5BC_1737_type%5D=FLAG&params%5B0%5D%5BC_1737%5D=&params%5B0%5D%5BC_49_search%5D=SUPERIEUR&params%5B0%5D%5BC_49_type%5D=NUMBER&params%5B0%5D%5BC_49%5D=&params%5B0%5D%5BC_48_search%5D=SUPERIEUR&params%5B0%5D%5BC_48_type%5D=NUMBER&params%5B0%5D%5BC_48%5D=&params%5B0%5D%5BC_34_search%5D=COMPRIS&params%5B0%5D%5BC_34_type%5D=NUMBER&params%5B0%5D%5BC_34_MIN%5D=&params%5B0%5D%5BC_34_MAX%5D=&params%5B0%5D%5BC_33_search%5D=COMPRIS&params%5B0%5D%5BC_33_type%5D=NUMBER&params%5B0%5D%5BC_33_MIN%5D=&params%5B%5D=pagination&params%5B%5D=400&params%5B%5D=map_carto&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=false&params%5B%5D=images%2Fmarker_2017.png
-    is_active: true
+    is_active: false
     group_type: Group
 - source: Foncia
   params:
@@ -173,7 +173,7 @@
     url: https://fr.foncia.com/achat/chatou-78400--saint-germain-en-laye-78100--fourqueux-78112--le-vesinet-78110--chambourcy-78240--maisons-laffitte-78600--mareil-marly-78750--marly-le-roi-78160--l-etang-la-ville-78620--croissy-sur-seine-78290--montesson-78360--houilles-78800--sartrouville-78500--carrieres-sur-seine-78420--rueil-malmaison-92500/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
-    is_active: true
+    is_active: false
     group_type: Group
 - source: LeBonCoin
   params:
