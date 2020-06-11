@@ -241,6 +241,11 @@
     - zone: Paris
       is_active: true
       group_type: Email
+- source: Barnes International
+  params:
+    - zone: Paris
+      is_active: true
+      group_type: Email
 - source: Daniel Feau
   params:
     - zone: Paris
