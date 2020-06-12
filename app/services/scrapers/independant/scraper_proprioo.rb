@@ -21,7 +21,6 @@ class Independant::ScraperProprioo < Scraper
               hashed_property[:price] = item["prix"]
               hashed_property[:rooms_number] = item["nbPieces"]
               hashed_property[:area] = perform_district_regex(item["codePostal"])
-              puts go_to_prop?(hashed_property, 7)
               if go_to_prop?(hashed_property, 7)
                 html = fetch_static_page(hashed_property[:link])
                 desc = html.xpath("//main/div/div[3]/div/div/div[1]/div[4]").text.strip
