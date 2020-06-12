@@ -1,16 +1,17 @@
 class Email::ScraperConnexionMail < Scraper
-  attr_accessor :html_content, :properties, :source
+  attr_accessor :html_content, :properties, :source, :params
 
   def initialize(html_content)
     @html_content = html_content
     @source = "Connexion Immobilier"
+    @params = fetch_init_params(@source, is_mail_alert = true)
     @properties = []
   end
 
   def launch(limit = nil)
     email_link = Nokogiri::HTML.parse(@html_content)
     link = access_xml_link(email_link, "a", "href")[0]
-    unless link.nil?
+    if !link.nil? && !self.params.empty?
       html = fetch_static_page(link)
       access_xml_raw(html, "body").each do |item|
         begin
@@ -29,6 +30,7 @@ class Email::ScraperConnexionMail < Scraper
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source
           hashed_property[:images] = access_xml_link(item, "section.pictures > figure > a", "href")
+          hashed_property[:reference] = "Connexion Immobilier Mail"
           if go_to_prop?(hashed_property, 7)
             @properties.push(hashed_property) ##testing purpose
             enrich_then_insert_v2(hashed_property)

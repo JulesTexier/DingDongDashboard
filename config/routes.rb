@@ -15,16 +15,18 @@ Rails.application.routes.draw do
   namespace "api" do
     namespace "v1" do
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
-
+      post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
+      post "/subscribers/:id/broker/" => "subscribers#atttribute_broker"
+      
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
       end
-
+      
       resources :properties, only: [:show, :index]
       resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
-
+      
       # Manychat routes
       # Subscriber
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
@@ -66,6 +68,21 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
 
+  resources :subscribers, only: [:show] do
+    resources :subscriptions, only: [:index, :new]
+    get "success" => "subscriptions#success"
+    get "cancel" => "subscriptions#cancel"
+  end
+
+  # Subscription 'subscription'
+  get "subscribe-1" => "subscribers#subscribe_1"
+  get "subscribe-2" => "subscribers#subscribe_2"
+  get "subscribe-3" => "subscribers#subscribe_3"
+  post "subscribe-create" => "subscribers#subscribe_create"
+  get "subscribed" => "subscribers#subscribe_4"
+  post "subscribed-update" => "subscribers#subscribed_update"
+
+  # Subscription 'regular'
   get "inscription-1" => "subscribers#inscription_1"
   get "inscription-2" => "subscribers#inscription_2"
   get "inscription-3" => "subscribers#inscription_3"
@@ -78,4 +95,6 @@ Rails.application.routes.draw do
   get "/dashboard/price" => "static_pages#property_price"
   get "/dashboard/source" => "static_pages#sources"
   get "/dashboard/duplicates" => "static_pages#duplicates"
+  get "/dashboard/brokers" => "static_pages#brokers_funnel"
+  get "/dashboard/shifts" => "static_pages#display_shifts"
 end

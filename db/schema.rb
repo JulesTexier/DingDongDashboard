@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_081010) do
+ActiveRecord::Schema.define(version: 2020_06_04_094910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.string "zone"
   end
 
+  create_table "broker_shifts", force: :cascade do |t|
+    t.integer "starting_hour"
+    t.integer "ending_hour"
+    t.integer "day"
+    t.string "name"
+    t.string "shift_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "brokers", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -92,31 +102,6 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
   end
 
-  create_table "hunter_searches", force: :cascade do |t|
-    t.string "research_name"
-    t.text "areas", default: [], array: true
-    t.integer "min_floor", default: 0
-    t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
-    t.integer "surface"
-    t.integer "rooms_number"
-    t.integer "max_price"
-    t.bigint "hunter_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
-  end
-
-  create_table "hunters", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "company"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "leads", force: :cascade do |t|
     t.string "firstname"
     t.string "phone"
@@ -137,6 +122,15 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.string "lastname"
     t.integer "min_rooms_number"
     t.index ["broker_id"], name: "index_leads_on_broker_id"
+  end
+
+  create_table "permanences", force: :cascade do |t|
+    t.bigint "broker_id"
+    t.bigint "broker_shift_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["broker_id"], name: "index_permanences_on_broker_id"
+    t.index ["broker_shift_id"], name: "index_permanences_on_broker_shift_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -172,6 +166,26 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["district_id"], name: "index_property_districts_on_district_id"
     t.index ["property_id"], name: "index_property_districts_on_property_id"
+  end
+
+  create_table "property_histories", force: :cascade do |t|
+    t.integer "price"
+    t.text "description"
+    t.string "link"
+    t.string "area"
+    t.integer "rooms_number"
+    t.integer "bedrooms_number"
+    t.integer "surface"
+    t.string "flat_type"
+    t.string "agency_name"
+    t.string "contact_number"
+    t.string "reference"
+    t.string "source"
+    t.string "method_name"
+    t.string "error"
+    t.text "images", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "property_images", force: :cascade do |t|
@@ -245,7 +259,6 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.text "description"
     t.string "step_type"
     t.integer "time_frame"
-    t.string "template"
     t.bigint "sequence_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -260,12 +273,11 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.string "sender_name"
     t.string "source"
     t.boolean "is_active"
-    t.text "trigger_ads", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "sequence_type"
     t.text "description"
     t.string "marketing_type"
+    t.string "marketing_link"
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -316,6 +328,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_081010) do
     t.text "specific_criteria"
     t.text "additional_question"
     t.string "initial_areas"
+    t.string "stripe_session_id"
+    t.boolean "is_blocked"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 

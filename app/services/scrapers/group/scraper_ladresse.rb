@@ -13,7 +13,8 @@ class Group::ScraperLadresse < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.ladresse.com" + access_xml_link(item, "div.products-img > a", "href")[0].tr("..", "").to_s
+          link = "https://www.ladresse.com" + access_xml_link(item, "div.products-img > a", "href")[0].tr("..", "").to_s
+          hashed_property[:link] = link.split("?search_id")[0]
           hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "ul.products-infos-pictos"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.products-name"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
           price_element = access_xml_text(item, "div.products-price")
@@ -34,7 +35,7 @@ class Group::ScraperLadresse < Scraper
             hashed_property[:description] = access_xml_text(html, "div.content-desc").tr("\n\t", "").strip
             agency_area = perform_district_regex(access_xml_text(html, "div.agence-title"))
             desc_area = perform_district_regex(hashed_property[:description])
-            desc_area != agency_area && desc_area != "N/C" ? hashed_property[:area] = desc_area : hashed_property[:area] = agency_area
+            hashed_property[:area] = desc_area != agency_area && desc_area != "N/C" ? desc_area : agency_area
             hashed_property[:floor] = regex_gen(access_xml_text(html, "ul.list-criteres > li:last-child > span"), '(\d+)/').to_int_scrp
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])

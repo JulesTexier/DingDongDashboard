@@ -1,0 +1,10 @@
+<h1>Créneaux des courtiers</h1>
+
+<% @data.each do |item|%>
+  <h2><%= item[:shift]%></h2>
+  <ul>
+    <% item[:brokers].each do |broker|%>
+      <li><%= broker.firstname %></li>
+    <%end%>
+  </ul>
+<%end%>

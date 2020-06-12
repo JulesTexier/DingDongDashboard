@@ -5,7 +5,6 @@ class SequenceStep < ApplicationRecord
 
   validates :step, presence: true, numericality: { only_integer: true }
   validates :step_type, presence: true
-  validates :template, presence: true
   validates :time_frame, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def get_step_infos
@@ -19,27 +18,19 @@ class SequenceStep < ApplicationRecord
     puts "*** END OF STEP INFO **\n\n"
   end
 
-  def execute_step(subscriber)
-    case self.sequence.sequence_type
-    when "Mail"
-      if Rails.env.production?
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: self.respectable_sending_hours(8, 23).hour)
-      else
-        GrowthMailer.send_growth_email_gmail(self, subscriber).deliver_later(wait: 5.second)
-      end
-      ## TODO - CREATE JOBS !!!!!!
-      SubscriberStatus.create(subscriber: subscriber, status: Status.find_by(name: get_status_name))
+  def execute_step(subscriber, property_data)
+    if Rails.env.production?
+      GrowthEngineJob.set(wait: self.respectable_sending_hours(8, 23).hour).perform_later(self.id, subscriber.id, property_data)
     else
-      puts "error"
+      GrowthEngineJob.set(wait: 5.second).perform_later(self.id, subscriber.id, property_data)
     end
   end
 
   def respectable_sending_hours(start_day, end_day)
-    a = DateTime.now + self.time_frame
+    a = DateTime.now + self.time_frame.hour
     if a.hour < start_day
-      time_frame_adjustment = start_day - a.hour
-      self.time_frame + time_frame_adjustment
-    elsif a.hour >= end_day
+      self.time_frame + (start_day - a.hour)
+    elsif a.hour > end_day
       time_frame_adjustment = (a.hour - end_day) + start_day
     else
       self.time_frame

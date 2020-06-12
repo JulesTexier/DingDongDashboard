@@ -176,6 +176,32 @@ class StaticPagesController < ApplicationController
     @duplicated_props_last_week = Property.where("created_at BETWEEN ? AND ?", DateTime.now.beginning_of_day - 14.days, DateTime.now.beginning_of_day - 7.days).select(:price, :rooms_number, :surface).group(:price, :rooms_number, :surface).having("count(*) > 1")
   end
 
+  # //Brokers stats 
+  def brokers_funnel
+    trello = Trello.new
+    @brokers_data = []
+    @status = ["En attente", "Peu intéressé", "Pas intéressé", "Jamais de réponse", "Plus en recherche", "Plus de nouvelle", "Intéressé", "En étude (rdv courtier simulation, documents, lettre de confort etc.)", "Offre acceptée (mandat + pièces)", "Instruction"]
+    scope = ["aurelienguichard1","melanieramon2","cohen172","kleinamelie","veroniquebenazet"]
+    Broker.where('trello_username IN (?)', scope).each do |broker|
+      broker_data = {}
+      broker_data[:name] = broker.firstname
+      broker_data[:data] = broker.get_users_by_column if !broker.trello_board_id.nil?
+      @brokers_data.push(broker_data)
+    end
+  end
+
+  def display_shifts
+    bs = BrokerShift.all
+    @data = []
+    bs.each do |doc|
+      item = {}
+      item[:shift] = doc.name
+      item[:brokers] = doc.brokers
+      @data.push(item)
+    end
+  end
+
+
   private
 
   def authenticate_admin

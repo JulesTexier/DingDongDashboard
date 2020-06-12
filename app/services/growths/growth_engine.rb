@@ -1,11 +1,10 @@
 class GrowthEngine
-  attr_reader :source, :sender_email, :sequence_type, :lead_email
+  attr_reader :source, :sender_email, :lead_email, :property_data
   attr_accessor :first_time_frame, :second_time_frame
 
-  def initialize(first_time_frame = 48, second_time_frame = 240, sequence_type = "Mail")
+  def initialize(first_time_frame = 48, second_time_frame = 240)
     @first_time_frame = first_time_frame
     @second_time_frame = second_time_frame
-    @sequence_type = sequence_type
   end
 
   def perform_email_webhook(json_content)
@@ -20,6 +19,7 @@ class GrowthEngine
     @source = email_parser.get_value("FromName")
     @sender_email = email_parser.get_value("To")
     @lead_email = email_parser.get_reply_to_email
+    @property_data = email_parser.ad_data_parser_se_loger
   end
 
   def handle_lead_email(email)
@@ -32,7 +32,7 @@ class GrowthEngine
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
       create_subscriber_to_sequence(subscriber, sequence)
-      sequence.execute_sequence(subscriber)
+      sequence.execute_sequence(subscriber, @property_data)
     end
   end
 
@@ -54,7 +54,7 @@ class GrowthEngine
       ## If the sub is not a client, or is an inactive client, we want to make some publicity for dingdong
       marketing_type = is_sequence_created_in_timeframe?(subscriber, @second_time_frame) ? "regular" : "hack"
     end
-    Sequence.get_adequate_sequence(marketing_type, @source, @sender_email, @sequence_type)
+    Sequence.get_adequate_sequence(marketing_type, @source, @sender_email)
   end
 
   def create_subscriber_to_sequence(subscriber, sequence)

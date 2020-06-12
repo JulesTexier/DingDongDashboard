@@ -22,9 +22,9 @@ class Independant::ScraperProprioo < Scraper
               hashed_property[:rooms_number] = item["nbPieces"]
               hashed_property[:area] = perform_district_regex(item["codePostal"])
               if go_to_prop?(hashed_property, 7)
-                desc = access_xml_text(fetch_static_page(hashed_property[:link]), "div.j6vkol-0").to_s.strip
-                desc.gsub("Proprioo vous propose à la vente", "").gsub("Proprioo, l’agence nouvelle génération, vous propose à la vente", "")
-                hashed_property[:description] = desc
+                html = fetch_static_page(hashed_property[:link])
+                desc = html.xpath("//main/div/div[3]/div/div/div[1]/div[4]").text.strip
+                hashed_property[:description] = desc.gsub("Proprioo vous propose à la vente", "").gsub("Proprioo, l’agence nouvelle génération, vous propose à la vente", "")
                 hashed_property[:flat_type] = item["typeBien"]
                 hashed_property[:bedrooms_number] = item["nbBedrooms"]
                 hashed_property[:floor] = perform_floor_regex(hashed_property[:description])

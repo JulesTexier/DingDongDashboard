@@ -74,42 +74,42 @@ RSpec.describe Scraper, type: :service do
         @s = Scraper.new
       end
       it "should return true because it has viager in desc" do
-        expect(@s.is_it_unwanted_prop?("Superbe investissement viager !!")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("Superbe investissement disponible uniquement en viager !!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement viager !!" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement disponible uniquement en viager !!" })).to eq(true)
       end
 
       it "should return true because it is residences/app services in desc" do
-        expect(@s.is_it_unwanted_prop?("Superbe investissement de type résidence service!!")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("Superbe investissement de type résidences services!!")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("Superbe investissement de type appartement service!!")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("Superbe investissement de type appartements services!!")).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement de type résidence service!!" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement de type résidences services!!" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement de type appartement service!!" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement de type appartements services!!" })).to eq(true)
       end
 
       it "should return true because it is EHPAD" do
-        expect(@s.is_it_unwanted_prop?("Superbe investissement d'une chambre EHPAD")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("Superbe investissement dans un EHPAD")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("EHPAD meublé à 5,37% de rentabilité")).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement d'une chambre EHPAD" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement dans un EHPAD" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "EHPAD meublé à 5,37% de rentabilité" })).to eq(true)
       end
 
       it "should return true because already sold by agency is ok" do
-        expect(@s.is_it_unwanted_prop?("APPARTEMENT SOUS COMPROMIS")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("APPARTEMENT DEJA VENDU PAR L'AGENCE")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("BIEN SOUS COMPROMIS")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("BIEN DEJA VENDU PAR L'AGENCE")).to eq(true)
-        expect(@s.is_it_unwanted_prop?("SOUS OFFRE ACTUELLEMENT")).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "APPARTEMENT SOUS COMPROMIS" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "APPARTEMENT DEJA VENDU PAR L'AGENCE" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "BIEN SOUS COMPROMIS" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "BIEN DEJA VENDU PAR L'AGENCE" })).to eq(true)
+        expect(@s.is_it_unwanted_prop?({ description: "SOUS OFFRE ACTUELLEMENT" })).to eq(true)
       end
 
       it "should return false because its a classic description" do
-        expect(@s.is_it_unwanted_prop?("Superbe investissement dans Paris")).to eq(false)
-        expect(@s.is_it_unwanted_prop?("Superbe appartement à 129 300€")).to eq(false)
-        expect(@s.is_it_unwanted_prop?("PARIS 18 à 129392euros dans un bete d'immeuble, super service rendu")).to eq(false)
-        expect(@s.is_it_unwanted_prop?("Appartement vendu via germinal agency")).to eq(false)
-        expect(@s.is_it_unwanted_prop?("Appartement vendu via germinal agency, super service rendu dans une belle résidence")).to eq(false)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe investissement dans Paris" })).to eq(false)
+        expect(@s.is_it_unwanted_prop?({ description: "Superbe appartement à 129 300€" })).to eq(false)
+        expect(@s.is_it_unwanted_prop?({ description: "PARIS 18 à 129392euros dans un bete d'immeuble, super service rendu" })).to eq(false)
+        expect(@s.is_it_unwanted_prop?({ description: "Appartement vendu via germinal agency" })).to eq(false)
+        expect(@s.is_it_unwanted_prop?({ description: "Appartement vendu via germinal agency, super service rendu dans une belle résidence" })).to eq(false)
       end
     end
 
     context "Testing is_link_in_db?(prop) to see if the property already exists in DB by its link" do
-      before(:all) do
+      before(:each) do
         @s = Scraper.new
         FactoryBot.create(:property, link: "https://google.com")
       end
@@ -128,7 +128,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing does_prop_exists?(prop) to see if the property already exists in DB by its link" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @propp = FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Fourqueux"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
         @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
@@ -163,7 +163,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing go_to_prop?(prop, time)" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         FactoryBot.create(:property, created_at: 6.days.ago, area: Area.find_by(name: "Paris 18ème"), surface: 23, price: 400000, rooms_number: 1, link: "https://google.com")
       end
@@ -199,7 +199,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     context "Testing desc_comparator" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @old_property = FactoryBot.create(:property, created_at: Time.now - 25.days, price: 600000, surface: 60)
         @c = { description: "À 50 mètres du M°Jules Joffrin et de la mairie, dans immeuble pierre de taille        , chaleureux 2 pièces de 37,20 m² comprenant entrée, séjour, cuisine séparée, chambre, WC séparés, salle de bains, cave. Parquets, moulures, cheminée. 1er étage vue sur l’église. À rafraichir. EXCLUSIVITÉ ACOPA." }
@@ -225,8 +225,55 @@ RSpec.describe Scraper, type: :service do
     end
   end
 
+  context "already_exists_with_desc" do
+    before :each do
+      @s = Scraper.new
+      FactoryBot.create(:property, surface: 20, price: 500000, rooms_number: 1, description: "this description is really close to what we want to test my man i love you so much", area: Area.find_by(name: "Paris 1er"), created_at: 30.days.ago)
+    end
+
+    it "should return true because it is the same prop" do
+      prop = { price: 500000, surface: 20, description: "this description is really close to what we want to test my man i love you so much", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return false because it isnt the same prop" do
+      prop = { price: 500000, surface: 19, rooms_number: 1, description: "this description is really close to what we want to test my man i love you so much", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(false)
+    end
+
+    it "should return false because it isnt the same prop" do
+      prop = { price: 500000, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(false)
+    end
+
+    it "should return true because the area is n/c" do
+      prop = { price: 500000, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "N/C" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: 20, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: nil, rooms_number: 1, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: nil, surface: nil, rooms_number: nil, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+
+    it "should return true because some attr is nil" do
+      prop = { price: 200000, surface: 20, rooms_number: nil, description: "this description isnt the same therefore we should insert this prop", area: "Paris 1er" }
+      expect(@s.already_exists_with_desc?(prop)).to eq(true)
+    end
+  end
+
   describe "GENERIC METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
     end
     context "testing simple gsub for many pages methods" do
@@ -241,7 +288,7 @@ RSpec.describe Scraper, type: :service do
   end
 
   describe "XML ACCESSORS METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
       @sai = Independant::ScraperAabiImmo.new
     end
@@ -291,7 +338,7 @@ RSpec.describe Scraper, type: :service do
   end
 
   describe "REGEX_METHODS" do
-    before(:each) do
+    before :each do
       @s = Scraper.new
     end
     context "perform_floor_regex(str)" do
@@ -443,7 +490,7 @@ RSpec.describe Scraper, type: :service do
 
   describe "simple fetch methods" do
     context "FETCH METHODS" do
-      before(:each) do
+      before :each do
         @s = Scraper.new
         @sai = Independant::ScraperAabiImmo.new
       end
@@ -462,6 +509,86 @@ RSpec.describe Scraper, type: :service do
             expect(@s.fetch_many_pages(args.url, 1, args.main_page_cls)).to be_a(Array)
           end
         end
+      end
+    end
+  end
+
+  describe "fetch init params" do
+    before :each do
+      @s = Scraper.new
+    end
+    it "should, given the source give the correct format, which is array" do
+      params = @s.fetch_init_params("Connexion Immobilier")
+      expect(params).to be_a(Array)
+    end
+
+    it "should, given the source and is mail alert, give the correct group type" do
+      params = @s.fetch_init_params("Connexion Immobilier")
+      expect(params.first.group_type).to eq("Group")
+    end
+
+    it "should, given the source and is mail alert, give the correct group type" do
+      params = @s.fetch_init_params("Connexion Immobilier", is_mail_alert = true)
+      expect(params.first.group_type).to eq("Email")
+    end
+
+    it "should, given the fact that it is a hub give array of more than one hash of params" do
+      params = @s.fetch_init_params("BienIci")
+      expect(params).to be_a(Array)
+      expect(params.length).to be >= 1
+      params.each do |param|
+        expect(param).to be_a(ScraperParameter)
+      end
+    end
+  end
+
+  describe "historization is a method that insert every property in PropertyHistory" do
+    context "insert entry in db if prop is not inserted because of our checker method, with its method name" do
+      before :each do
+        @s = Scraper.new
+        FactoryBot.create(:property, price: 500000, surface: 50, rooms_number: 1, area: Area.find_by(name: "Paris 1er"), link: "https://google.com", description: "this description is really close to what we want to test my man i love you so much")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com" }
+        @s.go_to_prop?(prop, 7)
+        expect(PropertyHistory.last.method_name).to eq("is_link_in_db?")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
+        @s.go_to_prop?(prop, 7)
+        expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: nil, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
+        @s.go_to_prop?(prop, 7)
+        expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
+      end
+
+      it "should insert PropertyHistory with already_exists_with_desc? method name" do
+        prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://yahoo.com/id_lol", description: "this description is really close to what we want to test my man i love you so much" }
+        @s.already_exists_with_desc?(prop)
+        expect(PropertyHistory.last.method_name).to eq("already_exists_with_desc?")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: nil, surface: nil, rooms_number: nil, area: "Paris 1er", link: "https://google.com/id_lol" }
+        @s.go_to_prop?(prop, 7)
+        expect(PropertyHistory.last.method_name).to eq("go_to_prop?")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: 500500, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
+        @s.is_it_unwanted_prop?(prop)
+        expect(PropertyHistory.last.method_name).to eq("is_it_unwanted_prop?")
+      end
+
+      it "should insert PropertyHistory with expected method name" do
+        prop = { price: 10000, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
+        @s.go_to_prop?(prop, 7)
+        expect(PropertyHistory.last.method_name).to eq("is_prop_fake?")
       end
     end
   end

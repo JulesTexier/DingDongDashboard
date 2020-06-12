@@ -18,7 +18,8 @@ scraper_params.each do |param|
     s.http_request = data["http_request"]
     s.group_type = data["group_type"]
     s.zone = data["zone"]
-    if ScraperParameter.where(source: s.source, zone: s.zone).count == 0
+    s.is_active = data["is_active"]
+    if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type).count == 0
       if s.save
         puts "Insertion of parameters - #{s.source} - #{s.zone}"
       else
@@ -79,5 +80,20 @@ area_yaml.each do |district_data|
       Area.create(name: data["name"], zone: district_data["zone"])
       puts "Area - #{data["name"]} created"
     end
+  end
+end
+
+broker_shifts_yaml = YAML.load_file("./db/data/broker_shifts.yml")
+broker_shifts_yaml.each do |shift|
+  if BrokerShift.where(name: shift["name"]).empty?
+    BrokerShift.create(shift)
+  end
+end
+
+brokers_yaml = YAML.load_file("./db/data/brokers.yml")
+brokers_yaml.each do |broker|
+  if Broker.where(trello_id: broker["trello_id"]).empty?
+    puts "Inserting #{broker["firstname"]}"
+    Broker.create(broker)
   end
 end

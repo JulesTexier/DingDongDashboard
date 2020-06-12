@@ -37,7 +37,7 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
-            if go_to_prop?(hashed_property, 7)
+            if go_to_prop?(hashed_property, 7) && hashed_property[:agency_name] != "Ding Dong"
               @properties.push(hashed_property)
               enrich_then_insert_v2(hashed_property)
               i += 1

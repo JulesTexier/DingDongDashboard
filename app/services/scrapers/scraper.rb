@@ -3,7 +3,7 @@ require "dotenv/load"
 
 class Scraper
   def enrich_then_insert_v2(hashed_property)
-    if !final_check_with_desc(hashed_property) && !is_it_unwanted_prop?(hashed_property[:description]) && !is_prop_fake?(hashed_property)
+    if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -48,8 +48,19 @@ class Scraper
   end
 
   def fetch_static_page(url)
-    page = Nokogiri::HTML(open(url))
-    return page
+    attempt_count = 0
+    max_attempts = 3
+    begin
+      attempt_count += 1
+      res = open(url)
+      raise StaticError unless res.status[0] == "200"
+    rescue
+      sleep 1
+      attempt_count < max_attempts ? retry : "Error in Fetch Static Page for url : #{url}."
+    else
+      page = Nokogiri::HTML.parse(res)
+      return page
+    end
   end
 
   def fetch_dynamic_page(url, waiting_class, wait, *click_args)
@@ -74,21 +85,23 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      puts "\nAttempt ##{attempt_count} for Scrapping Bee - #{source}" unless Rails.env.test?
+      puts "\nAttempt ##{attempt_count} for Scrapping Bee - Captcha" unless Rails.env.test?
       res = Net::HTTP.get_response(uri)
       raise ScrappingBeeError unless res.code == "200"
     rescue
-      puts "Trying again for #{source} - #{res.code}\n\n" unless Rails.env.test?
+      puts "Trying again for Captcha - #{res.code}\n\n" unless Rails.env.test?
       sleep 1
       retry if attempt_count < max_attempts
     else
-      puts "Worked on attempt n#{attempt_count} for #{source}\n\n" unless Rails.env.test?
+      puts "Worked on attempt n#{attempt_count} for Captcha\n\n" unless Rails.env.test?
       page = Nokogiri::HTML.parse(res.body)
       return page
     end
   end
 
-  def fetch_http_page(url, http_request)
+  def fetch_http_page(url, http_request = [{}, {}])
+    attempt_count = 0
+    max_attempts = 3
     header = http_request[0].is_a?(String) ? JSON.parse(http_request[0]) : http_request[0]
     request = Typhoeus::Request.new(
       url,
@@ -96,8 +109,16 @@ class Scraper
       headers: header,
       body: http_request[1],
     )
-    request.run
-    return Nokogiri::HTML(request.response.body)
+    begin
+      attempt_count += 1
+      request.run
+      raise HttpPageError unless request.response.response_code == 200
+    rescue
+      sleep 1
+      attempt_count < max_attempts ? retry : "Error in HTTP Post Request Page for url : #{url}."
+    else
+      Nokogiri::HTML.parse(request.response.response_body)
+    end
   end
 
   def fetch_json_post(url, http_request)
@@ -330,8 +351,9 @@ class Scraper
       else ## it doesnt exist in db so we check by 3 - 4 keys if its already in DB from another source
         filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) } ## we only keep existants arguments
         if filtered_prop.length > 2 ## we verify that theres at least 3 arguements
-          does_prop_exists?(filtered_prop, time) ? false : true ## if it doesnt exist, we go to the show
+          does_prop_exists?(prop, time) ? false : true ## if it doesnt exist, we go to the show
         else ## not enought args, so fuck off we dont go to the show
+          scrap_historisation(prop, __method__)
           false
         end
       end
@@ -341,22 +363,26 @@ class Scraper
   end
 
   def does_prop_exists?(prop, time)
-    if prop[:area].nil?
-      props = Property.where(
-        prop.except(:area)
-      ).where("created_at >= ?", time.days.ago)
+    response = false
+    filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
+    if filtered_prop[:area].nil?
+      response = Property.where(
+        filtered_prop.except(:area)
+      ).where("created_at >= ?", time.days.ago).exists?
     else
-      prop[:area_id] = Area.find_by(name: prop[:area]).id
-      props = Property.where(
-        prop.except(:area),
-      ).where("created_at >= ?", time.days.ago)
+      filtered_prop[:area_id] = Area.find_by(name: filtered_prop[:area]).id
+      response = Property.where(
+        filtered_prop.except(:area),
+      ).where("created_at >= ?", time.days.ago).exists?
     end
-    props.count == 0 ? false : true
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_link_in_db?(prop)
-    props = Property.where(link: prop[:link].strip)
-    props.count == 0 ? false : true
+    response = Property.where(link: prop[:link].strip).exists? ? true : false
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_prop_fake?(prop)
@@ -364,40 +390,49 @@ class Scraper
       ## delibarately not enough informations, we should further check
       ## if we put thoses attributes to nil, it means that we can't have informations on the main page
       ## but that we probably can retrieve it in property show
-      false
+      response = false
     elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
       price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
       sqm = prop[:price].to_i / prop[:surface].to_i
-      sqm < price_threshold ? true : false
+      response = sqm < price_threshold ? true : false
     else
-      true ## not enough informations, we should further check
+      response = true ## not enough informations, we should further check
     end
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
-  def final_check_with_desc(hashed_property)
+  ## Is a final check, and check if it already exists with description
+  ## check also if rooms_number or price is nil, if it is, then no insertion
+  ## check also if the area is not found, if so, no insertion
+  def already_exists_with_desc?(hashed_property)
     response = false
 
-    properties = Property.where(
-      surface: hashed_property[:surface],
-      price: hashed_property[:price],
-      area: Area.where(name: hashed_property[:area]).first,
-    )
+    if hashed_property[:area] == "N/C" || hashed_property[:rooms_number].nil? || hashed_property[:price].nil?
+      response = true
+    else
+      properties = Property.where(
+        surface: hashed_property[:surface],
+        price: hashed_property[:price],
+        area: Area.where(name: hashed_property[:area]).first,
+      ).pluck(:description)
 
-    properties.each do |property|
-      response = desc_comparator(property.description, hashed_property[:description])
-      break if response
+      properties.each do |property_desc|
+        response = desc_comparator(property_desc, hashed_property[:description])
+        break if response
+      end
     end
-
-    Property.where(surface: hashed_property[:surface], price: hashed_property[:price], area: Area.where(name: hashed_property[:area]).first)
-
-    response = true if (hashed_property[:rooms_number].nil? || hashed_property[:price].nil?) && !response
-
+    if response
+      scrap_historisation(hashed_property, __method__)
+    end
     return response
   end
 
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
-  def is_it_unwanted_prop?(str)
-    str.remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
+  def is_it_unwanted_prop?(prop)
+    response = prop[:description].remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
+    scrap_historisation(prop, __method__) if response
+    return response
   end
 
   def is_it_night?
@@ -475,13 +510,27 @@ class Scraper
   ## PARAMS METHODS FOR CITY OPENING ##
   #####################################
 
-  def fetch_init_params(source)
+  def fetch_init_params(source, is_mail_alert = false)
     parameters = ScraperParameter.where(source: source)
     data = []
     parameters.each do |param|
-      data.push(param) unless param.is_active == false
+      if param.is_active == true
+        if is_mail_alert
+          data.push(param) if param.group_type == "Email"
+        else
+          data.push(param) if param.group_type != "Email"
+        end
+      end
     end
     return data
+  end
+
+  ########################
+  ## PROP HISTORIZATION ##
+  ########################
+
+  def scrap_historisation(hashed_property, method_name)
+    insert_property_history(hashed_property, method_name) if !PropertyHistory.where(link: hashed_property[:link]).exists?
   end
 
   private
@@ -489,6 +538,14 @@ class Scraper
   ##############################
   ## PRIVATE DATABASE METHODS ##
   ##############################
+
+  def insert_property_history(hashed_property, method_name)
+    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street))
+    prop_history.method_name = method_name
+    if prop_history.save
+      puts "\n\nInsertion of historization of property from #{hashed_property[:source]}\n" unless Rails.env.test?
+    end
+  end
 
   def insert_property(prop_hash)
     prop_hash[:has_been_processed] = true if is_it_night?
@@ -504,7 +561,7 @@ class Scraper
 
   def insert_property_subways(subway_ids, prop)
     subway_ids.each do |subway_id|
-      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if PropertySubway.where(property_id: prop.id, subway_id: subway_id).empty?
+      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if !PropertySubway.where(property_id: prop.id, subway_id: subway_id).exists?
     end
   end
 end

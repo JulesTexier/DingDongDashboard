@@ -8,15 +8,15 @@ class Api::V1::ManychatController < ApplicationController
 
   before_action :authentificate
 
-  # POST : Create SubscriberStatus 
+  # POST : Create SubscriberStatus
   def create_subscriber_status
     subscriber = Subscriber.find(params[:subscriber_id])
     status = Status.find_by(name: params[:status_name])
 
-    if !subscriber.nil? && !status.nil? 
+    if !subscriber.nil? && !status.nil?
       ss = SubscriberStatus.create(subscriber: subscriber, status: status)
       render json: { status: "SUCCESS", message: "SubscriberStatus created", data: ss }, status: 200
-    else 
+    else
       render json: { status: "ERROR", message: "subscriber or status not found", data: nil }, status: 500
     end
   end
@@ -111,20 +111,24 @@ class Api::V1::ManychatController < ApplicationController
   def send_props_x_days
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props = subscriber.get_props_in_lasts_x_days(params[:x])
-      handle_sending(subscriber, props)
+      props_ids = subscriber.get_props_in_lasts_x_days(params[:x])
+      handle_sending(subscriber, props_ids)
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
   end
 
   #GET /manychat/s/:subscriber_id/send/last/:x/props
-  # Send X lasts properties that match Subscriber criteria
+  # Send X lasts properties that match Subscriber criteria unless user is blocked
   def send_x_last_props
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props = subscriber.get_x_last_props(params[:x])
-      handle_sending(subscriber, props, "last_properties")
+      if subscriber.is_blocked
+        send_flow(subscriber, "content20200604125739_572289")
+      else
+        props_ids = subscriber.get_x_last_props(params[:x])
+        handle_sending(subscriber, props_ids, "last_properties")
+      end
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -136,8 +140,8 @@ class Api::V1::ManychatController < ApplicationController
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
-      props = subscriber.get_morning_props
-      handle_sending(subscriber, props, "morning_properties")
+      props_ids = subscriber.get_morning_props
+      handle_sending(subscriber, props_ids, "morning_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
     end
@@ -192,7 +196,8 @@ class Api::V1::ManychatController < ApplicationController
 
   private
 
-  def handle_sending(subscriber, props, template = nil)
+  def handle_sending(subscriber, props_ids, template = nil)
+    props = Property.where(id: props_ids)
     if props.length > 0
       response = send_multiple_properties(subscriber, props, template)
       render json: response[:json_response], status: response[:status]
@@ -242,6 +247,19 @@ class Api::V1::ManychatController < ApplicationController
     return { json_response: json_response.to_json, status: status }
   end
 
+  def send_flow(subscriber, flow)
+    m = Manychat.new
+    response = m.send_flow_sequence(subscriber, flow)
+    if response[0]
+      json_response = { status: "SUCCESS", message: "The flow #{flow} has been sent to the subscriber #{subscriber.id}", data: response[1] }
+      status = 200
+    else
+      json_response = { status: "ERROR", message: "A error occur in manychat call", data: response[1] }
+      status = 406
+    end
+    return { json_response: json_response.to_json, status: status }
+  end
+
   def send_text_message(subscriber, text, status)
     m = Manychat.new
     response = m.send_text_message(subscriber, text)
@@ -255,8 +273,7 @@ class Api::V1::ManychatController < ApplicationController
   end
 
   def subscriber_params
-    # params.permit(:firstname, :lastname, :email, :phone, :is_active)
-    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status)
+    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked)
   end
 
   def lead_params

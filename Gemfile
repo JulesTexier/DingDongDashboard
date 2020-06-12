@@ -34,8 +34,6 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "watir-rails"
 
-gem "dotenv"
-
 # Swagger gem
 gem "rswag"
 
@@ -54,19 +52,24 @@ gem "rspec-retry"
 # Postmark
 gem "postmark-rails"
 
-# Mongo gem for migration purpose
-gem "mongo", "~> 2.7"
-
 # Metrics
 gem "chartkick"
 gem "groupdate"
+
+# Stripe
+gem "stripe"
+
 gem "rspec-rails", "~> 4.0.0.rc1"
+
+gem "dotenv"
 
 # Sidekiq
 gem "sidekiq", "~> 4.1", ">= 4.1.2"
 
-# CORS for webhook calls from website 
-gem 'rack-cors', '~> 0.4.0' 
+# CORS for webhook calls from website
+gem "rack-cors", "~> 0.4.0"
+
+gem "scout_apm"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

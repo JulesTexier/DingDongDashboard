@@ -8,8 +8,8 @@ class Subscriber < ApplicationRecord
   # validates :facebook_id, presence: true
   # validates :email, presence: false, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "email is not valid" }
   # validates :phone
-  validates :firstname, presence: true, unless: -> { status == "new_lead" }
-  validates :lastname, presence: true, unless: -> { status == "new_lead" }
+  # validates :firstname, presence: true, unless: -> { status == "new_lead" }
+  # validates :lastname, presence: true, unless: -> { status == "new_lead" }
 
   belongs_to :broker, optional: true
 
@@ -29,12 +29,28 @@ class Subscriber < ApplicationRecord
   has_many :statuses, through: :subscriber_statuses
 
   def is_client?
-    case self.status
-    when "form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"
-      true
-    else
-      false
+    is_client = false
+    statuses_scoped = ["form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"]
+
+    # 1 • On regarde s'il y a un SubscriberStatus (nouveaux users)
+    subscriber_statuses = SubscriberStatus.where(subscriber: self)
+    if !subscriber_statuses.empty? 
+      subscriber_statuses.each do |ss|
+        if statuses_scoped.include?(ss.status.name)
+          is_client = true 
+        end
+      end
+    else 
+      # 2 • Sinon on regarde directement l'atribut status (old users)
+      if statuses_scoped.include?(self.status)
+        is_client = true
+      end
     end
+    return is_client
+  end
+
+  def get_bm
+    bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name: "subscription_bm")).empty? ? "regular" : "subscription"
   end
 
   def get_areas_list
@@ -59,13 +75,14 @@ class Subscriber < ApplicationRecord
     return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/edit"
   end
 
-  def is_matching_property?(property)
-    test_price = is_matching_property_price(property)
-    test_surface = is_matching_property_surface(property)
-    test_rooms_number = is_matching_property_rooms_number(property)
-    test_floor = is_matching_property_floor(property)
-    test_elevator = is_matching_property_elevator_floor(property)
-    test_areas = is_matching_property_area(property)
+  def is_matching_property?(args, subs_areas)
+    ##We receive args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
+    test_rooms_number = is_matching_property_rooms_number(args[1])
+    test_surface = is_matching_property_surface(args[2])
+    test_price = is_matching_property_price(args[3])
+    test_floor = is_matching_property_floor(args[4])
+    test_areas = is_matching_property_area(args[5], subs_areas)
+    test_elevator = is_matching_property_elevator_floor(args[4], args[6])
 
     test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
   end
@@ -80,51 +97,53 @@ class Subscriber < ApplicationRecord
   end
 
   def get_x_last_props(max_number)
-    props = Property.order(id: :desc)
+    props = Property
+      .order(id: :desc)
+      .limit(1000)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
     props_to_send = []
-
+    subs_areas = self.areas.ids
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
-
-      props_to_send.length == max_number.to_i ? break : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      break if props_to_send.length == max_number.to_i
     end
+
     return props_to_send
   end
 
   def get_props_in_lasts_x_days(x_previous_days)
-    t = Time.now
-    t.in_time_zone("Europe/Paris")
-    start_date = t - x_previous_days.to_i.days
+    start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
 
-    puts start_date
-
-    props = Property.where("created_at >= ?", start_date)
+    props = Property
+      .where("created_at >= ?", start_date)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
 
     props_to_send = []
+    subs_areas = self.areas.ids
 
+    ##We pass args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
     end
 
     return props_to_send
   end
 
   def get_morning_props
-    # t = Time.now
-    # t.in_time_zone("Europe/Paris")
-    # byebug
     now = DateTime.now.in_time_zone("Europe/Paris")
     start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
     end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
 
-    props = Property.where("created_at BETWEEN ? AND ?", start_date, end_date)
+    props = Property
+      .where("created_at BETWEEN ? AND ?", start_date, end_date)
+      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
 
     props_to_send = []
 
+    subs_areas = self.areas.ids
     props.each do |prop|
-      self.is_matching_property?(prop) ? props_to_send.push(prop) : nil
-
-      props_to_send.length == 10 ? break : nil
+      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      break if props_to_send.length == 10
     end
     return props_to_send
   end
@@ -141,12 +160,28 @@ class Subscriber < ApplicationRecord
     self.where(is_active: true)
   end
 
+  def self.active_and_not_blocked
+    self.where(is_active: true, is_blocked: [nil, false])
+  end
+
   def self.inactive
     self.where(is_active: false)
   end
 
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
+  end
+
+  def is_subscriber_premium?
+    status_ids = Status.where(name: ["has_paid_subscription", "has_ended_subscription"]).pluck(:id)
+    status_array = self
+      .subscriber_statuses
+      .where(status_id: status_ids)
+    if status_array.empty? || self.stripe_session_id.nil?
+      return false
+    else
+      status_array.last.status.name == "has_paid_subscription" ? true : false
+    end
   end
 
   def notify_broker_trello(comment)
@@ -159,11 +194,7 @@ class Subscriber < ApplicationRecord
     desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
     desc += "\u000A**PROJET**\u000A"
     desc += "\u000A**FINANCEMENT**\u000A"
-    desc += "\u000A**CLIENTE**\u000A"
     desc += "\u000A**NOTES**\u000A"
-    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (inscription) :**\u000A"
-    desc += "\u000A**SUITE RDV COURTAGE :**\u000A"
-    desc += "\u000A**QU’AVEZ PENSE DE CE RDV (courtage) :**\u000A"
     desc += "\u000A\u000A---\u000A\u000A"
     desc += trello_summary
   end
@@ -179,7 +210,7 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
-    desc += "\u000A\u000A*Inscription chez DingDong : #{self.created_at.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+    desc += "\u000A\u000A*Inscription chez DingDong : #{Time.now.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
   end
 
   def get_chatbot_link
@@ -208,22 +239,24 @@ class Subscriber < ApplicationRecord
     return areas_name.join(", ")
   end
 
-  def add_initial_areas(areas_ad_list) 
+  def add_initial_areas(areas_ad_list)
     if !areas_ad_list.nil?
-      areas_ad_list.split(',').each do |area_id|
-        self.areas << Area.find(area_id) if !Area.find(area_id).nil?
+      areas_ad_list.split(",").each do |area_id|
+        if !Area.find(area_id).nil? && SelectedArea.where(subscriber: self, area_id: area_id).empty?
+          self.areas << Area.find(area_id)
+        end
       end
     end
   end
 
   def onboarding_old_user
-    self.update(has_messenger: true, broker: Broker.find_by(trello_username: "gregrouxeloldra"))
+    self.update(has_messenger: true, broker: Broker.find_by(trello_username: "etienne_dingdong"))
     trello = Trello.new
     trello.add_new_user_on_trello(self)
     trello.add_label_old_user(self)
   end
 
-  def handle_form_filled(subscriber_params)
+  def handle_form_filled(subscriber_params, form_type = "regular")
     has_been_updated = self.update(subscriber_params)
     self.add_initial_areas(subscriber_params[:initial_areas])
     SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "form_filled"))
@@ -234,30 +267,16 @@ class Subscriber < ApplicationRecord
       SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "has_not_messenger"))
       onboarding_no_messenger
     elsif self.broker.nil?
-      onboarding_broker
+      onboarding_broker(form_type)
     end
     return has_been_updated
   end
 
-  private
+  def handle_onboarding_end_manychat
+    onboarding_broker("subscription")
+  end
 
-  # Onboarding methods
-  # def handle_onboarding
-  #   if !previous_changes["status"].nil? && previous_changes["status"][1] == "form_filled" # A déclencher que si le status su sub passe à form filled
-  #     #0 • Handle duplicate
-  #     if Subscriber.where(email: self.email).size > 1
-  #       handle_duplicate
-  #       # 1 • Handle case user is a real estate hunter
-  #     elsif self.project_type.downcase.include?("chasseur")
-  #       onboarding_hunter
-  #       # 2 • Handle case user has not Messenger
-  #     elsif !self.has_messenger
-  #       onboarding_no_messenger
-  #     else
-  #       onboarding_broker
-  #     end
-  #   end
-  # end
+  private
 
   def handle_duplicate
     self.update(status: "duplicates")
@@ -274,12 +293,12 @@ class Subscriber < ApplicationRecord
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
   end
 
-  def onboarding_broker
-    attribute_adequate_broker 
+  def onboarding_broker(form_type = "regular")
+    attribute_adequate_broker(form_type)
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
     trello = Trello.new
     sms = SmsMode.new
-    if Rails.env.production?
+    if ENV["RAILS_ENV"] == "production"
       if trello.add_new_user_on_trello(self)
         # self.broker.send_email_notification(self)
         # now = Time.now.in_time_zone("Paris")
@@ -294,39 +313,39 @@ class Subscriber < ApplicationRecord
 
   # Matching methods
 
-  def is_matching_property_price(property)
-    (property.price <= self.max_price ? true : false) if !self.max_price.nil?
+  def is_matching_property_price(price)
+    (price <= self.max_price ? true : false) if !self.max_price.nil?
   end
 
-  def is_matching_property_surface(property)
-    (property.surface >= self.min_surface ? true : false) if !self.min_surface.nil?
+  def is_matching_property_surface(surface)
+    (surface >= self.min_surface ? true : false) if !self.min_surface.nil?
   end
 
-  def is_matching_property_rooms_number(property)
-    (property.rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
+  def is_matching_property_rooms_number(rooms_number)
+    (rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
   end
 
-  def is_matching_property_floor(property)
+  def is_matching_property_floor(floor)
     if self.min_floor.nil?
       return true
     else
-      if !property.floor.nil?
-        (property.floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
+      if !floor.nil?
+        (floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
       else
         return true
       end
     end
   end
 
-  def is_matching_property_elevator_floor(property)
+  def is_matching_property_elevator_floor(floor, has_elevator)
     if self.min_elevator_floor.nil?
       return true
     else
-      if !property.has_elevator.nil?
-        if property.has_elevator
+      if !has_elevator.nil?
+        if has_elevator
           return true
         else
-          property.floor.to_i < self.min_elevator_floor.to_i ? true : false
+          floor.to_i < self.min_elevator_floor.to_i ? true : false
         end
       else
         return true
@@ -334,8 +353,8 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  def is_matching_property_area(property)
-    self.areas.include?(property.area) ? true : false
+  def is_matching_property_area(area_id, sub_areas = self.areas.ids)
+    sub_areas.include?(area_id) ? true : false
   end
 
   def notify_broker_if_max_price_is_changed
@@ -346,15 +365,10 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  def attribute_adequate_broker
-    if self.broker.nil? 
-      # 19/05 TEST si il est dans un growth hack, alors on test le BM abonnement 
-      if !SubscriberSequence.where(subscriber: self, sequence: Sequence.find_by(name: "HACK - test abonnement payant")).empty?
-        self.update(broker: Broker.get_current_broker_subscription_bm)
-      else #Sinon on attribue un courtier 'normalement' 
-        self.update(broker: Broker.get_current_broker)
-      end
+  def attribute_adequate_broker(form_type = "regular")
+    if self.broker.nil?
+      shift_type = form_type == "subscription" ? "subscription" : "regular"
+      self.update(broker: Broker.get_current(shift_type))
     end
   end
-
 end

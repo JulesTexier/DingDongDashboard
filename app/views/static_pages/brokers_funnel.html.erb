@@ -1,0 +1,53 @@
+<h1 class="mt-5">Statistiques des brokers</h1>
+
+<% if false %>
+<% @brokers_data.each do |item|%>
+<div class="broker-section mt-5" >  
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3"><%= item[:name]%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% item[:data].each do |data| %>
+       <tr>
+
+        <td><%= data[:category] %></td>
+        <td><%= data[:count] %></td>
+    
+      <tr>
+      <% end %>
+        
+    </tbody>
+  </table>
+  </div>
+<%end%>
+<%end%>
+
+
+
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th colspan="1">Courtier</th>
+        <% @status.each do |item|%>
+          <th colspan="1"><%= item%></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    <% @brokers_data.each do |item|%>
+      <tr>
+        <th><%= item[:name] %></th>
+          <% i = 0 %>
+          <% @status.each do  %>
+            <% data = item[:data].select {|item_hash| item_hash[:category] == @status[i] } %>
+            <td><%= data[0][:count] if !data[0].nil?  %></td>
+            <% i += 1  %>
+          <%end%>
+      <tr>
+    <% end %>
+    </tbody>
+  </table>

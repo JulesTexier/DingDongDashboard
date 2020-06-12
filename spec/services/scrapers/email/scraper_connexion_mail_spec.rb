@@ -1,16 +1,15 @@
 require "rails_helper"
-
 RSpec.describe Email::ScraperConnexionMail, type: :service do
   before(:all) do
-    @s = Email::ScraperConnexionMail.new('<html><a href="https://ap.immo/p/3823591?u=11847481&p=576aef98504be65f477e9fdb179cf4d230b2c347"></html>')
+    @s = Email::ScraperConnexionMail.new('<html><a href="https://ap.immo/p/3962982?u=11847481&p=576aef98504be65f477e9fdb179cf4d230b2c347"></html>')
   end
-
   it "should launch and return proper number of properties" do
-    expect(@s.launch).to be_a(Array)
-    expect(Property.where(source: @s.source).count).to be >= 1
-    expect(Property.where(source: @s.source).count).to be == @s.properties.count
+    VCR.use_cassette(@s.source + "_mail") do
+      expect(@s.launch).to be_a(Array)
+      expect(Property.where(source: @s.source).count).to be >= 1
+      expect(Property.where(source: @s.source).count).to be == @s.properties.count
+    end
   end
-
   it "should return the right keys" do
     properties = @s.properties
     properties.each do |property|
@@ -24,7 +23,6 @@ RSpec.describe Email::ScraperConnexionMail, type: :service do
       expect(property).to have_key(:source)
     end
   end
-
   it "should return proper class for each keys" do
     properties = @s.properties
     properties.each do |property|
