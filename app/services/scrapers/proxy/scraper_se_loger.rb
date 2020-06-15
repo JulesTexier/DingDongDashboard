@@ -17,7 +17,7 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property = {}
             hashed_property[:price] = item["pricing"]["price"].to_int_scrp
             hashed_property[:images] = item["photos"].map { |img| img.gsub("/400/visuels", "/800/visuels") }
-            hashed_property[:area] = perform_district_regex(item["zipCode"])
+            hashed_property[:area] = perform_district_regex(item["zipCode"], args.zone)
             hashed_property[:link] = item["classifiedURL"]
             item["tags"].each do |infos|
               surface_regex = '\d(.)*m²'

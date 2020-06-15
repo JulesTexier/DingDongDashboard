@@ -18,8 +18,12 @@ scraper_params.each do |param|
     s.http_request = data["http_request"]
     s.group_type = data["group_type"]
     s.zone = data["zone"]
-    s.is_active = data["is_active"]
-    if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type).count == 0
+    if Rails.env.test?
+      s.is_active = s.zone == "Paris" ? data["is_active"] : false ## we don't want to run tests for every new city
+    else
+      s.is_active = data["is_active"]
+    end
+    if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type, url: s.url).empty?
       if s.save
         puts "Insertion of parameters - #{s.source} - #{s.zone}"
       else
