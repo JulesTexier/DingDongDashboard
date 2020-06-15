@@ -15,7 +15,7 @@ class Group::ScraperDanielFeau < Scraper
           hashed_property = {}
           hashed_property[:link] = "https://danielfeau.com" + access_xml_link(item, "a", "href")[0]
           hashed_property[:surface] = regex_gen(access_xml_text(item, "h3 > span"), '(\d+)(.?)(\d+)(.?)(m)').to_float_to_int_scrp
-          hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2 > div:nth-child(1)"))
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2 > div:nth-child(1)"), args.zone)
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h3 > span").remove_acc_scrp, '(\d+)(.?)(piece(s)?)').to_int_scrp
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, "h3 > span").remove_acc_scrp, '(\d+)(.?)(chambre(s)?)').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "span.price").to_int_scrp
