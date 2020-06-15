@@ -543,7 +543,7 @@ class Scraper
     prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street))
     prop_history.method_name = method_name
     if prop_history.save
-      puts "\n\nInsertion of historization of property from #{hashed_property[:source]}\n" unless Rails.env.test?
+      puts "\n\nInsertion of property history -> #{method_name}" unless Rails.env.test?
     end
   end
 
