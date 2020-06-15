@@ -163,7 +163,10 @@ class Subscriber < ApplicationRecord
   def self.active_and_not_blocked
     self.where(is_active: true, is_blocked: [nil, false])
   end
-
+  def self.not_blocked
+    self.where(is_blocked: [nil, false])
+  end
+    
   def self.inactive
     self.where(is_active: false)
   end

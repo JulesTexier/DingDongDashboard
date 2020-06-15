@@ -19,12 +19,8 @@ class Api::V1::DataController < ApplicationController
   end
 
   def get_facebook_id_subscribers
-    subscribers = Subscriber.all
-    fb_ids = []
-    subscribers.each do |sub|
-      fb_ids.push(sub.facebook_id)
-    end
-    render json: { status: "SUCCESS", message: "List of all active subscribers", data: fb_ids }, status: 200
+    subscribers = Subscriber.not_blocked.pluck(:facebook_id).uniq
+    render json: { status: "SUCCESS", message: "List of all active subscribers", data: subscribers }, status: 200
   end
 
   def display_shifts
