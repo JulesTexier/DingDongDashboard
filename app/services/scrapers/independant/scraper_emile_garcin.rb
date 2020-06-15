@@ -19,10 +19,11 @@ class Independant::ScraperEmileGarcin < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_link(item, "a", "href")[0].gsub("../", "").split("/")[2].split(".html?")[0])
           hashed_property[:area] = nil if hashed_property[:area] == "N/C"
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, "p.info"), '(\d+)(.?)(chambre(s?))').to_int_scrp
-          rooms_number = regex_gen(access_xml_text(item, "p.type"), '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
-          rooms_number = hashed_property[:bedrooms_number] + 1 if rooms_number == 0
+          rooms_number = regex_gen(access_xml_text(item, "p.type"), '(\d+)(.?)(pi)').to_int_scrp
+          rooms_number = hashed_property[:bedrooms_number] + 1 if rooms_number == 0 || rooms_number.nil?
           hashed_property[:rooms_number] = rooms_number
-          hashed_property[:price] = access_xml_text(item, "p.price").to_int_scrp
+          price = access_xml_text(item, "p.price")
+          hashed_property[:price] = price.include?("dont") ? price.split("dont")[0].to_int_scrp : price.to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "h1.title")) if hashed_property[:area].nil?
