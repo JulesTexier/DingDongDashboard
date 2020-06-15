@@ -19,7 +19,7 @@ scraper_params.each do |param|
     s.group_type = data["group_type"]
     s.zone = data["zone"]
     s.is_active = data["is_active"]
-    if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type).count == 0
+    if ScraperParameter.where(source: s.source, zone: s.zone, group_type: s.group_type, url: s.url).empty?
       if s.save
         puts "Insertion of parameters - #{s.source} - #{s.zone}"
       else
