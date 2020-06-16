@@ -247,6 +247,28 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+- source: Saint-Ferdinand
+  params:
+    - zone: Paris
+      url: http://www.agencessaintferdinand.com/acheter/
+      scraper_type: HTTPRequest
+      main_page_cls: div.property_listing
+      is_active: true
+      group_type: Group
+      http_request:
+        - {}
+        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+      http_type: post
+    - zone: Première Couronne
+      url: http://www.agencessaintferdinand.com/acheter/
+      scraper_type: HTTPRequest
+      main_page_cls: div.property_listing
+      is_active: true
+      group_type: Group
+      http_request:
+        - {}
+        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+      http_type: post
 - source: LeBonCoin
   params:
     - zone: Paris
