@@ -146,6 +146,9 @@ class SubscribersController < ApplicationController
       # end
       # flash[:danger] = flash[:danger].join(" & ")
     end
+    # // Send flow to subscriber 
+    flow = "content20200616092144_217967"
+    Manychat.new.send_flow_sequence(@subscriber, flow)
     redirect_to edit_subscriber_path
   end
 
