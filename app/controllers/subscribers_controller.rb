@@ -123,20 +123,28 @@ class SubscribersController < ApplicationController
   # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
+    subscriber_areas_id = @subscriber.areas.pluck(:id)
     # zone_areas = []
     # @subscriber.areas.each do |area|
     #   zone_areas.push(area.zone)
     # end
     # zone_areas.uniq
     zone_areas = ["Paris", "Première Couronne"]
-    @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas)
+    # @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas) 
+    # @areas_name = Area.where(zone: zone_areas).order(:id).pluck(:id, :name)
+    @areas_name = []
+    Area.where(zone: zone_areas).order(:id).pluck(:id, :name).each do |item|
+      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @areas_name.push(item)
+    end
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
-    if @subscriber.update(subscriber_params) && !params[:selected_areas].nil?
-      params[:selected_areas].each do |area_id|
+    if @subscriber.update(subscriber_params) && !params[:areas_name].nil?
+      params[:areas_name].each do |area_id|
         SelectedArea.create(subscriber: @subscriber, area_id: area_id)
       end
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
