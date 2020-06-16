@@ -52,31 +52,14 @@ class Scraper
     max_attempts = 3
     begin
       attempt_count += 1
-      res = fetch_redirect_page(url)
-      raise StaticError unless res.code == "200"
+      res = open(url)
+      raise StaticError unless res.status[0] == "200"
     rescue
       sleep 1
       attempt_count < max_attempts ? retry : "Error in Fetch Static Page for url : #{url}."
     else
-      page = Nokogiri::HTML.parse(res.read_body)
+      page = Nokogiri::HTML.parse(res)
       return page
-    end
-  end
-
-  ### Since Open URI uses page redirect by default, but Net/HTTP isn't
-  ### This method fetch redirect pages
-  ### Also more memory efficient
-  def fetch_redirect_page(uri_str, limit = 10)
-    raise ArgumentError, "HTTP redirect too deep" if limit == 0
-
-    url = URI.parse(uri_str)
-    req = Net::HTTP::Get.new(url.path, { "User-Agent" => "Mozilla/5.0 (etc...)" })
-    response = Net::HTTP.start(url.host, url.port, use_ssl: true) { |http| http.request(req) }
-    case response
-    when Net::HTTPSuccess then response
-    when Net::HTTPRedirection then fetch_redirect_page(response["location"], limit - 1)
-    else
-      response.error!
     end
   end
 
