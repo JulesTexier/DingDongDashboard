@@ -123,11 +123,12 @@ class SubscribersController < ApplicationController
   # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
-    zone_areas = []
-    @subscriber.areas.each do |area|
-      zone_areas.push(area.zone)
-    end
-    zone_areas.uniq
+    # zone_areas = []
+    # @subscriber.areas.each do |area|
+    #   zone_areas.push(area.zone)
+    # end
+    # zone_areas.uniq
+    zone_areas = ["Paris", "Première Couronne"]
     @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas)
   end
 
