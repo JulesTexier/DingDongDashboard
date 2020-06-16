@@ -35,10 +35,10 @@ class Group::ScraperSaintFerdinand < Scraper
             i += 1
             break if i == limit
           end
+        rescue StandardError => e
+          error_outputs(e, @source)
+          next
         end
-      rescue StandardError => e
-        error_outputs(e, @source)
-        next
       end
     end
     return @properties
