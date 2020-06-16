@@ -132,19 +132,28 @@ class SubscribersController < ApplicationController
     zone_areas = ["Paris", "Première Couronne"]
     # @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas) 
     # @areas_name = Area.where(zone: zone_areas).order(:id).pluck(:id, :name)
-    @areas_name = []
-    Area.where(zone: zone_areas).order(:id).pluck(:id, :name).each do |item|
+    @paris_areas = []
+    @premiere_couronne_areas = []
+    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
       selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
       item.push(selected)
-      @areas_name.push(item)
+      @paris_areas.push(item)
+    end
+    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
+      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @premiere_couronne_areas.push(item)
     end
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
-    if @subscriber.update(subscriber_params) && !params[:areas_name].nil?
-      params[:areas_name].each do |area_id|
+    areas_name = []
+    areas_name += params[:paris_areas] if !params[:paris_areas].nil?
+    areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+    if @subscriber.update(subscriber_params) && !areas_name.empty?
+      areas_name.each do |area_id|
         SelectedArea.create(subscriber: @subscriber, area_id: area_id)
       end
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
