@@ -123,19 +123,37 @@ class SubscribersController < ApplicationController
   # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
-    zone_areas = []
-    @subscriber.areas.each do |area|
-      zone_areas.push(area.zone)
+    subscriber_areas_id = @subscriber.areas.pluck(:id)
+    # zone_areas = []
+    # @subscriber.areas.each do |area|
+    #   zone_areas.push(area.zone)
+    # end
+    # zone_areas.uniq
+    zone_areas = ["Paris", "Première Couronne"]
+    # @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas) 
+    # @areas_name = Area.where(zone: zone_areas).order(:id).pluck(:id, :name)
+    @paris_areas = []
+    @premiere_couronne_areas = []
+    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
+      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @paris_areas.push(item)
     end
-    zone_areas.uniq
-    @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas)
+    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
+      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @premiere_couronne_areas.push(item)
+    end
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     SelectedArea.where(subscriber: @subscriber).destroy_all
-    if @subscriber.update(subscriber_params) && !params[:selected_areas].nil?
-      params[:selected_areas].each do |area_id|
+    areas_name = []
+    areas_name += params[:paris_areas] if !params[:paris_areas].nil?
+    areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+    if @subscriber.update(subscriber_params) && !areas_name.empty?
+      areas_name.each do |area_id|
         SelectedArea.create(subscriber: @subscriber, area_id: area_id)
       end
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
@@ -146,6 +164,9 @@ class SubscribersController < ApplicationController
       # end
       # flash[:danger] = flash[:danger].join(" & ")
     end
+    # // Send flow to subscriber 
+    flow = "content20200616092144_217967"
+    Manychat.new.send_flow_sequence(@subscriber, flow)
     redirect_to edit_subscriber_path
   end
 
