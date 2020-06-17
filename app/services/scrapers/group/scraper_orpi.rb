@@ -7,7 +7,7 @@ class Group::ScraperOrpi < Scraper
     @properties = []
   end
 
-  def launch(limit = nil)
+  def launch(limit = 13)
     i = 0
     self.params.each do |args|
       fetch_main_page(args)["items"].each do |item|
