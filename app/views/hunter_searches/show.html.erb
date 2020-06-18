@@ -1,0 +1,98 @@
+<%= render "navbar" %>
+  <% if false %>
+  <h1> Ici c'est la show :)</h1>
+  <h2> Recherche - <%= @hunter_search.research_name %>
+  <h2> Prix maximum - <%= @hunter_search.max_price %> </h2>
+  <h2> Surface minimum - <%= @hunter_search.surface %> </h2>
+  <h2> Etage minimum - <%= @hunter_search.min_floor %> </h2>
+  <h2> Zone minimum - <%= @hunter_search.areas %> </h2>
+  <hr/>
+  <br/>
+  <% end %>
+
+  <h2 class="mt-5 text-center" style="color:#525f7f"> Les derniers biens - <%=@hunter_search.research_name%></h1>
+
+<div class="row mt-5">
+      <% @properties.each do |property| %>
+        <div class="card col-12 col-lg-6 mb-3">
+          <%= image_tag property.get_cover, class: "card-img-top", style:"max-height:350px;"%>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title text-center text-primary mb-0">
+                📌 <%= property.area %> <br />
+                ↔ <%= property.surface %> m2
+                </h5>
+                <div class="mb-0" style="color:#ff7f50;">
+                    <h3>
+                    <%= property.price %> €
+                    </h3>
+                    <h5 class="text-primary">
+                        💰<%= property.price / property.surface %> €/m2
+                    </h5>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush mt-3 text-primary">
+              <li class="list-group-item pl-0 pr-0 d-flex justify-content-between pt-3 pb-3">
+                <div class="text-center">
+                <h1>🏠</h1> 
+                  <%= property.flat_type %>
+                </div>
+                <div class="text-center">
+                <h1>🛋</h1> 
+                  <%= property.rooms_number %> pièce(s)
+                </div>
+                <div class="text-center">
+                <h1>🛏</h1> 
+                  <%if !property.bedrooms_number.nil? %>
+                    <%= property.bedrooms_number %> chambre(s)
+                  <%else%>
+                    <%if property.rooms_number == 1 %>
+                      <%= property.rooms_number %> chambre(s)
+                    <%else%>
+                      <%= property.rooms_number - 1 %> chambre(s)
+                    <%end%>
+                  <%end%>
+                </div>
+              </li>
+
+              <li class="list-group-item pl-0 pr-0 d-flex justify-content-center pt-3 pb-3">
+                <div class="text-center">
+                <h1>️️⏱</h1> 
+                    Publié le <%= property.created_at.strftime("%d/%m/%Y à %H:%M") %>
+                </div>
+              </li>
+
+              </li>
+              <li class="list-group-item pl-0 pr-0 pt-4 pb-4">        
+                <h5 class="">
+                    GENERAL
+                </h5>
+                <div class="">
+                    <% if property.provider == "Agence" %> 👔 Bien d'une agence <br /><% end %>
+                    <% if property.provider == "Particulier" %> 👨 Bien d'un particulier <br /><% end %>
+                    <% if property.has_elevator == true %> 🚠 Avec Ascenseur <br /><% end %>
+                    <% if property.has_elevator == false %> 🚠 Sans Ascenseur <br /><% end %>
+                    <% if !property.floor.nil? %> 
+                      <% if property.floor == 1 %> 
+                        ↕ <%=property.floor%>er étage 
+                      <% else %>
+                        ↕ <%=property.floor%>ème étage 
+                      <% end %>
+                      <br />
+                    <% end %> 
+                    <% if property.subways.length != 0 %> Ⓜ️ <%=property.get_subways_full%>  <% end %>
+                </div>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-center mt-4">
+              <a type="button" href=<%=property.link%> class="btn btn-primary" target="_blank">👀 Voir sur <%=property.source%> </a> 
+              <% if property.contact_number == "N/C" %>
+              <div class="ml-2">
+                <a href="tel:<%=property.contact_number%>" class="btn btn-success">📞 Appeler </a> 
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+</div>
