@@ -11,7 +11,7 @@
       </div>
       <div class="card-body">
         <p class="card-text">Critères : <%= hunter_search.get_pretty_price %> € - <%= hunter_search.surface %>m2 - <%= hunter_search.max_price %></p>
-        <p class="card-text">Zone :  <%= hunter_search.areas.join(" - ") %> </p>
+        <p class="card-text">Zone :  <%= hunter_search.areas.pluck(:zone).uniq.join(" - ") %> </p>
         <%= link_to "Voir les derniers biens", hunter_hunter_search_path(@hunter, hunter_search), class: "btn btn-primary" %>
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">

@@ -13,12 +13,15 @@ class HunterSearchesController < ApplicationController
   def new
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = @hunter.hunter_searches.build
+    @areas = Area.get_active
+    @hs_areas = []
   end
 
   def create
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = @hunter.hunter_searches.build(hunter_search_params)
     if @hunter_search.save
+      @hunter_search.areas << Area.where(id: params["hunter_search"]["areas"])
       redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
     else
       render "new"
@@ -27,7 +30,7 @@ class HunterSearchesController < ApplicationController
 
   def edit
     @hunter = Hunter.find(params[:hunter_id])
-    @hunter_search = HunterSearch.find(params[:hunter_id])
+    @hunter_search = HunterSearch.find(params[:id])
     @areas = Area.get_active
     @hs_areas = @hunter_search.areas.pluck(:id)    
   end
@@ -36,8 +39,8 @@ class HunterSearchesController < ApplicationController
     if @hunter_search.update(hunter_search_params)
       @hunter_search.areas.destroy_all
       @hunter_search.areas << Area.where(id: params["hunter_search"]["areas"])
-      # redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
-      redirect_to edit_hunter_hunter_search_path(@hunter, @hunter_search)
+      redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
+      # redirect_to edit_hunter_hunter_search_path(@hunter, @hunter_search)
     else
       render "edit"
     end
