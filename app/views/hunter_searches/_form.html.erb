@@ -19,12 +19,12 @@
     <% areas = ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020"] %>
 
     <div class="d-flex flex-wrap"> 
-        <% areas.each do |area| %>
-        <div class="form-check mr-3 d-flex">  
-            <%= f.check_box :areas, { :multiple => true, class: "form-check-input" }, area, nil %>
-            <%= f.label :areas, area, { class: "form-check-label mb-2" } %>
-        </div>
-        <% end %>
+    <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
+    <%= b.label class:"label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do%>
+         <%=b.check_box + " " + b.text%>
+        <%end%>
+    <% end %>
+
     </div>
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰Budget Maximum ? *</h5>

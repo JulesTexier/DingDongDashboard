@@ -6,4 +6,8 @@ class Area < ApplicationRecord
     has_many :hunter_search_areas
     has_many :hunter_searchs, through: :hunter_search_areas
 
+    def self.get_active
+        Area.where(zone: ["Paris", "Première Couronne"])
+    end
+
 end

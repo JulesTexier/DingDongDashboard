@@ -26,9 +26,13 @@ class HunterSearchesController < ApplicationController
   end
 
   def edit
+    @hunter = Hunter.find(params[:hunter_id])
+    @hunter_search = HunterSearch.find(params[:hunter_id])
+    @areas = Area.get_active
   end
 
   def update
+    byebug
     if @hunter_search.update(hunter_search_params)
       redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
     else
