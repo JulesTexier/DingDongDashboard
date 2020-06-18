@@ -7,6 +7,7 @@ class Scraper
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
+      scrap_historisation(hashed_property, __method__)
     else
       # for test purpose, if we don't want ton insert this shitty property,
       ## then we remove it from the final array of our dedicated scraper
@@ -470,14 +471,14 @@ class Scraper
         x = short_string.length - min + 1
       end
       i = 0
-      array = []
+      sample_strings = []
       x.times do
         j = i + min
-        array.push(short_string[i..j])
+        sample_strings.push(short_string[i..j])
         i += 1
       end
-      array.each do |papouz|
-        response = true if long_string.include?(papouz)
+      sample_strings.each do |sample_string|
+        response = true if long_string.include?(sample_string)
       end
     end
     return response
@@ -530,6 +531,7 @@ class Scraper
   ########################
 
   def scrap_historisation(hashed_property, method_name)
+    hashed_property[:source] = self.source
     insert_property_history(hashed_property, method_name) if !PropertyHistory.where(link: hashed_property[:link]).exists?
   end
 
@@ -543,7 +545,7 @@ class Scraper
     prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street))
     prop_history.method_name = method_name
     if prop_history.save
-      puts "\n\nInsertion of property history -> #{method_name}" unless Rails.env.test?
+      puts "\n\nInsertion of property history - #{self.source} -> #{method_name}" unless Rails.env.test?
     end
   end
 
