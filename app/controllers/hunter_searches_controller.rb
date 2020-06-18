@@ -29,12 +29,15 @@ class HunterSearchesController < ApplicationController
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = HunterSearch.find(params[:hunter_id])
     @areas = Area.get_active
+    @hs_areas = @hunter_search.areas.pluck(:id)    
   end
 
   def update
-    byebug
     if @hunter_search.update(hunter_search_params)
-      redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
+      @hunter_search.areas.destroy_all
+      @hunter_search.areas << Area.where(id: params["hunter_search"]["areas"])
+      # redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
+      redirect_to edit_hunter_hunter_search_path(@hunter, @hunter_search)
     else
       render "edit"
     end
@@ -56,6 +59,6 @@ class HunterSearchesController < ApplicationController
   end
 
   def hunter_search_params
-    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :surface, :rooms_number, :max_price, :areas => [])
+    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :surface, :rooms_number, :max_price)
   end
 end

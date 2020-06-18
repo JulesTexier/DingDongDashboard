@@ -21,7 +21,7 @@
     <div class="d-flex flex-wrap"> 
     <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
     <%= b.label class:"label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do%>
-         <%=b.check_box + " " + b.text%>
+         <%=b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text%>
         <%end%>
     <% end %>
 
