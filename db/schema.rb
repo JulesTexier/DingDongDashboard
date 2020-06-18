@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_081925) do
+ActiveRecord::Schema.define(version: 2020_06_18_095333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 2020_06_18_081925) do
     t.index ["property_id"], name: "index_favorites_on_property_id"
     t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
+  end
+
+  create_table "hunter_search_areas", force: :cascade do |t|
+    t.bigint "hunter_search_id"
+    t.bigint "area_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_hunter_search_areas_on_area_id"
+    t.index ["hunter_search_id"], name: "index_hunter_search_areas_on_hunter_search_id"
   end
 
   create_table "hunter_searches", force: :cascade do |t|
