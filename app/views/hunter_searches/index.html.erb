@@ -3,19 +3,7 @@
   <h2 class="mt-5 text-center mb-5" style="color:#525f7f"> Toutes mes recherches</h1>
 
 
-<% if false %>
-<tr>
-  <% @hunter_searches.each do |hunter_search| %>
-  <td><%= hunter_search.research_name %></td>
-  <td><%= hunter_search.max_price %></td>
-  <td><%= link_to "Plus d'infos ", hunter_hunter_search_path(@hunter, hunter_search) %></td>
-  <td><%= link_to "Supprimer", hunter_hunter_search_path(@hunter, hunter_search),
-                  data: { :confirm => "Are you sure?" }, :method => :delete %></td>
-  <td><%= link_to "Modifier", edit_hunter_hunter_search_path(@hunter, hunter_search) %></td>
-  <hr/>
-  <% end %>
-</tr>
-<% end %>
+
 <% @hunter_searches.each do |hunter_search| %>
   <div class="card text-center">
     <div class="card-header">
