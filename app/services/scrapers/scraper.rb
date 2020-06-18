@@ -531,7 +531,7 @@ class Scraper
   ########################
 
   def scrap_historisation(hashed_property, method_name)
-    hashed_property[:source] = self.source
+    hashed_property[:source] = self.source unless Rails.env.test?
     insert_property_history(hashed_property, method_name) if !PropertyHistory.where(link: hashed_property[:link]).exists?
   end
 
