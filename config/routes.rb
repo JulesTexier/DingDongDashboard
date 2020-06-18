@@ -26,9 +26,7 @@ Rails.application.routes.draw do
       resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
-      resources :hunters do
-        resources :hunter_searches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy]
-      end
+      
       
       # Manychat routes
       # Subscriber
@@ -70,6 +68,9 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:create, :update, :edit]
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
+  resources :hunters do
+    resources :hunter_searches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy]
+  end
 
   resources :subscribers, only: [:show] do
     resources :subscriptions, only: [:index, :new]
