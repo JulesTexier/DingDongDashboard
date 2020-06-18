@@ -2,29 +2,29 @@
 
   <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches</h1>
 
+  <%= link_to "Créer une recherche", new_hunter_hunter_search_path(@hunter.id), class: "btn btn-success mb-3" %>
 
-
-<% @hunter_searches.each do |hunter_search| %>
-  <div class="card text-center">
-    <div class="card-header">
-      <ul class="nav nav-tabs card-header-tabs">
-        <li class="nav-item">
-          <%= link_to "Modifier", edit_hunter_hunter_search_path(@hunter, hunter_search), class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(@hunter, hunter_search),
-                      data: { :confirm => "Êtes-vous sûr?" }, class: "nav-link text-danger", :method => :delete %>
-        </li>
-      </ul>
+  <% @hunter_searches.each do |hunter_search| %>
+    <div class="card text-center">
+      <div class="card-header">
+        <h5 class="card-title"><%= hunter_search.research_name.capitalize %></h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Critères : <%= hunter_search.get_pretty_price %> € - <%= hunter_search.surface %>m2 - <%= hunter_search.max_price %></p>
+        <p class="card-text">Zone :  <%= hunter_search.areas.join(" - ") %> </p>
+        <%= link_to "Voir les derniers biens", hunter_hunter_search_path(@hunter, hunter_search), class: "btn btn-primary" %>
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <%= link_to "Modifier", edit_hunter_hunter_search_path(@hunter, hunter_search), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(@hunter, hunter_search),
+                        data: { :confirm => "Êtes-vous sûr?" }, class: "nav-link text-danger", :method => :delete %>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title"><%= hunter_search.research_name.capitalize %></h5>
-      <p class="card-text">Critères : <%= hunter_search.get_pretty_price %> € - <%= hunter_search.surface %>m2 - <%= hunter_search.max_price %></p>
-      <p class="card-text">Zone :  <%= hunter_search.areas.join(" - ") %> </p>
-      <%= link_to "Voir les derniers biens", hunter_hunter_search_path(@hunter, hunter_search), class: "btn btn-primary" %>
-    </div>
-  </div>
-  <br/>
-<% end %>
+    <br/>
+  <% end %>
 
 <%= render "footer" %>

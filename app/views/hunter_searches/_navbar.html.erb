@@ -4,9 +4,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav align-items-center mr-auto">
       <li class="nav-item active">
         <%= link_to "Mes recherches", hunter_hunter_searches_path(@hunter), class: "nav-link navbar-brand ml-4", style: "color:#525f7f; font-size: 16px;" %>
+      </li>
+    </ul>
+    <ul class="navbar-nav align-items-center mr-0">
+      <li class="nav-item active">
+        <%= link_to "Créer une recherche", new_hunter_hunter_search_path(@hunter.id), class: "btn btn-success" %>
       </li>
     </ul>
   </div>
