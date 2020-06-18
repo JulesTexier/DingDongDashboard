@@ -8,7 +8,7 @@ class HunterSearch < ApplicationRecord
       price: Float::INFINITY..self.max_price,
       rooms_number: self.rooms_number..Float::INFINITY,
       surface: self.surface..Float::INFINITY,
-    ).order(id: :desc)
+    ).order(id: :desc).limit(200)
 
     prop_array = []
     props.each do |prop|
