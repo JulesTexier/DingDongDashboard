@@ -1,5 +1,6 @@
 class HunterSearchesController < ApplicationController
   before_action :find_hunter_and_search, except: [:index, :new, :create]
+  before_action :check_current_hunter
 
   def index
     @hunter = Hunter.find(params[:hunter_id])
@@ -32,7 +33,7 @@ class HunterSearchesController < ApplicationController
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = HunterSearch.find(params[:id])
     @areas = Area.get_active
-    @hs_areas = @hunter_search.areas.pluck(:id)    
+    @hs_areas = @hunter_search.areas.pluck(:id)
   end
 
   def update
@@ -59,6 +60,13 @@ class HunterSearchesController < ApplicationController
   def find_hunter_and_search
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = HunterSearch.find(params[:id])
+  end
+
+  def check_current_hunter
+    hunter = Hunter.find_by(id: params[:hunter_id])
+    if hunter.nil? || hunter != current_hunter
+      redirect_to hunter_hunter_searches_path(current_hunter.id)
+    end
   end
 
   def hunter_search_params
