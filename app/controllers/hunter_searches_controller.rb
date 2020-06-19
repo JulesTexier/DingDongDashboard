@@ -1,7 +1,6 @@
 class HunterSearchesController < ApplicationController
   before_action :authenticate_hunter!
   before_action :find_hunter_and_search, except: [:index, :new, :create]
-  before_action :check_current_hunter, only: [:show]
 
   def index
     @hunter = current_hunter
@@ -61,13 +60,6 @@ class HunterSearchesController < ApplicationController
   def find_hunter_and_search
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = HunterSearch.find(params[:id])
-  end
-
-  def check_current_hunter
-    hunter_search = HunterSearch.find_by(id: params[:id])
-    if hunter_search.nil? || hunter_search.hunter.nil? ||  hunter_search.hunter != current_hunter
-      redirect_to hunter_hunter_searches_path(current_hunter.id)
-    end
   end
 
   def hunter_search_params
