@@ -8,7 +8,7 @@ class HunterSearchesController < ApplicationController
   end
 
   def show
-    @properties = @hunter_search.get_matching_properties
+    @properties = @hunter_search.get_matching_properties(18)
   end
 
   def new
