@@ -10,13 +10,13 @@
   <br/>
   <% end %>
 
-  <h2 class="mt-5 text-center text-dark"> Les derniers biens - <%=@hunter_search.research_name%></h1>
+  <h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
 
 <div class="row mt-5">
       <% @properties.each do |property| %>
         <div class="col-12 col-lg-4 mb-3">
         <div class="card">
-          <div id=<%="carousel#{property.id}"%> class="carousel slide" data-ride="carousel">
+          <div id=<%= "carousel#{property.id}" %> class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center">
@@ -31,11 +31,11 @@
                 </div>
               <% end %>
             </div>
-            <a class="carousel-control-prev" href=<%="#carousel#{property.id}"%> role="button" data-slide="prev">
+            <a class="carousel-control-prev" href=<%= "#carousel#{property.id}" %> role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href=<%="#carousel#{property.id}"%> role="button" data-slide="next">
+            <a class="carousel-control-next" href=<%= "#carousel#{property.id}" %> role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
@@ -71,15 +71,15 @@
                 </div>
                 <div class="text-center">
                 <h5>🛏</h5> 
-                  <%if !property.bedrooms_number.nil? %>
+                  <% if !property.bedrooms_number.nil? %>
                     <%= property.bedrooms_number %> chambre(s)
-                  <%else%>
-                    <%if property.rooms_number == 1 || property.rooms_number == 0 %>
+                  <% else %>
+                    <% if property.rooms_number == 1 || property.rooms_number == 0 %>
                       1 chambre
-                    <%else%>
+                    <% else %>
                       <%= property.rooms_number - 1 %> chambre(s)
-                    <%end%>
-                  <%end%>
+                    <% end %>
+                  <% end %>
                 </div>
               </li>
 
@@ -98,21 +98,21 @@
                     <% if property.has_elevator == false %> 🚠 Sans Ascenseur <br /><% end %>
                     <% if !property.floor.nil? %> 
                       <% if property.floor == 1 %> 
-                        ↕ <%=property.floor%>er étage 
+                        ↕ <%= property.floor %>er étage 
                       <% else %>
-                        ↕ <%=property.floor%>ème étage 
+                        ↕ <%= property.floor %>ème étage 
                       <% end %>
                       <br />
                     <% end %> 
-                    <% if property.subways.length != 0 %> Ⓜ️ <%=property.get_subways_full%>  <% end %>
+                    <% if property.subways.length != 0 %> Ⓜ️ <%= property.get_subways_full %>  <% end %>
                 </div>
               </li>
             </ul>
             <div class="d-flex justify-content-center mt-4">
-              <a type="button" href=<%=property.link%> class="btn btn-primary" target="_blank">👀 Voir sur <%=property.source%> </a> 
+              <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
               <% if property.contact_number == "N/C" %>
               <div class="ml-2">
-                <a href="tel:<%=property.contact_number%>" class="btn btn-success">📞 Appeler </a> 
+                <a href="tel:<%= property.contact_number %>" class="btn btn-success">📞 Appeler </a> 
               </div>
               <% end %>
             </div>
