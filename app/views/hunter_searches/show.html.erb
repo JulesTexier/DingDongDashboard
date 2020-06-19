@@ -19,11 +19,15 @@
           <div id=<%="carousel#{property.id}"%> class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src=<%= property.images[0] %> class="d-block w-100" alt="...">
+                <div class="d-flex justify-content-center">
+                 <img src=<%= property.images[0] %> class="d-block" alt="..." style="height:200px">
+                </div>
               </div>
               <% property.images.drop(1).each do |image| %>
                 <div class="carousel-item">
-                  <img src=<%= image %> class="d-block w-100" alt="...">
+                  <div class="d-flex justify-content-center">
+                    <img src=<%= image %> class="d-block" alt="..." style="height:200px">
+                  </div>
                 </div>
               <% end %>
             </div>
