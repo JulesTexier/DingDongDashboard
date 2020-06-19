@@ -10,12 +10,12 @@
       </li>
     </ul>
     <ul class="navbar-nav align-items-center mr-0">
-      <li class="nav-item active">
-        <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter), class: "btn btn-success" %>
+      <li class="nav-item d-flex active">
+        <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter), class: "btn btn-success mr-2" %>
         <% if hunter_signed_in? %>
-          <%= link_to "Se deconnecter", destroy_hunter_session_path, class: "btn btn-outline btn-danger" %>
+          <%= button_to "Se deconnecter", destroy_hunter_session_path, :method => :delete, class: "btn btn-outline btn-danger" %>
         <% else %>
-          <%= link_to 'Se connecter', new_hunter_session_path, class: "btn btn-outline btn-danger" %>
+          <%= link_to "Se connecter", new_hunter_session_path, class: "btn btn-outline btn-danger" %>
         <% end %>
       </li>
     </ul>
