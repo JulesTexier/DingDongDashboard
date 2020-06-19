@@ -2,7 +2,7 @@
 
   <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches</h1>
 
-  <%= link_to "Créer une recherche", new_hunter_hunter_search_path(@hunter.id), class: "btn btn-success mb-3" %>
+  <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter.id), class: "btn btn-success mb-3" %>
 
   <% @hunter_searches.each do |hunter_search| %>
     <div class="card text-center">
@@ -12,13 +12,13 @@
       <div class="card-body">
         <p class="card-text">Critères : <%= hunter_search.get_pretty_price %> € - <%= hunter_search.surface %>m2 - <%= hunter_search.max_price %></p>
         <p class="card-text">Zone :  <%= hunter_search.areas.pluck(:zone).uniq.join(" - ") %> </p>
-        <%= link_to "Voir les derniers biens", hunter_hunter_search_path(@hunter, hunter_search), class: "btn btn-primary" %>
+        <%= link_to "Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <%= link_to "Modifier", edit_hunter_hunter_search_path(@hunter, hunter_search), class: "nav-link" %>
+            <%= link_to "Modifier", edit_hunter_hunter_search_path(current_hunter, hunter_search), class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(@hunter, hunter_search),
+            <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(current_hunter, hunter_search),
                         data: { :confirm => "Êtes-vous sûr?" }, class: "nav-link text-danger", :method => :delete %>
           </li>
         </ul>
