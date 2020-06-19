@@ -1,4 +1,5 @@
 require "postmark-rails/templated_mailer"
+require 'dotenv/load'
 
 class PostmarkMailer < ApplicationMailer
   include PostmarkRails::TemplatedMailerMixin
@@ -41,5 +42,10 @@ class PostmarkMailer < ApplicationMailer
   def send_referral(subscriber, referral)
     self.template_model = { broker_firstname: subscriber.broker.firstname, referral_type: referral.referral_type, referral_firstname: referral.firstname, subscriber_fullname: subscriber.get_fullname, subscriber_email: subscriber.email, subscriber_phone: subscriber.phone }
     mail from: "etienne@hellodingdong.com", to: [subscriber.email, referral.email], cc: subscriber.broker.email, bcc: "etienne@hellodingdong.com", postmark_template_alias: "referral_template"
+  end
+
+  def send_properties_to_hunters(hunter_search)
+    self.template_model = { hunter_firstname: hunter_search.hunter.firstname, hunter_search_name: hunter_search.research_name, hunter_search_link: ENV['BASE_URL']+ "hunters/#{hunter_search.hunter.id}/hunter_searches/#{hunter_search.id}" }
+    mail from: "etienne@hellodingdong.com", to: hunter_search.hunter.email, postmark_template_alias: "hunter-notification"
   end
 end
