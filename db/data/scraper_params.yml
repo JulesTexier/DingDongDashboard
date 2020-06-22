@@ -125,6 +125,14 @@
     main_page_cls: div.search-list-item
     is_active: true
     group_type: Hub
+- source: Vanneau
+  params: 
+  - zone: Paris
+    url: https://www.vaneau.fr/fr/vaneau-search/search?field_ad_type[eq][]=buying&field_bedrooms_number[eq][]=0&field_bedrooms_number[eq][]=1&field_bedrooms_number[eq][]=2&field_bedrooms_number[eq][]=3&field_bedrooms_number[eq][]=4&field_bedrooms_number[eq][]=5&field_bedrooms_number[eq][]=6&field_furniture[eq][]=ALL&field_price[lte]=25000000&field_property_type[eq][]=5&field_property_type[eq][]=8&field_surface[lte]=0&field_swimming_pool[eq][]=ALL&limit=20&location[eq][]=area_55&mode=list&offset=0&offset_additional=0&search_page_id=260
+    scraper_type: HTTPRequest
+    is_active: true
+    http_type: get_json
+    group_type: Hub
 - source: Stephane Plaza
   params:
   - zone: Paris
@@ -247,6 +255,28 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+- source: Saint-Ferdinand
+  params:
+    - zone: Paris
+      url: http://www.agencessaintferdinand.com/acheter/
+      scraper_type: HTTPRequest
+      main_page_cls: div.property_listing
+      is_active: true
+      group_type: Group
+      http_request:
+        - {}
+        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+      http_type: post
+    - zone: Première Couronne
+      url: http://www.agencessaintferdinand.com/acheter/
+      scraper_type: HTTPRequest
+      main_page_cls: div.property_listing
+      is_active: true
+      group_type: Group
+      http_request:
+        - {}
+        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+      http_type: post
 - source: LeBonCoin
   params:
     - zone: Paris
@@ -300,6 +330,15 @@
   params:
     - zone: Paris
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Paris
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&LISTING-LISTpg=2
       main_page_cls: script
       scraper_type: Proxy
       waiting_cls: nil

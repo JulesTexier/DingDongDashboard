@@ -15,6 +15,7 @@ class Independant::ScraperProprioo < Scraper
         if array[1].is_a?(Array)
           begin
             array[1].each do |item|
+              next if item["status"] == "SOLD"
               hashed_property = {}
               hashed_property[:link] = "https://proprioo.fr" + I18n.transliterate(item["uri"])
               hashed_property[:surface] = item["surface"].round
