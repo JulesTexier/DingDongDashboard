@@ -1,6 +1,18 @@
+
+  <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-2 mb-2">
+    <% if @is_client %>
+      <h5 class="font-weight-bold text-dark col-12 text-center">Vous êtes déjà premium Ding Dong !</h5>
+    <% else %>
+      <%= link_to "S'abonner à Ding Dong Premium 🚀",
+                  new_subscriber_subscription_path,
+                  class: "btn btn-success",
+                  style: "font-weight:600" %>
+    <% end %>
+    </div>
+  </nav>
+
 <div class="row justify-content-center mt-4 align-items-center">
-
-
   <div class="col-sm-12 col-lg-8 aos-init aos-animate" data-aos="fade-up">
     <div class="mb-4">
       <h5 class="font-weight-bold text-blue col-12 text-center">Achetez sans stress avec</h5>
@@ -33,17 +45,7 @@
             </ul>
           </div>
         </div>
-      </div>  
-      <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
-        <div class="d-flex justify-content-center mt-2 mb-2">
-      <% if @is_client %>
-          <h5 class="font-weight-bold text-light col-12 text-center">Vous êtes déjà premium Ding Dong !</h5>
-      <% else %>
-            <%= link_to "S'abonner à Ding Dong Premium 🚀",
-                        new_subscriber_subscription_path,
-                        class: "btn btn-outline-light",
-                        style: "font-weight:600" %>
-      <% end %>
-        </div>
-      </nav>
+      </div> 
+    </div> 
+  </div>
 </div>
