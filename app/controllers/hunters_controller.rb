@@ -1,5 +1,5 @@
 class HuntersController < ApplicationController
-  before_filter :authenticate_hunter!
+  before_action :authenticate_hunter!
 
   protected
 
