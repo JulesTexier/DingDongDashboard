@@ -24,10 +24,9 @@ $(document).ready(function(){
 
     <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
-            <%= f.submit "Enregistrer mes critères 🚀", 
-                class: "btn btn-outline-light", 
-                style:"font-weight:600"
-            %>
+            <%= f.submit "Enregistrer mes critères 🚀",
+                         class: "btn btn-outline-light",
+                         style: "font-weight:600" %>
         </div>
     </nav>  
 
@@ -37,24 +36,22 @@ $(document).ready(function(){
 
       <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/6 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
-        <% if false%><h6>Paris</h6> <%end%>
+        <% if false %><h6>Paris</h6> <% end %>
         <div class="form-group col-12 p-0">
             <select multiple class="form-control" id="choices-multiple-remove-button" name="paris_areas[]">
-                <% @paris_areas.each do |item|%>
-                    <option value="<%=item[0]%>" <%= item[2] %>> <%= item[1] %></option>
+                <% @paris_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
                 <% end %>
             </select>
         </div>
-        <% if false%>
         <h6>Première couronne</h6>
         <div class="form-group col-12 p-0">
             <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
-                <% @premiere_couronne_areas.each do |item|%>
-                    <option value="<%=item[0]%>" <%= item[2] %>> <%= item[1] %></option>
+                <% @premiere_couronne_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
                 <% end %>
             </select>
         </div>
-        <% end %>
       </div>
 
     
@@ -63,7 +60,7 @@ $(document).ready(function(){
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">€</span>
             </div>
-            <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", min:"10000", max:"10000000", :required => true %>
+            <%= f.number_field :max_price, class: "form-control", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">3/6 ↔️ Surface minimum ? *</h5>
@@ -71,22 +68,22 @@ $(document).ready(function(){
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">m2</span>
             </div>
-            <%= f.number_field :min_surface, type:"number", class: "form-control", placeholder:"Ex : 30", min:"8", max:"400", :required => true   %>
+            <%= f.number_field :min_surface, type: "number", class: "form-control", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">4/6 🏡 Nombre de pièces minimum ? *</h5>
         <div class="input-group mb-3">
-            <%= f.number_field :min_rooms_number, class: "form-control", placeholder:"Ex : 1", min:"1", max:"6", :required => true   %>
+            <%= f.number_field :min_rooms_number, class: "form-control", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
         </div>
     
         <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">5/6 🎢 Étage minimum ?</h5>
         <div class="input-group mb-3">
-            <%= f.number_field :min_floor, class: "form-control", placeholder:"Ex : 1", min:"0", max:"8" %>
+            <%= f.number_field :min_floor, class: "form-control", placeholder: "Ex : 1", min: "0", max: "8" %>
         </div>
     
         <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">6/6 🚠 Ascenseur à partir de quel étage ?</h5>
         <div class="input-group" style="margin-bottom:4.5rem">
-            <%= f.number_field :min_elevator_floor, class: "form-control", placeholder:"Ex : 3", min:"0", max:"8"  %>
+            <%= f.number_field :min_elevator_floor, class: "form-control", placeholder: "Ex : 3", min: "0", max: "8" %>
         </div>
 
         <div class="d-flex justify-content-center mt-4 mb-6">
