@@ -12,6 +12,7 @@ class Group::ScraperDanielFeau < Scraper
     self.params.each do |args|
       fetch_main_page(args).each do |item|
         begin
+          break if item.child.attr("class") == "mdi mdi-loading rotating"
           hashed_property = {}
           hashed_property[:link] = "https://danielfeau.com" + access_xml_link(item, "a", "href")[0]
           hashed_property[:surface] = regex_gen(access_xml_text(item, "h3 > span"), '(\d+)(.?)(\d+)(.?)(m)').to_float_to_int_scrp
