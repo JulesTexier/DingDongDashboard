@@ -122,6 +122,51 @@ class String
     return lift
   end
 
+  def garden_str_scrp
+    regex_garden = "((sur|avec|) jardin(s)?)|(terasse-jardin)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    regex_no_garden = "(sans jardin(s)?)"
+    has_no_garden = self.match(/#{regex_no_garden}/i)
+    if has_a_garden.is_a?(MatchData)
+      garden = true
+    elsif has_no_garden.is_a?(MatchData)
+      garden = false
+    else
+      garden = nil
+    end
+    return garden
+  end
+
+  def balcony_str_scrp
+    regex_garden = "(avec|sur|un|^(?!sans|pas de))(.?)balcon(s?)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    regex_no_garden = "(sans balcon(s)?)"
+    has_no_garden = self.match(/#{regex_no_garden}/i)
+    if has_a_garden.is_a?(MatchData)
+      garden = true
+    elsif has_no_garden.is_a?(MatchData)
+      garden = false
+    else
+      garden = nil
+    end
+    return garden
+  end
+
+  def terrace_str_scrp
+    regex_garden = "(une|^(?!sans|pas de))(.?)terrasse(s?)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    regex_no_garden = "(sans terrasse(s)?)"
+    has_no_garden = self.match(/#{regex_no_garden}/i)
+    if has_a_garden.is_a?(MatchData)
+      garden = true
+    elsif has_no_garden.is_a?(MatchData)
+      garden = false
+    else
+      garden = nil
+    end
+    return garden
+  end
+
   def district_regex_scrp
     area_regex = '(?<=paris )(.*?)(\d+)(.?)(er|e|)|(?<=paris )(.?)(M{0,3}(?:C[MD]|D?C{0,3})(?:X[CL]|L?X{0,3})(?:I[XV]|V?I{0,3}))|(\d+)(.?)(er|eme|e)(.?)(arr)'
     area = self.match(/#{area_regex}/i).to_s
