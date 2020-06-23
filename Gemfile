@@ -69,6 +69,7 @@ gem "sidekiq", "~> 4.1", ">= 4.1.2"
 # CORS for webhook calls from website
 gem "rack-cors", "~> 0.4.0"
 
+
 gem "scout_apm"
 
 group :development, :test do

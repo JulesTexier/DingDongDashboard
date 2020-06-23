@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_094910) do
+ActiveRecord::Schema.define(version: 2020_06_19_083330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -100,6 +100,46 @@ ActiveRecord::Schema.define(version: 2020_06_04_094910) do
     t.index ["property_id"], name: "index_favorites_on_property_id"
     t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
     t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
+  end
+
+  create_table "hunter_search_areas", force: :cascade do |t|
+    t.bigint "hunter_search_id"
+    t.bigint "area_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_hunter_search_areas_on_area_id"
+    t.index ["hunter_search_id"], name: "index_hunter_search_areas_on_hunter_search_id"
+  end
+
+  create_table "hunter_searches", force: :cascade do |t|
+    t.string "research_name"
+    t.text "areas", default: [], array: true
+    t.integer "min_floor", default: 0
+    t.boolean "has_elevator"
+    t.integer "min_elevator_floor", default: 0
+    t.integer "surface"
+    t.integer "rooms_number"
+    t.integer "max_price"
+    t.bigint "hunter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
+  end
+
+  create_table "hunters", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "email"
+    t.string "phone"
+    t.string "company"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_hunters_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
 
   create_table "leads", force: :cascade do |t|

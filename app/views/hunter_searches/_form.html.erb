@@ -1,0 +1,91 @@
+<%= form_for [@hunter, @hunter_search] do |f| %>
+
+    <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <%= f.submit "Enregistrer mes critères 🚀", 
+                class: "btn btn-outline-light", 
+                style:"font-weight:600"
+            %>
+        </div>
+    </nav>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">➡️ Nom de la recherche ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.text_field :research_name, class: "form-control", placeholder:"Ex : Recherche 1", :required => true %>
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Arrondissements * </h5>
+
+    <% areas = ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020"] %>
+
+    <div class="d-flex flex-wrap"> 
+    <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
+    <%= b.label class:"label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do%>
+         <%=b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text%>
+        <%end%>
+    <% end %>
+
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰Budget Maximum ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", :required => true %>
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :surface, class: "form-control", placeholder:"Ex : 50", max: 700, min: 6 , :required => true %>
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡Nombre de pièces minimum ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :rooms_number, class: "form-control", placeholder:"Ex : 2", max: 10 , :required => true %>
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🎢 Etage minimum </h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :min_floor, class: "form-control", placeholder:"Ex : 2", max: 20 %>
+    </div>
+
+    <div class="mt-5 mb-5">
+        🔔
+    </div>
+
+<% end %>
+
+
+<script>
+    
+    function changeColor(className) {
+      let item = document.getElementsByClassName(className)[0]
+      let label = item.children[1]
+      let checkboxValue = item.children[0].children[0].checked
+    
+      if(checkboxValue){ 
+          label.style.color = "#57b894"
+        }
+      else{
+          label.style.color = "black"
+        }
+    }
+
+
+    function selectAll(className) {
+        let all_items = document.getElementsByClassName(className)
+
+        if(all_items[0].checked){
+            for(i=1; i < 21; i++){
+                all_items[i].checked = true;
+                all_items[i].parentNode.nextElementSibling.style.color = "#57b894"
+            }
+        }
+        else{
+            for(i=1; i < 21; i++){
+                all_items[i].checked = false;
+                all_items[i].parentNode.nextElementSibling.style.color = "black"
+            }
+        }
+    }
+
+
+</script>

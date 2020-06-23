@@ -49,6 +49,18 @@ class Broadcaster
       end
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
+
+    hunter_searches = HunterSearch.all
+    hunter_searches.each do |hunter_search|
+      hunter_search_area = hunter_search.areas.ids
+      matched_props = []
+      properties.each do |prop|
+        if hunter_search.is_matching_property?(prop, hunter_search_area)
+          PostmarkMailer.send_properties_to_hunters(hunter_search).deliver_now
+          break
+        end
+      end
+    end
     update_processed_properties(properties)
   end
 
