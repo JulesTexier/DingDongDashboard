@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_083330) do
+ActiveRecord::Schema.define(version: 2020_06_23_143616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -175,8 +175,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
 
   create_table "properties", force: :cascade do |t|
     t.integer "price"
-    t.string "old_area"
-    t.string "title"
     t.text "description"
     t.string "link"
     t.integer "rooms_number"
@@ -197,6 +195,9 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.boolean "has_elevator"
     t.text "images", default: [], array: true
     t.integer "area_id"
+    t.boolean "has_terrace"
+    t.boolean "has_garden"
+    t.boolean "has_balcony"
   end
 
   create_table "property_districts", force: :cascade do |t|
