@@ -153,7 +153,7 @@ class String
   end
 
   def terrace_str_scrp
-    regex_garden = "(une|^(?!sans|pas de))(.?)terrasse(s?)"
+    regex_garden = "(grande|une|^(?!sans|pas de))(.?)terrasse(s?)"
     has_a_garden = self.match(/#{regex_garden}/i)
     regex_no_garden = "(sans terrasse(s)?)"
     has_no_garden = self.match(/#{regex_no_garden}/i)
