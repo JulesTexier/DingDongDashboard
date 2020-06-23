@@ -324,6 +324,14 @@ class Scraper
     end
   end
 
+  def perform_exterior_regex(str)
+    exterior_infos = {}
+    exterior_infos[:has_garden] = str.garden_str_scrp
+    exterior_infos[:has_terrace] = str.terrace_str_scrp
+    exterior_infos[:has_balcony] = str.balcony_str_scrp
+    return exterior_infos
+  end
+
   def get_type_flat(str)
     flat_type = "N/C"
     flat_type = "Appartement" if str.downcase.include? "appartement"
@@ -542,7 +550,7 @@ class Scraper
   ##############################
 
   def insert_property_history(hashed_property, method_name)
-    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street))
+    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony))
     prop_history.method_name = method_name
     if prop_history.save
       puts "\n\nInsertion of property history - #{self.source} -> #{method_name}" unless Rails.env.test?
