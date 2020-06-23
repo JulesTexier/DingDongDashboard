@@ -142,14 +142,14 @@ class Manychat
     text = "😕 Oops, aucune annonce ne correspond ..."
     text = "Aucune annonce récente ne répond à vos critères de recherche 😕." if template == "last_properties"
     text = "Aucune annonce correspondant à vos critères n'est tombée cette nuit 😕." if template == "morning_properties"
-    text += "\u000ANous t'invitions à modifier vos critères de recherche si tu souhaites recevoir plus d'annonces ⬇️"
+    text += "\u000ANous vous invitons à modifier vos critères de recherche si vous souhaitez recevoir plus d'annonces ⬇️"
     return [create_message_text_hash(text)]
   end
 
   def create_header_gallery_element_new_properties(number_of_properties)
     title = "🍾 "
     number_of_properties == 1 ? title += "#{number_of_properties} nouvelle annonce est tombée !" : title += "#{number_of_properties} nouvelles annonces sont tombées !"
-    number_of_properties == 1 ? subtitle = "Fais défiler pour la découvrir ! ️↪️" : subtitle = "Fais défiler pour les découvrir ! ️↪️"
+    number_of_properties == 1 ? subtitle = "Faites défiler pour la découvrir ! ️↪️" : subtitle = "Faites défiler pour les découvrir ! ️↪️"
     image_url = "https://www.hellodingdong.com/content/gallery/rectangle/new_properties/#{number_of_properties}.png"
     # action_url = "https://hellodingdong.com/"
     create_header_gallery_element(title, subtitle, image_url)
@@ -276,7 +276,7 @@ class Manychat
       end
       message_array.push(create_message_card_hash("cards", elements, "horizontal"))
     else
-      text = "Oops, tu n'as aucune annonce en favoris ..."
+      text = "Oops, vous n'avez aucune annonce en favoris ..."
       message_array.push(create_message_text_hash(text))
     end
 
