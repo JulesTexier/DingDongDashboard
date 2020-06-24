@@ -4,6 +4,8 @@ require "dotenv/load"
 class Scraper
   def enrich_then_insert_v2(hashed_property)
     if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
+      enriched_infos = perform_enrichment_regex(hashed_property)
+      hashed_property.merge!(enriched_infos)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
       insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
@@ -324,12 +326,16 @@ class Scraper
     end
   end
 
-  def perform_exterior_regex(str)
-    exterior_infos = {}
-    exterior_infos[:has_garden] = str.garden_str_scrp
-    exterior_infos[:has_terrace] = str.terrace_str_scrp
-    exterior_infos[:has_balcony] = str.balcony_str_scrp
-    return exterior_infos
+  def perform_enrichment_regex(prop)
+    enriched_infos = {}
+    enriched_infos[:subway_ids] = perform_subway_regex(prop[:description]) unless prop.key?(:subway_ids)
+    enriched_infos[:floor] = perform_floor_regex(prop[:description]) unless prop.key?(:floor)
+    enriched_infos[:has_elevator] = perform_elevator_regex(prop[:description]) unless prop.key?(:has_elevator)
+    enriched_infos[:has_garden] = prop[:description].garden_str_scrp unless prop.key?(:has_garden)
+    enriched_infos[:has_terrace] = prop[:description].terrace_str_scrp unless prop.key?(:has_terrace)
+    enriched_infos[:has_balcony] = prop[:description].balcony_str_scrp unless prop.key?(:has_balcony)
+    enriched_infos[:is_last_floor] = prop[:description].last_floor_str_scrp unless prop.key?(:is_last_floor)
+    return enriched_infos
   end
 
   def get_type_flat(str)
@@ -550,7 +556,7 @@ class Scraper
   ##############################
 
   def insert_property_history(hashed_property, method_name)
-    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony))
+    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony, :is_last_floor, :is_new_construction))
     prop_history.method_name = method_name
     if prop_history.save
       puts "\n\nInsertion of property history - #{self.source} -> #{method_name}" unless Rails.env.test?
