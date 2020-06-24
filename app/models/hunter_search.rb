@@ -38,18 +38,26 @@ class HunterSearch < ApplicationRecord
     test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
   end
 
-  def is_matching_property_price(price)
+  def is_matching_property_max_price(price)
     (price <= self.max_price ? true : false) if !self.max_price.nil?
   end
 
+  def is_matching_property_min_price(price)
+    (price >= self.min_price ? true : false) if !self.min_price.nil?
+  end
+
+  def is_matching_property_price(price)
+    is_matching_property_max_price(price) && is_matching_property_min_price(price)
+  end
+
   def is_matching_property_surface(surface)
-    (surface >= self.surface ? true : false) if !self.surface.nil?
+    (surface >= self.min_surface ? true : false) if !self.min_surface.nil?
   end
 
   def is_matching_property_rooms_number(rooms_number)
-    (rooms_number.to_i >= self.rooms_number ? true : false) if !self.rooms_number.nil?
+    (rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
   end
-
+  
   def is_matching_property_floor(floor)
     if self.min_floor.nil?
       return true
