@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_083330) do
+ActiveRecord::Schema.define(version: 2020_06_24_100518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -117,12 +117,14 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
     t.integer "min_elevator_floor", default: 0
-    t.integer "surface"
-    t.integer "rooms_number"
+    t.integer "min_surface"
+    t.integer "min_rooms_number"
     t.integer "max_price"
     t.bigint "hunter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "min_price"
+    t.integer "max_sqm_price"
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
@@ -175,8 +177,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
 
   create_table "properties", force: :cascade do |t|
     t.integer "price"
-    t.string "old_area"
-    t.string "title"
     t.text "description"
     t.string "link"
     t.integer "rooms_number"
@@ -197,6 +197,9 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.boolean "has_elevator"
     t.text "images", default: [], array: true
     t.integer "area_id"
+    t.boolean "has_terrace"
+    t.boolean "has_garden"
+    t.boolean "has_balcony"
   end
 
   create_table "property_districts", force: :cascade do |t|
