@@ -314,19 +314,19 @@ class Scraper
   def perform_subway_regex(str, zone = "Paris")
     if zone == "Paris"
       subways = YAML.load_file("./db/data/subways.yml")
-      subways_ids = []
+      subway_infos = []
       subways["stations"].each do |subway|
         if str.remove_acc_scrp.match(/#{subway["name"].remove_acc_scrp}/i).is_a?(MatchData)
-          subways_ids.push(subway)
+          subway_infos.push(subway)
         end
       end
-      return subways_ids.uniq
+      return subway_infos.uniq
     end
   end
 
   def perform_enrichment_regex(prop)
     enriched_infos = {}
-    enriched_infos[:subway_ids] = perform_subway_regex(prop[:description]) unless prop.key?(:subway_ids)
+    enriched_infos[:subway_infos] = perform_subway_regex(prop[:description]) unless prop.key?(:subway_infos) || prop.key?(:subway_ids)
     enriched_infos[:floor] = perform_floor_regex(prop[:description]) unless prop.key?(:floor)
     enriched_infos[:has_elevator] = perform_elevator_regex(prop[:description]) unless prop.key?(:has_elevator)
     enriched_infos[:has_garden] = prop[:description].garden_str_scrp unless prop.key?(:has_garden)
@@ -554,7 +554,7 @@ class Scraper
   ##############################
 
   def insert_property_history(hashed_property, method_name)
-    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony, :is_last_floor, :is_new_construction))
+    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :subway_infos, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony, :is_last_floor, :is_new_construction))
     prop_history.method_name = method_name
     if prop_history.save
       puts "\n\nInsertion of property history - #{self.source} -> #{method_name}" unless Rails.env.test?
