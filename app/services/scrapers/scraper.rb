@@ -6,7 +6,6 @@ class Scraper
     if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
       enriched_infos = perform_enrichment_regex(hashed_property)
       hashed_property.merge!(enriched_infos)
-      # byebug
       puts JSON.pretty_generate(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
