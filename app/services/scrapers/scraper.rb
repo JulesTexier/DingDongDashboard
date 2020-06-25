@@ -6,9 +6,10 @@ class Scraper
     if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
       enriched_infos = perform_enrichment_regex(hashed_property)
       hashed_property.merge!(enriched_infos)
+      # byebug
+      puts JSON.pretty_generate(hashed_property)
       hashed_property[:area] = Area.where(name: hashed_property[:area]).first
       property = insert_property(hashed_property)
-      insert_property_subways(hashed_property[:subway_ids], property) unless property.nil? || hashed_property[:subway_ids].nil? || hashed_property[:subway_ids].empty?
       scrap_historisation(hashed_property, __method__)
     else
       # for test purpose, if we don't want ton insert this shitty property,
@@ -207,10 +208,8 @@ class Scraper
   end
 
   def error_outputs(e, source)
-    unless Rails.env.test?
-      puts "\nError for #{@source}, skip this one."
-      puts "It could be a bad link or a bad xml extraction.\n\n"
-    end
+    puts "\nError for #{@source}, skip this one."
+    puts "It could be a bad link or a bad xml extraction.\n\n"
   end
 
   ###########################
@@ -314,12 +313,11 @@ class Scraper
   ## And the we send it in an array for insertion.
   def perform_subway_regex(str, zone = "Paris")
     if zone == "Paris"
-      subways = JSON.parse(File.read("./db/data/subways.json"))
+      subways = YAML.load_file("./db/data/subways.yml")
       subways_ids = []
       subways["stations"].each do |subway|
-        if str.remove_acc_scrp.match(/#{subway["metro"].remove_acc_scrp}/i).is_a?(MatchData)
-          s = Subway.where(name: subway["metro"]).limit(1)
-          subways_ids.push(s.ids[0])
+        if str.remove_acc_scrp.match(/#{subway["name"].remove_acc_scrp}/i).is_a?(MatchData)
+          subways_ids.push(subway)
         end
       end
       return subways_ids.uniq
@@ -572,12 +570,6 @@ class Scraper
         puts prop.get_title
       end
       return prop
-    end
-  end
-
-  def insert_property_subways(subway_ids, prop)
-    subway_ids.each do |subway_id|
-      PropertySubway.create(property_id: prop.id, subway_id: subway_id) if !PropertySubway.where(property_id: prop.id, subway_id: subway_id).exists?
     end
   end
 end
