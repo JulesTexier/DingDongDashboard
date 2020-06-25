@@ -17,9 +17,8 @@ class Property < ApplicationRecord
   has_many :property_districts
   has_many :districts, through: :property_districts
 
-  has_many :property_subways
-  has_many :subways, through: :property_subways
-  
+  serialize :subway_infos, Array
+
   belongs_to :area
 
   def get_cover
@@ -31,7 +30,7 @@ class Property < ApplicationRecord
     self.rooms_number >= 1 ? description += "🛋️ " + self.rooms_number.to_s + "p" : nil
     self.floor != nil ? description = description + "   ↕ Et. " + self.floor.to_s : nil
     self.has_elevator ? description = description + "   🚠 Asc" : nil
-    description = description + "  💰#{(self.price/self.surface).round(0)}" 
+    description = description + "  💰#{(self.price / self.surface).round(0)}"
     description += " €/m2" if description.length < 25
     !self.subways.empty? ? description = description + "\u000AⓂ️ #{self.get_subways_full}" : nil
     description = description + "\u000A⏱️ " + self.created_at.in_time_zone("Europe/Paris").strftime("%d/%m").to_s + " à " + self.created_at.in_time_zone("Europe/Paris").strftime("%H:%M").to_s
@@ -48,7 +47,7 @@ class Property < ApplicationRecord
   end
 
   def get_pretty_area
-    if self.area.name[0..1] == "75" 
+    if self.area.name[0..1] == "75"
       if self.area.name[3..3] == "0"
         self.area.name[4..4] == "1" ? pretty_area = "1er" : pretty_area = "#{self.area.name[4..4]}ème"
       else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_120223) do
+ActiveRecord::Schema.define(version: 2020_06_25_083740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_120223) do
     t.boolean "has_balcony"
     t.boolean "is_new_construction"
     t.boolean "is_last_floor"
+    t.text "subway_infos"
   end
 
   create_table "property_districts", force: :cascade do |t|
@@ -239,16 +240,6 @@ ActiveRecord::Schema.define(version: 2020_06_24_120223) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_property_images_on_property_id"
-  end
-
-  create_table "property_subways", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "subway_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id", "subway_id"], name: "index_property_subways_on_property_id_and_subway_id", unique: true
-    t.index ["property_id"], name: "index_property_subways_on_property_id"
-    t.index ["subway_id"], name: "index_property_subways_on_subway_id"
   end
 
   create_table "referrals", force: :cascade do |t|
