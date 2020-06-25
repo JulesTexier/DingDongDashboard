@@ -28,14 +28,13 @@ class Group::ScraperConnexionImmobilier < Scraper
             hashed_property[:source] = @source
             hashed_property[:agency_name] = access_xml_text(html, "#detformcall > div.txt > p.name")
             hashed_property[:contact_number] = access_xml_text(html, "#detformcall > div.txt > p.desktoponly.tel").gsub(" ", "")
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             imgs = access_xml_link(html, '[itemprop="image"]', "src")
             hashed_property[:images] = []
             imgs.each do |img|
               hashed_property[:images].push(img) if !img.nil?
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

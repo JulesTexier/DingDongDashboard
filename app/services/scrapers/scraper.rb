@@ -2,7 +2,7 @@
 require "dotenv/load"
 
 class Scraper
-  def enrich_then_insert_v2(hashed_property)
+  def enrich_then_insert(hashed_property)
     if !already_exists_with_desc?(hashed_property) && !is_it_unwanted_prop?(hashed_property) && !is_prop_fake?(hashed_property)
       enriched_infos = perform_enrichment_regex(hashed_property)
       hashed_property.merge!(enriched_infos)

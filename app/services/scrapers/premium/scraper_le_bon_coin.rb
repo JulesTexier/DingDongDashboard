@@ -31,7 +31,7 @@ class Premium::ScraperLeBonCoin < Scraper
               property_checker_hash[:link] = hashed_property[:link]
               if go_to_prop?(property_checker_hash, 7)
                 @properties.push(hashed_property)
-                enrich_then_insert_v2(hashed_property)
+                enrich_then_insert(hashed_property)
                 i += 1
               end
               break if i == limit
@@ -78,7 +78,7 @@ class Premium::ScraperLeBonCoin < Scraper
       when "rooms"
         flat_data[:rooms_number] = element["value_label"].to_i
       when "real_estate_type"
-        flat_data[:flat_type] = element["value_label"]
+        flat_data[:flat_type] = get_type_flat(element["value_label"])
       end
     end
 
@@ -86,10 +86,6 @@ class Premium::ScraperLeBonCoin < Scraper
     !item["body"].nil? ? flat_data[:description] = item["body"].tr("\n", "") : nil
     !item["location"]["zipcode"].nil? ? flat_data[:area] = perform_district_regex(item["location"]["zipcode"]) : nil
     !item["price"].nil? ? flat_data[:price] = item["price"][0].to_i : nil
-
-    !flat_data[:description].nil? ? flat_data[:floor] = perform_floor_regex(flat_data[:description]) : nil
-    !flat_data[:description].nil? ? flat_data[:has_elevator] = perform_elevator_regex(flat_data[:description]) : nil
-    !flat_data[:description].nil? ? flat_data[:subway_ids] = perform_subway_regex(flat_data[:description]) : nil
 
     flat_data[:images] = []
     if !item["images"]["urls_large"].nil?

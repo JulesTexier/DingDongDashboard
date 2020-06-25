@@ -29,16 +29,13 @@ class Independant::ScraperDeliquietImmobilier < Scraper
             hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp if regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp != 0
             hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
             hashed_property[:agency_name] = @source
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             raw_images = html.css("#diapoDetail .img")
             hashed_property[:images] = []
             raw_images.each { |x| hashed_property[:images].push(regex_gen(x.attributes["style"].value, '(url)\((.)*\)').gsub("url('..", "http://www.deliquiet-immobilier.com").gsub("')", "")) }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

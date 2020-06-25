@@ -27,8 +27,7 @@ class Independant::ScraperNestenn < Scraper
             details = access_xml_text(html, "#groupeIcon").strip.gsub(/[^[:print:]]/, "").gsub(" ", "").remove_acc_scrp
             hashed_property[:bedrooms_number] = regex_gen(details, '(\d*)chambre').to_int_scrp
             hashed_property[:floor] = regex_gen(details, '(\d*)(er|eme)etage').to_int_scrp
-            details.match(/ascenseur/i).is_a?(MatchData) ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:has_elevator] = true if details.match(/ascenseur/i).is_a?(MatchData)
             hashed_property[:flat_type] = get_type_flat(infos)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
@@ -36,7 +35,7 @@ class Independant::ScraperNestenn < Scraper
             hashed_property[:contact_number] = access_xml_text(html, "#telephone_bien_content").gsub(" ", "").convert_phone_nbr_scrp
             hashed_property[:images] = access_xml_link(html, ".diapo_img > img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

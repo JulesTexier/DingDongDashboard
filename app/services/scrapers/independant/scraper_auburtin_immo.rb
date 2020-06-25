@@ -28,17 +28,14 @@ class Independant::ScraperAuburtinImmo < Scraper
             hashed_property[:floor] = access_xml_text(html, 'li[title="Etage"]').to_int_scrp if !access_xml_text(html, 'li[title="Etage"]').empty?
             if !access_xml_text(html, 'li[title="Ascenseur"]').empty?
               access_xml_text(html, 'li[title="Ascenseur"]').match(/oui/i).is_a?(MatchData) ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = false
-            else
-              hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             end
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:agency_name] = "AUBURTIN IMMOBILIER - Marx Dormoy"
             hashed_property[:contact_number] = "+33142058403"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "#slider > a", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

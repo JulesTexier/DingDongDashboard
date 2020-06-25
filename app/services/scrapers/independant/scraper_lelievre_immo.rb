@@ -24,15 +24,14 @@ class Independant::ScraperLelievreImmo < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.section_text").specific_trim_scrp("\n\r\t").strip
             hashed_property[:bedrooms_number] = item["field_annonce_chambres"]
-            hashed_property[:flat_type] = regex_gen(item["title"], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(item["title"])
             hashed_property[:floor] = item["field_annonce_etage"] == 0 ? nil : item["field_annonce_etage"]
             hashed_property[:has_elevator] = item["field_annonce_ascenceur"] == 1 ? true : false
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = ["https://www.lelievre-immobilier.com" + item["first_image_url"]]
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

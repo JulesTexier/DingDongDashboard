@@ -24,15 +24,12 @@ class Independant::ScraperEfficity < Scraper
             hashed_property[:description] = access_xml_text(html, "div.detail-desc-text").strip
             hashed_property[:flat_type] = access_xml_text(html, "#nom-bien").split("|")[0].tr(" ", "")
             hashed_property[:agency_name] = "Efficity"
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, ".cbp-lightbox", "href")
             hashed_property[:images].collect! { |img| img.clean_img_link_https }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end
