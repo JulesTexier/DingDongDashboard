@@ -1,0 +1,989 @@
+---
+stations:
+- name: Abbesses
+  line:
+  - '12'
+- name: Alésia
+  line:
+  - '4'
+- name: Alexandre Dumas
+  line:
+  - '2'
+- name: Alma - Marceau
+  line:
+  - '9'
+- name: Anatole France
+  line:
+  - '3'
+- name: Anvers
+  line:
+  - '2'
+- name: Argentine
+  line:
+  - '1'
+- name: Arts et Métiers
+  line:
+  - '3'
+  - '11'
+- name: Assemblée Nationale
+  line:
+  - '12'
+- name: Aubervilliers - Pantin - Quatre Chemins
+  line:
+  - '7'
+- name: Avenue Émile Zola
+  line:
+  - '10'
+- name: Avron
+  line:
+  - '2'
+- name: Bagneux
+  line:
+  - '4'
+- name: Balard
+  line:
+  - '8'
+- name: Barbès - Rochechouart
+  line:
+  - '2'
+  - '4'
+- name: Basilique de Saint-Denis
+  line:
+  - '13'
+- name: Bastille
+  line:
+  - '1'
+  - '5'
+- name: Bel-Air
+  line:
+  - '6'
+- name: Belleville
+  line:
+  - '2'
+  - '11'
+- name: Bérault
+  line:
+  - '1'
+- name: Bercy
+  line:
+  - '6'
+  - '14'
+- name: Bibliothèque François Mitterrand
+  line:
+  - '14'
+- name: Billancourt
+  line:
+  - '9'
+- name: Bir-Hakeim
+  line:
+  - '6'
+- name: Blanche
+  line:
+  - '2'
+- name: Bobigny - Pablo Picasso
+  line:
+  - '5'
+- name: Bobigny - Pantin - Raymond Queneau
+  line:
+  - '5'
+- name: Boissière
+  line:
+  - '6'
+- name: Bolivar
+  line:
+  - 7bis
+- name: Bonne Nouvelle
+  line:
+  - '8'
+  - '9'
+- name: Botzaris
+  line:
+  - 7bis
+- name: Boulogne - Jean Jaurès
+  line:
+  - '10'
+- name: Boulogne - Pont de Saint-Cloud
+  line:
+  - '10'
+- name: Boucicaut
+  line:
+  - '8'
+- name: Bourse
+  line:
+  - '3'
+- name: Bréguet - Sabin
+  line:
+  - '5'
+- name: Brochant
+  line:
+  - '13'
+- name: Buttes Chaumont
+  line:
+  - 7bis
+- name: Buzenval
+  line:
+  - '9'
+- name: Cadet
+  line:
+  - '7'
+- name: Cambronne
+  line:
+  - '6'
+- name: Campo Formio
+  line:
+  - '5'
+- name: Cardinal Lemoine
+  line:
+  - '10'
+- name: Carrefour Pleyel
+  line:
+  - '13'
+- name: Censier - Daubenton
+  line:
+  - '7'
+- name: Champs-Élysées - Clemenceau
+  line:
+  - '1'
+  - '13'
+- name: Chardon Lagache
+  line:
+  - '10'
+- name: Charenton - Écoles
+  line:
+  - '8'
+- name: Charles de Gaulle - Étoile
+  line:
+  - '1'
+  - '2'
+- name: Charles Michels
+  line:
+  - '10'
+- name: Charonne
+  line:
+  - '9'
+- name: Château d'Eau
+  line:
+  - '4'
+- name: Château de Vincennes
+  line:
+  - '1'
+- name: Château-Landon
+  line:
+  - '7'
+- name: Château Rouge
+  line:
+  - '4'
+- name: Châtelet
+  line:
+  - '1'
+  - '4'
+  - '7'
+  - '11'
+  - '14'
+- name: Châtillon - Montrouge
+  line:
+  - '13'
+- name: Chaussée d'Antin - La Fayette
+  line:
+  - '7'
+  - '9'
+- name: Chemin Vert
+  line:
+  - '8'
+- name: Chevaleret
+  line:
+  - '6'
+- name: Metro Cité
+  line:
+  - '4'
+- name: Cluny - La Sorbonne
+  line:
+  - '10'
+- name: Colonel Fabien
+  line:
+  - '2'
+- name: Metro Commerce
+  line:
+  - '8'
+- name: Concorde
+  line:
+  - '1'
+  - '8'
+  - '12'
+- name: Convention
+  line:
+  - '12'
+- name: Corentin Cariou
+  line:
+  - '7'
+- name: Corentin Celton
+  line:
+  - '12'
+- name: Corvisart
+  line:
+  - '6'
+- name: Cour Saint-Émilion
+  line:
+  - '14'
+- name: Courcelles
+  line:
+  - '2'
+- name: Couronnes
+  line:
+  - '2'
+- name: Créteil - L'Échat
+  line:
+  - '8'
+- name: Créteil - Préfecture
+  line:
+  - '8'
+- name: Créteil - Université
+  line:
+  - '8'
+- name: Crimée
+  line:
+  - '7'
+- name: Croix de Chavaux
+  line:
+  - '9'
+- name: Danube
+  line:
+  - 7bis
+- name: Daumesnil
+  line:
+  - '6'
+  - '8'
+- name: Denfert-Rochereau
+  line:
+  - '4'
+  - '6'
+- name: Dugommier
+  line:
+  - '6'
+- name: Dupleix
+  line:
+  - '6'
+- name: Duroc
+  line:
+  - '10'
+  - '13'
+- name: École Militaire
+  line:
+  - '8'
+- name: École Vétérinaire de Maisons-Alfort
+  line:
+  - '8'
+- name: Edgar Quinet
+  line:
+  - '6'
+- name: Église d'Auteuil
+  line:
+  - '10'
+- name: Église de Pantin
+  line:
+  - '5'
+- name: Esplanade de La Défense
+  line:
+  - '1'
+- name: Étienne Marcel
+  line:
+  - '4'
+- name: Europe
+  line:
+  - '3'
+- name: Exelmans
+  line:
+  - '9'
+- name: Faidherbe - Chaligny
+  line:
+  - '8'
+- name: Falguière
+  line:
+  - '12'
+- name: Félix Faure
+  line:
+  - '8'
+- name: Filles du Calvaire
+  line:
+  - '8'
+- name: Fort d'Aubervilliers
+  line:
+  - '7'
+- name: Franklin D. Roosevelt
+  line:
+  - '1'
+  - '9'
+- name: Front Populaire
+  line:
+  - '12'
+- name: Gabriel Péri
+  line:
+  - '13'
+- name: Gaîté
+  line:
+  - '13'
+- name: Gallieni
+  line:
+  - '3'
+- name: Gambetta
+  line:
+  - '3'
+  - 3bis
+- name: Gare d'Austerlitz
+  line:
+  - '5'
+  - '10'
+- name: Gare de l'Est
+  line:
+  - '4'
+  - '5'
+- name: Gare de Lyon
+  line:
+  - '1'
+  - '14'
+- name: Gare du Nord
+  line:
+  - '4'
+  - '5'
+- name: Garibaldi
+  line:
+  - '13'
+- name: George V
+  line:
+  - '1'
+- name: Glacière
+  line:
+  - '6'
+- name: Goncourt
+  line:
+  - '11'
+- name: Grands Boulevards
+  line:
+  - '8'
+  - '9'
+- name: Guy Môquet
+  line:
+  - '13'
+- name: Havre - Caumartin
+  line:
+  - '3'
+  - '9'
+- name: Hoche
+  line:
+  - '5'
+- name: Hôtel de Ville
+  line:
+  - '1'
+  - '11'
+- name: Iéna
+  line:
+  - '9'
+- name: Invalides
+  line:
+  - '8'
+  - '13'
+- name: Jacques Bonsergent
+  line:
+  - '5'
+- name: Jasmin
+  line:
+  - '9'
+- name: Jaurès
+  line:
+  - '2'
+  - '5'
+  - 7bis
+- name: Javel - André Citroën
+  line:
+  - '10'
+- name: Jourdain
+  line:
+  - '11'
+- name: Jules Joffrin
+  line:
+  - '12'
+- name: Jussieu
+  line:
+  - '7'
+  - '10'
+- name: Kléber
+  line:
+  - '6'
+- name: La Chapelle
+  line:
+  - '2'
+- name: La Courneuve
+  line:
+  - '7'
+- name: La Défense - Grande Arche
+  line:
+  - '1'
+- name: La Fourche
+  line:
+  - '13'
+- name: La Motte-Picquet - Grenelle
+  line:
+  - '6'
+  - '8'
+  - '10'
+- name: La Muette
+  line:
+  - '9'
+- name: La Tour-Maubourg
+  line:
+  - '8'
+- name: Lamarck - Caulaincourt
+  line:
+  - '12'
+- name: Laumière
+  line:
+  - '5'
+- name: Le Kremlin-Bicêtre
+  line:
+  - '7'
+- name: Le Peletier
+  line:
+  - '7'
+- name: Ledru-Rollin
+  line:
+  - '8'
+- name: Les Agnettes
+  line:
+  - '13'
+- name: Les Courtilles
+  line:
+  - '13'
+- name: Les Gobelins
+  line:
+  - '7'
+- name: Les Halles
+  line:
+  - '4'
+- name: Les Sablons
+  line:
+  - '1'
+- name: Liberté
+  line:
+  - '8'
+- name: Liège
+  line:
+  - '13'
+- name: Louis Blanc
+  line:
+  - '7'
+  - 7bis
+- name: Louise Michel
+  line:
+  - '3'
+- name: Lourmel
+  line:
+  - '8'
+- name: Louvre - Rivoli
+  line:
+  - '1'
+- name: Mabillon
+  line:
+  - '10'
+- name: Madeleine
+  line:
+  - '8'
+  - '12'
+  - '14'
+- name: Mairie d'Issy
+  line:
+  - '12'
+- name: Mairie d'Ivry
+  line:
+  - '7'
+- name: Mairie de Clichy
+  line:
+  - '13'
+- name: Mairie de Montreuil
+  line:
+  - '9'
+- name: Mairie de Montrouge
+  line:
+  - '4'
+- name: Mairie de Saint-Ouen
+  line:
+  - '13'
+- name: Mairie des Lilas
+  line:
+  - '11'
+- name: Maison Blanche
+  line:
+  - '7'
+- name: Maisons-Alfort - Les Juilliottes
+  line:
+  - '8'
+- name: Maisons-Alfort - Stade
+  line:
+  - '8'
+- name: Malakoff - Plateau de Vanves
+  line:
+  - '13'
+- name: Malakoff - Rue Étienne Dolet
+  line:
+  - '13'
+- name: Malesherbes
+  line:
+  - '3'
+- name: Maraîchers
+  line:
+  - '9'
+- name: Marcadet - Poissonniers
+  line:
+  - '4'
+  - '12'
+- name: Marcel Sembat
+  line:
+  - '9'
+- name: Marx Dormoy
+  line:
+  - '12'
+- name: Maubert-Mutualité
+  line:
+  - '10'
+- name: Ménilmontant
+  line:
+  - '2'
+- name: Michel Bizot
+  line:
+  - '8'
+- name: Michel-Ange - Auteuil
+  line:
+  - '9'
+  - '10'
+- name: Michel-Ange - Molitor
+  line:
+  - '9'
+  - '10'
+- name: Mirabeau
+  line:
+  - '10'
+- name: Miromesnil
+  line:
+  - '9'
+  - '13'
+- name: Monceau
+  line:
+  - '2'
+- name: Montgallet
+  line:
+  - '8'
+- name: Montparnasse - Bienvenüe
+  line:
+  - '4'
+  - '6'
+  - '12'
+  - '13'
+- name: Mouton-Duvernet
+  line:
+  - '4'
+- name: Nation
+  line:
+  - '1'
+  - '2'
+  - '6'
+  - '9'
+- name: Nationale
+  line:
+  - '6'
+- name: Notre-Dame-de-Lorette
+  line:
+  - '12'
+- name: Notre-Dame-des-Champs
+  line:
+  - '12'
+- name: Oberkampf
+  line:
+  - '5'
+  - '9'
+- name: Odéon
+  line:
+  - '4'
+  - '10'
+- name: Olympiades
+  line:
+  - '14'
+- name: Opéra
+  line:
+  - '3'
+  - '7'
+- name: Ourcq
+  line:
+  - '5'
+- name: Palais Royal - Musée du Louvre
+  line:
+  - '1'
+  - '7'
+- name: Parmentier
+  line:
+  - '3'
+- name: Passy
+  line:
+  - '6'
+- name: Pasteur
+  line:
+  - '6'
+  - '12'
+- name: Pelleport
+  line:
+  - 3bis
+- name: Père Lachaise
+  line:
+  - '2'
+  - '3'
+- name: Pereire
+  line:
+  - '3'
+- name: Pernety
+  line:
+  - '13'
+- name: Philippe Auguste
+  line:
+  - '2'
+- name: Picpus
+  line:
+  - '6'
+- name: Pierre et Marie Curie
+  line:
+  - '7'
+- name: Pigalle
+  line:
+  - '2'
+  - '12'
+- name: Place d'Italie
+  line:
+  - '5'
+  - '6'
+- name: Place de Clichy
+  line:
+  - '2'
+  - '13'
+- name: Place des Fêtes
+  line:
+  - 7bis
+  - '11'
+- name: Place Monge
+  line:
+  - '7'
+- name: Plaisance
+  line:
+  - '13'
+- name: Pointe du Lac
+  line:
+  - '8'
+- name: Poissonnière
+  line:
+  - '7'
+- name: Pont de Levallois - Bécon
+  line:
+  - '3'
+- name: Pont de Neuilly
+  line:
+  - '1'
+- name: Pont de Sèvres
+  line:
+  - '9'
+- name: Pont Marie
+  line:
+  - '7'
+- name: Pont Neuf
+  line:
+  - '7'
+- name: Porte d'Auteuil
+  line:
+  - '10'
+- name: Porte d'Italie
+  line:
+  - '7'
+- name: Porte d'Ivry
+  line:
+  - '7'
+- name: Porte d'Orléans
+  line:
+  - '4'
+- name: Porte Dauphine
+  line:
+  - '2'
+- name: Porte de Bagnolet
+  line:
+  - '3'
+- name: Porte de Champerret
+  line:
+  - '3'
+- name: Porte de Charenton
+  line:
+  - '8'
+- name: Porte de Choisy
+  line:
+  - '7'
+- name: Porte de Clichy
+  line:
+  - '13'
+- name: Porte de Clignancourt
+  line:
+  - '4'
+- name: Porte de la Chapelle
+  line:
+  - '12'
+- name: Porte de la Villette
+  line:
+  - '7'
+- name: Porte de Montreuil
+  line:
+  - '9'
+- name: Porte de Pantin
+  line:
+  - '5'
+- name: Porte de Saint-Cloud
+  line:
+  - '9'
+- name: Porte de Saint-Ouen
+  line:
+  - '13'
+- name: Porte de Vanves
+  line:
+  - '13'
+- name: Porte de Versailles
+  line:
+  - '12'
+- name: Porte de Vincennes
+  line:
+  - '1'
+- name: Porte des Lilas
+  line:
+  - 3bis
+  - '11'
+- name: Porte Dorée
+  line:
+  - '8'
+- name: Porte Maillot
+  line:
+  - '1'
+- name: Pré Saint-Gervais
+  line:
+  - 7bis
+- name: Pyramides
+  line:
+  - '7'
+  - '14'
+- name: Pyrénées
+  line:
+  - '11'
+- name: Quai de la Gare
+  line:
+  - '6'
+- name: Quai de la Rapée
+  line:
+  - '5'
+- name: Quatre-Septembre
+  line:
+  - '3'
+- name: Rambuteau
+  line:
+  - '11'
+- name: Ranelagh
+  line:
+  - '9'
+- name: Raspail
+  line:
+  - '4'
+  - '6'
+- name: Réaumur - Sébastopol
+  line:
+  - '3'
+  - '4'
+- name: Rennes
+  line:
+  - '12'
+- name: République
+  line:
+  - '3'
+  - '5'
+  - '8'
+  - '9'
+  - '11'
+- name: Reuilly - Diderot
+  line:
+  - '1'
+  - '8'
+- name: Richard-Lenoir
+  line:
+  - '5'
+- name: Richelieu - Drouot
+  line:
+  - '8'
+  - '9'
+- name: Riquet
+  line:
+  - '7'
+- name: Robespierre
+  line:
+  - '9'
+- name: Rome
+  line:
+  - '2'
+- name: Rue de la Pompe
+  line:
+  - '9'
+- name: Rue des Boulets
+  line:
+  - '9'
+- name: Rue du Bac
+  line:
+  - '12'
+- name: Rue Saint-Maur
+  line:
+  - '3'
+- name: Saint-Ambroise
+  line:
+  - '9'
+- name: Saint-Augustin
+  line:
+  - '9'
+- name: Saint-Denis - Porte de Paris
+  line:
+  - '13'
+- name: Saint-Denis - Université
+  line:
+  - '13'
+- name: Saint-Fargeau
+  line:
+  - 3bis
+- name: Saint-François-Xavier
+  line:
+  - '13'
+- name: Saint-Georges
+  line:
+  - '12'
+- name: Saint-Germain-des-Prés
+  line:
+  - '4'
+- name: Saint-Jacques
+  line:
+  - '6'
+- name: Saint-Lazare
+  line:
+  - '3'
+  - '12'
+  - '13'
+  - '14'
+- name: Saint-Mandé
+  line:
+  - '1'
+- name: Saint-Marcel
+  line:
+  - '5'
+- name: Saint-Michel
+  line:
+  - '4'
+- name: Saint-Paul
+  line:
+  - '1'
+- name: Saint-Philippe du Roule
+  line:
+  - '9'
+- name: Saint-Placide
+  line:
+  - '4'
+- name: Saint-Sébastien - Froissart
+  line:
+  - '8'
+- name: Saint-Sulpice
+  line:
+  - '4'
+- name: Ségur
+  line:
+  - '10'
+- name: Sentier
+  line:
+  - '3'
+- name: Sèvres - Babylone
+  line:
+  - '10'
+  - '12'
+- name: Sèvres - Lecourbe
+  line:
+  - '6'
+- name: Simplon
+  line:
+  - '4'
+- name: Solférino
+  line:
+  - '12'
+- name: Stalingrad
+  line:
+  - '2'
+  - '5'
+- name: Strasbourg - Saint-Denis
+  line:
+  - '4'
+  - '8'
+- name: Sully - Morland
+  line:
+  - '7'
+- name: Télégraphe
+  line:
+  - '11'
+- name: Temple
+  line:
+  - '3'
+- name: Ternes
+  line:
+  - '2'
+- name: Tolbiac
+  line:
+  - '7'
+- name: Trinité - d'Estienne d'Orves
+  line:
+  - '12'
+- name: Trocadéro
+  line:
+  - '6'
+  - '9'
+- name: Tuileries
+  line:
+  - '1'
+- name: Vaneau
+  line:
+  - '10'
+- name: Varenne
+  line:
+  - '13'
+- name: Vaugirard
+  line:
+  - '12'
+- name: Vavin
+  line:
+  - '4'
+- name: Verdun-Sud
+  line:
+  - '4'
+  - '5'
+- name: Victor Hugo
+  line:
+  - '2'
+- name: Villejuif - Léo Lagrange
+  line:
+  - '7'
+- name: Villejuif - Louis Aragon
+  line:
+  - '7'
+- name: Villejuif - Paul Vaillant-Couturier
+  line:
+  - '7'
+- name: Villiers
+  line:
+  - '2'
+  - '3'
+- name: Volontaires
+  line:
+  - '12'
+- name: Voltaire
+  line:
+  - '9'
+- name: Wagram
+  line:
+  - '3'
