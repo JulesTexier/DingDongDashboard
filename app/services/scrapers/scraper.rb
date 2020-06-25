@@ -61,9 +61,7 @@ class Scraper
       sleep 1
       attempt_count < max_attempts ? retry : "Error in Fetch Static Page for url : #{url}."
     else
-      # byebug
       page = Nokogiri::HTML.parse(res)
-      res.close!
       return page
     end
   end
@@ -183,9 +181,11 @@ class Scraper
   end
 
   def error_outputs(err, source)
-    puts "\nError for #{@source}, skip this one."
-    puts "It could be a bad link or a bad xml extraction.\n\n"
-    puts err
+    unless Rails.env.test?
+      puts "\nError for #{@source}, skip this one."
+      puts "It could be a bad link or a bad xml extraction.\n\n"
+      puts err
+    end
   end
 
   ###########################
