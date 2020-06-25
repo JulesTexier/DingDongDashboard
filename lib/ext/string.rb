@@ -129,7 +129,7 @@ class String
   end
 
   def garden_str_scrp
-    regex_garden = "((sur|avec|) jardin(s)?)|(terasse-jardin)"
+    regex_garden = "((sur|avec|un|^(?!sans|pas de))(.?)jardin(s)?)|(terasse-jardin)"
     has_a_garden = self.match(/#{regex_garden}/i)
     has_a_garden.is_a?(MatchData)
   end
@@ -141,7 +141,7 @@ class String
   end
 
   def terrace_str_scrp
-    regex_garden = "(grande|une|^(?!sans|pas de))(.?)terrasse(s?)"
+    regex_garden = "(grande|petite|charmante|une|^(?!sans|pas de))(.?)terrasse(s?)"
     has_a_garden = self.match(/#{regex_garden}/i)
     has_a_garden.is_a?(MatchData)
   end
