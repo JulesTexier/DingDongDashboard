@@ -26,8 +26,6 @@ class Scraper
       case args.scraper_type
       when 'Static'
         html = fetch_static_page(args.url)
-      when 'Dynamic'
-        html = fetch_dynamic_page(args.url, args.waiting_cls, args.wait, *args.click_args)
       when 'Captcha'
         html = fetch_captcha_page(args.url)
       when 'Proxy'
