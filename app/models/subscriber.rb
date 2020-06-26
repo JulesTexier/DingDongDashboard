@@ -90,7 +90,8 @@ class Subscriber < ApplicationRecord
   end
 
   def get_x_last_props(max_number)
-    properties = Property
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+    props = Property
       .order(id: :desc)
       .limit(1000)
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }
