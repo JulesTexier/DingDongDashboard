@@ -4,5 +4,6 @@ class AddExteriorAttrToSubscriber < ActiveRecord::Migration[6.0]
     add_column :subscribers, :terrace, :boolean, default: false
     add_column :subscribers, :garden, :boolean, default: false
     add_column :subscribers, :new_construction, :boolean, default: false
+    add_column :subscribers, :last_floor, :boolean, default: false
   end
 end

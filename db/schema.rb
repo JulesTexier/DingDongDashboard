@@ -370,6 +370,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_092346) do
     t.boolean "terrace", default: false
     t.boolean "garden", default: false
     t.boolean "new_construction", default: false
+    t.boolean "last_floor", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
