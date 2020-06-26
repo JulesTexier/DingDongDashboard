@@ -41,7 +41,8 @@ RSpec.describe Subscriber, type: :model do
       describe "case subscriber matching properties values" do
         before :each do
           prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
-          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
         context "floor and elevator are unknown" do
@@ -73,8 +74,8 @@ RSpec.describe Subscriber, type: :model do
 
         context "floor is equal to min_elevator_floor and elevator is true" do
           it "should match user and property (known floor)" do
-            @property.first[4] = @subscriber.min_elevator_floor
-            @property.first[6] = true
+            @property.first["floor"] = @subscriber.min_elevator_floor
+            @property.first["has_elevator"] = true
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
             end
@@ -85,12 +86,13 @@ RSpec.describe Subscriber, type: :model do
       describe "Property NOT matchs" do
         before :each do
           prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
-          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
         context "Surface is not ok" do
           it "should NOT match user and property because of surface !" do
-            @property.first[2] = @subscriber.min_surface - 1
+            @property.first["surface"] = @subscriber.min_surface - 1
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
             end
@@ -99,7 +101,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "Area is not ok" do
           it "should NOT match user and property because of area !" do
-            @property.first[5] = Area.find_by(name: "Paris 1er").id
+            @property.first["area_id"] = Area.find_by(name: "Paris 1er").id
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
             end
@@ -108,7 +110,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "Rooms_number is not ok" do
           it "should NOT match user and property because of rooms_number !" do
-            @property.first[1] = @subscriber.min_rooms_number - 1
+            @property.first["rooms_number"] = @subscriber.min_rooms_number - 1
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
             end
@@ -117,7 +119,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "Price is not ok" do
           it "should NOT match user and property because of price !" do
-            @property.first[3] = @subscriber.max_price + 1
+            @property.first["price"] = @subscriber.max_price + 1
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
             end
@@ -126,7 +128,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "Floor is not ok" do
           it "should NOT match user and property because of floor !" do
-            @property.first[4] = @subscriber.min_floor - 1
+            @property.first["floor"] = @subscriber.min_floor - 1
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
             end
@@ -136,8 +138,8 @@ RSpec.describe Subscriber, type: :model do
         describe "elevator contraints" do
           describe "elevator is true but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
-              @property.first[6] = false
-              @property.first[4] = @subscriber.min_elevator_floor - 1
+              @property.first["has_elevator"] = false
+              @property.first["floor"] = @subscriber.min_elevator_floor - 1
               @property.each do |prop|
                 expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
               end
@@ -145,8 +147,8 @@ RSpec.describe Subscriber, type: :model do
           end
           describe "floor is equal to min_elevator_floor but elevator is false" do
             it "should NOT match user and property (known elevator absence)" do
-              @property.first[6] = false
-              @property.first[4] = @subscriber.min_elevator_floor
+              @property.first["has_elevator"] = false
+              @property.first["floor"] = @subscriber.min_elevator_floor
               @property.each do |prop|
                 expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
               end
@@ -164,13 +166,6 @@ RSpec.describe Subscriber, type: :model do
       @hunter_status = FactoryBot.create(:status, name: "real_estate_hunter")
       @has_not_messenger = FactoryBot.create(:status, name: "has_not_messenger")
       @subscriber_params = { "firstname" => "Maxime", "lastname" => "Le Segretain", "email" => "azekzae@gmail.com", "phone" => "0689716569", "additional_question" => "", "has_messenger" => "true", "project_type" => "1er achat", "max_price" => "400000", "min_surface" => "23", "min_rooms_number" => "1", "specific_criteria" => "", "initial_areas" => "1" }
-      # # // Broker creation
-      # @aurelien = FactoryBot.create(:subscriber_aurelien)
-      # @melanie = FactoryBot.create(:subscriber_melanie)
-      # @hugo = FactoryBot.create(:subscriber_hugo)
-      # @amelie = FactoryBot.create(:subscriber_amelie)
-      # @veronique = FactoryBot.create(:subscriber_veronique)
-      # @greg = FactoryBot.create(:broker_greg)
       @broker_shift = FactoryBot.create(:broker_shift, day: Time.now.wday, starting_hour: Time.now.hour - 1, ending_hour: Time.now.hour + 1, shift_type: "regular")
       @broker = FactoryBot.create(:broker)
       @broker.shifts << @broker_shift
