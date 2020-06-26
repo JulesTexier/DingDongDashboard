@@ -68,15 +68,16 @@ class Subscriber < ApplicationRecord
   end
 
   def is_matching_property?(args, subs_areas)
-    ##We receive args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
-    test_rooms_number = is_matching_property_rooms_number(args[1])
-    test_surface = is_matching_property_surface(args[2])
-    test_price = is_matching_property_price(args[3])
-    test_floor = is_matching_property_floor(args[4])
-    test_areas = is_matching_property_area(args[5], subs_areas)
-    test_elevator = is_matching_property_elevator_floor(args[4], args[6])
-
-    test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
+    is_matching_property_rooms_number(args["rooms_number"]) &&
+    is_matching_property_surface(args["surface"]) &&
+    is_matching_property_price(args["price"]) &&
+    is_matching_property_floor(args["floor"]) &&
+    is_matching_property_area(args["area_id"], subs_areas) &&
+    is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
+    is_matching_property_terrace(args["has_terrace"]) &&
+    is_matching_property_garden(args["has_garden"]) &&
+    is_matching_property_balcony(args["has_balcony"]) &&
+    is_matching_property_last_floor(args["is_last_floor"])
   end
 
   def has_interacted(last_interaction, day_range)
@@ -89,14 +90,14 @@ class Subscriber < ApplicationRecord
   end
 
   def get_x_last_props(max_number)
-    props = Property
+    properties = Property
       .order(id: :desc)
       .limit(1000)
-      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
     props_to_send = []
     subs_areas = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
       break if props_to_send.length == max_number.to_i
     end
 
@@ -105,17 +106,16 @@ class Subscriber < ApplicationRecord
 
   def get_props_in_lasts_x_days(x_previous_days)
     start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
-
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
     props = Property
       .where("created_at >= ?", start_date)
-      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
 
     props_to_send = []
     subs_areas = self.areas.ids
 
-    ##We pass args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
     props.each do |prop|
-      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
     end
 
     return props_to_send
@@ -125,16 +125,16 @@ class Subscriber < ApplicationRecord
     now = DateTime.now.in_time_zone("Europe/Paris")
     start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
     end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
-
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
     props = Property
       .where("created_at BETWEEN ? AND ?", start_date, end_date)
-      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
 
     props_to_send = []
 
     subs_areas = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop[0]) if self.is_matching_property?(prop, subs_areas)
+      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
       break if props_to_send.length == 10
     end
     return props_to_send
@@ -302,32 +302,32 @@ class Subscriber < ApplicationRecord
         # end
       end
     else
-      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev"
+      puts "Subscriber onboardé, mais on le l'a pas mis sur le Trello car on est en dev" unless Rails.env.test?
     end
   end
 
   # Matching methods
 
   def is_matching_property_price(price)
-    (price <= self.max_price ? true : false) if !self.max_price.nil?
+    price <= self.max_price unless self.max_price.nil?
   end
 
   def is_matching_property_surface(surface)
-    (surface >= self.min_surface ? true : false) if !self.min_surface.nil?
+    surface >= self.min_surface unless self.min_surface.nil?
   end
 
   def is_matching_property_rooms_number(rooms_number)
-    (rooms_number.to_i >= self.min_rooms_number ? true : false) if !self.min_rooms_number.nil?
+    rooms_number.to_i >= self.min_rooms_number unless self.min_rooms_number.nil?
   end
 
   def is_matching_property_floor(floor)
     if self.min_floor.nil?
-      return true
+      true
     else
       if !floor.nil?
-        (floor.to_i >= self.min_floor ? true : false) if !self.min_floor.nil?
+        floor.to_i >= self.min_floor unless self.min_floor.nil?
       else
-        return true
+        true
       end
     end
   end
@@ -340,7 +340,7 @@ class Subscriber < ApplicationRecord
         if has_elevator
           return true
         else
-          floor.to_i < self.min_elevator_floor.to_i ? true : false
+          floor.to_i < self.min_elevator_floor.to_i
         end
       else
         return true
@@ -348,8 +348,24 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  def is_matching_property_terrace(terrace)
+    self.terrace ? !terrace.nil? && terrace : true
+  end
+
+  def is_matching_property_garden(garden)
+    self.garden ? !garden.nil? && garden : true
+  end
+
+  def is_matching_property_balcony(balcony)
+    self.balcony ? !balcony.nil? && balcony : true
+  end
+
+  def is_matching_property_last_floor(last_floor)
+    self.last_floor ? !last_floor.nil? && last_floor : true
+  end
+
   def is_matching_property_area(area_id, sub_areas = self.areas.ids)
-    sub_areas.include?(area_id) ? true : false
+    sub_areas.include?(area_id)
   end
 
   def notify_broker_if_max_price_is_changed
