@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_083740) do
+ActiveRecord::Schema.define(version: 2020_06_26_092346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -366,6 +366,10 @@ ActiveRecord::Schema.define(version: 2020_06_25_083740) do
     t.string "initial_areas"
     t.string "stripe_session_id"
     t.boolean "is_blocked"
+    t.boolean "balcony", default: false
+    t.boolean "terrace", default: false
+    t.boolean "garden", default: false
+    t.boolean "new_construction", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
