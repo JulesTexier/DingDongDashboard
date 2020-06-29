@@ -102,4 +102,9 @@ class HunterSearch < ApplicationRecord
       self.min_price.to_s.reverse.scan(/.{1,3}/).join(" ").reverse
     end
   end
+
+  def get_pretty_title
+    return "max. #{self.get_pretty_price("max")} € - min. #{self.min_surface} m2 - min. #{self.min_rooms_number} pce"
+  end
+
 end
