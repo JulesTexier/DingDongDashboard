@@ -112,4 +112,9 @@ class HunterSearch < ApplicationRecord
     HunterSearch.where(hunter_id: hunters_id)
   end
 
+  def self.not_live_broadcasted
+    hunters_id = Hunter.where.not(live_broadcast: true).pluck(:id)
+    HunterSearch.where(hunter_id: hunters_id)
+  end
+
 end
