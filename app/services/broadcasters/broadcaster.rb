@@ -50,7 +50,7 @@ class Broadcaster
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
 
-    hunter_searches = HunterSearch.all
+    hunter_searches = HunterSearch.live_broadcasted
     hunter_searches.each do |hunter_search|
       hunter_search_props = []
       hunter_search_area = hunter_search.areas.ids
