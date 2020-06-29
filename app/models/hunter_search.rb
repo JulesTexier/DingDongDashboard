@@ -56,7 +56,7 @@ class HunterSearch < ApplicationRecord
   end
 
   def is_matching_max_sqm_price(price, surface)
-    ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) if !self.max_price.nil? && surface != 0
+    ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) if !self.max_sqm_price.nil? && surface != 0
   end
 
   def is_matching_property_rooms_number(rooms_number)
@@ -105,6 +105,11 @@ class HunterSearch < ApplicationRecord
 
   def get_pretty_title
     return "max. #{self.get_pretty_price("max")} € - min. #{self.min_surface} m2 - min. #{self.min_rooms_number} pce"
+  end
+
+  def self.live_broadcasted
+    hunters_id = Hunter.where(live_broadcast: true).pluck(:id)
+    HunterSearch.where(hunter_id: hunters_id)
   end
 
 end
