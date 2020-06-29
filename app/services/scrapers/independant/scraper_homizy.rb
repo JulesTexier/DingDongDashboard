@@ -25,17 +25,15 @@ class Independant::ScraperHomizy < Scraper
             hashed_property[:description] = access_xml_text(html, "article.elementDt > p").specific_trim_scrp("\n").strip.gsub("L'équipe d'Homizy se tient à votre disposition par téléphone ou par mail pour répondre à vos questions et organiser une visite. Notre commission de commercialisation est de 4 500 euros fixe, à la charge du vendeur.", "")
             property_data = access_xml_array_to_text(html, "div.tab-pane > p").gsub("\n", "").gsub(" ", "")
             hashed_property[:floor] = regex_gen(property_data, 'Etage\d').gsub("Etage", "").to_int_scrp
-            hashed_property[:has_elevator] = nil
             elevator_raw = regex_gen(property_data, "Ascenseur(OUI|NON)").gsub("Ascenseur", "")
             elevator_raw == "OUI" ? hashed_property[:has_elevator] = true : nil
             elevator_raw == "NON" ? hashed_property[:has_elevator] = false : nil
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "li > img", "src")
             hashed_property[:images].collect! { |img| "https:" + img }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

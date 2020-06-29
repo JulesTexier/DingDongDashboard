@@ -26,13 +26,12 @@ class Hub::ScraperBienIci < Scraper
             hashed_property[:flat_type] = item["propertyType"]
             hashed_property[:floor] = item["floorQuantity"]
             hashed_property[:has_elevator] = item["hasElevator"]
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []
             item["photos"].each { |img_hash| hashed_property[:images].push(img_hash["url_photo"]) }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

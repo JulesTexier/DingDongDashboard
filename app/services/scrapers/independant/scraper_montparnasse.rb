@@ -27,15 +27,12 @@ class Independant::ScraperMontparnasse < Scraper
             hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "#box_slider_header_product > div > ul").remove_acc_scrp, '(\d+)(.?)(piece\(s\))').to_int_scrp if hashed_property[:rooms_number].nil?
             hashed_property[:surface] = regex_gen(access_xml_text(html, "#box_slider_header_product > div > ul"), '(\d+)(.?)(\d+)(.?)(m)').to_float_to_int_scrp if hashed_property[:surface].nil?
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = "+33142842121"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.item-slider > a", "href").map { |img| "https://www.montparnasseimmobilier.com/" + img.gsub("../", "") }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

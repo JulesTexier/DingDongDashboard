@@ -23,14 +23,11 @@ class Group::ScraperImmopolis < Scraper
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.font-markazi > div > p")) #attention, les 07ème ne passent pas, méthode à perfectionner Max
             hashed_property[:description] = access_xml_text(html, "div.wpb_wrapper > p").tr("\n\r\t", "").strip
             hashed_property[:agency_name] = "Immopolis"
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.image_carousel > figure > div.vc_single_image-wrapper > img.vc_single_image-img.attachment-full", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

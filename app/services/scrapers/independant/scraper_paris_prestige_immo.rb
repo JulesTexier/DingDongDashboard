@@ -26,15 +26,14 @@ class Independant::ScraperParisPrestigeImmo < Scraper
             raw_bedrooms = hashed_property[:description].transform_litteral_numbers.gsub(" ", "")
             hashed_property[:bedrooms_number] = regex_gen(raw_bedrooms, '(\d){1,}chambre').to_int_scrp if raw_bedrooms.match(/(\d){1,}chambre/i).is_a?(MatchData)
             hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(access_xml_text(html, ".title > h1") + hashed_property[:description])
+            hashed_property[:subway_infos] = perform_subway_regex(access_xml_text(html, ".title > h1") + hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:agency_name] = access_xml_text(html, "aside  > h4")
             hashed_property[:contact_number] = access_xml_link(html, "aside  > p > a", "href")[0].gsub("tel:0033", "").convert_phone_nbr_scrp
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, ".slideshow > img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

@@ -31,13 +31,12 @@ class Independant::ScraperLiberkeys < Scraper
             property["building_services"].each do |service|
               service == "Ascenseur" ? hashed_property[:has_elevator] = true : nil
             end
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:contact_number] = property["agent"]["phone"]
             hashed_property[:images] = item["low_quality_media"].each { |img| img.gsub!("//s3-eu-west-3", "https://s3-eu-west-3") }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

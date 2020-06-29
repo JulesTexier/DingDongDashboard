@@ -28,9 +28,6 @@ class Independant::ScraperEmileGarcin < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "h1.title")) if hashed_property[:area].nil?
             hashed_property[:description] = access_xml_text(html, "div.description").strip.tr("\t\n", "")
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:contact_number] = access_xml_text(html, "div.cont-phone").gsub(" ", "").tr("\t\n", "")
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
@@ -39,7 +36,7 @@ class Independant::ScraperEmileGarcin < Scraper
               hashed_property[:images].push("https://www.emilegarcin.fr/" + img.gsub!("../", ""))
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

@@ -7,7 +7,6 @@ class Independant::ScraperAgenceWindsor < Scraper
     @properties = []
   end
 
-
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
@@ -24,15 +23,12 @@ class Independant::ScraperAgenceWindsor < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.announce-description").tr("\n\t\r", "").strip
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = access_xml_text(html, "div.col-lg-6.col-xl-5.offset-xl-1 > div.mb-5 > div:nth-child(3) > b").convert_phone_nbr_scrp
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.carousel-inner.gallery > div.carousel-item > a", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

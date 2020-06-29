@@ -28,18 +28,15 @@ class Proxy::ScraperSeLoger < Scraper
               hashed_property[:bedrooms_number] = infos.to_int_scrp if infos.match(bedrooms_regex)
             end
             next if hashed_property[:surface].nil? || hashed_property[:rooms_number].nil?
-            hashed_property[:flat_type] = item["estateType"]
+            hashed_property[:flat_type] = get_type_flat(item["estateType"])
             hashed_property[:agency_name] = item["contact"]["contactName"]
             hashed_property[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
             hashed_property[:source] = @source
             hashed_property[:provider] = "Agence"
             hashed_property[:description] = item["description"]
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             if go_to_prop?(hashed_property, 7) && hashed_property[:agency_name] != "Ding Dong"
               @properties.push(hashed_property)
-              enrich_then_insert_v2(hashed_property)
+              enrich_then_insert(hashed_property)
               i += 1
             end
             break if i == limit

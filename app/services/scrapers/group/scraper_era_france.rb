@@ -26,15 +26,12 @@ class Group::ScraperEraFrance < Scraper
             agency_area = perform_district_regex(access_xml_text(html, "p.contact_agence_ville"), args.zone)
             desc_area = perform_district_regex(hashed_property[:description], args.zone)
             hashed_property[:area] = desc_area != agency_area && desc_area != "N/C" ? desc_area : agency_area
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "ul.slides > li > a", "href")
             hashed_property[:images].collect! { |img| "https://www.erafrance.com" + img.gsub("..", "") }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

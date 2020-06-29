@@ -25,9 +25,6 @@ class Independant::ScraperVarenne < Scraper
             hashed_property[:description] = access_xml_text(html, ".bien-annexe > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > p").strip
             hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "div.col-md-8:nth-child(2) > div:nth-child(1) > h4:nth-child(2)"))
             hashed_property[:agency_name] = @source + " - " + access_xml_text(html, ".nego-image-desc > p:nth-child(1) > a:nth-child(1)")
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             images = access_xml_link(html, ".item", "style")
@@ -39,7 +36,7 @@ class Independant::ScraperVarenne < Scraper
               end
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

@@ -9,7 +9,6 @@ class Independant::ScraperAristimmo < Scraper
     @properties = []
   end
 
-
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
@@ -34,7 +33,6 @@ class Independant::ScraperAristimmo < Scraper
             elevator_raw = regex_gen(details, "Ascenseur(OUI|NON)").gsub("Ascenseur", "")
             elevator_raw == "OUI" ? hashed_property[:has_elevator] = true : nil
             elevator_raw == "NON" ? hashed_property[:has_elevator] = false : nil
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []
@@ -43,7 +41,7 @@ class Independant::ScraperAristimmo < Scraper
               hashed_property[:images].push("https:" + img)
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

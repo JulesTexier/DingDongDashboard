@@ -387,19 +387,48 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should send us array with 1 if desc contains subway station" do
-        FactoryBot.create(:subway)
         expect(@s.perform_subway_regex("Wagram")).to be_a(Array)
-        expect(@s.perform_subway_regex("Wagram")).to eq([1])
-        expect(@s.perform_subway_regex("Wagram")).to be_a(Array)
-        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).not_to eq([1, 1, 1])
-        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).to eq([1])
+        expect(@s.perform_subway_regex("Wagram")).to eq([{"line"=>["3"], "name"=>"Wagram"}])
+        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).not_to eq([{"line"=>["3"], "name"=>"Wagram"}, {"line"=>["3"], "name"=>"Wagram"}, {"line"=>["3"], "name"=>"Wagram"}])
+        expect(@s.perform_subway_regex("Wagram Wagram Wagram")).to eq([{"line"=>["3"], "name"=>"Wagram"}])
       end
 
       it "should send us empty array if no probent results if there is subway inside database" do
-        FactoryBot.create(:subway)
         expect(@s.perform_subway_regex("Nothing")).to be_a(Array)
         expect(@s.perform_subway_regex("Nothing")).to eq([])
         expect(@s.perform_subway_regex("Nothing Nothing Nothing")).to eq([])
+      end
+    end
+
+    context "perform enrichment regexes" do
+      before :each do 
+        @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
+        
+      end
+      it "shoud, given the description, give us specific infos" do
+        @prop[:description] = "Super appartement avec un balcon, une petite terrasse et un jardin, à coté de Wagram, au 3ème et dernier étage sans ascenseur"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos).to be_a(Hash)
+        expect(enriched_infos[:has_terrace]).to eq(true)
+        expect(enriched_infos[:has_garden]).to eq(true)
+        expect(enriched_infos[:has_elevator]).to eq(false)
+        expect(enriched_infos[:has_balcony]).to eq(true)
+        expect(enriched_infos[:is_last_floor]).to eq(true)
+        expect(enriched_infos[:floor]).to eq(3)
+        expect(enriched_infos[:subway_infos]).to eq([{"line"=>["3"], "name"=>"Wagram"}])
+      end
+
+      it "shoud, given the description, give us specific infos" do
+        @prop[:description] = "Super appartement sans balcon, sans jardin, à coté de nulle part en particulier, au 3ème étage avec ascenseur"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos).to be_a(Hash)
+        expect(enriched_infos[:has_terrace]).to eq(false)
+        expect(enriched_infos[:has_garden]).to eq(false)
+        expect(enriched_infos[:has_elevator]).to eq(true)
+        expect(enriched_infos[:has_balcony]).to eq(false)
+        expect(enriched_infos[:is_last_floor]).to eq(false)
+        expect(enriched_infos[:floor]).to eq(3)
+        expect(enriched_infos[:subway_infos]).to eq([])
       end
     end
 

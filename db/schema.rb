@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_083330) do
+ActiveRecord::Schema.define(version: 2020_06_26_092346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -117,12 +117,14 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
     t.integer "min_elevator_floor", default: 0
-    t.integer "surface"
-    t.integer "rooms_number"
+    t.integer "min_surface"
+    t.integer "min_rooms_number"
     t.integer "max_price"
     t.bigint "hunter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "min_price"
+    t.integer "max_sqm_price"
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
@@ -175,8 +177,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
 
   create_table "properties", force: :cascade do |t|
     t.integer "price"
-    t.string "old_area"
-    t.string "title"
     t.text "description"
     t.string "link"
     t.integer "rooms_number"
@@ -197,6 +197,12 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.boolean "has_elevator"
     t.text "images", default: [], array: true
     t.integer "area_id"
+    t.boolean "has_terrace"
+    t.boolean "has_garden"
+    t.boolean "has_balcony"
+    t.boolean "is_new_construction"
+    t.boolean "is_last_floor"
+    t.text "subway_infos"
   end
 
   create_table "property_districts", force: :cascade do |t|
@@ -234,16 +240,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_property_images_on_property_id"
-  end
-
-  create_table "property_subways", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "subway_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id", "subway_id"], name: "index_property_subways_on_property_id_and_subway_id", unique: true
-    t.index ["property_id"], name: "index_property_subways_on_property_id"
-    t.index ["subway_id"], name: "index_property_subways_on_subway_id"
   end
 
   create_table "referrals", force: :cascade do |t|
@@ -370,6 +366,11 @@ ActiveRecord::Schema.define(version: 2020_06_19_083330) do
     t.string "initial_areas"
     t.string "stripe_session_id"
     t.boolean "is_blocked"
+    t.boolean "balcony", default: false
+    t.boolean "terrace", default: false
+    t.boolean "garden", default: false
+    t.boolean "new_construction", default: false
+    t.boolean "last_floor", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
