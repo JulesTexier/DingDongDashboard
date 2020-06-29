@@ -19,6 +19,7 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property[:images] = item["photos"].map { |img| img.gsub("/400/visuels", "/800/visuels") }
             hashed_property[:area] = perform_district_regex(item["zipCode"], args.zone)
             hashed_property[:link] = item["classifiedURL"]
+            hashed_property[:is_new_construction] = item["classifiedURL"].include?("bellesdemeures") || item["classifiedURL"].include?("selogerneuf")
             item["tags"].each do |infos|
               surface_regex = '\d(.)*m²'
               rooms_regex = '\d(.)*p'
