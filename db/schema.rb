@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_100518) do
+ActiveRecord::Schema.define(version: 2020_06_29_162047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_100518) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "live_broadcast", default: true
     t.index ["email"], name: "index_hunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
@@ -200,6 +201,9 @@ ActiveRecord::Schema.define(version: 2020_06_24_100518) do
     t.boolean "has_terrace"
     t.boolean "has_garden"
     t.boolean "has_balcony"
+    t.boolean "is_new_construction"
+    t.boolean "is_last_floor"
+    t.text "subway_infos"
   end
 
   create_table "property_districts", force: :cascade do |t|
@@ -237,16 +241,6 @@ ActiveRecord::Schema.define(version: 2020_06_24_100518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["property_id"], name: "index_property_images_on_property_id"
-  end
-
-  create_table "property_subways", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "subway_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id", "subway_id"], name: "index_property_subways_on_property_id_and_subway_id", unique: true
-    t.index ["property_id"], name: "index_property_subways_on_property_id"
-    t.index ["subway_id"], name: "index_property_subways_on_subway_id"
   end
 
   create_table "referrals", force: :cascade do |t|
@@ -373,6 +367,11 @@ ActiveRecord::Schema.define(version: 2020_06_24_100518) do
     t.string "initial_areas"
     t.string "stripe_session_id"
     t.boolean "is_blocked"
+    t.boolean "balcony", default: false
+    t.boolean "terrace", default: false
+    t.boolean "garden", default: false
+    t.boolean "new_construction", default: false
+    t.boolean "last_floor", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
