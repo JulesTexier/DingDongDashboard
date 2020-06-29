@@ -63,6 +63,6 @@ class HunterSearchesController < ApplicationController
   end
 
   def hunter_search_params
-    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :surface, :rooms_number, :max_price)
+    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price)
   end
 end

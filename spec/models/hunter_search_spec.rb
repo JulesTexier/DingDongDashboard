@@ -10,13 +10,13 @@ RSpec.describe HunterSearch, type: :model do
 
     describe "is_matching_property?" do
       before :each do
-        @hunter_search = FactoryBot.create(:hunter_search, min_price: 300000, max_price: 1000000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
+        @hunter_search = FactoryBot.create(:hunter_search, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000)
         @hunter_search.areas << Area.new(name: "Paris 10ème")
-      end
+     end
 
-      describe "case hunter_search matching properties values" do
+      describe "case hunter_search MATCH properties values" do
         before :each do
-          prop = FactoryBot.create(:property, price: @hunter_search.max_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
           @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
         end
 
@@ -60,7 +60,7 @@ RSpec.describe HunterSearch, type: :model do
 
       describe "Property NOT matchs" do
         before :each do
-          prop = FactoryBot.create(:property, price: @hunter_search.max_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
           @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
         end
 
@@ -109,6 +109,17 @@ RSpec.describe HunterSearch, type: :model do
           end
         end
 
+        context "SQM Price is too high" do
+          it "should NOT match user and property because of price !" do
+            @property.first[3] = 1000000
+            @property.first[2] = 80
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_max_sqm_price(prop[3],prop[2])).to eq(false)
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
+            end
+          end
+        end
+
         context "Floor is not ok" do
           it "should NOT match user and property because of floor !" do
             @property.first[4] = @hunter_search.min_floor - 1
@@ -119,7 +130,7 @@ RSpec.describe HunterSearch, type: :model do
         end
 
         describe "elevator contraints" do
-          describe "elevator is true but floor is inferior to min elevator_floor" do
+          describe "elevator is false but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
               @property.first[6] = false
               @property.first[4] = @hunter_search.min_elevator_floor - 1
@@ -137,7 +148,7 @@ RSpec.describe HunterSearch, type: :model do
               end
             end
           end
-      end
+        end
       end
     end
 

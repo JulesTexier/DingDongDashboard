@@ -5,9 +5,9 @@ class HunterSearch < ApplicationRecord
 
   def get_matching_properties(limit = 24)
     props = Property.where(
-      price: Float::INFINITY..self.max_price,
-      rooms_number: self.rooms_number..Float::INFINITY,
-      surface: self.surface..Float::INFINITY,
+      price: self.min_price..self.max_price,
+      rooms_number: self.min_rooms_number..Float::INFINITY,
+      surface: self.min_surface..Float::INFINITY,
     ).order(id: :desc).limit(200)
 
     prop_array = []
@@ -34,8 +34,9 @@ class HunterSearch < ApplicationRecord
     test_floor = is_matching_property_floor(args[4])
     test_areas = is_matching_property_area(args[5], subs_areas)
     test_elevator = is_matching_property_elevator_floor(args[4], args[6])
+    test_sqm = is_matching_max_sqm_price(args[3], args[2])
 
-    test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas ? true : false
+    test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas && test_sqm ? true : false
   end
 
   def is_matching_property_max_price(price)
@@ -52,6 +53,10 @@ class HunterSearch < ApplicationRecord
 
   def is_matching_property_surface(surface)
     (surface >= self.min_surface ? true : false) if !self.min_surface.nil?
+  end
+
+  def is_matching_max_sqm_price(price, surface)
+    ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) if !self.max_price.nil? && surface != 0
   end
 
   def is_matching_property_rooms_number(rooms_number)
@@ -90,7 +95,11 @@ class HunterSearch < ApplicationRecord
     search_areas.include?(area_id) ? true : false
   end
 
-  def get_pretty_price
-    self.max_price.to_s.reverse.scan(/.{1,3}/).join(" ").reverse
+  def get_pretty_price(edge)
+    if edge == "max"
+      self.max_price.to_s.reverse.scan(/.{1,3}/).join(" ").reverse
+    else
+      self.min_price.to_s.reverse.scan(/.{1,3}/).join(" ").reverse
+    end
   end
 end
