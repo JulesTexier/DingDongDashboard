@@ -52,14 +52,14 @@ class Broadcaster
 
     hunter_searches = HunterSearch.all
     hunter_searches.each do |hunter_search|
+      hunter_search_props = []
       hunter_search_area = hunter_search.areas.ids
-      matched_props = []
       properties.each do |prop|
         if hunter_search.is_matching_property?(prop, hunter_search_area)
-          PostmarkMailer.send_properties_to_hunters(hunter_search).deliver_now
-          break
+          hunter_search_props.push(prop)
         end
       end
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
     end
     update_processed_properties(properties)
   end
