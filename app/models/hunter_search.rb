@@ -3,6 +3,9 @@ class HunterSearch < ApplicationRecord
   has_many :hunter_search_areas
   has_many :areas, through: :hunter_search_areas
 
+  has_many :selections
+  has_many :properties, through: :selections, source: :property
+
   def get_matching_properties(limit = 24)
     props = Property.where(
       price: self.min_price..self.max_price,
