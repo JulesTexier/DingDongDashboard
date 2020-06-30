@@ -107,6 +107,12 @@ class String
     return floor_number
   end
 
+  def last_floor_str_scrp
+    regex_floors = "(dernier (é|è|e)tage)"
+    has_floor = self.match(/#{regex_floors}/i)
+    has_floor.is_a?(MatchData)
+  end
+
   def elevator_str_scrp
     regex_lift = "(avec ascenseur|par ascenseur)"
     has_a_lift = self.match(/#{regex_lift}/i)
@@ -120,6 +126,24 @@ class String
       lift = nil
     end
     return lift
+  end
+
+  def garden_str_scrp
+    regex_garden = "((sur|avec|un|^(?!sans|pas de))(.?)jardin(s)?)|(terasse-jardin)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    has_a_garden.is_a?(MatchData)
+  end
+
+  def balcony_str_scrp
+    regex_garden = "(avec|sur|un|^(?!sans|pas de))(.?)balcon(s?)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    has_a_garden.is_a?(MatchData)
+  end
+
+  def terrace_str_scrp
+    regex_garden = "(grande|petite|charmante|une|^(?!sans|pas de))(.?)terrasse(s?)"
+    has_a_garden = self.match(/#{regex_garden}/i)
+    has_a_garden.is_a?(MatchData)
   end
 
   def district_regex_scrp

@@ -27,22 +27,13 @@ class Independant::ScraperTrustInImmobilier < Scraper
             hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div[itemprop='name']"))
             hashed_property[:agency_name] = @source
             hashed_property[:contact_number] = access_xml_text(html, "#numero-telephonez-nous-detail").gsub(" ", "").gsub(/[^[:print:]]/, "")[0..9]
-            if !access_xml_text(html, 'li[title="Etage"]').empty?
-              hashed_property[:floor] = access_xml_text(html, 'li[title="Etage"]').gsub(" ", "").gsub(/[^[:print:]]/, "").to_int_scrp
-            else
-              perform_floor_regex(hashed_property[:description])
-            end
-            if !access_xml_text(html, 'li[title="Ascenseur"]').empty?
-              access_xml_text(html, 'li[title="Ascenseur"]').include?("oui") ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = false
-            else
-              hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            end
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:floor] = access_xml_text(html, 'li[title="Etage"]').gsub(" ", "").gsub(/[^[:print:]]/, "").to_int_scrp if !access_xml_text(html, 'li[title="Etage"]').empty?
+            hashed_property[:has_elevator] = access_xml_text(html, 'li[title="Ascenseur"]').include?("oui") if !access_xml_text(html, 'li[title="Ascenseur"]').empty?
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, ".gallery", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

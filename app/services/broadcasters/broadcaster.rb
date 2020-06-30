@@ -25,15 +25,16 @@ class Broadcaster
   end
 
   def new_properties_gallery
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
     properties = Property
       .unprocessed
-      .pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
     subscribers = Subscriber.active_and_not_blocked
     subscribers.each do |sub|
       subs_area = sub.areas.ids
       matched_props = []
       properties.each do |prop|
-        matched_props.push(Property.find(prop[0])) if sub.is_matching_property?(prop, subs_area)
+        matched_props.push(Property.find(prop["id"])) if sub.is_matching_property?(prop, subs_area)
       end
       if matched_props.length > 0
         if matched_props.length < 9

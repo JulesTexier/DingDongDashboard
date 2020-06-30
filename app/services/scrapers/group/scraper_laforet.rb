@@ -25,14 +25,13 @@ class Group::ScraperLaforet < Scraper
             hashed_property[:description] = property["description"]
             hashed_property[:floor] = property["floor"]
             hashed_property[:has_elevator] = property["has_lift"]
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:agency_name] = property["agency"]["name"]
             hashed_property[:contact_number] = property["agency"]["address"]["phone"]
             hashed_property[:source] = @source
             hashed_property[:images] = item["photos"]
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

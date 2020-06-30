@@ -27,12 +27,11 @@ class Group::ScraperJunot < Scraper
             hashed_property[:flat_type] = get_type_flat(access_xml_text(item, ".appartement"))
             floor = regex_gen(access_xml_text(html, 'li[itemprop="floorLevel"]').gsub(" ", ""), '(\d*)/')
             floor.empty? ? hashed_property[:floor] = nil : hashed_property[:floor] = floor.to_int_scrp
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "ul.slideshow > li > img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

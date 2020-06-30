@@ -26,9 +26,6 @@ class Independant::ScraperLaVitrine < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.read-more").tr("\r\n", "").strip
             hashed_property[:agency_name] = @source
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = access_xml_text(html, "li.phonenumber-2").tr("\t\n", "").convert_phone_nbr_scrp
             hashed_property[:source] = @source
@@ -37,7 +34,7 @@ class Independant::ScraperLaVitrine < Scraper
               hashed_property[:images].push("http://www.lavitrine.immo" + img) if !img.nil? && img.include?(".jpeg")
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

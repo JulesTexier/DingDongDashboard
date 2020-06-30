@@ -3,11 +3,6 @@ class SubscribersController < ApplicationController
   # Onboarding form "regular"
   def inscription_1
     @zone_select = ["Paris"]
-    # @zone_select = []
-    # Area.all.each do |area|
-    #   @zone_select << area.zone
-    # end
-    # @zone_select = @zone_select.uniq
   end
 
   def inscription_2
@@ -36,7 +31,6 @@ class SubscribersController < ApplicationController
 
   def inscription_4
     @subscriber = Subscriber.find(params["id"])
-    # @properties = @subscriber.get_x_last_props(5)
   end
 
   def create
@@ -120,18 +114,10 @@ class SubscribersController < ApplicationController
     redirect_to subscriber.get_chatbot_link
   end
 
-  # Edit form
   def edit
     @subscriber = Subscriber.find(params[:id])
     subscriber_areas_id = @subscriber.areas.pluck(:id)
-    # zone_areas = []
-    # @subscriber.areas.each do |area|
-    #   zone_areas.push(area.zone)
-    # end
-    # zone_areas.uniq
     zone_areas = ["Paris", "Première Couronne"]
-    # @areas = Area.where(zone: zone_areas).empty? ? Area.where(zone: "Paris") : Area.where(zone: zone_areas) 
-    # @areas_name = Area.where(zone: zone_areas).order(:id).pluck(:id, :name)
     @paris_areas = []
     @premiere_couronne_areas = []
     Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
@@ -159,10 +145,6 @@ class SubscribersController < ApplicationController
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else
       flash[:danger] = "Sélectionnez des arrondissements..."
-      # @subscriber.errors.full_messages.each do |message|
-      #   flash[:danger] << message
-      # end
-      # flash[:danger] = flash[:danger].join(" & ")
     end
     # // Send flow to subscriber 
     flow = "content20200616092144_217967"
@@ -173,6 +155,6 @@ class SubscribersController < ApplicationController
   private
 
   def subscriber_params
-    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas)
+    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor)
   end
 end

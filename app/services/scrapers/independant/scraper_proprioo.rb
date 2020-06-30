@@ -28,14 +28,11 @@ class Independant::ScraperProprioo < Scraper
                 hashed_property[:description] = desc.gsub("Proprioo vous propose à la vente", "").gsub("Proprioo, l’agence nouvelle génération, vous propose à la vente", "")
                 hashed_property[:flat_type] = item["typeBien"]
                 hashed_property[:bedrooms_number] = item["nbBedrooms"]
-                hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-                hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-                hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
                 hashed_property[:provider] = "Agence"
                 hashed_property[:source] = @source
                 hashed_property[:images] = item["thumbnails"]
                 @properties.push(hashed_property) ##testing purpose
-                enrich_then_insert_v2(hashed_property)
+                enrich_then_insert(hashed_property)
                 i += 1
                 break if i == limit
               end

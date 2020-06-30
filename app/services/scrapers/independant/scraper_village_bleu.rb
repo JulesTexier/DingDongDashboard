@@ -27,8 +27,7 @@ class Independant::ScraperVillageBleu < Scraper
             floor = regex_gen(details, 'etage{0,}((\d){1,}|rdc)').gsub("etage", "")
             floor == "rdc" ? hashed_property[:floor] = 0 : hashed_property[:floor] = floor.to_int_scrp
             elevator = regex_gen(details, "ascenseuroui").gsub("ascenseur", "")
-            elevator == "oui" ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
+            hashed_property[:has_elevator] = true if elevator == "oui"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []
@@ -37,7 +36,7 @@ class Independant::ScraperVillageBleu < Scraper
               hashed_property[:images].push(regex_gen(img, "https(.)*.jpg"))
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

@@ -32,9 +32,6 @@ class Independant::ScraperKmi < Scraper
             hashed_property[:flat_type] = regex_gen(access_xml_text(html, "div.property_categs"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
             hashed_property[:agency_name] = access_xml_text(html, "div.agent_unit > div:nth-child(2) > h4 > a").tr("\n\r\t", "")
             hashed_property[:contact_number] = access_xml_text(html, "div.agent_unit > div:nth-child(2) > div:nth-child(3)").convert_phone_nbr_scrp
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.multi_image_slider_image", "style")
@@ -42,7 +39,7 @@ class Independant::ScraperKmi < Scraper
               img.gsub!("background-image:url(", "").chop!
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

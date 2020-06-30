@@ -36,7 +36,7 @@ class BanSites::ScraperGuyHoquet < Scraper
           hashed_property[:source] = @source
           hashed_property[:images] = access_xml_link(html, ".de-biens-slider-itm", "href")
           @properties.push(hashed_property) ##testing purpose
-          enrich_then_insert_v2(hashed_property)
+          enrich_then_insert(hashed_property)
           i += 1
           break if i == limit
         end

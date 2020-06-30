@@ -29,15 +29,14 @@ class Independant::ScraperOfficeImmo < Scraper
             end
             hashed_property[:description] = access_xml_text(html, "div.row:nth-child(5) > div:nth-child(1) > p:nth-child(2)").strip
             hashed_property[:floor] = access_xml_text(item, "a:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)").to_float_to_int_scrp
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(access_xml_text(item, "a:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3)"))
+            hashed_property[:subway_infos] = perform_subway_regex(access_xml_text(item, "a:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(3)"))
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:agency_name] = @source
             hashed_property[:contact_number] = access_xml_text(html, ".info-agent > div:nth-child(2) > a:nth-child(2)").gsub(" ", "").gsub(".", "").convert_phone_nbr_scrp
             hashed_property[:images] = access_xml_link(html, "a.fancy-carousel", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end
