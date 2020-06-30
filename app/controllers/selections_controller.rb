@@ -1,5 +1,6 @@
 class SelectionsController < ApplicationController
   def index
+    @properties = HunterSearch.find(params["hunter_search_id"]).properties
   end
 
   def create

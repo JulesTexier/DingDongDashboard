@@ -1,2 +1,9 @@
-<h1>Selections#index</h1>
-<p>Find me in app/views/selections/index.html.erb</p>
+<%= render partial: "hunter_searches/navbar" %>
+
+<h2 class="mt-5 text-center text-dark"> Votre selection</h1>
+<ul>
+  <% @properties.each do |property|%>
+    <li><%= property.get_title %></li>
+  <% end %>
+</ul>
+<%= render partial: "hunter_searches/footer" %>

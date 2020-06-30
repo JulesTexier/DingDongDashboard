@@ -1,16 +1,6 @@
 <%= render "navbar" %>
-  <% if false %>
-  <h1> Ici c'est la show :)</h1>
-  <h2> Recherche - <%= @hunter_search.research_name %>
-  <h2> Prix maximum - <%= @hunter_search.max_price %> </h2>
-  <h2> Surface minimum - <%= @hunter_search.surface %> </h2>
-  <h2> Etage minimum - <%= @hunter_search.min_floor %> </h2>
-  <h2> Zone minimum - <%= @hunter_search.areas %> </h2>
-  <hr/>
-  <br/>
-  <% end %>
 
-  <h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
+<h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
 
 <div class="row mt-5">
       <% @properties.each do |property| %>
