@@ -89,13 +89,22 @@ class Broadcaster
     end
   end
 
-  # def hunter_searched_not_live_processed
-  #   hs = HunterSearch.not_live_broadcasted
-  #   hs.each do |hs| 
-  #     # props = FAIRE LA REQUETE.pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
-  #     HunterMailer.notification_email(hs.id, props).deliver_now
-  #   end
-  # end
+  def hunter_searched_not_live_processed
+    # // Load properties scraped in the last hour 
+    properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+    
+    hs = HunterSearch.not_live_broadcasted
+    hs.each do |hs| 
+      hunter_search_props = []
+      hunter_search_area = hs.areas.ids
+      properties.each do |prop|
+        if hs.is_matching_property?(prop, hunter_search_area)
+          hunter_search_props.push(prop)
+        end
+      end
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
+    end
+  end
 
   private
 
