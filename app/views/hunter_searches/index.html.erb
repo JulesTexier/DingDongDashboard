@@ -15,6 +15,9 @@
         <%= link_to "Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
+            <%= link_to "Ma selection", hunter_hunter_search_selections_path(current_hunter, hunter_search), class: "nav-link text-success" %>
+          </li>
+          <li class="nav-item">
             <%= link_to "Modifier", edit_hunter_hunter_search_path(current_hunter, hunter_search), class: "nav-link" %>
           </li>
           <li class="nav-item">
