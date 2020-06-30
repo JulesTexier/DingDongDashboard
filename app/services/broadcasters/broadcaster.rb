@@ -89,6 +89,14 @@ class Broadcaster
     end
   end
 
+  # def hunter_searched_not_live_processed
+  #   hs = HunterSearch.not_live_broadcasted
+  #   hs.each do |hs| 
+  #     # props = FAIRE LA REQUETE.pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+  #     HunterMailer.notification_email(hs.id, props).deliver_now
+  #   end
+  # end
+
   private
 
   def get_unprocessed_properties
