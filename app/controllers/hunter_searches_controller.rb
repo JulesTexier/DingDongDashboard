@@ -14,15 +14,31 @@ class HunterSearchesController < ApplicationController
   def new
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = @hunter.hunter_searches.build
-    @areas = Area.get_active
-    @hs_areas = []
+
+    hs_areas_id = @hunter_search.areas.pluck(:id)
+    zone_areas = ["Paris", "Première Couronne"]
+    @paris_areas = []
+    @premiere_couronne_areas = []
+    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
+      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @paris_areas.push(item)
+    end
+    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
+      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @premiere_couronne_areas.push(item)
+    end
   end
 
   def create
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = @hunter.hunter_searches.build(hunter_search_params)
     if @hunter_search.save
-      @hunter_search.areas << Area.where(id: params["hunter_search"]["areas"])
+      areas_name = []
+      areas_name += params[:paris_areas] if !params[:paris_areas].nil?
+      areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+      @hunter_search.areas << Area.where(id: areas_name)
       redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
     else
       render "new"
@@ -34,12 +50,31 @@ class HunterSearchesController < ApplicationController
     @hunter_search = HunterSearch.find(params[:id])
     @areas = Area.get_active
     @hs_areas = @hunter_search.areas.pluck(:id)
+    
+    hs_areas_id = @hunter_search.areas.pluck(:id)
+    zone_areas = ["Paris", "Première Couronne"]
+    @paris_areas = []
+    @premiere_couronne_areas = []
+    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
+      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @paris_areas.push(item)
+    end
+    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
+      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
+      item.push(selected)
+      @premiere_couronne_areas.push(item)
+    end
   end
 
   def update
     if @hunter_search.update(hunter_search_params)
+      areas_name = []
+      areas_name += params[:paris_areas] if !params[:paris_areas].nil?
+      areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+
       @hunter_search.areas.destroy_all
-      @hunter_search.areas << Area.where(id: params["hunter_search"]["areas"])
+      @hunter_search.areas << Area.where(id: areas_name)
       redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
       # redirect_to edit_hunter_hunter_search_path(@hunter, @hunter_search)
     else
@@ -63,6 +98,6 @@ class HunterSearchesController < ApplicationController
   end
 
   def hunter_search_params
-    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price)
+    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price)
   end
 end

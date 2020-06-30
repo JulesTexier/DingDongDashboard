@@ -15,16 +15,36 @@
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Arrondissements * </h5>
 
-    <% areas = ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020"] %>
-
-    <div class="d-flex flex-wrap"> 
-    <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
-    <%= b.label class: "label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do %>
-         <%= b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text %>
+    <% if false%>
+        <div class="d-flex flex-wrap"> 
+        <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
+        <%= b.label class: "label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do %>
+            <%= b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text %>
+            <% end %>
         <% end %>
+    </div>
+
     <% end %>
 
-    </div>
+    <div class="raw d-flex flex-wrap">
+        <% if false %><h6>Paris</h6> <% end %>
+        <div class="form-group col-12 p-0">
+            <select multiple class="form-control" id="choices-multiple-remove-button" name="paris_areas[]">
+                <% @paris_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+                <% end %>
+            </select>
+        </div>
+        <h6>Première couronne</h6>
+        <div class="form-group col-12 p-0">
+            <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
+                <% @premiere_couronne_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+                <% end %>
+            </select>
+        </div>
+      </div>
+
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰↗️ Budget Maximum ? *</h5>
     <div class="input-group mb-3">
@@ -57,6 +77,27 @@
 
 <% end %>
 
+<script>
+$(document).ready(function(){
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount:100,
+        searchResultLimit:100,
+        renderChoiceLimit:100
+        });
+    });
+    
+</script>
+
+<style>
+    .mt-100 {
+        margin-top: 100px
+    }
+    .choices__list--multiple .choices__item{
+        background-color: #57B894 !important;
+        border-color: #57B894 !important;
+    }
+</style>
 
 <script>
     
