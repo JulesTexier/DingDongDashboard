@@ -34,12 +34,12 @@ class Independant::ScraperThibaultChanelImmo < Scraper
             raw_floor = access_xml_text(html, ".value-_noo_property_field_etage")
             hashed_property[:floor] = raw_floor.to_int_scrp if !raw_floor.nil?
             raw_metro = access_xml_text(html, ".value-_noo_property_field_metro")
-            raw_metro.nil? ? hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description]) : hashed_property[:subway_ids] = perform_subway_regex(raw_metro)
+            hashed_property[:subway_infos] = perform_subway_regex(raw_metro) if !raw_metro.nil?
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, ".noo-lightbox-item", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

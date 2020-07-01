@@ -25,18 +25,14 @@ class Independant::ScraperCeiCab < Scraper
             hashed_property[:bedrooms_number] = access_xml_text(html, ".chambre").to_int_scrp
             hashed_property[:description] = access_xml_text(html, 'p[itemprop="description"]').strip
             hashed_property[:floor] = access_xml_text(html, "div.caracteristique-bloc:nth-child(4) > ul:nth-child(2) > li:nth-child(5) > strong").to_int_scrp
-            if access_xml_text(html, ".caracteristiques-divers").gsub(" ", "").downcase.gsub(/[^[:print:]]/, "").match(/ascenseur:oui/i).is_a?(MatchData)
-              hashed_property[:has_elevator] = true
-            else
-              hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            end
-            hashed_property[:subway_ids] = perform_subway_regex(access_xml_text(html, ".localisation"))
+            hashed_property[:has_elevator] = true if access_xml_text(html, ".caracteristiques-divers").gsub(" ", "").downcase.gsub(/[^[:print:]]/, "").match(/ascenseur:oui/i).is_a?(MatchData)
+            hashed_property[:subway_infos] = perform_subway_regex(access_xml_text(html, ".localisation"))
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:agency_name] = access_xml_text(html, ".negociateur-infos > h3")
             hashed_property[:images] = access_xml_link(html, "div#photoslider > ul > li > a", "href")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

@@ -25,13 +25,10 @@ class Group::ScraperSaintFerdinand < Scraper
             hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "div.listing_detail").remove_acc_scrp, '(pieces:)(.?)(\d+)').to_int_scrp
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             imgs = access_xml_link(html, '[itemprop="image"]', "src")
             hashed_property[:images] = access_xml_link(html, 'li[data-target="#carousel-listing"] > img', "src").map { |img| img.gsub("-143x83", "") }
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

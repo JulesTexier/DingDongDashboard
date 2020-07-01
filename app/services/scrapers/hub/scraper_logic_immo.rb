@@ -25,9 +25,6 @@ class Hub::ScraperLogicImmo < Scraper
             hashed_property[:description] = access_xml_text(html, "div.offer-description-text").specific_trim_scrp("\n").gsub("Être rappelé", "").gsub("Demander une visite", "").gsub("Obtenir l'adresse", "").strip
             hashed_property[:flat_type] = access_xml_text(html, "#js-faToaster > div > div.leftZone.clearfix > div.cell.type").specific_trim_scrp("\n\s")
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description], args.zone)
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = self.source
             hashed_property[:images] = []
@@ -49,7 +46,7 @@ class Hub::ScraperLogicImmo < Scraper
               hashed_property[:images].push(img_thumb["src"].gsub("photo-prop-182x136", "photo-prop-800x600"))
             end
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

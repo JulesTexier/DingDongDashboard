@@ -24,15 +24,12 @@ class Independant::ScraperHemptonParis < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "article.col-md-6.elementDt > p").tr("\n", "").strip
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = "+33142380206"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "ul.imageGallery > li > img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

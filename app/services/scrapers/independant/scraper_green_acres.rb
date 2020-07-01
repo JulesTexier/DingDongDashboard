@@ -23,14 +23,11 @@ class Independant::ScraperGreenAcres < Scraper
             hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "#mainInfoAdvertPage > div > ul"), '(\d+)(.?)(chambre(s?))').to_int_scrp
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "a.item-location > p"))
             hashed_property[:description] = access_xml_text(html, "#DescriptionDiv > p").specific_trim_scrp("\n").strip
-            hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-            hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "#links > div.item.active > div > div.vcenter > span > img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

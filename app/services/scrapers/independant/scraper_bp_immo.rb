@@ -7,7 +7,6 @@ class Independant::ScraperBpImmo < Scraper
     @properties = []
   end
 
-  
   def launch(limit = nil)
     i = 0
     self.params.each do |args|
@@ -27,15 +26,12 @@ class Independant::ScraperBpImmo < Scraper
             hashed_property[:floor] = regex_gen(details, 'etage:(\d)*').to_int_scrp
             if details.match(/ascenseur:(oui|non)/i).is_a?(MatchData)
               regex_gen(details, "ascenseur:(oui|non)").include?("oui") ? hashed_property[:has_elevator] = true : hashed_property[:has_elevator] = false
-            else
-              hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             end
-            hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.item >  img", "src")
             @properties.push(hashed_property) ##testing purpose
-            enrich_then_insert_v2(hashed_property)
+            enrich_then_insert(hashed_property)
             i += 1
             break if i == limit
           end

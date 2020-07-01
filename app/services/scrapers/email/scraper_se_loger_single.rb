@@ -21,16 +21,13 @@ class Email::ScraperSeLogerSingle < Scraper
         hashed_property[:link] = "https://" + regex_gen(access_xml_link(item, 'a[_label="cta"]', "href")[0], "(www.seloger.com)(.){1,}(htm)")
         hashed_property[:images] = access_xml_link(item, 'td.contents > a[_label="image"] > img', "src")
         hashed_property[:description] = access_xml_text(item, 'a[ _label="description"]').tr("\n\r", "").strip
-        hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
-        hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-        hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
         hashed_property[:flat_type] = get_type_flat(title)
         hashed_property[:provider] = "Agence"
         hashed_property[:source] = @source
         hashed_property[:reference] = "SeLoger Mail"
         if go_to_prop?(hashed_property, 7)
           @properties.push(hashed_property) ##testing purpose
-          enrich_then_insert_v2(hashed_property)
+          enrich_then_insert(hashed_property)
         end
       rescue StandardError => e
         error_outputs(e, @source)

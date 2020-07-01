@@ -25,9 +25,6 @@ class Group::ScraperMorissImmobilier < Scraper
               html = fetch_static_page(hashed_property[:link])
               hashed_property[:description] = access_xml_text(html, "div.wpestate_property_description > p").specific_trim_scrp("\n").strip
               hashed_property[:agency_name] = access_xml_text(html, "div.agent_unit > div > h4 > a")
-              hashed_property[:floor] = perform_floor_regex(hashed_property[:description])
-              hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
-              hashed_property[:subway_ids] = perform_subway_regex(hashed_property[:description])
               hashed_property[:provider] = "Agence"
               hashed_property[:source] = @source
               hashed_property[:images] = access_xml_link(html, "div.gallery_wrapper > div", "style")
@@ -35,7 +32,7 @@ class Group::ScraperMorissImmobilier < Scraper
                 image_url.gsub!("background-image:url(", "").gsub!(")", "")
               end
               @properties.push(hashed_property) ##testing purpose
-              enrich_then_insert_v2(hashed_property)
+              enrich_then_insert(hashed_property)
               i += 1
               break if i == limit
             end
