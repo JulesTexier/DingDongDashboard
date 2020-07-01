@@ -1,5 +1,12 @@
 <%= render "navbar" %>
 
+<script>
+  function addToSelection(id) {
+    document.getElementById(id+"-btn").style.display = "none";
+    document.getElementById(id+"-pushed").style.display = "block";
+  }
+</script>
+
 <h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
 
 <div class="row mt-5">
@@ -100,9 +107,10 @@
             </ul>
             <div class="d-flex justify-content-center mt-4">
             <% if @selected_properties.include?(property.id) %>
-              <p>Déjà dans vos favoris</p>
+              <p>✅ Dans votre selection</p>
             <% else %>
-              <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", remote: true %> 
+              <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
+              <p id="<%=property.id%>-pushed" style="display:none">✅ Dans votre selection</p>
             <% end %>
             </div>
             <div class="d-flex justify-content-center mt-4">
