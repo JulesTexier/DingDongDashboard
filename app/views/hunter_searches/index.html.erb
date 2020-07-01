@@ -7,7 +7,7 @@
   <% @hunter_searches.each do |hunter_search| %>
     <div class="card text-center">
       <div class="card-header">
-        <h5 class="card-title"><%= hunter_search.research_name.capitalize %></h5>
+        <h5 class="card-title"><%= hunter_search.research_name.capitalize %> <%= "(En pause)" if !hunter_search.is_active%></h5>
       </div>
       <div class="card-body">
         <p class="card-text">Critères : <%= hunter_search.get_pretty_price("max") %> € - <%= hunter_search.min_surface %>m2</p>
@@ -19,6 +19,10 @@
           </li>
           <li class="nav-item">
             <%= link_to "Modifier", edit_hunter_hunter_search_path(current_hunter, hunter_search), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+              <%= link_to "⏯️ Mettre en pause", hunter_hunter_search_path(current_hunter, hunter_search, {hunter_search: {is_active:false}}), method: :put, class: "nav-link text-info", remote: true, id: "#{hunter_search.id}-not-paused", style:  hunter_search.is_active? ? "display: block" : "display: none" %>
+              <%= link_to "⏯️ Réactiver", hunter_hunter_search_path(current_hunter, hunter_search, {hunter_search: {is_active:true}}), method: :put, class: "nav-link text-info", remote: true, id: "#{hunter_search.id}-paused", style:  hunter_search.is_active? ? "display: none" : "display: block" %>
           </li>
           <li class="nav-item">
             <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(current_hunter, hunter_search),

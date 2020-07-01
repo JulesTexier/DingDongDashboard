@@ -73,11 +73,15 @@ class HunterSearchesController < ApplicationController
       areas_name = []
       areas_name += params[:paris_areas] if !params[:paris_areas].nil?
       areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
-
-      @hunter_search.areas.destroy_all
-      @hunter_search.areas << Area.where(id: areas_name)
-      redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
-      # redirect_to edit_hunter_hunter_search_path(@hunter, @hunter_search)
+      
+      if !areas_name.empty?
+        @hunter_search.areas.destroy_all 
+        @hunter_search.areas << Area.where(id: areas_name)
+      end
+      respond_to do |format|
+        format.html { redirect_to hunter_hunter_search_path(@hunter, @hunter_search) } 
+        format.js { redirect_to hunter_hunter_searches_path(@hunter) }
+      end
     else
       render "edit"
     end
@@ -99,6 +103,6 @@ class HunterSearchesController < ApplicationController
   end
 
   def hunter_search_params
-    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price)
+    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :is_active)
   end
 end
