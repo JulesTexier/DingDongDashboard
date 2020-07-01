@@ -86,7 +86,6 @@
                 </div>
               </li>
 
-              </li>
               <li class="list-group-item pl-0 pr-0 pt-4 pb-4">        
                 <div class="">
                     <% if property.provider == "Agence" %> 👔 Bien d'une agence <br /><% end %>
@@ -105,13 +104,14 @@
                 </div>
               </li>
             </ul>
+
             <div class="d-flex justify-content-center mt-4">
-            <% if @selected_properties.include?(property.id) %>
-              <p>✅ Dans votre selection</p>
-            <% else %>
-              <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
-              <p id="<%=property.id%>-pushed" style="display:none">✅ Dans votre selection</p>
-            <% end %>
+              <% if @selected_properties.include?(property.id) %>
+                <p>✅ Dans votre selection</p>
+              <% else %>
+                <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
+                <p id="<%=property.id%>-pushed" style="display:none">✅ Dans votre selection</p>
+              <% end %>
             </div>
             <div class="d-flex justify-content-center mt-4">
               <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
