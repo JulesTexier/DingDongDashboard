@@ -15,5 +15,8 @@ class SelectionsController < ApplicationController
 
   def destroy
     Selection.find(params[:id]).destroy
+    respond_to do |format|
+      format.js { redirect_to hunter_hunter_search_selections_path(params[:hunter_id], params[:hunter_search_id]) }
+    end
   end
 end

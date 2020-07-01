@@ -7,8 +7,10 @@
   }
 </script>
 
-<h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
-
+<h1 class="mt-5 text-center text-dark"> 
+  Les derniers biens - <%= @hunter_search.research_name %>
+  &nbsp; <%= link_to  "🌟 Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-sm btn-success' %>
+</h1>
 <div class="row mt-5">
       <% @properties.each do |property| %>
         <div class="col-12 col-lg-4 mb-3">

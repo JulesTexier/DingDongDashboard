@@ -1,19 +1,119 @@
 <%= render partial: "hunter_searches/navbar" %>
 
-<script>
-  function changeClass(id) {
-    var r = confirm("Confirmer le retrait de cette annone de votre selection ?");
-    if (r == true) {
-    document.getElementById(id).style.display = "none";
-    }
-  }
-</script>
+<h1 class="mt-5 text-center text-dark"> 
+  Ma selection - <%= @hunter_search.research_name %>
+</h1>
+<div class="row d-flex justify-content-center">
+  &nbsp; <%= link_to  "📡 Voir les derniers biens", hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-sm btn-danger' %>
+  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-sm btn-primary' %>
+</div>
 
-<h2 class="mt-5 text-center text-dark"> Votre selection</h1>
-<ul>
-  <% @data.each do |item|%>
-    <li id="<%=item[0]%>"><%= item[1].get_title %> <%= link_to "🤍 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, onclick: "changeClass(#{item[0]})", class: "btn btn-sm btn-danger text-white", id: item[0], remote: true %> </li>
-  <% end %>
-</ul>
+<div class="row mt-5">
+      <% @data.each do |item| %>
+      <% property = item[1] %>
+        <div class="col-12 col-lg-4 mb-3">
+        <div class="card" id="<%=item[0]%>">
+          <div id=<%= "carousel#{property.id}" %> class="carousel slide" data-interval="false" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-flex justify-content-center">
+                 <img src=<%= property.images[0] %> class="d-block" alt="..." style="height:200px">
+                </div>
+              </div>
+              <% property.images.drop(1).each do |image| %>
+                <div class="carousel-item">
+                  <div class="d-flex justify-content-center">
+                    <img src=<%= image %> class="d-block" alt="..." style="height:200px">
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href=<%= "#carousel#{property.id}" %> role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href=<%= "#carousel#{property.id}" %> role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-around align-items-center">
+                <h6 class="card-title text-primary mb-0">
+                <div class="mb-2">
+                  📌 <%= property.area.name %>
+                </div>
+                <div>
+                ↔ <%= property.surface %> m2
+                </div>
+                </h6>
+                <div class="mb-0" style="color:#ff7f50;">
+                    <h5>
+                    <%= property.price %> €
+                    </h5>
+                    <h6 class="text-primary">
+                        💰<%= property.price / property.surface %> €/m2
+                    </h6>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush mt-3 text-primary">
+              <li class="list-group-item pl-0 pr-0 d-flex justify-content-between pt-3 pb-3">
+                <div class="text-center">
+                <h5>🏠</h5> 
+                  <%= property.flat_type %>
+                </div>
+                <div class="text-center">
+                <h5>🛋</h5> 
+                  <%= property.rooms_number %> pièce(s)
+                </div>
+                <div class="text-center">
+                <h5>🛏</h5> 
+                  <% if !property.bedrooms_number.nil? %>
+                    <%= property.bedrooms_number %> chambre(s)
+                  <% else %>
+                    <% if property.rooms_number == 1 || property.rooms_number == 0 %>
+                      1 chambre
+                    <% else %>
+                      <%= property.rooms_number - 1 %> chambre(s)
+                    <% end %>
+                  <% end %>
+                </div>
+              </li>
+
+              <li class="list-group-item pl-0 pr-0 d-flex justify-content-center pt-3 pb-3">
+                <div class="text-center">
+                   ️️⏱ <span class="font-italic">Publié le <%= property.created_at.strftime("%d/%m/%Y à %H:%M") %></span>
+                </div>
+              </li>
+
+              <li class="list-group-item pl-0 pr-0 pt-4 pb-4">        
+                <div class="">
+                    <% if property.provider == "Agence" %> 👔 Bien d'une agence <br /><% end %>
+                    <% if property.provider == "Particulier" %> 👨 Bien d'un particulier <br /><% end %>
+                    <% if property.has_elevator == true %> 🚠 Avec Ascenseur <br /><% end %>
+                    <% if property.has_elevator == false %> 🚠 Sans Ascenseur <br /><% end %>
+                    <% if !property.floor.nil? %> 
+                      <% if property.floor == 1 %> 
+                        ↕ <%= property.floor %>er étage 
+                      <% else %>
+                        ↕ <%= property.floor %>ème étage 
+                      <% end %>
+                      <br />
+                    <% end %> 
+                    <% if property.subway_infos.length != 0 %> Ⓜ️ <%= property.get_subways_full %>  <% end %>
+                </div>
+              </li>
+            </ul>
+
+            <div class="d-flex justify-content-center mt-4">
+              <%= link_to "💔 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, class: "btn btn-sm btn-outline-danger text-danger", id: item[0], remote: true %> </li>
+            </div>
+          </div>
+        </div>
+        </div>
+      <% end %>
+</div>
+
+
 <%= render partial: "hunter_searches/footer" %>
 
