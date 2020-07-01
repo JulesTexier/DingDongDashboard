@@ -1,6 +1,6 @@
 <%= render "navbar" %>
 
-  <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches (<%= @hunter_searches.count%>)</h1>
+  <h1 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches (<%= @hunter_searches.count%>)</h1>
 
   <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter.id), class: "btn btn-success mb-3" %>
 
@@ -12,7 +12,7 @@
       <div class="card-body">
         <p class="card-text">Critères : <%= hunter_search.get_pretty_price("max") %> € - <%= hunter_search.min_surface %>m2 - <%= hunter_search.max_price %></p>
         <p class="card-text">Zone :  <%= hunter_search.areas.pluck(:zone).uniq.join(" - ") %> </p>
-        <%= link_to "📡 Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
+        <%= link_to "👀 Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
         <div class= "row d-flex justify-content-between">
           <div class= "col-12 col-lg-6">
             <ul class="nav nav-tabs card-header-tabs mt-4 d-flex justify-content-start">

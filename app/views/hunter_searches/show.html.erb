@@ -7,11 +7,11 @@
   }
 </script>
 
-<h1 class="mt-5 text-center text-dark"> 
+<h1 class="mt-5 mb-5 text-center text-dark"> 
   Les derniers biens - <%= @hunter_search.research_name %>
 </h1>
 
-<div class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-start">
   &nbsp; <%= link_to  "❤️ Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-danger' %>
   &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
 </div>
