@@ -51,7 +51,7 @@ class Broadcaster
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
 
-    hunter_searches = HunterSearch.live_broadcasted
+    hunter_searches = HunterSearch.live_broadcasted.where(is_active: true)
     hunter_searches.each do |hunter_search|
       hunter_search_props = []
       hunter_search_area = hunter_search.areas.ids
@@ -94,7 +94,7 @@ class Broadcaster
     # // Load properties scraped in the last hour 
     properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
     
-    hs = HunterSearch.not_live_broadcasted
+    hs = HunterSearch.not_live_broadcasted.where(is_active: true)
     hs.each do |hs| 
       hunter_search_props = []
       hunter_search_area = hs.areas.ids
