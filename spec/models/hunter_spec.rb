@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Hunter, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe Subscriber do
+    describe "model" do
+      it "has a valid factory" do
+        expect(build(:hunter)).to be_valid
+      end
+    end
+  end
 end

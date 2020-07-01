@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_092346) do
+ActiveRecord::Schema.define(version: 2020_07_01_083542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_092346) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "min_price"
     t.integer "max_sqm_price"
+    t.boolean "is_active", default: true
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_092346) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "live_broadcast", default: true
     t.index ["email"], name: "index_hunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
@@ -289,6 +291,15 @@ ActiveRecord::Schema.define(version: 2020_06_26_092346) do
     t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
+  create_table "selections", force: :cascade do |t|
+    t.bigint "hunter_search_id"
+    t.bigint "property_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hunter_search_id"], name: "index_selections_on_hunter_search_id"
+    t.index ["property_id"], name: "index_selections_on_property_id"
+  end
+
   create_table "sequence_steps", force: :cascade do |t|
     t.integer "step"
     t.string "name"
@@ -384,6 +395,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_092346) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
+  add_foreign_key "selections", "hunter_searches"
+  add_foreign_key "selections", "properties"
   add_foreign_key "sequence_steps", "sequences"
   add_foreign_key "subscriber_sequences", "sequences"
   add_foreign_key "subscriber_sequences", "subscribers"

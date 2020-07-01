@@ -69,6 +69,13 @@ namespace :broadcast do
     ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     puts "The Good Morning Broadcaster script took #{ending - starting} seconds to run"
   end
+
+  task :hourly_check_hunters do
+    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    Broadcaster.new.hunter_searched_not_live_processed
+    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    puts "The Hourly check Hunter Broadcaster script took #{ending - starting} seconds to run"
+  end
 end
 
 namespace :test do

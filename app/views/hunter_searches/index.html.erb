@@ -1,27 +1,42 @@
 <%= render "navbar" %>
 
-  <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches</h1>
+  <h1 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches (<%= @hunter_searches.count%>)</h1>
 
   <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter.id), class: "btn btn-success mb-3" %>
 
   <% @hunter_searches.each do |hunter_search| %>
     <div class="card text-center">
       <div class="card-header">
-        <h5 class="card-title"><%= hunter_search.research_name.capitalize %></h5>
+        <h5 class="card-title"><%= hunter_search.research_name.capitalize %> <%= "(En pause)" if !hunter_search.is_active%></h5>
       </div>
       <div class="card-body">
-        <p class="card-text">Critères : <%= hunter_search.get_pretty_price %> € - <%= hunter_search.surface %>m2 - <%= hunter_search.max_price %></p>
-        <p class="card-text">Zone :  <%= hunter_search.areas.pluck(:zone).uniq.join(" - ") %> </p>
-        <%= link_to "Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
-        <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-            <%= link_to "Modifier", edit_hunter_hunter_search_path(current_hunter, hunter_search), class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Supprimer cette recherche", hunter_hunter_search_path(current_hunter, hunter_search),
-                        data: { :confirm => "Êtes-vous sûr?" }, class: "nav-link text-danger", :method => :delete %>
-          </li>
-        </ul>
+        <p class="card-text text-left"><b>Critères :</b> min. <%= hunter_search.get_pretty_price("min") %> € -  max. <%= hunter_search.get_pretty_price("max") %> € - min. <%= hunter_search.min_surface %>m2 </p>
+        <p class="card-text text-left"><b>Secteurs :</b> <%= hunter_search.areas.pluck(:name).uniq.join(" - ") %> </p>
+        <%= link_to "👀 Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
+        <div class= "row d-flex justify-content-between mb-2">
+          <div class= "col-12 col-lg-6">
+            <ul class="nav nav-tabs card-header-tabs mt-4 d-flex justify-content-start">
+              <li class="nav-item mr-2">
+                <%= link_to "❤️ Ma selection", hunter_hunter_search_selections_path(current_hunter, hunter_search), class: "btn btn-outline-danger" %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "✏️ Modifier", edit_hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-outline-primary" %>
+              </li>
+              <li class="nav-item mr-2">
+                  <%= link_to "⏯️ Mettre en pause", hunter_hunter_search_path(current_hunter, hunter_search, {hunter_search: {is_active:false}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-not-paused", style:  hunter_search.is_active? ? "display: block" : "display: none" %>
+                  <%= link_to "⏯️ Réactiver", hunter_hunter_search_path(current_hunter, hunter_search, {hunter_search: {is_active:true}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-paused", style:  hunter_search.is_active? ? "display: none" : "display: block" %>
+              </li>
+            </ul>
+          </div>
+          <div class= "col-12 col-lg-6">
+            <ul class="nav nav-tabs card-header-tabs mt-4 d-flex justify-content-end">
+              <li>
+              <%= link_to "❌ Supprimer cette recherche", hunter_hunter_search_path(current_hunter, hunter_search),
+                          data: { :confirm => "Êtes-vous sûr?" }, class: "btn btn-outline-danger", :method => :delete %>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <br/>

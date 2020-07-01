@@ -2,49 +2,73 @@
 
     <nav class="navbar navbar-light fixed-bottom bg-primary d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
-            <%= f.submit "Enregistrer mes critères 🚀", 
-                class: "btn btn-outline-light", 
-                style:"font-weight:600"
-            %>
+            <%= f.submit "Enregistrer mes critères 🚀",
+                         class: "btn btn-outline-light",
+                         style: "font-weight:600" %>
         </div>
     </nav>
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">➡️ Nom de la recherche ? *</h5>
     <div class="input-group mb-3">
-        <%= f.text_field :research_name, class: "form-control", placeholder:"Ex : Recherche 1", :required => true %>
+        <%= f.text_field :research_name, class: "form-control", placeholder: "Ex : Recherche 1", :required => true %>
     </div>
 
-    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Arrondissements * </h5>
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Secteur * </h5>
 
-    <% areas = ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020"] %>
+    <% if false%>
+        <div class="d-flex flex-wrap"> 
+        <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
+        <%= b.label class: "label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do %>
+            <%= b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text %>
+            <% end %>
+        <% end %>
+    </div>
 
-    <div class="d-flex flex-wrap"> 
-    <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
-    <%= b.label class:"label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do%>
-         <%=b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text%>
-        <%end%>
     <% end %>
 
+    <div class="raw d-flex flex-wrap">
+        <% if false %><h6>Paris</h6> <% end %>
+        <div class="form-group col-12 p-0">
+            <select multiple class="form-control" id="choices-multiple-remove-button" name="paris_areas[]">
+                <% @paris_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+                <% end %>
+            </select>
+        </div>
+        <h6>Première couronne</h6>
+        <div class="form-group col-12 p-0">
+            <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
+                <% @premiere_couronne_areas.each do |item| %>
+                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+                <% end %>
+            </select>
+        </div>
+      </div>
+
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰↗️ Budget Maximum ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :max_price, class: "form-control", placeholder: "Ex : 500000", :required => true %>
     </div>
 
-    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰Budget Maximum ? *</h5>
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰↘️ Budget Minimum ? *</h5>
     <div class="input-group mb-3">
-        <%= f.number_field :max_price, class: "form-control", placeholder:"Ex : 500000", :required => true %>
+        <%= f.number_field :min_price, class: "form-control", placeholder: "Ex : 0", value: 0, :required => true %>
     </div>
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
     <div class="input-group mb-3">
-        <%= f.number_field :surface, class: "form-control", placeholder:"Ex : 50", max: 700, min: 6 , :required => true %>
+        <%= f.number_field :min_surface, class: "form-control", placeholder:"Ex : 50", max: 700, min: 6 , :required => true %>
     </div>
 
-    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡Nombre de pièces minimum ? *</h5>
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🏡 Nombre de pièces minimum ? *</h5>
     <div class="input-group mb-3">
-        <%= f.number_field :rooms_number, class: "form-control", placeholder:"Ex : 2", max: 10 , :required => true %>
+        <%= f.number_field :min_rooms_number, class: "form-control", placeholder: "Ex : 2", max: 10, :required => true %>
     </div>
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🎢 Etage minimum </h5>
     <div class="input-group mb-3">
-        <%= f.number_field :min_floor, class: "form-control", placeholder:"Ex : 2", max: 20 %>
+        <%= f.number_field :min_floor, class: "form-control", placeholder: "Ex : 2", max: 20 %>
     </div>
 
     <div class="mt-5 mb-5">
@@ -53,6 +77,27 @@
 
 <% end %>
 
+<script>
+$(document).ready(function(){
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount:100,
+        searchResultLimit:100,
+        renderChoiceLimit:100
+        });
+    });
+    
+</script>
+
+<style>
+    .mt-100 {
+        margin-top: 100px
+    }
+    .choices__list--multiple .choices__item{
+        background-color: #57B894 !important;
+        border-color: #57B894 !important;
+    }
+</style>
 
 <script>
     
