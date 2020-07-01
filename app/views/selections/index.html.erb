@@ -1,9 +1,20 @@
 <%= render partial: "hunter_searches/navbar" %>
 
+<script>
+  function changeClass(id) {
+    var r = confirm("Confirmer le retrait de cette annone de votre selection ?");
+    if (r == true) {
+    document.getElementById(id).style.display = "none";
+      txt = "You pressed OK!";
+    }
+  }
+</script>
+
 <h2 class="mt-5 text-center text-dark"> Votre selection</h1>
 <ul>
   <% @data.each do |item|%>
-    <li><%= item[1].get_title %> <%= link_to "🤍 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, class: "btn btn-sm btn-danger text-white", remote: true %> </li>
+    <li id="<%=item[0]%>"><%= item[1].get_title %> <%= link_to "🤍 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, onclick: "changeClass(#{item[0]})", class: "btn btn-sm btn-danger text-white", id: item[0], remote: true %> </li>
   <% end %>
 </ul>
 <%= render partial: "hunter_searches/footer" %>
+
