@@ -9,8 +9,12 @@
 
 <h1 class="mt-5 text-center text-dark"> 
   Les derniers biens - <%= @hunter_search.research_name %>
-  &nbsp; <%= link_to  "🌟 Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-sm btn-success' %>
 </h1>
+
+<div class="row d-flex justify-content-center">
+  &nbsp; <%= link_to  "❤️ Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-danger' %>
+  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
+</div>
 <div class="row mt-5">
       <% @properties.each do |property| %>
         <div class="col-12 col-lg-4 mb-3">
@@ -109,19 +113,14 @@
 
             <div class="d-flex justify-content-center mt-4">
               <% if @selected_properties.include?(property.id) %>
-                <p>✅ Dans votre selection</p>
+                <p>❤️ Dans votre sélection</p>
               <% else %>
                 <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
-                <p id="<%=property.id%>-pushed" style="display:none">✅ Dans votre selection</p>
+                <p id="<%=property.id%>-pushed" style="display:none">❤️ Dans votre sélection</p>
               <% end %>
             </div>
             <div class="d-flex justify-content-center mt-4">
               <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
-              <% if property.contact_number == "N/C" %>
-              <div class="ml-2">
-                <a href="tel:<%= property.contact_number %>" class="btn btn-success">📞 Appeler </a> 
-              </div>
-              <% end %>
             </div>
           </div>
         </div>
