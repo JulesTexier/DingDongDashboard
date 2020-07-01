@@ -2,8 +2,8 @@
 
 <h2 class="mt-5 text-center text-dark"> Votre selection</h1>
 <ul>
-  <% @properties.each do |property|%>
-    <li><%= property.get_title %></li>
+  <% @data.each do |item|%>
+    <li><%= item[1].get_title %> <%= link_to "🤍 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, class: "btn btn-sm btn-danger text-white", remote: true %> </li>
   <% end %>
 </ul>
 <%= render partial: "hunter_searches/footer" %>
