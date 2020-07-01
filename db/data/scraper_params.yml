@@ -90,13 +90,13 @@
   - zone: Paris
     url: https://www.logic-immo.com/vente-immobilier-paris-75,100_1/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
-    main_page_cls: div.offer-details-wrapper
+    main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
   - zone: Banlieue-Ouest
     url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=28016_2,11603_2,17331_2,6361_2,19095_2,19440_2,19563_2,17892_2,8875_2,7021_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
-    main_page_cls: div.offer-details-wrapper
+    main_page_cls: div.offer-block
     is_active: false
     group_type: Hub
 - source: PAP
