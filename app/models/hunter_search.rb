@@ -30,7 +30,7 @@ class HunterSearch < ApplicationRecord
   end
 
   def is_matching_property?(args, subs_areas)
-    is_matching_property_rooms_number(args["rooms_number"])
+    is_matching_property_rooms_number(args["rooms_number"]) &&
     is_matching_property_surface(args["surface"]) &&
     is_matching_property_price(args["price"]) &&
     is_matching_property_floor(args["floor"]) &&

@@ -17,7 +17,8 @@ RSpec.describe HunterSearch, type: :model do
       describe "case hunter_search MATCH properties values" do
         before :each do
           prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
-          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
         context "floor and elevator are unknown" do
@@ -40,7 +41,7 @@ RSpec.describe HunterSearch, type: :model do
           end
 
           it "should match user and property (known floor)" do
-            @property.first[6] = true
+            @property.first["has_elevator"] = true
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(true)
             end
@@ -49,8 +50,8 @@ RSpec.describe HunterSearch, type: :model do
 
         context "floor is equal to min_elevator_floor and elevator is true" do
           it "should match user and property (known floor)" do
-            @property.first[4] = @hunter_search.min_elevator_floor
-            @property.first[6] = true
+            @property.first["floor"] = @hunter_search.min_elevator_floor
+            @property.first["has_elevator"] = true
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(true)
             end
@@ -61,12 +62,13 @@ RSpec.describe HunterSearch, type: :model do
       describe "Property NOT matchs" do
         before :each do
           prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
-          @property = Property.where(id: prop.id).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
         context "Surface is not ok" do
           it "should NOT match user and property because of surface !" do
-            @property.first[2] = @hunter_search.min_surface - 1
+            @property.first["surface"] = @hunter_search.min_surface - 1
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
@@ -75,7 +77,7 @@ RSpec.describe HunterSearch, type: :model do
 
         context "Area is not ok" do
           it "should NOT match user and property because of area !" do
-            @property.first[5] = Area.find_by(name: "Paris 1er").id
+            @property.first["area_id"] = Area.find_by(name: "Paris 1er").id
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
@@ -84,16 +86,14 @@ RSpec.describe HunterSearch, type: :model do
 
         context "Rooms_number is not ok" do
           it "should NOT match user and property because of rooms_number !" do
-            @property.first[1] = @hunter_search.min_rooms_number - 1
-            @property.each do |prop|
-              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
-            end
+            @property.first["rooms_number"] = @hunter_search.min_rooms_number - 1
+            expect(@hunter_search.is_matching_property?(@property.first, @hunter_search.areas.ids)).to eq(false)
           end
         end
 
         context "Price is too low" do
           it "should NOT match user and property because of price !" do
-            @property.first[3] = @hunter_search.min_price - 1
+            @property.first["price"] = @hunter_search.min_price - 1
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
@@ -102,7 +102,7 @@ RSpec.describe HunterSearch, type: :model do
 
         context "Price is too high" do
           it "should NOT match user and property because of price !" do
-            @property.first[3] = @hunter_search.max_price + 1
+            @property.first["price"] = @hunter_search.max_price + 1
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
@@ -111,10 +111,10 @@ RSpec.describe HunterSearch, type: :model do
 
         context "SQM Price is too high" do
           it "should NOT match user and property because of price !" do
-            @property.first[3] = 1000000
-            @property.first[2] = 80
+            @property.first["price"] = 1000000
+            @property.first["surface"] = 80
             @property.each do |prop|
-              expect(@hunter_search.is_matching_max_sqm_price(prop[3],prop[2])).to eq(false)
+              expect(@hunter_search.is_matching_max_sqm_price(prop["price"],prop["surface"])).to eq(false)
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
           end
@@ -122,7 +122,7 @@ RSpec.describe HunterSearch, type: :model do
 
         context "Floor is not ok" do
           it "should NOT match user and property because of floor !" do
-            @property.first[4] = @hunter_search.min_floor - 1
+            @property.first["floor"] = @hunter_search.min_floor - 1
             @property.each do |prop|
               expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
             end
@@ -132,8 +132,8 @@ RSpec.describe HunterSearch, type: :model do
         describe "elevator contraints" do
           describe "elevator is false but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
-              @property.first[6] = false
-              @property.first[4] = @hunter_search.min_elevator_floor - 1
+              @property.first["has_elevator"] = false
+              @property.first["floor"] = @hunter_search.min_elevator_floor - 1
               @property.each do |prop|
                 expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(true)
               end
@@ -141,8 +141,8 @@ RSpec.describe HunterSearch, type: :model do
           end
           describe "floor is equal to min_elevator_floor but elevator is false" do
             it "should NOT match user and property (known elevator absence)" do
-              @property.first[6] = false
-              @property.first[4] = @hunter_search.min_elevator_floor
+              @property.first["has_elevator"] = false
+              @property.first["surface"] = @hunter_search.min_elevator_floor
               @property.each do |prop|
                 expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
               end
