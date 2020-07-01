@@ -10,10 +10,10 @@
         <h5 class="card-title"><%= hunter_search.research_name.capitalize %> <%= "(En pause)" if !hunter_search.is_active%></h5>
       </div>
       <div class="card-body">
-        <p class="card-text">Critères : <%= hunter_search.get_pretty_price("max") %> € - <%= hunter_search.min_surface %>m2 - <%= hunter_search.max_price %></p>
-        <p class="card-text">Zone :  <%= hunter_search.areas.pluck(:zone).uniq.join(" - ") %> </p>
+        <p class="card-text text-left"><b>Critères :</b> min. <%= hunter_search.get_pretty_price("min") %> € -  max. <%= hunter_search.get_pretty_price("max") %> € - min. <%= hunter_search.min_surface %>m2 </p>
+        <p class="card-text text-left"><b>Secteurs :</b> <%= hunter_search.areas.pluck(:name).uniq.join(" - ") %> </p>
         <%= link_to "👀 Voir les derniers biens", hunter_hunter_search_path(current_hunter, hunter_search), class: "btn btn-primary" %>
-        <div class= "row d-flex justify-content-between">
+        <div class= "row d-flex justify-content-between mb-2">
           <div class= "col-12 col-lg-6">
             <ul class="nav nav-tabs card-header-tabs mt-4 d-flex justify-content-start">
               <li class="nav-item mr-2">
