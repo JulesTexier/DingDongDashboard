@@ -1,6 +1,6 @@
 <%= render "navbar" %>
 
-  <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches</h1>
+  <h2 class="mt-5 text-center mb-5 text-dark"> Toutes mes recherches (<%= @hunter_searches.count%>)</h1>
 
   <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter.id), class: "btn btn-success mb-3" %>
 
