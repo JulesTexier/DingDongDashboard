@@ -14,6 +14,9 @@ class Property < ApplicationRecord
   has_many :favorites
   has_many :fans, through: :favorites, source: :subscriber
 
+  has_many :selections
+  has_many :hunter_selections, through: :selections, source: :hunter_search
+
   has_many :property_districts
   has_many :districts, through: :property_districts
 

@@ -1,6 +1,9 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  get 'selections/index'
+  get 'selections/create'
+  get 'selections/destroy'
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   devise_for :admins
   devise_for :hunters
@@ -69,7 +72,9 @@ Rails.application.routes.draw do
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
   resources :hunters do
-    resources :hunter_searches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy]
+    resources :hunter_searches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy] do 
+      resources :selections, only: [:index, :create, :destroy]
+    end
   end
 
   resources :subscribers, only: [:show] do

@@ -22,6 +22,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
+
 development:
   <<: *default
   # database: giant_cat_development
@@ -30,6 +31,7 @@ development:
   database: lmrkkowi
   username: lmrkkowi
   password: tJ2lcdKX25oJziD5WKRGAsLXmYIsLqB8
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

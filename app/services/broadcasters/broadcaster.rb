@@ -51,16 +51,16 @@ class Broadcaster
       puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
     end
 
-    hunter_searches = HunterSearch.all
+    hunter_searches = HunterSearch.live_broadcasted.where(is_active: true)
     hunter_searches.each do |hunter_search|
+      hunter_search_props = []
       hunter_search_area = hunter_search.areas.ids
-      matched_props = []
       properties.each do |prop|
         if hunter_search.is_matching_property?(prop, hunter_search_area)
-          PostmarkMailer.send_properties_to_hunters(hunter_search).deliver_now
-          break
+          hunter_search_props.push(prop)
         end
       end
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
     end
     update_processed_properties(properties)
   end
@@ -87,6 +87,23 @@ class Broadcaster
       else
         puts "No warning Good Morning Message for #{sub[:facebook_id]}."
       end
+    end
+  end
+
+  def hunter_searched_not_live_processed
+    # // Load properties scraped in the last hour 
+    properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+    
+    hs = HunterSearch.not_live_broadcasted.where(is_active: true)
+    hs.each do |hs| 
+      hunter_search_props = []
+      hunter_search_area = hs.areas.ids
+      properties.each do |prop|
+        if hs.is_matching_property?(prop, hunter_search_area)
+          hunter_search_props.push(prop)
+        end
+      end
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
     end
   end
 

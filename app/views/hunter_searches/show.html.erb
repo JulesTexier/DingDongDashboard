@@ -1,22 +1,25 @@
 <%= render "navbar" %>
-  <% if false %>
-  <h1> Ici c'est la show :)</h1>
-  <h2> Recherche - <%= @hunter_search.research_name %>
-  <h2> Prix maximum - <%= @hunter_search.max_price %> </h2>
-  <h2> Surface minimum - <%= @hunter_search.surface %> </h2>
-  <h2> Etage minimum - <%= @hunter_search.min_floor %> </h2>
-  <h2> Zone minimum - <%= @hunter_search.areas %> </h2>
-  <hr/>
-  <br/>
-  <% end %>
 
-  <h2 class="mt-5 text-center text-dark"> Les derniers biens - <%= @hunter_search.research_name %></h1>
+<script>
+  function addToSelection(id) {
+    document.getElementById(id+"-btn").style.display = "none";
+    document.getElementById(id+"-pushed").style.display = "block";
+  }
+</script>
 
+<h1 class="mt-5 mb-5 text-center text-dark"> 
+  Les derniers biens - <%= @hunter_search.research_name %>
+</h1>
+
+<div class="row d-flex justify-content-start">
+  &nbsp; <%= link_to  "❤️ Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-danger' %>
+  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
+</div>
 <div class="row mt-5">
       <% @properties.each do |property| %>
         <div class="col-12 col-lg-4 mb-3">
         <div class="card">
-          <div id=<%= "carousel#{property.id}" %> class="carousel slide" data-ride="carousel">
+          <div id=<%= "carousel#{property.id}" %> class="carousel slide" data-interval="false" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center">
@@ -89,7 +92,6 @@
                 </div>
               </li>
 
-              </li>
               <li class="list-group-item pl-0 pr-0 pt-4 pb-4">        
                 <div class="">
                     <% if property.provider == "Agence" %> 👔 Bien d'une agence <br /><% end %>
@@ -104,17 +106,21 @@
                       <% end %>
                       <br />
                     <% end %> 
-                    <% if property.subways.length != 0 %> Ⓜ️ <%= property.get_subways_full %>  <% end %>
+                    <% if property.subway_infos.length != 0 %> Ⓜ️ <%= property.get_subways_full %>  <% end %>
                 </div>
               </li>
             </ul>
+
+            <div class="d-flex justify-content-center mt-4">
+              <% if @selected_properties.include?(property.id) %>
+                <p>❤️ Dans votre sélection</p>
+              <% else %>
+                <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
+                <p id="<%=property.id%>-pushed" style="display:none">❤️ Dans votre sélection</p>
+              <% end %>
+            </div>
             <div class="d-flex justify-content-center mt-4">
               <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
-              <% if property.contact_number == "N/C" %>
-              <div class="ml-2">
-                <a href="tel:<%= property.contact_number %>" class="btn btn-success">📞 Appeler </a> 
-              </div>
-              <% end %>
             </div>
           </div>
         </div>
