@@ -30,16 +30,13 @@ class HunterSearch < ApplicationRecord
   end
 
   def is_matching_property?(args, subs_areas)
-    ##We receive args in an array with this index [id, rooms_number, surface, price, floor, area_id, elevator]
-    test_rooms_number = is_matching_property_rooms_number(args[1])
-    test_surface = is_matching_property_surface(args[2])
-    test_price = is_matching_property_price(args[3])
-    test_floor = is_matching_property_floor(args[4])
-    test_areas = is_matching_property_area(args[5], subs_areas)
-    test_elevator = is_matching_property_elevator_floor(args[4], args[6])
-    test_sqm = is_matching_max_sqm_price(args[3], args[2])
-
-    test_price && test_surface && test_rooms_number && test_floor && test_elevator && test_areas && test_sqm ? true : false
+    is_matching_property_rooms_number(args["rooms_number"])
+    is_matching_property_surface(args["surface"]) &&
+    is_matching_property_price(args["price"]) &&
+    is_matching_property_floor(args["floor"]) &&
+    is_matching_property_area(args["area_id"], subs_areas) &&
+    is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
+    is_matching_max_sqm_price(args["price"], args["surface"])
   end
 
   def is_matching_property_max_price(price)
