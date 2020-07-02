@@ -56,7 +56,11 @@ class HunterSearch < ApplicationRecord
   end
 
   def is_matching_max_sqm_price(price, surface)
-    ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) if !self.max_sqm_price.nil? && surface != 0
+    if !self.max_sqm_price.nil? && surface != 0
+      ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
+    else
+      true 
+    end
   end
 
   def is_matching_property_rooms_number(rooms_number)

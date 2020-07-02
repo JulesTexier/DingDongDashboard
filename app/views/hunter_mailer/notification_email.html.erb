@@ -1,22 +1,204 @@
-<h1>De nouveaux biens viennent d'être récupérés !</h1>
-<h2>Concernant la recherche : <%= @hunter_search.name%>
-</h2>
 
-<table>
-  <% @props.each do |prop| %>
-    <tr>
-      <td>
-        <img src="<%= prop.images[0]%>" style="width:300px"/>
-      </td>
-      <td>
-        <ul>
-          <li>Prix : <%= prop.get_pretty_price %> €</li>
-          <li>Surface : <%= prop.surface %> m2</li>
-          <li>Nombre de pièces : <%= prop.rooms_number %></li>
-          <li>Etage : <%= prop.floor %></li>
-          <li>Lien de l'annonce : <%= prop.link %></li>
-        </ul>
-      </td>
-    </tr>
-  <% end %>
-</table>
+
+<div style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;background-color:#ffffff">
+  <center class="m_-1867408558110905584wrapper" style="width:100%;table-layout:fixed">
+
+
+      <div class="m_-1867408558110905584webkit" style="max-width:600px">
+
+
+          
+          
+
+          <table width="100%" align="center" bgcolor="#ffffff" class="m_-1867408558110905584outer" style="border-spacing:0;font-family:sans-serif;color:#333333;Margin:0 auto;width:100%;max-width:520px">
+              <tbody><tr>
+                  <td bgcolor="#ffffff" width="100%" align="center" height="30" style="border-bottom:2px solid #dfdfdf;padding-top:11px">
+                      <table style="border-spacing:0;font-family:sans-serif;color:#262626" align="center">
+                          <tbody><tr>
+                              <td class="m_-1867408558110905584contents" align="center">
+                                  <a href="" style="color:#333333;text-decoration:none" target="_blank"><img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" alt="Ding Dong" width="120" border="0" style="display:block;border:none;outline:none;text-decoration:none;margin:10 auto;font-family:Arial,Helvetica,sans-serif;font-size:20px;text-align:left" class="CToWUd"></a>
+                              </td>
+                          </tr>
+                      </tbody></table>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center" width="100%" height="23">&nbsp;</td>
+              </tr>
+              <tr>
+                  <td align="center" style="padding-left:20px;padding-right:20px">
+                      
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tbody><tr>
+                              <td align="center" style="font-size:21px;line-height:27px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left"><b>De nouveaux biens viennent d'être récupérés !</b></td>
+                          </tr>
+                          <tr>
+                              <td align="center" width="100%" height="9">&nbsp;</td>
+                          </tr>
+                          <tr>
+                              <td align="center" style="font-size:14px;line-height:18px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">Concernant la recherche : <%= @hunter_search["research_name"]%></td>
+                          </tr>
+                      </tbody></table>
+                  </td>
+              </tr>
+
+<% @props.each do |prop| %>
+<tbody>
+              <tr>
+                  <td align="center" style="padding-left:20px;padding-right:20px">
+                      
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tbody><tr>.
+
+                              <td align="center" width="100%" height="9" style="border-bottom:2px solid #dfdfdf">&nbsp;</td>
+                          </tr>
+                          <tr>
+                              <td align="center" width="100%" height="21">&nbsp;</td>
+                          </tr>
+                      </tbody></table>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td>
+                      <a href="<%= prop["link"] %>" style="color:#262626;text-decoration:none" target="_blank>
+                           <table>
+                              <tbody>
+
+                                 <tr>
+                                  <td align="center" style="padding-left:20px;padding-right:20px">
+                                      
+                                      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                          <tbody>
+
+                                          <tr>
+                                              <td class="m_-1867408558110905584contents">
+                                                  <a href="<%= prop["link"] %>" target="_blank"> <img src="<%= prop["images"][0]%>" alt="Image de l'annonce" width="480" height="319" style="display:block;width:100%;height:auto;float:left;border:0" class="CToWUd">
+                                                      
+                                                  </a>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td align="center" width="100%" height="15">&nbsp;</td>
+                                          </tr>
+                                      </tbody></table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td style="padding-top:0;padding-bottom:0;padding-right:20px;padding-left:20px;text-align:center;font-size:0">
+
+                                      
+
+                                      <div class="m_-1867408558110905584column" style="width:50%;max-width:240px;display:inline-block;vertical-align:top">
+                                          <table class="m_-1867408558110905584col100" width="100%" style="border-spacing:0;font-family:sans-serif;color:#333333">
+                                              <tbody><tr>
+                                                  <td class="m_-1867408558110905584col100" style="padding-top:10px;padding-bottom:10px;padding-right:0px;padding-left:0px">
+                                                      <table class="m_-1867408558110905584contents m_-1867408558110905584col100" style="border-spacing:0;font-family:sans-serif;width:100%;font-size:14px;text-align:center;color:#000">
+                                                          <tbody><tr>
+                                                              <td class="m_-1867408558110905584col100" align="center" style="font-size:24px;line-height:28px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                                  <a href="<%= prop["link"] %>" style="text-decoration:none!important;color:#000" target="_blank"><b><%= prop["price"] %> € </b>
+                                                                  </a>
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td class="m_-1867408558110905584col100" align="center" style="font-size:18px;line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                                  <a href="<%= prop["link"] %>" style="text-decoration:none!important;color:#000" target="_blank">Etage : <%= prop["floor"] %>
+                                                                  </a>
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td class="m_-1867408558110905584col100" align="center" style="font-size:18px;line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                                  <a href="<%= prop["link"] %>" style="text-decoration:none!important;color:#000" target="_blank">
+                                                                      <%= prop["rooms_number"] %>
+                                                                       pièces  •
+                                                                       <%= prop["surface"] %> m2
+                                                                  </a>
+                                                              </td>
+                                                          </tr>
+                            <tr>
+                              <td align="center" class="m_-1867408558110905584col100">
+                                  <table border="0" cellspacing="0" cellpadding="0" width="224" class="m_-1867408558110905584col100">
+                                      <tbody><tr>
+                                          <td class="" height="48" align="center" style="border-radius:24px" bgcolor="#2458FC"><a href="<%= prop["link"] %>" style="font-size:16px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;color:#ffffff;text-decoration:none;border-radius:26px;padding:10px 25px;display:inline-block" target="_blank" >Voir l'annonce</a></td>
+                                      </tr>
+                                  </tbody></table>
+                              </td>
+                          </tr>
+                                                      </tbody></table>
+                                                  </td>
+                                              </tr>
+                                          </tbody></table>
+                                      </div>
+
+
+                                  </td>
+                              </tr>
+
+                          </tbody></table>
+                      </a>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td align="center" style="padding-left:20px;padding-right:20px">
+                      
+                      <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                          <tbody><tr>
+                              <td align="center" width="100%" height="30" style="border-bottom:2px solid #dfdfdf">&nbsp;</td>
+                          </tr>
+                          <tr>
+                              <td align="center" width="100%" height="25">&nbsp;</td>
+                          </tr>
+                      </tbody></table>
+                  </td>
+              </tr>
+
+
+</tbody>
+
+<% end %>
+
+
+              <tr>
+                  <td align="center" style="padding-left:20px;padding-right:20px">
+                      <table border="0" cellspacing="0" cellpadding="0" width="250" align="center">
+                          <tbody><tr>
+                              <td height="40" align="center" bgcolor="#2458FC" style="border-radius:50px">
+                                  <a href="https://app.hellodingdong.com/hunters/1/hunter_searches" style="font-size:16px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;border-radius:50px;padding:6px 12px;display:inline-block" target="_blank"><img src="https://ci4.googleusercontent.com/proxy/5ZFDFf0u9a7OvyW1JpY_FAux4nBgfx6LTQm7RfPflaEbfdzZURSe3eneUZMOgzHmdLzOQ91vg1kC2tQgHuaDPDJ2gjfQ4JTwjrIez0ZUGtOCoBQ=s0-d-e1-ft#https://www.seloger.com/zi/flmkt/flash/ali/v2/icon-cloche-2x.png" width="11" height="12" alt="" style="margin:0 0 3px 0;display:inline;vertical-align:middle;border:0;font-family:sans-serif,'Source Sans Pro';font-size:14px;line-height:24px;color:#ffffff" class="CToWUd">
+                                      Voir mon dashboard
+                                  </a>
+                              </td>
+                          </tr>
+                      </tbody></table>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center" style="padding-left:20px;padding-right:20px">
+                      
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tbody><tr>
+                              <td align="center" width="100%" height="25">&nbsp;</td>
+                          </tr>
+                          <tr>
+                              <td class="m_-1867408558110905584contents" align="center" style="color:#262626;font-family:sans-serif,'Source Sans Pro';font-size:11px;line-height:13px;padding-top:0px;padding-bottom:0px;padding-right:20px;padding-left:20px;width:100%;text-align:center;width:600px">
+                                  <a href="" style="color:#262626;text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://t7.al.alerteimmo.com/r/?id%3Dh433655df,291b4fe6,291b5012&amp;source=gmail&amp;ust=1593760785273000&amp;usg=AFQjCNFwREXnBbjM_NhUfaVHMu8Iz5z_dA">© 2020 <span class="il">Ding Dong</span></a> Premium <br>
+
+                              </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </td>
+              </tr>
+             
+          </tbody>
+        </table>
+
+          
+
+      </div>
+
+  </center>
+<img height="0" width="0" alt="" src="https://ci5.googleusercontent.com/proxy/p939GwCMsdBt2MjMpiRpW62TWnpAkjKoV2k4_qlNlor3Yo8Nf4TlcxpDUTtvzQdMPGtf_f0PFCrKm7SOIkAYM9bABIiuUJDR8A=s0-d-e1-ft#http://t7.al.alerteimmo.com/r/?id=h433655df,291b4fe6,1" class="CToWUd"></div><div class="yj6qo"></div><div class="adL">
+</div></div></div><div id=":147" class="ii gt" style="display:none"><div id=":148" class="a3s aXjCH undefined"></div></div><div class="hi"></div></div>
+
+
