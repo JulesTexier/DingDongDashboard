@@ -7,8 +7,9 @@ class HunterSearch < ApplicationRecord
   has_many :properties, through: :selections, source: :property
 
   def get_matching_properties(limit = 24)
+    min_price = self.min_price.nil? ? 0 : self.min_price
     props = Property.where(
-      price: self.min_price..self.max_price,
+      price: min_price..self.max_price,
       rooms_number: self.min_rooms_number..Float::INFINITY,
       surface: self.min_surface..Float::INFINITY,
     ).order(id: :desc).limit(200)
