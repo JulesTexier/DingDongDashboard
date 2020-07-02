@@ -43,7 +43,12 @@
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰↘️ Budget Minimum ? *</h5>
     <div class="input-group mb-3">
-        <%= f.number_field :min_price, class: "form-control", placeholder: "Ex : 0", :required => true %>
+        <%= f.number_field :min_price, class: "form-control", placeholder: "Ex : 0", :required => false %>
+    </div>
+
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">💰↔️ Prix Maximum au m2 ? *</h5>
+    <div class="input-group mb-3">
+        <%= f.number_field :max_sqm_price, class: "form-control", placeholder: "Ex : 12 000", :required => false %>
     </div>
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">↔️ Surface minimum ? *</h5>
