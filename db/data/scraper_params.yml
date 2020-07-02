@@ -796,7 +796,7 @@
   params:
     - zone: Paris
       url: https://www.efficity.com/achat-immobilier/results/?inputed_location=8075056&property_type=1&max_price=&min_nb_of_rooms=1
-      main_page_cls: div.annonce
+      main_page_cls: div.programs-list-item
       scraper_type: Static
       waiting_cls: nil
       multi_page: false
