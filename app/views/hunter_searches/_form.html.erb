@@ -13,21 +13,11 @@
         <%= f.text_field :research_name, class: "form-control", placeholder: "Ex : Recherche 1", :required => true %>
     </div>
 
-    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Secteur * </h5>
+    <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">📍 Secteurs * </h5>
 
-    <% if false%>
-        <div class="d-flex flex-wrap"> 
-        <%= f.collection_check_boxes(:areas, @areas, :id, :name) do |b| %>
-        <%= b.label class: "label-checkbox my-3 col-xs-6 col-md-3 col-lg-2 " do %>
-            <%= b.check_box(checked: @hs_areas.include?(b.value)) + " " + b.text %>
-            <% end %>
-        <% end %>
-    </div>
-
-    <% end %>
 
     <div class="raw d-flex flex-wrap">
-        <% if false %><h6>Paris</h6> <% end %>
+        <h6>Arrondissements parisiens</h6>
         <div class="form-group col-12 p-0">
             <select multiple class="form-control" id="choices-multiple-remove-button" name="paris_areas[]">
                 <% @paris_areas.each do |item| %>
