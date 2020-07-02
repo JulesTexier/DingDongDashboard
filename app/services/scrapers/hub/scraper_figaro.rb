@@ -20,6 +20,7 @@ class Hub::ScraperFigaro < Scraper
           hashed_property[:flat_type] = regex_gen(access_xml_link(item, "a.js-link-ei", "title")[0], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
           hashed_property[:flat_type] == "Studio" ? hashed_property[:rooms_number] = 1 : hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "span.price-label"), '(\d)(.*)(€)').to_int_scrp
+          hashed_property[:is_new_construction] = access_xml_text(item, 'span.label-brand').include?("Avec Figaro Immoneuf")
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             if hashed_property[:link].include?("https://proprietes.lefigaro.fr")

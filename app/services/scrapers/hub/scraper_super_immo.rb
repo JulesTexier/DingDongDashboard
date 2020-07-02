@@ -18,6 +18,7 @@ class Hub::ScraperSuperImmo < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "b:nth-child(2)"), args.zone)
           hashed_property[:rooms_number] = regex_gen(item.text, '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "p > a > b.prix"), '(\d)(.*)(€)').to_int_scrp
+          hashed_property[:is_new_construction] = access_xml_text(item, 'p.js-desc-truncate').tr("\r\n", "").partition(" ").first == "Programme"
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "h1"), '(\d+)(.?)(chambre(s?))').to_int_scrp
