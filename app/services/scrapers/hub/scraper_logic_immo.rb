@@ -13,12 +13,13 @@ class Hub::ScraperLogicImmo < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = access_xml_link_matchdata(item, "div.offer-details-location > a", "href", "https://www.lux-residence.com/")[0].to_s
+          hashed_property[:link] = access_xml_link_matchdata(item, "a.offer-link", "href", "https://www.lux-residence.com/")[0].to_s
           next if hashed_property[:link].to_s.strip.empty?
           hashed_property[:surface] = access_xml_text(item, " div.offer-details-caracteristik > a > span.offer-details-caracteristik--area > span").to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.offer-details-location"), args.zone)
           hashed_property[:rooms_number] = access_xml_text(item, "div.offer-details-caracteristik > a > span.offer-details-caracteristik--rooms > span").to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.offer-details-price > p.offer-price > span"), '(\d)(.*)(€)').to_int_scrp
+          hashed_property[:is_new_construction] = access_xml_text(item, 'div.flag.flag-blue > span').include?("Programme Neuf")
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.unstyled.flex").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp

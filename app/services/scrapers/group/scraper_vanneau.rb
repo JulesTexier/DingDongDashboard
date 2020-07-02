@@ -24,7 +24,6 @@ class Group::ScraperVanneau < Scraper
             html = fetch_static_page(hashed_property[:link])
             element_arr = access_xml_text(html, "div.specifications > div").remove_acc_scrp.tr("\n", "").split("  ").uniq
             hashed_property[:rooms_number] = element_arr[element_arr.index(" pieces :") + 1].to_int_scrp ## get the next index if the index is equal to "pieces"
-            byebug if hashed_property[:rooms_number].nil?
             hashed_property[:description] = access_xml_text(html, "div.description").strip
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.informations__main > h1"), args.zone)
             hashed_property[:area] = perform_district_regex(hashed_property[:description], args.zone) if hashed_property[:area] == "N/C"

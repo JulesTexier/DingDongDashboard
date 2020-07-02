@@ -55,7 +55,7 @@ RSpec.describe Subscriber, type: :model do
 
         context "floor is known (and ok) and elevator is not false" do
           before :each do
-            @property.first[4] = @subscriber.min_floor
+            @property.first["floor"] = @subscriber.min_floor
           end
 
           it "should match user and property (known floor)" do
@@ -65,7 +65,7 @@ RSpec.describe Subscriber, type: :model do
           end
 
           it "should match user and property (known floor)" do
-            @property.first[6] = true
+            @property.first["has_elevator"] = true
             @property.each do |prop|
               expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
             end

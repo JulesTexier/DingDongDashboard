@@ -79,7 +79,7 @@ class HunterSearch < ApplicationRecord
     if self.min_elevator_floor.nil?
       return true
     else
-      if !has_elevator.nil?
+      if !has_elevator.nil? && !floor.nil?
         if has_elevator
           return true
         else

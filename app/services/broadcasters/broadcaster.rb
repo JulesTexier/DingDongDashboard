@@ -25,7 +25,7 @@ class Broadcaster
   end
 
   def new_properties_gallery
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images)
     properties = Property
       .unprocessed
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }
@@ -92,7 +92,7 @@ class Broadcaster
 
   def hunter_searched_not_live_processed
     # // Load properties scraped in the last hour 
-    properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator)
+    properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(:id, :rooms_number, :surface, :price, :floor, :area_id, :has_elevator, :images)
     
     hs = HunterSearch.not_live_broadcasted.where(is_active: true)
     hs.each do |hs| 
@@ -103,7 +103,7 @@ class Broadcaster
           hunter_search_props.push(prop)
         end
       end
-      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
     end
   end
 
@@ -115,7 +115,7 @@ class Broadcaster
 
   def update_processed_properties(properties)
     properties.each do |p|
-      prop = Property.find(p[0])
+      prop = Property.find(p["id"])
       prop.has_been_processed = true
       prop.save
     end

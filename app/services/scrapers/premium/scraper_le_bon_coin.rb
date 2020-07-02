@@ -13,7 +13,6 @@ class Premium::ScraperLeBonCoin < Scraper
       xml = fetch_main_page(args)
       if !xml[0].to_s.strip.empty?
         json = extract_json(xml)
-        hashed_properties = []
         if !json.nil?
           json["data"]["ads"].each do |item|
             begin
@@ -79,6 +78,8 @@ class Premium::ScraperLeBonCoin < Scraper
         flat_data[:rooms_number] = element["value_label"].to_i
       when "real_estate_type"
         flat_data[:flat_type] = get_type_flat(element["value_label"])
+      when "immo_sell_type"
+        flat_data[:is_new_construction] = element["value"] != "old"
       end
     end
 

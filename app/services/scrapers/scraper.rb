@@ -377,7 +377,7 @@ class Scraper
       ## but that we probably can retrieve it in property show
       response = false
     elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
-      price_threshold = prop[:area].include?("Paris") ? 5000 : 1000
+      price_threshold = prop[:area].include?("Paris") ? 7000 : 1000
       sqm = prop[:price].to_i / prop[:surface].to_i
       response = sqm < price_threshold ? true : false
     else

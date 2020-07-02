@@ -1,20 +1,20 @@
 <h1>De nouveaux biens viennent d'être récupérés !</h1>
-<h2>Concernant la recherche : <%= @hunter_search.name%>
+<h2>Concernant la recherche : <%= @hunter_search.research_name%>
 </h2>
 
 <table>
   <% @props.each do |prop| %>
     <tr>
       <td>
-        <img src="<%= prop.images[0]%>" style="width:300px"/>
+        <img src="<%= prop["images"][0]%>" style="width:300px"/>
       </td>
       <td>
         <ul>
-          <li>Prix : <%= prop.get_pretty_price %> €</li>
-          <li>Surface : <%= prop.surface %> m2</li>
-          <li>Nombre de pièces : <%= prop.rooms_number %></li>
-          <li>Etage : <%= prop.floor %></li>
-          <li>Lien de l'annonce : <%= prop.link %></li>
+          <li>Prix : <%= prop["price"] %> €</li>
+          <li>Surface : <%= prop["surface"] %> m2</li>
+          <li>Nombre de pièces : <%= prop["rooms_number"] %></li>
+          <li>Etage : <%= prop["floor"] %></li>
+          <li>Lien de l'annonce : <%= prop["link"] %></li>
         </ul>
       </td>
     </tr>
