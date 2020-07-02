@@ -17,7 +17,7 @@ RSpec.describe HunterSearch, type: :model do
       describe "case hunter_search MATCH properties values" do
         before :each do
           prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
@@ -62,7 +62,7 @@ RSpec.describe HunterSearch, type: :model do
       describe "Property NOT matchs" do
         before :each do
           prop = FactoryBot.create(:property, price: @hunter_search.min_price, surface: @hunter_search.min_surface, area: @hunter_search.areas.first, rooms_number: @hunter_search.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 

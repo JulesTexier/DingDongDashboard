@@ -90,7 +90,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_x_last_props(max_number)
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link link)
     props = Property
       .order(id: :desc)
       .limit(1000)
@@ -107,7 +107,7 @@ class Subscriber < ApplicationRecord
 
   def get_props_in_lasts_x_days(x_previous_days)
     start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
     props = Property
       .where("created_at >= ?", start_date)
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }
@@ -126,7 +126,7 @@ class Subscriber < ApplicationRecord
     now = DateTime.now.in_time_zone("Europe/Paris")
     start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
     end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
     props = Property
       .where("created_at BETWEEN ? AND ?", start_date, end_date)
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }

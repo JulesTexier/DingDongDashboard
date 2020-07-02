@@ -41,7 +41,7 @@ RSpec.describe Subscriber, type: :model do
       describe "case subscriber matching properties values" do
         before :each do
           prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
@@ -86,7 +86,7 @@ RSpec.describe Subscriber, type: :model do
       describe "Property NOT matchs" do
         before :each do
           prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
