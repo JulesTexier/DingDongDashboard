@@ -88,7 +88,7 @@
 
               <li class="list-group-item pl-0 pr-0 d-flex justify-content-center pt-3 pb-3">
                 <div class="text-center">
-                   ️️⏱ <span class="font-italic">Publié le <%= property.created_at.strftime("%d/%m/%Y à %H:%M") %></span>
+                   ️️⏱ <span class="font-italic">Publié le <%= property.created_at.in_time_zone('Paris').strftime("%d/%m/%Y à %H:%M") %></span>
                 </div>
               </li>
 

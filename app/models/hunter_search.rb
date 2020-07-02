@@ -15,12 +15,14 @@ class HunterSearch < ApplicationRecord
 
     prop_array = []
     props.each do |prop|
-      self.areas.each do |area|
-        if prop.area == area
-          if prop.has_elevator == false && prop.floor != nil
-            prop_array.push(prop) if self.min_elevator_floor > prop.floor
-          else
-            prop_array.push(prop)
+      if self.is_matching_max_sqm_price(prop.price, prop.surface)
+        self.areas.each do |area|
+          if prop.area == area
+            if prop.has_elevator == false && prop.floor != nil 
+              prop_array.push(prop) if self.min_elevator_floor > prop.floor
+            else
+              prop_array.push(prop)
+            end
           end
         end
       end

@@ -81,6 +81,7 @@ class HunterSearchesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to hunter_hunter_search_path(@hunter, @hunter_search) } 
         format.js { redirect_to hunter_hunter_searches_path(@hunter) }
+        format.xml { head :ok }
       end
     else
       render "edit"
@@ -88,6 +89,7 @@ class HunterSearchesController < ApplicationController
   end
 
   def destroy
+    Selection.where(hunter_search: @hunter_search).destroy_all
     @hunter_search.destroy
     respond_to do |format|
       format.html { redirect_to hunter_hunter_searches_path }
