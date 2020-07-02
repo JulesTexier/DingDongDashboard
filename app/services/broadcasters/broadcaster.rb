@@ -60,7 +60,7 @@ class Broadcaster
           hunter_search_props.push(prop)
         end
       end
-      HunterMailer.notification_email(hunter_search.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
+      HunterMailer.notification_email(hunter_search.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
     end
     update_processed_properties(properties)
   end
@@ -116,7 +116,7 @@ class Broadcaster
 
   def update_processed_properties(properties)
     properties.each do |p|
-      prop = Property.find(p[0])
+      prop = Property.find(p["id"])
       prop.has_been_processed = true
       prop.save
     end
