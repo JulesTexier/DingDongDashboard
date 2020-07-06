@@ -21,7 +21,7 @@ class Independant::ScraperLoretoImmo < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, ".detail_description").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(item, "p.type"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "p.type"))
             hashed_property[:agency_name] = "Loreto Immo"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

@@ -19,7 +19,7 @@ class Independant::ScraperHomizy < Scraper
           next if hashed_property[:area] == "N/C"
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "header.lstbody > h2").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.left-caption > span:nth-child(2) > span:nth-child(1)").to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "header.lstbody > h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "header.lstbody > h2"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "article.elementDt > p").specific_trim_scrp("\n").strip.gsub("L'équipe d'Homizy se tient à votre disposition par téléphone ou par mail pour répondre à vos questions et organiser une visite. Notre commission de commercialisation est de 4 500 euros fixe, à la charge du vendeur.", "")

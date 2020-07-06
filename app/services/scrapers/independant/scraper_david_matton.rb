@@ -24,7 +24,7 @@ class Independant::ScraperDavidMatton < Scraper
             detail = access_xml_text(html, "#detailCarac")
             hashed_property[:description] = access_xml_text(html, ".description").strip
             hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp if regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp != 0
-            hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'div.col-sm-6:nth-child(2)').tr("\r\t\n", ""))
             hashed_property[:agency_name] = @source
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

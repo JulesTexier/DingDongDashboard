@@ -19,6 +19,7 @@ class Independant::ScraperCphImmobilier < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.typo-body").tr("\n\r\t", "").strip, '(ce\(s\))(.?)(\d+)').to_int_scrp
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(item, "div.typo-body").tr("\n\r\t", "").strip, '(Chambre\(s\))(.*)(\d+)').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.prix-annonce").strip.split("\r")[0].to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.bloc-detail-descriptif").strip

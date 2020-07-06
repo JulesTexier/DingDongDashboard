@@ -17,7 +17,7 @@ class Independant::ScraperEyleau < Scraper
           hashed_property[:surface] = regex_gen(access_xml_text(item, "p.info > span:nth-child(1)"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:price] = access_xml_text(item, "span.always > p:nth-child(2)").to_int_scrp
           hashed_property[:rooms_number] = access_xml_text(item, "p.info > span:nth-child(2)").to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "p.type"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "p.type"))
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.always > p:nth-child(1)"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])

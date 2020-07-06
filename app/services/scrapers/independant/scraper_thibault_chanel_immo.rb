@@ -23,7 +23,7 @@ class Independant::ScraperThibaultChanelImmo < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.property-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)").strip
-            hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
+            hashed_property[:flat_type] = "N/C"
             hashed_property[:has_elevator] = perform_elevator_regex(hashed_property[:description])
             raw_elevator = access_xml_text(html, ".value-_noo_property_field_ascenseur")
             if !raw_elevator.empty? && !hashed_property[:has_elevator].nil?

@@ -20,6 +20,7 @@ class Independant::ScraperAgenceTroisFreres < Scraper
             hashed_property[:rooms_number] = room.text.to_int_scrp if room.at("i").attributes["class"].value.include?("pp-normal-door-in")
           end
           hashed_property[:price] = access_xml_text(item, "div.property-box-image-price").to_int_scrp
+          hashed_property[:flat_type] = 'N/C'
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.property-description > p").tr("\n\t\r", "").strip

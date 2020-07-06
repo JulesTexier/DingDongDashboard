@@ -18,6 +18,7 @@ class Independant::ScraperGreenAcres < Scraper
           access_xml_text(item, "div.item-details > ul > li:nth-child(2)").empty? ? hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h3.item-title.has-summary"), "(\d+)(.?)(pi(e|è)ce(s?))").to_int_scrp : hashed_property[:rooms_number] = access_xml_text(item, "div.item-details > ul > li:nth-child(2)").to_int_scrp
           next if hashed_property[:rooms_number] == 0
           hashed_property[:price] = access_xml_text(item, "p.item-price").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h3.item-title"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "#mainInfoAdvertPage > div > ul"), '(\d+)(.?)(chambre(s?))').to_int_scrp

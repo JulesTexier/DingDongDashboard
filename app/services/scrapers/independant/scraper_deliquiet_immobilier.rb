@@ -22,12 +22,12 @@ class Independant::ScraperDeliquietImmobilier < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".carac"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           price_item = access_xml_text(item, ".carac > div:nth-child(3)")
           price_item.include?("dont") ? hashed_property[:price] = regex_gen(price_item, '(\d)(.*)(dont)').to_int_scrp : hashed_property[:price] = price_item.to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             detail = access_xml_text(html, "#detailCarac")
             hashed_property[:description] = access_xml_text(html, ".description").strip
             hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp if regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp != 0
-            hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
             hashed_property[:agency_name] = @source
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

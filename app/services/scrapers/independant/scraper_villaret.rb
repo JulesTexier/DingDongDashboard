@@ -23,6 +23,7 @@ class Independant::ScraperVillaret < Scraper
           next if hashed_property[:price].nil?
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
+            hashed_property[:flat_type] = "N/C"
             hashed_property[:description] = access_xml_text(html, "div.product-desc").strip
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

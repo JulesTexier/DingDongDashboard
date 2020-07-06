@@ -29,7 +29,7 @@ class Independant::ScraperKmi < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div#description").tr("\n\t", "").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, "div.property_categs"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "div.property_categs"))
             hashed_property[:agency_name] = access_xml_text(html, "div.agent_unit > div:nth-child(2) > h4 > a").tr("\n\r\t", "")
             hashed_property[:contact_number] = access_xml_text(html, "div.agent_unit > div:nth-child(2) > div:nth-child(3)").convert_phone_nbr_scrp
             hashed_property[:provider] = "Agence"

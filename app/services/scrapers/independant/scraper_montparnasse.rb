@@ -24,6 +24,7 @@ class Independant::ScraperMontparnasse < Scraper
           hashed_property[:price] = access_xml_text(item, "div.products-price").split("dont")[0].to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'span[itemprop=name]'))
             hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "#box_slider_header_product > div > ul").remove_acc_scrp, '(\d+)(.?)(piece\(s\))').to_int_scrp if hashed_property[:rooms_number].nil?
             hashed_property[:surface] = regex_gen(access_xml_text(html, "#box_slider_header_product > div > ul"), '(\d+)(.?)(\d+)(.?)(m)').to_float_to_int_scrp if hashed_property[:surface].nil?
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")

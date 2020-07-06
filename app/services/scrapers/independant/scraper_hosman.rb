@@ -22,7 +22,7 @@ class Independant::ScraperHosman < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.container:nth-child(2)").strip.gsub("l\'oeil de l'expert", "").gsub(/[^[:print:]]/, "").gsub('\n', "")
-            hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
+            hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(hashed_property[:description], '(\d+)(.?)(chambre(s?))').to_int_scrp
             hashed_property[:agency_name] = @source
             hashed_property[:provider] = "Agence"

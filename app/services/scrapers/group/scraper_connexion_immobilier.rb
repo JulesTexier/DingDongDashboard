@@ -14,16 +14,17 @@ class Group::ScraperConnexionImmobilier < Scraper
         begin
           hashed_property = {}
           hashed_property[:link] = regex_gen(access_xml_link(item, "a.gp", "href")[0], "(&url=http)(.)*").gsub("&url=", "")
-          hashed_property[:surface] = access_xml_text(item, ".surface>span").to_int_scrp
+          hashed_property[:surface] = access_xml_text(item, ".surface > span").to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, ".city > nobr"))
           hashed_property[:rooms_number] = access_xml_text(item, ".rooms").to_int_scrp
           hashed_property[:price] = access_xml_text(item, ".price").to_s.force_encoding("UTF-8").split("€")[0].to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.desc").strip.gsub(/[^[:print:]]/, "")
-            !access_xml_text(item, ".bedrooms").empty? ? hashed_property[:bedrooms_number] = access_xml_text(item, ".bedrooms").to_int_scrp : nil
-            access_xml_text(item, ".floor").gsub(/[^[:print:]]/, "").include?("RDC") ? hashed_property[:floor] = 0 : hashed_property[:floor] = access_xml_text(item, ".floor").to_int_scrp
-            (access_xml_link(item, ".floor", "class")[0].include?("nolift") || access_xml_link(item, ".floor", "class")[0].include?("floorrdc")) ? hashed_property[:has_elevator] = false : hashed_property[:has_elevator] = true
+            hashed_property[:bedrooms_number] = access_xml_text(item, ".bedrooms").to_int_scrp if !access_xml_text(item, ".bedrooms").empty?
+            hashed_property[:floor] = access_xml_text(item, ".floor").gsub(/[^[:print:]]/, "").include?("RDC") ?  0 : access_xml_text(item, ".floor").to_int_scrp
+            hashed_property[:has_elevator] = (access_xml_link(item, ".floor", "class")[0].include?("nolift") || access_xml_link(item, ".floor", "class")[0].include?("floorrdc")) ? false : true
+            hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:agency_name] = access_xml_text(html, "#detformcall > div.txt > p.name")

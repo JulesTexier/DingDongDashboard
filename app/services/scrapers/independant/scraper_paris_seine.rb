@@ -21,6 +21,7 @@ class Independant::ScraperParisSeine < Scraper
           hashed_property[:price] = access_xml_array_to_text(item, "div.carac > div:nth-child(3)").split("\u0080")[0].to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'div.col-sm-6:nth-child(2)').tr("\r\t\n", ""))
             hashed_property[:description] = access_xml_text(html, "div.description").tr("\n\t\r", "").strip
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = "+33145446600"

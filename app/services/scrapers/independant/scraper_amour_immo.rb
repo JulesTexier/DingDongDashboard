@@ -22,7 +22,7 @@ class Independant::ScraperAmourImmo < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:rooms_number] = regex_gen(access_xml_text(html, ".titrecaracteristiquedubien > ul"), '(Pi(è|e)ce(s?))(...)(\d+)').tr("^0-9", "").to_float_to_int_scrp
             hashed_property[:description] = access_xml_text(html, ".description").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h2 > .categ"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h2 > .categ"))
             hashed_property[:agency_name] = "Amour Immobilier"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

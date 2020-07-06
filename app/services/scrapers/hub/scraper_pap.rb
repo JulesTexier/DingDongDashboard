@@ -23,7 +23,7 @@ class Hub::ScraperPap < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.item-tags.margin-bottom-20").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
             hashed_property[:description] = access_xml_text(html, "div.item-description").specific_trim_scrp("\n\t\r").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, "h1.item-title"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "h1.item-title"))
             hashed_property[:provider] = "Particulier"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "div.owl-thumbs.sm-hidden img", "src")

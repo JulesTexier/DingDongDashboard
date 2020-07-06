@@ -21,7 +21,7 @@ class Group::ScraperLaforet < Scraper
           if go_to_prop?(hashed_property, 7)
             property = fetch_json_get(item["links"]["self"])
             hashed_property[:bedrooms_number] = item["bedrooms"]
-            hashed_property[:flat_type] = item["type_label"]
+            hashed_property[:flat_type] = get_type_flat(item["type_label"])
             hashed_property[:description] = property["description"]
             hashed_property[:floor] = property["floor"]
             hashed_property[:has_elevator] = property["has_lift"]

@@ -21,7 +21,7 @@ class Group::ScraperEraFrance < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.description.principale").tr("\n\t", "").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, "h2.titre_bien"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "h2.titre_bien"))
             hashed_property[:agency_name] = access_xml_text(html, ".contact_agence_details > a > h3").tr("\n\r\t", "")
             agency_area = perform_district_regex(access_xml_text(html, "p.contact_agence_ville"), args.zone)
             desc_area = perform_district_regex(hashed_property[:description], args.zone)

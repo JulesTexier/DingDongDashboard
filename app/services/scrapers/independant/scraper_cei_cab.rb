@@ -20,6 +20,7 @@ class Independant::ScraperCeiCab < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "h3"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, 'h2[itemprop="name"]').gsub(" ", "").gsub(/[^[:print:]]/, ""), '(\d)*pi').to_int_scrp
           hashed_property[:price] = access_xml_link(item, "span[itemprop='price']", "content")[0].to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = access_xml_text(html, ".chambre").to_int_scrp

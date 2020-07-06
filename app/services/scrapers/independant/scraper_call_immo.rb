@@ -19,7 +19,7 @@ class Independant::ScraperCallImmo < Scraper
           next if hashed_property[:area] == "N/C"
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.vertical-align > h2").tr("\r\n\s\t", "").strip, '(\d+)(.?)(pi(è|e)ce(s?))').to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.vertical-align > h3"), '(\d)(.*)(€)').to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.vertical-align > h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.vertical-align > h2"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.read-more").specific_trim_scrp("\n").strip

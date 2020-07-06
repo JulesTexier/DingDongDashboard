@@ -19,6 +19,7 @@ class Independant::ScraperPrimas < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "p.address"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "p.infoSup").remove_acc_scrp, '(\d+)(.?)(piece(s?))').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "span.price").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, 'a[title]'))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.description").tr("\n\t\r", "").strip

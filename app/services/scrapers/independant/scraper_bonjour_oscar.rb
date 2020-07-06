@@ -17,6 +17,7 @@ class Independant::ScraperBonjourOscar < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.listGoods-zip"))
           hashed_property[:price] = regex_gen(access_xml_text(item, "span.listGoods-price"), '(\d)(.*)').to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.listGoods-infoBarRight > span:nth-child(1)"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "span.listGoods-category"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:surface] = access_xml_text(html, "li.spaces-item:nth-child(1) > span:nth-child(2)").to_float_to_int_scrp

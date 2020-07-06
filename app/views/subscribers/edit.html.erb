@@ -34,7 +34,7 @@ $(document).ready(function(){
 
       <h4 class="mb-3 mt-4" style="color: #0470C1; font-weight:600; ">Renseignez vos 6 critères de recherche ci-dessous : </h6> 
 
-      <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/6 📍 Arrondissement/ville ? *</h5>
+      <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/7 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
         <% if false %><h6>Paris</h6> <% end %>
         <div class="form-group col-12 p-0">
@@ -55,7 +55,7 @@ $(document).ready(function(){
       </div>
 
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">2/6 💰 Prix d'achat maximum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">2/7 💰 Prix d'achat maximum ? *</h5>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">€</span>
@@ -63,7 +63,7 @@ $(document).ready(function(){
             <%= f.number_field :max_price, class: "form-control", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">3/6 ↔️ Surface minimum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">3/7 ↔️ Surface minimum ? *</h5>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">m2</span>
@@ -71,24 +71,24 @@ $(document).ready(function(){
             <%= f.number_field :min_surface, type: "number", class: "form-control", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">4/6 🏡 Nombre de pièces minimum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">4/7 🏡 Nombre de pièces minimum ? *</h5>
         <div class="input-group mb-3">
             <%= f.number_field :min_rooms_number, class: "form-control", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">5/6 🎢 A partir de quel étage minimum ?</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">5/7 🎢 A partir de quel étage minimum ?</h5>
         <h6 style="color: #0470C1; font-weight:200;">ex: 1 si vous ne souhaitez pas de Rez-de-Chaussée</h5>
         <div class="input-group mb-3">
             <%= f.number_field :min_floor, class: "form-control", placeholder: "Ex : 1", min: "0", max: "8" %>
         </div>
     
-        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">6/6 🚠A partir de quel étage souhaitez-vous un ascenseur?</h5>
+        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">6/7 🚠A partir de quel étage souhaitez-vous un ascenseur?</h5>
         <h6 style="color: #0470C1; font-weight:200;">ex: 3 si vous souhaitez un ascenseur à partir du 3ème étage</h5>
         <div class="input-group mb-3" style="margin-bottom:4.5rem">
             <%= f.number_field :min_elevator_floor, class: "form-control", placeholder: "Ex : 3", min: "0", max: "8" %>
         </div>
 
-        <% if false %>
+       
         <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">7/7 + de critères</h5>
         <h6 style="color: #0470C1; font-weight:200;">Cochez les cases suivantes si vous souhaitez recevoir uniquement les annonces contenant l'information suivante :</h5>
         <div class="form-check form-check-inline">
@@ -107,7 +107,7 @@ $(document).ready(function(){
             <%= f.check_box :last_floor, class: "form-check-input" %> 
             <%= f.label "Dernière étage", class: "form-check-label" %> 
         </div> 
-        <% end %>
+
         <br/><br/><br/>
         <div class="d-flex justify-content-center mt-4 mb-6">
         -------- 🔔--------

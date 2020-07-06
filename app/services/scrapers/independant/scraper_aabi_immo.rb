@@ -18,6 +18,7 @@ class Independant::ScraperAabiImmo < Scraper
           hashed_property[:surface] = access_xml_text(item, "li.area").to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "h3"))
           hashed_property[:price] = access_xml_text(item, "span.price").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "p"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:rooms_number] = regex_gen(access_xml_text(html, "div.summary.details.clearfix").remove_acc_scrp, '(piece(s?))(.?)(\d+)(.?)(piece(s?))').to_int_scrp

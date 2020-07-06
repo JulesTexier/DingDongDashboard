@@ -17,7 +17,7 @@ class Independant::ScraperDistrictImmo < Scraper
           hashed_property[:link] = "https://www.district-immo.com" + access_xml_link(item, "div.item-property-photo > a", "href")[0]
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.item-property-size"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.item-property-area > p"))
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.item-property-area"), "(appartement|studio|duplex|triplex)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.item-property-area"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.item-property-size").remove_acc_scrp, '(\d+)(.?)(piece(s?))').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.item-property-price").split("Honoraires")[0].to_int_scrp
           if go_to_prop?(hashed_property, 7)

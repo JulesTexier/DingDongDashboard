@@ -18,7 +18,7 @@ class Independant::ScraperDeferla < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "p.localisation > b"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4 > a"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = access_xml_text(item, "h4.text-right > a").to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h4 > a"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h4 > a"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.content > p").specific_trim_scrp("\n").strip
