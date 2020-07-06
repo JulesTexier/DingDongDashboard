@@ -26,7 +26,7 @@ class Independant::ScraperProprioo < Scraper
                 html = fetch_static_page(hashed_property[:link])
                 desc = html.xpath("//main/div/div[3]/div/div/div[1]/div[4]").text.strip
                 hashed_property[:description] = desc.gsub("Proprioo vous propose à la vente", "").gsub("Proprioo, l’agence nouvelle génération, vous propose à la vente", "")
-                hashed_property[:flat_type] = item["typeBien"]
+                hashed_property[:flat_type] = get_type_flat(item["typeBien"])
                 hashed_property[:bedrooms_number] = item["nbBedrooms"]
                 hashed_property[:provider] = "Agence"
                 hashed_property[:source] = @source

@@ -19,6 +19,7 @@ class Independant::ScraperGaranceImmo < Scraper
           hashed_property[:rooms_number] = access_xml_text(item, "span.icon_pieces").gsub(/[[:space:]]/i, "").to_int_scrp
           hashed_property[:bedrooms_number] = access_xml_text(item, "span.icon_chambres").gsub(/[[:space:]]/i, "").to_int_scrp
           hashed_property[:price] = access_xml_text(item, "h4:nth-child(20)").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.col-md-6.col-xs-12 > div:nth-child(2)").strip

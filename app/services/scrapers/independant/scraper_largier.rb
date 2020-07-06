@@ -17,7 +17,7 @@ class Independant::ScraperLargier < Scraper
           hashed_property[:surface] = access_xml_text(item, "div.moreInfos > ul > li:nth-child(3)").to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "figcaption > p:nth-child(1)"))
           hashed_property[:price] = access_xml_text(item, "figcaption > p:nth-child(2)").to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.moreInfos > ul > li:nth-child(1)"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)").capitalize
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.moreInfos > ul > li:nth-child(1)"))
           hashed_property[:rooms_number] = access_xml_text(item, "div.moreInfos > ul > li:nth-child(2)").to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])

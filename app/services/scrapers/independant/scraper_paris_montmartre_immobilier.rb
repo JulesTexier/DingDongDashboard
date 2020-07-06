@@ -21,6 +21,7 @@ class Independant::ScraperParisMontmartreImmobilier < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             detail = access_xml_text(html, "#detail").strip.tr(" ", "")
+            hashed_property[:flat_type] = "N/C"
             hashed_property[:bedrooms_number] = regex_gen(detail, 'Chambre(s?):(\d)*').to_int_scrp
             hashed_property[:description] = access_xml_text(html, "#description>p").strip
             hashed_property[:agency_name] = @source

@@ -22,7 +22,7 @@ class Independant::ScraperEngelVoelkers < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(html, "ul.ev-exposee-detail-facts"), 'Pi(e|è)ce(s?)(.?)(\d+)').to_int_scrp
             hashed_property[:description] = access_xml_text(html, "p.ev-exposee-text").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, ".ev-exposee-subtitle"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, ".ev-exposee-subtitle"))
             hashed_property[:agency_name] = "Engel Voelkers"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

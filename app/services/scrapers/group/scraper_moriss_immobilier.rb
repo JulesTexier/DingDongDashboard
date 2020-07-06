@@ -20,7 +20,8 @@ class Group::ScraperMorissImmobilier < Scraper
             next if hashed_property[:area] == "N/C"
             hashed_property[:rooms_number] = access_xml_text(item, "div.inforoom_unit_type4 > span").to_int_scrp
             hashed_property[:price] = access_xml_text(item, "div.listing_unit_price_wrapper").to_int_scrp
-            hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h4 > a"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h4 > a"))
+            hashed_property[:flat_type] = get_type_flat(hashed_property[:link]) if hashed_property[:flat_type] == "N/C"
             if go_to_prop?(hashed_property, 7)
               html = fetch_static_page(hashed_property[:link])
               hashed_property[:description] = access_xml_text(html, "div.wpestate_property_description > p").specific_trim_scrp("\n").strip

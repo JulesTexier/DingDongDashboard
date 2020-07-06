@@ -19,6 +19,7 @@ class Independant::ScraperEtudeLepic < Scraper
           hashed_property[:rooms_number] = access_xml_text(item, "li.pieces > div.ctn-li > span.txt").to_int_scrp
           hashed_property[:bedrooms_number] = access_xml_text(item, "li.chambres > div.ctn-li > span.txt").to_int_scrp
           hashed_property[:price] = access_xml_text(item, "span.price").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "span.type"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.description").tr("\n\t\r", "").strip

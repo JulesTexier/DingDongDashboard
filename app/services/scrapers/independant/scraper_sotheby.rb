@@ -18,7 +18,7 @@ class Independant::ScraperSotheby < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "figcaption > p:nth-child(1) > span"))
           hashed_property[:rooms_number] = access_xml_text(item, "span.ico_piece > span").to_float_to_int_scrp + 1
           hashed_property[:price] = regex_gen(access_xml_text(item, "figcaption > p:nth-child(2) > span"), '(\d)(.*)(€)').to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "figcaption > p:nth-child(3)"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "figcaption > p:nth-child(3)"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.detailDescriptif > p").specific_trim_scrp("\n").strip

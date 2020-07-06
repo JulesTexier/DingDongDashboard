@@ -22,7 +22,7 @@ class Independant::ScraperLaMaisonImmo < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, ".description").strip
             hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, ".listing_criteres").gsub(" ", ""), '(,)(\d*)(Ch)').to_int_scrp if access_xml_text(item, ".listing_criteres").gsub(" ", "").match(/(,)(\d*)(Ch)/i).is_a?(MatchData)
-            hashed_property[:flat_type] = get_type_flat(hashed_property[:description])
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'div.col-sm-6:nth-child(2)').tr("\r\t\n", ""))
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []

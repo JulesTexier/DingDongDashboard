@@ -22,7 +22,7 @@ class Independant::ScraperCapitaliParis < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "ul.list-group:nth-child(2) > li.list-group-item:nth-child(1) > div").split("Code postal")[1])
             hashed_property[:description] = access_xml_text(html, ".description").gsub("\t", "").gsub("\n", "").strip
-            hashed_property[:flat_type] = regex_gen(hashed_property[:description], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'div.col-sm-6:nth-child(2)').tr("\r\t\n", ""))
             hashed_property[:agency_name] = "Capitali Paris"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

@@ -18,12 +18,12 @@ class Independant::ScraperVillageBleu < Scraper
           hashed_property[:area] = perform_district_regex(hashed_property[:link])
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, ".annonce-pieces"), "([0-9]){1,}").to_float_to_int_scrp
           hashed_property[:price] = access_xml_text(item, ".annonce-prix").strip.to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.detail-desc-txt").strip
             details = access_xml_text(html, ".detail-sign").strip.gsub(" ", "").gsub(/[^[:print:]]/, "").downcase.remove_acc_scrp
             hashed_property[:bedrooms_number] = regex_gen(details, 'chambre(s){0,}(\d){1,}').to_int_scrp
-            hashed_property[:flat_type] = "Appartement"
             floor = regex_gen(details, 'etage{0,}((\d){1,}|rdc)').gsub("etage", "")
             floor == "rdc" ? hashed_property[:floor] = 0 : hashed_property[:floor] = floor.to_int_scrp
             elevator = regex_gen(details, "ascenseuroui").gsub("ascenseur", "")

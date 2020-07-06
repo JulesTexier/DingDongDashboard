@@ -19,7 +19,7 @@ class Hub::ScraperProprietesFigaro < Scraper
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(item, "ul.itemlist-caracteristiques"), '(\d+(.?)(?=chambres))').to_float_to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.itemlist-infos > ul > li:nth-child(2) > span.nb"), '(\d+(.?)(\d*))').to_float_to_int_scrp
           hashed_property[:price] = access_xml_text(item, "span.itemlist-price-nb").to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "span.itemlist-title"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "span.itemlist-title"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "#js-description").specific_trim_scrp("\n").strip

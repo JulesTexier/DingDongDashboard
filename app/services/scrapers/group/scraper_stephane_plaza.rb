@@ -23,7 +23,7 @@ class Group::ScraperStephanePlaza < Scraper
             hashed_property[:bedrooms_number] = property["properties"]["bedroom"]
             hashed_property[:description] = property["description"]
             if property["type"] == "1"
-              hashed_property[:flat_type] = "Appartmement"
+              hashed_property[:flat_type] = "Appartement"
             elsif property["type"] == "2"
               hashed_property[:flat_type] = "Maison"
             else

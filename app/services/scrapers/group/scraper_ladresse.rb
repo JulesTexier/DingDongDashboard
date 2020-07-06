@@ -16,7 +16,7 @@ class Group::ScraperLadresse < Scraper
           link = "https://www.ladresse.com" + access_xml_link(item, "div.products-img > a", "href")[0].tr("..", "").to_s
           hashed_property[:link] = link.split("?search_id")[0]
           hashed_property[:surface] = regex_gen(access_xml_array_to_text(item, "ul.products-infos-pictos"), '(\d+(.?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "div.products-name"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.products-name"))
           price_element = access_xml_text(item, "div.products-price")
           hashed_property[:price] = regex_gen(price_element, '(\d+)(.?)(\d+)(...)dont').tr("^0-9", "") != "" ? regex_gen(price_element, '(\d+)(.?)(\d+)(...)dont').tr("^0-9", "").to_float_to_int_scrp : price_element.tr("^0-9", "").to_float_to_int_scrp
           picto_element = access_xml_link(item, "ul.products-infos-pictos > li:nth(2) > img", "src").to_s

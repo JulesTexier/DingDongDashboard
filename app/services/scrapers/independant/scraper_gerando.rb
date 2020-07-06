@@ -19,6 +19,7 @@ class Independant::ScraperGerando < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.caract").remove_acc_scrp, '(\d+)(.?)(piece\(s\))').to_int_scrp
           hashed_property[:bedrooms_number] = regex_gen(access_xml_text(item, "div.caract"), '(\d+)(.?)(chambre\(s\))').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div > div:nth-child(2) > div > h3 > div > div > span").split("dont")[0].to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h2[itemprop=name]"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "ul.list-group"))

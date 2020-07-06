@@ -24,6 +24,7 @@ class Independant::ScraperEmileGarcin < Scraper
           hashed_property[:rooms_number] = rooms_number
           price = access_xml_text(item, "p.price")
           hashed_property[:price] = price.include?("dont") ? price.split("dont")[0].to_int_scrp : price.to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.description > p"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "h1.title")) if hashed_property[:area].nil?

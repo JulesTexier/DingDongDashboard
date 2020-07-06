@@ -17,7 +17,7 @@ class Independant::ScraperArcales < Scraper
           hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(\d+(.?)(\d*))(.)(m²)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2"))
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.col-xs-12.col-sm-5.panel-heading > ul > li:nth-child(2) > span:nth-child(2) > span:nth-child(1)"), '(\d)(.*)').to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h2"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h2"))
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])

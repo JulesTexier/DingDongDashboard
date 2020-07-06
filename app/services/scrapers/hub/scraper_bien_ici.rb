@@ -24,7 +24,7 @@ class Hub::ScraperBienIci < Scraper
           if go_to_prop?(hashed_property, 7)
             hashed_property[:bedrooms_number] = item["bedroomsQuantity"]
             hashed_property[:description] = item["description"]
-            hashed_property[:flat_type] = item["propertyType"]
+            hashed_property[:flat_type] = get_type_flat(item["propertyType"])
             hashed_property[:floor] = item["floorQuantity"]
             hashed_property[:has_elevator] = item["hasElevator"]
             hashed_property[:provider] = "Agence"

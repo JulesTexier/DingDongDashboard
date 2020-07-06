@@ -25,7 +25,7 @@ class Independant::ScraperImmobilierSurMesure < Scraper
             hashed_property[:area] = perform_district_regex(access_xml_text(html, "div.infos-long > h2")) if hashed_property[:area] == "N/C"
             next if hashed_property[:area] == "N/C"
             hashed_property[:description] = access_xml_text(html, ".text-bien > p").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, "strong.bread-current"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "strong.bread-current"))
             hashed_property[:agency_name] = "Immo Sur Mesure"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

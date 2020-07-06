@@ -19,6 +19,7 @@ class Group::ScraperSaintFerdinand < Scraper
           hashed_property[:surface] = access_xml_text(item, "span.infosize").tr("m2", "").to_int_scrp
           hashed_property[:bedrooms_number] = access_xml_text(item, "span.inforoom").to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.listing_unit_price_wrapper").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.listing_details"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "#description").strip

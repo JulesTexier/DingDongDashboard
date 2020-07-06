@@ -21,7 +21,7 @@ class Group::ScraperCentury < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "#focusAnnonceV2 > section.precision > div.desc-fr > p").specific_trim_scrp("\n").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(html, "div.content > div > h1"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "div.content > div > h1"))
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

@@ -19,6 +19,7 @@ class Independant::ScraperSistelImmo < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "div.typo-body").tr("\n\r\t", "").strip, '(pi(è|e)ce\(s\))(.?)(\d+)').to_int_scrp
           hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(item, "div.typo-body").tr("\n\r\t", "").strip, '(Chambre\(s\))(.*)(\d+)').to_int_scrp
           hashed_property[:price] = access_xml_text(item, "div.prix-annonce").to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "span.h2-like.typo-action"))
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "p.bloc-detail-descriptif").strip

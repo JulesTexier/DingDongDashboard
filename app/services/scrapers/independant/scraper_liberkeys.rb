@@ -24,7 +24,7 @@ class Independant::ScraperLiberkeys < Scraper
             property = fetch_json_get("https://api.liberkeys.com/portal/properties/#{item["slug"]}")
             hashed_property[:description] = property["description"]
             hashed_property[:bedrooms_number] = item["bedroom_count"]
-            hashed_property[:flat_type] = item["type"]
+            hashed_property[:flat_type] = get_type_flat(item["type"])
             hashed_property[:agency_name] = @source
             hashed_property[:floor] = regex_gen(property["floor"], '(\d)(\s)sur').to_int_scrp
             hashed_property[:has_elevator] = nil

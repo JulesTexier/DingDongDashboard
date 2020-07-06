@@ -22,7 +22,7 @@ class Email::ScraperConnexionMail < Scraper
           hashed_property[:surface] = regex_gen(access_xml_text(item, "li.mdi-arrow-expand-all"), '(\d+(.?)(\d*))(.)(m²)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "article > h2"))
           hashed_property[:description] = access_xml_text(item, "article > p").strip
-          hashed_property[:flat_type] = regex_gen(hashed_property[:description], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = "N/C"
           hashed_property[:agency_name] = "Connexion"
           hashed_property[:provider] = "Agence"
           hashed_property[:source] = @source

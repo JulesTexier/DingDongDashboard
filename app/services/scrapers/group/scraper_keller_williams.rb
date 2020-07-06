@@ -22,7 +22,7 @@ class Group::ScraperKellerWilliams < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:area] = perform_district_regex(access_xml_array_to_text(html, "#accordion").split("Code postal")[1].split("Ville")[0])
             hashed_property[:description] = access_xml_text(html, "p.description").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_array_to_text(html, "#accordion"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison|(DEMEURE DE PRESTIGE))")
+            hashed_property[:flat_type] = get_type_flat(hashed_property[:link])
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = access_xml_link(html, "a.link_img_bien", "href").map { |img| "https://www.kwfrance.com/" + img.gsub!("../", "") }
@@ -34,7 +34,6 @@ class Group::ScraperKellerWilliams < Scraper
         end
       rescue StandardError => e
         error_outputs(e, @source)
-        puts e.message
         next
       end
     end

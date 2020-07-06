@@ -19,7 +19,7 @@ class Independant::ScraperFortisImmo < Scraper
           hashed_property[:area] = perform_district_regex(access_xml_array_to_text(item, "li.list-group-item"))
           hashed_property[:area] = nil if hashed_property[:area] == "N/C"
           hashed_property[:price] = regex_gen(access_xml_array_to_text(item, "li.list-group-item").gsub(" ", ""), '(\d*)(.?)(€)').to_int_scrp
-          hashed_property[:flat_type] = regex_gen(access_xml_text(item, "span.title"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+          hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "span.title"))
           hashed_property[:rooms_number] = regex_gen(access_xml_array_to_text(item, "li.list-group-item").remove_acc_scrp, '(\d+)(.?)(piece)').to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])

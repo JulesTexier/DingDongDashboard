@@ -22,7 +22,7 @@ class Independant::ScraperCheneVert < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:surface] = regex_gen(access_xml_text(html, "h4"), '(\d+(.?)(\d*))(.)(m²)').to_float_to_int_scrp
             hashed_property[:description] = access_xml_text(html, "div.tag-box > p").strip
-            hashed_property[:flat_type] = regex_gen(hashed_property[:description], "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_raw(item, "img")[0].values[1])
             hashed_property[:agency_name] = "Chene Vert"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

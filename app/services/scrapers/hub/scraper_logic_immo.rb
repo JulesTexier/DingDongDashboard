@@ -24,7 +24,7 @@ class Hub::ScraperLogicImmo < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.unstyled.flex").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
             hashed_property[:description] = access_xml_text(html, "div.offer-description-text").specific_trim_scrp("\n").gsub("Être rappelé", "").gsub("Demander une visite", "").gsub("Obtenir l'adresse", "").strip
-            hashed_property[:flat_type] = access_xml_text(html, "#js-faToaster > div > div.leftZone.clearfix > div.cell.type").specific_trim_scrp("\n\s")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "#js-faToaster > div > div.leftZone.clearfix > div.cell.type"))
             hashed_property[:agency_name] = access_xml_text(html, "span.agency-name")
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = self.source

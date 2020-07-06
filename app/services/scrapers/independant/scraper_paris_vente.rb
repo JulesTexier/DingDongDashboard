@@ -22,6 +22,7 @@ class Independant::ScraperParisVente < Scraper
           hashed_property[:images] = access_xml_link(item, "a.gallery-thumb", "href").map { |img| "https://www.parisvente.com/" + img }
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, 'div.propTitleText > h3'))
             hashed_property[:description] = access_xml_text(html, "p#propDescriptif").tr("\n\t\r", "").strip
             hashed_property[:provider] = "Agence"
             hashed_property[:contact_number] = "+331 43 38 08 15"

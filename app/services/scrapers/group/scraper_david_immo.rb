@@ -21,7 +21,8 @@ class Group::ScraperDavidImmo < Scraper
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "#main > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)").strip
-            hashed_property[:flat_type] = regex_gen(access_xml_text(item, "h1"), "((a|A)ppartement|(A|a)ppartements|(S|s)tudio|(S|s)tudette|(C|c)hambre|(M|m)aison)")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h1"))
+            hashed_property[:flat_type] = get_type_flat(hashed_property[:link]) if hashed_property[:flat_type] == "N/C"
             hashed_property[:agency_name] = "DavidImmo"
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source

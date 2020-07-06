@@ -23,7 +23,7 @@ class Hub::ScraperSuperImmo < Scraper
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:bedrooms_number] = regex_gen(access_xml_text(html, "h1"), '(\d+)(.?)(chambre(s?))').to_int_scrp
             hashed_property[:description] = access_xml_text(html, "p.description").strip
-            hashed_property[:flat_type] = access_xml_text(html, "#itemprop-appartements")
+            hashed_property[:flat_type] = get_type_flat(access_xml_text(html, "#itemprop-appartements"))
             hashed_property[:agency_name] = access_xml_text(html, "header > div.media-body > b")
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
