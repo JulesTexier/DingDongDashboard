@@ -6,30 +6,15 @@ class HunterSearch < ApplicationRecord
   has_many :selections
   has_many :properties, through: :selections, source: :property
 
-  def get_matching_properties(limit = 24)
-    min_price = self.min_price.nil? ? 0 : self.min_price
-    props = Property.where(
-      price: min_price..self.max_price,
-      rooms_number: self.min_rooms_number..Float::INFINITY,
-      surface: self.min_surface..Float::INFINITY,
-    ).order(id: :desc).limit(200)
-
-    prop_array = []
-    props.each do |prop|
-      if self.is_matching_max_sqm_price(prop.price, prop.surface)
-        self.areas.each do |area|
-          if prop.area == area
-            if prop.has_elevator == false && prop.floor != nil 
-              prop_array.push(prop) if self.min_elevator_floor > prop.floor
-            else
-              prop_array.push(prop)
-            end
-          end
-        end
-      end
-      break if prop_array.length == limit
+  def get_matching_properties(limit = 24, max_scope = 500)
+    matched_props_ids = []
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
+    properties = Property.last(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
+    properties.each do |property|
+      matched_props_ids.push(property["id"]) if is_matching_property?(property, self.areas.ids)
+      break if matched_props_ids.length == limit
     end
-    return prop_array
+    return Property.where(id: matched_props_ids)
   end
 
   def is_matching_property?(args, subs_areas)
@@ -39,7 +24,11 @@ class HunterSearch < ApplicationRecord
     is_matching_property_floor(args["floor"]) &&
     is_matching_property_area(args["area_id"], subs_areas) &&
     is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
-    is_matching_max_sqm_price(args["price"], args["surface"])
+    is_matching_max_sqm_price(args["price"], args["surface"]) &&
+    is_matching_property_terrace(args["has_terrace"]) &&
+    is_matching_property_garden(args["has_garden"]) &&
+    is_matching_property_balcony(args["has_balcony"]) &&
+    is_matching_property_last_floor(args["is_last_floor"])
   end
 
   def is_matching_property_max_price(price)
@@ -100,6 +89,22 @@ class HunterSearch < ApplicationRecord
 
   def is_matching_property_area(area_id, search_areas = self.areas.ids)
     search_areas.include?(area_id) ? true : false
+  end
+
+  def is_matching_property_terrace(terrace)
+    self.terrace ? !terrace.nil? && terrace : true
+  end
+
+  def is_matching_property_garden(garden)
+    self.garden ? !garden.nil? && garden : true
+  end
+
+  def is_matching_property_balcony(balcony)
+    self.balcony ? !balcony.nil? && balcony : true
+  end
+
+  def is_matching_property_last_floor(last_floor)
+    self.last_floor ? !last_floor.nil? && last_floor : true
   end
 
   def get_pretty_price(edge)
