@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_083542) do
+ActiveRecord::Schema.define(version: 2020_07_06_074844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -126,6 +126,11 @@ ActiveRecord::Schema.define(version: 2020_07_01_083542) do
     t.integer "min_price"
     t.integer "max_sqm_price"
     t.boolean "is_active", default: true
+    t.boolean "balcony", default: false
+    t.boolean "terrace", default: false
+    t.boolean "garden", default: false
+    t.boolean "new_construction", default: false
+    t.boolean "last_floor", default: false
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
