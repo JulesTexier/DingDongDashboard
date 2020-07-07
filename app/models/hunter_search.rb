@@ -36,7 +36,11 @@ class HunterSearch < ApplicationRecord
   end
 
   def is_matching_property_min_price(price)
-    (price >= self.min_price ? true : false) if !self.min_price.nil?
+    if !self.min_price.nil?
+      (price >= self.min_price ? true : false) 
+    else
+      true
+    end
   end
 
   def is_matching_property_price(price)
