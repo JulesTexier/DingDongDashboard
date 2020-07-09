@@ -134,14 +134,11 @@ class SubscribersController < ApplicationController
 
   def update
     @subscriber = Subscriber.find(params[:id])
-    SelectedArea.where(subscriber: @subscriber).destroy_all
-    areas_name = []
-    areas_name += params[:paris_areas] if !params[:paris_areas].nil?
-    areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
-    if @subscriber.update(subscriber_params) && !areas_name.empty?
-      areas_name.each do |area_id|
-        SelectedArea.create(subscriber: @subscriber, area_id: area_id)
-      end
+    areas_ids = []
+    areas_ids += params[:paris_areas] if !params[:paris_areas].nil?
+    areas_ids += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+    if @subscriber.update(subscriber_params) && !areas_ids.empty?
+      @subscriber.update_areas(areas_ids)
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else
       flash[:danger] = "Sélectionnez des arrondissements..."
