@@ -70,13 +70,12 @@ class HunterSearchesController < ApplicationController
 
   def update
     if @hunter_search.update(hunter_search_params)
-      areas_name = []
-      areas_name += params[:paris_areas] if !params[:paris_areas].nil?
-      areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+      areas_ids = []
+      areas_ids += params[:paris_areas] if !params[:paris_areas].nil?
+      areas_ids += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
       
-      if !areas_name.empty?
-        @hunter_search.areas.destroy_all 
-        @hunter_search.areas << Area.where(id: areas_name)
+      if !areas_ids.empty?
+        @hunter_search.update_hunter_search_areas(areas_ids)
       end
       respond_to do |format|
         format.html { redirect_to hunter_hunter_search_path(@hunter, @hunter_search) } 

@@ -10,11 +10,21 @@ class HunterSearch < ApplicationRecord
     matched_props_ids = []
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
     properties = Property.last(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
+    areas_ids = self.areas.ids
     properties.each do |property|
-      matched_props_ids.push(property["id"]) if is_matching_property?(property, self.areas.ids)
+      matched_props_ids.push(property["id"]) if is_matching_property?(property, areas_ids)
       break if matched_props_ids.length == limit
     end
     return Property.where(id: matched_props_ids)
+  end
+
+  def update_hunter_search_areas(areas_ids)
+    selected_areas = self.areas.pluck(:id)
+    areas_ids.map! {|id| id.to_i }
+    areas_to_destroy = selected_areas.reject {|x| areas_ids.include?(x)}
+    self.hunter_search_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
+    areas_to_add = areas_ids.reject {|x| selected_areas.include?(x)}
+    areas_to_add.each { |area_id| HunterSearchArea.create(hunter_search_id: self.id, area_id: area_id) } unless areas_to_add.empty?
   end
 
   def is_matching_property?(args, subs_areas)
