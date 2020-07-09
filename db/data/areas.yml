@@ -171,7 +171,7 @@
         - "20eme arr."
         - "Paris 20"
         - "Paris 20e"
-- zone: Banlieue-Ouest
+- zone: Yvelines
   datas:
     - name: Fourqueux
       terms:
@@ -217,7 +217,7 @@
     - name: Carrières-sur-Seines
       terms:
         - "78420"
-- zone: Haut de Seine
+- zone: Hauts-de-Seine
   datas: 
     - name: Suresnes
       terms:
@@ -256,7 +256,7 @@
       terms:
         - "92500"
         - Rueil
-- zone: Val de Marne
+- zone: Val-de-Marne
   datas: 
     - name: Montreuil
       terms:
@@ -295,7 +295,7 @@
     - name: Arcueil
       terms:
         - "94110"
-- zone: Seine Saint Denis
+- zone: Seine-Saint-Denis
   datas: 
     - name: Saint-Ouen
       terms: 
