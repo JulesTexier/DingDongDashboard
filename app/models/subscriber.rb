@@ -105,6 +105,15 @@ class Subscriber < ApplicationRecord
     return props_to_send
   end
 
+  def update_areas(areas_ids)
+    selected_areas = self.areas.pluck(:id)
+    areas_ids.map! {|id| id.to_i }
+    areas_to_destroy = selected_areas.reject {|x| areas_ids.include?(x)}
+    self.selected_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
+    areas_to_add = areas_ids.reject {|x| selected_areas.include?(x)}
+    areas_to_add.each { |area_id| SelectedArea.create(subscriber_id: self.id, area_id: area_id) } unless areas_to_add.empty?
+  end
+
   def get_props_in_lasts_x_days(x_previous_days)
     start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
