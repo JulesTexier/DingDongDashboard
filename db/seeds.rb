@@ -83,6 +83,8 @@ area_yaml.each do |district_data|
     if Area.where(name: data["name"]).empty?
       Area.create(name: data["name"], zone: district_data["zone"])
       puts "Area - #{data["name"]} created"
+    elsif Area.find_by(name: data["name"]).zone != data["zone"]
+      Area.find_by(name: data["name"]).update(zone: data["zone"])
     end
   end
 end
