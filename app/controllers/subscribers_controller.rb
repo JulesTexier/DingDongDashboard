@@ -117,19 +117,38 @@ class SubscribersController < ApplicationController
   def edit
     @subscriber = Subscriber.find(params[:id])
     subscriber_areas_id = @subscriber.areas.pluck(:id)
-    zone_areas = ["Paris", "Première Couronne"]
-    @paris_areas = []
-    @premiere_couronne_areas = []
-    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
-      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @paris_areas.push(item)
+
+    zone_areas = Area.all.pluck(:zone).uniq!
+    # areas = Area.all.pluck(:id, :name, :zone)
+    # areas = Area.all.pluck(:id, :name, :zone).map { |id, name, zone| { id: id, name: name, zone: zone } }
+    @master_areas = []
+    zone_areas.each do |zone| 
+      zone_hash = {}
+      zone_hash[:zone] = zone
+      zone_hash[:areas] = Area.where(zone: zone).pluck(:id, :name)
+      @master_areas.push(zone_hash)
     end
-    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
-      selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @premiere_couronne_areas.push(item)
+
+    @master_areas.each do |zone|
+      zone[:areas].each do |area|
+        selected = subscriber_areas_id.include?(area[0]) ? "selected" : ""
+        area.push(selected)
+      end
     end
+
+    # zone_areas = ["Paris", "Première Couronne"]
+    # @paris_areas = []
+    # @premiere_couronne_areas = []
+    # Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
+    #   selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+    #   item.push(selected)
+    #   @paris_areas.push(item)
+    # end
+    # Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
+    #   selected = subscriber_areas_id.include?(item[0]) ? "selected" : ""
+    #   item.push(selected)
+    #   @premiere_couronne_areas.push(item)
+    # end
   end
 
   def update

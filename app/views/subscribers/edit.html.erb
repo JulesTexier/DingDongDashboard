@@ -36,22 +36,17 @@ $(document).ready(function(){
 
       <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/7 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
-        <% if false %><h6>Paris</h6> <% end %>
-        <div class="form-group col-12 p-0">
-            <select multiple class="form-control" id="choices-multiple-remove-button" name="paris_areas[]">
-                <% @paris_areas.each do |item| %>
-                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
-                <% end %>
-            </select>
-        </div>
-        <h6>Première couronne</h6>
-        <div class="form-group col-12 p-0">
-            <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
-                <% @premiere_couronne_areas.each do |item| %>
-                    <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
-                <% end %>
-            </select>
-        </div>
+
+        <% @master_areas.each do |zone|%>
+            <h6><%= zone[:zone] %></h6>
+            <div class="form-group col-12 p-0">
+                <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
+                    <% zone[:areas].each do |item| %>
+                        <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+                    <% end %>
+                </select>
+            </div>
+        <% end %>
       </div>
 
     
