@@ -171,7 +171,7 @@
         - "20eme arr."
         - "Paris 20"
         - "Paris 20e"
-- zone: Yvelines
+- zone: Yvelines (78)
   datas:
     - name: Fourqueux
       terms:
@@ -196,9 +196,10 @@
     - name: Mareil-Marly
       terms:
         - "78750"
-    - name: Marly-Leroy
+    - name: Marly-le-Roi
       terms:
         - "78160"
+        - Marly le Roi
     - name: L'Etang-La-Ville
       terms:
         - "78620"
@@ -217,7 +218,7 @@
     - name: Carrières-sur-Seines
       terms:
         - "78420"
-- zone: Hauts-de-Seine
+- zone: Hauts-de-Seine (92)
   datas: 
     - name: Suresnes
       terms:
@@ -256,11 +257,26 @@
       terms:
         - "92500"
         - Rueil
-- zone: Val-de-Marne
-  datas: 
-    - name: Montreuil
+    - name: Courbevoie
+      terms: 
+        - "92400"
+    - name: Nanterre
+      terms: 
+        - "92000"
+    - name: Colombes
+      terms: 
+        - "92700"
+    - name: Meudon
       terms:
-        - "93100"
+        - "92190"
+    - name: Gennevilliers
+      terms:
+        - "92230"
+    - name: Asnières-sur-Seine
+      terms:
+        - "92600"
+- zone: Val-de-Marne (94)
+  datas: 
     - name: Saint Mandé
       terms:
         - "94160"
@@ -295,7 +311,7 @@
     - name: Arcueil
       terms:
         - "94110"
-- zone: Seine-Saint-Denis
+- zone: Seine-Saint-Denis (93)
   datas: 
     - name: Saint-Ouen
       terms: 
@@ -319,3 +335,6 @@
     - name: Bagnolet
       terms:
         - "93170"
+    - name: Montreuil
+      terms:
+        - "93100"
