@@ -196,9 +196,10 @@
     - name: Mareil-Marly
       terms:
         - "78750"
-    - name: Marly-Leroy
+    - name: Marly-le-Roi
       terms:
         - "78160"
+        - Marly le Roi
     - name: L'Etang-La-Ville
       terms:
         - "78620"
