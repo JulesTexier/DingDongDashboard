@@ -1,7 +1,7 @@
 class BrokerMailer < ApplicationMailer
-  def new_lead(subscriber_id, broker_id)
+  def new_lead(subscriber_id)
     @subscriber = Subscriber.find(subscriber_id)
-    @broker = Broker.find(broker_id)
+    @broker = @subscriber.broker
 
     if !@subscriber.nil? && !@broker.nil? 
       subject = "[DING DONG] Nouveau contact"

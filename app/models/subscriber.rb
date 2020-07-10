@@ -281,6 +281,12 @@ class Subscriber < ApplicationRecord
     onboarding_broker("subscription")
   end
 
+  def send_to_broker_lead_gen
+    broker = Broker.last 
+    self.update(broker: broker)
+    BrokerMailer.new_lead(self.id).deliver_now
+  end
+
   private
 
   def handle_duplicate
