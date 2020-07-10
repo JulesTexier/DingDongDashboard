@@ -149,6 +149,14 @@ class SubscribersController < ApplicationController
     redirect_to edit_subscriber_path
   end
 
+
+  def activation
+    @subscriber = Subscriber.find(params[:id])
+    if !@subscriber.nil?
+      @subscriber.update(is_blocked: false) 
+    end
+  end
+
   private
 
   def subscriber_params

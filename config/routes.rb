@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   end
 
   resources :subscribers, only: [:create, :update, :edit]
+  get '/subscribers/activation/:id' => 'subscribers#activation'
   resources :properties, only: [:show]
   resources :lead, only: [:new, :create]
   resources :hunters do
