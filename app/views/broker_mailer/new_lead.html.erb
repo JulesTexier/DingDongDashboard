@@ -1,0 +1,8 @@
+<h1>Un nouveau contact s'est inscrit chez Ding Dong</h1>
+
+<h2>Il attend votre appel</h2>
+<b><%= @subscriber.phone %></b>
+
+<h2>Activer son accès à Ding Dong</h2>
+<p>Une fois la prise de contact établie, n'oubliez pas de donner accès à Ding Dong votre prospect en cliquant sur le lien suivant : </p>
+<a href="<%=ENV['BASE_URL']%>subscribers/activation/<%= @subscriber.id %>">Activer son compte</a>
