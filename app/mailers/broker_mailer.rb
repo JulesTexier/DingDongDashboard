@@ -1,0 +1,2 @@
+class BrokerMailer < ApplicationMailer
+end
