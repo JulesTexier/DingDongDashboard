@@ -171,7 +171,7 @@
         - "20eme arr."
         - "Paris 20"
         - "Paris 20e"
-- zone: Banlieue-Ouest
+- zone: Yvelines
   datas:
     - name: Fourqueux
       terms:
@@ -217,11 +217,7 @@
     - name: Carrières-sur-Seines
       terms:
         - "78420"
-    - name: Rueil-Malmaison
-      terms:
-        - "92500"
-        - Rueil
-- zone: Première Couronne
+- zone: Hauts-de-Seine
   datas: 
     - name: Suresnes
       terms:
@@ -256,28 +252,12 @@
     - name: Boulogne-Billancourt
       terms:
         - "92100"
-    - name: Saint-Ouen
-      terms: 
-        - "93400"
-    - name: Saint-Denis
-      terms: 
-        - "93200"
-        - "93210"
-    - name: Aubervilliers
+    - name: Rueil-Malmaison
       terms:
-        - "93300"
-    - name: Pantin
-      terms:
-        - "93500"
-    - name: Pré-Saint-Gervais
-      terms:
-        - "93310"
-    - name: Les Lilas
-      terms:
-        - "93260"
-    - name: Bagnolet
-      terms:
-        - "93170"
+        - "92500"
+        - Rueil
+- zone: Val-de-Marne
+  datas: 
     - name: Montreuil
       terms:
         - "93100"
@@ -315,3 +295,27 @@
     - name: Arcueil
       terms:
         - "94110"
+- zone: Seine-Saint-Denis
+  datas: 
+    - name: Saint-Ouen
+      terms: 
+        - "93400"
+    - name: Saint-Denis
+      terms: 
+        - "93200"
+        - "93210"
+    - name: Aubervilliers
+      terms:
+        - "93300"
+    - name: Pantin
+      terms:
+        - "93500"
+    - name: Pré-Saint-Gervais
+      terms:
+        - "93310"
+    - name: Les Lilas
+      terms:
+        - "93260"
+    - name: Bagnolet
+      terms:
+        - "93170"
