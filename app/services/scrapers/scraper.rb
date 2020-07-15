@@ -9,7 +9,7 @@ class Scraper
       prop.merge!(enriched_infos)
       prop[:area] = Area.where(name: prop[:area]).first
       insert_property(prop)
-      scrap_historisation(prop, __method__)
+      prop_historisation(prop, __method__)
     else
       # for test purpose, if we don't want ton insert this shitty property,
       ## then we remove it from the final array of our dedicated scraper
@@ -338,7 +338,7 @@ class Scraper
         if filtered_prop.length > 2 ## we verify that theres at least 3 arguements
           does_prop_exists?(prop, time) ? false : true ## if it doesnt exist, we go to the show
         else ## not enought args, so fuck off we dont go to the show
-          scrap_historisation(prop, __method__)
+          prop_historisation(prop, __method__)
           false
         end
       end
@@ -360,13 +360,13 @@ class Scraper
         filtered_prop.except(:area),
       ).where('created_at >= ?', time.days.ago).exists?
     end
-    scrap_historisation(prop, __method__) if response
+    prop_historisation(prop, __method__) if response
     response
   end
 
   def is_link_in_db?(prop)
-    response = Property.where(link: prop[:link].strip).exists? ? true : false
-    scrap_historisation(prop, __method__) if response
+    response = Property.where(link: prop[:link].strip).exists?
+    prop_historisation(prop, __method__) if response
     response
   end
 
@@ -379,11 +379,11 @@ class Scraper
     elsif prop[:price].to_i != 0 && prop[:surface].to_i != 0 && prop[:area] != "N/C"
       price_threshold = prop[:area].include?("Paris") ? 7000 : 1000
       sqm = prop[:price].to_i / prop[:surface].to_i
-      response = sqm < price_threshold ? true : false
+      response = sqm < price_threshold
     else
       response = true ## not enough informations, we should further check
     end
-    scrap_historisation(prop, __method__) if response
+    prop_historisation(prop, __method__) if response
     response
   end
 
@@ -408,7 +408,7 @@ class Scraper
       end
     end
     if response
-      scrap_historisation(hashed_property, __method__)
+      prop_historisation(hashed_property, __method__)
     end
     response
   end
@@ -416,7 +416,7 @@ class Scraper
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
   def is_it_unwanted_prop?(prop)
     response = prop[:description].remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
-    scrap_historisation(prop, __method__) if response
+    prop_historisation(prop, __method__) if response
     response
   end
 
@@ -514,7 +514,7 @@ class Scraper
   ## PROP HISTORIZATION ##
   ########################
 
-  def scrap_historisation(hashed_property, method_name)
+  def prop_historisation(hashed_property, method_name)
     hashed_property[:source] = self.source unless Rails.env.test?
     insert_property_history(hashed_property, method_name) unless PropertyHistory.where(link: hashed_property[:link]).exists?
   end
