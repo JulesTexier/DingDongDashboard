@@ -14,7 +14,7 @@ class Independant::ScraperIad < Scraper
         begin
           next if access_xml_text(item, ".button__highlight") == "Sous compromis"
           hashed_property = {}
-          hashed_property[:link] = "https://www.iadfrance.fr" + access_xml_link(item, ".c-offer__title", "href")[0].to_s
+          hashed_property[:link] = "https://www.iadfrance.fr" + access_xml_link(item, ".c-offer__title", "href")[0].strip
           hashed_property[:surface] = regex_gen(access_xml_text(item, ".c-offer__title").strip, '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, ".c-offer__localization"))
           hashed_property[:description] = access_xml_text(item, ".c-offer__description").strip

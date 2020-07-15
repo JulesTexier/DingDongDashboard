@@ -498,14 +498,14 @@ RSpec.describe Scraper, type: :service do
 
     context "perform_district_regex(str) for Suburbs" do
       it "should translate postcode to City Name" do
-        expect(@s.perform_district_regex("Appartement situé 78112", "Banlieue-Ouest")).to eq("Fourqueux")
-        expect(@s.perform_district_regex("Bien situé dans le 78100", "Banlieue-Ouest")).to eq("Saint-Germain-En-Laye")
-        expect(@s.perform_district_regex("Superbe petit bien à 92500", "Banlieue-Ouest")).to eq("Rueil-Malmaison")
+        expect(@s.perform_district_regex("Appartement situé 78112", "Yvelines (78)")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Bien situé dans le 78100", "Yvelines (78)")).to eq("Saint-Germain-En-Laye")
+        expect(@s.perform_district_regex("Superbe petit bien à Mareil-Marly", "Yvelines (78)")).to eq("Mareil-Marly")
       end
 
       it "should take city over postcode" do
-        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).to eq("Fourqueux")
-        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Banlieue-Ouest")).not_to eq("Saint-Germain-En-Laye")
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Yvelines (78)")).to eq("Fourqueux")
+        expect(@s.perform_district_regex("Appartement à Fourqueux (78100)", "Yvelines (78)")).not_to eq("Saint-Germain-En-Laye")
       end
 
       it "shouldnt take any city because there's no args for suburbs" do
@@ -513,6 +513,12 @@ RSpec.describe Scraper, type: :service do
         expect(@s.perform_district_regex("Bien situé dans le 78112")).to eq("N/C")
         expect(@s.perform_district_regex("Appartement situé à Fourqueux")).not_to eq("Fourqueux")
         expect(@s.perform_district_regex("Bien situé dans le 78112")).not_to eq("Fourqueux")
+      end
+
+      it "should translate postcode to City Name" do
+        expect(@s.perform_district_regex("Appartement situé 92500", "Hauts-de-Seine (92)")).to eq("Rueil-Malmaison")
+        expect(@s.perform_district_regex("Appartement situé à Rueil", "Hauts-de-Seine (92)")).to eq("Rueil-Malmaison")
+        expect(@s.perform_district_regex("Superbe petit bien à Nanterre", "Hauts-de-Seine (92)")).to eq("Nanterre")
       end
     end
   end
