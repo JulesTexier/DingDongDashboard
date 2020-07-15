@@ -30,7 +30,7 @@ class Hub::ScraperBienIci < Scraper
             hashed_property[:provider] = "Agence"
             hashed_property[:source] = @source
             hashed_property[:images] = []
-            item["photos"].each { |img_hash| hashed_property[:images].push(img_hash["url_photo"]) }
+            item["photos"].each { |img_hash| hashed_property[:images].push(img_hash["url_photo"]) unless img_hash["url_photo"].nil? }
             @properties.push(hashed_property) ##testing purpose
             enrich_then_insert(hashed_property)
             i += 1

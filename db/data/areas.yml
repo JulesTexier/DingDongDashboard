@@ -171,7 +171,7 @@
         - "20eme arr."
         - "Paris 20"
         - "Paris 20e"
-- zone: Banlieue-Ouest
+- zone: Yvelines (78)
   datas:
     - name: Fourqueux
       terms:
@@ -196,9 +196,10 @@
     - name: Mareil-Marly
       terms:
         - "78750"
-    - name: Marly-Leroy
+    - name: Marly-le-Roi
       terms:
         - "78160"
+        - Marly le Roi
     - name: L'Etang-La-Ville
       terms:
         - "78620"
@@ -217,11 +218,7 @@
     - name: Carrières-sur-Seines
       terms:
         - "78420"
-    - name: Rueil-Malmaison
-      terms:
-        - "92500"
-        - Rueil
-- zone: Première Couronne
+- zone: Hauts-de-Seine (92)
   datas: 
     - name: Suresnes
       terms:
@@ -256,31 +253,51 @@
     - name: Boulogne-Billancourt
       terms:
         - "92100"
-    - name: Saint-Ouen
+    - name: Rueil-Malmaison
+      terms:
+        - "92500"
+        - Rueil
+    - name: Courbevoie
       terms: 
-        - "93400"
-    - name: Saint-Denis
+        - "92400"
+    - name: Nanterre
       terms: 
-        - "93200"
-        - "93210"
-    - name: Aubervilliers
+        - "92000"
+    - name: Colombes
+      terms: 
+        - "92700"
+    - name: Meudon
       terms:
-        - "93300"
-    - name: Pantin
+        - "92190"
+    - name: Gennevilliers
       terms:
-        - "93500"
-    - name: Pré-Saint-Gervais
+        - "92230"
+    - name: Asnières-sur-Seine
       terms:
-        - "93310"
-    - name: Les Lilas
+        - "92600"
+    - name: Sèvres
       terms:
-        - "93260"
-    - name: Bagnolet
+        - "92310"
+    - name: Chaville
       terms:
-        - "93170"
-    - name: Montreuil
+        - "92370"
+    - name: Ville-d'Avray
       terms:
-        - "93100"
+        - "92410"
+    - name: Garches
+      terms:
+        - "92380"
+    - name: La Garenne-Colombes
+      terms:
+        - "92250"
+        - Garenne Colombes
+        - Garenne-Colombes
+    - name: Bois-Colombes
+      terms:
+        - "92270"
+        - Bois Colombes
+- zone: Val-de-Marne (94)
+  datas: 
     - name: Saint Mandé
       terms:
         - "94160"
@@ -315,3 +332,30 @@
     - name: Arcueil
       terms:
         - "94110"
+- zone: Seine-Saint-Denis (93)
+  datas: 
+    - name: Saint-Ouen
+      terms: 
+        - "93400"
+    - name: Saint-Denis
+      terms: 
+        - "93200"
+        - "93210"
+    - name: Aubervilliers
+      terms:
+        - "93300"
+    - name: Pantin
+      terms:
+        - "93500"
+    - name: Pré-Saint-Gervais
+      terms:
+        - "93310"
+    - name: Les Lilas
+      terms:
+        - "93260"
+    - name: Bagnolet
+      terms:
+        - "93170"
+    - name: Montreuil
+      terms:
+        - "93100"

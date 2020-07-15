@@ -393,7 +393,7 @@ class Scraper
   def already_exists_with_desc?(hashed_property)
     response = false
 
-    if hashed_property[:area] == "N/C" || hashed_property[:rooms_number].nil? || hashed_property[:price].nil?
+    if hashed_property[:area] == "N/C" || hashed_property[:rooms_number].nil? || hashed_property[:price].nil? || hashed_property[:surface].nil?
       response = true
     else
       properties = Property.where(

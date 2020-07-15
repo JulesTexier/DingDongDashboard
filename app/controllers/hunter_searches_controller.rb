@@ -17,29 +17,15 @@ class HunterSearchesController < ApplicationController
     @hunter_search = @hunter.hunter_searches.build
 
     hs_areas_id = @hunter_search.areas.pluck(:id)
-    zone_areas = ["Paris", "Première Couronne"]
-    @paris_areas = []
-    @premiere_couronne_areas = []
-    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
-      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @paris_areas.push(item)
-    end
-    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
-      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @premiere_couronne_areas.push(item)
-    end
+    @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
   end
 
   def create
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = @hunter.hunter_searches.build(hunter_search_params)
     if @hunter_search.save
-      areas_name = []
-      areas_name += params[:paris_areas] if !params[:paris_areas].nil?
-      areas_name += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
-      @hunter_search.areas << Area.where(id: areas_name)
+      areas_ids = params[:area_ids]
+      @hunter_search.areas << Area.where(id: areas_ids)
       redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
     else
       render "new"
@@ -53,26 +39,12 @@ class HunterSearchesController < ApplicationController
     @hs_areas = @hunter_search.areas.pluck(:id)
     
     hs_areas_id = @hunter_search.areas.pluck(:id)
-    zone_areas = ["Paris", "Première Couronne"]
-    @paris_areas = []
-    @premiere_couronne_areas = []
-    Area.where(zone: "Paris").order(:id).pluck(:id, :name).each do |item|
-      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @paris_areas.push(item)
-    end
-    Area.where(zone: "Première Couronne").order(:id).pluck(:id, :name).each do |item|
-      selected = hs_areas_id.include?(item[0]) ? "selected" : ""
-      item.push(selected)
-      @premiere_couronne_areas.push(item)
-    end
+    @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
   end
 
   def update
     if @hunter_search.update(hunter_search_params)
-      areas_ids = []
-      areas_ids += params[:paris_areas] if !params[:paris_areas].nil?
-      areas_ids += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+      areas_ids = params[:area_ids] 
       
       if !areas_ids.empty?
         @hunter_search.update_hunter_search_areas(areas_ids)
