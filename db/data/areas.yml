@@ -275,6 +275,27 @@
     - name: Asnières-sur-Seine
       terms:
         - "92600"
+    - name: Sèvres
+      terms:
+        - "92310"
+    - name: Chaville
+      terms:
+        - "92370"
+    - name: Ville-d'Avray
+      terms:
+        - "92410"
+    - name: Garches
+      terms:
+        - "92380"
+    - name: La Garenne-Colombes
+      terms:
+        - "92250"
+        - Garenne Colombes
+        - Garenne-Colombes
+    - name: Bois-Colombes
+      terms:
+        - "92270"
+        - Bois Colombes
 - zone: Val-de-Marne (94)
   datas: 
     - name: Saint Mandé

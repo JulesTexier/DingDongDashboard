@@ -14,7 +14,7 @@
     is_active: true
     group_type: Hub
   - zone: Hauts-de-Seine (92)
-    url: https://www.superimmo.com/achat/appartement/boulogne-billancourt-92100,nanterre-92000,courbevoie-92400,colombes-92700,asnieres-sur-seine-92600,rueil-malmaison-92500,levallois-perret-92300,issy-les-moulineaux-92130,neuilly-sur-seine-92200,clichy-92110,meudon-92190,gennevilliers-92230,montrouge-92120,puteaux-92800,suresnes-92150,malakoff-92240,saint-cloud-92210,vanves-92170?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
     is_active: true
@@ -46,7 +46,7 @@
     is_active: true
     group_type: Hub
   - zone: Hauts-de-Seine (92)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-72258%22%2C%22-91776%22%2C%22-85802%22%2C%22-72148%22%2C%22-86985%22%2C%22-86999%22%2C%22-37026%22%2C%22-85527%22%2C%22-37027%22%2C%22-59321%22%2C%22-72020%22%2C%22-72261%22%2C%22-91768%22%2C%22-85799%22%2C%22-91738%22%2C%22-31341%22%2C%22-90082%22%2C%22-91641%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-7449%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -78,7 +78,7 @@
     is_active: true
     group_type: Hub
   - zone: Hauts-de-Seine (92)
-    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=suresnes%20%2892150%29,boulogne%20billancourt%20%2892100%29,clichy%20%2892110%29,issy%20les%20moulineaux%20%2892130%29,levallois%20perret%20%2892300%29,malakoff%20%2892240%29,montrouge%20%2892120%29,neuilly%20sur%20seine%20%2892200%29,puteaux%20%2892800%29,saint%20cloud%20%2892210%29,vanves%20%2892170%29,Rueil-Malmaison%20%2892%29,Courbevoie%20%2892%29,Nanterre%20%2892%29,Colombes%20%2892%29,Meudon%20%2892%29,Gennevilliers%20%2892%29,Asnieres-sur-seine%20%2892%29&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&sort=5
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Hauts-de-Seine&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&sort=5
     scraper_type: Static
     main_page_cls: div.container-item
     is_active: true
@@ -142,13 +142,7 @@
     is_active: true
     group_type: Hub
   - zone: Hauts-de-Seine (92)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=32369_2,25200_2,22397_2,27405_2,17928_2,7736_2,21649_2,14030_2,19126_2,33918_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: true
-    group_type: Hub
-  - zone: Hauts-de-Seine (92)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=4285_2,26546_2,8445_2,22198_2,7878_2,20379_2,12209_2,1363_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    url: https://www.logic-immo.com/vente-immobilier-hauts-de-seine-92,117_1/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
     is_active: true
@@ -180,7 +174,7 @@
     is_active: true
     group_type: Hub
   - zone: Hauts-de-Seine (92)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-nanterre-92000-g43265g43267g43269g43270g43271g43272g43273g43274g43279g43281g43282g43283g43289g43294g43298g43299g43300g43301-a-partir-du-studio
+    url: https://www.pap.fr/annonce/vente-appartement-maison-hauts-de-seine-92-g456-a-partir-du-studio-2
     scraper_type: Static
     main_page_cls: div.search-list-item
     is_active: true
@@ -232,7 +226,7 @@
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location=92073,92062,92051,92064,92044,92024,92049,92040,92046,92075,92012,92063,92026,92050,92025,92048,92036,92004&sort=date_desc&limit=15
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -252,7 +246,7 @@
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=suresnes&locations%5B0%5D%5Blabel%5D=Suresnes+(92150)&locations%5B1%5D%5Bvalue%5D=puteaux&locations%5B1%5D%5Blabel%5D=Puteaux+(92800)&locations%5B2%5D%5Bvalue%5D=neuilly-sur-seine&locations%5B2%5D%5Blabel%5D=Neuilly-sur-Seine+(92200)&locations%5B3%5D%5Bvalue%5D=saint-cloud&locations%5B3%5D%5Blabel%5D=Saint-Cloud+(92210)+-+Ville&locations%5B4%5D%5Bvalue%5D=levallois-perret&locations%5B4%5D%5Blabel%5D=Levallois-Perret+(92300)+-+Ville&locations%5B5%5D%5Bvalue%5D=clichy&locations%5B5%5D%5Blabel%5D=Clichy+(92110)+-+Ville&locations%5B6%5D%5Bvalue%5D=montrouge&locations%5B6%5D%5Blabel%5D=Montrouge+(92120)+-+Ville&locations%5B7%5D%5Bvalue%5D=issy-les-moulineaux&locations%5B7%5D%5Blabel%5D=Issy-les-Moulineaux+(92130)+-+Ville&locations%5B8%5D%5Bvalue%5D=malakoff&locations%5B8%5D%5Blabel%5D=Malakoff+(92240)+-+Ville&locations%5B9%5D%5Bvalue%5D=vanves&locations%5B9%5D%5Blabel%5D=Vanves+(92170)+-+Ville&locations%5B10%5D%5Bvalue%5D=boulogne-billancourt&locations%5B10%5D%5Blabel%5D=Boulogne-Billancourt+(92100)+-+Ville&locations%5B11%5D%5Bvalue%5D=saint-ouen&locations%5B11%5D%5Blabel%5D=Saint-Ouen+(93400)+-+Ville&locations%5B12%5D%5Bvalue%5D=aubervilliers&locations%5B12%5D%5Blabel%5D=Aubervilliers+(93300)+-+Ville&locations%5B13%5D%5Bvalue%5D=pantin&locations%5B13%5D%5Blabel%5D=Pantin+(93500)+-+Ville&locations%5B14%5D%5Bvalue%5D=le-pre-saint-gervais&locations%5B14%5D%5Blabel%5D=Le+Pr%C3%A9-Saint-Gervais+(93310)+-+Ville&locations%5B15%5D%5Bvalue%5D=les-lilas&locations%5B15%5D%5Blabel%5D=Les+Lilas+(93260)+-+Ville&locations%5B16%5D%5Bvalue%5D=bagnolet&locations%5B16%5D%5Blabel%5D=Bagnolet+(93170)+-+Ville&locations%5B17%5D%5Bvalue%5D=montreuil&locations%5B17%5D%5Blabel%5D=Montreuil+(93100)+-+Ville&locations%5B18%5D%5Bvalue%5D=saint-mande&locations%5B18%5D%5Blabel%5D=Saint-Mand%C3%A9+(94160)+-+Ville&locations%5B19%5D%5Bvalue%5D=vincennes&locations%5B19%5D%5Blabel%5D=Vincennes+(94300)+-+Ville&locations%5B20%5D%5Bvalue%5D=fontenay-sous-bois&locations%5B20%5D%5Blabel%5D=Fontenay-sous-Bois+(94120)+-+Ville&locations%5B21%5D%5Bvalue%5D=nogent-sur-marne&locations%5B21%5D%5Blabel%5D=Nogent-sur-Marne+(94130)+-+Ville&locations%5B22%5D%5Bvalue%5D=joinville-le-pont&locations%5B22%5D%5Blabel%5D=Joinville-le-Pont+(94340)+-+Ville&locations%5B23%5D%5Bvalue%5D=saint-maurice&locations%5B23%5D%5Blabel%5D=Saint-Maurice+(94410)+-+Ville&locations%5B24%5D%5Bvalue%5D=charenton-le-pont&locations%5B24%5D%5Blabel%5D=Charenton-le-Pont+(94220)+-+Ville&locations%5B25%5D%5Bvalue%5D=ivry-sur-seine&locations%5B25%5D%5Blabel%5D=Ivry-sur-Seine+(94200)+-+Ville&locations%5B26%5D%5Bvalue%5D=le-kremlin-bicetre&locations%5B26%5D%5Blabel%5D=Le+Kremlin-Bic%C3%AAtre+(94270)+-+Ville&locations%5B27%5D%5Bvalue%5D=gentilly&locations%5B27%5D%5Blabel%5D=Gentilly+(94250)+-+Ville&locations%5B28%5D%5Bvalue%5D=arcueil&locations%5B28%5D%5Blabel%5D=Arcueil+(94110)+-+Ville&locations%5B29%5D%5Bvalue%5D=saint-denis-seine-saint-denis&locations%5B29%5D%5Blabel%5D=Saint-Denis+(93200)+-+Ville&locations%5B0%5D%5Bvalue%5D=rueil-malmaison&locations%5B0%5D%5Blabel%5D=Rueil-Malmaison+(92500)&locations%5B1%5D%5Bvalue%5D=courbevoie&locations%5B1%5D%5Blabel%5D=Courbevoie+(92400)&locations%5B2%5D%5Bvalue%5D=nanterre&locations%5B2%5D%5Blabel%5D=Nanterre+(92000)&locations%5B3%5D%5Bvalue%5D=colombes&locations%5B3%5D%5Blabel%5D=Colombes+(92700)&locations%5B4%5D%5Bvalue%5D=meudon&locations%5B4%5D%5Blabel%5D=Meudon+(92190)&locations%5B5%5D%5Bvalue%5D=gennevilliers&locations%5B5%5D%5Blabel%5D=Gennevilliers+(92230)&locations%5B6%5D%5Bvalue%5D=asnieres-sur-seine&locations%5B6%5D%5Blabel%5D=Asnières-sur-Seine+(92600)&newBuild=true&oldBuild=true&sort=date-down&layoutType=list
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=hauts-de-seine&locations%5B0%5D%5Blabel%5D=Hauts-de-Seine+-+D%C3%A9partement&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -284,7 +278,7 @@
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=100&exclude=17930265%2C17926685%2C17895588%2C17892236%2C17890052%2C17888110%2C17885459%2C17871368%2C17852869%2C17787979%2C17787083%2C17769591%2C17758177%2C17445548%2C17111837%2C4468262&cities=92040%2C92044%2C92051%2C92024%2C92049%2C92073%2C92062%2C92064%2C92046%2C92075%2C92012%2C92063%2C92026%2C92050%2C92025%2C92048%2C92036%2C92004&types=house%2Capartment&transaction=buy
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=18209332%2C18181967%2C18179395%2C18178563%2C18161975%2C18161877%2C18160904%2C18160754%2C18150001%2C18132411%2C18121318%2C18116877%2C18083798%2C18083625%2C18082726%2C18082538&cities=92&types=house%2Capartment&transaction=buy
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -316,7 +310,7 @@
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://www.century21.fr/annonces/achat/v-meudon/s-0-/st-0-/b-0-/page-1/#/annonces/achat/v-meudon-malakoff-st+cloud-nanterre-levallois+perret-vanves-neuilly+sur+seine-suresnes-gennevilliers-rueil+malmaison-clichy-asnieres+sur+seine-montrouge-issy+les+moulineaux-puteaux-boulogne+billancourt-colombe-courbevoie/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat/d-92_hauts_de_seine/s-0-/st-0-/b-0-/tri-date-desc/page-1/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
@@ -360,7 +354,7 @@
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://fr.foncia.com/achat/suresnes-92150--puteaux-92800--neuilly-sur-seine-92200--saint-cloud-92210--levallois-perret-92300--clichy-92110--montrouge-92120--issy-les-moulineaux-92130--malakoff-92240--vanves-92170--boulogne-billancourt-92100/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    url: https://fr.foncia.com/achat/hauts-de-seine-92/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
@@ -430,16 +424,7 @@
       is_active: true
       group_type: Proxy
     - zone: Hauts-de-Seine (92)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38488%2C38483%2C38481%2C38485%2C38474%2C38466%2C38479%2C38473%2C38475%2C38489&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Hauts-de-Seine (92)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38460%2C38484%2C38468%2C38480%2C38467%2C38477%2C38472%2C38457&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+      url: https://www.meilleursagents.com/annonces/achat/hauts-de-seine-92/
       main_page_cls: div.listing-item.search-listing-result__item
       scraper_type: Proxy
       waiting_cls: nil
@@ -486,7 +471,7 @@
       is_active: true
       group_type: Proxy
     - zone: Hauts-de-Seine (92)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:920062}|{ci:920051}|{ci:920073}|{ci:920064}|{ci:920044}|{ci:920024}|{ci:920049}|{ci:920040}|{ci:920046}|{ci:920075}|{ci:920012}|{ci:920063}|{ci:920026}|{ci:920050}|{ci:920025}|{ci:920048}|{ci:920036}|{ci:920004}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:92}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
       scraper_type: Proxy
       waiting_cls: nil
@@ -548,7 +533,7 @@
       is_active: true
       group_type: Proxy
     - zone: Hauts-de-Seine (92)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=92012,92075,92046,92040,92049,92024,92044,92064,92051,92062,92073,,92063,92026,92050,92025,92048,92036,92004
+      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=92&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=
       main_page_cls: "#bloc_liste > div.ergov3-annonce"
       scraper_type: Proxy
       multi_page: false
