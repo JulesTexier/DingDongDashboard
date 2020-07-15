@@ -20,6 +20,8 @@ class Property < ApplicationRecord
   has_many :property_districts
   has_many :districts, through: :property_districts
 
+  has_many :property_links
+
   serialize :subway_infos, Array
 
   belongs_to :area
