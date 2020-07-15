@@ -281,14 +281,23 @@ class Subscriber < ApplicationRecord
     onboarding_broker("subscription")
   end
 
+  def handle_new_lead_gen
+    t = Trello.new
+    broker = Broker.find_by_trello_username("etienne_dingdong")
+    self.update(broker: broker, is_blocked: true)
+    t.add_new_user_on_trello(self)
+    send_to_broker_lead_gen
+  end
+
+  
+  private
+
   def send_to_broker_lead_gen
     broker = Broker.last 
     self.update(broker: broker)
     BrokerMailer.new_lead(self.id).deliver_now
   end
-
-  private
-
+  
   def handle_duplicate
     self.update(status: "duplicates")
     PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?

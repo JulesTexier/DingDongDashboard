@@ -198,7 +198,7 @@ class Api::V1::ManychatController < ApplicationController
   def send_to_broker
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      subscriber.send_to_broker_lead_gen
+      subscriber.handle_new_lead_gen
       render json: { status: "SUCCESS", message: "Subscriber have been pushed to #{subscriber.broker.firstname}", data: subscriber }, status: 200
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "An error occurred", data: nil }, status: 500
