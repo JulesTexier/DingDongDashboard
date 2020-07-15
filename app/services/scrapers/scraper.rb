@@ -8,8 +8,8 @@ class Scraper
       enriched_infos = perform_enrichment_regex(prop)
       prop.merge!(enriched_infos)
       prop[:area] = Area.where(name: prop[:area]).first
-      insert_property(prop)
-      prop_historisation(prop, __method__)
+      prop = insert_property(prop)
+      prop_historisation(prop, __method__, prop.id)
     else
       # for test purpose, if we don't want ton insert this shitty property,
       ## then we remove it from the final array of our dedicated scraper
@@ -351,22 +351,24 @@ class Scraper
     response = false
     filtered_prop = prop.select { |k, v| !v.nil? && [:area, :rooms_number, :surface, :price].include?(k) }
     if filtered_prop[:area].nil?
-      response = Property.where(
+      parent_prop_id = Property.where(
         filtered_prop.except(:area)
-      ).where('created_at >= ?', time.days.ago).exists?
+      ).where('created_at >= ?', time.days.ago).pluck(:id)
     else
       filtered_prop[:area_id] = Area.find_by(name: filtered_prop[:area]).id
-      response = Property.where(
+      parent_prop_id = Property.where(
         filtered_prop.except(:area),
-      ).where('created_at >= ?', time.days.ago).exists?
+      ).where('created_at >= ?', time.days.ago).pluck(:id)
     end
-    prop_historisation(prop, __method__) if response
+    response = parent_prop_id.any?
+    prop_historisation(prop, __method__, parent_prop_id[0]) if response
     response
   end
 
   def is_link_in_db?(prop)
-    response = Property.where(link: prop[:link].strip).exists?
-    prop_historisation(prop, __method__) if response
+    parent_prop_id = Property.where(link: prop[:link].strip).pluck(:id)
+    response = parent_prop_id.any?
+    prop_historisation(prop, __method__, parent_prop_id[0]) if response
     response
   end
 
@@ -400,15 +402,13 @@ class Scraper
         surface: hashed_property[:surface],
         price: hashed_property[:price],
         area: Area.where(name: hashed_property[:area]).first,
-      ).pluck(:description)
+      ).pluck(:id, :description)
 
-      properties.each do |property_desc|
-        response = desc_comparator(property_desc, hashed_property[:description])
+      properties.each do |property|
+        response = desc_comparator(property[1], hashed_property[:description])
+        prop_historisation(hashed_property, __method__, property[0]) if response
         break if response
       end
-    end
-    if response
-      prop_historisation(hashed_property, __method__)
     end
     response
   end
@@ -514,9 +514,9 @@ class Scraper
   ## PROP HISTORIZATION ##
   ########################
 
-  def prop_historisation(hashed_property, method_name)
-    hashed_property[:source] = self.source unless Rails.env.test?
-    insert_property_history(hashed_property, method_name) unless PropertyHistory.where(link: hashed_property[:link]).exists?
+  def prop_historisation(prop, method_name, parent_prop_id = nil)
+    prop[:source] = self.source unless Rails.env.test?
+    insert_property_link(prop, method_name, parent_prop_id) unless PropertyLink.where(link: prop[:link]).exists?
   end
 
   private
@@ -525,10 +525,11 @@ class Scraper
   ## PRIVATE DATABASE METHODS ##
   ##############################
 
-  def insert_property_history(hashed_property, method_name)
-    prop_history = PropertyHistory.new(hashed_property.except(:floor, :subway_ids, :subway_infos, :has_elevator, :provider, :renovated, :street, :has_garden, :has_terrace, :has_balcony, :is_last_floor, :is_new_construction))
-    prop_history.method_name = method_name
-    if prop_history.save
+  def insert_property_link(hashed_property, method_name, parent_prop_id)
+    prop_hst = PropertyLink.new(hashed_property.slice(:link, :description, :source, :images))
+    prop_hst.method_name = method_name
+    prop_hst.property_id = parent_prop_id.nil? ? nil : parent_prop_id
+    if prop_hst.save
       puts "\n\nInsertion of property history - #{self.source} -> #{method_name}" unless Rails.env.test?
     end
   end
