@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_074844) do
+ActiveRecord::Schema.define(version: 2020_07_16_101006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -249,6 +249,18 @@ ActiveRecord::Schema.define(version: 2020_07_06_074844) do
     t.index ["property_id"], name: "index_property_images_on_property_id"
   end
 
+  create_table "property_links", force: :cascade do |t|
+    t.bigint "property_id"
+    t.string "link"
+    t.string "source"
+    t.text "description"
+    t.text "images", default: [], array: true
+    t.string "method_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["property_id"], name: "index_property_links_on_property_id"
+  end
+
   create_table "referrals", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -387,6 +399,8 @@ ActiveRecord::Schema.define(version: 2020_07_06_074844) do
     t.boolean "garden", default: false
     t.boolean "new_construction", default: false
     t.boolean "last_floor", default: false
+    t.integer "min_price", default: 0
+    t.integer "max_sqm_price"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
@@ -400,6 +414,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_074844) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
+  add_foreign_key "property_links", "properties"
   add_foreign_key "selections", "hunter_searches"
   add_foreign_key "selections", "properties"
   add_foreign_key "sequence_steps", "sequences"
