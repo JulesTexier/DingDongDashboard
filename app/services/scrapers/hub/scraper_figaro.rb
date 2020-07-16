@@ -14,11 +14,11 @@ class Hub::ScraperFigaro < Scraper
         begin
           hashed_property = {}
           link = access_xml_link(item, "a.js-link-ei", "href")[0].to_s
-          link.to_s.strip.empty? ? hashed_property[:link] = access_xml_link(item, "a.js-link-plf", "href")[0].to_s : hashed_property[:link] = "https://immobilier.lefigaro.fr" + link
+          hashed_property[:link] = link.to_s.strip.empty? ? access_xml_link(item, "a.js-link-plf", "href")[0].to_s : "https://immobilier.lefigaro.fr" + link
           hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2 > a > span").tr("\n\t", ""), args.zone)
-          hashed_property[:flat_type] = get_type_flat(access_xml_link(item, "a.js-link-ei", "title")[0])
-          hashed_property[:flat_type] == "Studio" ? hashed_property[:rooms_number] = 1 : hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:flat_type] = get_type_flat(access_xml_link(item, "a.js-link-ei", "title")[0]) unless access_xml_link(item, "a.js-link-ei", "title")[0].nil?
+          hashed_property[:rooms_number] = hashed_property[:flat_type] == "Studio" ? 1 : regex_gen(access_xml_text(item, "h2"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "span.price-label"), '(\d)(.*)(€)').to_int_scrp
           hashed_property[:is_new_construction] = access_xml_text(item, 'span.label-brand').include?("Avec Figaro Immoneuf")
           if go_to_prop?(hashed_property, 7)
