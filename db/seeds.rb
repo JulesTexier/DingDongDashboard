@@ -33,41 +33,6 @@ scraper_params.each do |param|
   end
 end
 
-# referrals = [
-#   {
-#     firstname: "Mathieu",
-#     lastname: "EM Reno",
-#     email: "emtrinquart@gmail.com",
-#     phone: "0698936051",
-#     referral_type: "entrepreneur tout corps d'état",
-#   },
-#   {
-#     firstname: "Gulay",
-#     lastname: "Demirtas",
-#     email: "gulay.demirtas@paris.notaires.fr",
-#     phone: "0664720732",
-#     referral_type: "notaire",
-#   },
-#   {
-#     firstname: "Camille",
-#     lastname: "Hermand",
-#     email: "camille@camillearchitectures.com",
-#     phone: "0682652785",
-#     referral_type: "architecte",
-#   },
-#   {
-#     firstname: "Ruth",
-#     lastname: "Zola",
-#     email: "rzola@agorafinance.fr",
-#     phone: "0610592419",
-#     referral_type: "chasseur immobilier",
-#   }
-# ]
-
-# referrals.each do |referral|
-#   Referral.create(firstname: referral[:firstname], lastname: referral[:lastname], email: referral[:email], phone: referral[:phone], referral_type: referral[:referral_type])
-# end
-
 statuses_file = YAML.load(File.read("./db/data/statuses.yml"))
 
 statuses_file.each do |status|
@@ -83,6 +48,8 @@ area_yaml.each do |district_data|
     if Area.where(name: data["name"]).empty?
       Area.create(name: data["name"], zone: district_data["zone"])
       puts "Area - #{data["name"]} created"
+    elsif Area.find_by(name: data["name"]).zone != district_data["zone"]
+      Area.find_by(name: data["name"]).update(zone: district_data["zone"])
     end
   end
 end
