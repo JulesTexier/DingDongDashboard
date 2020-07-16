@@ -284,7 +284,6 @@ class Subscriber < ApplicationRecord
     t = Trello.new
     broker = Broker.find_by_trello_username("etienne_dingdong")
     self.update(broker: broker, is_blocked: true)
-    SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "unblocked"))
     t.add_new_user_on_trello(self)
     send_to_broker_lead_gen
   end
