@@ -298,7 +298,8 @@ class Scraper
 
   def perform_enrichment_regex(prop)
     enriched_infos = {}
-    enriched_infos[:subway_infos] = perform_subway_regex(prop[:description]) unless prop.key?(:subway_infos) || prop.key?(:subway_ids)
+    zone = prop[:area].include?("Paris") ? "Paris" : "Suburb"
+    enriched_infos[:subway_infos] = perform_subway_regex(prop[:description], zone) unless prop.key?(:subway_infos) || prop.key?(:subway_ids)
     enriched_infos[:floor] = perform_floor_regex(prop[:description]) unless prop.key?(:floor)
     enriched_infos[:has_elevator] = perform_elevator_regex(prop[:description]) unless prop.key?(:has_elevator)
     enriched_infos[:has_garden] = prop[:description].garden_str_scrp unless prop.key?(:has_garden)
