@@ -81,7 +81,50 @@ RSpec.describe Subscriber, type: :model do
             end
           end
         end
+        context "Exterior is not ok" do
+            # Exterior single 
+            it "should NOT match user and property because of garden !" do
+              @property.first["has_garden"] = false
+              @subscriber.garden = true
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+              end
+            end
+            it "should NOT match user and property because of garden !" do
+              @property.first["has_balcony"] = false
+              @subscriber.balcony = true
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+              end
+            end
+            it "should NOT match user and property because of garden !" do
+              @property.first["has_terrace"] = false
+              @subscriber.terrace = true
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+              end
+            end
+            # Exterior multi
+            it "should NOT match user and property because of terrace !" do
+              @property.first["has_balcony"] = true
+              @property.first["has_garden"] = true
+              @subscriber.terrace = true
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+              end
+            end
+            it "should match user and property because of garden !" do
+              @property.first["has_balcony"] = false
+              @property.first["has_garden"] = true
+              @subscriber.garden = true
+              @subscriber.balcony = true
+              @property.each do |prop|
+                expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
+              end
+            end
+          end
       end
+
 
       describe "Property NOT matchs" do
         before :each do

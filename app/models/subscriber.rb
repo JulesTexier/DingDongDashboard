@@ -74,9 +74,7 @@ class Subscriber < ApplicationRecord
     is_matching_property_floor(args["floor"]) &&
     is_matching_property_area(args["area_id"], subs_areas) &&
     is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
-    is_matching_property_terrace(args["has_terrace"]) &&
-    is_matching_property_garden(args["has_garden"]) &&
-    is_matching_property_balcony(args["has_balcony"]) &&
+    is_matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
     is_matching_property_last_floor(args["is_last_floor"])
   end
 
@@ -370,6 +368,18 @@ class Subscriber < ApplicationRecord
       else
         return true
       end
+    end
+  end
+
+  def is_matching_exterior?(terrace, garden, balcony)
+    if self.terrace || self.balcony || self.garden #At least one exterior criteria
+      if (self.terrace && is_matching_property_terrace(terrace)) || (self.balcony && is_matching_property_balcony(balcony)) || (self.garden && is_matching_property_garden(garden))
+        return true 
+      else
+        return false 
+      end
+    else # Esle; no testing => returning true
+      return true
     end
   end
 

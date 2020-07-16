@@ -129,6 +129,49 @@ RSpec.describe HunterSearch, type: :model do
           end
         end
 
+        context "Exterior is not ok" do
+          # Exterior single 
+          it "should NOT match user and property because of garden !" do
+            @property.first["has_garden"] = false
+            @hunter_search.garden = true
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
+            end
+          end
+          it "should NOT match user and property because of garden !" do
+            @property.first["has_balcony"] = false
+            @hunter_search.balcony = true
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
+            end
+          end
+          it "should NOT match user and property because of garden !" do
+            @property.first["has_terrace"] = false
+            @hunter_search.terrace = true
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
+            end
+          end
+          # Exterior multi
+          it "should NOT match user and property because of terrace !" do
+            @property.first["has_balcony"] = true
+            @property.first["has_garden"] = true
+            @hunter_search.terrace = true
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(false)
+            end
+          end
+          it "should match user and property because of garden !" do
+            @property.first["has_balcony"] = false
+            @property.first["has_garden"] = true
+            @hunter_search.garden = true
+            @hunter_search.balcony = true
+            @property.each do |prop|
+              expect(@hunter_search.is_matching_property?(prop, @hunter_search.areas.ids)).to eq(true)
+            end
+          end
+        end
+
         describe "elevator contraints" do
           describe "elevator is false but floor is inferior to min elevator_floor" do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
