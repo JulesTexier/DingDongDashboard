@@ -13,7 +13,9 @@ class Hub::ScraperPap < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.pap.fr" + access_xml_link_matchdata(item, "a.item-title", "href", "(#dialog_mensualite|www.immoneuf.com/|construiresamaison.com/)")[0]
+          link = access_xml_link(item, "a.item-title", "href")[0]
+          next if link.match("(#dialog_mensualite|www.immoneuf.com/|construiresamaison.com/)").is_a?(MatchData)
+          hashed_property[:link] = "https://www.pap.fr" + access_xml_link(item, "a.item-title", "href")[0]
           hashed_property[:surface] = regex_gen(access_xml_text(item, "ul.item-tags"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "span.h1"), args.zone)
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "p.item-description"), args.zone) if hashed_property[:area] == "N/C"
