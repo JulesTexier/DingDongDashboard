@@ -73,6 +73,7 @@ class Subscriber < ApplicationRecord
     is_matching_property_price(args["price"]) &&
     is_matching_property_floor(args["floor"]) &&
     is_matching_property_area(args["area_id"], subs_areas) &&
+    is_matching_max_sqm_price(args["price"], args["surface"]) &&
     is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
     is_matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
     is_matching_property_last_floor(args["is_last_floor"])
@@ -331,8 +332,28 @@ class Subscriber < ApplicationRecord
 
   # Matching methods
 
+  def is_matching_property_max_price(price)
+    (price <= self.max_price ? true : false) if !self.max_price.nil?
+  end
+
+  def is_matching_property_min_price(price)
+    if !self.min_price.nil?
+      (price >= self.min_price ? true : false) 
+    else
+      true
+    end
+  end
+
   def is_matching_property_price(price)
-    price <= self.max_price unless self.max_price.nil?
+    is_matching_property_max_price(price) && is_matching_property_min_price(price)
+  end
+
+  def is_matching_max_sqm_price(price, surface)
+    if !self.max_sqm_price.nil? && surface != 0
+      ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
+    else
+      true 
+    end
   end
 
   def is_matching_property_surface(surface)

@@ -40,7 +40,7 @@ RSpec.describe Subscriber, type: :model do
 
       describe "case subscriber matching properties values" do
         before :each do
-          prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.min_surface, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @subscriber.max_price, surface: @subscriber.max_price/10000, area: @subscriber.areas.first, rooms_number: @subscriber.min_rooms_number, floor: nil, has_elevator: nil)
           attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
@@ -81,6 +81,17 @@ RSpec.describe Subscriber, type: :model do
             end
           end
         end
+
+        context "SQM Price is too high" do
+          it "should NOT match user and property because of price !" do
+            @property.first["price"] = 1000000
+            @property.first["surface"] = 80
+            @property.each do |prop|
+              expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(false)
+            end
+          end
+        end
+
         context "Exterior is not ok" do
             # Exterior single 
             it "should NOT match user and property because of garden !" do
@@ -183,6 +194,8 @@ RSpec.describe Subscriber, type: :model do
             it "should match user and property (known elevator abscence but min_elevator_floor <)" do
               @property.first["has_elevator"] = false
               @property.first["floor"] = @subscriber.min_elevator_floor - 1
+              @property.first["price"] = @subscriber.max_price
+              @property.first["surface"] = @subscriber.max_price / 10000
               @property.each do |prop|
                 expect(@subscriber.is_matching_property?(prop, @subscriber.areas.ids)).to eq(true)
               end
@@ -198,6 +211,7 @@ RSpec.describe Subscriber, type: :model do
             end
           end
         end
+
       end
     end
   end
