@@ -62,6 +62,10 @@
   - name: unblocked
     description: User has been unblocked by broker once called
     status_type: acquisition
+  - name: is_active_one_week
+    description: User has been active in the past week
+    status_type: retention
+
 
 
     
