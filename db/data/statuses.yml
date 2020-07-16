@@ -53,6 +53,15 @@
   - name: has_ended_subscription
     description: User has ended its subscription for Ding Dong alert
     status_type: revenue
+  - name: onboarding_started
+    description: User arrived on Messenger chatbot
+    status_type: acquisition
+  - name: onboarding_ended
+    description: User has ended its onboarding on Manychat
+    status_type: acquisition
+  - name: unblocked
+    description: User has been unblocked by broker once called
+    status_type: acquisition
 
 
     
