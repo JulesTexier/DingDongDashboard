@@ -76,7 +76,8 @@ class Subscriber < ApplicationRecord
     is_matching_max_sqm_price(args["price"], args["surface"]) &&
     is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
     is_matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
-    is_matching_property_last_floor(args["is_last_floor"])
+    is_matching_property_last_floor(args["is_last_floor"]) &&
+    is_matching_property_new_construction(args["is_new_construction"])
   end
 
   def has_interacted(last_interaction, day_range)
@@ -282,7 +283,7 @@ class Subscriber < ApplicationRecord
 
   def handle_new_lead_gen
     t = Trello.new
-    broker = Broker.find_by_trello_username("etienne_dingdong")
+    broker = Broker.get_current_lead_gen
     self.update(broker: broker, is_blocked: true)
     t.add_new_user_on_trello(self)
     send_to_broker_lead_gen
@@ -422,6 +423,10 @@ class Subscriber < ApplicationRecord
 
   def is_matching_property_area(area_id, sub_areas = self.areas.ids)
     sub_areas.include?(area_id)
+  end
+
+  def is_matching_property_new_construction(is_new_construction)
+    !self.new_construction && is_new_construction ? false : true
   end
 
   def notify_broker_if_max_price_is_changed
