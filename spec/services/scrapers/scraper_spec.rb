@@ -415,6 +415,20 @@ RSpec.describe Scraper, type: :service do
         expect(enriched_infos[:has_balcony]).to eq(true)
         expect(enriched_infos[:is_last_floor]).to eq(true)
         expect(enriched_infos[:floor]).to eq(3)
+        expect(enriched_infos[:subway_infos]).to eq([])
+      end
+
+      it "shoud, given the description, give us specific infos" do
+        @prop[:description] = "Super appartement avec un balcon, une petite terrasse et un jardin, à coté de Wagram, au 3ème et dernier étage sans ascenseur"
+        @prop[:area] = "Paris 3ème"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos).to be_a(Hash)
+        expect(enriched_infos[:has_terrace]).to eq(true)
+        expect(enriched_infos[:has_garden]).to eq(true)
+        expect(enriched_infos[:has_elevator]).to eq(false)
+        expect(enriched_infos[:has_balcony]).to eq(true)
+        expect(enriched_infos[:is_last_floor]).to eq(true)
+        expect(enriched_infos[:floor]).to eq(3)
         expect(enriched_infos[:subway_infos]).to eq([{"line"=>["3"], "name"=>"Wagram"}])
       end
 
@@ -577,53 +591,53 @@ RSpec.describe Scraper, type: :service do
     end
   end
 
-  describe "historization is a method that insert every property in PropertyHistory" do
+  describe "historization is a method that insert every property in PropertyLink" do
     context "insert entry in db if prop is not inserted because of our checker method, with its method name" do
       before :each do
         @s = Scraper.new
         FactoryBot.create(:property, price: 500000, surface: 50, rooms_number: 1, area: Area.find_by(name: "Paris 1er"), link: "https://google.com", description: "this description is really close to what we want to test my man i love you so much")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com" }
         @s.go_to_prop?(prop, 7)
-        expect(PropertyHistory.last.method_name).to eq("is_link_in_db?")
+        expect(PropertyLink.last.method_name).to eq("is_link_in_db?")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
-        expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
+        expect(PropertyLink.last.method_name).to eq("does_prop_exists?")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: nil, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
-        expect(PropertyHistory.last.method_name).to eq("does_prop_exists?")
+        expect(PropertyLink.last.method_name).to eq("does_prop_exists?")
       end
 
-      it "should insert PropertyHistory with already_exists_with_desc? method name" do
+      it "should insert PropertyLink with already_exists_with_desc? method name" do
         prop = { price: 500000, surface: 50, rooms_number: 1, area: "Paris 1er", link: "https://yahoo.com/id_lol", description: "this description is really close to what we want to test my man i love you so much" }
         @s.already_exists_with_desc?(prop)
-        expect(PropertyHistory.last.method_name).to eq("already_exists_with_desc?")
+        expect(PropertyLink.last.method_name).to eq("already_exists_with_desc?")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: nil, surface: nil, rooms_number: nil, area: "Paris 1er", link: "https://google.com/id_lol" }
         @s.go_to_prop?(prop, 7)
-        expect(PropertyHistory.last.method_name).to eq("go_to_prop?")
+        expect(PropertyLink.last.method_name).to eq("go_to_prop?")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: 500500, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
         @s.is_it_unwanted_prop?(prop)
-        expect(PropertyHistory.last.method_name).to eq("is_it_unwanted_prop?")
+        expect(PropertyLink.last.method_name).to eq("is_it_unwanted_prop?")
       end
 
-      it "should insert PropertyHistory with expected method name" do
+      it "should insert PropertyLink with expected method name" do
         prop = { price: 10000, surface: 49, rooms_number: 2, area: "Paris 1er", link: "https://google.com/id_lol", description: "Super viager pour un local commercial" }
         @s.go_to_prop?(prop, 7)
-        expect(PropertyHistory.last.method_name).to eq("is_prop_fake?")
+        expect(PropertyLink.last.method_name).to eq("is_prop_fake?")
       end
     end
   end

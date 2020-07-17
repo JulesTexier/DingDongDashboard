@@ -19,6 +19,7 @@ class Hub::ScraperBienIci < Scraper
           hashed_property[:rooms_number] = item["roomsQuantity"]
           hashed_property[:price] = item["price"] if item["price"].is_a?(Integer)
           hashed_property[:is_new_construction] = item["newProperty"]
+          next if hashed_property[:area] == "N/C"
           next if hashed_property[:link].match(/(visiteonline-)/i).is_a?(MatchData)
           next if hashed_property[:surface].nil? || hashed_property[:price].nil?
           if go_to_prop?(hashed_property, 7)

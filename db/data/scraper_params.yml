@@ -176,19 +176,19 @@
   - zone: Hauts-de-Seine (92)
     url: https://www.pap.fr/annonce/vente-appartement-maison-hauts-de-seine-92-g456-a-partir-du-studio-2
     scraper_type: Static
-    main_page_cls: div.search-list-item
+    main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
   - zone: Val-de-Marne (94)
     url: https://www.pap.fr/annonce/vente-appartements-arcueil-94110-g43345g43346g43348g43354g43356g43357g43359g43364g43370g43379-a-partir-du-studio
     scraper_type: Static
-    main_page_cls: div.search-list-item
+    main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
   - zone: Seine-Saint-Denis (93)
     url: https://www.pap.fr/annonce/vente-appartement-maison-bagnolet-93170-g43303g43308g43313g43321g43324g43335g43339g43705-a-partir-du-studio
     scraper_type: Static
-    main_page_cls: div.search-list-item
+    main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
 - source: Vanneau
