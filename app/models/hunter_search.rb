@@ -6,10 +6,11 @@ class HunterSearch < ApplicationRecord
   has_many :selections
   has_many :properties, through: :selections, source: :property
 
-  def get_matching_properties(limit = 24, max_scope = 500)
+  def get_matching_properties(limit = 100, max_scope = 500)
     matched_props_ids = []
+    areas_ids = HunterSearchArea.where(hunter_search: self).pluck(:area_id)
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
-    properties = Property.last(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
+    properties = Property.where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number).where(area: areas_ids).last(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
     areas_ids = self.areas.ids
     properties.each do |property|
       matched_props_ids.push(property["id"]) if is_matching_property?(property, areas_ids)
