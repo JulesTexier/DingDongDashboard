@@ -73,10 +73,9 @@ class Subscriber < ApplicationRecord
     is_matching_property_price(args["price"]) &&
     is_matching_property_floor(args["floor"]) &&
     is_matching_property_area(args["area_id"], subs_areas) &&
+    is_matching_max_sqm_price(args["price"], args["surface"]) &&
     is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
-    is_matching_property_terrace(args["has_terrace"]) &&
-    is_matching_property_garden(args["has_garden"]) &&
-    is_matching_property_balcony(args["has_balcony"]) &&
+    is_matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
     is_matching_property_last_floor(args["is_last_floor"])
   end
 
@@ -281,8 +280,23 @@ class Subscriber < ApplicationRecord
     onboarding_broker("subscription")
   end
 
+  def handle_new_lead_gen
+    t = Trello.new
+    broker = Broker.find_by_trello_username("etienne_dingdong")
+    self.update(broker: broker, is_blocked: true)
+    t.add_new_user_on_trello(self)
+    send_to_broker_lead_gen
+  end
+
+  
   private
 
+  def send_to_broker_lead_gen
+    broker = Broker.last 
+    self.update(broker: broker)
+    BrokerMailer.new_lead(self.id).deliver_now
+  end
+  
   def handle_duplicate
     self.update(status: "duplicates")
     PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
@@ -318,8 +332,28 @@ class Subscriber < ApplicationRecord
 
   # Matching methods
 
+  def is_matching_property_max_price(price)
+    (price <= self.max_price ? true : false) if !self.max_price.nil?
+  end
+
+  def is_matching_property_min_price(price)
+    if !self.min_price.nil?
+      (price >= self.min_price ? true : false) 
+    else
+      true
+    end
+  end
+
   def is_matching_property_price(price)
-    price <= self.max_price unless self.max_price.nil?
+    is_matching_property_max_price(price) && is_matching_property_min_price(price)
+  end
+
+  def is_matching_max_sqm_price(price, surface)
+    if !self.max_sqm_price.nil? && surface != 0
+      ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
+    else
+      true 
+    end
   end
 
   def is_matching_property_surface(surface)
@@ -355,6 +389,18 @@ class Subscriber < ApplicationRecord
       else
         return true
       end
+    end
+  end
+
+  def is_matching_exterior?(terrace, garden, balcony)
+    if self.terrace || self.balcony || self.garden #At least one exterior criteria
+      if (self.terrace && is_matching_property_terrace(terrace)) || (self.balcony && is_matching_property_balcony(balcony)) || (self.garden && is_matching_property_garden(garden))
+        return true 
+      else
+        return false 
+      end
+    else # Esle; no testing => returning true
+      return true
     end
   end
 
