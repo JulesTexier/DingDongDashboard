@@ -8,7 +8,7 @@ class HunterSearchesController < ApplicationController
   end
 
   def show
-    @properties = @hunter_search.get_matching_properties(18)
+    @properties = @hunter_search.get_matching_properties(100)
     @selected_properties = HunterSearch.find(params[:id]).properties.pluck(:id)
   end
 
