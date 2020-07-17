@@ -10,13 +10,13 @@ class HunterSearch < ApplicationRecord
     matched_props_ids = []
     areas_ids = HunterSearchArea.where(hunter_search: self).pluck(:area_id)
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
-    properties = Property.where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number).where(area: areas_ids).last(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
+    properties = Property.where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number).where(area: areas_ids).order(id: :desc).limit(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
     areas_ids = self.areas.ids
     properties.each do |property|
       matched_props_ids.push(property["id"]) if is_matching_property?(property, areas_ids)
       break if matched_props_ids.length == limit
     end
-    return Property.where(id: matched_props_ids)
+    return Property.where(id: matched_props_ids).order(id: :desc)
   end
 
   def update_hunter_search_areas(areas_ids)
