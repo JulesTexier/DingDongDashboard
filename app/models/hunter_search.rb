@@ -16,7 +16,7 @@ class HunterSearch < ApplicationRecord
       matched_props_ids.push(property["id"]) if is_matching_property?(property, areas_ids)
       break if matched_props_ids.length == limit
     end
-    return Property.where(id: matched_props_ids)
+    return Property.where(id: matched_props_ids).order(id: :desc)
   end
 
   def update_hunter_search_areas(areas_ids)
