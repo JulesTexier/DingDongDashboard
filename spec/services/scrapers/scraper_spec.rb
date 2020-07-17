@@ -415,6 +415,20 @@ RSpec.describe Scraper, type: :service do
         expect(enriched_infos[:has_balcony]).to eq(true)
         expect(enriched_infos[:is_last_floor]).to eq(true)
         expect(enriched_infos[:floor]).to eq(3)
+        expect(enriched_infos[:subway_infos]).to eq([])
+      end
+
+      it "shoud, given the description, give us specific infos" do
+        @prop[:description] = "Super appartement avec un balcon, une petite terrasse et un jardin, à coté de Wagram, au 3ème et dernier étage sans ascenseur"
+        @prop[:area] = "Paris 3ème"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos).to be_a(Hash)
+        expect(enriched_infos[:has_terrace]).to eq(true)
+        expect(enriched_infos[:has_garden]).to eq(true)
+        expect(enriched_infos[:has_elevator]).to eq(false)
+        expect(enriched_infos[:has_balcony]).to eq(true)
+        expect(enriched_infos[:is_last_floor]).to eq(true)
+        expect(enriched_infos[:floor]).to eq(3)
         expect(enriched_infos[:subway_infos]).to eq([{"line"=>["3"], "name"=>"Wagram"}])
       end
 
