@@ -286,14 +286,14 @@ class Scraper
   ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
   ## And the we send it in an array for insertion.
   def perform_subway_regex(str, zone = "Paris")
+    subway_infos = []
     if zone == "Paris"
       subways = YAML.load_file("./db/data/subways.yml")
-      subway_infos = []
       subways["stations"].each do |subway|
         subway_infos.push(subway) if str.remove_acc_scrp.match(/#{subway["name"].remove_acc_scrp}/i).is_a?(MatchData)
       end
-      subway_infos.uniq
     end
+    subway_infos.uniq
   end
 
   def perform_enrichment_regex(prop)
