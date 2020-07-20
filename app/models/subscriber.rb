@@ -77,7 +77,9 @@ class Subscriber < ApplicationRecord
     is_matching_property_terrace(args["has_terrace"]) &&
     is_matching_property_garden(args["has_garden"]) &&
     is_matching_property_balcony(args["has_balcony"]) &&
-    is_matching_property_last_floor(args["is_last_floor"])
+    is_matching_property_last_floor(args["is_last_floor"]) &&
+    is_matching_home_type(args["home_type"]) && 
+    is_matching_apartment_type(args["apartment_type"])
   end
 
   def has_interacted(last_interaction, day_range)
@@ -356,6 +358,14 @@ class Subscriber < ApplicationRecord
         return true
       end
     end
+  end
+
+  def is_matching_home_type(home_type)
+    self.home_type ? !home_type.nil? && home_type : true
+  end
+
+  def is_matching_apartment_type(apartment_type)
+    self.apartment_type ? !apartment_type.nil? && apartment_type : true
   end
 
   def is_matching_property_terrace(terrace)
