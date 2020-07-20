@@ -50,6 +50,27 @@
                                                       email : <%= @subscriber.email %>
                                                     </td>
                                                   </tr>
+                                                  <tr>
+                                                    <td class="m_-1867408558110905584col100" align="center" style="line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                      Budget :  min: <%= @subscriber.min_price %> - max: <%= @subscriber.max_price %>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td class="m_-1867408558110905584col100" align="center" style="line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                      Surface min : <%= @subscriber.min_surface %>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td class="m_-1867408558110905584col100" align="center" style="line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                      Secteurs: <%= @subscriber.get_areas_list %>
+                                                    </td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="m_-1867408558110905584col100" align="center" style="line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
+                                                        Nb de pièces min: <%= @subscriber.min_rooms_number %>
+                                                    </td>
+                                                  </tr>
+                                                  
                                                 </tbody>
                                               </table>
                                             </td>
@@ -82,21 +103,21 @@
                     <tr>
                       <td>
                         <h2>Discours type</h2>
-                        <h2 id="pr-sentation-">Présentation :</h2>
+                        <p style="text-decoration:underline" id="pr-sentation-">Présentation :</p>
                         <p>Bonjour...(réponse bonjour), je m&#39;appelle XX, je vous appelle suite à votre inscription sur Ding Dong pour discuter de votre projet, de votre plan de financement et vous donner accès à notre alerte immobilière. 
                         avez-vous 5 minutes à m&#39;accorder ? </p>
                         <ol>
                         <li>Vous cherchez depuis combien de temps ? </li>
                         <li>Comment se passe vos recherches ? </li>
                         </ol>
-                        <h3 id="transition-ding-dong-">Transition Ding Dong :</h3>
+                        <b id="transition-ding-dong-">Transition Ding Dong :</b>
                         <p>Le marché est très tendu à Paris, on a créé Ding Dong pour accélérer vos recherches. Notre alerte regroupe tous les sites immobilier (+160) afin de recevoir les annonces le premier et de toutes les avoir au même endroit. </p>
                         <ol>
                         <li>Avez-vous déjà fait des offres ? </li>
                         <li>Quel est votre budget ?</li>
                         <li>Comment avez-vous estimé ce budget ? </li>
                         </ol>
-                        <h3 id="transition-courtage-">Transition courtage :</h3>
+                        <b id="transition-courtage-">Transition courtage :</b>
                         <p>En plus de notre alerte, qui vous aide dans vos recherches d&#39;appartements, je suis courtier chez Meilleurtaux. Mon métier consiste à vous aider à chercher le meilleur financement possible. Je mets toutes les banques en concurrences y compris la votre pour vous obtenir les meilleurs conditions.</p>
                         <ul>
                         <li>Je peux vous préparer gratuitement un plan de financement si vous voulez ? 
@@ -104,9 +125,9 @@
                         <li>Si la personne a déjà eu un taux : Ok super, je peux au moins vous dire si vous avez obtenu un bon taux si vous me donnez quelques informations ? </li>
                         <li>et tous les autres tricks que vous connaissez en fonction du profil de la personne que vous avez en face de vous :) attestation de financement personnalisé, etc...</li>
                         </ul>
-                        <h2 id="acc-s-ding-dong-">Accès à Ding Dong :</h2>
+                        <p style="text-decoration:underline" id="acc-s-ding-dong-">Accès à Ding Dong :</p>
                         <p>Je viens de valider votre compte, vous recevrez maintenant toutes les annonces sur notre conversation Messenger. </p>
-                        <h2 id="fin-du-rdv-">Fin du RDV :</h2>
+                        <p style="text-decoration:underline" id="fin-du-rdv-">Fin du RDV :</p>
                         <p>Avez-vous une dernière question  ? 
                         Merci beaucoup d&#39;avoir pris le temps, bienvenue chez Ding Dong et à bientôt.</p>
 
