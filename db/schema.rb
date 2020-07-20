@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_123209) do
+ActiveRecord::Schema.define(version: 2020_07_16_101006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -399,6 +399,8 @@ ActiveRecord::Schema.define(version: 2020_07_15_123209) do
     t.boolean "garden", default: false
     t.boolean "new_construction", default: false
     t.boolean "last_floor", default: false
+    t.integer "min_price", default: 0
+    t.integer "max_sqm_price"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 

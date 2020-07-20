@@ -1,0 +1,16 @@
+<div class="row justify-content-center mt-5 mb-5">
+    <img class="text-center" src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" style="height:50px" alt="Logo">
+</div>
+<div class="row">
+  <div class="col-12">
+  <% if @subscriber.is_blocked == false%>
+    <h1>Merci</h1>
+      <p><%= @subscriber.firstname %> <%= @subscriber.lastname %> recevra dorénavant les annonces Ding Dong ! 
+      <br>Il n'a jamais été aussi prêt de trouver son futur bien ! 😉
+    </p>
+  <% else %>
+    <h1>⚠️ Attention</h1>
+    <p>Oups, quelque chose ne s'est pas bien passé, veuillez contacter Ding Dong svp</p>
+  <% end %>
+  </div>
+</div>

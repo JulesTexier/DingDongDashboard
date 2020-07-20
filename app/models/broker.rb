@@ -40,6 +40,45 @@ class Broker < ApplicationRecord
     !brokers.empty? ? brokers[rand(0..brokers.length-1)] : nil
   end
 
+  def self.get_current_lead_gen
+    candice = Broker.find_by(email: "ca.timmerman@meilleurtaux.com")
+    erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
+    benoit = Broker.find_by(email: "b.leroux@meilleurtaux.com")
+    benoit = Broker.find_by(email: "a.meneghino@meilleurtaux.com")
+
+    morning_end = 13
+    afternooon_end = 20
+    date = Time.now.in_time_zone("Paris")
+    b = nil
+    case date.wday
+    when 0
+      b = [candice, adrien].sample
+    when 1 
+      if date.hour < afternooon_end
+        b = [candice, adrien].sample
+      else 
+        b = [candice, adrien, benoit, erika].sample
+      end
+    when 2 || 3 || 4
+        b = [candice, adrien, benoit, erika].sample
+    when 5 
+      if  date.hour < afternooon_end
+        b = [candice, adrien, benoit, erika].sample
+      else 
+        b = [benoit, erika].sample
+      end
+    when 6 
+      if date.hour < afternooon_end
+        b = [benoit, erika].sample
+      else 
+        b = [candice, adrien].sample
+      end
+    else
+      b = [candice, adrien].sample
+    end
+    return b
+  end
+
   # def self.get_current_broker(date = Time.now)
 
   #   if !ENV['BROKER'].nil? && !Rails.env.test?

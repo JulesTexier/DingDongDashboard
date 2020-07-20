@@ -137,9 +137,18 @@ class SubscribersController < ApplicationController
     redirect_to edit_subscriber_path
   end
 
+
+  def activation
+    @subscriber = Subscriber.find(params[:id])
+    if !@subscriber.nil?
+      @subscriber.update(is_blocked: false) 
+      SubscriberStatus.create(subscriber: self, status: Status.find_by(name: "unblocked"))
+    end
+  end
+
   private
 
   def subscriber_params
-    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor)
+    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor, :min_price, :max_sqm_price)
   end
 end

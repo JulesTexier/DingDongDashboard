@@ -34,7 +34,7 @@ $(document).ready(function(){
 
       <h4 class="mb-3 mt-4" style="color: #0470C1; font-weight:600; ">Renseignez vos 6 critères de recherche ci-dessous : </h6> 
 
-      <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/7 📍 Arrondissement/ville ? *</h5>
+      <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/10 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
 
         <% @master_areas.each do |zone|%>
@@ -50,15 +50,25 @@ $(document).ready(function(){
       </div>
 
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">2/7 💰 Prix d'achat maximum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">2/10 💰 Prix d'achat maximum ? *</h5>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">€</span>
             </div>
             <%= f.number_field :max_price, class: "form-control", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
         </div>
+
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">3/10 💰↘️ Budget Minimum ?*</h5>
+        <div class="input-group mb-3">
+            <%= f.number_field :min_price, class: "form-control", placeholder: "Ex : 0", :required => true %>
+        </div>
+
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">4/10 💰↔️ Prix Maximum au m2 ?</h5>
+        <div class="input-group mb-3">
+            <%= f.number_field :max_sqm_price, class: "form-control", placeholder: "Ex : 12 000", :required => false %>
+        </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">3/7 ↔️ Surface minimum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">5/10 ↔️ Surface minimum ? *</h5>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">m2</span>
@@ -66,42 +76,49 @@ $(document).ready(function(){
             <%= f.number_field :min_surface, type: "number", class: "form-control", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">4/7 🏡 Nombre de pièces minimum ? *</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">6/10 🏡 Nombre de pièces minimum ? *</h5>
         <div class="input-group mb-3">
             <%= f.number_field :min_rooms_number, class: "form-control", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
         </div>
     
-        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">5/7 🎢 A partir de quel étage minimum ?</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400;">7/10 🎢 A partir de quel étage minimum ?</h5>
         <h6 style="color: #0470C1; font-weight:200;">ex: 1 si vous ne souhaitez pas de Rez-de-Chaussée</h5>
         <div class="input-group mb-3">
             <%= f.number_field :min_floor, class: "form-control", placeholder: "Ex : 1", min: "0", max: "8" %>
         </div>
+        <div class="form-check form-check-inline">
+          <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id:"last_floor", value:"true" %> 
+          <label class="form-check-label" for="last_floor">Uniquement dernier étage</label>
+        </div>
     
-        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">6/7 🚠A partir de quel étage souhaitez-vous un ascenseur?</h5>
+        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">8/10 🚠A partir de quel étage souhaitez-vous un ascenseur?</h5>
         <h6 style="color: #0470C1; font-weight:200;">ex: 3 si vous souhaitez un ascenseur à partir du 3ème étage</h5>
         <div class="input-group mb-3" style="margin-bottom:4.5rem">
             <%= f.number_field :min_elevator_floor, class: "form-control", placeholder: "Ex : 3", min: "0", max: "8" %>
         </div>
 
        
-        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">7/7 + de critères</h5>
-        <h6 style="color: #0470C1; font-weight:200;">Cochez les cases suivantes si vous souhaitez recevoir uniquement les annonces contenant l'information suivante :</h5>
+        <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">9/10 🌻 Exterieur ? </h5>
         <div class="form-check form-check-inline">
-            <%= f.check_box :balcony, class: "form-check-input" %> 
-            <%= f.label "Balcon", class: "form-check-label" %> 
+            <%= f.check_box :balcony, class: "form-check-input", type:"checkbox",  id:"balcony" %> 
+            <label class="form-check-label" for="balcony">Balcon</label>
         </div>
         <div class="form-check form-check-inline">
-            <%= f.check_box :terrace, class: "form-check-input" %> 
-            <%= f.label "Terrasse", class: "form-check-label" %> 
-        </div> 
-        <div class="form-check form-check-inline">
-            <%= f.check_box :garden, class: "form-check-input" %> 
-            <%= f.label "Jardin", class: "form-check-label" %> 
+            <%= f.check_box :terrace, class: "form-check-input", type:"checkbox",  id:"terrace" %> 
+            <label class="form-check-label" for="terrace">Terrasse</label>
         </div>
         <div class="form-check form-check-inline">
-            <%= f.check_box :last_floor, class: "form-check-input" %> 
-            <%= f.label "Dernière étage", class: "form-check-label" %> 
-        </div> 
+            <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
+            <label class="form-check-label" for="garden">Jardin</label>
+        </div>
+        
+        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">10/10 🏗️ Neuf ?</h5>
+        <h6 style="color: #0470C1; font-weight:200;">Voulez vous ajouter les biens neufs à votre recherche ? </h5>
+        <div class="form-check form-check-inline">
+            <%= f.check_box :new_construction, id:"new_construction", class: "form-check-input" %> 
+            <%= f.label "Recevoir les constuctions neuves", for:"new_construction", class: "form-check-label" %> 
+        </div>
+
 
         <br/><br/><br/>
         <div class="d-flex justify-content-center mt-4 mb-6">
