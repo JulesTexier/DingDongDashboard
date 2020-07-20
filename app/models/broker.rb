@@ -41,6 +41,9 @@ class Broker < ApplicationRecord
   end
 
   def self.get_current_lead_gen
+    if Rails.env == "development"
+      return Broker.find_by(email: "etienne@hellodingdong.com")
+    end
     candice = Broker.find_by(email: "ca.timmerman@meilleurtaux.com")
     erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
     benoit = Broker.find_by(email: "b.leroux@meilleurtaux.com")
