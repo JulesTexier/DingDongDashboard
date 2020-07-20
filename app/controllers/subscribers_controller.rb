@@ -143,6 +143,8 @@ class SubscribersController < ApplicationController
     if !@subscriber.nil?
       @subscriber.update(is_blocked: false) 
       SubscriberStatus.create(subscriber: @subscriber, status: Status.find_by(name: "unblocked"))
+      flow = "content20200716090652_490399"
+      Manychat.new.send_flow_sequence(@subscriber, flow)
     end
   end
 
