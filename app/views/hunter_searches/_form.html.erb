@@ -61,7 +61,9 @@
         <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id:"last_floor", value:"true" %> 
         <label class="form-check-label" for="last_floor">Uniquement dernier étage</label>
     </div>
+    
 
+    <% if false %>
     <h5 class="mt-4 mb-6" style="color: #525f7f; font-weight:400">Maison et/ou Appartement ?</h5>
     <div class="form-check form-check-inline">
       <%= f.check_box :apartment_type, class: "form-check-input" %> 
@@ -71,6 +73,7 @@
       <%= f.check_box :home_type, class: "form-check-input" %> 
       <%= f.label "Maison", class: "form-check-label" %> 
     </div>
+    <% end %>
 
 
     <h5 class="mt-4 mb-3" style="color: #525f7f; font-weight:400">🌻 Exterieur ? </h5>

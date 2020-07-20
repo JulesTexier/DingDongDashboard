@@ -96,18 +96,6 @@ $(document).ready(function(){
         <div class="input-group mb-3" style="margin-bottom:4.5rem">
             <%= f.number_field :min_elevator_floor, class: "form-control", placeholder: "Ex : 3", min: "0", max: "8" %>
         </div>
-
-        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">7/8 Souhaitez-vous une maison et/ou un appartement ?</h5>
-        <div class="form-check form-check-inline">
-          <%= f.check_box :apartment_type, class: "form-check-input" %> 
-          <%= f.label "Appartement", class: "form-check-label" %> 
-        </div>
-        <div class="form-check form-check-inline">
-          <%= f.check_box :home_type, class: "form-check-input" %> 
-          <%= f.label "Maison", class: "form-check-label" %> 
-        </div>
-
-
        
         <h5 class="mt-4 mb-3" style="color: #0470C1; font-weight:400">9/10 🌻 Exterieur ? </h5>
         <div class="form-check form-check-inline">
@@ -130,6 +118,17 @@ $(document).ready(function(){
             <%= f.label "Recevoir les constuctions neuves", for:"new_construction", class: "form-check-label" %> 
         </div>
 
+        <% if false %>
+        <h5 class="mt-4 mb-6" style="color: #0470C1; font-weight:400;">11/11 Souhaitez-vous une maison et/ou un appartement ?</h5>
+        <div class="form-check form-check-inline">
+          <%= f.check_box :apartment_type, class: "form-check-input" %> 
+          <%= f.label "Appartement", class: "form-check-label" %> 
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.check_box :home_type, class: "form-check-input" %> 
+          <%= f.label "Maison", class: "form-check-label" %> 
+        </div>
+        <% end %>
 
         <br/><br/><br/>
         <div class="d-flex justify-content-center mt-4 mb-6">
