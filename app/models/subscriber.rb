@@ -286,17 +286,12 @@ class Subscriber < ApplicationRecord
     broker = Broker.get_current_lead_gen
     self.update(broker: broker, is_blocked: true)
     t.add_new_user_on_trello(self)
-    send_to_broker_lead_gen
+    BrokerMailer.new_lead(self.id).deliver_now
   end
 
   
   private
 
-  def send_to_broker_lead_gen
-    broker = Broker.last 
-    self.update(broker: broker)
-    BrokerMailer.new_lead(self.id).deliver_now
-  end
   
   def handle_duplicate
     self.update(status: "duplicates")
