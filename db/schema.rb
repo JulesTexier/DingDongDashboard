@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.boolean "garden", default: false
     t.boolean "new_construction", default: false
     t.boolean "last_floor", default: false
-    t.string "home_type", default: "f"
-    t.string "apartment_type", default: "f"
+    t.boolean "home_type", default: true
+    t.boolean "apartment_type", default: true
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
@@ -403,8 +403,8 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.boolean "last_floor", default: false
     t.integer "min_price", default: 0
     t.integer "max_sqm_price"
-    t.string "home_type", default: "f"
-    t.string "apartment_type", default: "f"
+    t.boolean "home_type", default: true
+    t.boolean "apartment_type", default: true
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
