@@ -44,7 +44,7 @@ class Broker < ApplicationRecord
     candice = Broker.find_by(email: "ca.timmerman@meilleurtaux.com")
     erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
     benoit = Broker.find_by(email: "b.leroux@meilleurtaux.com")
-    adrien = Broker.find_by(email: "a.meneghino@meilleurtaux.com")
+    adrien = Broker.find_by(email: "a.meneghini@meilleurtaux.com")
 
     morning_end = 13
     afternooon_end = 20
