@@ -403,11 +403,8 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.boolean "last_floor", default: false
     t.integer "min_price", default: 0
     t.integer "max_sqm_price"
-<<<<<<< HEAD
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
-=======
->>>>>>> dfa4b3ffcdd906642904c6197c3edf4d0cda074f
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
