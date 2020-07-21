@@ -288,35 +288,35 @@ class Manychat
     if !subscriber.nil? && !subscriber.broker.nil? && !subscriber.broker.firstname.nil?
       broker_name = subscriber.broker.firstname
     else
-      broker_name = "conseiller"
+      broker_name = "Conseiller"
     end
     qr = [{
       "type": "flow",
       "caption": "🏠 5 annonces",
       "target": ENV["QR_ADS"],
     },
-          {
+    {
       "type": "flow",
-      "caption": "💬 #{broker_name}",
-      "target": ENV["QR_CALL_BROKER"],
+      "caption": "🔔 Ding Dong",
+      "target": ENV["QR_DING_DONG"],
+    },
+      {
+      "type": "flow",
+      "caption": "💰 Estimer appart",
+      "target": ENV["QR_ESTIMATION"],
     }, {
       "type": "flow",
-      "caption": "🧐 Visite",
-      "target": ENV["QR_VISIT"],
+      "caption": "⚒️ Outils",
+      "target": ENV["QR_TOOLS"],
     }, {
       "type": "flow",
-      "caption": "🤝 Négo",
-      "target": ENV["QR_NEGO"],
+      "caption": "📚 Guide",
+      "target": ENV["QR_GUIDELINES"],
     },
           {
       "type": "flow",
-      "caption": "📝​ Offre",
-      "target": ENV["QR_MAKE_OFFER"],
-    },
-          {
-      "type": "flow",
-      "caption": "👨‍⚖️ Notaire",
-      "target": ENV["QR_NOTARY"],
+      "caption": "⛔ Stop",
+      "target": ENV["QR_STOP"],
     }]
     return qr
   end
