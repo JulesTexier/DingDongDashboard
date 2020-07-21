@@ -94,10 +94,10 @@ Rails.application.routes.draw do
   post "subscribed-update" => "subscribers#subscribed_update"
 
   # Subscription 'regular'
-  get "inscription-1" => "subscribers#inscription_1"
-  get "inscription-2" => "subscribers#inscription_2"
-  get "inscription-3" => "subscribers#inscription_3"
-  get "inscription-finalisee" => "subscribers#inscription_4"
+  get "step-1" => "subscribers#step_1"
+  get "step-2" => "subscribers#step_2"
+  get "step-3" => "subscribers#step_3"
+  get "step-finalisee" => "subscribers#step_4"
 
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
