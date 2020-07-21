@@ -38,9 +38,13 @@ $(document).ready(function(){
       <div class="raw d-flex flex-wrap">
 
         <div class="form-group col-12 p-0">
-            <select multiple placeholder="ex: <%= @master_areas.first[1] %>" class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
+            <select multiple placeholder="ex: <%= @master_areas.first[1] %>" class="form-control" id="choices-multiple-remove-button" name="areas[]">
                 <% @master_areas.each do |item| %>
-                    <option value="<%= item[0] %>"> <%= item[1] %></option>
+                    <% if item[2].nil? && item[1].nil?%>
+                      <option value="<%= item[0] %>"> <%= item[0] %></option>
+                    <% else %>
+                      <option value="<%= item[0] %>"> <%= item[1] + " (" + item[2] + ")" %></option>
+                    <% end %>
                 <% end %>
             </select>
         </div>

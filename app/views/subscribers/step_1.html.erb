@@ -5,19 +5,19 @@
 
             <div class="d-flex flex-wrap">
                 <div class="card-group">
-                <% @zone_select.each do |zone| %>
+                <% @agglos_infos.each do |agglo| %>
                 <div>
 
                 </div>
                   <div class="card">
-                    <img class="card-img-top" src="https://images.prismic.io/figaroimmo%2F99439d29-f927-483b-9667-d280eaf7d061_shutterstock_1420728554-compressor.jpg?auto=compress,format&rect=0,0,1000,667&w=720&h=480" alt="Card image cap">
+                    <img class="card-img-top" src="<%= agglo["image_url"] %>" alt="Card image cap">
                     <div class="card-body">
 
-                    <%= check_box_tag 'selected_zones[]', 
-                        zone
+                    <%= check_box_tag 'selected_zones', 
+                        agglo["agglomeration"]
                     %>
                     <span class="form-check-label mb-2 ml-2 box_hover" >
-                        <%= zone %>
+                        <%= agglo["agglomeration"] %>
                     </span>
                     </div>
                   </div>
