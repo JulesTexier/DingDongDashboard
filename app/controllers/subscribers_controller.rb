@@ -2,7 +2,7 @@ class SubscribersController < ApplicationController
 
   # Onboarding form "regular"
   def step_1
-    @zone_select = ["Paris", "Lyon"]
+    @agglos_infos = Area.get_active_agglo_infos
   end
 
   def step_2
@@ -11,8 +11,8 @@ class SubscribersController < ApplicationController
       redirect_to "/step-1"
     else
       @subscriber = Subscriber.new
-      @selected_zones = params[:selected_zones]
-      @master_areas = params[:selected_zones][0] == "Paris" ? Area.where.not(zone: "Lyon").order(:id).pluck(:id, :name) : Area.where(zone: "Lyon").order(:id).pluck(:id, :name)
+      @master_areas = Area.get_selected_agglo_area(params[:selected_zones])
+      @master_areas.push(Area.englobed_area(params[:selected_zones]))
     end
   end
 
