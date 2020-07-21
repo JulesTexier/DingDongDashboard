@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_101006) do
+ActiveRecord::Schema.define(version: 2020_07_21_084753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_101006) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "zone"
+    t.string "zip_code"
   end
 
   create_table "broker_shifts", force: :cascade do |t|
@@ -131,6 +132,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_101006) do
     t.boolean "garden", default: false
     t.boolean "new_construction", default: false
     t.boolean "last_floor", default: false
+    t.boolean "home_type", default: true
+    t.boolean "apartment_type", default: true
     t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
@@ -401,6 +404,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_101006) do
     t.boolean "last_floor", default: false
     t.integer "min_price", default: 0
     t.integer "max_sqm_price"
+    t.boolean "home_type", default: true
+    t.boolean "apartment_type", default: true
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
