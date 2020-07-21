@@ -201,7 +201,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber.handle_new_lead_gen
       render json: { status: "SUCCESS", message: "Subscriber have been pushed to #{subscriber.broker.firstname}", data: subscriber }, status: 200
     rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "An error occurred", data: nil }, status: 500
+      render json: { status: "ERROR", message: "An error occurred", data: e }, status: 500
     end
   end
 
