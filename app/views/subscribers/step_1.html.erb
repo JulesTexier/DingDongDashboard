@@ -1,36 +1,37 @@
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <h5 class="mt-5 mb-3" style="color: #0470C1; font-weight:400">🔎 Dans quelle agglomération recherchez-vous ? *</h5>
-                <%= form_tag('/step-2', :id => 'zone_selection_form', method: :get) do |f| %>
+<div class="row">
+    <div class="col-12 col-md-6">
+        <h5 class="mt-5 mb-3" style="color: #0470C1; font-weight:400">🔎 Dans quelle agglomération recherchez-vous ? *</h5>
+            <%= form_tag('/step-2', :id => 'zone_selection_form', method: :get) do |f| %>
 
-                <div class="d-flex flex-wrap">
-                    <div class="card-group">
-                    <% @zone_select.each do |zone| %>
-                    <div>
+            <div class="d-flex flex-wrap">
+                <div class="card-group">
+                <% @zone_select.each do |zone| %>
+                <div>
 
-                    </div>
-                      <div class="card">
-                        <img class="card-img-top" src="https://images.prismic.io/figaroimmo%2F99439d29-f927-483b-9667-d280eaf7d061_shutterstock_1420728554-compressor.jpg?auto=compress,format&rect=0,0,1000,667&w=720&h=480" alt="Card image cap">
-                        <div class="card-body">
-  
-                        <%= check_box_tag 'selected_zones[]', 
-                            zone
-                        %>
-                        <span class="form-check-label mb-2 ml-2 box_hover" >
-                            <%= zone %>
-                        </span>
-                        </div>
-                      </div>
-                    <% end %>
                 </div>
-                <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                    <div class="d-flex justify-content-center mt-2 mb-2">
-                        <%= submit_tag "C'est parti ! 🚀", :name => 'commit', class: "btn btn-outline-light", style:"font-weight:600" %>
+                  <div class="card">
+                    <img class="card-img-top" src="https://images.prismic.io/figaroimmo%2F99439d29-f927-483b-9667-d280eaf7d061_shutterstock_1420728554-compressor.jpg?auto=compress,format&rect=0,0,1000,667&w=720&h=480" alt="Card image cap">
+                    <div class="card-body">
+
+                    <%= check_box_tag 'selected_zones[]', 
+                        zone
+                    %>
+                    <span class="form-check-label mb-2 ml-2 box_hover" >
+                        <%= zone %>
+                    </span>
                     </div>
-                </nav>
+                  </div>
                 <% end %>
-        </div>
+            </div>
+            <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+                <div class="d-flex justify-content-center mt-2 mb-2">
+                    <%= submit_tag "C'est parti ! 🚀", :name => 'commit', class: "btn btn-outline-light", style:"font-weight:600" %>
+                </div>
+            </nav>
+            <% end %>
     </div>
+</div>
+
 <script>
 $(document).ready(function(){
     $('input:checkbox').click(function() {
