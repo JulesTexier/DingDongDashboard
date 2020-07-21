@@ -1,20 +1,5 @@
 class SubscribersController < ApplicationController
 
-  # Onboarding form "regular"
-  def step_1
-    @agglos_infos = Area.get_active_agglo_infos
-  end
-
-  def step_2
-    if params[:selected_zones].nil?
-      flash[:danger] = "Veuillez sélectionner une zones de recherche."
-      redirect_to "/step-1"
-    else
-      @subscriber = Subscriber.new
-      @master_areas = Area.get_selected_agglo_area(params[:selected_zones])
-      @master_areas.push(Area.englobed_area(params[:selected_zones]))
-    end
-  end
 
   def step_3
     @draft_subscriber = params["subscriber"]
@@ -112,17 +97,28 @@ class SubscribersController < ApplicationController
     redirect_to subscriber.get_chatbot_link
   end
 
+  def select_agglomeration
+    @agglos_infos = Area.get_active_agglo_infos
+  end
+
   def edit
     @subscriber = Subscriber.find(params[:id])
     subscriber_areas_id = @subscriber.areas.pluck(:id)
-    @master_areas = Area.get_aggregate_data_for_selection(subscriber_areas_id)
+    if params[:selected_zones].nil? && subscriber_areas_id.empty?
+      flash[:danger] = "Veuillez sélectionner une zone de recherche."
+      redirect_to "/subscribers/agglomeration/" + params[:id]
+    elsif params[:selected_zones].nil? 
+      @master_areas = Area.get_aggregate_data_for_selection(subscriber_areas_id)
+    else
+      @master_areas = Area.get_selected_agglo_area(params[:selected_zones], subscriber_areas_id)
+      @master_areas += Area.global_zones(params[:selected_zones])
+    end
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     areas_ids = []
-    areas_ids += params[:paris_areas] if !params[:paris_areas].nil?
-    areas_ids += params[:premiere_couronne_areas] if !params[:premiere_couronne_areas].nil?
+    areas_ids += params[:name_areas] unless params[:name_areas].nil?
     if @subscriber.update(subscriber_params) && !areas_ids.empty?
       @subscriber.update_areas(areas_ids)
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
@@ -130,8 +126,8 @@ class SubscribersController < ApplicationController
       flash[:danger] = "Sélectionnez des arrondissements..."
     end
     # // Send flow to subscriber 
-    flow = "content20200716131717_882877"
-    Manychat.new.send_flow_sequence(@subscriber, flow)
+    # flow = "content20200716131717_882877"
+    # Manychat.new.send_flow_sequence(@subscriber, flow)
     redirect_to edit_subscriber_path
   end
 

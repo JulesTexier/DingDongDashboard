@@ -36,17 +36,17 @@ $(document).ready(function(){
 
       <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/9 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
-
-        <% @master_areas.each do |zone|%>
-            <h6><%= zone[:zone] %></h6>
-            <div class="form-group col-12 p-0">
-                <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
-                    <% zone[:areas].each do |item| %>
-                        <option value="<%= item[0] %>" <%= item[2] %>> <%= item[1] %></option>
+        <div class="form-group col-12 p-0">
+            <select multiple placeholder="ex: <%= @master_areas.first[1] %>" class="form-control" id="choices-multiple-remove-button" name="areas[]">
+                <% @master_areas.each do |item| %>
+                    <% if item[0] == "GlobalZone"%>
+                      <option value="<%= item[0] %> - <%= item[1] %>"> <%= item[1] %></option>
+                    <% else %>
+                      <option value="<%= item[0] %>" <%= item[3] %>> <%= item[1] + " (" + item[2] + ")" %></option>
                     <% end %>
-                </select>
-            </div>
-        <% end %>
+                <% end %>
+            </select>
+        </div>
       </div>
 
     

@@ -20,7 +20,7 @@ $(document).ready(function(){
     }
 </style>
 
-<%= form_for @subscriber, url: subscribers_path do |f| %>
+<%= form_for @subscriber, url: subscriber_path(@subscriber) do |f| %>
 
     <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
         <div class="d-flex justify-content-center mt-2 mb-2">
@@ -40,8 +40,8 @@ $(document).ready(function(){
         <div class="form-group col-12 p-0">
             <select multiple placeholder="ex: <%= @master_areas.first[1] %>" class="form-control" id="choices-multiple-remove-button" name="areas[]">
                 <% @master_areas.each do |item| %>
-                    <% if item[2].nil? && item[1].nil?%>
-                      <option value="<%= item[0] %>"> <%= item[0] %></option>
+                    <% if item[0] == "GlobalZone"%>
+                      <option value="<%= item[1] %>"> <%= item[1] %></option>
                     <% else %>
                       <option value="<%= item[0] %>"> <%= item[1] + " (" + item[2] + ")" %></option>
                     <% end %>

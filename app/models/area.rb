@@ -16,7 +16,7 @@ class Area < ApplicationRecord
 			zone_areas.each do |zone| 
 				zone_hash = {}
 				zone_hash[:zone] = zone
-				zone_hash[:areas] = Area.where(zone: zone).pluck(:id, :name)
+				zone_hash[:areas] = Area.where(zone: zone).pluck(:id, :name, :zip_code)
 				master_areas.push(zone_hash)
 			end
 
@@ -26,7 +26,13 @@ class Area < ApplicationRecord
 					area.push(selected)
 				end
 			end
-			return master_areas
+      return master_areas
+      # areas = Area.where(zone: zones).pluck(:id, :name, :zip_code)
+      # areas.each do |area|
+      #   selected = areas_id.include?(area[0]) ? "selected" : ""
+      #   area.push(selected)
+      # end
+      # areas
     end
 
     def self.get_agglo_infos
@@ -42,7 +48,7 @@ class Area < ApplicationRecord
       agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
     end
 
-    def self.get_selected_agglo_area(selected_agglo)
+    def self.get_selected_agglo_area(selected_agglo, areas_id)
       agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
       zones = []
       agglo_infos.each do |agglo|
@@ -50,12 +56,25 @@ class Area < ApplicationRecord
           zones.push(agglo["zone"])
         end
       end
-      Area.where(zone: zones).pluck(:id, :name, :zip_code)
+      areas = Area.where(zone: zones).pluck(:id, :name, :zip_code)
+      areas.each do |area|
+        selected = areas_id.include?(area[0]) ? "selected" : ""
+        area.push(selected)
+      end
+      areas
     end
 
-    def self.englobed_area(selected_agglo)
+    def self.global_zones(selected_agglo)
       agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
-      englobed_area = agglo_infos.map {|agglo| agglo["zone"] if agglo["agglomeration"] == selected_agglo }
-      englobed_area.flatten
+      global_zones = []
+      agglo_infos.each do |agglo| 
+        if agglo["agglomeration"] == selected_agglo 
+          agglo["zone"].each do |zone_name|
+            zone_area = ["GlobalZone", zone_name]
+            global_zones.push(zone_area)
+          end
+        end
+      end
+      global_zones
     end
 end
