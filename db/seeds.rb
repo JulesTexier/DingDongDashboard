@@ -45,11 +45,16 @@ end
 area_yaml = YAML.load_file("./db/data/areas.yml")
 area_yaml.each do |district_data|
   district_data["datas"].each do |data|
-    if Area.where(name: data["name"]).empty?
-      Area.create(name: data["name"], zone: district_data["zone"])
+    area = Area.find_by(name: data["name"])
+    if area.nil?
+      Area.create(name: data["name"], zone: district_data["zone"], zip_code: data["terms"].first)
       puts "Area - #{data["name"]} created"
-    elsif Area.find_by(name: data["name"]).zone != district_data["zone"]
-      Area.find_by(name: data["name"]).update(zone: district_data["zone"])
+    elsif area.zone != district_data["zone"]
+      area.update(zone: district_data["zone"])
+      puts "Area - #{data["name"]}'s zone updated"
+    elsif area.zip_code != data["terms"].first
+      area.update(zip_code: data["terms"].first)
+      puts "Area - #{data["name"]}'s zip_code updated"
     end
   end
 end
