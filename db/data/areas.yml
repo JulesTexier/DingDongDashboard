@@ -1,5 +1,5 @@
 ---
-- zone: Paris
+- zone: Paris (75)
   datas:
     - name: "Paris 1er"
       terms:
@@ -359,7 +359,7 @@
     - name: Montreuil
       terms:
         - "93100"
-- zone: Lyon
+- zone: Lyon (69)
   datas:
     - name: "Lyon 1er"
       terms:
