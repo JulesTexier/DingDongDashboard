@@ -29,4 +29,33 @@ class Area < ApplicationRecord
 			return master_areas
     end
 
+    def self.get_agglo_infos
+      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
+    end
+
+    def self.get_active_agglo_infos
+      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
+      agglo_infos.reject {|agglo| !agglo["is_active"]}
+    end
+
+    def self.get_zones_from_agglo(agglo)
+      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
+    end
+
+    def self.get_selected_agglo_area(selected_agglo)
+      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
+      zones = []
+      agglo_infos.each do |agglo|
+        if agglo["agglomeration"] == selected_agglo
+          zones.push(agglo["zone"])
+        end
+      end
+      Area.where(zone: zones).pluck(:id, :name, :zip_code)
+    end
+
+    def self.englobed_area(selected_agglo)
+      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
+      englobed_area = agglo_infos.map {|agglo| agglo["zone"] if agglo["agglomeration"] == selected_agglo }
+      englobed_area.flatten
+    end
 end
