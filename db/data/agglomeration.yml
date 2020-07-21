@@ -1,0 +1,25 @@
+---
+- agglomeration: Paris
+  zone: 
+    - Paris (75)
+    - Hauts-de-Seine (92)
+    - Val-de-Marne (94)
+    - Yvelines (78)
+    - Seine-Saint-Denis (93)
+  image_url: https://images.prismic.io/figaroimmo%2F99439d29-f927-483b-9667-d280eaf7d061_shutterstock_1420728554-compressor.jpg?auto=compress,format&rect=0,0,1000,667&w=720&h=480
+  is_active: true
+- agglomeration: Lyon
+  zone: 
+    - Lyon (69)
+  image_url: https://www.lespetitsrapporteurs.fr/wp-content/uploads/2015/05/lyon-quai-saone-julien-reboulet.jpg
+  is_active: true
+- agglomeration: Bordeaux
+  zone: 
+    - Bordeaux (33)
+  image_url: https://media.lesechos.com/api/v1/images/view/5e564835d286c24a66624156/1280x720/12760-1536067902-bordeaux.jpg
+  is_active: false
+- agglomeration: Marseilles
+  zone: 
+    - Marseilles (13)
+  image_url: https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/France/Marseille/marseille-lead-image-guide.jpg?imwidth=450
+  is_active: false
