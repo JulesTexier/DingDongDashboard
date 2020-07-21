@@ -1,35 +1,34 @@
 class SubscribersController < ApplicationController
 
   # Onboarding form "regular"
-  def inscription_1
-    @zone_select = ["Paris"]
+  def step_1
+    @zone_select = ["Paris", "Lyon"]
   end
 
-  def inscription_2
-    selected_zones = params[:selected_zones]
-    if selected_zones.nil? || Area.where(zone: selected_zones).empty?
-      flash[:danger] = "Veuillez sélectionner une ou plusieurs zones de recherche 👇"
-      redirect_to "/inscription-1"
+  def step_2
+    if params[:selected_zones].nil?
+      flash[:danger] = "Veuillez sélectionner une zones de recherche."
+      redirect_to "/step-1"
     else
       @subscriber = Subscriber.new
-      @zone = "Banlieue-Ouest"
-      @areas = Area.where(zone: selected_zones)
+      @selected_zones = params[:selected_zones]
+      @master_areas = params[:selected_zones][0] == "Paris" ? Area.where.not(zone: "Lyon").order(:id).pluck(:id, :name) : Area.where(zone: "Lyon").order(:id).pluck(:id, :name)
     end
   end
 
-  def inscription_3
+  def step_3
     @draft_subscriber = params["subscriber"]
     @draft_subscriber["selected_areas"] = params["selected_areas"].join(",")
     @draft_subscriber["project_type"] = params["selected_project_types"].join(",")
     if @draft_subscriber.nil?
-      flash[:danger] = "Une erreur est apparue, veuillez recommencer svp"
-      redirect_to "/inscription-1"
+      flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp."
+      redirect_to "/step-1"
     else
       @subscriber = Subscriber.new
     end
   end
 
-  def inscription_4
+  def step_4
     @subscriber = Subscriber.find(params["id"])
   end
 
@@ -39,9 +38,8 @@ class SubscribersController < ApplicationController
       flash[:success] = "Nous avons bien reçu votre demande 🙂 Merci !"
       redirect_to "/inscription-finalisee?id=#{subscriber.id}"
     else
-      flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp"
-      puts "ohoh, probleme"
-      redirect_to "/inscription-1"
+      flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp."
+      redirect_to "/step-1"
     end
   end
 
