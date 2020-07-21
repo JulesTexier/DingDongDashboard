@@ -7,6 +7,12 @@
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
+  - zone: Lyon
+    url: https://www.superimmo.com/achat/rhone-alpes/rhone/lyon-69?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
   - zone: Yvelines (78)
     url: https://www.superimmo.com/achat/appartement/sartrouville-78500,houilles-78800,chatou-78400,maisons-laffitte-78600,marly-le-roi-78160,le-vesinet-78110,montesson-78360,carrieres-sur-seine-78420,croissy-sur-seine-78290,chambourcy-78240,l-etang-la-ville-78620,mareil-marly-78750,saint-germain-en-laye-78?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
     scraper_type: Static
@@ -35,6 +41,12 @@
   params:
   - zone: Paris
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-7444%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Lyon
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-120965%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -71,6 +83,12 @@
     main_page_cls: div.container-item
     is_active: true
     group_type: Hub
+  - zone: Lyon
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=lyon&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
   - zone: Yvelines (78)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Saint-Germain-en-Laye%20(78),Fourqueux%20(78),Le%20Vesinet%20(78),Chambourcy%20(78),Maisons-Laffitte%20(78),Mareil-Marly%20(78),L%27Etang-la-Ville%20(78),Croissy-sur-Seine%20(78),Chatou%20(78),Montesson%20(78),Houilles%20(78),Sartrouville%20(78),Carrieres-sur-seine%20(78)&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22
     scraper_type: Static
@@ -99,6 +117,12 @@
   params:
   - zone: Paris
     url: https://proprietes.lefigaro.fr/annonces/immobilier-paris-ile+de+france-france/?tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Lyon
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-rhone-rhone+alpes-france/?ville=lyon&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: true
@@ -135,6 +159,12 @@
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
+  - zone: Lyon
+    url: https://www.logic-immo.com/vente-immobilier-lyon-tous-codes-postaux,422_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
   - zone: Yvelines (78)
     url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=28016_2,11603_2,17331_2,6361_2,19095_2,19440_2,19563_2,17892_2,8875_2,7021_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
@@ -163,6 +193,12 @@
   params:
   - zone: Paris
     url: https://www.pap.fr/annonce/vente-appartement-maison-paris-75-g439-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+  - zone: Lyon
+    url: https://www.pap.fr/annonce/vente-appartement-maison-lyon-69-g43590-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: true
@@ -207,6 +243,12 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Lyon
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=69123&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
   - zone: Yvelines (78)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=78251&location[]=78551&location[]=78586&location[]=78650&location[]=78133&location[]=78358&location[]=78367&location[]=78372&location[]=78224&location[]=78190&location[]=78146&location[]=78418&location[]=78311&location[]=78124&sort=date_desc&limit=15
     scraper_type: HTTPRequest
@@ -235,6 +277,12 @@
   params:
   - zone: Paris
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=paris&locations%5B0%5D%5Blabel%5D=Paris&minSurface=10&maxSurface=1000&nbRooms%5B%5D=1&nbRooms%5B%5D=2&nbRooms%5B%5D=3&nbRooms%5B%5D=4&nbRooms%5B%5D=5&nbRooms%5B%5D=6&newBuild=true&oldBuild=true&minPrice=0&maxPrice=7000000&newBuild=true&oldBuild=true&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Lyon
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=lyon&locations%5B0%5D%5Blabel%5D=Lyon&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -271,6 +319,12 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Lyon
+    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=69123
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
   - zone: Yvelines (78)
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=18065755%2C17977863%2C17968075%2C17952239%2C17931030%2C17893385%2C17892236%2C17871368%2C17852869%2C17787083%2C17769591%2C17738611&cities=78551%2C78586%2C78650%2C78133%2C78358%2C78367%2C78372%2C78224%2C78190%2C78146%2C78418%2C78311%2C78124&types=apartment%2Chouse&transaction=buy
     scraper_type: HTTPRequest
@@ -299,6 +353,12 @@
   params:
   - zone: Paris
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Lyon
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-lyon/s-0-/st-0-/b-0-/tri-date-desc/page-1/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
@@ -347,6 +407,12 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+  - zone: Lyon
+    url: https://fr.foncia.com/achat/lyon-69/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
   - zone: Yvelines (78)
     url: https://fr.foncia.com/achat/chatou-78400--saint-germain-en-laye-78100--fourqueux-78112--le-vesinet-78110--chambourcy-78240--maisons-laffitte-78600--mareil-marly-78750--marly-le-roi-78160--l-etang-la-ville-78620--croissy-sur-seine-78290--montesson-78360--houilles-78800--sartrouville-78500--carrieres-sur-seine-78420/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
@@ -389,15 +455,27 @@
       url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
       main_page_cls: body
       scraper_type: Captcha
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
+      is_active: true
+      group_type: Premium
+    - zone: Lyon
+      url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+      main_page_cls: body
+      scraper_type: Captcha
       is_active: true
       group_type: Premium
 - source: MeilleursAgents
   params:
     - zone: Paris
       url: https://www.meilleursagents.com/annonces/achat/paris-75000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Lyon
+      url: https://www.meilleursagents.com/annonces/achat/lyon-69000/
       main_page_cls: div.listing-item.search-listing-result__item
       scraper_type: Proxy
       waiting_cls: nil
@@ -463,6 +541,15 @@
       group_type: Proxy
     - zone: Paris
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&LISTING-LISTpg=2
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Lyon
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:690123}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
       scraper_type: Proxy
       waiting_cls: nil

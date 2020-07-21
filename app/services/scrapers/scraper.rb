@@ -310,17 +310,22 @@ class Scraper
   end
 
   def get_type_flat(str)
-    flat_type = 'N/C'
-    flat_type = 'Appartement' if str.downcase.include? 'appartement'
-    flat_type = 'Maison' if str.downcase.include? 'maison'
-    flat_type = 'Studio' if str.downcase.include? 'studio'
-    flat_type = 'Loft' if str.downcase.include? 'loft'
-    flat_type = 'Cave' if str.downcase.include? 'cave'
-    flat_type = 'Parking' if str.downcase.include? 'parking'
-    flat_type = 'Commerce' if str.downcase.include? 'commerce'
-    flat_type = 'Bureaux' if str.downcase.include? 'bureaux'
-    flat_type = 'Hotel particulier' if str.downcase.include? 'hotel particulier'
-    flat_type
+    case 
+    when str.match?(/appartement|studio|loft|duplex|triplex/i)
+      'Appartement'
+    when str.match?(/maison|hotel particulier/i)
+      'Maison'
+    when str.match?(/cave/i)
+      'Cave'
+    when str.match?(/parking/i)
+      'Parking'
+    when str.match?(/commerce/i)
+      'Commerce'
+    when str.match?(/bureaux/i)
+      'Bureaux'
+    else
+      'N/C'
+    end
   end
 
   #############################

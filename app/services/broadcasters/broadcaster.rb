@@ -25,7 +25,7 @@ class Broadcaster
   end
 
   def new_properties_gallery
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
+    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
 
     properties = Property
       .unprocessed
