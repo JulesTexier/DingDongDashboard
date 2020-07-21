@@ -295,7 +295,12 @@ class Manychat
       "caption": "🏠 5 annonces",
       "target": ENV["QR_ADS"],
     },
-          {
+    {
+      "type": "flow",
+      "caption": "🔔 Ding Dong",
+      "target": ENV["QR_DING_DONG"],
+    },
+      {
       "type": "flow",
       "caption": "💰 Estimer appart",
       "target": ENV["QR_ESTIMATION"],
