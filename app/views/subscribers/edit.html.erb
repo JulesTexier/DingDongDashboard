@@ -38,7 +38,7 @@ $(document).ready(function(){
       <div class="raw d-flex flex-wrap">
 
         <% @master_areas.each do |zone|%>
-          <% unless zone[:zone] == "Lyon (69)" %>
+          <% unless zone[:zone].include?("Lyon") %>
             <h6><%= zone[:zone] %></h6>
             <div class="form-group col-12 p-0">
                 <select multiple class="form-control" id="choices-multiple-remove-button" name="premiere_couronne_areas[]">
