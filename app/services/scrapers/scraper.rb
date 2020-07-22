@@ -257,7 +257,7 @@ class Scraper
     elevator = str.remove_acc_scrp.elevator_str_scrp
   end
 
-  def perform_district_regex(str, zone = "Paris")
+  def perform_district_regex(str, zone = "Paris (75)")
     district_datas = YAML.load_file("./db/data/areas.yml")
     district = []
     cleaned_str = str.perform_num_converter_scrp
@@ -285,9 +285,9 @@ class Scraper
   ## We loop through a JSON File ISO to the DB to gain performance instead of looping in the entire db
   ## We then look in DB the ID of the subway object and assign the id (which is an array, that's odd)
   ## And the we send it in an array for insertion.
-  def perform_subway_regex(str, zone = "Paris")
+  def perform_subway_regex(str, zone = "Paris (75)")
     subway_infos = []
-    if zone == "Paris"
+    if zone == "Paris (75)"
       subways = YAML.load_file("./db/data/subways.yml")
       subways["stations"].each do |subway|
         subway_infos.push(subway) if str.remove_acc_scrp.match(/#{subway["name"].remove_acc_scrp}/i).is_a?(MatchData)
@@ -298,7 +298,7 @@ class Scraper
 
   def perform_enrichment_regex(prop)
     enriched_infos = {}
-    zone = prop[:area].include?("Paris") ? "Paris" : "Suburb"
+    zone = prop[:area].include?("Paris") ? "Paris (75)" : "Suburb"
     enriched_infos[:subway_infos] = perform_subway_regex(prop[:description], zone) unless prop.key?(:subway_infos) || prop.key?(:subway_ids)
     enriched_infos[:floor] = perform_floor_regex(prop[:description]) unless prop.key?(:floor)
     enriched_infos[:has_elevator] = perform_elevator_regex(prop[:description]) unless prop.key?(:has_elevator)

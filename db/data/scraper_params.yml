@@ -1,13 +1,13 @@
 ---
 - source: SuperImmo
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.superimmo.com/achat/ile-de-france/paris?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.superimmo.com/achat/rhone-alpes/rhone/lyon-69?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
@@ -39,13 +39,13 @@
     group_type: Hub
 - source: BienIci
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-7444%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=yWeDRCFt6PZ20MoXNQZcfKT3KVwyJ%2B9FIT1W3ei0Nls%3D%3A5e8468d12141c803c8845ed0&id=5e8468d12141c803c8845ed0
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-120965%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
     http_type: get_json
@@ -77,13 +77,13 @@
     group_type: Hub
 - source: Figaro
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=paris&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
     scraper_type: Static
     main_page_cls: div.container-item
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=lyon&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
     scraper_type: Static
     main_page_cls: div.container-item
@@ -115,13 +115,13 @@
     group_type: Hub
 - source: Propr. Figaro
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-paris-ile+de+france-france/?tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-rhone-rhone+alpes-france/?ville=lyon&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
@@ -153,13 +153,13 @@
     group_type: Hub
 - source: LogicImmo
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.logic-immo.com/vente-immobilier-paris-75,100_1/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.logic-immo.com/vente-immobilier-lyon-tous-codes-postaux,422_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
@@ -191,13 +191,13 @@
     group_type: Hub
 - source: PAP
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.pap.fr/annonce/vente-appartement-maison-paris-75-g439-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.pap.fr/annonce/vente-appartement-maison-lyon-69-g43590-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
@@ -229,7 +229,7 @@
     group_type: Hub
 - source: Vanneau
   params: 
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.vaneau.fr/fr/vaneau-search/search?field_ad_type[eq][]=buying&field_bedrooms_number[eq][]=0&field_bedrooms_number[eq][]=1&field_bedrooms_number[eq][]=2&field_bedrooms_number[eq][]=3&field_bedrooms_number[eq][]=4&field_bedrooms_number[eq][]=5&field_bedrooms_number[eq][]=6&field_furniture[eq][]=ALL&field_price[lte]=25000000&field_property_type[eq][]=5&field_property_type[eq][]=8&field_surface[lte]=0&field_swimming_pool[eq][]=ALL&limit=20&location[eq][]=area_55&mode=list&offset=0&offset_additional=0&search_page_id=260
     scraper_type: HTTPRequest
     is_active: true
@@ -237,13 +237,13 @@
     group_type: Hub
 - source: Stephane Plaza
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=75&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=69123&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
@@ -275,13 +275,13 @@
     group_type: Group
 - source: Orpi
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=paris&locations%5B0%5D%5Blabel%5D=Paris&minSurface=10&maxSurface=1000&nbRooms%5B%5D=1&nbRooms%5B%5D=2&nbRooms%5B%5D=3&nbRooms%5B%5D=4&nbRooms%5B%5D=5&nbRooms%5B%5D=6&newBuild=true&oldBuild=true&minPrice=0&maxPrice=7000000&newBuild=true&oldBuild=true&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=lyon&locations%5B0%5D%5Blabel%5D=Lyon&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
@@ -313,13 +313,13 @@
     group_type: Group
 - source: Laforet
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.laforet.com/api/immo/properties?cities=75&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=69123
     scraper_type: HTTPRequest
     http_type: get_json
@@ -351,13 +351,13 @@
     group_type: Group
 - source: Century21
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/page-1/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-lyon/s-0-/st-0-/b-0-/tri-date-desc/page-1/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
@@ -389,7 +389,7 @@
     group_type: Group
 - source: ERA France
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://www.erafrance.com/catalog/advanced_search_result_carto.php?action=update_search&ville=75&map_polygone=&latlngsearch=2.3318341000%2C48.8357218000&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_28_tmp=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30min=&C_30_MAX=&C_30_tmp=&C_65_modal=75&check_C_28=Vente&C_33_search=EGAL&C_33_type=NUMBER&C_33_MIN=&C_33=&C_38_search=EGAL&C_38_type=NUMBER&C_38_MIN=&C_38=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30min=&30max=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_47_search=SUPERIEUR&C_47_type=NUMBER&C_46_search=SUPERIEUR&C_46_type=NUMBER&C_41_search=EGAL&C_41_type=NUMBER&C_50_search=SUPERIEUR&C_50_type=NUMBER&C_110_search=EGAL&C_110_type=NUMBER&C_1737_search=EGAL&C_1737_type=NUMBER&C_49_search=SUPERIEUR&C_49_type=NUMBER&C_48_search=SUPERIEUR&C_48_type=NUMBER&keywords=
     scraper_type: HTTPRequest
     main_page_cls: div.bien
@@ -401,13 +401,13 @@
     group_type: Group
 - source: Foncia
   params:
-  - zone: Paris
+  - zone: Paris (75)
     url: https://fr.foncia.com/achat/paris-75/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
-  - zone: Lyon
+  - zone: Lyon (69)
     url: https://fr.foncia.com/achat/lyon-69/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
@@ -439,7 +439,7 @@
     group_type: Group
 - source: Saint-Ferdinand
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.agencessaintferdinand.com/acheter/
       scraper_type: HTTPRequest
       main_page_cls: div.property_listing
@@ -451,13 +451,13 @@
       http_type: post
 - source: LeBonCoin
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
       main_page_cls: body
       scraper_type: Captcha
       is_active: true
       group_type: Premium
-    - zone: Lyon
+    - zone: Lyon (69)
       url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
       main_page_cls: body
       scraper_type: Captcha
@@ -465,7 +465,7 @@
       group_type: Premium
 - source: MeilleursAgents
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.meilleursagents.com/annonces/achat/paris-75000/
       main_page_cls: div.listing-item.search-listing-result__item
       scraper_type: Proxy
@@ -474,7 +474,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
-    - zone: Lyon
+    - zone: Lyon (69)
       url: https://www.meilleursagents.com/annonces/achat/lyon-69000/
       main_page_cls: div.listing-item.search-listing-result__item
       scraper_type: Proxy
@@ -530,7 +530,7 @@
       group_type: Proxy
 - source: SeLoger
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
       scraper_type: Proxy
@@ -539,7 +539,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&LISTING-LISTpg=2
       main_page_cls: script
       scraper_type: Proxy
@@ -548,7 +548,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
-    - zone: Lyon
+    - zone: Lyon (69)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:690123}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
       scraper_type: Proxy
@@ -586,13 +586,13 @@
       group_type: Proxy
 - source: SeLoger
   params:
-    - zone: Paris
+    - zone: Paris (75)
       is_active: true
       main_page_cls: li.property.initial
       group_type: Email
 - source: Arthurimmo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.arthurimmo.com/recherche,incl_recherche_prestige_ajax.htm?idpays=250&ci=750056&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&tri=d_dt_crea%2Cd_dt_crea&idtypebien=1%2C2&tri=d_dt_crea&_=1587115724817
       main_page_cls: div.recherche-annonces-vente
       scraper_type: Static
@@ -603,7 +603,7 @@
       group_type: Group
 - source: ParuVendu
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
       main_page_cls: "#bloc_liste > div.ergov3-annonce"
       scraper_type: Proxy
@@ -645,7 +645,7 @@
       group_type: Proxy
 - source: Connexion Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.connexion-immobilier.com/achat-vente-immobilier-acheter-paris/resultats-annonces-achat
       main_page_cls: div.prdlst
       scraper_type: Static
@@ -656,17 +656,17 @@
       group_type: Group
 - source: Connexion Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       is_active: true
       group_type: Email
 - source: Barnes International
   params:
-    - zone: Paris
+    - zone: Paris (75)
       is_active: true
       group_type: Email
 - source: Daniel Feau
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://danielfeau.com/fr/acheter/paris-neuilly-boulogne-saint-cloud
       main_page_cls: li.property.initial
       scraper_type: Static
@@ -677,7 +677,7 @@
       group_type: Group
 - source: DavidImmo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.davidimmo.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&type_lot%5B%5D=appartement&type_lot%5B%5D=maison&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&surface=&budget_min=&budget_max=&page=0&vendus=0&submit_search_0=
       main_page_cls: div.property
       scraper_type: Static
@@ -688,7 +688,7 @@
       group_type: Group
 - source: Immopolis
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.immopolis.fr/?dp_status=ventes-status&dp_price_from&dp_price_to&search-listings=true&dp_location%5B0%5D=paris-01er-paris-location&dp_location%5B1%5D=paris-02eme-paris-location&dp_location%5B2%5D=paris-03eme-paris-location&dp_location%5B3%5D=paris-07eme-paris-location&dp_location%5B4%5D=paris-08eme-paris-location&dp_location%5B5%5D=paris-10eme-paris-location&dp_location%5B6%5D=paris-16eme-paris-location&dp_location%5B7%5D=paris-17eme-paris-location&dp_location%5B8%5D=paris-18eme-paris-location&dp_location%5B9%5D=paris-paris-location&dp_surface_from&dp_surface_to
       main_page_cls: div.col_liste_annonce_info
       scraper_type: Static
@@ -699,7 +699,7 @@
       group_type: Group
 - source: Junot
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.junot.fr/fr/resultat?type=buy&location[]=75001&location[]=75002&location[]=75003&location[]=75004&location[]=75005&location[]=75006&location[]=75007&location[]=75008&location[]=75009&location[]=75010&location[]=75011&location[]=75012&location[]=75013&location[]=75014&location[]=75015&location[]=75016&location[]=75116&location[]=75017&location[]=75018&location[]=75019&location[]=75020
       main_page_cls: li.block_product
       scraper_type: Static
@@ -710,7 +710,7 @@
       group_type: Group
 - source: Keller Williams
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.kwfrance.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_28_search=EGAL&C_28_type=UNIQUE&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&C_30=0
       main_page_cls: a.element-item
       scraper_type: Static
@@ -721,7 +721,7 @@
       group_type: Group
 - source: L'Adresse
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.ladresse.com/catalog/advanced_search_result.php?action=update_search&C_28=Vente&C_28_search=EGAL&C_28_type=UNIQUE&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30_MIN=&30_MAX=
       main_page_cls: "#listing_bien > div.row > div.col-lg-6"
       scraper_type: Static
@@ -731,7 +731,7 @@
       group_type: Group
 - source: MorissImmobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.morissimmobilier.com/wp-admin/admin-ajax.php
       main_page_cls: div.property_listing
       scraper_type: HTTPRequest
@@ -744,7 +744,7 @@
       group_type: Group
 - source: AABI Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.aabimmobilier.com/fr/recherche?page=[[PAGE_NUMBER]]
       main_page_cls: li.property.initial
       scraper_type: Static
@@ -755,7 +755,7 @@
       group_type: Independant
 - source: Acopa Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.acopa-immobilier.fr/wp-admin/admin-ajax.php
       main_page_cls: li.annonce
       scraper_type: HTTPRequest
@@ -770,7 +770,7 @@
       group_type: Independant
 - source: Agence Pereire
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.agencepereire.com/immobilier/pays/achat/france.htm#ci=750056&idpays=250&idqfix=1&idtt=2&idtypebien=1&lang=fr&pres=prestige&pxmax=Max&pxmin=Min&surf_terrainmax=Max&surf_terrainmin=Min&surfacemax=Max&surfacemin=Min&tri=d_dt_crea
       main_page_cls: div.recherche-annonces
       scraper_type: Static
@@ -781,7 +781,7 @@
       group_type: Independant
 - source: Agences des 3 Frères
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://agencedes3freres.com/?page_id=1213
       main_page_cls: div.property-container
       scraper_type: Static
@@ -792,7 +792,7 @@
       group_type: Independant
 - source: Agence Windsor
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.agenceswindsor.fr/
       main_page_cls: div.announce
       scraper_type: Static
@@ -802,7 +802,7 @@
       group_type: Independant
 - source: Alesia Conseil
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.alesiaconseil.com/fr/vente/1/
       main_page_cls: article.ui-property
       scraper_type: HTTPRequest
@@ -817,7 +817,7 @@
       group_type: Independant
 - source: Amour Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://amour-immobilier.com/tous-nos-biens/
       main_page_cls: div.entry-content > a
       scraper_type: Static
@@ -828,7 +828,7 @@
       group_type: Independant
 - source: Arcales
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.arcales.fr/recherche/[[PAGE_NUMBER]]
       main_page_cls: .panelBien
       scraper_type: Static
@@ -839,7 +839,7 @@
       group_type: Independant
 - source: Aristimmo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.aristimmo.com/vente-75/1
       main_page_cls: li.panelBien
       scraper_type: Static
@@ -853,7 +853,7 @@
       group_type: Independant
 - source: Assas Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.assasimmobilier.com/vente-loft-hotel-particulier-appartement-paris-assas-immobilier/
       main_page_cls: div.annonce_listing
       scraper_type: Static
@@ -864,7 +864,7 @@
       group_type: Independant
 - source: Auburtin Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.auburtin-immo.com/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=1&saisie=Paris&tri=d_dt_crea&
       main_page_cls: "#recherche-resultats-listing > div.row-fluid > div"
       scraper_type: Static
@@ -875,7 +875,7 @@
       group_type: Independant
 - source: Auteuil Sud Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.auteuilsud-immobilier.fr/vente-appartement-paris-auteuil/&new_research=1
       main_page_cls: article.annonce_listing
       scraper_type: Static
@@ -886,7 +886,7 @@
       group_type: Independant
 - source: AVL Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.avl-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_1725=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=2%2C1&C_27_tmp=1&C_33_search=EGAL&C_33_type=TEXT&C_33=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=INFERIEUR&C_30_type=NUMBER&C_30=&search_id=1663957660967503&page=1&search_id=1663957660967503&sort=0
       main_page_cls: article.bien
       scraper_type: Static
@@ -897,7 +897,7 @@
       group_type: Independant
 - source: Bonjour Oscar
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.bonjour-oscar.com/acheter/
       main_page_cls: li.listGoods-item
       scraper_type: Static
@@ -908,7 +908,7 @@
       group_type: Independant
 - source: Building Parners
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.bpimmo.com/recherche.php
       main_page_cls: div.offre_bien
       scraper_type: HTTPRequest
@@ -923,7 +923,7 @@
       group_type: Independant
 - source: Residence Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.residences-immobilier.com/fr/recherche.html?lang=fr&bdgMax=&bdgMin=&departement=75&district=&enlarge_search=&keywords=&nb_piece=&setLocDep=&shortterm=&surfMax=&surfMin=&TypeAnnonceL=&TypeAnnonceV=1&TypeBien=&villes=&ville_dep=&tri=DATE
       main_page_cls: div.row.no-gutters.px-3.px-sm-0
       scraper_type: Static
@@ -931,7 +931,7 @@
       group_type: Independant
 - source: Callimmo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.callimmo.fr/fr/vente/1/?o=d_mandate,desc
       main_page_cls: article.ui-property
       scraper_type: Static
@@ -942,7 +942,7 @@
       group_type: Independant
 - source: Canal Street
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.canal-street.fr/a-vendre/[[PAGE_NUMBER]]
       main_page_cls: article.panelBien
       scraper_type: Static
@@ -953,7 +953,7 @@
       group_type: Independant
 - source: Capitale Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.capitale-immobilier.com/annonces/
       main_page_cls: div.item
       scraper_type: Static
@@ -964,7 +964,7 @@
       group_type: Independant
 - source: Capitali Paris
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.capitali-paris.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=1&C_65_REPLACE=Paris&C_65_search=CONTIENT&C_65_type=TEXT&C_65=Paris&C_34_search=SUPERIEUR&C_34_type=NUMBER&C_34_MIN=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_30_MIN=0&search_id=1664043544559140&page=1&search_id=1664043544559140&sort=0
       main_page_cls: article.bien
       scraper_type: Static
@@ -975,7 +975,7 @@
       group_type: Independant
 - source: Cei Cab
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.cei-cab.com/annonces?id_polygon=&localisation_etendu=1&visite_virtuelle=&categorie=vente&type_bien=appartement&nb_pieces=&surface=&budget=&localisation=Paris+%2875%29&submit=Rechercher
       main_page_cls: div.container-offre
       scraper_type: Static
@@ -988,7 +988,7 @@
       group_type: Independant
 - source: Chene Vert
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.le-chene-vert.com/annonces-liste.asp?typeliste=&tri=nouveaute
       main_page_cls: "#grid-container > ul > li"
       scraper_type: Static
@@ -999,7 +999,7 @@
       group_type: Independant
 - source: CPH Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.cph.fr/recherche,incl_recherche_prestige_ajax.htm?idpays=250&cp=75&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&pxmin=Min&pxmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&idtypebien=1%2C2&tri=d_dt_crea&_=1586254200670
       main_page_cls: div.recherche-annonces
       scraper_type: Static
@@ -1010,7 +1010,7 @@
       group_type: Independant
 - source: Dauphine Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.dauphine-immo.com/advanced-search/?type=&max-price=&status=vente&location=&bathrooms=&min-area=&max-area=&min-price=&max-price=&property_id=
       main_page_cls: div.property-item
       scraper_type: Static
@@ -1021,7 +1021,7 @@
       group_type: Independant
 - source: David Matton
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.davidmattonimmobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=2%2C1&C_65_REPLACE=Paris&C_65_search=CONTIENT&C_65_type=TEXT&C_65=Paris&page=1&search_id=1663595643973767&sort=PRODUCT_LIST_DATEd
       main_page_cls: article.bien
       scraper_type: Static
@@ -1032,7 +1032,7 @@
       group_type: Independant
 - source: Deferla
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://deferla.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&investissement=0&type_lot%5B%5D=Appartement&type_lot%5B%5D=Atelier&type_lot%5B%5D=Immeuble&type_lot%5B%5D=Loft&type_lot%5B%5D=Maison&type_lot%5B%5D=Terrain&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&nb_chambre=&surface=&budget_min=&budget_max=&page=1&vendus=0&submit_search_0=&page=[[PAGE_NUMBER]]
       main_page_cls: div.property
       scraper_type: Static
@@ -1043,7 +1043,7 @@
       group_type: Independant
 - source: Deliquiet Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.deliquiet-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=UNIQUE&C_27=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75001%20PARIS%2C75002%20PARIS%2C75003%20PARIS%2C75004%20PARIS%2C75005%20PARIS%2C75006%20PARIS%2C75007%20PARIS%2C75008%20PARIS%2C75009%20PARIS%2C75010%20PARIS%2C75011%20PARIS%2C75012%20PARIS%2C75013%20PARIS%2C75014%20PARIS%2C75015%20PARIS%2C75016%20PARIS%2C75017%20PARIS%2C75018%20PARIS%2C75019%20PARIS%2C75020%20PARIS%2C&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_30_MIN=0&C_33_search=COMPRIS&C_33_type=NUMBER&C_33_MIN=&page=1&search_id=1662214799533655&sort=0
       main_page_cls: article.bien
       scraper_type: Static
@@ -1054,7 +1054,7 @@
       group_type: Independant
 - source: District Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.district-immo.com/fr/acheter-un-appartement/recherche/75001-75002-75003-75004-75011-75005-75006-75007-75015-75008-75009-75016-75116-75017-75010-75018-75019-75020-75012-75013-75014
       main_page_cls: article.item-property-small
       scraper_type: Static
@@ -1065,7 +1065,7 @@
       group_type: Independant
 - source: Efficity
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.efficity.com/achat-immobilier/results/?inputed_location=8075056&property_type=1&max_price=&min_nb_of_rooms=1
       main_page_cls: div.programs-list-item
       scraper_type: Static
@@ -1076,7 +1076,7 @@
       group_type: Independant
 - source: Emile Garcin
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.emilegarcin.fr/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_REPLACE=%2CParis&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_64_search=INFERIEUR&C_64_type=TEXT&C_64=&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30_MIN=&C_30_MAX=&30_MAX=&products_sort_id=0
       main_page_cls: div.un-bien
       scraper_type: Static
@@ -1087,7 +1087,7 @@
       group_type: Independant
 - source: Enfants Rouges
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.agencedesenfantsrouges.com/fr/recherche/?nature=1&type[]=1&type[]=2&city[]=32552&city[]=32553&city[]=32569&city[]=32554&city[]=32560&city[]=32561&city[]=32562&city[]=32565&city[]=32567&city[]=32568&city[]=32559&price&age&tenant_min&tenant_max&rent_type&newprogram_delivery_at&newprogram_delivery_at_display&currency=EUR&customroute&homepage&order=news%7Cdesc
       main_page_cls: li.ad
       scraper_type: Static
@@ -1097,7 +1097,7 @@
       group_type: Independant
 - source: Engel Voelkers
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.engelvoelkers.com/fr/search/?q=&startIndex=0&businessArea=residential&sortOrder=DESC&sortField=newestProfileCreationTimestamp&pageSize=18&facets=bsnssr%3Aresidential%3Bcntry%3Afrance%3Bdstrct%3Aparis%3Brgn%3Aile_de_france%3Btyp%3Abuy%3B
       main_page_cls: div.col-lg-4
       scraper_type: Static
@@ -1107,7 +1107,7 @@
       group_type: Independant
 - source: Ernest et associés
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.ernest-et-associes.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_34=0&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75
       main_page_cls: div.content_liste_vente
       scraper_type: Static
@@ -1118,7 +1118,7 @@
       group_type: Independant
 - source: Etude Lepic
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.etudelepic.fr/vente-appartement-paris/tri=id&ordre=DESC
       main_page_cls: article.annonce_listing
       scraper_type: Static
@@ -1129,7 +1129,7 @@
       group_type: Independant
 - source: Eyleau Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.eylauimmobilier.com/vente-appartement-paris-75016-eylau-immobilier/tri=id&ordre=DESC
       main_page_cls: div.annonce_listing
       scraper_type: Static
@@ -1140,7 +1140,7 @@
       group_type: Independant
 - source: Fortis Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.fortisimmo.fr/wp-admin/admin-ajax.php
       main_page_cls: div.purchase-wrapper
       scraper_type: HTTPRequest
@@ -1155,7 +1155,7 @@
       group_type: Independant
 - source: Garance Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.garance-immo.com/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&type_lot%5B%5D=appartement&type_lot%5B%5D=maison&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&surface=&budget_min=&budget_max=&page=0&vendus=0&submit_search_0=
       main_page_cls: div.property
       scraper_type: Static
@@ -1166,7 +1166,7 @@
       group_type: Independant
 - source: Gérando Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.gerandoimmobilier.fr/catalog/advanced_search_result.php?action=update_search&search_id=1664115282882257&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=PARIS&C_27=&C_27_search=EGAL&C_27_type=UNIQUE&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&C_38_search=COMPRIS&C_38_type=NUMBER&C_38_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&page=1&search_id=1664115282882257&sort=0
       main_page_cls: section.unBien
       scraper_type: Static
@@ -1177,7 +1177,7 @@
       group_type: Independant
 - source: GreenAcres
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.green-acres.fr/fr/prog_show_properties.html?searchQuery=order-date_d-lg-fr-cn-fr-i-24-hab_appartement-on-hab_house-on-city_id-dp_75
       main_page_cls: figure
       scraper_type: Static
@@ -1188,7 +1188,7 @@
       group_type: Independant
 - source: Grenelle Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.grenelle-immobilier.com/a-vendre/1
       main_page_cls: article.panelBien
       scraper_type: Static
@@ -1199,7 +1199,7 @@
       group_type: Independant
 - source: Hempton Paris
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.hempton-paris.com/a-vendre/[[PAGE_NUMBER]]
       main_page_cls: article.panelBien
       scraper_type: Static
@@ -1210,7 +1210,7 @@
       group_type: Independant
 - source: Homizy
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.homizy-immobilier.com/votre-recherche/[[PAGE_NUMBER]]
       main_page_cls: ul.listingUL > li
       scraper_type: Static
@@ -1221,7 +1221,7 @@
       group_type: Independant
 - source: Hosman
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.hosman.co/api/v1/properties?zones=[%22Paris,%20France%22]&min_area=&max_budget=&min_room_number=0&display_sold=false
       main_page_cls: ""
       scraper_type: HTTPRequest
@@ -1233,7 +1233,7 @@
       group_type: Independant
 - source: Iad
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.iadfrance.fr/rechercher/annonces?generic_type%5B%5D=AP&generic_type%5B%5D=MV&surface_min=&surface_max=&price_min=&price_max=&id=&departments=Paris&tags_list=%5B%7B%22type%22%3A%22departments%22%2C%22value%22%3A%22Paris%22%2C%22name%22%3A%22Paris+%22%7D%5D&transaction_type=Vente&frequency=Journali%C3%A8re
       main_page_cls: div.c-offer
       scraper_type: Static
@@ -1244,7 +1244,7 @@
       group_type: Independant
 - source: Immo'Land
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.immo-land.fr/recherche/
       main_page_cls: li.panelBien
       scraper_type: Static
@@ -1255,7 +1255,7 @@
       group_type: Independant
 - source: Immobilier Parisien
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.immobilier-parisien.fr/index.php?contr=biens_liste&tri_lots=date&type_transaction=0&type_lot%5B%5D=appartement&localisation=Paris+-+75&hidden-localisation=Paris+-+75&nb_piece=&surface=&budget_min=&budget_max=&page=0&vendus=0&submit_search_0=
       main_page_cls: .properties-grid > div > div.col-sm-6
       scraper_type: Static
@@ -1266,7 +1266,7 @@
       group_type: Independant
 - source: Immo Sur Mesure
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.immobilier-surmesure.com/wp-admin/admin-ajax.php
       main_page_cls: div.mon-bien
       scraper_type: HTTPRequest
@@ -1279,7 +1279,7 @@
       group_type: Independant
 - source: KMI
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.cabinet-kmi.com/recherche-avancee/page/1?advanced_city=paris-2&chambres-min&surface-min&budget-max&submit=RECHERCHER&wpestate_regular_search_nonce=0cc36da597&_wp_http_referer=%2Facheter%2F
       main_page_cls: div.property_listing
       scraper_type: HTTPRequest
@@ -1294,7 +1294,7 @@
       group_type: Independant
 - source: Krystyna
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.krystyna-immobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=&C_34_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75013+PARIS&C_65_tmp=75013+PARIS&keywords=&C_33_MAX=&C_30_MIN=
       main_page_cls: div.product-listing
       scraper_type: Static
@@ -1304,7 +1304,7 @@
       group_type: Independant
 - source: La Maison Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.lamaisonimmo.fr/catalog/advanced_search_result.php?action=update_search&search_id=1663963762147810&map_polygone=&C_28=Vente&C_28_search=EGAL&C_28_type=UNIQUE&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=1&C_65_REPLACE=75002+paris%2C+75009+paris%2C+75015+paris%2C+75001+paris%2C+75003+paris%2C+75009+paris%2C+75005+paris%2C+75006+paris%2C+75007+paris%2C+75008+paris%2C+75004+paris%2C+75010+paris%2C+75011+paris%2C+75012+paris%2C+75014+paris%2C+75016+paris%2C+75017+paris%2C+75018+paris%2C+75019+paris%2C+75020+paris&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75002+paris%2C+75009+paris%2C+75015+paris%2C+75001+paris%2C+75003+paris%2C+75004+paris%2C+75009+paris%2C+75005+paris%2C+75006+paris%2C+75007+paris%2C+75008+paris%2C+75010+paris%2C+75011+paris%2C+75012+paris%2C+75014+paris%2C+75016+paris%2C+75017+paris%2C+75018+paris%2C+75019+paris%2C+75020+paris&C_30_MIN=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_33_search=COMPRIS&C_33_type=NUMBER&C_33_MAX=&C_33_MIN=0&C_38_search=COMPRIS&C_38_type=NUMBER&C_38_MAX=&C_38_MIN=0&C_36_search=COMPRIS&C_36_type=NUMBER&C_36_MAX=&C_36_MIN=
       main_page_cls: div.bien
       scraper_type: Static
@@ -1315,7 +1315,7 @@
       group_type: Independant
 - source: La Résidence
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.laresidence.fr/nos-annonces?Etats=Bac&CodesVille=1862,21759,650,554,21952,682,493,21996,654,680,21967,21787,661,21660,21756,22022,573,21861,45938,45937&CodesType=20,1&autosave=true
       main_page_cls: div.vignetteBienListing
       scraper_type: Static
@@ -1326,7 +1326,7 @@
       group_type: Independant
 - source: La Vitrine Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.lavitrine.immo/fr/vente/1/
       main_page_cls: article.ui-property
       scraper_type: HTTPRequest
@@ -1341,7 +1341,7 @@
       group_type: Independant
 - source: Largier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.largier.fr/fr/vente-maison-appartement-hotels-particulier-paris-largier/p=[[PAGE_NUMBER]]
       main_page_cls: div.annonce_listing
       scraper_type: Static
@@ -1352,7 +1352,7 @@
       group_type: Independant
 - source: LelievreImmo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.lelievre-immobilier.com/sites/default/files/annonces/json/allAnnonces.json?
       main_page_cls: ""
       scraper_type: HTTPRequest
@@ -1367,7 +1367,7 @@
       group_type: Independant
 - source: Les Parisiennes
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.lesparisiennesimmo.com/recherche/[[PAGE_NUMBER]]
       main_page_cls: ul.listingUL > li
       scraper_type: Static
@@ -1378,7 +1378,7 @@
       group_type: Independant
 - source: Liberkeys
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://api.liberkeys.com/portal/properties?region=1&max_results=500&min_price=0&max_price=3500000&room_count=0&bedroom_count=0&include_sold_properties=false&order=recent_desc
       main_page_cls: ""
       scraper_type: HTTPRequest
@@ -1393,7 +1393,7 @@
       group_type: Independant
 - source: Loreto Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.loretoimmobilier.com/fr/vente-studio-maison-appartement-hotel-particulier-loft-atelier-paris/tri=id&ordre=DESC
       main_page_cls: div.annonce_listing
       scraper_type: Static
@@ -1404,7 +1404,7 @@
       group_type: Independant
 - source: Lux Residence
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.lux-residence.com/fr/annonces/vente/immobilier-prestige-PARIS.php?currency=EUR&sort=date_desc
       main_page_cls: "#prod-list > div > div > div.row"
       scraper_type: Static
@@ -1415,7 +1415,7 @@
       group_type: Independant
 - source: Montparnasse Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.montparnasseimmobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&map_polygone=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_search=EGAL&C_27_type=TEXT&C_27=2%2C1&C_27_tmp=2&C_27_tmp=1&C_34_MIN=&C_34_search=COMPRIS&C_34_type=NUMBER&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MAX=&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75015+PARIS%2C75005+PARIS%2C75007+PARIS&C_65_tmp=75015+PARIS&C_65_tmp=75005+PARIS&C_65_tmp=75007+PARIS&keywords=&C_33_MAX=&C_30_MIN=
       main_page_cls: div.product-listing
       scraper_type: Static
@@ -1426,7 +1426,7 @@
       group_type: Independant
 - source: Nestenn
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://nestenn.com/?prestige=0&action=listing&transaction=Vente&list_ville=75000+Paris%2C75001+Paris+1%2C75010+Paris+10%2C75011+Paris+11%2C75012+Paris+12%2C75013+Paris+13%2C75014+Paris+14%2C75015+Paris+15%2C75018+Paris+18%2C75002+Paris+2%2C75116+PARIS%2C75017+Paris+17%2C75016+Paris+16%2C75019+Paris+19%2C75020+Paris+20%2C75003+Paris+3%2C75004+Paris+4%2C75005+Paris+5%2C75006+Paris+6%2C75007+Paris+7&ville=75000+Paris&ville=75001+Paris+1&ville=75010+Paris+10&ville=75011+Paris+11&ville=75012+Paris+12&ville=75013+Paris+13&ville=75014+Paris+14&ville=75015+Paris+15&ville=75018+Paris+18&ville=75002+Paris+2&ville=75116+PARIS&ville=75017+Paris+17&ville=75016+Paris+16&ville=75019+Paris+19&ville=75020+Paris+20&ville=75003+Paris+3&ville=75004+Paris+4&ville=75005+Paris+5&ville=75006+Paris+6&ville=75007+Paris+7&list_type=Maison%2CAppartement%2CStudio&type=Maison&type=Appartement&type=Studio&prix_min=&prix_max=&pieces=&chambres=&surface_min=&surface_max=&surface_terrain_min=&surface_terrain_max=&ref=
       main_page_cls: .annonce
       scraper_type: Static
@@ -1437,7 +1437,7 @@
       group_type: Independant
 - source: Office Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://office-immo.com/resultat-recherche/?type=|Appartement|Maison|Loft&nature=|1&surface=&budget=&localisation=|75&nbPiece=
       main_page_cls: div.off-home
       scraper_type: Static
@@ -1448,7 +1448,7 @@
       group_type: Independant
 - source: Paris Montmartre Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://paris-montmartre-immobilier.fr/advanced-search/?keyword=PARIS&status=vente&type=&bedrooms=&min-area=&max-price=&bathrooms=&max-area=&min-price=
       main_page_cls: div.property-item
       scraper_type: Static
@@ -1459,7 +1459,7 @@
       group_type: Independant
 - source: Paris prestige immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.parisprestigeimmo.fr/fr/recherche/
       main_page_cls: li.ad
       scraper_type: HTTPRequest
@@ -1474,7 +1474,7 @@
       group_type: Independant
 - source: Paris Seine
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.paris-seine-immobilier.com/catalog/advanced_search_result.php?action=update_search&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_27_REPLACE=1&C_27_search=EGAL&C_27_type=UNIQUE&C_27=2%2C1&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&page=1&search_id=1663417493034890&sort=0
       main_page_cls: article.bien
       scraper_type: Static
@@ -1485,7 +1485,7 @@
       group_type: Independant
 - source: Paris Vente
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.parisvente.com/pv_liste.pl?ACTION=CONSULTER;FROM=LISTE;PAR_PAGE=20;PAR_PAGE3=selected;ISMOBILE=non;ISMOBILE_OU_TABLETTE=non;localisation=75015%2C75006%2C75007%2C75014%2C75013%2C75005%2C75012%2C75004%2C75001%2C75008%2C75016%2C75017%2C75018%2C75009%2C75010%2C75002%2C75003%2C75011%2C75020%2C75019;localisationTitle=75015%2C%2075006%2C%2075007%2C%2075014%2C%2075013%2C%2075005%2C%2075012%2C%2075004%2C%2075001%2C%2075008%2C%2075016%2C%2075017%2C%2075018%2C%2075009%2C%2075010%2C%2075002%2C%2075003%2C%2075011%2C%2075020%2C%2075019;localisationDatastate=75015---75015%2C75006---75006%2C75007---75007%2C75014---75014%2C75013---75013%2C75005---75005%2C75012---75012%2C75004---75004%2C75001---75001%2C75008---75008%2C75016---75016%2C75017---75017%2C75018---75018%2C75009---75009%2C75010---75010%2C75002---75002%2C75003---75003%2C75011---75011%2C75020---75020%2C75019---75019;TYPE_BIEN=appartement;TYPE_BIEN=maison%20de%20ville;PRIX_MIN=0;PRIX_MAX=10000000;SURFACE_MIN=0;SURFACE_MAX=1000;submit=Rechercher;NUM_PAGE=1
       main_page_cls: div.propItem
       scraper_type: Static
@@ -1496,7 +1496,7 @@
       group_type: Independant
 - source: Primas Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.primasimmobilier.com/vente-appartement-paris-75019/tri=id&ordre=DESC
       main_page_cls: article.annonce_listing
       scraper_type: Static
@@ -1507,7 +1507,7 @@
       group_type: Independant
 - source: Rennes Saint Germain
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.rennes-st-germain.com/recherche/[[PAGE_NUMBER]]
       main_page_cls: article.panelBien
       scraper_type: Static
@@ -1518,7 +1518,7 @@
       group_type: Independant
 - source: Sellier Patrimoine
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.sellier-patrimoine.com/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=1&saisie=Paris&tri=d_dt_crea&
       main_page_cls: div.recherche-annonces-vente
       scraper_type: Static
@@ -1529,7 +1529,7 @@
       group_type: Independant
 - source: Sistel Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.sistel-immo.fr/immobilier/pays/achat/france.htm#ci=750056&idpays=250&idqfix=1&idtt=2&lang=fr&pres=basic&surf_terrainmax=Max&surf_terrainmin=Min&surfacemax=Max&surfacemin=Min&tri=d_dt_crea
       main_page_cls: div.recherche-annonces
       scraper_type: Static
@@ -1540,7 +1540,7 @@
       group_type: Independant
 - source: Sotheby
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.proprietesparisiennes-sothebysrealty.com/fr/vente-proprietes-appartements-luxe-paris/tri=id&ordre=DESC
       main_page_cls: div.annonce_listing
       scraper_type: Static
@@ -1551,7 +1551,7 @@
       group_type: Independant
 - source: STI Immo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.sti-immo.com/recherche/
       main_page_cls: article
       scraper_type: Static
@@ -1562,7 +1562,7 @@
       group_type: Independant
 - source: Tendances Immobilières
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.tendancesimmobilieres.com/properties/?filter_location=74&filter_type=25&filter_contract_type=21&filter_price_from=&filter_price_to=&filter_area_from=&filter_area_to=&filter_sort_by=date&filter_order=DESC
       main_page_cls: div.property
       scraper_type: Static
@@ -1573,7 +1573,7 @@
       group_type: Independant
 - source: TerrasseCie
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.terrasse-cie.com/fr/ventes?order=news%7Cdesc
       main_page_cls: .ad
       scraper_type: Static
@@ -1583,7 +1583,7 @@
       group_type: Independant
 - source: Thibault Chanel Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.thibaultchanel.com/search-property-result/?location=&category=&bedrooms=&bathrooms=&min_price=0&max_price=10000000&min_area=0&max_area=1000
       main_page_cls: article
       scraper_type: Static
@@ -1594,7 +1594,7 @@
       group_type: Independant
 - source: Trust In Immobilier
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.trust-in-immobilier.fr/recherche,basic.htm?ci=750056&idqfix=1&idtt=2&idtypebien=2&idtypebien=1&pxmax=Max&pxmin=Min&saisie=O%C3%B9+d%C3%A9sirez-vous+habiter+%3f&surfacemax=Max&surfacemin=Min&tri=d_dt_crea&
       main_page_cls: div.conteneur-annonce
       scraper_type: Static
@@ -1605,7 +1605,7 @@
       group_type: Independant
 - source: Agence Varenne
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.agencevarenne.fr/fr/liste-biens?search=1&clicarrondissement=0&arrondissement%5B0%5D=5&arrondissement%5B1%5D=6&arrondissement%5B2%5D=7&arrondissement%5B3%5D=13&arrondissement%5B4%5D=14&arrondissement%5B5%5D=15&arrondissement%5B6%5D=1&arrondissement%5B7%5D=2&arrondissement%5B8%5D=3&arrondissement%5B9%5D=4&arrondissement%5B10%5D=8&arrondissement%5B11%5D=9&arrondissement%5B12%5D=16&arrondissement%5B13%5D=17
       main_page_cls: div.row-ct-liste
       scraper_type: Static
@@ -1616,7 +1616,7 @@
       group_type: Independant
 - source: Village Bleu
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: http://www.villagebleu.com/recherche,incl_recherche_mobilefirst_ajax.htm?idqfix=1&annlistepg=1&lang=fr&idtt=2&idtypebien=1&ci=750056&tri=d_dt_crea
       main_page_cls: div.annonce
       scraper_type: Static
@@ -1627,7 +1627,7 @@
       group_type: Independant
 - source: Villaret
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://www.villaret-immobilier.com/catalog/advanced_search_result.php?action=update_search&search_id=&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75003+paris%2C75004+paris%2C75005+paris%2C75006+paris%2C75008+paris%2C75009+paris%2C75010+paris%2C75011+paris%2C75012+paris%2C75015+paris%2C75016+paris&C_65_tmp=75003+paris&C_65_tmp=75004+paris&C_65_tmp=75005+paris&C_65_tmp=75006+paris&C_65_tmp=75008+paris&C_65_tmp=75009+paris&C_65_tmp=75010+paris&C_65_tmp=75011+paris&C_65_tmp=75012+paris&C_65_tmp=75015+paris&C_65_tmp=75016+paris&C_27_search=EGAL&C_27_type=TEXT&C_27=1%2C2%2CLoft&C_27_tmp=1&C_27_tmp=2&C_27_tmp=Loft&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=
       main_page_cls: div.cell-product
       scraper_type: Static
@@ -1638,7 +1638,7 @@
       group_type: Independant
 - source: Proprioo
   params:
-    - zone: Paris
+    - zone: Paris (75)
       url: https://9zx8d1ab8c-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.1.0)%3B%20Browser%20(lite)%3B%20JS%20Helper%20(3.1.1)%3B%20react%20(16.13.1)%3B%20react-instantsearch%20(6.4.0)&x-algolia-api-key=b848f214a86e4735a9801b9a0aad971b&x-algolia-application-id=9ZX8D1AB8C
       main_page_cls: div.sc-1y2l6jx-0
       scraper_type: HTTPRequest

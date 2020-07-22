@@ -19,7 +19,7 @@ scraper_params.each do |param|
     s.group_type = data["group_type"]
     s.zone = data["zone"]
     if Rails.env.test?
-      s.is_active = s.zone == "Paris" ? data["is_active"] : false ## we don't want to run tests for every new city
+      s.is_active = s.zone == "Paris (75)" ? data["is_active"] : false ## we don't want to run tests for every new city
     else
       s.is_active = data["is_active"]
     end
