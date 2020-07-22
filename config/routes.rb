@@ -94,7 +94,7 @@ Rails.application.routes.draw do
   post "subscribed-update" => "subscribers#subscribed_update"
 
   # Subscription 'regular'
-  get "subscribers/agglomeration/:id" => "subscribers#select_agglomeration"
+  get "subscribers/:id/agglomeration" => "subscribers#select_agglomeration"
 
   get "/dashboard/" => "static_pages#dashboard"
   get "/dashboard/properties" => "static_pages#properties"
