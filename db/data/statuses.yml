@@ -48,7 +48,7 @@
     description: User has started its subscription for Ding Dong alert
     status_type: revenue
   - name: has_cancelled_subscription
-    description: User hasnt been to the end of process of paying subscription
+    description: User hasn't been to the end of process of paying subscription
     status_type: revenue
   - name: has_ended_subscription
     description: User has ended its subscription for Ding Dong alert
@@ -65,6 +65,10 @@
   - name: is_active_one_week
     description: User has been active in the past week
     status_type: retention
+  - name: research_paused
+    description: User has paused is research
+    status_type: drop
+
 
 
 

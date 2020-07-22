@@ -17,6 +17,7 @@
       <div class="raw d-flex flex-wrap">
 
         <% @master_areas.each do |zone|%>
+          <% unless zone[:zone].include?("Lyon") %>
             <h6><%= zone[:zone] %></h6>
             <div class="form-group col-12 p-0">
                 <select multiple class="form-control" id="choices-multiple-remove-button" name="area_ids[]">
@@ -25,6 +26,7 @@
                     <% end %>
                 </select>
             </div>
+          <% end %>
         <% end %>
       </div>
 
