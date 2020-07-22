@@ -2,7 +2,7 @@ class GrowthEngine
   attr_reader :source, :sender_email, :lead_email, :property_data
   attr_accessor :first_time_frame, :second_time_frame
 
-  def initialize(first_time_frame = 48, second_time_frame = 240)
+  def initialize(first_time_frame = 42, second_time_frame = 1008)
     @first_time_frame = first_time_frame
     @second_time_frame = second_time_frame
   end
