@@ -37,7 +37,7 @@ $(document).ready(function(){
       <h5 class="mb-3 mt-4" style="color: #0470C1; font-weight:400;">1/9 📍 Arrondissement/ville ? *</h5>
       <div class="raw d-flex flex-wrap">
         <div class="form-group col-12 p-0">
-            <select multiple placeholder="ex: <%= @master_areas.first[1] %>" class="form-control" id="choices-multiple-remove-button" name="areas[]">
+            <select multiple placeholder="ex: <%= @master_areas.first[1] + " (" + @master_areas.first[2] + ")" %> " class="form-control" id="choices-multiple-remove-button" name="areas[]">
                 <% @master_areas.each do |item| %>
                     <% if item[0] == "GlobalZone"%>
                       <option value="<%= item[0] %> - <%= item[1] %>"> <%= item[1] %></option>
