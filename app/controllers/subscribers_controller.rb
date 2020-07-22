@@ -1,22 +1,5 @@
 class SubscribersController < ApplicationController
 
-
-  def step_3
-    @draft_subscriber = params["subscriber"]
-    @draft_subscriber["selected_areas"] = params["selected_areas"].join(",")
-    @draft_subscriber["project_type"] = params["selected_project_types"].join(",")
-    if @draft_subscriber.nil?
-      flash[:danger] = "Une erreur s'est produite, veuillez recommencer svp."
-      redirect_to "/step-1"
-    else
-      @subscriber = Subscriber.new
-    end
-  end
-
-  def step_4
-    @subscriber = Subscriber.find(params["id"])
-  end
-
   def create
     subscriber = Subscriber.where(email: subscriber_params["email"]).empty? ? Subscriber.new(subscriber_params) : Subscriber.where(email: subscriber_params["email"]).last
     if subscriber.handle_form_filled(subscriber_params)
@@ -98,7 +81,8 @@ class SubscribersController < ApplicationController
   end
 
   def select_agglomeration
-    @agglos_infos = Area.get_active_agglo_infos
+    @subscriber = Subscriber.find(params[:id])
+    @agglos_infos = Area.get_agglo_infos
   end
 
   def edit
@@ -106,9 +90,11 @@ class SubscribersController < ApplicationController
     subscriber_areas_id = @subscriber.areas.pluck(:id)
     if params[:selected_zones].nil? && subscriber_areas_id.empty?
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
-      redirect_to "/subscribers/agglomeration/" + params[:id]
-    elsif params[:selected_zones].nil? 
-      @master_areas = Area.get_aggregate_data_for_selection(subscriber_areas_id)
+      redirect_to "/subscribers/" + params[:id] + "agglomeration"
+    elsif subscriber_areas_id.any?
+      zone = @subscriber.determine_zone
+      @master_areas = Area.get_selected_agglo_area(zone[0], subscriber_areas_id)
+      @master_areas += Area.global_zones(zone[0])
     else
       @master_areas = Area.get_selected_agglo_area(params[:selected_zones], subscriber_areas_id)
       @master_areas += Area.global_zones(params[:selected_zones])
@@ -118,7 +104,7 @@ class SubscribersController < ApplicationController
   def update
     @subscriber = Subscriber.find(params[:id])
     areas_ids = []
-    areas_ids += params[:name_areas] unless params[:name_areas].nil?
+    areas_ids += params[:areas] unless params[:areas].nil?
     if @subscriber.update(subscriber_params) && !areas_ids.empty?
       @subscriber.update_areas(areas_ids)
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
@@ -126,8 +112,8 @@ class SubscribersController < ApplicationController
       flash[:danger] = "Sélectionnez des arrondissements..."
     end
     # // Send flow to subscriber 
-    # flow = "content20200716131717_882877"
-    # Manychat.new.send_flow_sequence(@subscriber, flow)
+    flow = "content20200716131717_882877"
+    Manychat.new.send_flow_sequence(@subscriber, flow)
     redirect_to edit_subscriber_path
   end
 
