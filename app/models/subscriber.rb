@@ -105,12 +105,25 @@ class Subscriber < ApplicationRecord
     return props_to_send
   end
 
+  def determine_zone
+    subscriber_zone = []
+    self.areas.pluck(:zone).uniq.each do |zone|
+      subscriber_zone.push(Area.get_agglo_from_zone(zone))
+    end
+    subscriber_zone.flatten.uniq
+  end
+
   def update_areas(areas_ids)
     selected_areas = self.areas.pluck(:id)
-    areas_ids.map! {|id| id.to_i }
-    areas_to_destroy = selected_areas.reject {|x| areas_ids.include?(x)}
+    areas_ids.map! do |area_id|
+      area_id.include?("GlobalZone") ? Area.where(zone: area_id.gsub("GlobalZone - ", "")).pluck(:id) : area_id
+    end
+    cleaned_area_array = areas_ids.flatten.uniq
+    cleaned_area_array.map! {|id| id.to_i }
+    
+    areas_to_destroy = selected_areas.reject {|x| cleaned_area_array.include?(x)}
     self.selected_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
-    areas_to_add = areas_ids.reject {|x| selected_areas.include?(x)}
+    areas_to_add = cleaned_area_array.reject {|x| selected_areas.include?(x)}
     areas_to_add.each { |area_id| SelectedArea.create(subscriber_id: self.id, area_id: area_id) } unless areas_to_add.empty?
   end
 
