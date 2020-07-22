@@ -1,5 +1,5 @@
 class GrowthEngineJob < ApplicationJob
-  queue_as :default
+  queue_as :mailers
 
   def perform(*args)
     sequence_step = SequenceStep.find(args[0])
