@@ -8,6 +8,16 @@ class Trello
     @token = "key=#{ENV['TRELLO_KEY']}&token=#{ENV['TRELLO_SECRET']}"
   end
 
+  def add_lead_on_etienne_trello(user)
+    list_id = Broker.find_by(email: "etienne@hellodingdong.com").trello_lead_list_id
+    params = {}
+    params[:name] = user.get_fullname
+    params[:desc] = user.trello_description
+    params[:pos] = 'top'
+    new_card_response = create_new_card(list_id, params)
+    return false if new_card_response.code != (200 || 204)
+  end
+
   def add_new_user_on_trello(user)
 
     # 1• Create card on tello Board 
