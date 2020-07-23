@@ -1,38 +1,61 @@
-<div class="row">
-    <div class="col-12 col-md-6">
-        <h5 class="mt-5 mb-3" style="color: #0470C1; font-weight:400">🔎 Dans quelle agglomération recherchez-vous ? *</h5>
+<div class="row mb-4">
+    <div class="col-12 mb-5">
+        <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
+        <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
             <%= form_tag(edit_subscriber_path(@subscriber), method: :get) do |f| %>
-
-            <div class="d-flex flex-wrap">
-                <div class="card-group">
-                <% @agglos_infos.each do |agglo| %>
-                <div>
-
-                </div>
-                  <div class="card">
-                    <img class="card-img-top" src="<%= agglo["image_url"] %>" alt="Card image cap">
-                    <div class="card-body">
-
-                    <%= check_box_tag 'selected_zones', 
-                        agglo["agglomeration"]
-                    %>
-                    <span class="form-check-label mb-2 ml-2 box_hover" >
-                        <%= agglo["agglomeration"] %>
-                    </span>
+                <div class="d-flex">
+                    <div class="card-group">
+                        <% @agglos_infos.each do |agglo| %>
+                            <div class="col-12 col-md-3 mb-4">
+                                <div class="card <%=agglo%>" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
+                                    <img 
+                                    class="card-img-top" 
+                                    src="<%= agglo["image_url"] %>" 
+                                    alt="agglomération">
+                                    <div class="card-body" style="display: none;">
+                                        <%= radio_button_tag 'selected_zones', 
+                                            agglo["agglomeration"]
+                                        %>
+                                        <span class="form-check-label mb-2 ml-2 box_hover" >
+                                            <%= agglo["agglomeration"] %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
-                  </div>
-                <% end %>
-            </div>
-            <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                <div class="d-flex justify-content-center mt-2 mb-2">
-                    <%= submit_tag "C'est parti ! 🚀", class: "btn btn-outline-light", style:"font-weight:600" %>
+                    <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+                        <div class="d-flex justify-content-center mt-2 mb-2">
+                            <%= submit_tag "C'est parti ! 🚀", class: "btn btn-outline-light", style:"font-weight:600" %>
+                        </div>
+                    </nav>
                 </div>
-            </nav>
             <% end %>
     </div>
 </div>
 
 <script>
+
+    function checkedAgglomeration(className) {
+        let card = document.getElementsByClassName(className)[0]
+        let checkbox = card.children[1].children[0]
+        let allCards = document.getElementsByClassName("card")
+
+        console.log(className)
+
+        if(className.includes("true")){ 
+            checkbox.checked = true;
+            for(i=0; i < allCards.length; i++){
+                allCards[i].style.border = "none"
+                card.style.border = "solid 1px #f26ca7"
+            }
+        }
+        else{
+          alert("Hey hey, patience on ouvre bientôt ! 🎉")
+        }
+    }
+
+
 $(document).ready(function(){
     $('input:checkbox').click(function() {
         $('input:checkbox').not(this).prop('checked', false);
