@@ -285,7 +285,7 @@ class Subscriber < ApplicationRecord
     # broker = Broker.get_current_lead_gen
     broker = Broker.find_by(email: "etienne@hellodingdong.com")
     self.update(broker: broker, is_blocked: true)
-    Trello.new.add_new_user_on_trello(self)
+    Trello.new.add_lead_on_etienne_trello(self)
     BrokerMailer.new_lead(self.id).deliver_now
   end
 
