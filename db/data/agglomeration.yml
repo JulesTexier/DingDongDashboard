@@ -20,8 +20,8 @@
   is_active: false
 - agglomeration: Marseilles
   zone: 
-    - Marseilles (13)
-  image_url: https://hellodingdong.com/assets/images/marseilles.jpg
+    - Marseille (13)
+  image_url: https://hellodingdong.com/assets/images/marseille.jpg
   is_active: false
 - agglomeration: Nice
   zone: 
