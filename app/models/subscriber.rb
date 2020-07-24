@@ -118,9 +118,9 @@ class Subscriber < ApplicationRecord
     areas_ids.map! do |area_id|
       area_id.include?("GlobalZone") ? Area.where(zone: area_id.gsub("GlobalZone - ", "")).pluck(:id) : area_id
     end
-    cleaned_area_array = areas_ids.flatten.uniq
+    cleaned_area_array = areas_ids.flatten
     cleaned_area_array.map! {|id| id.to_i }
-    
+    cleaned_area_array.uniq!
     areas_to_destroy = selected_areas.reject {|x| cleaned_area_array.include?(x)}
     self.selected_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
     areas_to_add = cleaned_area_array.reject {|x| selected_areas.include?(x)}
