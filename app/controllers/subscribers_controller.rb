@@ -90,7 +90,7 @@ class SubscribersController < ApplicationController
     subscriber_areas_id = @subscriber.areas.pluck(:id)
     if params[:selected_zones].nil? && subscriber_areas_id.empty?
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
-      redirect_to "/subscribers/" + params[:id] + "agglomeration"
+      redirect_to "/subscribers/" + params[:id] + "/agglomeration"
     elsif subscriber_areas_id.any?
       zone = @subscriber.determine_zone
       @master_areas = Area.get_selected_agglo_area(zone[0], subscriber_areas_id)
