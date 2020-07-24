@@ -21,13 +21,14 @@ class Premium::ScraperLeBonCoin < Scraper
                 ## wrapped it in a condition for test env, otherwise every fixtures will be outdated in two days
                 next if Time.parse(item["first_publication_date"]) < Time.now - 2.days
               end
-              hashed_property = extract_each_flat(item)
+              hashed_property = extract_each_flat(item, args.zone)
               property_checker_hash = {}
               property_checker_hash[:rooms_number] = hashed_property[:rooms_number]
               property_checker_hash[:surface] = hashed_property[:surface]
               property_checker_hash[:price] = hashed_property[:price]
               property_checker_hash[:area] = hashed_property[:area]
               property_checker_hash[:link] = hashed_property[:link]
+              pp hashed_property
               if go_to_prop?(property_checker_hash, 7)
                 @properties.push(hashed_property)
                 enrich_then_insert(hashed_property)
@@ -67,7 +68,7 @@ class Premium::ScraperLeBonCoin < Scraper
     return json[0]
   end
 
-  def extract_each_flat(item)
+  def extract_each_flat(item, zone)
     flat_data = {}
 
     item["attributes"].each do |element|
@@ -85,7 +86,7 @@ class Premium::ScraperLeBonCoin < Scraper
 
     !item["url"].nil? ? flat_data[:link] = item["url"].gsub(" u002F", "/").gsub("\s", "") : nil
     !item["body"].nil? ? flat_data[:description] = item["body"].tr("\n", "") : nil
-    !item["location"]["zipcode"].nil? ? flat_data[:area] = perform_district_regex(item["location"]["zipcode"]) : nil
+    !item["location"]["zipcode"].nil? ? flat_data[:area] = perform_district_regex(item["location"]["zipcode"], zone) : nil
     !item["price"].nil? ? flat_data[:price] = item["price"][0].to_i : nil
 
     flat_data[:images] = []
