@@ -297,20 +297,20 @@ class Manychat
     },
     {
       "type": "flow",
-      "caption": "🔔 Ding Dong",
+      "caption": "💬 Ding Dong",
       "target": ENV["QR_DING_DONG"],
     },
       {
       "type": "flow",
-      "caption": "💰 Estimer appart",
+      "caption": "👨‍💼 Estimer appart",
       "target": ENV["QR_ESTIMATION"],
     }, {
       "type": "flow",
-      "caption": "⚒️ Outils",
+      "caption": "🔑 Outils",
       "target": ENV["QR_TOOLS"],
     }, {
       "type": "flow",
-      "caption": "📚 Guide",
+      "caption": "📖 Guide",
       "target": ENV["QR_GUIDELINES"],
     },
           {

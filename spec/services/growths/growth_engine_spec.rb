@@ -65,7 +65,7 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       it "should return false if it's a client, have a subscriber_sequence but outside second_time_frame" do
-        @sequence_subscriber = FactoryBot.create(:subscriber_sequence, sequence: @sequence, subscriber: @client_subscriber, created_at: 12.days.ago)
+        @sequence_subscriber = FactoryBot.create(:subscriber_sequence, sequence: @sequence, subscriber: @client_subscriber, created_at: 43.days.ago)
         expect(@ge.send(:is_sequence_created_in_timeframe?, @client_subscriber, @ge.second_time_frame)).to eq(false)
       end
 
@@ -155,7 +155,7 @@ RSpec.describe GrowthEngine, type: :service do
 
       ## C'est un new_lead qui nous contacte 11 jours après sa dernière séquence, on lui renvoie un hack
       it "is a new lead that contacts us 11 days ago so we should return hack sequence" do
-        @subscriber_to_sequence = FactoryBot.create(:subscriber_sequence, sequence: @sequence_hack, subscriber: @new_lead_subscriber, created_at: 11.days.ago)
+        @subscriber_to_sequence = FactoryBot.create(:subscriber_sequence, sequence: @sequence_hack, subscriber: @new_lead_subscriber, created_at: 43.days.ago)
         @ge.send(:handle_lead_email, @new_lead_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(2)
         expect(SubscriberSequence.last.sequence).to eq(@sequence_hack)

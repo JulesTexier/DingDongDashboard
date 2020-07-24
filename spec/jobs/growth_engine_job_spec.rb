@@ -16,7 +16,7 @@ RSpec.describe GrowthEngineJob, type: :job do
       Timecop.freeze(time) do 
         expect {
           GrowthEngineJob.set(wait_until: time).perform_later(@sequence_step.id, @subscriber.id)
-        }.to have_enqueued_job.with(@sequence_step.id, @subscriber.id).on_queue("default").at(time)
+        }.to have_enqueued_job.with(@sequence_step.id, @subscriber.id).on_queue("mailers").at(time)
       end
     end
   end

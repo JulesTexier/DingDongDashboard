@@ -91,9 +91,11 @@ class Subscriber < ApplicationRecord
 
   def get_x_last_props(max_number)
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link link)
-    props = Property
+    props = 
+      Property.where(area: self.areas)
+      .where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number)
       .order(id: :desc)
-      .limit(1000)
+      .limit(200)
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }
     props_to_send = []
     subs_areas = self.areas.ids
@@ -101,7 +103,6 @@ class Subscriber < ApplicationRecord
       props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
       break if props_to_send.length == max_number.to_i
     end
-
     return props_to_send
   end
 
@@ -295,11 +296,10 @@ class Subscriber < ApplicationRecord
   end
 
   def handle_new_lead_gen
-    t = Trello.new
     # broker = Broker.get_current_lead_gen
     broker = Broker.find_by(email: "etienne@hellodingdong.com")
     self.update(broker: broker, is_blocked: true)
-    # t.add_new_user_on_trello(self)
+    Trello.new.add_lead_on_etienne_trello(self)
     BrokerMailer.new_lead(self.id).deliver_now
   end
 
