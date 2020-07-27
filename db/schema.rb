@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_092807) do
+ActiveRecord::Schema.define(version: 2020_07_27_143018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "zone"
+    t.string "zip_code"
   end
 
   create_table "broker_shifts", force: :cascade do |t|
@@ -83,13 +84,6 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
     t.string "description"
     t.string "alias_email"
-  end
-
-  create_table "districts", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -153,28 +147,6 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
 
-  create_table "leads", force: :cascade do |t|
-    t.string "firstname"
-    t.string "phone"
-    t.string "email"
-    t.boolean "has_messenger"
-    t.integer "min_surface"
-    t.integer "max_price"
-    t.string "project_type"
-    t.text "areas"
-    t.text "additional_question"
-    t.text "specific_criteria"
-    t.string "source"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "status", default: "tf_filled"
-    t.bigint "broker_id"
-    t.string "trello_id_card"
-    t.string "lastname"
-    t.integer "min_rooms_number"
-    t.index ["broker_id"], name: "index_leads_on_broker_id"
-  end
-
   create_table "permanences", force: :cascade do |t|
     t.bigint "broker_id"
     t.bigint "broker_shift_id"
@@ -212,43 +184,6 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.boolean "is_new_construction"
     t.boolean "is_last_floor"
     t.text "subway_infos"
-  end
-
-  create_table "property_districts", force: :cascade do |t|
-    t.bigint "district_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["district_id"], name: "index_property_districts_on_district_id"
-    t.index ["property_id"], name: "index_property_districts_on_property_id"
-  end
-
-  create_table "property_histories", force: :cascade do |t|
-    t.integer "price"
-    t.text "description"
-    t.string "link"
-    t.string "area"
-    t.integer "rooms_number"
-    t.integer "bedrooms_number"
-    t.integer "surface"
-    t.string "flat_type"
-    t.string "agency_name"
-    t.string "contact_number"
-    t.string "reference"
-    t.string "source"
-    t.string "method_name"
-    t.string "error"
-    t.text "images", default: [], array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "property_images", force: :cascade do |t|
-    t.string "url"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id"], name: "index_property_images_on_property_id"
   end
 
   create_table "property_links", force: :cascade do |t|
@@ -298,16 +233,6 @@ ActiveRecord::Schema.define(version: 2020_07_17_092807) do
     t.index ["area_id"], name: "index_selected_areas_on_area_id"
     t.index ["subscriber_id", "area_id"], name: "index_selected_areas_on_subscriber_id_and_area_id", unique: true
     t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
-  end
-
-  create_table "selected_districts", force: :cascade do |t|
-    t.bigint "district_id"
-    t.bigint "subscriber_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["district_id"], name: "index_selected_districts_on_district_id"
-    t.index ["subscriber_id", "district_id"], name: "index_selected_districts_on_subscriber_id_and_district_id", unique: true
-    t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
   create_table "selections", force: :cascade do |t|
