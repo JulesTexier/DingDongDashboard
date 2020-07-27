@@ -1,15 +1,18 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
-  after_update :notify_broker_if_max_price_is_changed
+
+  ## REVOIR LES VALIDATEURS
+
+  # after_update :notify_broker_if_max_price_is_changed
 
   belongs_to :broker, optional: true
 
   has_many :selected_areas
   has_many :areas, through: :selected_areas
 
-  has_many :selected_districts
-  has_many :districts, through: :selected_districts
+  # has_many :selected_districts
+  # has_many :districts, through: :selected_districts
 
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
@@ -20,6 +23,7 @@ class Subscriber < ApplicationRecord
   has_many :subscriber_statuses
   has_many :statuses, through: :subscriber_statuses
 
+  # !!! A update
   def is_client?
     is_client = false
     statuses_scoped = ["form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"]
@@ -41,10 +45,12 @@ class Subscriber < ApplicationRecord
     return is_client
   end
 
+  # to delete
   def get_bm
     bm = SubscriberStatus.where(subscriber: self, status: Status.find_by(name: "subscription_bm")).empty? ? "regular" : "subscription"
   end
 
+  # a garder (mais vérifier)
   def get_areas_list
     list = ""
     self.areas.each do |area|
@@ -54,6 +60,7 @@ class Subscriber < ApplicationRecord
     return list
   end
 
+  # a supprimer
   def get_districts_list
     list = ""
     self.districts.each do |district|
@@ -63,10 +70,12 @@ class Subscriber < ApplicationRecord
     return list
   end
 
+  # a garder (mais vérifier)
   def get_edit_path
     return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/edit"
   end
 
+  # a garder 
   def is_matching_property?(args, subs_areas)
     is_matching_property_rooms_number(args["rooms_number"]) &&
     is_matching_property_surface(args["surface"]) &&
@@ -80,6 +89,7 @@ class Subscriber < ApplicationRecord
     is_matching_property_new_construction(args["is_new_construction"])
   end
 
+  # a vérifier 
   def has_interacted(last_interaction, day_range)
     response = false
     parsed_last_interaction = Time.parse(last_interaction)
@@ -89,6 +99,7 @@ class Subscriber < ApplicationRecord
     return response
   end
 
+  # a refacto avec Max
   def get_x_last_props(max_number)
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link link)
     props = 
@@ -106,6 +117,7 @@ class Subscriber < ApplicationRecord
     return props_to_send
   end
 
+  # a vérifier
   def update_areas(areas_ids)
     selected_areas = self.areas.pluck(:id)
     areas_ids.map! {|id| id.to_i }
@@ -115,6 +127,7 @@ class Subscriber < ApplicationRecord
     areas_to_add.each { |area_id| SelectedArea.create(subscriber_id: self.id, area_id: area_id) } unless areas_to_add.empty?
   end
 
+  # a vérifier
   def get_props_in_lasts_x_days(x_previous_days)
     start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
@@ -132,6 +145,7 @@ class Subscriber < ApplicationRecord
     return props_to_send
   end
 
+  # normalement ok
   def get_morning_props
     now = DateTime.now.in_time_zone("Europe/Paris")
     start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
@@ -151,6 +165,7 @@ class Subscriber < ApplicationRecord
     return props_to_send
   end
 
+  # a verifier
   def get_areas
     areas = []
     self.areas.each do |area|
@@ -159,25 +174,32 @@ class Subscriber < ApplicationRecord
     return areas
   end
 
+  # a vérifier mais normalement ok
   def self.active
     self.where(is_active: true)
   end
 
+  # a vérifier mais normalement ok
   def self.active_and_not_blocked
     self.where(is_active: true, is_blocked: [nil, false])
   end
+
+  # a vérifier mais normalement ok
   def self.not_blocked
     self.where(is_blocked: [nil, false])
   end
-    
+  
+  # a vérifier mais normalement ok
   def self.inactive
     self.where(is_active: false)
   end
 
+  # a priori useless
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
   end
 
+  # to delete
   def is_subscriber_premium?
     status_ids = Status.where(name: ["has_paid_subscription", "has_ended_subscription"]).pluck(:id)
     status_array = self
@@ -190,6 +212,7 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  # A voir ... (util pour Etienne ?)
   def notify_broker_trello(comment)
     Trello.new.add_comment_to_user_card(self, comment)
   end
@@ -278,6 +301,7 @@ class Subscriber < ApplicationRecord
     return has_been_updated
   end
 
+  # a delete
   def handle_onboarding_end_manychat
     onboarding_broker("subscription")
   end
@@ -293,22 +317,25 @@ class Subscriber < ApplicationRecord
   
   private
 
-  
+  # a virer normalement
   def handle_duplicate
     self.update(status: "duplicates")
     PostmarkMailer.send_user_dulicate_email(self).deliver_now if !self.email.nil?
   end
 
+  # a virer normalement
   def onboarding_hunter
     # Send email to lead with Max in C/C
     PostmarkMailer.send_onboarding_hunter_email(self).deliver_now if !self.email.nil?
   end
 
+  # a virer normalement
   def onboarding_no_messenger
     # Send email to lead with explainations
     PostmarkMailer.send_email_to_lead_with_no_messenger(self).deliver_now
   end
 
+  # a virer 
   def onboarding_broker(form_type = "regular")
     attribute_adequate_broker(form_type)
     # self.update(broker: Broker.get_current_broker) if self.broker.nil?
@@ -327,7 +354,9 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  ###################
   # Matching methods
+  ###################
 
   def is_matching_property_max_price(price)
     (price <= self.max_price ? true : false) if !self.max_price.nil?
@@ -425,6 +454,7 @@ class Subscriber < ApplicationRecord
     !self.new_construction && is_new_construction ? false : true
   end
 
+# A voir ...
   def notify_broker_if_max_price_is_changed
     if !previous_changes["max_price"].nil? && !self.broker.nil? && !self.trello_id_card.nil?
       old_price = previous_changes["max_price"][0]
@@ -433,6 +463,7 @@ class Subscriber < ApplicationRecord
     end
   end
 
+  # A vérifier mais useless normalement
   def attribute_adequate_broker(form_type = "regular")
     if self.broker.nil?
       shift_type = form_type == "subscription" ? "subscription" : "regular"
