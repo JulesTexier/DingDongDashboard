@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   #############
   # 2 - Core
   #############
-  resources :subscribers, only: [:create, :update, :edit]
-  get '/subscribers/activation/:id' => 'subscribers#activation'
+  resources :subscribers, only: [:create, :update, :edit] do 
+    get '/activation/' => 'subscribers#activation'
+  end
   resources :properties, only: [:show]
 
   #############

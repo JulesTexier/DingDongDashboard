@@ -139,7 +139,7 @@ class SubscribersController < ApplicationController
 
 
   def activation
-    @subscriber = Subscriber.find(params[:id])
+    @subscriber = Subscriber.find(params[:subscriber_id])
     if !@subscriber.nil?
       @subscriber.update(is_blocked: false) 
       SubscriberStatus.create(subscriber: @subscriber, status: Status.find_by(name: "unblocked"))
