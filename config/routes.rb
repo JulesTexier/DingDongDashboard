@@ -57,20 +57,20 @@ Rails.application.routes.draw do
   #############
   namespace "api" do
     namespace "v1" do
+
+      # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
       post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
-      #post "/subscribers/:id/broker/" => "subscribers#atttribute_broker"
-
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
       end
 
+      # Other models
       resources :properties, only: [:show, :index]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
 
-      # Manychat routes
-      # Subscriber
+      # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber" # a garder
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning" # a garder
       get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" # a garder
@@ -78,20 +78,15 @@ Rails.application.routes.draw do
       post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" # a garder
       post "/manychat/s/:subscriber_id/send_to_broker" => "manychat#send_to_broker" # a garder
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" # a garder + ajouter le tracking
-
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" # a checker
       
-      # post "/manychat/s/:subscriber_id/onboard_broker" => "manychat#onboard_old_users"
 
-      # Trello resources
+      # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder
-
       post "/trello/move-card-to-broker" => "trello#update_user_broker" # a checker
 
-      #post "/trello/send-email-chatbot" => "trello#send_chatbot_link_from_trello_btn" 
-      #post "/trello/referral" => "trello#send_referral"
 
-      # Webhooks resources
+      # Webhooks 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
       post "webhooks/postmark/growth-emailing" => "webhooks#handle_postmark_growth_emailing"
       post "webhooks/postmark/growth-new-contact" => "webhooks#handle_postmark_new_contact"
