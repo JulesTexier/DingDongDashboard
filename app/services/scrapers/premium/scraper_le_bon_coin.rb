@@ -28,7 +28,6 @@ class Premium::ScraperLeBonCoin < Scraper
               property_checker_hash[:price] = hashed_property[:price]
               property_checker_hash[:area] = hashed_property[:area]
               property_checker_hash[:link] = hashed_property[:link]
-              pp hashed_property
               if go_to_prop?(property_checker_hash, 7)
                 @properties.push(hashed_property)
                 enrich_then_insert(hashed_property)
