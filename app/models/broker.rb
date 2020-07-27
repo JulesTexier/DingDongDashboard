@@ -41,44 +41,45 @@ class Broker < ApplicationRecord
   end
 
   def self.get_current_lead_gen
-    if Rails.env == "development"
-      return Broker.find_by(email: "etienne@hellodingdong.com")
-    end
+    # if Rails.env == "development"
+    #   return Broker.find_by(email: "etienne@hellodingdong.com")
+    # end
     candice = Broker.find_by(email: "ca.timmerman@meilleurtaux.com")
-    erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
+    # erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
     benoit = Broker.find_by(email: "b.leroux@meilleurtaux.com")
-    adrien = Broker.find_by(email: "a.meneghini@meilleurtaux.com")
+    # adrien = Broker.find_by(email: "a.meneghini@meilleurtaux.com")
 
-    morning_end = 13
-    afternooon_end = 20
-    date = Time.now.in_time_zone("Paris")
-    b = nil
-    case date.wday
-    when 0
-      b = [candice, adrien].sample
-    when 1 
-      if date.hour < afternooon_end
-        b = [candice, adrien].sample
-      else 
-        b = [candice, adrien, benoit, erika].sample
-      end
-    when 2 || 3 || 4
-        b = [candice, adrien, benoit, erika].sample
-    when 5 
-      if  date.hour < afternooon_end
-        b = [candice, adrien, benoit, erika].sample
-      else 
-        b = [benoit, erika].sample
-      end
-    when 6 
-      if date.hour < afternooon_end
-        b = [benoit, erika].sample
-      else 
-        b = [candice, adrien].sample
-      end
-    else
-      b = [candice, adrien].sample
-    end
+    # morning_end = 13
+    # afternooon_end = 20
+    # date = Time.now.in_time_zone("Paris")
+    # b = nil
+    b = [candice, benoit].sample
+    # case date.wday
+    # when 0
+    #   b = [candice, adrien].sample
+    # when 1 
+    #   if date.hour < afternooon_end
+    #     b = [candice, adrien].sample
+    #   else 
+    #     b = [candice, adrien, benoit, erika].sample
+    #   end
+    # when 2 || 3 || 4
+    #     b = [candice, adrien, benoit, erika].sample
+    # when 5 
+    #   if  date.hour < afternooon_end
+    #     b = [candice, adrien, benoit, erika].sample
+    #   else 
+    #     b = [benoit, erika].sample
+    #   end
+    # when 6 
+    #   if date.hour < afternooon_end
+    #     b = [benoit, erika].sample
+    #   else 
+    #     b = [candice, adrien].sample
+    #   end
+    # else
+    #   b = [candice, adrien].sample
+    # end
     return b
   end
 
