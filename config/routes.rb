@@ -104,33 +104,4 @@ Rails.application.routes.draw do
       get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
     end
   end
-
-  #############
-  # TO REMOVE
-  #############
-
-  #mount Rswag::Ui::Engine => "/api-docs"
-  #mount Rswag::Api::Engine => "/api-docs"
-
-
-  
-  # # Subscription 'subscription'
-  # get "subscribe-1" => "subscribers#subscribe_1"
-  # get "subscribe-2" => "subscribers#subscribe_2"
-  # get "subscribe-3" => "subscribers#subscribe_3"
-  # post "subscribe-create" => "subscribers#subscribe_create"
-  # get "subscribed" => "subscribers#subscribe_4"
-  # post "subscribed-update" => "subscribers#subscribed_update"
-
-  # # Subscription 'regular'
-  # get "inscription-1" => "subscribers#inscription_1"
-  # get "inscription-2" => "subscribers#inscription_2"
-  # get "inscription-3" => "subscribers#inscription_3"
-  # get "inscription-finalisee" => "subscribers#inscription_4"
-
-  # resources :subscribers, only: [:show] do
-  #   resources :subscriptions, only: [:index, :new]
-  #   get "success" => "subscriptions#success"
-  #   get "cancel" => "subscriptions#cancel"
-  # end
 end

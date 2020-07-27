@@ -125,8 +125,6 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.3.0)
-    json-schema (2.8.1)
-      addressable (>= 2.4)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -271,19 +269,6 @@ GEM
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.9.3)
-    rswag (2.3.1)
-      rswag-api (= 2.3.1)
-      rswag-specs (= 2.3.1)
-      rswag-ui (= 2.3.1)
-    rswag-api (2.3.1)
-      railties (>= 3.1, < 7.0)
-    rswag-specs (2.3.1)
-      activesupport (>= 3.1, < 7.0)
-      json-schema (~> 2.2)
-      railties (>= 3.1, < 7.0)
-    rswag-ui (2.3.1)
-      actionpack (>= 3.1, < 7.0)
-      railties (>= 3.1, < 7.0)
     rubocop (0.86.0)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
@@ -413,7 +398,6 @@ DEPENDENCIES
   redis
   rspec-rails (~> 4.0.0.rc1)
   rspec-retry
-  rswag
   rubocop
   sass-rails (>= 6)
   scout_apm

@@ -36,9 +36,6 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "watir-rails"
 
-# Swagger gem
-gem "rswag"
-
 # Send HTTP REST requests
 gem "typhoeus", "~> 1.1"
 
