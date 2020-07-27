@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_123501) do
+ActiveRecord::Schema.define(version: 2020_07_27_131312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -84,13 +84,6 @@ ActiveRecord::Schema.define(version: 2020_07_27_123501) do
     t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
     t.string "description"
     t.string "alias_email"
-  end
-
-  create_table "districts", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -215,15 +208,6 @@ ActiveRecord::Schema.define(version: 2020_07_27_123501) do
     t.text "subway_infos"
   end
 
-  create_table "property_districts", force: :cascade do |t|
-    t.bigint "district_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["district_id"], name: "index_property_districts_on_district_id"
-    t.index ["property_id"], name: "index_property_districts_on_property_id"
-  end
-
   create_table "property_histories", force: :cascade do |t|
     t.integer "price"
     t.text "description"
@@ -291,16 +275,6 @@ ActiveRecord::Schema.define(version: 2020_07_27_123501) do
     t.index ["area_id"], name: "index_selected_areas_on_area_id"
     t.index ["subscriber_id", "area_id"], name: "index_selected_areas_on_subscriber_id_and_area_id", unique: true
     t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
-  end
-
-  create_table "selected_districts", force: :cascade do |t|
-    t.bigint "district_id"
-    t.bigint "subscriber_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["district_id"], name: "index_selected_districts_on_district_id"
-    t.index ["subscriber_id", "district_id"], name: "index_selected_districts_on_subscriber_id_and_district_id", unique: true
-    t.index ["subscriber_id"], name: "index_selected_districts_on_subscriber_id"
   end
 
   create_table "selections", force: :cascade do |t|
