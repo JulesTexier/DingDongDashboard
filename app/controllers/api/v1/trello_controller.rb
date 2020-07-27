@@ -8,22 +8,6 @@ class Api::V1::TrelloController < ApplicationController
     @trello = Trello.new
   end
 
-  def send_chatbot_link_from_trello_btn
-    document = JSON.parse(request.body.read)
-    user = Subscriber.where(trello_id_card: document["cardId"]).first
-
-    if !user.nil?
-      PostmarkMailer.send_chatbot_link(user).deliver_now
-      user.update(status: 'chatbot_invite_sent')
-      status = Status.find_by(name: 'email_chatbot_sent')
-      SubscriberStatus.create(subscriber: user, status: status) if !status.nil?
-      render json: {status: 'SUCCESS', message: 'User found', data: user}, status: 200
-    else
-      b = @trello.get_trello_card_broker(document["cardId"])
-      PostmarkMailer.send_error_message_broker_btn(document["cardId"], b.firstname ).deliver_now
-      render json: {status: 'ERROR', message: 'User not found, email sent to Etienne with data about the concerned broker', data: b}, status: 500
-    end
-  end
 
   def add_action_to_broker
     document = JSON.parse(request.body.read)
@@ -70,22 +54,5 @@ class Api::V1::TrelloController < ApplicationController
     end
   end
 
-  def send_referral
-    document = JSON.parse(request.body.read)
-    subscriber = Subscriber.where(trello_id_card: document["cardId"]).last
-    referral = Referral.where(referral_type: document["referralType"]).last
-
-    if !subscriber.nil? && !subscriber.broker.nil? && !referral.nil? 
-      # 1. Send email 
-      PostmarkMailer.send_referral(subscriber, referral).deliver_now      
-      # 2 • Log action in trello 
-      # response = @trello.add_referral_sending_to_action_log(subscriber, referral)
-
-      render json: {status: 'SUCCESS', message: "Email sent and action logged in Trello", data: subscriber}, status: 200
-    else 
-      render json: {status: 'ERROR', message: 'User and/or broker and/or referral not found !', data: nil}, status: 500 
-    end
-
-  end
 
 end
