@@ -1,4 +1,4 @@
 class SelectedArea < ApplicationRecord
-    belongs_to :subscriber
+    belongs_to :research
     belongs_to :area
 end
