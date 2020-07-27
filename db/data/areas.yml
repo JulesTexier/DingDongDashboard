@@ -296,6 +296,12 @@
       terms:
         - "92270"
         - Bois Colombes
+    - name: Antony
+      terms:
+        - "92160"
+    - name: Clamart
+      terms:
+        - "92140"
 - zone: Val-de-Marne (94)
   datas: 
     - name: Saint Mandé

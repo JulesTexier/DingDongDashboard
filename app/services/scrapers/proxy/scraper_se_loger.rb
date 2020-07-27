@@ -34,12 +34,26 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
             hashed_property[:source] = @source
             hashed_property[:provider] = "Agence"
-            hashed_property[:description] = item["description"]
-            if go_to_prop?(hashed_property, 7) && hashed_property[:agency_name] != "Ding Dong"
+            description = item["description"]
+            if go_to_prop?(hashed_property, 7) && hashed_property[:agency_name] != "Merci Max"
+              html = fetch_static_page_proxy_auth(hashed_property[:link])
+              unless html.nil? #sometimes, the proxy request will fail, but we don't want to lose datas from the json
+                if access_xml_text(html, 'a.headerLogo > span').include?("Belles Demeures")
+                  show_description = access_xml_text(html, 'p.detailDescSummary').strip
+                  exterior_infos = access_xml_text(html, 'ul.detailInfosListBest')
+                else
+                  show_description = access_xml_text(html, 'section#showcase-description > div:nth-child(2) > div').strip
+                  exterior_infos = access_xml_text(html, 'section#showcase-description > div:nth-child(3) > div')
+                end
+                hashed_property[:description] = show_description.length > description.length ? show_description : description
+                hashed_property[:has_elevator] = true if exterior_infos.match?(/ascenseur/i)
+                hashed_property[:has_balcony] = true if exterior_infos.match?(/balcon/i)
+                hashed_property[:has_terrace] = true if exterior_infos.match?(/terrasse/i)
+                end
+              end
               @properties.push(hashed_property)
               enrich_then_insert(hashed_property)
               i += 1
-            end
             break if i == limit
           end
         rescue StandardError => e
