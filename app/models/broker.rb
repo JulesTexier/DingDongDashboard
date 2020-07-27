@@ -2,7 +2,6 @@ require "dotenv/load"
 
 class Broker < ApplicationRecord
 
-  has_many :leads # a virer
   has_many :subscribers # ok 
 
   has_many :permanences # a voir
