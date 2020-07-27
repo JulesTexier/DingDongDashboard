@@ -250,7 +250,9 @@ class Scraper
 
   def perform_floor_regex(str)
     floor = str.remove_acc_scrp.convert_numerals_scrp.floors_str_scrp
-    floor.to_int_scrp unless floor.nil?
+    unless floor.nil?
+      floor.ground_floor_str_scrp ? 0 : floor.to_int_scrp 
+    end
   end
 
   def perform_elevator_regex(str)

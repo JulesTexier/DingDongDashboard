@@ -107,6 +107,11 @@ class String
     return floor_number
   end
 
+  def ground_floor_str_scrp
+    regex_ground_floor = "rez-de-chauss(e|è|é)e|rez de chauss(e|è|é)e|rdc"
+    self.match?(/#{regex_ground_floor}/i)
+  end
+
   def last_floor_str_scrp
     regex_floors = "(dernier (é|è|e)tage)"
     has_floor = self.match(/#{regex_floors}/i)
