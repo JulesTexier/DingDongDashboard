@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_142030) do
+ActiveRecord::Schema.define(version: 2020_07_27_151609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -147,28 +147,6 @@ ActiveRecord::Schema.define(version: 2020_07_27_142030) do
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
 
-  create_table "leads", force: :cascade do |t|
-    t.string "firstname"
-    t.string "phone"
-    t.string "email"
-    t.boolean "has_messenger"
-    t.integer "min_surface"
-    t.integer "max_price"
-    t.string "project_type"
-    t.text "areas"
-    t.text "additional_question"
-    t.text "specific_criteria"
-    t.string "source"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "status", default: "tf_filled"
-    t.bigint "broker_id"
-    t.string "trello_id_card"
-    t.string "lastname"
-    t.integer "min_rooms_number"
-    t.index ["broker_id"], name: "index_leads_on_broker_id"
-  end
-
   create_table "permanences", force: :cascade do |t|
     t.bigint "broker_id"
     t.bigint "broker_shift_id"
@@ -228,6 +206,33 @@ ActiveRecord::Schema.define(version: 2020_07_27_142030) do
     t.string "referral_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "researches", force: :cascade do |t|
+    t.string "research_name"
+    t.text "areas", default: [], array: true
+    t.integer "min_floor", default: 0
+    t.boolean "has_elevator"
+    t.integer "min_elevator_floor", default: 0
+    t.integer "min_surface"
+    t.integer "min_rooms_number"
+    t.integer "max_price"
+    t.integer "min_price"
+    t.integer "max_sqm_price"
+    t.boolean "is_active", default: true
+    t.boolean "balcony", default: false
+    t.boolean "terrace", default: false
+    t.boolean "garden", default: false
+    t.boolean "new_construction", default: false
+    t.boolean "last_floor", default: false
+    t.boolean "home_type", default: true
+    t.boolean "apartment_type", default: true
+    t.bigint "hunter_id"
+    t.bigint "subscriber_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hunter_id"], name: "index_researches_on_hunter_id"
+    t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
 
   create_table "scraper_parameters", force: :cascade do |t|

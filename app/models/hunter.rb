@@ -4,7 +4,7 @@ class Hunter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :hunter_searches
+  has_many :researches
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :email, presence: true

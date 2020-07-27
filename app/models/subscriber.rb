@@ -8,6 +8,8 @@ class Subscriber < ApplicationRecord
   has_many :selected_areas
   has_many :areas, through: :selected_areas
 
+  has_one :research
+
   has_many :selected_districts
   has_many :districts, through: :selected_districts
 
@@ -340,103 +342,103 @@ class Subscriber < ApplicationRecord
     end
   end
 
-  # Matching methods
+    # Matching methods
 
-  def is_matching_property_max_price(price)
-    (price <= self.max_price ? true : false) if !self.max_price.nil?
-  end
-
-  def is_matching_property_min_price(price)
-    if !self.min_price.nil?
-      (price >= self.min_price ? true : false) 
-    else
-      true
+    def is_matching_property_max_price(price)
+      (price <= self.max_price ? true : false) if !self.max_price.nil?
     end
-  end
-
-  def is_matching_property_price(price)
-    is_matching_property_max_price(price) && is_matching_property_min_price(price)
-  end
-
-  def is_matching_max_sqm_price(price, surface)
-    if !self.max_sqm_price.nil? && surface != 0
-      ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
-    else
-      true 
-    end
-  end
-
-  def is_matching_property_surface(surface)
-    surface >= self.min_surface unless self.min_surface.nil?
-  end
-
-  def is_matching_property_rooms_number(rooms_number)
-    rooms_number.to_i >= self.min_rooms_number unless self.min_rooms_number.nil?
-  end
-
-  def is_matching_property_floor(floor)
-    if self.min_floor.nil?
-      true
-    else
-      if !floor.nil?
-        floor.to_i >= self.min_floor unless self.min_floor.nil?
+  
+    def is_matching_property_min_price(price)
+      if !self.min_price.nil?
+        (price >= self.min_price ? true : false) 
       else
         true
       end
     end
-  end
-
-  def is_matching_property_elevator_floor(floor, has_elevator)
-    if self.min_elevator_floor.nil?
-      return true
-    else
-      if !has_elevator.nil?
-        if has_elevator
-          return true
-        else
-          floor.to_i < self.min_elevator_floor.to_i
-        end
+  
+    def is_matching_property_price(price)
+      is_matching_property_max_price(price) && is_matching_property_min_price(price)
+    end
+  
+    def is_matching_max_sqm_price(price, surface)
+      if !self.max_sqm_price.nil? && surface != 0
+        ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
       else
+        true 
+      end
+    end
+  
+    def is_matching_property_surface(surface)
+      surface >= self.min_surface unless self.min_surface.nil?
+    end
+  
+    def is_matching_property_rooms_number(rooms_number)
+      rooms_number.to_i >= self.min_rooms_number unless self.min_rooms_number.nil?
+    end
+  
+    def is_matching_property_floor(floor)
+      if self.min_floor.nil?
+        true
+      else
+        if !floor.nil?
+          floor.to_i >= self.min_floor unless self.min_floor.nil?
+        else
+          true
+        end
+      end
+    end
+  
+    def is_matching_property_elevator_floor(floor, has_elevator)
+      if self.min_elevator_floor.nil?
+        return true
+      else
+        if !has_elevator.nil?
+          if has_elevator
+            return true
+          else
+            floor.to_i < self.min_elevator_floor.to_i
+          end
+        else
+          return true
+        end
+      end
+    end
+  
+    def is_matching_exterior?(terrace, garden, balcony)
+      if self.terrace || self.balcony || self.garden #At least one exterior criteria
+        if (self.terrace && is_matching_property_terrace(terrace)) || (self.balcony && is_matching_property_balcony(balcony)) || (self.garden && is_matching_property_garden(garden))
+          return true 
+        else
+          return false 
+        end
+      else # Esle; no testing => returning true
         return true
       end
     end
-  end
-
-  def is_matching_exterior?(terrace, garden, balcony)
-    if self.terrace || self.balcony || self.garden #At least one exterior criteria
-      if (self.terrace && is_matching_property_terrace(terrace)) || (self.balcony && is_matching_property_balcony(balcony)) || (self.garden && is_matching_property_garden(garden))
-        return true 
-      else
-        return false 
-      end
-    else # Esle; no testing => returning true
-      return true
+  
+    def is_matching_property_terrace(terrace)
+      self.terrace ? !terrace.nil? && terrace : true
     end
-  end
-
-  def is_matching_property_terrace(terrace)
-    self.terrace ? !terrace.nil? && terrace : true
-  end
-
-  def is_matching_property_garden(garden)
-    self.garden ? !garden.nil? && garden : true
-  end
-
-  def is_matching_property_balcony(balcony)
-    self.balcony ? !balcony.nil? && balcony : true
-  end
-
-  def is_matching_property_last_floor(last_floor)
-    self.last_floor ? !last_floor.nil? && last_floor : true
-  end
-
-  def is_matching_property_area(area_id, sub_areas = self.areas.ids)
-    sub_areas.include?(area_id)
-  end
-
-  def is_matching_property_new_construction(is_new_construction)
-    !self.new_construction && is_new_construction ? false : true
-  end
+  
+    def is_matching_property_garden(garden)
+      self.garden ? !garden.nil? && garden : true
+    end
+  
+    def is_matching_property_balcony(balcony)
+      self.balcony ? !balcony.nil? && balcony : true
+    end
+  
+    def is_matching_property_last_floor(last_floor)
+      self.last_floor ? !last_floor.nil? && last_floor : true
+    end
+  
+    def is_matching_property_area(area_id, sub_areas = self.areas.ids)
+      sub_areas.include?(area_id)
+    end
+  
+    def is_matching_property_new_construction(is_new_construction)
+      !self.new_construction && is_new_construction ? false : true
+    end
 
   def notify_broker_if_max_price_is_changed
     if !previous_changes["max_price"].nil? && !self.broker.nil? && !self.trello_id_card.nil?
