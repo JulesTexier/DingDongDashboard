@@ -45,15 +45,27 @@ class Broker < ApplicationRecord
     #   return Broker.find_by(email: "etienne@hellodingdong.com")
     # end
     candice = Broker.find_by(email: "ca.timmerman@meilleurtaux.com")
-    # erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
+    erika = Broker.find_by(email: "e.meteau@meilleurtaux.com")
     benoit = Broker.find_by(email: "b.leroux@meilleurtaux.com")
+
+    date = Time.now.in_time_zone("Paris")
+    
+    if date.wday == 6
+      b = benoit
+    else 
+      if date.day > 17 && date.month == 8
+        b = [candice, benoit, erika].sample
+      else
+        b = [candice, benoit].sample
+      end
+    end 
+
     # adrien = Broker.find_by(email: "a.meneghini@meilleurtaux.com")
 
     # morning_end = 13
     # afternooon_end = 20
-    # date = Time.now.in_time_zone("Paris")
     # b = nil
-    b = [candice, benoit].sample
+    # b = [candice, benoit].sample
     # case date.wday
     # when 0
     #   b = [candice, adrien].sample
