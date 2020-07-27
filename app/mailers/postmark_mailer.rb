@@ -11,11 +11,7 @@ class PostmarkMailer < ApplicationMailer
     mail from: "fred@hellodingdong.com", to: "etienne@hellodingdong.com", postmark_template_alias: "error-broker-btn"
   end
 
-  # A checker
-  def send_onboarding_hunter_email(lead)
-    self.template_model = { lead_firstname: lead.firstname }
-    mail from: "etienne@hellodingdong.com", to: lead.email, bcc: "maxime@hellodingdong.com", postmark_template_alias: "onboarding-hunter"
-  end
+  
 
   # A garder (remanier avec la table alert)
   def send_properties_to_hunters(hunter_search)

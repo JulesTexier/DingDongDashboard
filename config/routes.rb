@@ -65,7 +65,6 @@ Rails.application.routes.draw do
       end
 
       resources :properties, only: [:show, :index]
-      resources :leads, only: [:index, :show, :update]
       resources :brokers, only: [:show]
       resources :favorites, only: [:create, :destroy]
 
@@ -81,13 +80,7 @@ Rails.application.routes.draw do
 
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" # a checker
       
-      #post "/manychat/s/create-from-lead" => "manychat#create_subscriber_from_lead"
       # post "/manychat/s/:subscriber_id/onboard_broker" => "manychat#onboard_old_users"
-      # Lead
-      #post "/manychat/l/:lead_id/update" => "manychat#update_lead"
-
-      # Typeform resources
-      #post "/typeform/lead/new" => "typeform#generate_lead"
 
       # Trello resources
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder
@@ -115,11 +108,9 @@ Rails.application.routes.draw do
   # TO REMOVE
   #############
 
-  #get "lead/create"
   #mount Rswag::Ui::Engine => "/api-docs"
   #mount Rswag::Api::Engine => "/api-docs"
 
-#  resources :lead, only: [:new, :create]
 
   
   # # Subscription 'subscription'
