@@ -1,8 +1,9 @@
+include ActionController::HttpAuthentication::Token::ControllerMethods
+
 class Api::V1::WebhooksController < ApplicationController
+  
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
-
-  include ActionController::HttpAuthentication::Token::ControllerMethods
 
   def handle_postmark_inbound
     if params["FromName"] == "SeLoger"
@@ -49,6 +50,10 @@ class Api::V1::WebhooksController < ApplicationController
       render json: { status: "ERROR", message: "Can't handle this email" }, status: 500
     end
   end
+
+  ######################################
+  # COOKIE TRACKING (not used anymore)
+  ######################################
 
   def handle_website_link_clicked
     params = JSON.parse(request.body.string)
