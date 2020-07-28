@@ -34,7 +34,6 @@ class Api::V1::ManychatController < ApplicationController
         else
           data = subscriber.as_json
           data[:areas_list] = subscriber.get_areas_list
-          data[:districts_list] = subscriber.get_districts_list
           data[:edit_path] = subscriber.get_edit_path
           data[:project_type] = subscriber.project_type
           render json: { status: "SUCCESS", message: "Subscriber updated", data: data }, status: 200
