@@ -4,14 +4,11 @@ require 'dotenv/load'
 class PostmarkMailer < ApplicationMailer
   include PostmarkRails::TemplatedMailerMixin
 
-  
   # A virer (voire remanier avec le nouveau mode d'activation )
   def send_error_message_broker_btn(card_id, broker_firstname = "XXX")
     self.template_model = { broker_name: broker_firstname, card_id: card_id }
     mail from: "fred@hellodingdong.com", to: "etienne@hellodingdong.com", postmark_template_alias: "error-broker-btn"
   end
-
-  
 
   # A garder (remanier avec la table alert)
   def send_properties_to_hunters(hunter_search)
