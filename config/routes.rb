@@ -80,11 +80,8 @@ Rails.application.routes.draw do
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" # a garder + ajouter le tracking
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" # a checker
       
-
       # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder
-      post "/trello/move-card-to-broker" => "trello#update_user_broker" # a checker
-
 
       # Webhooks 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
