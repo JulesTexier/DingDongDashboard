@@ -152,9 +152,9 @@ class Api::V1::ManychatController < ApplicationController
   def send_prop_details
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
+      subscriber.update(is_active: true)
       begin
         property = Property.find(params[:property_id])
-
         m = Manychat.new
         response = m.send_property_info_post_interaction(subscriber, property)
         if response[0]
