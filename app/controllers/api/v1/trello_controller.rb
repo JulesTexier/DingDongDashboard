@@ -4,10 +4,6 @@ require "typhoeus"
 class Api::V1::TrelloController < ApplicationController
   protect_from_forgery with: :null_session
 
-  def initialize
-    @trello = Trello.new
-  end
-
   def add_action_to_broker
     document = JSON.parse(request.body.read)
     card_id = document["card_id"]
