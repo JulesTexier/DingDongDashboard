@@ -5,8 +5,8 @@ class BrokerMailer < ApplicationMailer
 
     if !@subscriber.nil? && !@broker.nil? 
       subject = "[DING DONG] Nouveau contact"
-      # mail(from: "etienne@hellodingdong.com", to: @broker.email, subject: subject)
-      mail(from: "etienne@hellodingdong.com", to: "fred@hellodingdong.com", subject: subject)
+      mail(from: "etienne@hellodingdong.com", to: @broker.email, subject: subject)
+      # mail(from: "etienne@hellodingdong.com", to: "fred@hellodingdong.com", subject: subject)
     end
 
   end
