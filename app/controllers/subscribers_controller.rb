@@ -1,5 +1,4 @@
-class SubscribersController < ApplicationController
-  
+class SubscribersController < ApplicationController  
   # ###############
   # CRUD 
   # ###############

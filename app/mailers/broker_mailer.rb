@@ -1,5 +1,4 @@
-class BrokerMailer < ApplicationMailer
-  
+class BrokerMailer < ApplicationMailer  
   def new_lead(subscriber_id)
     @subscriber = Subscriber.find(subscriber_id)
     @broker = @subscriber.broker

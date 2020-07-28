@@ -36,8 +36,7 @@ class HunterSearchesController < ApplicationController
     @hunter = Hunter.find(params[:hunter_id])
     @hunter_search = HunterSearch.find(params[:id])
     @areas = Area.get_active
-    @hs_areas = @hunter_search.areas.pluck(:id)
-    
+    @hs_areas = @hunter_search.areas.pluck(:id)    
     hs_areas_id = @hunter_search.areas.pluck(:id)
     @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
   end
