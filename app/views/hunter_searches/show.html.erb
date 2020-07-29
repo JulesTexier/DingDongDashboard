@@ -8,12 +8,12 @@
 </script>
 
 <h1 class="mt-5 mb-5 text-center text-dark"> 
-  Les derniers biens - <%= @hunter_search.research_name %>
+  Les derniers biens - <%= @hunter_search.name %>
 </h1>
 
 <div class="row d-flex justify-content-start">
-  &nbsp; <%= link_to  "❤️ Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-danger' %>
-  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
+  <% if false %> &nbsp; <%= link_to  "❤️ Voir ma selection", hunter_hunter_search_selections_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-danger' %> <% end %>
+  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_research_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
 </div>
 <div class="row mt-5">
       <% @properties.each do |property| %>
@@ -110,7 +110,7 @@
                 </div>
               </li>
             </ul>
-
+            <% if false %>
             <div class="d-flex justify-content-center mt-4">
               <% if @selected_properties.include?(property.id) %>
                 <p>❤️ Dans votre sélection</p>
@@ -122,6 +122,7 @@
             <div class="d-flex justify-content-center mt-4">
               <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
             </div>
+            <% end %>
           </div>
         </div>
         </div>

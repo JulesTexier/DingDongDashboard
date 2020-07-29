@@ -6,12 +6,12 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav align-items-center mr-auto">
       <li class="nav-item active">
-        <%= link_to "Mes recherches", hunter_hunter_searches_path(current_hunter), class: "btn btn-primary text-white ml-4", style: "color:#525f7f; font-size: 16px;" %>
+        <%= link_to "Mes recherches", hunter_researches_path(current_hunter), class: "btn btn-primary text-white ml-4", style: "color:#525f7f; font-size: 16px;" %>
       </li>
     </ul>
     <ul class="navbar-nav align-items-center mr-0">
       <li class="nav-item d-flex active">
-        <%= link_to "Créer une recherche", new_hunter_hunter_search_path(current_hunter), class: "btn btn-success mr-2" %>
+        <%= link_to "Créer une recherche", new_hunter_research_path(current_hunter), class: "btn btn-success mr-2" %>
         <% if hunter_signed_in? %>
           <%= button_to "Se deconnecter", destroy_hunter_session_path, :method => :delete, class: "btn btn-outline btn-danger" %>
         <% else %>
