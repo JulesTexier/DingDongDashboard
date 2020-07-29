@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController  
   # ###############
-  # CRUD 
+  #      CRUD     #
   # ###############
 
   def edit
@@ -21,22 +21,23 @@ class SubscribersController < ApplicationController
 
   def update
     @subscriber = Subscriber.find(params[:id])
+    @research = @subscriber.research
     areas_ids = []
     areas_ids += params[:areas] unless params[:areas].nil?
-    if @subscriber.update(subscriber_params) && !areas_ids.empty?
-      @subscriber.update_areas(areas_ids)
+    if @subscriber.update(research_params) && !areas_ids.empty?
+      @research.update_research_areas(areas_ids)
       flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else
       flash[:danger] = "Sélectionnez des arrondissements..."
     end
     # // Send flow to subscriber 
     flow = "content20200716131717_882877"
-    Manychat.new.send_flow_sequence(@subscriber, flow)
+    Manychat.new.send_flow_sequence(@subscriber, flow) unless Rails.env.development?
     redirect_to edit_subscriber_path
   end
 
   # ###############
-  # OTHER 
+  #      OTHER    #
   # ###############
 
 
@@ -60,6 +61,10 @@ class SubscribersController < ApplicationController
   private
 
   def subscriber_params
-    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor, :min_price, :max_sqm_price)
+    params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id)
+  end
+
+  def research_params
+    params.require(:research).permit(:max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor, :min_price, :max_sqm_price)
   end
 end
