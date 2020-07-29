@@ -1,7 +1,7 @@
-class CreateLeads < ActiveRecord::Migration[6.0]
+class DropTableModelLead < ActiveRecord::Migration[6.0]
   def change
-    create_table :leads do |t|
-      t.string :name
+    drop_table :leads do |t|
+      t.string :firstname
       t.string :phone
       t.string :email
       t.boolean :has_messenger
@@ -12,8 +12,12 @@ class CreateLeads < ActiveRecord::Migration[6.0]
       t.text :additional_question
       t.text :specific_criteria
       t.string :source
-
-      t.timestamps
+      t.timestamps null: false
+      t.string :status
+      t.bigint :broker_id
+      t.string :trello_id_card
+      t.string :lastname
+      t.integer :min_rooms_number
     end
   end
 end

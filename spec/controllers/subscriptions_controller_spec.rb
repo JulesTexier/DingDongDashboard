@@ -15,19 +15,9 @@ RSpec.describe SubscriptionsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it "should return false for is_client" do
-      get :index, params: { subscriber_id: @subscriber.id }
-      expect(@subscriber.is_subscriber_premium?).to eq(false)
-    end
-
     it "should return ok for cancel page" do
       get :cancel, params: { subscriber_id: @subscriber.id }
       expect(response).to have_http_status(:ok)
-    end
-
-    it "should return false for is_client" do
-      get :cancel, params: { subscriber_id: @subscriber.id }
-      expect(@subscriber.is_subscriber_premium?).to eq(false)
     end
 
     it "should return ok" do

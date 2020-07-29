@@ -1,12 +1,11 @@
+require "dotenv/load"
+
 class Api::V1::ManychatController < ApplicationController
+  TOKEN = ENV["BEARER_TOKEN"]
   protect_from_forgery with: :null_session
+  before_action :authentificate
 
   include ActionController::HttpAuthentication::Token::ControllerMethods
-
-  require "dotenv/load"
-  TOKEN = ENV["BEARER_TOKEN"]
-
-  before_action :authentificate
 
   # POST : Create SubscriberStatus
   def create_subscriber_status
@@ -18,46 +17,6 @@ class Api::V1::ManychatController < ApplicationController
       render json: { status: "SUCCESS", message: "SubscriberStatus created", data: ss }, status: 200
     else
       render json: { status: "ERROR", message: "subscriber or status not found", data: nil }, status: 500
-    end
-  end
-
-  #POST (create subscriber in manychat) /manychat/s/create-from-lead
-  def create_subscriber_from_lead
-    lead = Lead.find(params[:lead_id])
-
-    if !lead.nil?
-      subscriber_hash = {}
-      subscriber_hash[:firstname] = lead.firstname
-      subscriber_hash[:lastname] = lead.lastname
-      subscriber_hash[:email] = lead.email
-      subscriber_hash[:phone] = lead.phone
-      subscriber_hash[:min_surface] = lead.min_surface
-      subscriber_hash[:max_price] = lead.max_price
-      subscriber_hash[:min_rooms_number] = lead.min_rooms_number
-      subscriber_hash[:broker_id] = lead.broker_id
-      subscriber_hash[:trello_id_card] = lead.trello_id_card
-      subscriber_hash[:facebook_id] = params[:facebook_id]
-      subscriber_hash[:status] = "onboarding_started"
-      subscriber_hash[:is_active] = true
-      s = Subscriber.new(subscriber_hash)
-
-      if s.save
-        lead.areas.split(",").each do |area|
-          area = Area.where(name: area).first
-          SelectedArea.create(subscriber: s, area: area) if !area.nil?
-        end
-
-        data = s.as_json
-        data[:areas_list] = s.get_areas_list
-        data[:districts_list] = s.get_districts_list
-        data[:edit_path] = s.get_edit_path
-        data[:project_type] = lead.project_type
-        render json: { status: "SUCCESS", message: "Subscriber created", data: data }, status: 200
-      else
-        render json: { status: "ERROR", message: "Subscriber not created", data: nil }, status: 500
-      end
-    else
-      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
     end
   end
 
@@ -75,7 +34,6 @@ class Api::V1::ManychatController < ApplicationController
         else
           data = subscriber.as_json
           data[:areas_list] = subscriber.get_areas_list
-          data[:districts_list] = subscriber.get_districts_list
           data[:edit_path] = subscriber.get_edit_path
           data[:project_type] = subscriber.project_type
           render json: { status: "SUCCESS", message: "Subscriber updated", data: data }, status: 200
@@ -92,21 +50,7 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  # POST  (update lead) /manychat/l/:lead_id/update
-  def update_lead
-    begin
-      lead = Lead.find(params[:lead_id])
-      if lead.update(lead_params.except(:lead_id))
-        render json: { status: "SUCCESS", message: "Lead updated", data: lead }, status: 200
-      else
-        render json: { status: "ERROR", message: "Lead not updated", data: nil }, status: 500
-      end
-    rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "Lead not found", data: nil }, status: 404
-    end
-  end
-
-  #GET /manychat/s/:subscriber_id/send/props/last/:x/days
+  # GET /manychat/s/:subscriber_id/send/props/last/:x/days
   # Send properties that match Subscriber criteria in the last X days
   def send_props_x_days
     begin
@@ -118,7 +62,7 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  #GET /manychat/s/:subscriber_id/send/last/:x/props
+  # GET /manychat/s/:subscriber_id/send/last/:x/props
   # Send X lasts properties that match Subscriber criteria unless user is blocked
   def send_x_last_props
     begin
@@ -134,7 +78,7 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  #GET /subscribers/:subscriber_id/send/props/morning
+  # GET /subscribers/:subscriber_id/send/props/morning
   # Send properties that match Subscriber criteria during past night
   def send_props_morning
     begin
@@ -147,7 +91,7 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  #GET /subscribers/:subscriber_id/send/props/:property_id/details
+  # GET /subscribers/:subscriber_id/send/props/:property_id/details
   # Send a property details to a subscriber
   def send_prop_details
     begin
@@ -170,7 +114,7 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  #GET /subscribers/:subscriber_id/props/favorites
+  # GET /subscribers/:subscriber_id/props/favorites
   # Send properties that match Subscriber criteria during past night
   def send_props_favorites
     begin
@@ -179,18 +123,6 @@ class Api::V1::ManychatController < ApplicationController
       render json: response[:json_response], status: response[:status]
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
-    end
-  end
-
-  # POST "/manychat/s/:subscriber_id/onboard_broker"
-  # One click btn to atatch user to broker
-  def onboard_old_users
-    begin
-      subscriber = Subscriber.find(params[:subscriber_id])
-      subscriber.onboarding_old_user
-      render json: { status: "SUCCESS", message: "Subscriber added to #{subscriber.broker.firstname}'s Trello", data: subscriber }, status: 200
-    rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "An error occurred", data: nil }, status: 500
     end
   end
 
@@ -285,10 +217,6 @@ class Api::V1::ManychatController < ApplicationController
 
   def subscriber_params
     params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked)
-  end
-
-  def lead_params
-    params.permit(:id, :name, :email, :phone, :status, :broker_id, :lead_id)
   end
 
   def authentificate

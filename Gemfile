@@ -36,9 +36,6 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "watir-rails"
 
-# Swagger gem
-gem "rswag"
-
 # Send HTTP REST requests
 gem "typhoeus", "~> 1.1"
 
@@ -87,6 +84,9 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rb-readline"
   gem "pry", "~> 0.12.2"
+  gem "letter_opener"
+  gem "rails_best_practices"
+
 end
 
 group :test do
@@ -103,7 +103,6 @@ group :test do
   gem "webmock"
   gem "vcr"
   gem "timecop"
-  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
