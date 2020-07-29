@@ -2,8 +2,8 @@ class Research < ApplicationRecord
   belongs_to :subscriber, optional: true
   belongs_to :hunter, optional: true
 
-  has_many :selected_areas
-  has_many :areas, through: :selected_areas
+  has_many :research_areas
+  has_many :areas, through: :research_areas
 
   validate :correct_association
 
@@ -19,8 +19,11 @@ class Research < ApplicationRecord
     matching_property_last_floor?(args["is_last_floor"]) &&
     matching_property_new_construction?(args["is_new_construction"])
   end
-
-  # Matching methods
+  ####################
+  # MATCHING METHODS #
+  ####################
+  
+  private
 
   def matching_property_max_price?(price)
     price <= self.max_price if !self.max_price.nil?
