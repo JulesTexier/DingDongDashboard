@@ -2,7 +2,6 @@ class CreateResearches < ActiveRecord::Migration[6.0]
   def change
     create_table :researches do |t|
       t.string :research_name, default: nil
-      t.text :areas, default: [], array: true
       t.integer :min_floor, default: 0
       t.boolean :has_elevator, default: nil
       t.integer :min_elevator_floor, default: 0

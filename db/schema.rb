@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_151609) do
+ActiveRecord::Schema.define(version: 2020_07_29_094259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -208,9 +208,15 @@ ActiveRecord::Schema.define(version: 2020_07_27_151609) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "research_areas", force: :cascade do |t|
+    t.bigint "area_id"
+    t.bigint "research_id"
+    t.index ["area_id"], name: "index_research_areas_on_area_id"
+    t.index ["research_id"], name: "index_research_areas_on_research_id"
+  end
+
   create_table "researches", force: :cascade do |t|
     t.string "research_name"
-    t.text "areas", default: [], array: true
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
     t.integer "min_elevator_floor", default: 0
