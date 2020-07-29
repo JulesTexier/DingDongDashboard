@@ -23,6 +23,25 @@ class Area < ApplicationRecord
       return areas
     end
 
+    def self.get_areas_for_hunters(areas_id)
+			master_areas = []
+			zone_areas = Area.all.pluck(:zone).uniq!
+			zone_areas.each do |zone| 
+				zone_hash = {}
+				zone_hash[:zone] = zone
+				zone_hash[:areas] = Area.where(zone: zone).pluck(:id, :name)
+				master_areas.push(zone_hash)
+			end
+
+			master_areas.each do |zone|
+				zone[:areas].each do |area|
+					selected = areas_id.include?(area[0]) ? "selected" : ""
+					area.push(selected)
+				end
+			end
+			return master_areas
+    end
+
     def self.get_agglo_infos
       YAML.load_file("./db/data/agglomeration.yml")
     end
