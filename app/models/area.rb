@@ -1,6 +1,10 @@
 class Area < ApplicationRecord
     has_many :selected_areas
     has_many :subscribers, through: :selected_areas
+
+    has_many :research_areas
+    has_many :researches, through: :research_areas
+
     has_many :properties
     
     has_many :hunter_search_areas
@@ -18,7 +22,6 @@ class Area < ApplicationRecord
       end
       return areas
     end
-
 
     def self.get_agglo_infos
       YAML.load_file("./db/data/agglomeration.yml")
