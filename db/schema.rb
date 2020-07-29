@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_094259) do
   end
 
   create_table "researches", force: :cascade do |t|
-    t.string "research_name"
+    t.string "name"
     t.string "zone"
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
