@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'selections/destroy'
   
   resources :hunters do
-    resources :hunter_searches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy] do 
+    resources :researches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy], controller: 'hunter_searches' do 
       resources :selections, only: [:index, :create, :destroy]
     end
   end
