@@ -8,8 +8,8 @@ class HunterSearchesController < ApplicationController
   end
 
   def show
-    @properties = @hunter_search.get_matching_properties(100)
-    @selected_properties = Research.find(params[:id]).properties.pluck(:id)
+    @properties = @hunter_search.last_matching_properties(100)
+    # @selected_properties = Research.find(params[:id]).properties.pluck(:id)
   end
 
   def new
@@ -17,7 +17,7 @@ class HunterSearchesController < ApplicationController
     @hunter_search = @hunter.researches.build
 
     hs_areas_id = @hunter_search.areas.pluck(:id)
-    @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
+    @master_areas = Area.get_areas_for_hunters(hs_areas_id)
   end
 
   def create
@@ -26,7 +26,7 @@ class HunterSearchesController < ApplicationController
     if @hunter_search.save
       areas_ids = params[:area_ids]
       @hunter_search.areas << Area.where(id: areas_ids)
-      redirect_to hunter_hunter_search_path(@hunter, @hunter_search)
+      redirect_to hunter_research_path(@hunter, @hunter_search)
     else
       render "new"
     end
@@ -38,7 +38,7 @@ class HunterSearchesController < ApplicationController
     @areas = Area.get_active
     @hs_areas = @hunter_search.areas.pluck(:id)    
     hs_areas_id = @hunter_search.areas.pluck(:id)
-    @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
+    @master_areas = Area.get_areas_for_hunters(hs_areas_id)
   end
 
   def update
@@ -46,11 +46,11 @@ class HunterSearchesController < ApplicationController
       areas_ids = params[:area_ids] 
       
       if !areas_ids.empty?
-        @hunter_search.update_hunter_search_areas(areas_ids)
+        @hunter_search.update_research_areas(areas_ids)
       end
       respond_to do |format|
-        format.html { redirect_to hunter_hunter_search_path(@hunter, @hunter_search) } 
-        format.js { redirect_to hunter_hunter_searches_path(@hunter) }
+        format.html { redirect_to hunter_research_path(@hunter, @hunter_search) } 
+        format.js { redirect_to hunter_researches_path(@hunter) }
         format.xml { head :ok }
       end
     else
