@@ -4,17 +4,17 @@ class HunterSearchesController < ApplicationController
 
   def index
     @hunter = current_hunter
-    @hunter_searches = HunterSearch.where(hunter: @hunter)
+    @hunter_searches = Research.where(hunter: @hunter)
   end
 
   def show
     @properties = @hunter_search.get_matching_properties(100)
-    @selected_properties = HunterSearch.find(params[:id]).properties.pluck(:id)
+    @selected_properties = Research.find(params[:id]).properties.pluck(:id)
   end
 
   def new
     @hunter = Hunter.find(params[:hunter_id])
-    @hunter_search = @hunter.hunter_searches.build
+    @hunter_search = @hunter.researches.build
 
     hs_areas_id = @hunter_search.areas.pluck(:id)
     @master_areas = Area.get_aggregate_data_for_selection(hs_areas_id)
@@ -22,7 +22,7 @@ class HunterSearchesController < ApplicationController
 
   def create
     @hunter = Hunter.find(params[:hunter_id])
-    @hunter_search = @hunter.hunter_searches.build(hunter_search_params)
+    @hunter_search = @hunter.researches.build(hunter_search_params)
     if @hunter_search.save
       areas_ids = params[:area_ids]
       @hunter_search.areas << Area.where(id: areas_ids)
@@ -34,7 +34,7 @@ class HunterSearchesController < ApplicationController
 
   def edit
     @hunter = Hunter.find(params[:hunter_id])
-    @hunter_search = HunterSearch.find(params[:id])
+    @hunter_search = Research.find(params[:id])
     @areas = Area.get_active
     @hs_areas = @hunter_search.areas.pluck(:id)    
     hs_areas_id = @hunter_search.areas.pluck(:id)
@@ -71,10 +71,10 @@ class HunterSearchesController < ApplicationController
 
   def find_hunter_and_search
     @hunter = Hunter.find(params[:hunter_id])
-    @hunter_search = HunterSearch.find(params[:id])
+    @hunter_search = Research.find(params[:id])
   end
 
   def hunter_search_params
-    params.require(:hunter_search).permit(:research_name, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :last_floor, :new_construction)
+    params.require(:research).permit(:name, :zone, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :last_floor, :new_construction)
   end
 end
