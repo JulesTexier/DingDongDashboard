@@ -1,0 +1,2 @@
+module SavedPropertiesHelper
+end

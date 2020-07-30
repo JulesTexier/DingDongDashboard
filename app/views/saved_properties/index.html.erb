@@ -1,11 +1,11 @@
 <%= render partial: "hunter_searches/navbar" %>
 
 <h1 class="mt-5 mb-5 text-center text-dark"> 
-  Ma selection - <%= @hunter_search.research_name %>
+  Ma selection - <%= @hunter_search.name %>
 </h1>
 <div class="row d-flex justify-content-start">
-  &nbsp; <%= link_to  "👀 Voir les derniers biens", hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-primary' %>
-  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_hunter_search_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
+  &nbsp; <%= link_to  "👀 Voir les derniers biens", hunter_research_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-primary' %>
+  &nbsp; <%= link_to  "✏️ Modifier ma recherche", edit_hunter_research_path(@hunter_search.hunter, @hunter_search) ,class:'btn btn-outline-primary' %>
 </div>
 
 <div class="row mt-5">
@@ -106,7 +106,7 @@
             </ul>
 
             <div class="d-flex justify-content-center mt-4">
-              <%= link_to "💔 Retirer", hunter_hunter_search_selection_path(current_hunter, @hunter_search.id, item[0]), method: :delete, class: "btn btn-sm btn-outline-danger text-danger", id: item[0], remote: true %> </li>
+              <%= link_to "💔 Retirer", hunter_research_saved_property_path(current_hunter, @hunter_search.id, item[0]), method: :delete, class: "btn btn-sm btn-outline-danger text-danger", id: item[0], remote: true %> </li>
             </div>
           </div>
         </div>
