@@ -43,10 +43,8 @@ class HunterSearchesController < ApplicationController
 
   def update
     if @hunter_search.update(hunter_search_params)
-      areas_ids = params[:area_ids] 
-      
-      if !areas_ids.empty?
-        @hunter_search.update_research_areas(areas_ids)
+      unless params[:area_ids].nil? || params[:area_ids].empty?
+        @hunter_search.update_research_areas(params[:area_ids])
       end
       respond_to do |format|
         format.html { redirect_to hunter_research_path(@hunter, @hunter_search) } 
@@ -59,7 +57,7 @@ class HunterSearchesController < ApplicationController
   end
 
   def destroy
-    Selection.where(hunter_search: @hunter_search).destroy_all
+    SavedProperty.where(research: @hunter_search).destroy_all
     @hunter_search.destroy
     respond_to do |format|
       format.html { redirect_to hunter_hunter_searches_path }

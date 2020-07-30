@@ -23,8 +23,8 @@
                 <%= link_to "✏️ Modifier", edit_hunter_research_path(current_hunter, hunter_search), class: "btn btn-outline-primary" %>
               </li>
               <li class="nav-item mr-2">
-                  <%= link_to "⏯️ Mettre en pause", hunter_research_path(current_hunter, hunter_search, {hunter_search: {is_active:false}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-not-paused", style:  hunter_search.is_active? ? "display: block" : "display: none" %>
-                  <%= link_to "⏯️ Réactiver", hunter_research_path(current_hunter, hunter_search, {hunter_search: {is_active:true}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-paused", style:  hunter_search.is_active? ? "display: none" : "display: block" %>
+                  <%= link_to "⏯️ Mettre en pause", hunter_research_path(current_hunter, hunter_search, {research: {is_active:false}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-not-paused", style:  hunter_search.is_active? ? "display: block" : "display: none" %>
+                  <%= link_to "⏯️ Réactiver", hunter_research_path(current_hunter, hunter_search, {research: {is_active:true}}), method: :put, class: "btn btn-outline-dark", remote: true, id: "#{hunter_search.id}-paused", style:  hunter_search.is_active? ? "display: none" : "display: block" %>
               </li>
             </ul>
           </div>
