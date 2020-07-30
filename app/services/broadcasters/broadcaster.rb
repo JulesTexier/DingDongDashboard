@@ -5,25 +5,6 @@ class Broadcaster
     @manychat_client = Manychat.new
   end
 
-  # Actual logic : Run every X minutes and process a batch of unprocessed new scrapped properties
-  def new_properties
-    properties_counter = 0
-    subscribers_counter = 0
-
-    properties = Property.unprocessed
-    properties_counter = properties.length
-    properties.each do |prop|
-      subscribers = prop.get_matching_subscribers
-      subscribers_counter += subscribers.length
-      subscribers.each do |sub|
-        @manychat_client.send_single_property_card(sub, prop)
-      end
-      prop.has_been_processed = true
-      prop.save
-    end
-    return [properties_counter, subscribers_counter]
-  end
-
   ###########################
   ## BROADCASTER RAKETASKS ##
   ###########################
@@ -70,26 +51,26 @@ class Broadcaster
   end
 
   def good_morning
-    subs = Subscriber.active_and_not_blocked
-    subs.each do |sub|
-      sub_mc_infos = @manychat_client.fetch_subscriber_mc_infos(sub)
+    sub_researches = Research.active_subs_research
+    sub_researches.each do |sub_research|
+      sub_mc_infos = @manychat_client.fetch_subscriber_mc_infos(sub_research.subscriber)
       border = @manychat_client.is_last_interaction_borderline(sub_mc_infos[1]["data"]) if sub_mc_infos[0] == true
-      property_nbr = sub.get_morning_props.length
+      property_nbr = sub_research.morning_properties.length
       if property_nbr > 0 && !border
         text = good_morning_text(property_nbr)
-        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{sub.id}/send/props/morning"
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{sub_research.subscriber.id}/send/props/morning"
         btn_caption = "🚀 Recevoir !"
-        @manychat_client.send_dynamic_button_message(sub, btn_caption, webhook, "get", text, body = {})
+        @manychat_client.send_dynamic_button_message(sub_research.subscriber, btn_caption, webhook, "get", text, body = {})
       elsif border
         text = "🔔 Votre alerte est en pause ! 🔔\u000A Nous stoppons les messages automatiques au bout d'une semaine sans action de votre part 😊🙏\u000AContinuez à recevoir les annonces simplement en cliquant ici"
-        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{sub.id}/update"
+        webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{sub_research.subscriber.id}/update"
         btn_caption = "🚀 Continuer !"
         body = {}
         body[:is_active] = true
         body[:message] = "reactivation"
-        @manychat_client.send_dynamic_button_message(sub, btn_caption, webhook, "post", text, body)
+        @manychat_client.send_dynamic_button_message(sub_research.subscriber, btn_caption, webhook, "post", text, body)
       else
-        puts "No warning Good Morning Message for #{sub[:facebook_id]}."
+        puts "No warning Good Morning Message for #{sub_research.subscriber[:facebook_id]}."
       end
     end
   end
