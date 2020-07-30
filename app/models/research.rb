@@ -5,6 +5,9 @@ class Research < ApplicationRecord
   has_many :research_areas
   has_many :areas, through: :research_areas
 
+  has_many :saved_properties
+  has_many :properties, through: :saved_properties
+
   validate :correct_association
 
   def last_matching_properties(limit = 100, max_scope = 500)

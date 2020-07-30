@@ -17,6 +17,9 @@ class Property < ApplicationRecord
   has_many :selections
   has_many :hunter_selections, through: :selections, source: :hunter_search
 
+  has_many :saved_properties
+  has_many :researches, through: :saved_properties
+
   has_many :property_links
 
   serialize :subway_infos, Array
