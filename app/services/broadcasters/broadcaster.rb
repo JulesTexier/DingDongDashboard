@@ -24,6 +24,10 @@ class Broadcaster
     return [properties_counter, subscribers_counter]
   end
 
+  ###########################
+  ## BROADCASTER RAKETASKS ##
+  ###########################
+
   def new_properties_gallery
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
     properties = Property
@@ -103,16 +107,11 @@ class Broadcaster
           hunter_search_props.push(prop)
         end
       end
-      HunterMailer.notification_email(hs.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
-
+      HunterMailer.notification_email(hunter_research.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
     end
   end
 
   private
-
-  def get_unprocessed_properties
-    return Property.where(has_been_processed: false)
-  end
 
   def update_processed_properties(properties)
     properties.each do |p|
@@ -120,12 +119,6 @@ class Broadcaster
       prop.has_been_processed = true
       prop.save
     end
-  end
-
-  def update_processed_property(property_id)
-    prop = Property.find(property_id)
-    prop.has_been_processed = true
-    prop.save
   end
 
   def good_morning_text(prop_nbr)
