@@ -61,6 +61,21 @@ class Research < ApplicationRecord
   def get_pretty_title
     return "max. #{self.get_pretty_price("max")} € - min. #{self.min_surface} m2 - min. #{self.min_rooms_number} pce"
   end
+
+
+  ##################################
+  ## HUNTER METHODS FOR BROADCAST ##
+  ##################################
+
+  def self.live_broadcasted
+    hunters_id = Hunter.where(live_broadcast: true).pluck(:id)
+    Research.where(hunter_id: hunters_id)
+  end
+
+  def self.not_live_broadcasted
+    hunters_id = Hunter.where.not(live_broadcast: true).pluck(:id)
+    Research.where(hunter_id: hunters_id)
+  end
   
   private
 
