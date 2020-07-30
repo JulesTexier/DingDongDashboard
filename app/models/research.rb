@@ -67,14 +67,28 @@ class Research < ApplicationRecord
   ## HUNTER METHODS FOR BROADCAST ##
   ##################################
 
-  def self.live_broadcasted
-    hunters_id = Hunter.where(live_broadcast: true).pluck(:id)
-    Research.where(hunter_id: hunters_id)
+  def self.active_hunters_live_broadcasted
+    self.includes(:hunter)
+    .where.not(hunters: { id: nil })
+    .where(is_active: true, hunters: {live_broadcast: true})
   end
 
-  def self.not_live_broadcasted
-    hunters_id = Hunter.where.not(live_broadcast: true).pluck(:id)
-    Research.where(hunter_id: hunters_id)
+  def self.active_hunters_not_live_broadcasted
+    self.includes(:hunter)
+    .where.not(hunters: { id: nil })
+    .where(is_active: true, hunters: {live_broadcast: false})
+  end
+
+  def self.active_subs_research
+    self.includes(:subscriber)
+      .where.not(subscribers: { id: nil })
+      .where(subscribers: { is_active: true, is_blocked: false })
+  end
+
+  def self.active_hunters_research
+    self.includes(:hunter)
+      .where.not(hunters: { id: nil } )
+      .where(is_active: true)
   end
   
   private
