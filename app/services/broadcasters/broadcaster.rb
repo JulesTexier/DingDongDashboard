@@ -26,42 +26,41 @@ class Broadcaster
 
   def new_properties_gallery
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
-
     properties = Property
       .unprocessed
       .pluck(*attrs).map { |p| attrs.zip(p).to_h }
-    subscribers = Subscriber.active_and_not_blocked
-    subscribers.each do |sub|
-      subs_area = sub.areas.ids
+    researches = Research.active_subs_research
+    researches.each do |research|
       matched_props = []
       properties.each do |prop|
-        matched_props.push(Property.find(prop["id"])) if sub.is_matching_property?(prop, subs_area)
+        matched_props.push(Property.find(prop["id"])) if research.matching_property?(prop, research.areas.ids)
       end
       if matched_props.length > 0
         if matched_props.length < 9
-          @manychat_client.send_properties_gallery(sub, matched_props)
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props)
         elsif matched_props.length >= 9 && matched_props.length < 19
-          @manychat_client.send_properties_gallery(sub, matched_props[0..8])
-          @manychat_client.send_properties_gallery(sub, matched_props[9..18])
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props[0..8])
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props[9..18])
         elsif matched_props.length >= 19 && matched_props.length < 29
-          @manychat_client.send_properties_gallery(sub, matched_props[0..8])
-          @manychat_client.send_properties_gallery(sub, matched_props[9..18])
-          @manychat_client.send_properties_gallery(sub, matched_props[19..28])
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props[0..8])
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props[9..18])
+          @manychat_client.send_properties_gallery(research.subscriber, matched_props[19..28])
         end
       end
-      puts "#{matched_props.length} properties sent to Subscriber #{sub.firstname} + #{sub.lastname}"
+      puts "#{matched_props.length} properties sent to Subscriber #{research.subscriber.firstname} + #{research.subscriber.lastname}"
     end
 
-    hunter_searches = HunterSearch.live_broadcasted.where(is_active: true)
-    hunter_searches.each do |hunter_search|
-      hunter_search_props = []
-      hunter_search_area = hunter_search.areas.ids
+    hunter_researches = Research.active_hunters_live_broadcasted
+    hunter_researches.each do |hunter_research|
+      hunter_research_props = []
+      hunter_research_area = hunter_research.areas.ids
       properties.each do |prop|
-        if hunter_search.is_matching_property?(prop, hunter_search_area)
-          hunter_search_props.push(prop)
+        if hunter_research.matching_property?(prop, hunter_research_area)
+          hunter_research_props.push(prop)
         end
       end
-      HunterMailer.notification_email(hunter_search.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
+      byebug
+      HunterMailer.notification_email(hunter_research.id, hunter_research_props).deliver_now if !hunter_research_props.empty?
     end
     update_processed_properties(properties)
   end
@@ -93,20 +92,18 @@ class Broadcaster
 
   def hunter_searched_not_live_processed
     # // Load properties scraped in the last hour 
-
     attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
     properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(*attrs).map { |p| attrs.zip(p).to_h }
 
-    hs = HunterSearch.not_live_broadcasted.where(is_active: true)
-    hs.each do |hs| 
+    hunter_researches = Research.active_hunters_not_live_broadcasted
+    hunter_researches.each do |hunter_research| 
       hunter_search_props = []
-      hunter_search_area = hs.areas.ids
       properties.each do |prop|
-        if hs.is_matching_property?(prop, hunter_search_area)
+        if hunter_research.matching_property?(prop, hunter_research.areas.ids)
           hunter_search_props.push(prop)
         end
       end
-      HunterMailer.notification_email(hs.id, hunter_search_props ).deliver_now if !hunter_search_props.empty?
+      HunterMailer.notification_email(hs.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
 
     end
   end
