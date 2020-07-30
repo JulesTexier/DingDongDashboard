@@ -1,8 +1,8 @@
 class HunterMailer < ApplicationMailer
-  def notification_email(hunter_search_id, props)
-    @hunter_search = HunterSearch.find(hunter_search_id)
+  def notification_email(hunter_research_id, props)
+    @hunter_research = Research.find(hunter_research_id)
     @props = props
     subject = props.size > 1 ? "Nouveaux biens" : "Nouveau bien"
-    mail(from: "nicolas@hellodingdong.com", to: @hunter_search.hunter.email, subject: subject)
+    mail(from: "nicolas@hellodingdong.com", to: @hunter_research.hunter.email, subject: subject)
   end
 end
