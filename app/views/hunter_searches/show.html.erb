@@ -110,19 +110,17 @@
                 </div>
               </li>
             </ul>
-            <% if false %>
             <div class="d-flex justify-content-center mt-4">
               <% if @selected_properties.include?(property.id) %>
                 <p>❤️ Dans votre sélection</p>
               <% else %>
-                <%= link_to "🤍 Ajouter à ma selection", hunter_hunter_search_selections_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
+                <%= link_to "🤍 Ajouter à ma selection", hunter_research_saved_properties_path(current_hunter, @hunter_search, {:property_id => property.id}), method: :post, class: "btn btn-danger text-white", id:"#{property.id}-btn", onclick:"addToSelection(#{property.id})", remote: true %> 
                 <p id="<%=property.id%>-pushed" style="display:none">❤️ Dans votre sélection</p>
               <% end %>
             </div>
             <div class="d-flex justify-content-center mt-4">
               <a type="button" href=<%= property.link %> class="btn btn-primary" target="_blank">👀 Voir sur <%= property.source %> </a> 
             </div>
-            <% end %>
           </div>
         </div>
         </div>

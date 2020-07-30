@@ -9,7 +9,7 @@ class HunterSearchesController < ApplicationController
 
   def show
     @properties = @hunter_search.last_matching_properties(100)
-    # @selected_properties = Research.find(params[:id]).properties.pluck(:id)
+    @selected_properties = Research.find(params[:id]).properties.pluck(:id)
   end
 
   def new
