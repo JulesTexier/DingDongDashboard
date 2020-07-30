@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :hunters do
     resources :researches, only: [:index, :show, :create, :new, :edit, :update, :put, :patch, :destroy], controller: 'hunter_searches' do 
       resources :selections, only: [:index, :create, :destroy]
+      resources :saved_properties, only: [:index, :create, :destroy]
     end
   end
   
