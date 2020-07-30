@@ -25,19 +25,6 @@ class Subscriber < ApplicationRecord
   # 1 - Business methods
   ########################
 
-  def is_matching_property?(args, subs_areas)
-    is_matching_property_rooms_number(args["rooms_number"]) &&
-    is_matching_property_surface(args["surface"]) &&
-    is_matching_property_price(args["price"]) &&
-    is_matching_property_floor(args["floor"]) &&
-    is_matching_property_area(args["area_id"], subs_areas) &&
-    is_matching_max_sqm_price(args["price"], args["surface"]) &&
-    is_matching_property_elevator_floor(args["floor"], args["has_elevator"]) &&
-    is_matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
-    is_matching_property_last_floor(args["is_last_floor"]) &&
-    is_matching_property_new_construction(args["is_new_construction"])
-  end
-
   def is_client?
     is_client = false
     statuses_scoped = ["form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"]
@@ -59,7 +46,6 @@ class Subscriber < ApplicationRecord
     return is_client
   end
 
-
   def has_interacted(last_interaction, day_range)
     response = false
     parsed_last_interaction = Time.parse(last_interaction)
@@ -69,80 +55,12 @@ class Subscriber < ApplicationRecord
     return response
   end
 
-  # a refacto avec Max
-  def get_x_last_props(max_number)
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link link)
-    props = 
-      Property.where(area: self.areas)
-      .where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number)
-      .order(id: :desc)
-      .limit(200)
-      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
-    props_to_send = []
-    subs_areas = self.areas.ids
-    props.each do |prop|
-      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
-      break if props_to_send.length == max_number.to_i
-    end
-    return props_to_send
-  end
-
   def determine_zone
     subscriber_zone = []
     self.areas.pluck(:zone).uniq.each do |zone|
       subscriber_zone.push(Area.get_agglo_from_zone(zone))
     end
     subscriber_zone.flatten.uniq
-  end
-
-  def update_areas(areas_ids)
-    selected_areas = self.areas.pluck(:id)
-    areas_ids.map! do |area_id|
-      area_id.include?("GlobalZone") ? Area.where(zone: area_id.gsub("GlobalZone - ", "")).pluck(:id) : area_id
-    end
-    cleaned_area_array = areas_ids.flatten
-    cleaned_area_array.map! {|id| id.to_i }
-    cleaned_area_array.uniq!
-    areas_to_destroy = selected_areas.reject {|x| cleaned_area_array.include?(x)}
-    self.selected_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
-    areas_to_add = cleaned_area_array.reject {|x| selected_areas.include?(x)}
-    areas_to_add.each { |area_id| SelectedArea.create(subscriber_id: self.id, area_id: area_id) } unless areas_to_add.empty?
-  end
-
-  def get_props_in_lasts_x_days(x_previous_days)
-    start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
-    props = Property
-      .where("created_at >= ?", start_date)
-      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
-
-    props_to_send = []
-    subs_areas = self.areas.ids
-
-    props.each do |prop|
-      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
-    end
-
-    return props_to_send
-  end
-
-  def get_morning_props
-    now = DateTime.now.in_time_zone("Europe/Paris")
-    start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
-    end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
-    props = Property
-      .where("created_at BETWEEN ? AND ?", start_date, end_date)
-      .pluck(*attrs).map { |p| attrs.zip(p).to_h }
-
-    props_to_send = []
-
-    subs_areas = self.areas.ids
-    props.each do |prop|
-      props_to_send.push(prop["id"]) if self.is_matching_property?(prop, subs_areas)
-      break if props_to_send.length == 10
-    end
-    return props_to_send
   end
 
   # A voir ... (util pour Etienne ?)
@@ -234,6 +152,10 @@ class Subscriber < ApplicationRecord
     self.where(is_active: true, is_blocked: [nil, false])
   end
 
+  def self.active_with_research
+    self.includes(:research).where(is_active: true, is_blocked: [nil, false]).where.not(researches: { id: nil })
+  end
+
   def self.not_blocked
     self.where(is_blocked: [nil, false])
   end
@@ -251,102 +173,6 @@ class Subscriber < ApplicationRecord
   ###################
   # Matching methods
   ###################
-
-    def is_matching_property_max_price(price)
-      (price <= self.max_price ? true : false) if !self.max_price.nil?
-    end
-  
-    def is_matching_property_min_price(price)
-      if !self.min_price.nil?
-        (price >= self.min_price ? true : false) 
-      else
-        true
-      end
-    end
-  
-    def is_matching_property_price(price)
-      is_matching_property_max_price(price) && is_matching_property_min_price(price)
-    end
-  
-    def is_matching_max_sqm_price(price, surface)
-      if !self.max_sqm_price.nil? && surface != 0
-        ((price/surface).round(0).to_i <= self.max_sqm_price ? true : false) 
-      else
-        true 
-      end
-    end
-  
-    def is_matching_property_surface(surface)
-      surface >= self.min_surface unless self.min_surface.nil?
-    end
-  
-    def is_matching_property_rooms_number(rooms_number)
-      rooms_number.to_i >= self.min_rooms_number unless self.min_rooms_number.nil?
-    end
-  
-    def is_matching_property_floor(floor)
-      if self.min_floor.nil?
-        true
-      else
-        if !floor.nil?
-          floor.to_i >= self.min_floor unless self.min_floor.nil?
-        else
-          true
-        end
-      end
-    end
-  
-    def is_matching_property_elevator_floor(floor, has_elevator)
-      if self.min_elevator_floor.nil?
-        return true
-      else
-        if !has_elevator.nil?
-          if has_elevator
-            return true
-          else
-            floor.to_i < self.min_elevator_floor.to_i
-          end
-        else
-          return true
-        end
-      end
-    end
-  
-    def is_matching_exterior?(terrace, garden, balcony)
-      if self.terrace || self.balcony || self.garden #At least one exterior criteria
-        if (self.terrace && is_matching_property_terrace(terrace)) || (self.balcony && is_matching_property_balcony(balcony)) || (self.garden && is_matching_property_garden(garden))
-          return true 
-        else
-          return false 
-        end
-      else # Esle; no testing => returning true
-        return true
-      end
-    end
-  
-    def is_matching_property_terrace(terrace)
-      self.terrace ? !terrace.nil? && terrace : true
-    end
-  
-    def is_matching_property_garden(garden)
-      self.garden ? !garden.nil? && garden : true
-    end
-  
-    def is_matching_property_balcony(balcony)
-      self.balcony ? !balcony.nil? && balcony : true
-    end
-  
-    def is_matching_property_last_floor(last_floor)
-      self.last_floor ? !last_floor.nil? && last_floor : true
-    end
-  
-    def is_matching_property_area(area_id, sub_areas = self.areas.ids)
-      sub_areas.include?(area_id)
-    end
-  
-    def is_matching_property_new_construction(is_new_construction)
-      !self.new_construction && is_new_construction ? false : true
-    end
 
 # A voir ...
   def notify_broker_if_max_price_is_changed
