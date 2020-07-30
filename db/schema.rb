@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_094259) do
+ActiveRecord::Schema.define(version: 2020_07_30_070313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -240,6 +240,13 @@ ActiveRecord::Schema.define(version: 2020_07_29_094259) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hunter_id"], name: "index_researches_on_hunter_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
+  end
+
+  create_table "saved_properties", force: :cascade do |t|
+    t.bigint "research_id"
+    t.bigint "property_id"
+    t.index ["property_id"], name: "index_saved_properties_on_property_id"
+    t.index ["research_id"], name: "index_saved_properties_on_research_id"
   end
 
   create_table "scraper_parameters", force: :cascade do |t|
