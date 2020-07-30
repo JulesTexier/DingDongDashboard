@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       # Other models
       resources :properties, only: [:show, :index]
       resources :brokers, only: [:show]
-      resources :favorites, only: [:create, :destroy]
+      resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber" # a garder
