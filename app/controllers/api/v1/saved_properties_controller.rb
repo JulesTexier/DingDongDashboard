@@ -5,10 +5,10 @@ class Api::V1::SavedPropertiesController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :authentificate
 
-  # POST /favorites/
+  # POST /saved_property/
   def create 
       begin
-        saved_property = Favorite.new(saved_property_params)
+        saved_property = SavedProperty.new(saved_property_params)
         s = Research.find(params[:research_id]).subscriber
         if fav.save
             render json: send_message_post_add(s, "success")
@@ -24,10 +24,10 @@ class Api::V1::SavedPropertiesController < ApplicationController
       end
   end
 
-  # DELETE /subscribers/:id
+  # DELETE /saved_property/:id
   def destroy 
     begin
-      fav = Favorite.find(params[:id])
+      fav = SavedProperty.find(params[:id])
       s = fav.subscriber
       if fav.destroy
         render json: send_message_post_delete(s, "success")
