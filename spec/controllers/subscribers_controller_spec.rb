@@ -6,7 +6,8 @@ RSpec.describe SubscribersController, type: :controller do
   describe "GET #edit" do
     before do
       sub = FactoryBot.create(:subscriber_dummy_fb_id)
-      sub.areas << Area.first
+      research = FactoryBot.create(:subscriber_research, subscriber: sub)
+      research.areas << Area.first
       get :edit, params: { id: sub.id }
     end
     it "returns http success" do
