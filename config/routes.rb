@@ -85,10 +85,7 @@ Rails.application.routes.draw do
 
       # Webhooks 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
-      post "webhooks/postmark/growth-emailing" => "webhooks#handle_postmark_growth_emailing"
       post "webhooks/postmark/growth-new-contact" => "webhooks#handle_postmark_new_contact"
-      # post "webhooks/funnel/website_clicked" => "webhooks#handle_website_link_clicked"
-      # post "webhooks/funnel/form_clicked" => "webhooks#handle_form_link_clicked"
 
       #data
       get "data/subscribers" => "data#get_subscribers"

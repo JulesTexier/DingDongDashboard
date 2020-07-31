@@ -55,7 +55,7 @@ class Api::V1::ManychatController < ApplicationController
   def send_props_x_days
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      props_ids = subscriber.get_props_in_lasts_x_days(params[:x])
+      props_ids = subscriber.research.properties_last_x_days(params[:x])
       handle_sending(subscriber, props_ids)
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
@@ -70,7 +70,7 @@ class Api::V1::ManychatController < ApplicationController
       if subscriber.is_blocked
         send_flow(subscriber, "content20200604125739_572289")
       else
-        props_ids = subscriber.get_x_last_props(params[:x])
+        props_ids = subscriber.research.last_x_properties(params[:x])
         handle_sending(subscriber, props_ids, "last_properties")
       end
     rescue ActiveRecord::RecordNotFound
@@ -84,7 +84,7 @@ class Api::V1::ManychatController < ApplicationController
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
       subscriber.update(is_active: true)
-      props_ids = subscriber.get_morning_props
+      props_ids = subscriber.research.morning_properties
       handle_sending(subscriber, props_ids, "morning_properties")
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404

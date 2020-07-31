@@ -10,18 +10,79 @@ class Research < ApplicationRecord
 
   validate :correct_association
 
+  #############################
+  ## CONSTANT FOR ATTRIBUTES ##
+  #############################
+
+  ATTRS = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
+
   def last_matching_properties(limit = 100, max_scope = 500)
+    properties = Property
+    .where('price <= ? AND surface >= ? AND rooms_number >= ?', 
+    self.max_price, 
+    self.min_surface, 
+    self.min_rooms_number)
+    .where(area: self.areas.ids)
+    .order(id: :desc)
+    .limit(max_scope)
+    .pluck(*ATTRS)
+    .map { |p| ATTRS.zip(p).to_h }
     matched_props_ids = []
-    areas_ids = ResearchArea.where(research: self).pluck(:area_id)
-    attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)      
-    properties = Property.where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number).where(area: areas_ids).order(id: :desc).limit(max_scope).pluck(*attrs).map { |p| attrs.zip(p).to_h }
-    areas_ids = self.areas.ids
     properties.each do |property|
-      matched_props_ids.push(property["id"]) if matching_property?(property, areas_ids)
+      matched_props_ids.push(property["id"]) if matching_property?(property, self.areas.ids)
       break if matched_props_ids.length == limit
     end
-    return Property.where(id: matched_props_ids).order(id: :desc)
+    Property.where(id: matched_props_ids).order(id: :desc)
   end
+
+  def morning_properties
+    now = DateTime.now.in_time_zone("Europe/Paris")
+    start_date = DateTime.new(now.year, now.month, now.day, 22, 0, 0, now.zone) - 1
+    end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
+    props = Property
+      .where("created_at BETWEEN ? AND ?", start_date, end_date)
+      .pluck(*ATTRS)
+      .map { |p| ATTRS.zip(p).to_h }
+    props_to_send = []
+    props.each do |prop|
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      break if props_to_send.length == 10
+    end
+    props_to_send
+  end
+
+  def properties_last_x_days(x_previous_days)
+    start_date = Time.now.in_time_zone("Europe/Paris") - x_previous_days.to_i.days
+    props = Property
+      .where("created_at >= ?", start_date)
+      .pluck(*ATTRS)
+      .map { |p| ATTRS.zip(p).to_h }
+    props_to_send = []
+    props.each do |prop|
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+    end
+    props_to_send
+  end
+
+  def last_x_properties(max_number)
+    props = Property
+      .where(area: self.areas)
+      .where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number)
+      .order(id: :desc)
+      .limit(200)
+      .pluck(*ATTRS)
+      .map { |p| ATTRS.zip(p).to_h }
+    props_to_send = []
+    props.each do |prop|
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      break if props_to_send.length == max_number.to_i
+    end
+    props_to_send
+  end
+
+  ################################
+  ## PUBLIC MATCHING ALGORYTHMS ##
+  ################################
 
   def matching_property?(args, areas)
     matching_property_rooms_number?(args["rooms_number"]) &&
@@ -62,19 +123,32 @@ class Research < ApplicationRecord
     return "max. #{self.get_pretty_price("max")} € - min. #{self.min_surface} m2 - min. #{self.min_rooms_number} pce"
   end
 
-
   ##################################
   ## HUNTER METHODS FOR BROADCAST ##
   ##################################
 
-  def self.live_broadcasted
-    hunters_id = Hunter.where(live_broadcast: true).pluck(:id)
-    Research.where(hunter_id: hunters_id)
+  def self.active_hunters_live_broadcasted
+    self.includes(:hunter)
+    .where.not(hunters: { id: nil })
+    .where(is_active: true, hunters: {live_broadcast: true})
   end
 
-  def self.not_live_broadcasted
-    hunters_id = Hunter.where.not(live_broadcast: true).pluck(:id)
-    Research.where(hunter_id: hunters_id)
+  def self.active_hunters_not_live_broadcasted
+    self.includes(:hunter)
+    .where.not(hunters: { id: nil })
+    .where(is_active: true, hunters: {live_broadcast: false})
+  end
+
+  def self.active_subs_research
+    self.includes(:subscriber)
+      .where.not(subscribers: { id: nil })
+      .where(subscribers: { is_active: true, is_blocked: false })
+  end
+
+  def self.active_hunters_research
+    self.includes(:hunter)
+      .where.not(hunters: { id: nil } )
+      .where(is_active: true)
   end
   
   private
