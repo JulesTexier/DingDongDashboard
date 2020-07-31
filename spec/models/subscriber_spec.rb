@@ -25,7 +25,6 @@ RSpec.describe Subscriber, type: :model do
       context "associations" do
         before { FactoryBot.build(:subscriber) }
         it do
-          should have_many(:fav_properties).through(:favorites).class_name("Property")
           should have_many(:areas).through(:selected_areas).class_name("Area")
           should have_many(:districts).through(:selected_districts).class_name("District")
         end
