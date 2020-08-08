@@ -289,6 +289,8 @@ class Subscriber < ApplicationRecord
     # self.update(broker: broker, is_blocked: true)
     self.update(broker: broker)
     Trello.new.add_lead_on_etienne_trello(self)
+    flow = "content20200716090652_490399"
+    Manychat.new.send_flow_sequence(@subscriber, flow)
     # BrokerMailer.new_lead(self.id).deliver_now
   end
 
