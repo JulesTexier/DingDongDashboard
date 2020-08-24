@@ -2,10 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Research, type: :model do
   describe "Subscriber research model" do
-    it "has a valid factory" do
-      sub = FactoryBot.create(:subscriber)
-      research = FactoryBot.create(:research, subscriber: sub)
-      expect(research).to be_valid
+    context "valid research and associations" do
+      before :each do 
+        sub = FactoryBot.create(:subscriber)
+        @research = FactoryBot.create(:research, subscriber: sub)
+      end
+
+      it "has a valid factory" do
+        expect(@research).to be_valid
+      end
+
+      it "valid association" do
+        should have_many(:properties).through(:saved_properties).class_name("Property")
+        should have_many(:areas).through(:research_areas).class_name("Area")
+      end
+
+      #TODO - test model method 'correct_association'
     end
 
     describe "matching_property?" do
