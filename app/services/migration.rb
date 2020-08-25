@@ -53,6 +53,7 @@ class Migration
       if hs.hunter.researches.empty?
         puts "Hunter #{hs.hunter.id} prepared to migrate."
         research = Research.new(hunter: hs.hunter)
+        research.name = hs.name
         research.min_floor = hs.min_floor
         research.has_elevator = hs.has_elevator
         research.min_elevator_floor = hs.min_elevator_floor
