@@ -1,17 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::SavedProperties", type: :request do
+  headers = { "AUTHORIZATION" => "Bearer DD-nFMdxvgGEXdpEs7whj" }
 
-  describe "GET /create" do
+  describe "POST /create" do
     it "returns http success" do
-      get "/api/v1/saved_properties/create"
+      research = FactoryBot.create(:subscriber_research)
+      property = FactoryBot.create(:property)
+      post "/api/v1/saved_properties", params: { property_id: property.id, research_id: research.id } , headers: headers
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /destroy" do
+  describe "DELETE /destroy" do
     it "returns http success" do
-      get "/api/v1/saved_properties/destroy"
+      saved_property = FactoryBot.create(:saved_property)
+      delete "/api/v1/saved_properties/#{saved_property.id}", params: {}, headers: headers
       expect(response).to have_http_status(:success)
     end
   end
