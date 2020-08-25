@@ -10,32 +10,32 @@ class Api::V1::SavedPropertiesController < ApplicationController
       begin
         saved_property = SavedProperty.new(saved_property_params)
         s = Research.find(params[:research_id]).subscriber
-        if fav.save
+        if saved_property.save
             render json: send_message_post_add(s, "success")
           else
-            if fav.errors.messages[:subscriber][0] === "has already been taken" 
+            if saved_property.errors.messages[:subscriber][0] === "has already been taken" 
                 render json: send_message_post_add(s, "error_already_exists")
             else
                 render json: send_message_post_add(s, "error")
             end
           end
       rescue ActiveRecord::RecordNotFound
-        render json: {status: 'ERROR', message: 'Subcriber not found', data: nil}, status: 404
+        render json: {status: 'ERROR', message: 'Saved Property not found', data: nil}, status: 404
       end
   end
 
   # DELETE /saved_property/:id
   def destroy 
     begin
-      fav = SavedProperty.find(params[:id])
-      s = fav.subscriber
-      if fav.destroy
+      saved_property = SavedProperty.find(params[:id])
+      s = saved_property.research.subscriber
+      if saved_property.destroy
         render json: send_message_post_delete(s, "success")
       else
         render json: send_message_post_delete(s, "error")
       end
     rescue ActiveRecord::RecordNotFound
-      render json: {status: 'ERROR', message: 'Favorite not found', data: nil}, status: 404
+      render json: {status: 'ERROR', message: 'Saved Property not found', data: nil}, status: 404
     end
   end
 
