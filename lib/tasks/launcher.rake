@@ -94,3 +94,13 @@ namespace :broker do
     Broker.send_good_morning_message_leads
   end
 end
+
+namespace :migration do 
+  desc "Tasks to migrate datas for major release"
+  task :hunter_migration do 
+    Migration.new.hunter_migration_to_research
+  end
+  task :subscriber_migration do 
+    Migration.new.subscriber_migration_to_research
+  end
+end
