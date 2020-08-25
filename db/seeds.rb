@@ -85,7 +85,7 @@ Subscriber.all.each do |subscriber|
   # Migration des critères vers un objet Research
   research = Research.new(subscriber: subscriber)
   research.min_floor = subscriber.min_floor
-  research.has_elevator = subscriber.has_elevator
+  research.has_elevator = subscriber.min_elevator_floor.nil? ? false : true
   research.min_elevator_floor = subscriber.min_elevator_floor
   research.min_surface = subscriber.min_surface
   research.min_rooms_number = subscriber.min_rooms_number
