@@ -11,6 +11,7 @@ class Property < ApplicationRecord
   validate :image_array_validator
   validate :image_link_validator
 
+  ## A SUPPRIMER APRES LE SEED
   has_many :selections
   has_many :hunter_selections, through: :selections, source: :hunter_search
 

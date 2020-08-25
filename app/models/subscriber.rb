@@ -17,6 +17,11 @@ class Subscriber < ApplicationRecord
   has_many :subscriber_statuses
   has_many :statuses, through: :subscriber_statuses
 
+  ## A SUPPRIMER APRES LE SEED
+  has_many :favorites
+  has_many :fav_properties, through: :favorites, source: :property
+
+
   after_create :create_research
 
 
