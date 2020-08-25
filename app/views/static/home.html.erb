@@ -28,7 +28,11 @@
                     <h5 class="card-title">Vous êtes chasseur ?</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Professionnel</h6>
                     <p class="card-text">Rejoignez Ding Dong Pro, l'outil multi-recherches le plus performant du marché.</p>
-                    <%= link_to "Accéder à mon espace", hunter_hunter_searches_path(4), class: "btn btn-success" %>
+                    <% if hunter_signed_in? %>
+                      <%= link_to "Accéder à mon espace", hunter_researches_path(current_hunter), class: "btn btn-success" %>
+                    <% else %>
+                      <%= link_to "Accéder à mon espace", new_hunter_session_path, class: "btn btn-success" %>
+                    <% end %>
                 </div>
             </div>
         </div>
