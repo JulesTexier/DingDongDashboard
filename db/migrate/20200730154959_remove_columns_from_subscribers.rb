@@ -4,7 +4,6 @@ class RemoveColumnsFromSubscribers < ActiveRecord::Migration[6.0]
     remove_column :subscribers, :additional_question, :text
     remove_column :subscribers, :initial_areas, :string
     remove_column :subscribers, :stripe_session_id, :string
-    remove_column :subscribers, :status, :string
   end
 
   def down
@@ -12,6 +11,5 @@ class RemoveColumnsFromSubscribers < ActiveRecord::Migration[6.0]
     add_column :subscribers, :additional_question, :text
     add_column :subscribers, :initial_areas, :string
     add_column :subscribers, :stripe_session_id, :string
-    add_column :subscribers, :status, :string
   end
 end

@@ -366,6 +366,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_154959) do
     t.integer "max_sqm_price"
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
+    t.string "status"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
