@@ -1,20 +1,16 @@
-require 'dotenv/load'
-
-class Api::V1::FavoritesController < ApplicationController
+class Api::V1::SavedPropertiesController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   
   TOKEN = ENV['BEARER_TOKEN']
   protect_from_forgery with: :null_session
   before_action :authentificate
 
-  # POST /favorites/
+  # POST /saved_property/
   def create 
-    begin
-      p = Property.find(params[:property_id])
       begin
-          s = Subscriber.find(params[:subscriber_id])
-          fav = Favorite.new(favorite_params)
-          if fav.save
+        saved_property = SavedProperty.new(saved_property_params)
+        s = Research.find(params[:research_id]).subscriber
+        if fav.save
             render json: send_message_post_add(s, "success")
           else
             if fav.errors.messages[:subscriber][0] === "has already been taken" 
@@ -26,15 +22,12 @@ class Api::V1::FavoritesController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         render json: {status: 'ERROR', message: 'Subcriber not found', data: nil}, status: 404
       end
-    rescue ActiveRecord::RecordNotFound
-        render json: {status: 'ERROR', message: 'Property not found', data: nil}, status: 404
-    end
   end
 
-  # DELETE /subscribers/:id
+  # DELETE /saved_property/:id
   def destroy 
     begin
-      fav = Favorite.find(params[:id])
+      fav = SavedProperty.find(params[:id])
       s = fav.subscriber
       if fav.destroy
         render json: send_message_post_delete(s, "success")
@@ -53,8 +46,8 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
-  def favorite_params
-    params.permit(:subscriber_id, :property_id)
+  def saved_property_params
+    params.permit(:research_id, :property_id)
   end
 
   def send_message_post_add(s, msg)
@@ -94,5 +87,4 @@ class Api::V1::FavoritesController < ApplicationController
       end
     end        
   end
-
 end

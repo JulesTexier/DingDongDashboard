@@ -11,9 +11,6 @@ class Subscriber < ApplicationRecord
 
   has_one :research
 
-  has_many :favorites
-  has_many :fav_properties, through: :favorites, source: :property
-
   has_many :subscriber_sequences
   has_many :sequences, through: :subscriber_sequences
 

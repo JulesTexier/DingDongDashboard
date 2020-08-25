@@ -180,7 +180,7 @@ class Manychat
     else
       if direct_source
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
-        webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
+        webhook_fav = ENV["BASE_URL"] + "api/v1/saved_property/"
         body_fav = { subscriber_id: subscriber.id, property_id: property.id }
         buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
       else
@@ -235,7 +235,7 @@ class Manychat
       property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
     end
-    webhook_fav = ENV["BASE_URL"] + "api/v1/favorites/"
+    webhook_fav = ENV["BASE_URL"] + "api/v1/saved_property/"
     body_fav = { subscriber_id: subscriber.id, property_id: property.id }
     buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
 
@@ -256,7 +256,7 @@ class Manychat
 
   # This method is building a json_gallery of cards for each property in fav of a subscriber
   def create_favorites_gallery_card(subscriber)
-    favs = subscriber.favorites
+    favs = subscriber.research.saved_properties
     message_array = []
 
     elements = []
@@ -268,7 +268,7 @@ class Manychat
         # 1st btn : Source
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
         # 2nd btn : Remove from fav
-        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/favorites/#{fav.id}"
+        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/saved_property/#{fav.id}"
         buttons.push(create_dynamic_button_hash("💔 Retirer des favoris", webhook_delete_fav, "DELETE"))
 
         elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, buttons))

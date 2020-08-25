@@ -68,12 +68,12 @@ Rails.application.routes.draw do
       # Other models
       resources :properties, only: [:show, :index]
       resources :brokers, only: [:show]
-      resources :favorites, only: [:create, :destroy]
+      resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber" # a garder
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning" # a garder
-      get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" # a garder
+      get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" # a UPDATE
       get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props" # a garder
       post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" # a garder
       post "/manychat/s/:subscriber_id/send_to_broker" => "manychat#send_to_broker" # a garder
