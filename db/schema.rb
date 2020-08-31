@@ -238,6 +238,8 @@ ActiveRecord::Schema.define(version: 2020_08_31_080528) do
     t.bigint "subscriber_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "email_flux"
+    t.boolean "messenger_flux"
     t.index ["hunter_id"], name: "index_researches_on_hunter_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
