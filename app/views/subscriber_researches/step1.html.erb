@@ -7,7 +7,7 @@
   <%= f.error_notification %>
 
   <%= hidden_field_tag :current_step, 'step1' %>
-  <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :second, value_method: :second %>
+  <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :first, value_method: :first %>
 
   <%= f.submit 'Continue' %>
 <% end %>

@@ -1,0 +1,15 @@
+
+<ol class="breadcrumb">
+  <li><%= link_to "Agglomération", step1_subscriber_subscriber_researches_path %></li>
+  <li><%= link_to "Critères", step2_subscriber_subscriber_researches_path %></li>
+  <li class="active">Canal</li>
+</ol>
+
+<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+  <%= f.error_notification %>
+
+  <%= hidden_field_tag :current_step, 'step4' %>
+  <%= f.input :messenger_flux %>
+
+  <%= f.submit 'Finish' %>
+<% end %>
