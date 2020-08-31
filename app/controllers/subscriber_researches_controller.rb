@@ -18,8 +18,11 @@ class SubscriberResearchesController < ApplicationController
     end
   end
 
+  def step1
+    @agglos_infos = Area.get_agglo_infos
+  end
+
   def step2
-    byebug
   end
 
   def create
