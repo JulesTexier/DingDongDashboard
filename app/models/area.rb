@@ -43,7 +43,14 @@ class Area < ApplicationRecord
     end
 
     def self.get_agglo_infos
-      YAML.load_file("./db/data/agglomeration.yml")
+      collection = []
+      i = 0
+      raw_area = YAML.load_file("./db/data/agglomeration.yml")
+      raw_area.each do |area|
+        collection.push([i.to_s, area["agglomeration"]])
+        i += 1
+      end
+      collection
     end
 
     def self.get_active_agglo_infos
