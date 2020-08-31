@@ -1,0 +1,2 @@
+module SubscriberResearchesHelper
+end
