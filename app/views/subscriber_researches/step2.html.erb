@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li><%= link_to "Step 1", step1_subscriber_subscriber_researches_path %></li>
+  <li class="active">Step 2</li>
+</ol>
+
+<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+  <%= f.error_notification %>
+
+  <%= hidden_field_tag :current_step, 'step2' %>
+  <%= f.input :min_price %>
+  <%= f.input :min_surface %>
+
+  <%= f.submit 'Finish' %>
+<% end %>

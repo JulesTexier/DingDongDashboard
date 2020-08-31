@@ -1,0 +1,13 @@
+<ol class="breadcrumb">
+  <li class='active'>Step 1</li>
+  <li>Step 2</li>
+</ol>
+
+<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+  <%= f.error_notification %>
+
+  <%= hidden_field_tag :current_step, 'step1' %>
+  <%= f.input :agglomeration %>
+
+  <%= f.submit 'Continue' %>
+<% end %>
