@@ -49,7 +49,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_research_wizard_params
-    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_surface, :min_price)
+    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type, :email_flux, :messenger_flux)
   end
 
   class InvalidStep < StandardError; end 
