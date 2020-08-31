@@ -22,9 +22,6 @@ class Subscriber < ApplicationRecord
   has_many :fav_properties, through: :favorites, source: :property
 
 
-  after_create :create_research
-
-
   ########################
   # 1 - Business methods
   ########################
@@ -193,9 +190,5 @@ class Subscriber < ApplicationRecord
       shift_type = form_type == "subscription" ? "subscription" : "regular"
       self.update(broker: Broker.get_current(shift_type))
     end
-  end
-
-  def create_research
-    Research.create(subscriber: self)
   end
 end
