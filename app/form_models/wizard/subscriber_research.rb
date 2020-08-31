@@ -18,9 +18,12 @@ module Wizard
     end
     
     class Step2 < Step1
-
       validates :min_surface, presence: true
       validates :min_price, presence: true
+    end
+
+    class Step3 < Step2
+      validates :messenger_flux, presence: true
     end
   end
 end
