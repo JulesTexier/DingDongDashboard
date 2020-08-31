@@ -4,7 +4,17 @@ class SubscribersController < ApplicationController
   # ###############
 
   def new
-    
+    @subscriber = Subscriber.new
+  end
+
+  def create
+    subscriber = Subscriber.new(subscriber_params)
+    if subscriber.save
+      redirect_to new_subscriber_research_path(subscriber)
+    else
+      flash[:error] = "Un problème est apparu, veuillez réessayer."
+      render 'new'
+    end
   end
 
   def edit
