@@ -3,6 +3,10 @@ class SubscribersController < ApplicationController
   #      CRUD     #
   # ###############
 
+  def new
+    
+  end
+
   def edit
     @subscriber = Subscriber.find(params[:id])
     @research = @subscriber.research
