@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   #############
   # 2 - Core
   #############
-  resources :subscribers, only: [:create, :update, :edit] do 
+  resources :subscribers, only: [:new, :create, :update, :edit] do 
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
+    resources :researches, only: [:new, :create, :update, :edit]
   end
   resources :properties, only: [:show]
 
