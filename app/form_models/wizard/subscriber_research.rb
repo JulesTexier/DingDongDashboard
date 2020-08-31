@@ -1,6 +1,6 @@
 module Wizard
   module SubscriberResearch
-    STEPS = %w(step1 step2).freeze
+    STEPS = %w(step1 step2 step3).freeze
 
     class Base
       include ActiveModel::Model
@@ -19,7 +19,7 @@ module Wizard
     
     class Step2 < Step1
       validates :min_surface, presence: true
-      validates :min_price, presence: true
+      validates :max_price, presence: true
     end
 
     class Step3 < Step2
