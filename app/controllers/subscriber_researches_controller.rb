@@ -23,6 +23,12 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def step2
+    @master_areas = Area.get_selected_agglo_area(@subscriber_research_wizard.agglomeration, [])
+    @master_areas += Area.global_zones(@subscriber_research_wizard.agglomeration)
+  end
+
+  def step3
+    byebug
   end
 
   def create
@@ -52,7 +58,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_research_wizard_params
-    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type, :email_flux, :messenger_flux)
+    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type, :email_flux, :messenger_flux, areas: [:id])
   end
 
   class InvalidStep < StandardError; end 
