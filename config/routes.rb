@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resource :subscriber_researches do
       get :step1, :path => 'agglomeration'
       get :step2, :path => 'criteres'
+      get :step3, :path => 'canal'
       post :validate_step
     end
   end
