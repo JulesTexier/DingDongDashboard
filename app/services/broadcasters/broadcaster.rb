@@ -44,7 +44,6 @@ class Broadcaster
           hunter_research_props.push(prop)
         end
       end
-      byebug
       HunterMailer.notification_email(hunter_research.id, hunter_research_props).deliver_now if !hunter_research_props.empty?
     end
     update_processed_properties(properties)
