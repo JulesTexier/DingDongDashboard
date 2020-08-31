@@ -24,8 +24,8 @@ Rails.application.routes.draw do
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
     resource :subscriber_researches do
-      get :step1
-      get :step2
+      get :step1, :path => 'agglomeration'
+      get :step2, :path => 'criteres'
       post :validate_step
     end
   end
