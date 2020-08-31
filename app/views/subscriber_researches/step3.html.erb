@@ -8,8 +8,9 @@
 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
   <%= f.error_notification %>
 
-  <%= hidden_field_tag :current_step, 'step4' %>
-  <%= f.input :messenger_flux %>
-
+  <%= hidden_field_tag :current_step, 'step3' %>
+  <%= f.input :messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
+  <%= f.input :email_flux, :as => :hidden, :input_html => { :value => "false" } %>
+  
   <%= f.submit 'Finish' %>
 <% end %>
