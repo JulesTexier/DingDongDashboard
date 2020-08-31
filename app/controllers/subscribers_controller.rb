@@ -10,7 +10,7 @@ class SubscribersController < ApplicationController
   def create
     subscriber = Subscriber.new(subscriber_params)
     if subscriber.save
-      redirect_to new_subscriber_research_path(subscriber)
+      redirect_to step1_subscriber_subscriber_researches_path(subscriber)
     else
       flash[:error] = "Un problème est apparu, veuillez réessayer."
       render 'new'
