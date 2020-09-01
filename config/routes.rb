@@ -17,8 +17,11 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"
   end
 
-  # Token conforùation email 
+  # Token confirmation email 
   get '/:token/confirm_email/', :to => "subscribers#confirm_email", as: 'confirm_email'
+  
+  # 404
+  get :url_not_found, :to => "static#url_not_found", :path => 'lien-perdu'
   
   #############
   # 2 - Core
@@ -29,6 +32,8 @@ Rails.application.routes.draw do
     get :professionals, :path => 'nos-pros'
     get :email_confirmed, :path => 'confirmation'
   end
+
+  
   resources :properties, only: [:show]
   
   resource :subscriber_researches do
