@@ -23,16 +23,16 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:new, :create, :update, :edit] do 
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
-    resource :subscriber_researches do
-      get :step1, :path => 'agglomeration'
-      get :step2, :path => 'criteres'
-      get :step3, :path => 'canal'
-      post :validate_step
-    end
     get :professionals, :path => 'nos-pros'
   end
   resources :properties, only: [:show]
-
+  
+  resource :subscriber_researches do
+    get :step1, :path => 'agglomeration'
+    get :step2, :path => 'criteres'
+    get :step3, :path => 'profil'
+    post :validate_step
+  end
 
 
   #############
