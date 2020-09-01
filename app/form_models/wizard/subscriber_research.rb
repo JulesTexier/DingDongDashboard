@@ -4,12 +4,13 @@ module Wizard
 
     class Base
       include ActiveModel::Model
-      attr_accessor :subscriber_research
+      attr_accessor :subscriber_research, :subscriber
 
       delegate *::Research.attribute_names.map { |attr| [attr, "#{attr}="] }.flatten, to: :subscriber_research
 
       def initialize(subscriber_research_attributes)
         @subscriber_research = ::Research.new(subscriber_research_attributes)
+        @subscriber = ::Subscriber.new
       end
     end
 
@@ -23,7 +24,6 @@ module Wizard
     end
 
     class Step3 < Step2
-      validates :messenger_flux, presence: true
     end
   end
 end
