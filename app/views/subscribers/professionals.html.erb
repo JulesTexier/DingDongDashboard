@@ -1,1 +1,9 @@
 <p> SALUT ICI CEST LA PRESENTATION DES PROS POUR LE USER </p>
+
+
+
+<% if @subscriber.messenger_flux%>
+  <%= link_to "Démarrer", "https://m.me/HiDingDong" %>
+<% else %>
+  <p>Veuillez confirmer votre email, un email vient de vous être envoyé avec un lien à cliquer.</p>
+<%end%>
