@@ -52,7 +52,10 @@ class SubscribersController < ApplicationController
   end
 
   def professionals
-    
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @notary = @subscriber.notary
+    @broker = @subscriber.broker
+    @contractor = @subscriber.contractor
   end
 
   # ###############
@@ -79,11 +82,11 @@ class SubscribersController < ApplicationController
     if subscriber
       subscriber.validate_email
       subscriber.save(validate: false)
-      # A CODER Méthode pour envoyer les 5 derniers biens
-      redirect_to root_path
+      # TODO A CODER Méthode pour envoyer les 5 derniers biens
+      redirect_to subscriber_email_confirmed_path(subscriber)
     else
       flash[:error] = "Désolé, l'utilisateur n'existe pas"
-      redirect_to root_path
+      redirect_to url_not_found_path
     end
   end
 
