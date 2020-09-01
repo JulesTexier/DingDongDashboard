@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_080528) do
+ActiveRecord::Schema.define(version: 2020_09_01_095632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -238,8 +238,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_080528) do
     t.bigint "subscriber_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "email_flux"
-    t.boolean "messenger_flux"
     t.index ["hunter_id"], name: "index_researches_on_hunter_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
@@ -369,6 +367,8 @@ ActiveRecord::Schema.define(version: 2020_08_31_080528) do
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
     t.string "status"
+    t.boolean "messenger_flux"
+    t.boolean "email_flux"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
