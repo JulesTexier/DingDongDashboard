@@ -2,6 +2,9 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
+  after_create :send_confirmation_email
+
+
   ## REVOIR LES VALIDATEURS
 
   belongs_to :broker, optional: true
@@ -168,12 +171,33 @@ class Subscriber < ApplicationRecord
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
   end
+  
+  def validate_email
+    self.email_confirmed = true
+    self.confirm_token = nil
+  end
 
   private
 
-  ###################
-  # Matching methods
-  ###################
+  ###########################
+  # Email confirmation methods
+  ###########################
+
+
+  def set_confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
+
+  def send_confirmation_email
+    if self.email_flux
+      set_confirmation_token
+      self.save(validate: false)
+      SubscriberMailer.registration_confirmation(self).deliver_now
+    end
+  end
+
 
 # A voir ...
   def notify_broker_if_max_price_is_changed
@@ -192,3 +216,5 @@ class Subscriber < ApplicationRecord
     end
   end
 end
+
+
