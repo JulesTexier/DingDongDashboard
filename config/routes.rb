@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   authenticate :admin do
     mount Sidekiq::Web => "/sidekiq"
   end
+
+  # Token conforùation email 
+  get '/:token/confirm_email/', :to => "subscribers#confirm_email", as: 'confirm_email'
   
   #############
   # 2 - Core
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
     get :professionals, :path => 'nos-pros'
+    get :email_confirmed, :path => 'confirmation'
   end
   resources :properties, only: [:show]
   
