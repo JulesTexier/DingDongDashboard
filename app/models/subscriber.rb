@@ -3,11 +3,9 @@ require "dotenv/load"
 class Subscriber < ApplicationRecord
 
   after_create :send_confirmation_email
-
+  after_create :professional_attribution
 
   ## REVOIR LES VALIDATEURS
-
-  belongs_to :broker, optional: true
 
   has_many :selected_areas
   has_many :areas, through: :selected_areas
@@ -23,6 +21,11 @@ class Subscriber < ApplicationRecord
   ## A SUPPRIMER APRES LE SEED
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
+
+  ## Professional association
+  belongs_to :notary, optional: true
+  belongs_to :contractor, optional: true
+  belongs_to :broker, optional: true
 
 
   ########################
@@ -78,6 +81,18 @@ class Subscriber < ApplicationRecord
     self.update(broker: broker, is_blocked: true)
     Trello.new.add_lead_on_etienne_trello(self)
     BrokerMailer.new_lead(self.id).deliver_now
+  end
+
+
+  ############################
+  # Professional Attribution #
+  ############################
+
+  def professional_attribution
+    self.notary = Notary.first if self.notary.nil?
+    self.contractor = Contractor.first if self.contractor.nil?
+    self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
+    self.save
   end
 
 
