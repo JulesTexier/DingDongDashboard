@@ -51,6 +51,10 @@ class SubscribersController < ApplicationController
     redirect_to edit_subscriber_path
   end
 
+  def professionals
+    
+  end
+
   # ###############
   #      OTHER    #
   # ###############

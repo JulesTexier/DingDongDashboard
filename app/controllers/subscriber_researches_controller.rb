@@ -43,7 +43,7 @@ class SubscriberResearchesController < ApplicationController
       @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
       session[:subscriber_research_attributes] = nil
       session[:areas] = nil
-      redirect_to root_path, notice: 'Research succesfully created!'
+      redirect_to subscriber_professionals_path, notice: 'Research succesfully created!'
     else
       redirect_to({ action: Wizard::SubscriberResearch::STEPS.first }, alert: 'There were a problem when creating the research.')
     end

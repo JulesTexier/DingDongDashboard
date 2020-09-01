@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get :step3, :path => 'canal'
       post :validate_step
     end
+    get :professionals, :path => 'nos-pros'
   end
   resources :properties, only: [:show]
 
