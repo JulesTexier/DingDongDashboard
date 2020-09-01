@@ -1,5 +1,18 @@
-<p> SALUT ICI CEST LA PRESENTATION DES PROS POUR LE USER </p>
-
+<h1>Ding Dong, c'est aussi des pros pour t'accompagner dans ta recherche ! </h1>
+<div class="row mt-4">
+  <div class="col-4">
+    <h2>Ton notaire - Maître <%= @notary.lastname %></h2>
+    <img src="<%= @notary.profile_picture %>">
+  </div>
+  <div class="col-4">
+    <h2>Ton courtier - <%= @broker.firstname %></h2>
+    <img src="<%= @broker.profile_picture %>"/>
+  </div>
+  <div class="col-4">
+    <h2>Ton entrepreneur - <%= @contractor.firstname %></h2>
+    <img src="<%= @contractor.profile_picture %>"/>
+  </div>
+</div>
 
 
 <% if @subscriber.messenger_flux%>
