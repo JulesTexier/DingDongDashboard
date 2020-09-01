@@ -61,7 +61,6 @@ class SubscriberResearchesController < ApplicationController
 
   def wizard_subscriber_research_for_step(step)
     raise InvalidStep unless step.in?(Wizard::SubscriberResearch::STEPS)
-
     "Wizard::SubscriberResearch::#{step.camelize}".constantize.new(session[:subscriber_research_attributes])
   end
 

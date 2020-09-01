@@ -11,6 +11,53 @@
   <%= hidden_field_tag :current_step, 'step3' %>
   <%= f.input :messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
   <%= f.input :email_flux, :as => :hidden, :input_html => { :value => "false" } %>
+
+  <div class="row">
+    <div class='col-6 d-flex justify-content-center'>
+      <div class="medium-btn" id="messenger" onCLick="selectMessenger()">
+        <p>Messenger</p>
+      </div>
+    </div>
+    <div class='col-6 d-flex justify-content-center'>
+      <div class="medium-btn" id="email" onCLick="selectEmail()">
+        <p>Mail</p>
+      </div>
+    </div>
+  </div>
   
   <%= f.submit 'Finish' %>
 <% end %>
+
+<style>
+  .medium-btn{
+    border: solid 2px #000;
+    width:100px;
+    height:100px;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .medium-active{
+    background-color: #fff200;
+  } 
+</style>
+
+<script>
+
+  function selectMessenger(){
+    document.getElementById('subscriber_research_wizard_messenger_flux').value="true";
+    document.getElementById('subscriber_research_wizard_email_flux').value="false";
+    document.getElementById("messenger").classList.add("medium-active");
+    document.getElementById("email").classList.remove("medium-active");
+  }
+
+  function selectEmail(){
+    document.getElementById('subscriber_research_wizard_email_flux').value="true";
+    document.getElementById('subscriber_research_wizard_messenger_flux').value="false";
+    document.getElementById("email").classList.add("medium-active");
+    document.getElementById("messenger").classList.remove("medium-active");
+  }
+
+</script>

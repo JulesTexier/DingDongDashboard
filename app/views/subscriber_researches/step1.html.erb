@@ -1,8 +1,12 @@
-<ol class="breadcrumb">
-  <li class='active'>Agglomération</li>
-  <li>Critères</li>
-  <li>Canal</li>
-</ol>
+<div class= "row">
+  <div class="col-12 d-flex ">
+    <ul class="breadcrumb justify-content-around w-100">
+      <div class='active'>Agglomération</div>
+      <div>Critères</div>
+      <div>Canal</div>
+    </ul>
+  </div>
+</div>
 
 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
   <%= f.error_notification %>
