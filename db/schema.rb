@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_095632) do
+ActiveRecord::Schema.define(version: 2020_09_01_132101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -369,6 +369,8 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.string "status"
     t.boolean "messenger_flux"
     t.boolean "email_flux"
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
   end
 
