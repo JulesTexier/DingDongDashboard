@@ -47,7 +47,7 @@ class Area < ApplicationRecord
       i = 0
       raw_area = YAML.load_file("./db/data/agglomeration.yml")
       raw_area.each do |area|
-        collection.push([area["agglomeration"], area["is_active"]])
+        collection.push([area["agglomeration"], area["is_active"], area["image_url"]])
         i += 1
       end
       collection

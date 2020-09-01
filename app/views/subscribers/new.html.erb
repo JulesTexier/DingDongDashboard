@@ -1,10 +1,10 @@
 <%= simple_form_for @subscriber do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :email %>
   <%= f.input :firstname %>
   <%= f.input :lastname %>
   <%= f.input :phone %>
+  <%= f.input :email %>
 
-  <%= f.submit 'Continue' %>
+  <%= f.submit 'Continue', class:"btn btn-success" %>
 <% end %>
