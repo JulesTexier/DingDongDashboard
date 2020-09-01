@@ -1,7 +1,7 @@
 <div class= "row">
   <div class="col-12 d-flex ">
     <ul class="breadcrumb justify-content-around w-100">
-        <li><%= link_to "Agglomération", step1_subscriber_subscriber_researches_path %></li>
+        <li><%= link_to "Agglomération", step1_subscriber_researches_path %></li>
         <li class="active">Critères</li>
         <li>Canal</li>
     </ul>
@@ -29,7 +29,7 @@ $(document).ready(function(){
     }
 </style>
 
-<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
   <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
       <div class="d-flex justify-content-center mt-2 mb-2">
           <%= f.submit "Enregistrer mes critères 🚀",

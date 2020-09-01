@@ -9,7 +9,7 @@
 </div>
 
 <% if false%>
-  <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+  <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
     <%= f.error_notification %>
 
     <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :first, value_method: :first %>
@@ -22,7 +22,7 @@
     <div class="col-12 mb-5">
         <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
         <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
-            <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
+            <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
             <%= hidden_field_tag :current_step, 'step1' %>
                 <div class="d-flex">
                     <div class="card-group">

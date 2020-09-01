@@ -1,14 +1,20 @@
 
 <ol class="breadcrumb">
-  <li><%= link_to "Agglomération", step1_subscriber_subscriber_researches_path %></li>
-  <li><%= link_to "Critères", step2_subscriber_subscriber_researches_path %></li>
-  <li class="active">Canal</li>
+  <li><%= link_to "Agglomération", step1_subscriber_researches_path %></li>
+  <li><%= link_to "Critères", step2_subscriber_researches_path %></li>
+  <li class="active">Profil</li>
 </ol>
 
-<%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_subscriber_researches_path do |f| %>
-  <%= f.error_notification %>
 
+  
+<%= simple_form_for @subscriber_research_wizard.subscriber, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
+  <%= f.error_notification %>
   <%= hidden_field_tag :current_step, 'step3' %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+  <%= f.input :phone %>
+  <%= f.input :email %>
+
   <%= f.input :messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
   <%= f.input :email_flux, :as => :hidden, :input_html => { :value => "false" } %>
 
@@ -24,8 +30,8 @@
       </div>
     </div>
   </div>
-  
-  <%= f.submit 'Finish' %>
+
+  <%= f.submit 'Continue', class:"btn btn-success" %>
 <% end %>
 
 <style>
@@ -47,15 +53,15 @@
 <script>
 
   function selectMessenger(){
-    document.getElementById('subscriber_research_wizard_messenger_flux').value="true";
-    document.getElementById('subscriber_research_wizard_email_flux').value="false";
+    document.getElementById('subscriber_wizard_messenger_flux').value="true";
+    document.getElementById('subscriber_wizard_email_flux').value="false";
     document.getElementById("messenger").classList.add("medium-active");
     document.getElementById("email").classList.remove("medium-active");
   }
 
   function selectEmail(){
-    document.getElementById('subscriber_research_wizard_email_flux').value="true";
-    document.getElementById('subscriber_research_wizard_messenger_flux').value="false";
+    document.getElementById('subscriber_wizard_email_flux').value="true";
+    document.getElementById('subscriber_wizard_messenger_flux').value="false";
     document.getElementById("email").classList.add("medium-active");
     document.getElementById("messenger").classList.remove("medium-active");
   }
