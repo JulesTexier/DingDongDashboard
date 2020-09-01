@@ -1,0 +1,2 @@
+class Notary < ApplicationRecord
+end

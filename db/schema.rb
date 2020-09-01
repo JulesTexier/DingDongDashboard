@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_132101) do
+ActiveRecord::Schema.define(version: 2020_09_01_142716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -86,6 +86,15 @@ ActiveRecord::Schema.define(version: 2020_09_01_132101) do
     t.string "alias_email"
   end
 
+  create_table "contractors", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "profile_picture"
+    t.string "phone"
+    t.string "company"
+    t.string "email"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.bigint "subscriber_id"
     t.bigint "property_id"
@@ -145,6 +154,15 @@ ActiveRecord::Schema.define(version: 2020_09_01_132101) do
     t.boolean "live_broadcast", default: true
     t.index ["email"], name: "index_hunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
+  end
+
+  create_table "notaries", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "profile_picture"
+    t.string "phone"
+    t.string "company"
+    t.string "email"
   end
 
   create_table "permanences", force: :cascade do |t|
