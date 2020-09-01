@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_142716) do
+ActiveRecord::Schema.define(version: 2020_09_01_143525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -389,7 +389,11 @@ ActiveRecord::Schema.define(version: 2020_09_01_142716) do
     t.boolean "email_flux"
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.bigint "contractor_id"
+    t.bigint "notary_id"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
+    t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
+    t.index ["notary_id"], name: "index_subscribers_on_notary_id"
   end
 
   create_table "subways", force: :cascade do |t|

@@ -2,7 +2,7 @@ require "dotenv/load"
 
 class Broker < ApplicationRecord
 
-  has_many :subscribers # ok 
+  has_many :subscribers
 
   has_many :permanences # a voir
   has_many :shifts, through: :permanences, source: :broker_shift #a voir
