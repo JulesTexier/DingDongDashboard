@@ -61,7 +61,7 @@
 
                 <tr>
                     <td>
-                        <a href="<%= prop["link"] %>" style="color:#262626;text-decoration:none" target="_blank>
+                        <a href="<%= prop.link %>" style="color:#262626;text-decoration:none" target="_blank>
                             <table>
                                 <tbody>
 
@@ -73,7 +73,7 @@
 
                                             <tr>
                                                 <td class="m_-1867408558110905584contents">
-                                                    <a href="<%= prop["link"] %>" target="_blank"> <img src="<%= prop["images"][0]%>" alt="Image de l'annonce" width="480" height="319" style="display:block;width:100%;height:auto;float:left;border:0" class="CToWUd">
+                                                    <a href="<%= prop.link %>" target="_blank"> <img src="<%= prop.images.first%>" alt="Image de l'annonce" width="480" height="319" style="display:block;width:100%;height:auto;float:left;border:0" class="CToWUd">
                                                         
                                                     </a>
                                                 </td>
@@ -95,16 +95,17 @@
                                                     <tbody>
                                                       <tr>
                                                         <td class="m_-1867408558110905584col100" align="center" style="font-size:24px;line-height:28px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
-                                                            <a href="<%= prop["link"] %>" style="text-decoration:none!important;color:#000" target="_blank"><b><%= prop["price"] %> € </b>
+                                                            <a href="<%= prop.link %>" style="text-decoration:none!important;color:#000" target="_blank"><b><%= prop.price %> € </b>
                                                             </a>
                                                         </td>
                                                       </tr>
                                                       <tr>
                                                         <td class="m_-1867408558110905584col100" align="center" style="font-size:18px;line-height:24px;font-family:Arial,Helvetica,sans-serif;color:#262626;text-align:left">
-                                                            <a href="<%= prop["link"] %>" style="text-decoration:none!important;color:#000" target="_blank">
-                                                                <%= prop["rooms_number"] %>
+                                                            <a href="<%= prop.link %>" style="text-decoration:none!important;color:#000" target="_blank">
+                                                                <%= prop.rooms_number %>
                                                                   pièces  •
-                                                                  <%= prop["surface"] %> m2
+                                                                  <%= prop.surface %> m2 • 
+                                                                  <%= prop.area.name %> 
                                                             </a>
                                                         </td>
                                                       </tr>
@@ -112,7 +113,7 @@
                                                         <td class="m_-1867408558110905584col100">
                                                             <table border="0" cellspacing="0" cellpadding="0" width="224" class="m_-1867408558110905584col100">
                                                                 <tbody><tr style="margin-top:20px;">
-                                                                    <td class="" height="48" align="center" style="border-radius:24px" bgcolor="#2458FC"><a href="<%= prop["link"] %>" style="font-size:16px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;color:#ffffff;text-decoration:none;border-radius:26px;padding:10px 25px;display:inline-block" target="_blank" >Voir l'annonce</a></td>
+                                                                    <td class="" height="48" align="center" style="border-radius:24px" bgcolor="#2458FC"><a href="<%= prop.link %>" style="font-size:16px;font-family:Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;color:#ffffff;text-decoration:none;border-radius:26px;padding:10px 25px;display:inline-block" target="_blank" >Voir l'annonce</a></td>
                                                                 </tr>
                                                             </tbody></table>
                                                         </td>
