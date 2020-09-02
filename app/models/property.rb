@@ -122,6 +122,10 @@ class Property < ApplicationRecord
     self.where(has_been_processed: false)
   end
 
+  # def self.plucked_unprocessed_properties
+  #   self.unprocessed.pluck(*BROADCASTER_ATTRS).map { |p| BROADCASTER_ATTRS.zip(p).to_h }
+  # end
+
   private
 
   def image_array_validator
