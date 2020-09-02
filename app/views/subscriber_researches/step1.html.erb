@@ -1,58 +1,60 @@
-<div class= "row">
-  <div class="col-12 d-flex ">
-    <ul class="breadcrumb justify-content-around w-100">
-      <div class='active'>Agglomération</div>
-      <div>Critères</div>
-      <div>Canal</div>
+<div class= "row mt-3">
+  <div class="col-12 d-flex pr-0">
+    <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
+      <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
+      <div class="badge-off col-12 col-md-2 text-center mb-1">⚙️Critères</div>
+      <div class="badge-off col-12 col-md-2 text-center mb-1">💌Validation</div>
     </ul>
   </div>
 </div>
 
-<% if false%>
-  <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-    <%= f.error_notification %>
+<div class="container">
 
-    <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :first, value_method: :first %>
+    <% if false%>
+    <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :first, value_method: :first %>
+        <%= f.submit 'Continue' %>
+    <% end %>
+    <% end %>
 
-    <%= f.submit 'Continue' %>
-  <% end %>
-<% end %>
-
-<div class="row mb-4">
-    <div class="col-12 mb-5">
-        <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
-        <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
-            <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-            <%= hidden_field_tag :current_step, 'step1' %>
-                <div class="d-flex">
-                    <div class="card-group">
-                        <% @agglos_infos.each do |agglo| %>
-                            <div class="col-12 col-md-3 mb-4">
-                                <div class="card <%=agglo%>" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
-                                    <img 
-                                    class="card-img-top" 
-                                    src="<%= agglo[2] %>" 
-                                    alt="agglomération">
-                                    <div class="card-body" style="display: none;">
-                                        <%= f.radio_button :agglomeration, 
-                                            agglo[0]
-                                        %>
-                                        <span class="form-check-label mb-2 ml-2 box_hover" >
-                                            <%= agglo[0] %>
-                                        </span>
+    <div class="row mb-4">
+        <div class="col-12 mb-5">
+            <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
+            <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
+                <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
+                <%= hidden_field_tag :current_step, 'step1' %>
+                    <div class="d-flex">
+                        <div class="card-group">
+                            <% @agglos_infos.each do |agglo| %>
+                                <div class="col-12 col-md-3 mb-4">
+                                    <div class="card card_hover <%=agglo%>" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
+                                        <img 
+                                        class="card-img-top" 
+                                        src="<%= agglo[2] %>" 
+                                        alt="agglomération">
+                                        <div class="card-body" style="display: none;">
+                                            <%= f.radio_button :agglomeration, 
+                                                agglo[0]
+                                            %>
+                                            <span class="form-check-label mb-2 ml-2 box_hover" >
+                                                <%= agglo[0] %>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <% end %>
-                    </div>
-                    <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                        <div class="d-flex justify-content-center mt-2 mb-2">
-                            <%= submit_tag "C'est parti ! 🚀", class: "btn btn-outline-light", style:"font-weight:600" %>
+                            <% end %>
                         </div>
-                    </nav>
-                </div>
-            <% end %>
+                        <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+                            <div class="d-flex justify-content-center mt-2 mb-2">
+                                <%= submit_tag "C'est parti ! 🚀", class: "btn btn-outline-light"%>
+                            </div>
+                        </nav>
+                    </div>
+                <% end %>
+        </div>
     </div>
+
 </div>
 
 <script>
@@ -62,13 +64,11 @@
         let checkbox = card.children[1].children[0]
         let allCards = document.getElementsByClassName("card")
 
-        console.log(className)
-
         if(className.includes("true")){ 
             checkbox.checked = true;
             for(i=0; i < allCards.length; i++){
                 allCards[i].style.border = "none"
-                card.style.border = "solid 1px #f26ca7"
+                card.style.border = "solid 1px #2458FC"
             }
         }
         else{

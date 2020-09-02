@@ -13,28 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_09_01_095632) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "btree_gin"
-  enable_extension "btree_gist"
-  enable_extension "citext"
-  enable_extension "cube"
-  enable_extension "dblink"
-  enable_extension "dict_int"
-  enable_extension "dict_xsyn"
-  enable_extension "earthdistance"
-  enable_extension "fuzzystrmatch"
-  enable_extension "hstore"
-  enable_extension "intarray"
-  enable_extension "ltree"
-  enable_extension "pg_stat_statements"
-  enable_extension "pg_trgm"
-  enable_extension "pgcrypto"
-  enable_extension "pgrowlocks"
-  enable_extension "pgstattuple"
   enable_extension "plpgsql"
-  enable_extension "tablefunc"
-  enable_extension "unaccent"
-  enable_extension "uuid-ossp"
-  enable_extension "xml2"
 
   create_table "admins", force: :cascade do |t|
     t.string "firstname"
@@ -354,6 +333,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.integer "min_elevator_floor"
     t.bigint "broker_id"
     t.string "trello_id_card"
+    t.string "status", default: "form_filled"
     t.string "project_type"
     t.boolean "has_messenger"
     t.boolean "is_blocked"
@@ -366,17 +346,9 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.integer "max_sqm_price"
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
-    t.string "status"
     t.boolean "messenger_flux"
     t.boolean "email_flux"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
-  end
-
-  create_table "subways", force: :cascade do |t|
-    t.string "name"
-    t.string "line", default: "{}"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "favorites", "properties"
