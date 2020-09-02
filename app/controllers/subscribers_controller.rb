@@ -90,6 +90,10 @@ class SubscribersController < ApplicationController
     end
   end
 
+  def email_validation
+    @subscriber = Subscriber.find(params[:subscriber_id])
+  end
+
   def email_confirmed
     subscriber = Subscriber.find(params[:subscriber_id])
     redirect_to root_path if subscriber.messenger_flux || !subscriber 
