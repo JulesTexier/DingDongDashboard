@@ -1,0 +1,15 @@
+Salut <%= @subscriber.firstname %>,
+
+<% if @properties.length > 1 %>
+De nouveaux biens ont été capté par notre intelligence artificielle !
+<% else %>
+Un nouveau bien a été capté par notre intelligence artificielle !
+<% end %>
+
+<% @properties.each do |property| %>
+  <p>Prix : <%= property.price %></p>
+  <p>Surface : <%= property.surface %></p>
+  <p>Area : <%= property.area.name %></p>
+  <img src="<%= property.images.first %>"/>
+  <%=  link_to "Accéder au lien", property.link %>
+<% end %>
