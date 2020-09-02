@@ -1,38 +1,73 @@
-
-<ol class="breadcrumb">
-  <li><%= link_to "Agglomération", step1_subscriber_researches_path %></li>
-  <li><%= link_to "Critères", step2_subscriber_researches_path %></li>
-  <li class="active">Profil</li>
-</ol>
-
-
-  
-<%= simple_form_for @subscriber_research_wizard.subscriber, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
-  <%= f.error_notification %>
-  <%= hidden_field_tag :current_step, 'step3' %>
-  <%= f.input :firstname %>
-  <%= f.input :lastname %>
-  <%= f.input :phone %>
-  <%= f.input :email %>
-
-  <%= f.input :messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
-  <%= f.input :email_flux, :as => :hidden, :input_html => { :value => "false" } %>
-
-  <div class="row">
-    <div class='col-6 d-flex justify-content-center'>
-      <div class="medium-btn medium-active" id="messenger" onCLick="selectMessenger()">
-        <p>Messenger</p>
-      </div>
-    </div>
-    <div class='col-6 d-flex justify-content-center'>
-      <div class="medium-btn" id="email" onCLick="selectEmail()">
-        <p>Mail</p>
-      </div>
-    </div>
+<div class= "row mt-3">
+  <div class="col-12 d-flex pr-0">
+    <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
+      <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
+      <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
+      <%= link_to "💌Validation", step3_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
+    </ul>
   </div>
+</div>
 
-  <%= f.submit 'Continue', class:"btn btn-success" %>
-<% end %>
+
+<div class="container">
+
+  <%= simple_form_for @subscriber_research_wizard.subscriber, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
+    <%= f.error_notification %>
+    <%= hidden_field_tag :current_step, 'step3' %>
+
+    <%= f.input :messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
+    <%= f.input :email_flux, :as => :hidden, :input_html => { :value => "false" } %>
+
+
+        <h5 class="mb-2 mt-4 grey_dark text-center">Les dernières infos pour valider votre compte</h6> 
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4">
+                <p class="mt-4 mb-3 grey">🎢 Prénom</p>
+                <div class="input-group mb-3">
+                    <%= f.input_field :firstname, class: "form-control input_style", placeholder: "Ex : Nicolas"%>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <p class="mt-4 mb-6 grey">Nom</p>
+                <div class="input-group mb-3" style="margin-bottom:4.5rem">
+                    <%= f.input_field :lastname, class: "form-control input_style", placeholder: "Ex : Dupont" %>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4">
+                <p class="mt-4 mb-3 grey">🎢 Mail</p>
+                <div class="input-group mb-3">
+                    <%= f.input_field :email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com"%>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <p class="mt-4 mb-6 grey">Téléphone</p>
+                <div class="input-group mb-3" style="margin-bottom:4.5rem">
+                    <%= f.input_field :phone, class: "form-control input_style", placeholder: "Ex : 0624345653" %>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="row">
+      <div class='col-6 d-flex justify-content-center'>
+        <div class="medium-btn medium-active" id="messenger" onCLick="selectMessenger()">
+          <p>Messenger</p>
+        </div>
+      </div>
+      <div class='col-6 d-flex justify-content-center'>
+        <div class="medium-btn" id="email" onCLick="selectEmail()">
+          <p>Mail</p>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit 'Continue', class:"btn btn-success" %>
+  <% end %>
+  
+</div>
 
 <style>
   .medium-btn{

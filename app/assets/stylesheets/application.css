@@ -13,6 +13,49 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .card_hover:hover {
+  border: solid 1px #F26CA7 !important;
+}
+
+.mt-100 {
+  margin-top: 100px
+}
+.choices__list--multiple .choices__item{
+  background-color: #2458FC !important;
+  border-color: #2458FC !important;
+}
+
+ .badge-off{
+  padding: 5px 10px 5px 10px;
+  color: #2458FC;
+  background: white;
+  border: #2458FC solid 1px;
+  border-radius: 50px
+}
+
+.badge-active{
+  padding: 5px 10px 5px 10px;
+  color: white;
+  background: #2458FC;
+  border: #2458FC solid 1px;
+  border-radius: 50px
+}
+
+.badge-active:hover{
+  padding: 5px 10px 5px 10px;
+  color: white !important;
+  background: #F26CA7;
+  border: #F26CA7 solid 1px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+.btn:hover{
+  background: #F26CA7 !important;
+  color: white !important;
+  border: #F26CA7 solid 1px !important;
+}
 
 .form-check-input {
   position: absolute;
@@ -44,19 +87,19 @@
  }
 
  .is-focused .choices__inner, .is-open .choices__inner {
-    border-color: #0470C1 !important;
+    border-color: #2458FC !important;
  }
 
-.input_style {
+.input_style input{
   padding: 20px 20px 20px 10px !important;
   background: none !important;
-  color: #0470C1 !important;
+  color: #2458FC !important;
 }
 
 .input-group-text_style {
     color: white !important;
-    background: #0470C1 !important;
-    border: 1px solid #0470C1 !important;
+    background: #2458FC !important;
+    border: 1px solid #2458FC !important;
 }
 
 
@@ -93,11 +136,11 @@
   }
 
   .bg-blue{
-    background-color: #0470C1;
+    background-color: #2458FC;
   }
 
   .text-blue{
-    color: #0470C1;
+    color: #2458FC;
   }
 
   .text-black{
@@ -122,8 +165,3 @@
     height: min-intrinsic;
     max-height: 200px;
   }
-
-
-
-
-
