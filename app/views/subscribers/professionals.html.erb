@@ -46,7 +46,12 @@
                 </div>
                 <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
                     <div class="d-flex justify-content-center mt-2 mb-2">
-                        <div class="btn btn-outline-light"> Démarrer mon alerte 🚀</div>
+                        <%# <div class="btn btn-outline-light"> Démarrer mon alerte 🚀</div> %>
+                        <% if @subscriber.email_flux %>
+                          <%= link_to "Démarrer mon alerte 🚀", subscriber_email_validation_path, class: 'btn btn-outline-light' %>
+                        <% elsif @subscriber.messenger_flux %>
+                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/HiDingDong/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
+                        <% end %>
                     </div>
                 </nav>
             </div>
