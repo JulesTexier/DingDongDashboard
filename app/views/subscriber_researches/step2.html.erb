@@ -9,19 +9,14 @@
 </div>
 
 
-<div class="container">
+    <div class="container">
 
     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-        <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
-            <div class="d-flex justify-content-center mt-2 mb-2">
-                <%= f.submit "Enregistrer mes critères 🚀",
-                    class: "btn btn-outline-light"%>
-            </div>
-        </nav>  
+
         <%= hidden_field_tag :current_step, 'step2' %>
         <%= f.error_notification %>
 
-
+        <div style="margin-bottom: 150px;">
             <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
             <p class="mt-4 mb-3 grey">📍 Votre zone de recherche *</p>
             <div class="raw d-flex flex-wrap">
@@ -136,12 +131,19 @@
                     </div>
                 <% end %>
 
-                <br/><br/><br/>
-                <div class="d-flex justify-content-center mt-4 mb-6">
-                -------- 🔔--------
-                </div>
+
             </p>
+        </div>
+
+        <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-2 mb-2">
+                <%= f.submit "Enregistrer mes critères 🚀",
+                    class: "btn btn-outline-light"%>
+            </div>
+        </nav>  
         <% end %>
+
+
 </div>
 
 
