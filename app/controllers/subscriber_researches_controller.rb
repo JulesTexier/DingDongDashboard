@@ -34,7 +34,7 @@ class SubscriberResearchesController < ApplicationController
   
   def step3
     if session[:areas].empty?
-      flash[:error] = "Veuillez sélectionner une zone de recherche."
+      flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
   end
