@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_095632) do
+ActiveRecord::Schema.define(version: 2020_09_01_143525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
     t.string "description"
     t.string "alias_email"
+  end
+
+  create_table "contractors", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "profile_picture"
+    t.string "phone"
+    t.string "company"
+    t.string "email"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -124,6 +133,15 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.boolean "live_broadcast", default: true
     t.index ["email"], name: "index_hunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
+  end
+
+  create_table "notaries", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "profile_picture"
+    t.string "phone"
+    t.string "company"
+    t.string "email"
   end
 
   create_table "permanences", force: :cascade do |t|
@@ -348,7 +366,13 @@ ActiveRecord::Schema.define(version: 2020_09_01_095632) do
     t.boolean "apartment_type", default: true
     t.boolean "messenger_flux"
     t.boolean "email_flux"
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
+    t.bigint "contractor_id"
+    t.bigint "notary_id"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
+    t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
+    t.index ["notary_id"], name: "index_subscribers_on_notary_id"
   end
 
   add_foreign_key "favorites", "properties"

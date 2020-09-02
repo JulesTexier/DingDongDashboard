@@ -1,0 +1,9 @@
+Salut <%= @subscriber.firstname %>,
+
+<% if @properties.length > 1 %>
+De nouveaux biens ont été capté par notre intelligence artificielle !
+<% else %>
+Un nouveau bien a été capté par notre intelligence artificielle !
+<% end %>
+
+<%= render 'property', properties: @properties %>

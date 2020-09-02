@@ -1,0 +1,7 @@
+<% properties.each do |property| %>
+  <p>Prix : <%= property.price %></p>
+  <p>Surface : <%= property.surface %></p>
+  <p>Area : <%= property.area.name %></p>
+  <img src="<%= property.images.first %>"/>
+  <%=  link_to "Accéder au lien", property.link %>
+<% end %>

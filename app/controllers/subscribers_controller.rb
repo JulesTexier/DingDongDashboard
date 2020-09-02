@@ -1,4 +1,5 @@
 class SubscribersController < ApplicationController  
+
   # ###############
   #      CRUD     #
   # ###############
@@ -10,7 +11,6 @@ class SubscribersController < ApplicationController
   def create
     subscriber = Subscriber.new(subscriber_params)
     if subscriber.save
-      redirect_to step1_subscriber_subscriber_researches_path(subscriber)
     else
       flash[:error] = "Un problème est apparu, veuillez réessayer."
       render 'new'
@@ -52,7 +52,10 @@ class SubscribersController < ApplicationController
   end
 
   def professionals
-    
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @notary = @subscriber.notary
+    @broker = @subscriber.broker
+    @contractor = @subscriber.contractor
   end
 
   # ###############
@@ -74,9 +77,28 @@ class SubscribersController < ApplicationController
     end
   end
 
+  def confirm_email
+    subscriber = Subscriber.find_by_confirm_token(params[:token])
+    if subscriber
+      subscriber.validate_email
+      subscriber.save(validate: false)
+      SubscriberMailer.welcome_email(subscriber).deliver_now
+      redirect_to subscriber_email_confirmed_path(subscriber)
+    else
+      flash[:error] = "Désolé, l'utilisateur n'existe pas"
+      redirect_to url_not_found_path
+    end
+  end
+
+  def email_confirmed
+    subscriber = Subscriber.find(params[:subscriber_id])
+    redirect_to root_path if subscriber.messenger_flux || !subscriber 
+  end
+
   private
 
   def subscriber_params
     params.require(:subscriber).permit(:firstname, :lastname, :email, :phone, :has_messenger, :facebook_id, :max_price, :min_surface, :min_rooms_number, :min_elevator_floor, :min_floor, :project_type, :additional_question, :specific_criteria, :broker_id, :status, :initial_areas, :terrace, :garden, :balcony, :new_construction, :last_floor, :min_price, :max_sqm_price)
   end
 end
+

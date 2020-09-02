@@ -2,9 +2,10 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
-  ## REVOIR LES VALIDATEURS
+  after_create :send_confirmation_email
+  after_create :professional_attribution
 
-  belongs_to :broker, optional: true
+  ## REVOIR LES VALIDATEURS
 
   has_many :selected_areas
   has_many :areas, through: :selected_areas
@@ -20,6 +21,11 @@ class Subscriber < ApplicationRecord
   ## A SUPPRIMER APRES LE SEED
   has_many :favorites
   has_many :fav_properties, through: :favorites, source: :property
+
+  ## Professional association
+  belongs_to :notary, optional: true
+  belongs_to :contractor, optional: true
+  belongs_to :broker, optional: true
 
 
   ########################
@@ -75,6 +81,18 @@ class Subscriber < ApplicationRecord
     self.update(broker: broker, is_blocked: true)
     Trello.new.add_lead_on_etienne_trello(self)
     BrokerMailer.new_lead(self.id).deliver_now
+  end
+
+
+  ############################
+  # Professional Attribution #
+  ############################
+
+  def professional_attribution
+    self.notary = Notary.first if self.notary.nil?
+    self.contractor = Contractor.first if self.contractor.nil?
+    self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
+    self.save
   end
 
 
@@ -168,12 +186,33 @@ class Subscriber < ApplicationRecord
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
   end
+  
+  def validate_email
+    self.email_confirmed = true
+    self.confirm_token = nil
+  end
 
   private
 
-  ###################
-  # Matching methods
-  ###################
+  ###########################
+  # Email confirmation methods
+  ###########################
+
+
+  def set_confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
+
+  def send_confirmation_email
+    if self.email_flux
+      set_confirmation_token
+      self.save(validate: false)
+      SubscriberMailer.registration_confirmation(self).deliver_now
+    end
+  end
+
 
 # A voir ...
   def notify_broker_if_max_price_is_changed
@@ -192,3 +231,5 @@ class Subscriber < ApplicationRecord
     end
   end
 end
+
+

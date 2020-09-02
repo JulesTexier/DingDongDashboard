@@ -1,0 +1,5 @@
+ Hi <%= @subscriber.firstname %>,
+
+Thanks for registering! To confirm your registration click the URL below.
+
+<%=  link_to "Confirm mon email", "http://localhost:3000/#{@subscriber.confirm_token}/confirm_email/"%>
