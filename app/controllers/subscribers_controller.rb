@@ -82,7 +82,7 @@ class SubscribersController < ApplicationController
     if subscriber
       subscriber.validate_email
       subscriber.save(validate: false)
-      # TODO A CODER Méthode pour envoyer les 5 derniers biens
+      SubscriberMailer.welcome_email(subscriber).deliver_now
       redirect_to subscriber_email_confirmed_path(subscriber)
     else
       flash[:error] = "Désolé, l'utilisateur n'existe pas"
