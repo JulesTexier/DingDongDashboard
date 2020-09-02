@@ -13,6 +13,50 @@
  *= require_tree .
  *= require_self
  */
+
+.encart_style {
+  padding: 15px;
+  border-radius: 25px;
+  border : 1px solid #6c757d;
+}
+
+
+
+/*STEP 3&4*/
+
+.medium-btn{
+  border: 1px solid #2458FC !important;
+  border-radius: .25rem !important;
+  color: #2458FC !important;
+  cursor: pointer !important;
+}
+
+.medium-active{
+  background-color: #2458FC !important;
+  color: white !important;
+} 
+
+.medium-active-logo{
+  fill: white !important;
+}
+
+.btn:hover > svg > g > path {
+  fill: white !important;
+}
+
+/*STEP 3&4*/
+
+ .comment_style {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 25px;
+  margin-top: -80px;
+  color: #373A3C;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
  
  .card_hover:hover {
   border: solid 1px #F26CA7 !important;
