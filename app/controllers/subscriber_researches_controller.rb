@@ -37,6 +37,7 @@ class SubscriberResearchesController < ApplicationController
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
+    # @average_results = [10,12]
     @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
