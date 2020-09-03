@@ -123,6 +123,23 @@ class Research < ApplicationRecord
     return "max. #{self.get_pretty_price("max")} € - min. #{self.min_surface} m2 - min. #{self.min_rooms_number} pce"
   end
 
+  def average_results_estimation(nb_days)
+    props = Property
+      .where('created_at > ? ', Time.now - nb_days.days)
+      .where(area: self.areas)
+      .where('price <= ? AND surface >= ? AND rooms_number >= ?', self.max_price, self.min_surface, self.min_rooms_number)
+      .order(id: :desc)
+      .limit(200)
+      .pluck(*ATTRS)
+      .map { |p| ATTRS.zip(p).to_h }
+    matching_props = []
+    props.each do |prop|
+      matching_props.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+    end
+    average = matching_props.count/nb_days
+    return [average*0.8.round, average*1.2.round]
+  end
+
   ##################################
   ## HUNTER METHODS FOR BROADCAST ##
   ##################################

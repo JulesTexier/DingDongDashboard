@@ -1,0 +1,15 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-12 col-lg-8 mb-5">
+      <div class="row">
+        <div class='col-12  d-flex justify-content-center mb-1'>
+        <% case average_results[1] %>
+        <% when 0 %>
+          <p>Oups, tes critères sont trop restrictifs. Tu ne recevras que très peu d'annonces. 
+          <br/> Nous t'invitons à <%= link_to 'modifier tes critères', step2_subscriber_researches_path %> </p>
+        <% else %>
+          <p>Tu vas recevoir entre <%= average_results[0] %> et <%= average_results[1] %> bien(s) par jour</p>
+        <% end %>
+        </div>
+      </div>
+  </div>
+</div>
