@@ -90,6 +90,8 @@ Rails.application.routes.draw do
       # Other models
       resources :properties, only: [:show, :index]
       resources :brokers, only: [:show]
+      resources :notaries, only: [:show]
+      resources :contractors, only: [:show]
       resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
