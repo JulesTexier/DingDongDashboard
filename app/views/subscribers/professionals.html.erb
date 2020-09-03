@@ -16,7 +16,14 @@
 <div class="container">
     <div class="row mt-4 mb-4">
         <div class="col-12">
-            <h5 class="mb-3 grey_dark">Ding Dong c'est aussi 3 professionnels pour vous aider ❤️</h6> 
+            <h3 class="mb-3 grey_dark">
+                <div style="font-family: 'Nunito'"> Félicitations 🎉 Votre alerte est paramétrée !</div>
+            </h3> 
+            <h5>
+                <div class="mt-4"> 🎁 En cadeau de bienvenue 🎁 </div>
+                <div class="mt-2"> ️👨‍💼 Nos 3 meilleurs pros pour vous accompagner  </div>
+            </h5> 
+
             <div class="">
                 <div class="row mt-5">
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
@@ -50,7 +57,7 @@
                         <% if @subscriber.email_flux %>
                           <%= link_to "Démarrer mon alerte 🚀", subscriber_email_validation_path, class: 'btn btn-outline-light' %>
                         <% elsif @subscriber.messenger_flux %>
-                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/HiDingDong/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
+                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/#{ENV['MANYCHAT_BOT_ID']}/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
                         <% end %>
                     </div>
                 </nav>

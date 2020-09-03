@@ -14,6 +14,14 @@
  *= require_self
  */
 
+ .mb-100{
+  margin-bottom: 120px;
+ }
+
+ .logo-sm {
+  max-height: 2rem;
+}
+
 .encart_style {
   padding: 15px;
   border-radius: 25px;

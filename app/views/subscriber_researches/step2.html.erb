@@ -16,21 +16,21 @@
 </div>
 
 
-    <div class="container">
+    <div class="container mb-100">
 
     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
 
         <%= hidden_field_tag :current_step, 'step2' %>
         <%= f.error_notification %>
 
-        <div style="margin-bottom: 150px;">
+        
             <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
             <p class="mt-4 mb-3 grey">📍 Votre zone de recherche *</p>
             <div class="raw d-flex flex-wrap">
                 <div class="form-group col-12 p-0 mb-0">
                     <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
                         <% @master_areas.each do |item| %>
-                        <option value="<%= item[0] %>" <%= item[3] %>> <%= item[1] + " (" + item[2] + ")" %></option>
+                        <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
                         <% end %>
                     </select>
                 </div>
@@ -140,7 +140,7 @@
 
 
             </p>
-        </div>
+        
 
         <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
             <div class="d-flex justify-content-center mt-2 mb-2">

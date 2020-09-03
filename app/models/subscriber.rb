@@ -132,7 +132,7 @@ class Subscriber < ApplicationRecord
 
   def get_areas_list
     areas = ""
-    self.areas.each do |area|
+    self.research.areas.each do |area|
       areas += area.name + ", "
     end
     return areas
@@ -156,7 +156,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_edit_path
-    return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/edit"
+    return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/research/edit"
   end
 
   ########################

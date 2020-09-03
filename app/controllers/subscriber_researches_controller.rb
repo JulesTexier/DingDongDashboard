@@ -1,5 +1,5 @@
 class SubscriberResearchesController < ApplicationController
-  before_action :load_subscriber_research_wizard, except: %i(validate_step)
+  before_action :load_subscriber_research_wizard, except: [:edit, :update, :validate_step]
 
   def validate_step
     current_step = params[:current_step]
@@ -37,6 +37,8 @@ class SubscriberResearchesController < ApplicationController
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
+    # @average_results = [10,12]
+    @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
   def create
@@ -50,6 +52,32 @@ class SubscriberResearchesController < ApplicationController
     else
       redirect_to({ action: Wizard::SubscriberResearch::STEPS.first }, alert: 'There were a problem when creating the research.')
     end
+  end
+
+  def edit 
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @research = @subscriber.research
+    subscriber_areas_id = @research.areas.pluck(:id)
+    @master_areas = Area.get_selected_agglo_area(@research.agglomeration, subscriber_areas_id)
+  end
+
+  def update
+    @subscriber = Subscriber.find(params[:subscriber_id])
+    @research = @subscriber.research
+    areas_ids = []
+    areas_ids += params[:areas] unless params[:areas].nil?
+    if @research.update(research_params) && !areas_ids.empty?
+      @research.update_research_areas(areas_ids)
+      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
+    else
+      flash[:danger] = "Sélectionnez des arrondissements..."
+    end
+    # // Send flow to subscriber
+    if @subscriber.messenger_flux
+      flow = "content20200716131717_882877"
+      Manychat.new.send_flow_sequence(@subscriber, flow) unless Rails.env.development?
+    end
+    redirect_to subscriber_research_edit_path(@subscriber)
   end
 
   private
@@ -73,6 +101,10 @@ class SubscriberResearchesController < ApplicationController
 
   def subscriber_wizard_params
     params.require(:subscriber_wizard).permit(:firstname, :lastname, :email, :phone, :messenger_flux, :email_flux)
+  end
+
+  def research_params
+    params.require(:research).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type)
   end
 
   class InvalidStep < StandardError; end
