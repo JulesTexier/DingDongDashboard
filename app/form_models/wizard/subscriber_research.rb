@@ -21,6 +21,7 @@ module Wizard
     class Step2 < Step1
       validates :min_surface, presence: true
       validates :max_price, presence: true
+      validates :min_rooms_number, presence: true
     end
 
     class Step3 < Step2

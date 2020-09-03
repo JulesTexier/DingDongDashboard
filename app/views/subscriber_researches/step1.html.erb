@@ -1,3 +1,10 @@
+<div class="row mt-3"> 
+    <div class="col d-flex justify-content-center"> 
+        <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+    </div>
+</div>
+
+
 <div class= "row mt-3">
   <div class="col-12 d-flex pr-0">
     <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
@@ -9,20 +16,12 @@
 </div>
 
 <div class="container">
-
-    <% if false%>
-    <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-        <%= f.error_notification %>
-        <%= f.input :agglomeration, as: :radio_buttons, collection: @agglos_infos, label_method: :first, value_method: :first %>
-        <%= f.submit 'Continue' %>
-    <% end %>
-    <% end %>
-
     <div class="row mb-4">
         <div class="col-12 mb-5">
             <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
             <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
+                <%= f.error_notification %>   
                 <%= hidden_field_tag :current_step, 'step1' %>
                     <div class="d-flex">
                         <div class="card-group">
@@ -35,7 +34,8 @@
                                         alt="agglomération">
                                         <div class="card-body" style="display: none;">
                                             <%= f.radio_button :agglomeration, 
-                                                agglo[0]
+                                                agglo[0],
+                                                required: true
                                             %>
                                             <span class="form-check-label mb-2 ml-2 box_hover" >
                                                 <%= agglo[0] %>

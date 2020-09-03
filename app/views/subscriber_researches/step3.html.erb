@@ -1,3 +1,9 @@
+<div class="row mt-3"> 
+    <div class="col d-flex justify-content-center"> 
+        <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+    </div>
+</div>
+
 <div class= "row mt-3">
   <div class="col-12 d-flex pr-0">
     <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
@@ -25,13 +31,13 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <p class="mt-4 mb-3 grey">👉 Prénom</p>
                 <div class="input-group mb-3">
-                    <%= f.input_field :firstname, class: "form-control input_style", placeholder: "Ex : Nicolas"%>
+                    <%= f.input_field :firstname, class: "form-control input_style", placeholder: "Ex : Nicolas", required: true %>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
                 <p class="mt-4 mb-6 grey">👉 Nom</p>
                 <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                    <%= f.input_field :lastname, class: "form-control input_style", placeholder: "Ex : Dupont" %>
+                    <%= f.input_field :lastname, class: "form-control input_style", placeholder: "Ex : Dupont", required: true %>
                 </div>
             </div>
         </div>
@@ -39,13 +45,13 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <p class="mt-4 mb-3 grey">💌 Email</p>
                 <div class="input-group mb-3">
-                    <%= f.input_field :email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com"%>
+                    <%= f.input_field :email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com", required: true%>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
                 <p class="mt-4 mb-6 grey">📱Téléphone</p>
                 <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                    <%= f.input_field :phone, class: "form-control input_style", placeholder: "Ex : 0624345653" %>
+                    <%= f.input_field :phone, class: "form-control input_style", placeholder: "Ex : 0624345653", required: true%>
                 </div>
             </div>
         </div>
@@ -91,27 +97,6 @@
   
 </div>
 
-<style>
-  .medium-btn{
-    border: 1px solid #2458FC;
-    border-radius: .25rem;
-    color: #2458FC;
-    cursor: pointer;
-  }
-
-  .medium-active{
-    background-color: #2458FC;
-    color: white;
-  } 
-
-  .medium-active-logo{
-    fill: white !important;
-  }
-
-  .btn:hover > svg > g > path {
-    fill: white !important;
-  }
-</style>
 
 <script>
 

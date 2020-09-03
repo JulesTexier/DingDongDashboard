@@ -34,7 +34,7 @@ class SubscriberResearchesController < ApplicationController
   
   def step3
     if session[:areas].empty?
-      flash[:error] = "Veuillez sélectionner une zone de recherche."
+      flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
   end
@@ -43,7 +43,7 @@ class SubscriberResearchesController < ApplicationController
     @subscriber_research_wizard.subscriber.save
     @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
     if @subscriber_research_wizard.subscriber_research.save
-      @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
+      @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
       session[:subscriber_research_attributes] = nil
       session[:areas] = nil
       redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), notice: 'Research succesfully created!'

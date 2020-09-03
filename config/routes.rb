@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
     get :professionals, :path => 'nos-pros'
+    get :email_validation, :path => 'validez-votre-email'
     get :email_confirmed, :path => 'confirmation'
     get '/research/edit' => 'subscriber_researches#edit'
     patch '/research/update' => 'subscriber_researches#update'
