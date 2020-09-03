@@ -15,7 +15,7 @@
 </div>
 
 
-<div class="container">
+<div class="container mb-100">
 
   <%= simple_form_for @subscriber_research_wizard.subscriber, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
     <%= f.error_notification %>
@@ -26,6 +26,39 @@
 
 
         <h5 class="mb-2 mt-4 grey_dark text-center">Les dernières infos pour valider votre compte</h6> 
+
+
+        <%= render 'indicator', average_results: @average_results%>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <p class="mt-4 mb-3 grey">🛎️ Souhaitez-vous recevoir les annonces par mail ou messenger ?</p>
+                <div class="row">
+                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
+                    <div class="btn medium-btn medium-active col-12" id="messenger" onCLick="selectMessenger()">
+                        <?xml version="1.0"?>
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30">
+                          <g>
+                            <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path medium-active-logo" style="fill:#2458FC" data-old_color="#2196f3"/>
+                          </g> 
+                        </svg>
+                        <span class="ml-2">Messenger</span>
+                    </div>
+                  </div>
+                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
+                    <div class="btn medium-btn col-12" id="email" onCLick="selectEmail()">
+                      <?xml version="1.0"?>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="30" height="30">
+                        <g>
+                          <path d="M467,81H45c-24.853,0-45,20.147-45,45v260c0,24.853,20.147,45,45,45h422c24.853,0,45-20.147,45-45V126    C512,101.147,491.853,81,467,81z M430.992,338.391c-6.306,5.365-15.776,4.605-21.144-1.708L323.272,234.89l-59.839,34.139    c-4.607,2.628-10.26,2.627-14.865,0l-59.839-34.139l-86.577,101.792c-5.364,6.308-14.833,7.077-21.144,1.708    c-6.311-5.367-7.075-14.833-1.708-21.144l82.913-97.484l-73.645-42.016c-7.196-4.104-9.701-13.266-5.597-20.461    c4.106-7.197,13.266-9.701,20.462-5.597c6.103,3.481,145.685,83.114,152.567,87.041c6.874-3.922,146.448-83.55,152.567-87.041    c7.193-4.105,16.356-1.6,20.462,5.597c4.104,7.195,1.6,16.356-5.597,20.461l-73.645,42.016l82.913,97.484    C438.067,323.558,437.303,333.023,430.992,338.391z" id="email-logo" data-original="#000000" class="active-path" data-old_color="#000000" style="fill:#2458FC"/>
+                        </g>
+                      </svg>
+                      <span class="ml-2">Email</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
@@ -56,37 +89,6 @@
             </div>
         </div>
 
-        <%= render 'indicator', average_results: @average_results%>
-
-        <div class="row justify-content-center mb-5">
-            <div class="col-12 col-lg-8 mb-5">
-                <p class="mt-4 mb-3 grey">🛎️ Souhaitez-vous recevoir les annonces par mail ou messenger ?</p>
-                <div class="row">
-                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
-                    <div class="btn medium-btn medium-active col-12" id="messenger" onCLick="selectMessenger()">
-                        <?xml version="1.0"?>
-                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30">
-                          <g>
-                            <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path medium-active-logo" style="fill:#2458FC" data-old_color="#2196f3"/>
-                          </g> 
-                        </svg>
-                        <span class="ml-2">Messenger</span>
-                    </div>
-                  </div>
-                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
-                    <div class="btn medium-btn col-12" id="email" onCLick="selectEmail()">
-                      <?xml version="1.0"?>
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="30" height="30">
-                        <g>
-                          <path d="M467,81H45c-24.853,0-45,20.147-45,45v260c0,24.853,20.147,45,45,45h422c24.853,0,45-20.147,45-45V126    C512,101.147,491.853,81,467,81z M430.992,338.391c-6.306,5.365-15.776,4.605-21.144-1.708L323.272,234.89l-59.839,34.139    c-4.607,2.628-10.26,2.627-14.865,0l-59.839-34.139l-86.577,101.792c-5.364,6.308-14.833,7.077-21.144,1.708    c-6.311-5.367-7.075-14.833-1.708-21.144l82.913-97.484l-73.645-42.016c-7.196-4.104-9.701-13.266-5.597-20.461    c4.106-7.197,13.266-9.701,20.462-5.597c6.103,3.481,145.685,83.114,152.567,87.041c6.874-3.922,146.448-83.55,152.567-87.041    c7.193-4.105,16.356-1.6,20.462,5.597c4.104,7.195,1.6,16.356-5.597,20.461l-73.645,42.016l82.913,97.484    C438.067,323.558,437.303,333.023,430.992,338.391z" id="email-logo" data-original="#000000" class="active-path" data-old_color="#000000" style="fill:#2458FC"/>
-                        </g>
-                      </svg>
-                      <span class="ml-2">Email</span>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
 
 
         <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">

@@ -1,15 +1,46 @@
-<div class="row justify-content-center mb-5">
-  <div class="col-12 col-lg-8 mb-5">
+<div class="row justify-content-center mt-5">
+  <div class="col-12 col-lg-8">
       <div class="row">
-        <div class='col-12  d-flex justify-content-center mb-1'>
-        <% case average_results[1] %>
-        <% when 0 %>
-          <p>Oups, tes critères sont trop restrictifs. Tu ne recevras que très peu d'annonces. 
-          <br/> Nous t'invitons à <%= link_to 'modifier tes critères', step2_subscriber_researches_path %> </p>
+
+        <% case  %>
+        <% when average_results[1] == 0 %>
+          <div class="col-6">
+            ⚠️Tes critères sont <span class="text-danger">trop restrictifs</span>
+            <br/>
+            Tu ne recevras <strong>quasiment pas d'annonces</strong>
+          </div>
+          <div class="col-6">
+            <%= link_to 'Ajuster mes critères', step2_subscriber_researches_path, class:"btn medium-btn" %>
+          </div>
+        <% when average_results[1] < 3 %>
+          <div class="col-6">
+            ⚠️Tes critères sont <span class="text-danger">très restrictifs</span>
+            <br/>
+            Tu recevras entre <strong><%= average_results[0] %> et <%= average_results[1] %> annonces / jour </strong>
+          </div>
+          <div class="col-6">
+            <%= link_to 'Ajuster mes critères', step2_subscriber_researches_path, class:"btn medium-btn" %>
+          </div>
+        <% when average_results[1] > 20 %>
+          <div class="col-6">
+            ⚠️Tes critères sont <span class="text-danger">trop larges</span>
+            <br/>
+            Tu recevras plus de <strong>20 annonces / jour </strong>
+          </div>
+          <div class="col-6">
+            <%= link_to 'Ajuster mes critères', step2_subscriber_researches_path, class:"btn medium-btn" %>
+          </div>
         <% else %>
-          <p>Tu vas recevoir entre <%= average_results[0] %> et <%= average_results[1] %> bien(s) par jour</p>
+          <div class="col-6">
+            ✅Tes critères sont <span class="text-success">bons</span>
+            <br/>
+            Tu recevras entre <strong><%= average_results[0] %> et <%= average_results[1] %> annonces / jour </strong>
+          </div>
+          <div class="col-6">
+            <%= link_to 'Ajuster mes critères', step2_subscriber_researches_path, class:"btn medium-btn" %>
+          </div>
         <% end %>
-        </div>
+
       </div>
   </div>
 </div>
