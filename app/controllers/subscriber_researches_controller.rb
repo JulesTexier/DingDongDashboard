@@ -1,5 +1,5 @@
 class SubscriberResearchesController < ApplicationController
-  before_action :load_subscriber_research_wizard, except: %i(validate_step),  except: [:edit, :update]
+  before_action :load_subscriber_research_wizard, except: [:edit, :update, :validate_step]
 
   def validate_step
     current_step = params[:current_step]
@@ -37,6 +37,7 @@ class SubscriberResearchesController < ApplicationController
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
+    @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
   def create
