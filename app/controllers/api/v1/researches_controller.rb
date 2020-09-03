@@ -1,6 +1,6 @@
 require 'dotenv/load'
 
-class Api::V1::ResearchsController < ActionController::API
+class Api::V1::ResearchesController < ActionController::API
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
     TOKEN = ENV['BEARER_TOKEN']
