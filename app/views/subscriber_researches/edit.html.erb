@@ -29,7 +29,7 @@
                         <% if item[0] == "GlobalZone"%>
                         <option value="<%= item[0] %> - <%= item[1] %>"> <%= item[1] %></option>
                         <% else %>
-                        <option value="<%= item[0] %>" <%= item[3] %>> <%= item[1] + " (" + item[2] + ")" %></option>
+                        <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
                         <% end %>
                     <% end %>
                 </select>
