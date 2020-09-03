@@ -32,10 +32,13 @@ Rails.application.routes.draw do
     get :professionals, :path => 'nos-pros'
     get :email_validation, :path => 'validez-votre-email'
     get :email_confirmed, :path => 'confirmation'
+    get '/research/edit' => 'subscriber_researches#edit'
+    patch '/research/update' => 'subscriber_researches#update'
   end
 
   
   resources :properties, only: [:show]
+
   
   resource :subscriber_researches do
     get :step1, :path => 'agglomeration'
