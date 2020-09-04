@@ -17,7 +17,9 @@ class Api::V1::ResearchesController < ActionController::API
     def show
         begin
             research = Research.find(params[:id])
-            render json: {status: 'SUCCESS', message: 'Required research', data: research}, status: 200
+            data = research.as_json
+            data[:areas_list] = research.get_areas_list
+            render json: {status: 'SUCCESS', message: 'Required research', data: data}, status: 200
         rescue ActiveRecord::RecordNotFound
             render json: {status: 'ERROR', message: 'Research not found', data: nil}, status: 404
         end
