@@ -1,10 +1,10 @@
-:concurrency: 4
+:concurrency: 5
 staging:
-  :concurrency: 4
+  :concurrency: 5
 production:
   :concurrency: 4
 :queues:
-  - critical
-  - default
-  - low
-  - mailers
+  - ["broadcaster", 6]
+  - ["scraper", 4]
+  - ["mailers", 2]
+  - ["low", 1]
