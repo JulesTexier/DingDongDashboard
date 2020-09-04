@@ -140,6 +140,9 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
     desc += "\u000A\u000A*Inscription chez DingDong : #{Time.now.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+    desc += "\u000A\u000A*Courtier : #{self.broker.firstname}*" unless self.broker.nil?
+    desc += "\u000A\u000A*Entrepreneur : #{self.contractor.firstname}*" unless self.contractor.nil?
+    desc += "\u000A\u000A*Notaire : #{self.notary.firstname}*" unless self.notary.nil?
   end
 
   def get_fullname
