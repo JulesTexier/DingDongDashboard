@@ -21,6 +21,9 @@ class Api::V1::SubscribersController < ActionController::API
             data[:areas_list] = subscriber.get_areas_list
             data[:edit_path] = subscriber.get_edit_path
             data[:research_id] = subscriber.research.id
+            data[:broker_name] = subscriber.broker.firstname unless subscriber.broker.nil?
+            data[:notary_name] = subscriber.notary.firstname unless subscriber.notary.nil?
+            data[:contractor_name] = subscriber.contractor.firstname unless subscriber.contractor.nil?
             render json: {status: 'SUCCESS', message: 'Required subscriber', data: data}, status: 200
         rescue ActiveRecord::RecordNotFound
             render json: {status: 'ERROR', message: 'Subscriber not found', data: nil}, status: 404
