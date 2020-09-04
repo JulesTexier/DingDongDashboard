@@ -10,9 +10,9 @@
     <div class= "row mt-3">
     <div class="col-12 d-flex">
         <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-        <div class="badge-off col-12 col-md-2 text-center mb-1">⚙️Critères</div>
-        <div class="badge-off col-12 col-md-2 text-center mb-1">💌Validation</div>
+        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4 text-center mb-1' %>
+        <div class="badge-off col-12 col-lg-4 text-center mb-1">⚙️Critères</div>
+        <div class="badge-off col-12 col-lg-4 text-center mb-1">💌Validation</div>
         </ul>
     </div>
     </div>
@@ -25,7 +25,7 @@
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
                 <%= f.error_notification %>   
                 <%= hidden_field_tag :current_step, 'step1' %>
-                    <div class="d-flex">
+                    <div class="">
                         <div class="card-group">
                             <% @agglos_infos.each do |agglo| %>
                                 <div class="col-12 col-md-3 mb-4">
