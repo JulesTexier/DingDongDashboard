@@ -27,26 +27,26 @@
             <div class="">
                 <div class="row mt-5">
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <img src="<%= @subscriber.broker.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
-                        <div>Je suis Hugo, expert courtier sur Paris. Je peux vous aider à trouver le meilleur taux en fonction de votre situation !</div>
+                        <div><%= @subscriber.broker.description %></div>
                     </div>                  
                     <a class="btn medium-btn mt-2" href="mailto:etienne@hellodingdong.com" target="_blank">Me contacter</a>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <img src="<%= @subscriber.contractor.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
-                        <div>Moi c'est Mathieu, entrepreneur travaux depuis 20 ans. Je vous accompagne en contre-visite et me charge de tous le suivi des travaux !</div>
+                        <div><%= @subscriber.contractor.description %></div>
                     </div>   
                     <a class="btn medium-btn mt-2" href="mailto:etienne@hellodingdong.com" target="_blank">Me contacter</a>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <img src="<%= @subscriber.notary.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
-                        <div>Je suis Paul Henry, Notaire depuis plus de 10 ans. Je suis là pour échanger sur la procédure administrative de votre achat.</div>
+                        <div><%= @subscriber.notary.description %></div>
                     </div>   
                     <a class="btn medium-btn mt-2" href="mailto:etienne@hellodingdong.com" target="_blank">Me contacter</a>
                 </div>
