@@ -1,5 +1,5 @@
 class SubscriberResearchesController < ApplicationController
-  before_action :load_subscriber_research_wizard, except: [:edit, :update, :validate_step]
+  before_action :load_subscriber_research_wizard, except: [:edit, :update, :validate_step, :stop, :activate]
 
   def validate_step
     current_step = params[:current_step]
@@ -78,6 +78,31 @@ class SubscriberResearchesController < ApplicationController
       Manychat.new.send_flow_sequence(@subscriber, flow) unless Rails.env.development?
     end
     redirect_to subscriber_research_edit_path(@subscriber)
+  end
+
+
+  def stop
+    begin
+      @confirmation = false
+      @subscriber = Subscriber.find(params[:subscriber_id])
+      if @subscriber.update(is_active: false)
+        @confirmation = true
+      end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+    end
+  end
+
+  def activate 
+    begin
+      @confirmation = false
+      @subscriber = Subscriber.find(params[:subscriber_id])
+      if @subscriber.update(is_active: true)
+        @confirmation = true
+      end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+    end
   end
 
   private

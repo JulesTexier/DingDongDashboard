@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get :email_confirmed, :path => 'confirmation'
     get '/research/edit' => 'subscriber_researches#edit'
     patch '/research/update' => 'subscriber_researches#update'
+    get '/research/stop' => 'subscriber_researches#stop'
+    get '/research/activate' => 'subscriber_researches#activate'
   end
 
   
