@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_063431) do
+ActiveRecord::Schema.define(version: 2020_09_04_081742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -164,6 +164,14 @@ ActiveRecord::Schema.define(version: 2020_09_04_063431) do
     t.string "phone"
     t.string "company"
     t.string "email"
+    t.text "description"
+  end
+
+  create_table "nurturing_mailers", force: :cascade do |t|
+    t.string "name"
+    t.integer "time_frame"
+    t.string "template"
+    t.boolean "is_active", default: false
     t.text "description"
   end
 
