@@ -32,3 +32,10 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+backblaze:
+  service: Backblaze
+  bucket_name: ding-dong
+  bucket_id: 8384741f7ac56b7e764b0f10
+  key_id: 002344fa5be6bf00000000001
+  key_token: K002RBdfn73476IgKuEM62VW9315BSo
