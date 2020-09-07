@@ -174,6 +174,14 @@ class Research < ApplicationRecord
       .where(is_active: true)
   end
   
+  def get_areas_list
+    areas = ""
+    self.areas.each do |area|
+      areas += area.name + ", "
+    end
+    return areas
+  end
+
   private
 
   ####################

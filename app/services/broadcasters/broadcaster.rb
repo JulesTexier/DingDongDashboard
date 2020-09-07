@@ -12,7 +12,6 @@ class Broadcaster
   def live_broadcast
     properties = Property.unprocessed
     update_processed_properties(properties)
-
     live_messenger_broadcaster(properties)
     live_email_broadcaster(properties)
     live_email_broadcaster_hunter(properties)
@@ -69,7 +68,6 @@ class Broadcaster
   def hunter_searched_not_live_processed
     # // Load properties scraped in the last hour 
     properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(*ATTRS).map { |p| ATTRS.zip(p).to_h }
-
     hunter_researches = Research.active_hunters_not_live_broadcasted
     hunter_researches.each do |hunter_research| 
       hunter_search_props = []
@@ -81,7 +79,8 @@ class Broadcaster
   end
 
   def good_morning
-    sub_researches = Research.active_subs_research
+    ##TODO - make this method for mailers as well, currently only for messenger
+    sub_researches = Research.active_subs_research_messenger
     sub_researches.each do |sub_research|
       sub_mc_infos = @manychat_client.fetch_subscriber_mc_infos(sub_research.subscriber)
       border = @manychat_client.is_last_interaction_borderline(sub_mc_infos[1]["data"]) if sub_mc_infos[0] == true

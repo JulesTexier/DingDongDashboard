@@ -27,6 +27,7 @@ class Subscriber < ApplicationRecord
   belongs_to :contractor, optional: true
   belongs_to :broker, optional: true
 
+  validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}
 
   ########################
   # 1 - Business methods
@@ -96,6 +97,21 @@ class Subscriber < ApplicationRecord
   end
 
 
+  ##########################
+  ## Nurturing Mailer Job ##
+  ##########################
+  
+  ## Task executed in subscriber method validate_email 
+  def execute_nurturing_mailer
+    if self.email_flux && self.email_confirmed
+      nurturing_mailers = NurturingMailer.where(is_active: true)
+      nurturing_mailers.each do |nurturing_mailer|
+        NurturingMailerJob.set(wait: nurturing_mailer.time_frame.hour).perform_later(self, nurturing_mailer)
+      end
+    end
+  end
+
+
   ########################
   # 2 - Core methods
   ########################
@@ -124,6 +140,9 @@ class Subscriber < ApplicationRecord
     desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
     desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
     desc += "\u000A\u000A*Inscription chez DingDong : #{Time.now.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
+    desc += "\u000A\u000A*Courtier : #{self.broker.firstname}*" unless self.broker.nil?
+    desc += "\u000A\u000A*Entrepreneur : #{self.contractor.firstname}*" unless self.contractor.nil?
+    desc += "\u000A\u000A*Notaire : #{self.notary.firstname}*" unless self.notary.nil?
   end
 
   def get_fullname
@@ -132,7 +151,7 @@ class Subscriber < ApplicationRecord
 
   def get_areas_list
     areas = ""
-    self.areas.each do |area|
+    self.research.areas.each do |area|
       areas += area.name + ", "
     end
     return areas
@@ -190,6 +209,7 @@ class Subscriber < ApplicationRecord
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
+    self.execute_nurturing_mailer
   end
 
   private

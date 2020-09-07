@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get :email_confirmed, :path => 'confirmation'
     get '/research/edit' => 'subscriber_researches#edit'
     patch '/research/update' => 'subscriber_researches#update'
+    get '/research/stop' => 'subscriber_researches#stop'
+    get '/research/activate' => 'subscriber_researches#activate'
   end
 
   
@@ -88,6 +90,7 @@ Rails.application.routes.draw do
       end
 
       # Other models
+      resources :researches, only: [:show, :update, :index, :destroy, :create]
       resources :properties, only: [:show, :index]
       resources :brokers, only: [:show]
       resources :notaries, only: [:show]

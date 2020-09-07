@@ -19,26 +19,26 @@
             <div class="">
                 <div class="row mt-5">
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.broker.avatar, width: 250, alt: "Courtier Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px">Hugo, courtier</h5>
-                        <div>Je suis expert courtier sur Paris. Je peux vous aider à trouver le meilleur taux en fonction de votre situation !</div>
+                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.broker.firstname %>, courtier</h5>
+                        <div><%= @subscriber.broker.description %></div>
                     </div>                  
                     
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.contractor.avatar, width: 250, alt:"Entrepreneurs travaux Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px">Mathieu, entrepreneur</h5>
-                        <div>Je suis entrepreneur travaux depuis 20 ans. Je vous accompagne en contre-visite et me charge de tous le suivi des travaux !</div>
+                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.contractor.firstname %>, entrepreneur</h5>
+                        <div><%= @subscriber.contractor.description %></div>
                     </div>   
                     
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-                    <img src="https://hellodingdong.com/assets/images/notaire_paul_henry.jpg" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.notary.avatar, width: 250, alt:"Notaire Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">Paul Henry, Notaire</h5>
-                        <div>Je suis Notaire depuis plus de 10 ans. Je suis là pour échanger sur la procédure administrative de votre achat.</div>
+                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.notary.firstname %>, Notaire</h5>
+                        <div><%= @subscriber.notary.description %></div>
                     </div>   
                     
                 </div>
@@ -49,7 +49,7 @@
                         <% if @subscriber.email_flux %>
                           <%= link_to "Démarrer mon alerte 🚀", subscriber_email_validation_path, class: 'btn btn-outline-light' %>
                         <% elsif @subscriber.messenger_flux %>
-                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/HiDingDong/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
+                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/#{ENV['MANYCHAT_BOT_ID']}/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
                         <% end %>
                     </div>
                 </nav>

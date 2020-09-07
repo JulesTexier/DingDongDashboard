@@ -5,7 +5,7 @@
         <% case  %>
         <% when average_results[1] == 0 %>
           <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-            ⚠️Vos critères sont <span class="text-danger">trop restrictifs</span>
+            ⚠️ Vos critères sont <span class="text-danger">trop restrictifs</span>
             <br/>
             Vous ne recevrez <strong>quasiment pas d'annonces</strong>
           </div>
@@ -14,7 +14,7 @@
           </div>
         <% when average_results[1] < 3 %>
           <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-            ⚠️Vos critères sont <span class="text-danger">très restrictifs</span>
+            ⚠️ Vos critères sont <span class="text-danger">très restrictifs</span>
             <br/>
             Vous recevrez entre <strong><%= average_results[0] %> et <%= average_results[1] %> annonces / jour </strong>
           </div>
@@ -23,7 +23,7 @@
           </div>
         <% when average_results[1] > 20 %>
           <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-            ⚠️Vos critères sont <span class="text-danger">trop larges</span>
+            ⚠️ Vos critères sont <span class="text-danger">trop larges</span>
             <br/>
             Vous recevrez plus de <strong>20 annonces / jour </strong>
           </div>
@@ -32,7 +32,7 @@
           </div>
         <% else %>
           <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-            ✅Vos critères sont <span class="text-success">bons</span>
+            ✅ Vos critères sont <span class="text-success">bons</span>
             <br/>
             Vous recevrez entre <strong><%= average_results[0] %> et <%= average_results[1] %> annonces / jour </strong>
           </div>

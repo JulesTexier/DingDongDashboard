@@ -1,0 +1,9 @@
+<% if @confirmation%>
+
+  <h1><%= @subscriber.firstname %>, ton alerte est bien suspendue.</h1>
+  <h2>Tu ne recevras plus aucun bien ! </h2>
+  <%= link_to "Réactiver mon alerte", subscriber_research_activate_path %>
+
+<% else %>
+  <h1>Oups, une erreur s'est produite</h1>
+<% end%>

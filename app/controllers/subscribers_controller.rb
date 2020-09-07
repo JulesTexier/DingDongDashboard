@@ -99,6 +99,7 @@ class SubscribersController < ApplicationController
     redirect_to root_path if subscriber.messenger_flux || !subscriber 
   end
 
+
   private
 
   def subscriber_params

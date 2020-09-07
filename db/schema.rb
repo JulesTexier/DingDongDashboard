@@ -10,10 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_143525) do
+ActiveRecord::Schema.define(version: 2020_09_07_080332) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
+  enable_extension "btree_gist"
+  enable_extension "citext"
+  enable_extension "cube"
+  enable_extension "dblink"
+  enable_extension "dict_int"
+  enable_extension "dict_xsyn"
+  enable_extension "earthdistance"
+  enable_extension "fuzzystrmatch"
+  enable_extension "hstore"
+  enable_extension "intarray"
+  enable_extension "ltree"
+  enable_extension "pg_stat_statements"
+  enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
+  enable_extension "pgrowlocks"
+  enable_extension "pgstattuple"
   enable_extension "plpgsql"
+  enable_extension "tablefunc"
+  enable_extension "unaccent"
+  enable_extension "uuid-ossp"
+  enable_extension "xml2"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "firstname"
@@ -72,6 +114,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_143525) do
     t.string "phone"
     t.string "company"
     t.string "email"
+    t.text "description"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -142,6 +185,15 @@ ActiveRecord::Schema.define(version: 2020_09_01_143525) do
     t.string "phone"
     t.string "company"
     t.string "email"
+    t.text "description"
+  end
+
+  create_table "nurturing_mailers", force: :cascade do |t|
+    t.string "name"
+    t.integer "time_frame"
+    t.string "template"
+    t.boolean "is_active", default: false
+    t.text "description"
   end
 
   create_table "permanences", force: :cascade do |t|
@@ -351,7 +403,6 @@ ActiveRecord::Schema.define(version: 2020_09_01_143525) do
     t.integer "min_elevator_floor"
     t.bigint "broker_id"
     t.string "trello_id_card"
-    t.string "status", default: "form_filled"
     t.string "project_type"
     t.boolean "has_messenger"
     t.boolean "is_blocked"
@@ -364,6 +415,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_143525) do
     t.integer "max_sqm_price"
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
+    t.string "status"
     t.boolean "messenger_flux"
     t.boolean "email_flux"
     t.boolean "email_confirmed", default: false
@@ -375,6 +427,14 @@ ActiveRecord::Schema.define(version: 2020_09_01_143525) do
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"
   end
 
+  create_table "subways", force: :cascade do |t|
+    t.string "name"
+    t.string "line", default: "{}"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
