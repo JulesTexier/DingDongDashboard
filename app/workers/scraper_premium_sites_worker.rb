@@ -1,5 +1,6 @@
 class ScraperPremiumSitesWorker
   include Sidekiq::Worker
+  sidekiq_options queue: :scraper
 
   def perform(klass)
     scraper = klass.constantize.new

@@ -97,6 +97,21 @@ class Subscriber < ApplicationRecord
   end
 
 
+  ##########################
+  ## Nurturing Mailer Job ##
+  ##########################
+  
+  ## Task executed in subscriber method validate_email 
+  def execute_nurturing_mailer
+    if self.email_flux && self.email_confirmed
+      nurturing_mailers = NurturingMailer.where(is_active: true)
+      nurturing_mailers.each do |nurturing_mailer|
+        NurturingMailerJob.set(wait: nurturing_mailer.time_frame.hour).perform_later(self, nurturing_mailer)
+      end
+    end
+  end
+
+
   ########################
   # 2 - Core methods
   ########################
@@ -194,6 +209,7 @@ class Subscriber < ApplicationRecord
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
+    self.execute_nurturing_mailer
   end
 
   private

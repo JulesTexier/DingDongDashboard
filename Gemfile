@@ -37,8 +37,6 @@ gem 'activestorage-backblaze'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
 
-gem "watir-rails"
-
 # Send HTTP REST requests
 gem "typhoeus", "~> 1.1"
 

@@ -55,26 +55,19 @@ end
 namespace :broadcast do
   desc "This is a task for broadcasting messages to our users."
 
-  task :new_properties_gallery do
-    puts "This will broadcast new scraped properties to active subscribers"
-    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    Broadcaster.new.new_properties_gallery
-    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    puts "The new_properties broadcast script took #{ending - starting} seconds to run"
+  task :live_broadcast do
+    puts "Launching Live Broadcast"
+    BroadcasterWorker.perform_async('live_broadcast')
   end
 
   task :good_morning do
-    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    Broadcaster.new.good_morning
-    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    puts "The Good Morning Broadcaster script took #{ending - starting} seconds to run"
+    puts "Launching Good Morning Broadcast"
+    BroadcasterWorker.perform_async('good_morning')
   end
 
   task :hourly_check_hunters do
-    starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    Broadcaster.new.hunter_searched_not_live_processed
-    ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    puts "The Hourly check Hunter Broadcaster script took #{ending - starting} seconds to run"
+    puts "Launching Hunter Not Live Broadcast"
+    BroadcasterWorker.perform_async('hunter_not_live')
   end
 end
 

@@ -15,4 +15,9 @@ class PostmarkMailer < ApplicationMailer
     self.template_model = { hunter_firstname: hunter_search.hunter.firstname, hunter_search_name: hunter_search.research_name, hunter_search_link: ENV['BASE_URL']+ "hunters/#{hunter_search.hunter.id}/hunter_searches/#{hunter_search.id}" }
     mail from: "etienne@hellodingdong.com", to: hunter_search.hunter.email, postmark_template_alias: "hunter-notification"
   end
+
+  def send_nurturing_email(subscriber, nurturing_email)
+    self.template_model = { subscriber_firstname: subscriber.firstname, subscriber_lastname: subscriber.lastname }
+    mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
+  end
 end

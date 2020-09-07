@@ -367,13 +367,6 @@ GEM
     vcr (6.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
-    watir (6.16.5)
-      regexp_parser (~> 1.2)
-      selenium-webdriver (~> 3.6)
-    watir-rails (2.2.2)
-      rack
-      rails
-      watir (>= 6.0.0.beta4)
     web-console (4.0.3)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -446,7 +439,6 @@ DEPENDENCIES
   typhoeus (~> 1.1)
   tzinfo-data
   vcr
-  watir-rails
   web-console (>= 3.3.0)
   webdrivers
   webmock

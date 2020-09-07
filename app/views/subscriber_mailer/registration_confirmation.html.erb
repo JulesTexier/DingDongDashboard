@@ -2,4 +2,4 @@
 
 Thanks for registering! To confirm your registration click the URL below.
 
-<%=  link_to "Confirm mon email", "#{ENV['BASE_URL']@subscriber.confirm_token}/confirm_email/"%>
+<%=  link_to "Confirm mon email", "#{ENV['BASE_URL'] + @subscriber.confirm_token}/confirm_email/"%>
