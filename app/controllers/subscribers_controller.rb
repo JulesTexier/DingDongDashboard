@@ -1,55 +1,9 @@
 class SubscribersController < ApplicationController  
 
-  # ###############
-  #      CRUD     #
-  # ###############
-
-  def new
-    @subscriber = Subscriber.new
-  end
-
-  def create
-    subscriber = Subscriber.new(subscriber_params)
-    if subscriber.save
-    else
-      flash[:error] = "Un problème est apparu, veuillez réessayer."
-      render 'new'
-    end
-  end
-
-  def edit
-    @subscriber = Subscriber.find(params[:id])
-    @research = @subscriber.research
-    @research.update(zone: params[:selected_zones]) unless params[:selected_zones].nil?
-    subscriber_areas_id = @research.areas.pluck(:id)
-    if params[:selected_zones].nil? && subscriber_areas_id.empty?
-      flash[:danger] = "Veuillez sélectionner une zone de recherche."
-      redirect_to "/subscribers/" + params[:id] + "/agglomeration"
-    elsif subscriber_areas_id.any?
-      @master_areas = Area.get_selected_agglo_area(@research.zone, subscriber_areas_id)
-      @master_areas += Area.global_zones(@research.zone)
-    else
-      @master_areas = Area.get_selected_agglo_area(params[:selected_zones], subscriber_areas_id)
-      @master_areas += Area.global_zones(params[:selected_zones])
-    end
-  end
-
-  def update
-    @subscriber = Subscriber.find(params[:id])
-    @research = @subscriber.research
-    areas_ids = []
-    areas_ids += params[:areas] unless params[:areas].nil?
-    if @research.update(subscriber_params) && !areas_ids.empty?
-      @research.update_research_areas(areas_ids)
-      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
-    else
-      flash[:danger] = "Sélectionnez des arrondissements..."
-    end
-    # // Send flow to subscriber 
-    flow = "content20200716131717_882877"
-    Manychat.new.send_flow_sequence(@subscriber, flow) unless Rails.env.development?
-    redirect_to edit_subscriber_path
-  end
+  
+  # #########################
+  #      BUSINESS LOGIC     #
+  # #########################
 
   def professionals
     @subscriber = Subscriber.find(params[:subscriber_id])
@@ -57,10 +11,6 @@ class SubscribersController < ApplicationController
     @broker = @subscriber.broker
     @contractor = @subscriber.contractor
   end
-
-  # ###############
-  #      OTHER    #
-  # ###############
 
   def select_agglomeration
     @subscriber = Subscriber.find(params[:subscriber_id])
