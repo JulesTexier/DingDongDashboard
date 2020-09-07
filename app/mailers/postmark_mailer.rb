@@ -17,7 +17,25 @@ class PostmarkMailer < ApplicationMailer
   end
 
   def send_nurturing_email(subscriber, nurturing_email)
-    self.template_model = { subscriber_firstname: subscriber.firstname, subscriber_lastname: subscriber.lastname }
+    self.template_model = { 
+      subscriber_firstname: subscriber.firstname,
+      subscriber_lastname: subscriber.lastname,
+      broker_firstname: subscriber.broker.firstname,
+      broker_lastname: subscriber.broker.lastname,
+      broker_email: subscriber.broker.email,
+      broker_phone: subscriber.broker.phone,
+      broker_avatar: subscriber.broker.avatar,
+      notary_firstname: subscriber.notary.firstname,
+      notary_lastname: subscriber.notary.lastname,
+      notary_email: subscriber.notary.email,
+      notary_phone: subscriber.notary.phone,
+      notary_avatar: subscriber.notary.avatar,
+      contractor_firstname: subscriber.contractor.firstname,
+      contractor_lastname: subscriber.contractor.lastname,
+      contractor_email: subscriber.contractor.email,
+      contractor_phone: subscriber.contractor.phone,
+      contractor_avatar: subscriber.contractor.avatar
+    }
     mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
 end
