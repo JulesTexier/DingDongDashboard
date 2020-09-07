@@ -27,7 +27,7 @@
             <div class="">
                 <div class="row mt-5">
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="<%= @subscriber.broker.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.broker.avatar, width: 250 %>
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
                         <div><%= @subscriber.broker.description %></div>

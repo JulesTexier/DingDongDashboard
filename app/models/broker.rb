@@ -2,6 +2,8 @@ require "dotenv/load"
 
 class Broker < ApplicationRecord
 
+  has_one_attached :avatar
+
   has_many :subscribers
 
   has_many :permanences # a voir
