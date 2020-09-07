@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   #############
   # 2 - Core
   #############
-  resources :subscribers, only: [:new, :create, :update, :edit] do 
+  resources :subscribers, only: [] do 
     get '/activation/' => 'subscribers#activation'
     get '/agglomeration' => 'subscribers#select_agglomeration'
     get :professionals, :path => 'nos-pros'
