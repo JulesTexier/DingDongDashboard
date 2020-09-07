@@ -27,7 +27,7 @@
             <div class="">
                 <div class="row mt-5">
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <%= image_tag @subscriber.broker.avatar, width: 250 %>
+                    <%= image_tag @subscriber.broker.avatar, width: 250, alt: "Courtier Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
                         <div><%= @subscriber.broker.description %></div>
@@ -35,7 +35,7 @@
                     <a class="btn medium-btn mt-2" href="mailto:etienne@hellodingdong.com" target="_blank">Me contacter</a>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <img src="<%= @subscriber.contractor.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.contractor.avatar, width: 250, alt:"Entrepreneurs travaux Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
                         <div><%= @subscriber.contractor.description %></div>
@@ -43,7 +43,7 @@
                     <a class="btn medium-btn mt-2" href="mailto:etienne@hellodingdong.com" target="_blank">Me contacter</a>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-                    <img src="<%= @subscriber.notary.profile_picture %>" width="250" alt="acheter paris" class="testimonial-picture">
+                    <%= image_tag @subscriber.notary.avatar, width: 250, alt:"Notaire Ding Dong", class:"testimonial-picture" %>
                     <div class="comment_style" target="_blank">
                         <div><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">⭐⭐⭐⭐⭐</div>
                         <div><%= @subscriber.notary.description %></div>
