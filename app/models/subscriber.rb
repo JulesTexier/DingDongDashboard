@@ -209,6 +209,7 @@ class Subscriber < ApplicationRecord
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
+    self.is_active = true
     self.execute_nurturing_mailer
   end
 
