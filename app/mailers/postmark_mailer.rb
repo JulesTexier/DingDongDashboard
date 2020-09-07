@@ -24,17 +24,17 @@ class PostmarkMailer < ApplicationMailer
       broker_lastname: subscriber.broker.lastname,
       broker_email: subscriber.broker.email,
       broker_phone: subscriber.broker.phone,
-      broker_avatar: subscriber.broker.avatar,
+      broker_avatar: url_for(subscriber.broker.avatar),
       notary_firstname: subscriber.notary.firstname,
       notary_lastname: subscriber.notary.lastname,
       notary_email: subscriber.notary.email,
       notary_phone: subscriber.notary.phone,
-      notary_avatar: subscriber.notary.avatar,
+      notary_avatar: url_for(subscriber.notary.avatar),
       contractor_firstname: subscriber.contractor.firstname,
       contractor_lastname: subscriber.contractor.lastname,
       contractor_email: subscriber.contractor.email,
       contractor_phone: subscriber.contractor.phone,
-      contractor_avatar: subscriber.contractor.avatar
+      contractor_avatar: url_for(subscriber.contractor.avatar)
     }
     mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
