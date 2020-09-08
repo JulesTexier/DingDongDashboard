@@ -7,6 +7,7 @@ module Wizard
       attr_accessor :subscriber_research, :subscriber
 
       delegate *::Research.attribute_names.map { |attr| [attr, "#{attr}="] }.flatten, to: :subscriber_research
+      delegate *::Subscriber.attribute_names.map { |attr| [attr, "#{attr}="] }.flatten, to: :subscriber, prefix: :subscriber
 
       def initialize(subscriber_research_attributes)
         @subscriber_research = ::Research.new(subscriber_research_attributes)
@@ -25,6 +26,7 @@ module Wizard
     end
 
     class Step3 < Step2
+      validates :subscriber_phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}
     end
   end
 end
