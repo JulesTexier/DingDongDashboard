@@ -23,7 +23,6 @@
     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
 
         <%= hidden_field_tag :current_step, 'step2' %>
-        <%= f.error_notification %>
 
         
             <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 

@@ -5,9 +5,9 @@ class SubscriberResearchesController < ApplicationController
     current_step = params[:current_step]
     @subscriber_research_wizard = wizard_subscriber_research_for_step(current_step)
     @subscriber_research_wizard.subscriber_research.attributes = subscriber_research_wizard_params unless current_step == "step3"
-    @subscriber_research_wizard.subscriber.attributes = subscriber_wizard_params if current_step == "step3"
+    @subscriber_research_wizard.attributes = subscriber_wizard_params if current_step == "step3"
     session[:subscriber_research_attributes] = @subscriber_research_wizard.subscriber_research.attributes
-    
+    session[:subscriber_attributes] = @subscriber_research_wizard.subscriber.attributes
     ## Need to keep this params for research_area. Stored it in session.
     session[:areas] = params[:areas] unless params[:areas].nil?
 
@@ -17,6 +17,7 @@ class SubscriberResearchesController < ApplicationController
 
       redirect_to action: next_step
     else
+      flash[:danger] = @subscriber_research_wizard.errors.map {|key, error| error}.join(", ")
       render current_step
     end
   end
@@ -37,7 +38,6 @@ class SubscriberResearchesController < ApplicationController
       flash[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
-    # @average_results = [10,12]
     @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
@@ -47,10 +47,12 @@ class SubscriberResearchesController < ApplicationController
     if @subscriber_research_wizard.subscriber_research.save
       @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
       session[:subscriber_research_attributes] = nil
+      session[:subscriber_attributes] = nil
       session[:areas] = nil
-      redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), notice: 'Research succesfully created!'
+      redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), sucess: 'Votre alerte a été correctement créée!'
     else
-      redirect_to({ action: Wizard::SubscriberResearch::STEPS.first }, alert: 'There were a problem when creating the research.')
+      flash[:danger] = @subscriber_research_wizard.subscriber.errors.map {|key, error| error}.join(", ")
+      redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
     end
   end
 
@@ -117,7 +119,7 @@ class SubscriberResearchesController < ApplicationController
 
   def wizard_subscriber_research_for_step(step)
     raise InvalidStep unless step.in?(Wizard::SubscriberResearch::STEPS)
-    "Wizard::SubscriberResearch::#{step.camelize}".constantize.new(session[:subscriber_research_attributes])
+    "Wizard::SubscriberResearch::#{step.camelize}".constantize.new(session[:subscriber_research_attributes], session[:subscriber_attributes])
   end
 
   def subscriber_research_wizard_params
@@ -125,7 +127,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_wizard_params
-    params.require(:subscriber_wizard).permit(:firstname, :lastname, :email, :phone, :messenger_flux, :email_flux)
+    params.require(:subscriber_wizard).permit(:subscriber_firstname, :subscriber_lastname, :subscriber_email, :subscriber_phone, :subscriber_messenger_flux, :subscriber_email_flux)
   end
 
   def research_params

@@ -27,14 +27,9 @@
 
   <body  style="background-color: #f7fafc; font-family: 'Rubik' !important">
     <div>
-    <% if flash[:success] %>
-      <div class="alert alert-success" role="alert">
-        <%= flash[:success] %>
-      </div>
-    <% end %>
-    <% if flash[:danger] %>
-      <div class="alert alert-danger" role="alert">
-        <%= flash[:danger] %>
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-<%= type %>">
+        <%= msg %>
       </div>
     <% end %>
       <%= yield %>
