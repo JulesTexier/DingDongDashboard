@@ -37,10 +37,10 @@ Rails.application.routes.draw do
     get '/research/stop' => 'subscriber_researches#stop'
     get '/research/activate' => 'subscriber_researches#activate'
   end
-
+  
   
   resources :properties, only: [:show]
-
+  
   
   resource :subscriber_researches do
     get :step1, :path => 'agglomeration'
@@ -48,8 +48,10 @@ Rails.application.routes.draw do
     get :step3, :path => 'profil'
     post :validate_step
   end
-
-
+  
+  # Broker custom client inscription path
+  get '/inscription/courtier/:broker_id' => "subscribers#broker_onboarding"
+  
   #############
   # 3 - Hunters
   #############

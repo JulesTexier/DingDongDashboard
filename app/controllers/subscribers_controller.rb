@@ -50,8 +50,8 @@ class SubscribersController < ApplicationController
   end
 
   def broker_onboarding
-    puts params[:broker_id]
-    redirect_to step1_subscriber_researches_path(params[:broker_id])
+    session[:broker_id] = params[:broker_id]
+    redirect_to step1_subscriber_researches_path
   end
 
 
