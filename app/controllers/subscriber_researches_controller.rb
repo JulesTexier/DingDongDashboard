@@ -74,7 +74,7 @@ class SubscriberResearchesController < ApplicationController
     end
     # // Send flow to subscriber
     if @subscriber.messenger_flux
-      flow = "content20200716131717_882877"
+      flow = "content20200902122313_665528"
       Manychat.new.send_flow_sequence(@subscriber, flow) unless Rails.env.development?
     end
     redirect_to subscriber_research_edit_path(@subscriber)
