@@ -80,14 +80,6 @@ class Subscriber < ApplicationRecord
     Trello.new.add_comment_to_user_card(self, comment)
   end
 
-  def handle_new_lead_gen
-    # broker = Broker.get_current_lead_gen
-    broker = Broker.find_by(email: "etienne@hellodingdong.com")
-    self.update(broker: broker, is_blocked: true)
-    Trello.new.add_lead_on_etienne_trello(self)
-    BrokerMailer.new_lead(self.id).deliver_now
-  end
-
 
   ############################
   # Professional Attribution #
