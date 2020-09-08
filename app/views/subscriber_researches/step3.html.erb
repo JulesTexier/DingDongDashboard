@@ -1,21 +1,23 @@
-<div class="row mt-3"> 
-    <div class="col d-flex justify-content-center"> 
-        <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
-    </div>
-</div>
-
-<div class= "row mt-3">
-  <div class="col-12 d-flex pr-0">
-    <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-      <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-      <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-      <%= link_to "💌Validation", step3_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-    </ul>
-  </div>
-</div>
-
-
 <div class="container mb-100">
+
+  <div class="row mt-3"> 
+      <div class="col d-flex justify-content-center"> 
+          <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+      </div>
+  </div>
+
+  <div class= "row mt-3">
+    <div class="col-12 d-flex">
+      <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
+        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+        <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+        <%= link_to "💌Validation", step3_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+      </ul>
+    </div>
+  </div>
+
+
+
 
   <%= simple_form_for @subscriber_research_wizard.subscriber, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
     <%= f.error_notification %>
@@ -62,13 +64,13 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-3 grey">👉 Prénom</p>
+                <p class="mt-4 mb-3 grey">👉 Prénom *</p>
                 <div class="input-group mb-3">
                     <%= f.input_field :firstname, class: "form-control input_style", placeholder: "Ex : Nicolas", required: true %>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-6 grey">👉 Nom</p>
+                <p class="mt-4 mb-6 grey">👉 Nom *</p>
                 <div class="input-group mb-3" style="margin-bottom:4.5rem">
                     <%= f.input_field :lastname, class: "form-control input_style", placeholder: "Ex : Dupont", required: true %>
                 </div>
@@ -76,13 +78,13 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-3 grey">💌 Email</p>
+                <p class="mt-4 mb-3 grey">💌 Email *</p>
                 <div class="input-group mb-3">
                     <%= f.input_field :email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com", required: true%>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-6 grey">📱Téléphone</p>
+                <p class="mt-4 mb-6 grey">📱Téléphone *</p>
                 <div class="input-group mb-3" style="margin-bottom:4.5rem">
                     <%= f.input_field :phone, class: "form-control input_style", placeholder: "Ex : 0624345653", required: true%>
                 </div>

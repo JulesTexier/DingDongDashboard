@@ -1,22 +1,24 @@
-<div class="row mt-3"> 
-    <div class="col d-flex justify-content-center"> 
-        <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+<div class="container mb-100">
+
+    <div class="row mt-3"> 
+        <div class="col d-flex justify-content-center"> 
+            <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+        </div>
     </div>
-</div>
 
 
-<div class= "row mt-3">
-  <div class="col-12 d-flex pr-0">
-    <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-      <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-      <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-md-2 text-center mb-1' %>
-      <div class="badge-off col-12 col-md-2 text-center mb-1">💌Validation</div>
-    </ul>
-  </div>
-</div>
+    <div class= "row mt-3">
+    <div class="col-12 d-flex">
+        <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
+        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+        <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+        <div class="badge-off col-12 col-lg-4  text-center mb-1">💌Validation</div>
+        </ul>
+    </div>
+    </div>
 
 
-    <div class="container mb-100">
+
 
     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
 
@@ -148,7 +150,7 @@
                     class: "btn btn-outline-light"%>
             </div>
         </nav>  
-        <% end %>
+    <% end %>
 
 
 </div>
