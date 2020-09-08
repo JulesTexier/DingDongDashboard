@@ -42,7 +42,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def create
-    @subscriber_research_wizard.subscriber.broker = Broker.find(session[:broker_id]) if !session[:broker_id].nil?
+    @subscriber_research_wizard.subscriber.broker = Broker.find(session[:broker_id], is_broker_affiliated: true) if !session[:broker_id].nil?
     @subscriber_research_wizard.subscriber.save(context: :onboarding)
     @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
     if @subscriber_research_wizard.subscriber_research.save
