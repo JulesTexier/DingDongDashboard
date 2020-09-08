@@ -57,7 +57,7 @@
                         <% if @subscriber.email_flux %>
                           <%= link_to "Démarrer mon alerte 🚀", subscriber_email_validation_path, class: 'btn btn-outline-light' %>
                         <% elsif @subscriber.messenger_flux %>
-                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/#{ENV['MANYCHAT_BOT_ID']}/?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
+                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/#{ENV['BOT_LINK']}?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
                         <% end %>
                     </div>
                 </nav>
