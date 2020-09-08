@@ -42,7 +42,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def create
-    @subscriber_research_wizard.subscriber.save
+    @subscriber_research_wizard.subscriber.save(context: :onboarding)
     @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
     if @subscriber_research_wizard.subscriber_research.save
       @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
