@@ -216,7 +216,7 @@ class Api::V1::ManychatController < ApplicationController
   end
 
   def subscriber_params
-    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked)
+    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked, :messenger_flux, :email_flux)
   end
 
   def authentificate
