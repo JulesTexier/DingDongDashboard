@@ -71,14 +71,15 @@ class Api::V1::SubscribersController < ActionController::API
 
     # POST /suscribers/fb/:facebook_id
     def create_from_facebook_id
-        sub  = Subscriber.find_by(facebook_id: params[:facebook_id])
-        @subscriber = sub.nil? ? Subscriber.create(facebook_id: params[:facebook_id]) : sub
-        data = @subscriber.as_json
-        data[:edit_path] = @subscriber.get_edit_path
-        if !@subscriber.id.nil?
+        # sub  = Subscriber.find_by(facebook_id: params[:facebook_id])
+        # @subscriber = sub.nil? ? Subscriber.new(facebook_id: params[:facebook_id]) : sub
+        @subscriber = Subscriber.new(facebook_id: params[:facebook_id]) 
+        if @subscriber.save(context: :facebook_creation)
+            data = @subscriber.as_json
+            data[:edit_path] = @subscriber.get_edit_path
             render json: {status: 'SUCCESS', message: 'Subscriber created', data: data}, status: 200
         else
-            render json: {status: 'ERROR', message: 'Subscriber could not be created', data: nil}, status: 500
+            render json: {status: 'ERROR', message: 'Subscriber could not be created', data: @subscriber.errors}, status: 500
         end
 
     end

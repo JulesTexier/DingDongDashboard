@@ -302,8 +302,8 @@ class Manychat
     },
       {
       "type": "flow",
-      "caption": "👨‍💼 Estimer appart",
-      "target": ENV["QR_ESTIMATION"],
+      "caption": "👨‍💼 Mes pros",
+      "target": ENV["QR_PROS"],
     }, {
       "type": "flow",
       "caption": "🔑 Outils",

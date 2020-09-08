@@ -37,7 +37,13 @@ class GrowthEngine
   end
 
   def get_subscriber(email_address)
-    Subscriber.where(email: email_address).where.not(status: "duplicates").last.nil? ? Subscriber.create(email: email_address, status: "new_lead") : Subscriber.where(email: email_address).where.not(status: "duplicates").last
+    if Subscriber.where(email: email_address).where.not(status: "duplicates").last.nil?
+      sub = Subscriber.new(email: email_address, status: "new_lead")
+      sub.save(validate: false)
+      sub
+    else 
+      Subscriber.where(email: email_address).where.not(status: "duplicates").last
+    end
   end
 
   ## If the subscriber has not a sequence, we declare it out of timeframe

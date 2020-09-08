@@ -27,7 +27,8 @@ class Subscriber < ApplicationRecord
   belongs_to :contractor, optional: true
   belongs_to :broker, optional: true
 
-  validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}
+  validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}, on: :onboarding
+  validates :facebook_id, uniqueness: true, on: :facebook_creation
 
   ########################
   # 1 - Business methods
@@ -209,6 +210,7 @@ class Subscriber < ApplicationRecord
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
+    self.is_active = true
     self.execute_nurturing_mailer
   end
 
