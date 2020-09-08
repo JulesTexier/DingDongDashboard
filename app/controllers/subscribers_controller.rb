@@ -49,6 +49,11 @@ class SubscribersController < ApplicationController
     redirect_to root_path if subscriber.messenger_flux || !subscriber 
   end
 
+  def broker_onboarding
+    puts params[:broker_id]
+    redirect_to step1_subscriber_researches_path(params[:broker_id])
+  end
+
 
   private
 
