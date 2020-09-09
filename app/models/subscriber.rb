@@ -77,7 +77,7 @@ class Subscriber < ApplicationRecord
 
   # A voir ... (util pour Etienne ?)
   def notify_broker_trello(comment)
-    Trello.new.add_comment_to_user_card(self, comment)
+    # Trello.new.add_comment_to_user_card(self, comment)
   end
 
 
@@ -97,7 +97,7 @@ class Subscriber < ApplicationRecord
   ############################
 
   def add_subscriber_to_etienne_trello
-    Tello.new.add_lead_on_etienne_trello(self)
+    # Trello.new.add_lead_on_etienne_trello(self)
   end
 
 
