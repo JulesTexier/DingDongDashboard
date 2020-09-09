@@ -71,7 +71,7 @@ class Api::V1::ManychatController < ApplicationController
         send_flow(subscriber, "content20200604125739_572289")
       else
         props_ids = subscriber.research.last_x_properties(params[:x])
-        handle_sending(subscriber, props_ids, "last_properties")
+        handle_sending(subscriber, props_ids.reverse, "last_properties")
       end
     rescue ActiveRecord::RecordNotFound
       render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
