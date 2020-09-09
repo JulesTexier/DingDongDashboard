@@ -36,6 +36,6 @@ local:
 backblaze:
   service: Backblaze
   bucket_name: ding-dong
-  bucket_id: ENV['BACKBLAZE_BUCKET_ID']
-  key_id: ENV['BACKBLAZE_KEY_ID']
-  key_token: ENV['BACKBLAZE_KEY_TOKEN']
+  bucket_id: <%= ENV['BACKBLAZE_BUCKET_ID'] %>
+  key_id: <%= ENV['BACKBLAZE_KEY_ID'] %>
+  key_token: <%= ENV['BACKBLAZE_KEY_TOKEN'] %>
