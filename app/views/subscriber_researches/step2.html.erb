@@ -44,7 +44,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text input-group-text_style" id="basic-addon1">€</span>
                         </div>
-                        <%= f.number_field :max_price, class: "form-control input_style", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
+                        <%= f.number_field :max_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
@@ -53,13 +53,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text input-group-text_style" id="basic-addon1">m2</span>
                         </div>
-                        <%= f.number_field :min_surface, type: "number", class: "form-control input_style", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
+                        <%= f.number_field :min_surface, as: :numeric, class: "form-control input_style", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <p class="mt-4 mb-3 grey">🏡 Nb. de pièces min *</p>
                     <div class="input-group mb-3">
-                        <%= f.number_field :min_rooms_number, class: "form-control input_style", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
+                        <%= f.number_field :min_rooms_number, as: :numeric, class: "form-control input_style", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text input-group-text_style" id="basic-addon1">€</span>
                         </div>
-                        <%= f.number_field :min_price, class: "form-control input_style", placeholder: "Ex : 0", :required => false %>
+                        <%= f.number_field :min_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 0", :required => false %>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
@@ -84,7 +84,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text input-group-text_style" id="basic-addon1">€ / m2</span>
                         </div>
-                        <%= f.number_field :max_sqm_price, class: "form-control input_style", placeholder: "Ex : 12 000", :required => false %>
+                        <%= f.number_field :max_sqm_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 12 000", :required => false %>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <p class="mt-4 mb-3 grey">🎢 Étage minimum</p>
                     <div class="input-group mb-3">
-                        <%= f.number_field :min_floor, class: "form-control input_style", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
+                        <%= f.number_field :min_floor, as: :numeric, class: "form-control input_style", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
                     </div>
                     <div class="form-check form-check-inline mb-3">
                     <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id:"last_floor", value:"true" %> 
@@ -102,7 +102,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <p class="mt-4 mb-6 grey">🚠A partir de quel étage faut-il un ascenseur</p>
                     <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                        <%= f.number_field :min_elevator_floor, class: "form-control input_style", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
+                        <%= f.number_field :min_elevator_floor, as: :numeric, class: "form-control input_style", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
                     </div>
                 </div>
             </div>
