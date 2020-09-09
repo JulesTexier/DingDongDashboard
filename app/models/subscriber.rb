@@ -31,7 +31,7 @@ class Subscriber < ApplicationRecord
   validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}, on: :onboarding
   validates :facebook_id, uniqueness: true, on: :facebook_creation
   validates_uniqueness_of :phone, message: "Ce numéro est déjà enregistré dans notre base", on: :onboarding
-  validates_uniqueness_of :email, message: "Cette adresse email est déjà enregistré dans notre base", on: :onboarding
+  validates_uniqueness_of :email, message: "Cette adresse email est déjà enregistrée dans notre base", on: :onboarding
 
   ########################
   # 1 - Business methods
