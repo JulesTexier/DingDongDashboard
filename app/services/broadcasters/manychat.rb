@@ -180,8 +180,8 @@ class Manychat
     else
       if direct_source
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
-        webhook_fav = ENV["BASE_URL"] + "api/v1/saved_property/"
-        body_fav = { subscriber_id: subscriber.id, property_id: property.id }
+        webhook_fav = ENV["BASE_URL"] + "api/v1/saved_properties/"
+        body_fav = { research_id: subscriber.research.id, property_id: property.id }
         buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
       else
         webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{subscriber.id}/send/props/#{property.id}/details"
@@ -235,8 +235,8 @@ class Manychat
       property.provider == "Particulier" ? caption = "☎️ Appeler le particulier" : caption = "Appeler l'agence"
       buttons.push(create_call_button_hash(caption, property.contact_number))
     end
-    webhook_fav = ENV["BASE_URL"] + "api/v1/saved_property/"
-    body_fav = { subscriber_id: subscriber.id, property_id: property.id }
+    webhook_fav = ENV["BASE_URL"] + "api/v1/saved_properties/"
+    body_fav = { research_id: subscriber.research.id, property_id: property.id }
     buttons.push(create_dynamic_button_hash("❤️ Ajouter favoris", webhook_fav, "POST", body_fav))
 
     elements = []
@@ -268,7 +268,7 @@ class Manychat
         # 1st btn : Source
         buttons.push(create_url_button_hash("👀 Voir sur #{property.source}", property.link))
         # 2nd btn : Remove from fav
-        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/saved_property/#{fav.id}"
+        webhook_delete_fav = ENV["BASE_URL"] + "api/v1/saved_properties/#{fav.id}"
         buttons.push(create_dynamic_button_hash("💔 Retirer des favoris", webhook_delete_fav, "DELETE"))
 
         elements.push(create_message_element_hash(property.get_title, property.manychat_show_description, property.get_cover, buttons))
