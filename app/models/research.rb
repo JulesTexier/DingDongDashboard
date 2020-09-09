@@ -159,13 +159,13 @@ class Research < ApplicationRecord
   def self.active_subs_research_messenger
     self.includes(:subscriber)
       .where.not(subscribers: { id: nil, facebook_id: nil })
-      .where(subscribers: { is_active: true, is_blocked: false, messenger_flux: true, email_flux: false })
+      .where(subscribers: { is_active: true, is_blocked: [false, nil], messenger_flux: true, email_flux: [false, nil] })
   end
 
   def self.active_subs_research_email
     self.includes(:subscriber)
       .where.not(subscribers: { id: nil })
-      .where(subscribers: { is_active: true, is_blocked: false, email_flux: true, messenger_flux: false, email_confirmed: true })
+      .where(subscribers: { is_active: true, is_blocked: [false, nil], email_flux: true, messenger_flux: [false, nil], email_confirmed: true })
   end
 
   def self.active_hunters_research
