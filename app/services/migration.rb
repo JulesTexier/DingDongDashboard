@@ -29,8 +29,6 @@ class Migration
         research.apartment_type = subscriber.apartment_type
         research.created_at = subscriber.created_at
         research.agglomeration = "Paris" ##because all our users are in Paris, which is convenient AF
-        research.messenger_flux = true
-        research.email_flux = false
 
         research.save
         puts "Research #{research.id} saved."
@@ -45,6 +43,9 @@ class Migration
         end
         puts "Subscriber #{subscriber.id} successfully migrated."
       end
+      subscriber.update(notary: Notary.first) if subscriber.notary.nil? 
+      subscriber.update(contractor: Contractor.first) if subscriber.contractor.nil? 
+      subscriber.update(messenger_flux: true, email_flux: false) if subscriber.messenger_flux.nil?
     end
   end
 
