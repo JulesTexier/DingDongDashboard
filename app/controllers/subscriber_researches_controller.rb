@@ -49,7 +49,7 @@ class SubscriberResearchesController < ApplicationController
       session[:subscriber_research_attributes] = nil
       session[:subscriber_attributes] = nil
       session[:areas] = nil
-      redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), sucess: 'Votre alerte a été correctement créée!'
+      redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), success: 'Votre alerte a été correctement créée!'
     else
       flash[:danger] = @subscriber_research_wizard.subscriber.errors.map {|key, error| error}.join(", ")
       redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
