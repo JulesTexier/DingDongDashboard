@@ -43,6 +43,9 @@ class Migration
         end
         puts "Subscriber #{subscriber.id} successfully migrated."
       end
+      subscriber.update(notary: Notary.first) if subscriber.notary.nil? 
+      subscriber.update(contractor: Contractor.first) if subscriber.contractor.nil? 
+      subscriber.update(messenger_flux: true, email_flux: false) if subscriber.messenger_flux.nil?
     end
   end
 
@@ -51,7 +54,7 @@ class Migration
   def hunter_migration_to_research
     HunterSearch.all.each do |hs|
     # Migration des critères vers un objet Research
-      if hs.hunter.researches.empty?
+      unless Research.where(hunter: hs.hunter, name: hs.research_name, created_at: hs.created_at).any?
         puts "Hunter #{hs.hunter.id} prepared to migrate."
         research = Research.new(hunter: hs.hunter)
         research.name = hs.research_name

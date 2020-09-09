@@ -37,10 +37,10 @@ Rails.application.routes.draw do
     get '/research/stop' => 'subscriber_researches#stop'
     get '/research/activate' => 'subscriber_researches#activate'
   end
-
+  
   
   resources :properties, only: [:show]
-
+  
   
   resource :subscriber_researches do
     get :step1, :path => 'agglomeration'
@@ -48,8 +48,10 @@ Rails.application.routes.draw do
     get :step3, :path => 'profil'
     post :validate_step
   end
-
-
+  
+  # Broker custom client inscription path
+  get '/inscription/courtier/:broker_id' => "subscribers#broker_onboarding"
+  
   #############
   # 3 - Hunters
   #############
@@ -103,7 +105,6 @@ Rails.application.routes.draw do
       get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" # a UPDATE
       get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props" # a garder
       post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" # a garder
-      post "/manychat/s/:subscriber_id/send_to_broker" => "manychat#send_to_broker" # a garder
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" # a garder + ajouter le tracking
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" # a checker
       

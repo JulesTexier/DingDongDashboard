@@ -4,6 +4,7 @@ class Subscriber < ApplicationRecord
 
   after_create :send_confirmation_email
   after_create :professional_attribution
+  after_create :add_subscriber_to_etienne_trello
 
   ## REVOIR LES VALIDATEURS
 
@@ -30,7 +31,7 @@ class Subscriber < ApplicationRecord
   validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}, on: :onboarding
   validates :facebook_id, uniqueness: true, on: :facebook_creation
   validates_uniqueness_of :phone, message: "Ce numéro est déjà enregistré dans notre base", on: :onboarding
-  validates_uniqueness_of :email, message: "Cette adresse email est déjà enregistré dans notre base", on: :onboarding
+  validates_uniqueness_of :email, message: "Cette adresse email est déjà enregistrée dans notre base", on: :onboarding
 
   ########################
   # 1 - Business methods
@@ -76,15 +77,7 @@ class Subscriber < ApplicationRecord
 
   # A voir ... (util pour Etienne ?)
   def notify_broker_trello(comment)
-    Trello.new.add_comment_to_user_card(self, comment)
-  end
-
-  def handle_new_lead_gen
-    # broker = Broker.get_current_lead_gen
-    broker = Broker.find_by(email: "etienne@hellodingdong.com")
-    self.update(broker: broker, is_blocked: true)
-    Trello.new.add_lead_on_etienne_trello(self)
-    BrokerMailer.new_lead(self.id).deliver_now
+    # Trello.new.add_comment_to_user_card(self, comment)
   end
 
 
@@ -97,6 +90,14 @@ class Subscriber < ApplicationRecord
     self.contractor = Contractor.first if self.contractor.nil?
     self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
     self.save
+  end
+
+  ############################
+  # Etienne Trello follow up 
+  ############################
+
+  def add_subscriber_to_etienne_trello
+    Trello.new.add_lead_on_etienne_trello(self)
   end
 
 

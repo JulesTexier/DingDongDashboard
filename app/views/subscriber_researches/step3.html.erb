@@ -83,12 +83,26 @@
                 <div class="input-group mb-3">
                     <%= f.input_field :subscriber_email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com", required: true %>
                 </div>
+                <% if @subscriber_research_wizard.subscriber.errors[:email].any? %>
+                  <div class="input-group mb-3">
+                    <small class="text-danger">
+                      <%= @subscriber_research_wizard.subscriber.errors.messages[:email].join(" ") %>
+                    </small>      
+                  </div>
+                <% end %>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
                 <p class="mt-4 mb-6 grey">📱Téléphone *</p>
                 <div class="input-group mb-3" style="margin-bottom:4.5rem">
                     <%= f.input_field :subscriber_phone, class: "form-control input_style", placeholder: "Ex : 0624345653", required: true %>
                 </div>
+                <% if @subscriber_research_wizard.subscriber.errors[:phone].any? %>
+                  <div class="input-group mb-3">
+                    <small class="text-danger">
+                      <%= @subscriber_research_wizard.subscriber.errors.messages[:phone].join(" ") %>
+                    </small>      
+                  </div>
+                <% end %>
             </div>
         </div>
 
@@ -108,8 +122,8 @@
 <script>
 
   function selectMessenger(){
-    document.getElementById('subscriber_wizard_messenger_flux').value="true";
-    document.getElementById('subscriber_wizard_email_flux').value="false";
+    document.getElementById('subscriber_wizard_subscriber_messenger_flux').value="true";
+    document.getElementById('subscriber_wizard_subscriber_email_flux').value="false";
     document.getElementById("messenger").classList.add("medium-active");
     document.getElementById("email").classList.remove("medium-active");
     document.getElementById("messenger-logo").classList.add("medium-active-logo"); 
@@ -117,8 +131,8 @@
   }
 
   function selectEmail(){
-    document.getElementById('subscriber_wizard_email_flux').value="true";
-    document.getElementById('subscriber_wizard_messenger_flux').value="false";
+    document.getElementById('subscriber_wizard_subscriber_email_flux').value="true";
+    document.getElementById('subscriber_wizard_subscriber_messenger_flux').value="false";
     document.getElementById("email").classList.add("medium-active");
     document.getElementById("messenger").classList.remove("medium-active");
     document.getElementById("messenger-logo").classList.remove("medium-active-logo");   

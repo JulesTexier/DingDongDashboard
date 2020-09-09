@@ -126,17 +126,6 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
-  # POST "/manychat/s/:subscriber_id/send_to_broker"
-  def send_to_broker
-    begin
-      subscriber = Subscriber.find(params[:subscriber_id])
-      subscriber.handle_new_lead_gen
-      render json: { status: "SUCCESS", message: "Subscriber have been pushed to #{subscriber.broker.firstname}", data: subscriber }, status: 200
-    rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "An error occurred", data: e }, status: 500
-    end
-  end
-
   private
 
   def handle_sending(subscriber, props_ids, template = nil)
@@ -216,7 +205,7 @@ class Api::V1::ManychatController < ApplicationController
   end
 
   def subscriber_params
-    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked)
+    params.permit(:firstname, :lastname, :email, :phone, :is_active, :subscriber_id, :message, :facebook_id, :status, :is_blocked, :messenger_flux, :email_flux)
   end
 
   def authentificate

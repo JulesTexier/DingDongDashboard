@@ -41,6 +41,7 @@ class Research < ApplicationRecord
     end_date = DateTime.new(now.year, now.month, now.day, 9, 0, 0, now.zone)
     props = Property
       .where("created_at BETWEEN ? AND ?", start_date, end_date)
+      .order(id: :desc)
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []

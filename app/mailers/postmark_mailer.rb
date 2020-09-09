@@ -18,18 +18,22 @@ class PostmarkMailer < ApplicationMailer
 
   def send_nurturing_email(subscriber, nurturing_email)
     self.template_model = { 
+      subscriber_id: subscriber.id,
       subscriber_firstname: subscriber.firstname,
       subscriber_lastname: subscriber.lastname,
+      broker_id: subscriber.broker.id,
       broker_firstname: subscriber.broker.firstname,
       broker_lastname: subscriber.broker.lastname,
       broker_email: subscriber.broker.email,
       broker_phone: subscriber.broker.phone,
       broker_avatar: url_for(subscriber.broker.avatar),
+      notary_id: subscriber.notary.id,
       notary_firstname: subscriber.notary.firstname,
       notary_lastname: subscriber.notary.lastname,
       notary_email: subscriber.notary.email,
       notary_phone: subscriber.notary.phone,
       notary_avatar: url_for(subscriber.notary.avatar),
+      contractor_id: subscriber.contractor.id,
       contractor_firstname: subscriber.contractor.firstname,
       contractor_lastname: subscriber.contractor.lastname,
       contractor_email: subscriber.contractor.email,
