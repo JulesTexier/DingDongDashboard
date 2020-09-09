@@ -75,9 +75,9 @@ class SubscriberResearchesController < ApplicationController
     areas_ids += params[:areas] unless params[:areas].nil?
     if @research.update(research_params) && !areas_ids.empty?
       @research.update_research_areas(areas_ids)
-      flash.now[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
+      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else
-      flash.now[:danger] = "Sélectionnez des arrondissements..."
+      flash[:danger] = "Sélectionnez des arrondissements..."
     end
     # // Send flow to subscriber
     if @subscriber.messenger_flux

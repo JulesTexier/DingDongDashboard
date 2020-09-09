@@ -6,60 +6,60 @@
     - Val-de-Marne (94)
     - Yvelines (78)
     - Seine-Saint-Denis (93)
-  image_url: https://f002.backblazeb2.com/file/ding-dong/paris.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
   is_active: true
 - agglomeration: Lyon
   zone: 
     - Lyon (69)
-  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/lyon.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/lyon.jpg
   is_active: true
 - agglomeration: Bordeaux
   zone: 
     - Bordeaux (33)
-  image_url: https://hellodingdong.com/assets/images/bordeaux.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/bordeaux.jpg
   is_active: false
 - agglomeration: Marseille
   zone: 
     - Marseille (13)
-  image_url: https://hellodingdong.com/assets/images/marseille.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/marseilles.jpg
   is_active: false
 - agglomeration: Nice
   zone: 
     - Nice (06)
-  image_url: https://hellodingdong.com/assets/images/nice.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/nice.jpg
   is_active: false
 - agglomeration: Nantes
   zone: 
     - Nantes (44)
-  image_url: https://hellodingdong.com/assets/images/nantes.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/nantes.jpg
   is_active: false
 - agglomeration: Montpellier
   zone: 
     - Montpellier (34)
-  image_url: https://hellodingdong.com/assets/images/montpellier.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/montpellier.jpg
   is_active: false
 - agglomeration: Toulouse
   zone: 
     - Toulouse (31)
-  image_url: https://hellodingdong.com/assets/images/toulouse.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/toulouse.jpg
   is_active: false
 - agglomeration: Strasbourg
   zone: 
     - Strasbourg (13)
-  image_url: https://hellodingdong.com/assets/images/strasbourg.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/strasbourg.jpg
   is_active: false
 - agglomeration: Lille
   zone: 
     - Lille (59)
-  image_url: https://hellodingdong.com/assets/images/lille.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/lille.jpg
   is_active: false
 - agglomeration: Rennes
   zone: 
     - Rennes (35)
-  image_url: https://hellodingdong.com/assets/images/rennes.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/rennes.jpg
   is_active: false
 - agglomeration: La Rochelle
   zone: 
     - La Rochelle (17)
-  image_url: https://hellodingdong.com/assets/images/la_rochelle.jpg
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/la_rochelle.jpg
   is_active: false
