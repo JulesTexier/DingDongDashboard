@@ -32,7 +32,8 @@ gem "rails_admin", "~> 2.0"
 gem 'activestorage-backblaze'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 0.2.3'
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
