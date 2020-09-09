@@ -17,7 +17,7 @@ class SubscriberResearchesController < ApplicationController
 
       redirect_to action: next_step
     else
-      flash[:danger] = @subscriber_research_wizard.errors.map {|key, error| error}.join(", ")
+      flash.now[:danger] = "Une erreur s'est produite, veuillez réessayer."
       render current_step
     end
   end
@@ -35,24 +35,29 @@ class SubscriberResearchesController < ApplicationController
   
   def step3
     if session[:areas].empty?
-      flash[:danger] = "Veuillez sélectionner une zone de recherche."
+      flash.now[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
-    @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
+    # @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
   def create
-    @subscriber_research_wizard.subscriber.save(context: :onboarding)
-    @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
-    if @subscriber_research_wizard.subscriber_research.save
-      @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
-      session[:subscriber_research_attributes] = nil
-      session[:subscriber_attributes] = nil
-      session[:areas] = nil
-      redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), success: 'Votre alerte a été correctement créée!'
-    else
-      flash[:danger] = @subscriber_research_wizard.subscriber.errors.map {|key, error| error}.join(", ")
-      redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
+    if @subscriber_research_wizard.subscriber.save(context: :onboarding)
+      @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
+      @subscriber_research_wizard.subscriber_research.max_price = nil
+      if @subscriber_research_wizard.subscriber_research.save
+        @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
+        session[:subscriber_research_attributes] = nil
+        session[:subscriber_attributes] = nil
+        session[:areas] = nil
+        redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), success: 'Votre alerte a été correctement créée!'
+      else
+        flash[:danger] = "Une erreur s'est produite, veuillez réessayer."
+        redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
+      end
+    else 
+      flash.now[:danger] = "Une erreur s'est produite, veuillez réessayer."
+      render params[:current_step]
     end
   end
 
@@ -70,9 +75,9 @@ class SubscriberResearchesController < ApplicationController
     areas_ids += params[:areas] unless params[:areas].nil?
     if @research.update(research_params) && !areas_ids.empty?
       @research.update_research_areas(areas_ids)
-      flash[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
+      flash.now[:success] = "Les critères sont enregistrés ! Fermez cette fenêtre pour continuer."
     else
-      flash[:danger] = "Sélectionnez des arrondissements..."
+      flash.now[:danger] = "Sélectionnez des arrondissements..."
     end
     # // Send flow to subscriber
     if @subscriber.messenger_flux
