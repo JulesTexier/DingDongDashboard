@@ -49,12 +49,9 @@ area_yaml.each do |district_data|
     if area.nil?
       Area.create(name: data["name"], zone: district_data["zone"], zip_code: data["terms"].first)
       puts "Area - #{data["name"]} created"
-    elsif area.zone != district_data["zone"]
-      area.update(zone: district_data["zone"])
-      puts "Area - #{data["name"]}'s zone updated"
-    elsif area.zip_code != data["terms"].first
-      area.update(zip_code: data["terms"].first)
-      puts "Area - #{data["name"]}'s zip_code updated"
+    else 
+      area.update(zone: district_data["zone"]) if area.zone != district_data["zone"]
+      area.update(zip_code: data["terms"].first) if area.zip_code != data["terms"].first
     end
   end
 end
@@ -73,3 +70,7 @@ brokers_yaml.each do |broker|
     Broker.create(broker)
   end
 end
+
+Notary.create(firstname: "Pierre-Alexis", lastname: "Leray") if Notary.all.empty?
+
+Contractor.create(firstname: "Matthieu") if Contractor.all.empty?
