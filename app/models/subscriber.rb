@@ -131,8 +131,10 @@ class Subscriber < ApplicationRecord
 
   def get_areas_list
     areas = ""
-    self.research.areas.each do |area|
-      areas += area.name + ", "
+    unless self.research.nil?
+      self.research.areas.each do |area|
+        areas += area.name + ", "
+      end
     end
     return areas
   end
