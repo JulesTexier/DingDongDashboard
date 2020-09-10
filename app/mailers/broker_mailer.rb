@@ -13,7 +13,7 @@ class BrokerMailer < ApplicationMailer
     end
   end
 
-  def weekly_update()
+  def weekly_update
     # @subscribers = Subscriber.find(subscribers_id)
     # @recent_leads = @subscribers.where('created_at > ?', Time.now - )
     mail(from: "etienne@hellodingdong.com", to: "f.bonnand@gmail.com", subject: "DING DONG - Synthèse de la semaine")

@@ -97,7 +97,7 @@ class Subscriber < ApplicationRecord
   ############################
 
   def add_subscriber_to_etienne_trello
-    # Trello.new.add_lead_on_etienne_trello(self)
+    Trello.new.add_lead_on_etienne_trello(self)
   end
 
 
@@ -121,32 +121,24 @@ class Subscriber < ApplicationRecord
   ########################
 
   # TRELLO METHODS
-
-  def trello_description
-    desc = ""
-    desc += "**CONTACT** \u000A Tél: #{self.phone} \u000A Email: #{self.email}\u000A"
-    desc += "\u000A**PROJET**\u000A"
-    desc += "\u000A**FINANCEMENT**\u000A"
-    desc += "\u000A**NOTES**\u000A"
-    desc += "\u000A\u000A---\u000A\u000A"
-    desc += trello_summary
-  end
-
+  
   def trello_summary
-    desc = ""
-    desc += "**#{self.get_fullname.upcase}**"
-    desc += "\u000A**Projet d'achat** : #{self.project_type}"
-    desc += "\u000A**Budget Maximum** : #{self.max_price.to_s.reverse.gsub(/...(?=.)/, '\& ').reverse} €"
-    desc += "\u000A**Surface Minimum ** : #{self.min_surface} m2"
-    desc += "\u000A**Nombre de pièces minimum ** : #{self.min_rooms_number}"
-    desc += "\u000A**Arrondissements** : #{self.get_areas_list}"
-    desc += "\u000A**Critère(s) spécifique(s)** : #{self.specific_criteria}" if !self.specific_criteria.nil?
-    desc += "\u000A**Question(s) additionelle(s)** : #{self.additional_question}" if !self.additional_question.nil?
-    desc += "\u000A\u000A**#{self.get_fullname} a déclaré ne pas avoir Messenger**" if !self.has_messenger
+    desc = "**#{self.get_fullname.upcase}**"
+    desc += "\u000A **Tél:** #{self.phone} \u000A **Email:** #{self.email}\u000A"
+    desc += "\u000A**Medium** : #{self.get_medium}"
     desc += "\u000A\u000A*Inscription chez DingDong : #{Time.now.in_time_zone("Paris").strftime("%d/%m/%Y - %H:%M")}*"
-    desc += "\u000A\u000A*Courtier : #{self.broker.firstname}*" unless self.broker.nil?
-    desc += "\u000A\u000A*Entrepreneur : #{self.contractor.firstname}*" unless self.contractor.nil?
-    desc += "\u000A\u000A*Notaire : #{self.notary.firstname}*" unless self.notary.nil?
+    desc += "\u000A\u000A---\u000A\u000A"
+    desc += "\u000A**RECHERCHE**\u000A"
+    desc += "\u000A**Budget Maximum** : #{self.research.max_price.to_s.reverse.gsub(/...(?=.)/, '\& ').reverse} €"
+    desc += "\u000A**Budget Minimum ** : #{self.research.min_price} €"
+    desc += "\u000A**Surface Minimum ** : #{self.research.min_surface} m2"
+    desc += "\u000A**Nombre de pièces minimum ** : #{self.research.min_rooms_number}"
+    desc += "\u000A**Areas** : #{self.get_areas_list}"
+    desc += "\u000A\u000A---\u000A\u000A"
+    desc += "\u000A**PROS**\u000A"
+    desc += "\u000A\u000A**Courtier :** #{self.broker.firstname} #{self.broker.lastname}" unless self.broker.nil?
+    desc += "\u000A\u000A**Entrepreneur :** #{self.contractor.firstname} #{self.contractor.lastname}" unless self.contractor.nil?
+    desc += "\u000A\u000A**Notaire :** #{self.notary.firstname} #{self.notary.lastname}" unless self.notary.nil?
   end
 
   def get_fullname
@@ -161,21 +153,20 @@ class Subscriber < ApplicationRecord
     return areas
   end
 
+  def get_medium 
+    if self.messenger_flux
+      "Messenger"
+    else 
+      "Alerte email"
+    end
+  end
+
   def get_areas
     areas = []
     self.areas.each do |area|
       areas.push(area.name)
     end
     return areas
-  end
-
-  def get_areas_list
-    list = ""
-    self.areas.each do |area|
-      list = list + ";" + area.name
-    end
-    list[0] = ""
-    return list
   end
 
   def get_edit_path
