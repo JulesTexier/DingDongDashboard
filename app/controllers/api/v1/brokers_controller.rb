@@ -10,7 +10,9 @@ class Api::V1::BrokersController < ApplicationController
   def show 
     @broker = Broker.find(params[:id])
     if !@broker.nil?
-      render json: {status: 'SUCCESS', message: 'Broker found', data: @broker}, status: 200
+      data = @broker.as_json
+      data[:avatar] = url_for(@broker.avatar) unless @broker.avatar.attachment.nil?
+      render json: {status: 'SUCCESS', message: 'Broker found', data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Broker not found'}, status: 404
     end
