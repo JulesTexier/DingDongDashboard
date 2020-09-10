@@ -10,7 +10,9 @@ class Api::V1::NotariesController < ApplicationController
   def show 
     @notary = Notary.find(params[:id])
     if !@notary.nil?
-      render json: {status: 'SUCCESS', message: 'Notary found', data: @notary}, status: 200
+      data = @notary.as_json
+      data[:avatar] = url_for(@notary.avatar) unless @notary.avatar.attachment.nil?
+      render json: {status: 'SUCCESS', message: 'Notary found', data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Notary not found'}, status: 404
     end

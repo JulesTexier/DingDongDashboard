@@ -10,7 +10,9 @@ class Api::V1::ContractorsController < ApplicationController
   def show 
     @contractor = Contractor.find(params[:id])
     if !@contractor.nil?
-      render json: {status: 'SUCCESS', message: 'Contractor found', data: @contractor}, status: 200
+      data = @contractor.as_json
+      data[:avatar] = url_for(@contractor.avatar) unless @contractor.avatar.attachment.nil?
+      render json: {status: 'SUCCESS', message: 'Contractor found', data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Contractor not found'}, status: 404
     end
