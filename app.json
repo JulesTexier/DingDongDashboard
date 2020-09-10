@@ -43,7 +43,7 @@
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
         {
-          "test-setup": ["bundle exec rake db:seed", "bin/rails assets:precompile"],
+          "test-setup": "bundle exec rake db:seed",
           "test": "bundle exec rspec" 
         }
     }
