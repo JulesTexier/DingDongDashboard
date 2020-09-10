@@ -97,7 +97,7 @@ class Subscriber < ApplicationRecord
   ############################
 
   def add_subscriber_to_etienne_trello
-    # Trello.new.add_lead_on_etienne_trello(self)
+    Trello.new.add_lead_on_etienne_trello(self)
   end
 
 
