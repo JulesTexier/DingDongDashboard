@@ -45,6 +45,7 @@ class Migration
       end
       subscriber.update(notary: Notary.first) if subscriber.notary.nil? 
       subscriber.update(contractor: Contractor.first) if subscriber.contractor.nil? 
+      subscriber.update(broker: Broker.find_by(email: "etienne@hellodingdong.com" ) if subscriber.broker.nil? 
       subscriber.update(messenger_flux: true, email_flux: false) if subscriber.messenger_flux.nil?
     end
   end
