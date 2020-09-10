@@ -26,7 +26,7 @@ module Wizard
     end
 
     class Step3 < Step2
-      validates :subscriber_phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}
+      validates :subscriber_phone, presence: true, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}
       validates :subscriber_email, presence: true
       validates :subscriber_firstname, presence: true
       validates :subscriber_lastname, presence: true 
