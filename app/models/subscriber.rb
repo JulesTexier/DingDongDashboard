@@ -3,8 +3,6 @@ require "dotenv/load"
 class Subscriber < ApplicationRecord
 
   after_create :send_confirmation_email
-  after_create :professional_attribution
-  after_create :add_subscriber_to_etienne_trello
 
   ## REVOIR LES VALIDATEURS
 
@@ -80,26 +78,12 @@ class Subscriber < ApplicationRecord
     # Trello.new.add_comment_to_user_card(self, comment)
   end
 
-
-  ############################
-  # Professional Attribution #
-  ############################
-
-  def professional_attribution
-    self.notary = Notary.first if self.notary.nil?
-    self.contractor = Contractor.first if self.contractor.nil?
-    self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
-    self.save
+  def handle_onboarding
+    professional_attribution
+    add_subscriber_to_etienne_trello
   end
 
-  ############################
-  # Etienne Trello follow up 
-  ############################
-
-  def add_subscriber_to_etienne_trello
-    Trello.new.add_lead_on_etienne_trello(self)
-  end
-
+  
 
   ##########################
   ## Nurturing Mailer Job ##
@@ -209,6 +193,27 @@ class Subscriber < ApplicationRecord
   end
 
   private
+
+  ############################
+  # Professional Attribution #
+  ############################
+
+
+  def professional_attribution
+    self.notary = Notary.first if self.notary.nil?
+    self.contractor = Contractor.first if self.contractor.nil?
+    self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
+    self.save
+  end
+
+  ############################
+  # Etienne Trello follow up 
+  ############################
+
+  def add_subscriber_to_etienne_trello
+    Trello.new.add_lead_on_etienne_trello(self)
+  end
+
 
   ###########################
   # Email confirmation methods
