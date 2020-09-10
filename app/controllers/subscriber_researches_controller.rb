@@ -44,9 +44,9 @@ class SubscriberResearchesController < ApplicationController
   def create
     if @subscriber_research_wizard.subscriber.save(context: :onboarding)
       @subscriber_research_wizard.subscriber.broker = Broker.find(session[:broker_id], is_broker_affiliated: true) unless session[:broker_id].nil?
-      @subscriber_research_wizard.subscriber.handle_onboarding
       @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
       if @subscriber_research_wizard.subscriber_research.save
+        @subscriber_research_wizard.subscriber.handle_onboarding
         @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
         session[:subscriber_research_attributes] = nil
         session[:subscriber_attributes] = nil
