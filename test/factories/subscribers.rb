@@ -13,6 +13,8 @@ FactoryBot.define do
     facebook_id { "fb000001" }
     has_messenger { true }
     broker { FactoryBot.create(:broker) }
+    notary { FactoryBot.create(:notary) }
+    contractor { FactoryBot.create(:contractor) }
 
     factory :subscriber_fred do
       facebook_id { "3558864844155233" }
