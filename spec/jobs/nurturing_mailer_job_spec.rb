@@ -3,12 +3,13 @@ require 'rails_helper'
 RSpec.describe NurturingMailerJob, type: :job do
   describe "#perform_later" do
     before :all do
+      ActiveJob::Base.queue_adapter = :test
       @subscriber = FactoryBot.create(:subscriber)
       FactoryBot.create(:subscriber_research, subscriber: @subscriber)
       @nurturing_email = FactoryBot.create(:nurturing_mailer, time_frame: 0, template: "template_1")
     end
+
     it "enqueue job" do
-      ActiveJob::Base.queue_adapter = :test
       expect {
       NurturingMailerJob.perform_later(@subscriber, @nurturing_email)
       }.to have_enqueued_job
