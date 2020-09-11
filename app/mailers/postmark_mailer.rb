@@ -3,6 +3,7 @@ require 'dotenv/load'
 
 class PostmarkMailer < ApplicationMailer
   include PostmarkRails::TemplatedMailerMixin
+  include Rails.application.routes.url_helpers
 
   # A virer (voire remanier avec le nouveau mode d'activation )
   def send_error_message_broker_btn(card_id, broker_firstname = "XXX")
@@ -26,19 +27,19 @@ class PostmarkMailer < ApplicationMailer
       broker_lastname: subscriber.broker.lastname,
       broker_email: subscriber.broker.email,
       broker_phone: subscriber.broker.phone,
-      broker_avatar: url_for(subscriber.broker.avatar),
+      broker_avatar: rails_blob_url(subscriber.broker.avatar),
       notary_id: subscriber.notary.id,
       notary_firstname: subscriber.notary.firstname,
       notary_lastname: subscriber.notary.lastname,
       notary_email: subscriber.notary.email,
       notary_phone: subscriber.notary.phone,
-      notary_avatar: url_for(subscriber.notary.avatar),
+      notary_avatar: rails_blob_url(subscriber.notary.avatar),
       contractor_id: subscriber.contractor.id,
       contractor_firstname: subscriber.contractor.firstname,
       contractor_lastname: subscriber.contractor.lastname,
       contractor_email: subscriber.contractor.email,
       contractor_phone: subscriber.contractor.phone,
-      contractor_avatar: url_for(subscriber.contractor.avatar)
+      contractor_avatar: rails_blob_url(subscriber.contractor.avatar)
     }
     mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
