@@ -27,19 +27,19 @@ class PostmarkMailer < ApplicationMailer
       broker_lastname: subscriber.broker.lastname,
       broker_email: subscriber.broker.email,
       broker_phone: subscriber.broker.phone,
-      broker_avatar: rails_blob_url(subscriber.broker.avatar),
+      broker_avatar: rails_blob_url(subscriber.broker.avatar, only_path: true),
       notary_id: subscriber.notary.id,
       notary_firstname: subscriber.notary.firstname,
       notary_lastname: subscriber.notary.lastname,
       notary_email: subscriber.notary.email,
       notary_phone: subscriber.notary.phone,
-      notary_avatar: rails_blob_url(subscriber.notary.avatar),
+      notary_avatar: rails_blob_url(subscriber.notary.avatar, only_path: true),
       contractor_id: subscriber.contractor.id,
       contractor_firstname: subscriber.contractor.firstname,
       contractor_lastname: subscriber.contractor.lastname,
       contractor_email: subscriber.contractor.email,
       contractor_phone: subscriber.contractor.phone,
-      contractor_avatar: rails_blob_url(subscriber.contractor.avatar)
+      contractor_avatar: rails_blob_url(subscriber.contractor.avatar, only_path: true)
     }
     mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
