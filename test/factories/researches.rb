@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :research do
     factory :hunter_research do 
+      agglomeration { "Paris" }
       max_price { 300000 }
       min_price { 100000 }
       last_floor { false }
@@ -9,6 +10,7 @@ FactoryBot.define do
       hunter { FactoryBot.create(:hunter) }
     end
     factory :subscriber_research do
+      agglomeration { "Paris" }
       max_price { 300000 }
       min_price { 100000 }
       last_floor { false }
