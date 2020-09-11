@@ -126,7 +126,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_fullname
-    return self.firstname + " " + self.lastname
+    return "#{self.firstname} #{self.lastname}"
   end
 
   def get_areas_list
@@ -157,6 +157,16 @@ class Subscriber < ApplicationRecord
 
   def get_edit_path
     return ENV["BASE_URL"] + "subscribers/" + self.id.to_s + "/research/edit"
+  end
+
+  def get_criteria
+    desc =  ""
+    desc += "\u000ABudget Maximum: #{self.research.max_price.to_s.reverse.gsub(/...(?=.)/, '\& ').reverse} €"
+    desc += "\u000ABudget Minimum: #{self.research.min_price} €"
+    desc += "\u000ASurface Minimum: #{self.research.min_surface} m2"
+    desc += "\u000ANombre de pièces minimum: #{self.research.min_rooms_number}"
+    desc += "\u000AZone de recherche: #{self.get_areas_list}"
+    return desc
   end
 
   ########################

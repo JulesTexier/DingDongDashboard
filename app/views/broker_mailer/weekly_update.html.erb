@@ -5,11 +5,11 @@
 <table>
   <tr>
     <th> Nombre de client sur Ding Dong</th>
-    <td>49</td>
+    <td><%= @dd_all.count %></td>
   </tr>
   <tr>
     <th> Sur les 7 derniers jours </i></th>
-    <td>10</td>
+    <td><%= @dd_week.count %></td>
   </tr>
 </table>
 
@@ -22,18 +22,16 @@
     <th> Critères de recherche ?</th>
     <th> Coordonnées</th>
   </tr>
-  <tr>
-    <td> Jeanne Ausecours</td>
-    <td> 09/08/2020</td>
-    <td> Oui</td>
-    <td> OUI </td>
-    <td> OUI </td>
-    <td> 07.98.93.74 <br> jeanne.ausecours@gmail.com </td>
-  </tr>
+  <% @dd_subs_data.each do |sub|%>
+    <tr>
+      <td> <%= sub[:name] %></td>
+      <td> <%= sub[:created_at] %></td>
+      <td> <%= sub[:stop] %></td>
+      <td> <%= sub[:criteria] %> </td>
+      <td> <%= sub[:coords] %> </td>
+    </tr>
+  <% end %>
 </table>
-
-<h3>Statistiques des clients Ding Dong</h3>
-
 
 <style>
 table, tr, th, td {
