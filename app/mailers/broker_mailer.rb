@@ -25,7 +25,8 @@ class BrokerMailer < ApplicationMailer
       sub_hash = {}
       sub_hash[:name] = sub.get_fullname
       sub_hash[:created_at] = sub.created_at.strftime("%d/%m/%Y")
-      sub_hash[:coords] = "Téléphone: #{sub.phone} \u000AEmail: #{sub.email}"
+      sub_hash[:phone] = "#{sub.phone}"
+      sub_hash[:email] = "#{sub.email}"
       sub_hash[:stop] = sub.is_active ? "OUI" : "NON"
       sub_hash[:criteria] = sub.get_criteria
       @dd_subs_data.push(sub_hash)
@@ -41,7 +42,6 @@ class BrokerMailer < ApplicationMailer
       sub_hash[:criteria] = sub.get_criteria
       @own_subs_data.push(sub_hash)
     end
-    byebug
     mail(from: "etienne@hellodingdong.com", to: "f.bonnand@gmail.com", subject: "DING DONG - Synthèse de la semaine")
   end
 end
