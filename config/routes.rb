@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
       resources :subscribers do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
+        get "/handle-onboarding" => "subscribers#handle_onboarding"
       end
 
       # Other models
@@ -100,13 +101,14 @@ Rails.application.routes.draw do
       resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
-      post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber" # a garder
-      get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning" # a garder
-      get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" # a UPDATE
-      get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props" # a garder
-      post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" # a garder
-      get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" # a garder + ajouter le tracking
-      get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" # a checker
+      post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
+      get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning" 
+      get "/manychat/s/:subscriber_id/send/props/favorites" => "manychat#send_props_favorites" 
+      get "/manychat/s/:subscriber_id/send/last/:x/props" => "manychat#send_x_last_props"
+      post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" 
+      get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" 
+      get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" 
+      
       
       # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder

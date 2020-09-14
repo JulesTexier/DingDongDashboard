@@ -54,7 +54,6 @@ class SubscribersController < ApplicationController
     redirect_to step1_subscriber_researches_path
   end
 
-
   private
 
   def subscriber_params

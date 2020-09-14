@@ -84,6 +84,12 @@ class Api::V1::SubscribersController < ActionController::API
 
     end
 
+    # GET /subscribers/:subscriber_id/handle-onboarding 
+    def handle_onboarding
+        Subscriber.find(params[:subscriber_id]).handle_onboarding
+        render json: {status: 'SUCCESS', message: 'Subscriber onboarded', data: Subscriber.find(params[:subscriber_id])}, status: 200
+    end
+
 
     private
 
