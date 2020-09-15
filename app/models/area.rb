@@ -73,18 +73,47 @@ class Area < ApplicationRecord
       agglo_from_zone
     end
 
-    def self.get_selected_agglo_area(selected_agglo, areas_id)
-      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
-      zones = []
-      agglo_infos.each do |agglo|
-        if agglo["agglomeration"] == selected_agglo
-          zones.push(agglo["zone"])
+    def self.selected_area_onboarding(agglomeration, area_params)
+      all_selected_areas = []
+      departments = Agglomeration.find_by(name: agglomeration).departments
+      departments.each do |department|
+        a = []
+        a.push("department " + department.id.to_s)
+        a.push(department.name)
+        a.push("selected") if area_params.include?("department " + department.id.to_s)
+        all_selected_areas.push(a)
+        department.areas.pluck(:id, :name, :zip_code).each do |area|
+          b = []
+          b.push("area " + area[0].to_s)
+          b.push(area[1])
+          b.push(area[2])
+          b.push("selected") if area_params.include?("area " + area[0].to_s)
+          all_selected_areas.push(b)
         end
       end
-      areas = Area.where(zone: zones).pluck(:id, :name, :zip_code)
-      areas.each do |area|
-        selected = areas_id.include?(area[0]) ? "selected" : ""
-        area.push(selected)
+      all_selected_areas
+    end
+
+    def self.selected_area_edit(agglomeration, research_area = nil)
+      departments = Agglomeration.find_by(name: agglomeration).departments
+      areas = []
+      departments.each do |department|
+        a = []
+        a.push("department " + department.id.to_s)
+        a.push(department.name)
+        if department.areas.pluck(:id).all? { |e| research_area.include?(e) }
+          research_area -= department.areas.pluck(:id)
+          a.push("selected")
+        end 
+        areas.push(a)
+        department.areas.pluck(:id, :name, :zip_code).each do |area|
+          b = []
+          b.push("area " + area[0].to_s)
+          b.push(area[1])
+          b.push(area[2])
+          b.push("selected") if research_area.include?(area[0])
+          areas.push(b)
+        end
       end
       areas
     end
