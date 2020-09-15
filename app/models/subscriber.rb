@@ -213,7 +213,7 @@ class Subscriber < ApplicationRecord
   def professional_attribution
     self.notary = Notary.first if self.notary.nil?
     self.contractor = Contractor.first if self.contractor.nil?
-    self.broker = Broker.find_by(email: 'etienne@hellodingdong.com') if self.broker.nil?
+    self.broker = Broker.last if self.broker.nil?
     self.save
   end
 
