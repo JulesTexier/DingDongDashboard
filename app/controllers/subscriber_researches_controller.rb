@@ -24,7 +24,7 @@ class SubscriberResearchesController < ApplicationController
 
   def step1
     session[:areas] = [] #Reboot areas in case user changes agglomeration
-    @agglos_infos = Area.get_agglo_infos
+    @agglomerations_infos = Agglomeration.all
   end
 
   def step2
