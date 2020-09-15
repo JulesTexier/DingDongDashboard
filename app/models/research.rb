@@ -100,10 +100,12 @@ class Research < ApplicationRecord
 
   def update_research_areas(areas_ids)
     selected_areas = self.areas.pluck(:id)
-    areas_ids.map! do |area_id|
-      area_id.include?("GlobalZone") ? Area.where(zone: area_id.gsub("GlobalZone - ", "")).pluck(:id) : area_id
+    modified_array = []
+    areas_ids.each do |area_id|
+      modified_array.push(Department.find(area_id.gsub("department ", "").to_i).areas.pluck(:id)) if area_id.include?("department")
+      modified_array.push(Area.where(id: area_id.gsub("area ", "").to_i).pluck(:id)) if area_id.include?("area")
     end
-    cleaned_area_array = areas_ids.flatten
+    cleaned_area_array = modified_array.flatten
     cleaned_area_array.map! {|id| id.to_i }
     cleaned_area_array.uniq!
     areas_to_destroy = selected_areas.reject {|x| cleaned_area_array.include?(x)}
