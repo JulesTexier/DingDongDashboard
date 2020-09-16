@@ -24,7 +24,7 @@ RSpec.describe Research, type: :model do
       before :each do
         sub = FactoryBot.create(:subscriber)
         @research = FactoryBot.create(:research, subscriber: sub, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000)
-        @research.areas << Area.new(name: "Paris 10ème")
+        @research.areas << Area.find_by(name: "Paris 10ème")
      end
 
       describe "case research MATCH properties values" do
