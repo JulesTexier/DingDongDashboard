@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_141503) do
+ActiveRecord::Schema.define(version: 2020_09_16_142351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -129,31 +129,6 @@ ActiveRecord::Schema.define(version: 2020_09_16_141503) do
     t.string "name"
     t.bigint "agglomeration_id"
     t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
-  end
-
-  create_table "hunter_searches", force: :cascade do |t|
-    t.string "research_name"
-    t.text "areas", default: [], array: true
-    t.integer "min_floor", default: 0
-    t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
-    t.integer "min_surface"
-    t.integer "min_rooms_number"
-    t.integer "max_price"
-    t.bigint "hunter_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "min_price"
-    t.integer "max_sqm_price"
-    t.boolean "is_active", default: true
-    t.boolean "balcony", default: false
-    t.boolean "terrace", default: false
-    t.boolean "garden", default: false
-    t.boolean "new_construction", default: false
-    t.boolean "last_floor", default: false
-    t.boolean "home_type", default: true
-    t.boolean "apartment_type", default: true
-    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
   end
 
   create_table "hunters", force: :cascade do |t|
