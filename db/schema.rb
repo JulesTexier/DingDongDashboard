@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_094545) do
+ActiveRecord::Schema.define(version: 2020_09_16_141503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -129,25 +129,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.string "name"
     t.bigint "agglomeration_id"
     t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
-  end
-
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "subscriber_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id"], name: "index_favorites_on_property_id"
-    t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
-    t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
-  end
-
-  create_table "hunter_search_areas", force: :cascade do |t|
-    t.bigint "hunter_search_id"
-    t.bigint "area_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_hunter_search_areas_on_area_id"
-    t.index ["hunter_search_id"], name: "index_hunter_search_areas_on_hunter_search_id"
   end
 
   create_table "hunter_searches", force: :cascade do |t|
@@ -339,15 +320,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
   end
 
-  create_table "selections", force: :cascade do |t|
-    t.bigint "hunter_search_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hunter_search_id"], name: "index_selections_on_hunter_search_id"
-    t.index ["property_id"], name: "index_selections_on_property_id"
-  end
-
   create_table "sequence_steps", force: :cascade do |t|
     t.integer "step"
     t.string "name"
@@ -451,12 +423,8 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "departments"
-  add_foreign_key "favorites", "properties"
-  add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
   add_foreign_key "property_links", "properties"
-  add_foreign_key "selections", "hunter_searches"
-  add_foreign_key "selections", "properties"
   add_foreign_key "sequence_steps", "sequences"
   add_foreign_key "subscriber_sequences", "sequences"
   add_foreign_key "subscriber_sequences", "subscribers"
