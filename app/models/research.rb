@@ -109,9 +109,11 @@ class Research < ApplicationRecord
     cleaned_area_array.map! {|id| id.to_i }
     cleaned_area_array.uniq!
     areas_to_destroy = selected_areas.reject {|x| cleaned_area_array.include?(x)}
-    self.research_areas.where(area_id: areas_to_destroy).destroy_all unless areas_to_destroy.empty?
+    self.research_areas.where(area_id: areas_to_destroy).delete_all unless areas_to_destroy.empty?
     areas_to_add = cleaned_area_array.reject {|x| selected_areas.include?(x)}
-    areas_to_add.each { |area_id| ResearchArea.create(research_id: self.id, area_id: area_id) } unless areas_to_add.empty?
+    areas_to_import = []
+    areas_to_add.each { |area_id| areas_to_import << ResearchArea.new(research_id: self.id, area_id: area_id) } unless areas_to_add.empty?
+    ResearchArea.import areas_to_import
   end
   
   def get_pretty_price(edge)
