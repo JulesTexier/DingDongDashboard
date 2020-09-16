@@ -16,15 +16,6 @@ class Area < ApplicationRecord
         Area.where(zone: ["Paris", "Première Couronne"])
     end
 
-    def self.get_aggregate_data_for_selection(areas_id)
-      areas = []
-      areas_id.each do |area|
-        area.push(Area.find(area).pluck(:name, :zip_code))
-        area.push("selected")
-      end
-      return areas
-    end
-
     def self.get_areas_for_hunters(areas_id)
 			master_areas = []
 			zone_areas = Area.all.pluck(:zone).uniq!
@@ -55,24 +46,6 @@ class Area < ApplicationRecord
       collection
     end
 
-    def self.get_active_agglo_infos
-      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
-      agglo_infos.reject {|agglo| !agglo["is_active"]}
-    end
-
-    def self.get_agglo_from_zone(zone_name)
-      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
-      agglo_from_zone = []
-      agglo_infos.each do |agglo| 
-        agglo["zone"].any? do |zone| 
-          if zone.include?(zone_name)
-            agglo_from_zone.push(agglo["agglomeration"])
-          end
-        end
-      end
-      agglo_from_zone
-    end
-
     def self.selected_area_onboarding(agglomeration, area_params)
       all_selected_areas = []
       departments = Agglomeration.find_by(name: agglomeration).departments
@@ -98,37 +71,24 @@ class Area < ApplicationRecord
       departments = Agglomeration.find_by(name: agglomeration).departments
       areas = []
       departments.each do |department|
-        a = []
-        a.push("department " + department.id.to_s)
-        a.push(department.name)
-        if department.areas.pluck(:id).all? { |e| research_area.include?(e) }
-          research_area -= department.areas.pluck(:id)
-          a.push("selected")
+        selected_departments = []
+        selected_departments.push("department " + department.id.to_s)
+        selected_departments.push(department.name)
+        department_areas = department.areas
+        if department_areas.pluck(:id).all? { |e| research_area.include?(e) }
+          research_area -= department_areas.pluck(:id)
+          selected_departments.push("selected")
         end 
-        areas.push(a)
-        department.areas.pluck(:id, :name, :zip_code).each do |area|
-          b = []
-          b.push("area " + area[0].to_s)
-          b.push(area[1])
-          b.push(area[2])
-          b.push("selected") if research_area.include?(area[0])
-          areas.push(b)
+        areas.push(selected_departments)
+        department_areas.pluck(:id, :name, :zip_code).each do |area|
+          selected_areas = []
+          selected_areas.push("area " + area[0].to_s)
+          selected_areas.push(area[1])
+          selected_areas.push(area[2])
+          selected_areas.push("selected") if research_area.include?(area[0])
+          areas.push(selected_areas)
         end
       end
       areas
-    end
-
-    def self.global_zones(selected_agglo)
-      agglo_infos = YAML.load_file("./db/data/agglomeration.yml")
-      global_zones = []
-      agglo_infos.each do |agglo| 
-        if agglo["agglomeration"] == selected_agglo 
-          agglo["zone"].each do |zone_name|
-            zone_area = ["GlobalZone", zone_name]
-            global_zones.push(zone_area)
-          end
-        end
-      end
-      global_zones
     end
 end
