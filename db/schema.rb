@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_142857) do
+ActiveRecord::Schema.define(version: 2020_09_16_143232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -347,25 +347,10 @@ ActiveRecord::Schema.define(version: 2020_09_16_142857) do
     t.boolean "is_active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "max_price"
-    t.integer "min_surface"
-    t.integer "min_rooms_number"
-    t.integer "min_floor", default: 0
-    t.integer "min_elevator_floor"
     t.bigint "broker_id"
     t.string "trello_id_card"
-    t.string "project_type"
-    t.boolean "has_messenger"
     t.boolean "is_blocked"
-    t.boolean "balcony", default: false
     t.boolean "terrace", default: false
-    t.boolean "garden", default: false
-    t.boolean "new_construction", default: false
-    t.boolean "last_floor", default: false
-    t.integer "min_price", default: 0
-    t.integer "max_sqm_price"
-    t.boolean "home_type", default: true
-    t.boolean "apartment_type", default: true
     t.string "status"
     t.boolean "messenger_flux"
     t.boolean "email_flux"
