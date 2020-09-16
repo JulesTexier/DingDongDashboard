@@ -33,7 +33,7 @@
                 <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
                   <% @master_areas.each do |item| %>
                     <% if item[0].include?("department") %>
-                      <option value="<%= item[0] %>" <%= item[2] %>> <%= "Tout #{item[1]}" %></option>
+                      <option value="<%= item[0] %>" <%= item[2] %>> <%= "#{item[1]}" %></option>
                     <% else %>
                       <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
                     <% end %>
