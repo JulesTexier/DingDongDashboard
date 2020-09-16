@@ -64,11 +64,6 @@ namespace :broadcast do
     puts "Launching Good Morning Broadcast"
     BroadcasterWorker.perform_async('good_morning')
   end
-
-  task :hourly_check_hunters do
-    puts "Launching Hunter Not Live Broadcast"
-    BroadcasterWorker.perform_async('hunter_not_live')
-  end
 end
 
 namespace :test do
@@ -90,9 +85,6 @@ end
 
 namespace :migration do 
   desc "Tasks to migrate datas for major release"
-  task :hunter_migration do 
-    Migration.new.hunter_migration_to_research
-  end
   task :subscriber_migration do 
     Migration.new.subscriber_migration_to_research
   end

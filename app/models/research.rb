@@ -1,14 +1,11 @@
 class Research < ApplicationRecord
-  belongs_to :subscriber, optional: true
-  belongs_to :hunter, optional: true
+  belongs_to :subscriber
 
   has_many :research_areas
   has_many :areas, through: :research_areas
 
   has_many :saved_properties
   has_many :properties, through: :saved_properties
-
-  validate :correct_association
 
   #############################
   ## CONSTANT FOR ATTRIBUTES ##
@@ -144,21 +141,9 @@ class Research < ApplicationRecord
     return [(average*0.8).round, (average*1.2).round]
   end
 
-  ##################################
-  ## HUNTER METHODS FOR BROADCAST ##
-  ##################################
-
-  def self.active_hunters_live_broadcasted
-    self.includes(:hunter)
-    .where.not(hunters: { id: nil })
-    .where(is_active: true, hunters: {live_broadcast: true})
-  end
-
-  def self.active_hunters_not_live_broadcasted
-    self.includes(:hunter)
-    .where.not(hunters: { id: nil })
-    .where(is_active: true, hunters: {live_broadcast: false})
-  end
+  ###########################
+  ## METHODS FOR BROADCAST ##
+  ###########################
 
   def self.active_subs_research_messenger
     self.includes(:subscriber)
@@ -170,12 +155,6 @@ class Research < ApplicationRecord
     self.includes(:subscriber)
       .where.not(subscribers: { id: nil })
       .where(subscribers: { is_active: true, is_blocked: [false, nil], email_flux: true, messenger_flux: [false, nil], email_confirmed: true })
-  end
-
-  def self.active_hunters_research
-    self.includes(:hunter)
-      .where.not(hunters: { id: nil } )
-      .where(is_active: true)
   end
   
   def get_areas_list
@@ -286,14 +265,5 @@ class Research < ApplicationRecord
 
   def matching_property_new_construction?(is_new_construction)
     !self.new_construction && is_new_construction ? false : true
-  end
-
-  def correct_association
-    case
-    when self.hunter.nil? && self.subscriber.nil?
-      errors.add(:research, "should belong to hunter or subscriber")
-    when !self.hunter.nil? && !self.subscriber.nil? 
-      errors.add(:research, "shouldn't belong to hunter AND subscriber") 
-    end
   end
 end
