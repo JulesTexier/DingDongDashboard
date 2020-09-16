@@ -65,14 +65,6 @@ class Subscriber < ApplicationRecord
     return response
   end
 
-  def determine_zone
-    subscriber_zone = []
-    self.areas.pluck(:zone).uniq.each do |zone|
-      subscriber_zone.push(Area.get_agglo_from_zone(zone))
-    end
-    subscriber_zone.flatten.uniq
-  end
-
   # A voir ... (util pour Etienne ?)
   def notify_broker_trello(comment)
     # Trello.new.add_comment_to_user_card(self, comment)
