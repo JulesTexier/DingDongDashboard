@@ -1,6 +1,6 @@
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation, except: %w(ar_internal_metadata scraper_parameters areas)
+    DatabaseCleaner.clean_with :truncation, except: %w(ar_internal_metadata scraper_parameters areas agglomerations departments)
   end
 
   config.before(:each) do
