@@ -42,7 +42,7 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
     before :all do
       @sub = FactoryBot.create(:subscriber_fred)
       @sub_research = FactoryBot.create(:subscriber_research, subscriber: @sub, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
-      @sub_research.areas << Area.new(name: "Paris 10ème")
+      @sub_research.areas << Area.find_by(name: "Paris 10ème")
       date = Date.today
       date = Time.parse(date.to_time.in_time_zone("Europe/Paris").beginning_of_day.to_s)
       @property = FactoryBot.create(:property, created_at: date, price: @sub_research.max_price, surface: @sub_research.min_surface, area: @sub_research.areas.first, rooms_number: @sub_research.min_rooms_number, floor: nil, has_elevator: nil)

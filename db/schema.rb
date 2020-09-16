@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_174919) do
+ActiveRecord::Schema.define(version: 2020_09_15_094545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -71,6 +71,12 @@ ActiveRecord::Schema.define(version: 2020_09_08_174919) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "agglomerations", force: :cascade do |t|
+    t.string "name"
+    t.string "image_url"
+    t.boolean "is_active", default: false
+  end
+
   create_table "areas", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -78,6 +84,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_174919) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "zone"
     t.string "zip_code"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_areas_on_department_id"
   end
 
   create_table "broker_shifts", force: :cascade do |t|
@@ -115,6 +123,12 @@ ActiveRecord::Schema.define(version: 2020_09_08_174919) do
     t.string "company"
     t.string "email"
     t.text "description"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -436,6 +450,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_174919) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "areas", "departments"
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"

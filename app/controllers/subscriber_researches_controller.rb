@@ -10,7 +10,6 @@ class SubscriberResearchesController < ApplicationController
     session[:subscriber_attributes] = @subscriber_research_wizard.subscriber.attributes
     ## Need to keep this params for research_area. Stored it in session.
     session[:areas] = params[:areas] unless params[:areas].nil?
-
     if @subscriber_research_wizard.valid?
       next_step = wizard_subscriber_research_next_step(current_step)
       create and return unless next_step
@@ -24,13 +23,12 @@ class SubscriberResearchesController < ApplicationController
 
   def step1
     session[:areas] = [] #Reboot areas in case user changes agglomeration
-    @agglos_infos = Area.get_agglo_infos
+    @agglomerations_infos = Agglomeration.all
   end
 
   def step2
     session[:areas] = [] if session[:areas].nil?
-    default_areas = session[:areas].flatten.map! {|id| id.to_i }
-    @master_areas = Area.get_selected_agglo_area(@subscriber_research_wizard.agglomeration, default_areas)
+    @master_areas = Area.selected_area_onboarding(@subscriber_research_wizard.agglomeration, session[:areas])
   end
   
   def step3
@@ -47,7 +45,7 @@ class SubscriberResearchesController < ApplicationController
       @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
       if @subscriber_research_wizard.subscriber_research.save
         @subscriber_research_wizard.subscriber.handle_onboarding
-        @subscriber_research_wizard.subscriber_research.areas << Area.find(session[:areas])
+        @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
         session[:subscriber_research_attributes] = nil
         session[:subscriber_attributes] = nil
         session[:areas] = nil
@@ -66,7 +64,7 @@ class SubscriberResearchesController < ApplicationController
     @subscriber = Subscriber.find(params[:subscriber_id])
     @research = @subscriber.research
     subscriber_areas_id = @research.areas.pluck(:id)
-    @master_areas = Area.get_selected_agglo_area(@research.agglomeration, subscriber_areas_id)
+    @master_areas = Area.selected_area_edit(@research.agglomeration, subscriber_areas_id)
   end
 
   def update

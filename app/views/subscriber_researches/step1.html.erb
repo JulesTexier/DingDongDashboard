@@ -26,20 +26,20 @@
                 <%= hidden_field_tag :current_step, 'step1' %>
                     <div class="">
                         <div class="card-group">
-                            <% @agglos_infos.each do |agglo| %>
+                            <% @agglomerations_infos.each do |agglo| %>
                                 <div class="col-12 col-md-3 mb-4">
-                                    <div class="card card_hover <%=agglo%>" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
+                                    <div class="card card_hover [<%= agglo.name %>, <%= agglo.is_active %>, <%= agglo.image_url %>]" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
                                         <img 
                                         class="card-img-top" 
-                                        src="<%= agglo[2] %>" 
+                                        src="<%= agglo.image_url %>" 
                                         alt="agglomération">
                                         <div class="card-body" style="display: none;">
                                             <%= f.radio_button :agglomeration, 
-                                                agglo[0],
+                                                agglo.name,
                                                 required: true
                                             %>
                                             <span class="form-check-label mb-2 ml-2 box_hover" >
-                                                <%= agglo[0] %>
+                                                <%= agglo.name %>
                                             </span>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
             checkbox.checked = true;
             for(i=0; i < allCards.length; i++){
                 allCards[i].style.border = "none"
-                card.style.border = "solid 1px #2458FC"
+                card.style.border = "solid 2px #2458FC"
             }
         }
         else{

@@ -42,20 +42,41 @@ statuses_file.each do |status|
   end
 end
 
+
+agglo_file = YAML.load_file("db/data/agglomeration.yml")
+agglo_file.each do |agglo_data|
+  agglo = Agglomeration.find_by(name: agglo_data["agglomeration"])
+  if agglo.blank?
+    a = Agglomeration.new
+    a.name = agglo_data["agglomeration"]
+    a.image_url = agglo_data["image_url"]
+    a.is_active = agglo_data["is_active"]
+    a.save
+    agglo_data["zone"].each do |department|
+      Department.create(name: department, agglomeration: a) unless Department.where(name: department).any?
+    end
+  else
+    agglo_data["zone"].each do |department|
+      Department.create(name: department, agglomeration: agglo) unless Department.where(name: department).any?
+    end
+  end
+end
+
 area_yaml = YAML.load_file("./db/data/areas.yml")
 area_yaml.each do |district_data|
   district_data["datas"].each do |data|
     area = Area.find_by(name: data["name"])
     if area.nil?
-      Area.create(name: data["name"], zone: district_data["zone"], zip_code: data["terms"].first)
+      Area.create(name: data["name"], zone: district_data["zone"], zip_code: data["terms"].first, department: Department.find_by(name: district_data["zone"]))
       puts "Area - #{data["name"]} created"
     else 
       area.update(zone: district_data["zone"]) if area.zone != district_data["zone"]
+      area.update(department: Department.find_by(name: area.zone)) if area.department.nil?
       area.update(zip_code: data["terms"].first) if area.zip_code != data["terms"].first
     end
   end
 end
-
+  
 broker_shifts_yaml = YAML.load_file("./db/data/broker_shifts.yml")
 broker_shifts_yaml.each do |shift|
   if BrokerShift.where(name: shift["name"]).empty?

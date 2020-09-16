@@ -24,14 +24,14 @@
         <p class="mt-4 mb-3 grey">📍 Votre zone de recherche *</p>
         <div class="raw d-flex flex-wrap">
             <div class="form-group col-12 p-0 mb-0">
-                <select multiple placeholder= <%= "Ex:#{@master_areas.first[1]}, ..." %>  class="form-control" id="choices-multiple-remove-button" name="areas[]">
-                    <% @master_areas.each do |item| %>
-                        <% if item[0] == "GlobalZone"%>
-                        <option value="<%= item[0] %> - <%= item[1] %>"> <%= item[1] %></option>
-                        <% else %>
-                        <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
-                        <% end %>
+                <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
+                  <% @master_areas.each do |item| %>
+                    <% if item[0].include?("department") %>
+                      <option value="<%= item[0] %>" <%= item[2] %>> <%= "Tout #{item[1]}" %></option>
+                    <% else %>
+                      <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
                     <% end %>
+                  <% end %>
                 </select>
             </div>
         </div>

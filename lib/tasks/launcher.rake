@@ -96,4 +96,8 @@ namespace :migration do
   task :subscriber_migration do 
     Migration.new.subscriber_migration_to_research
   end
+
+  task :agglomeration_migration do 
+    Migration.new.agglomeration_migration
+  end
 end

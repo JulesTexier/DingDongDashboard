@@ -11,11 +11,6 @@ class SubscribersController < ApplicationController
     @broker = @subscriber.broker
     @contractor = @subscriber.contractor
   end
-
-  def select_agglomeration
-    @subscriber = Subscriber.find(params[:subscriber_id])
-    @agglos_infos = Area.get_agglo_infos
-  end
   
   def activation
     flow = "content20200716090652_490399"

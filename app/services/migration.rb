@@ -93,4 +93,34 @@ class Migration
       end
     end 
   end
+
+  def agglomeration_migration
+    agglo_file = YAML.load_file("db/data/agglomeration.yml")
+    agglo_file.each do |agglo_data|
+      agglo = Agglomeration.find_by(name: agglo_data["agglomeration"])
+      if agglo.blank?
+        a = Agglomeration.new
+        a.name = agglo_data["agglomeration"]
+        a.image_url = agglo_data["image_url"]
+        a.is_active = agglo_data["is_active"]
+        a.save
+        agglo_data["zone"].each do |department|
+          Department.create(name: department, agglomeration: a) unless Department.where(name: department).any?
+        end
+      else
+        agglo_data["zone"].each do |department|
+          Department.create(name: department, agglomeration: agglo) unless Department.where(name: department).any?
+        end
+      end
+
+      areas = Area.all 
+      areas.each do |area|
+        if area.department.nil?
+          area.department = Department.find_by(name: area.zone)
+          area.save
+          puts area.department.name
+        end
+      end
+    end
+  end
 end
