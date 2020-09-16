@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   #############
   resources :subscribers, only: [] do 
     get '/activation/' => 'subscribers#activation'
-    get '/agglomeration' => 'subscribers#select_agglomeration'
     get :professionals, :path => 'nos-pros'
     get :email_validation, :path => 'validez-votre-email'
     get :email_confirmed, :path => 'confirmation'
