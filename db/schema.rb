@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_143232) do
+ActiveRecord::Schema.define(version: 2020_09_16_153202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -129,23 +129,6 @@ ActiveRecord::Schema.define(version: 2020_09_16_143232) do
     t.string "name"
     t.bigint "agglomeration_id"
     t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
-  end
-
-  create_table "hunters", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "company"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.boolean "live_broadcast", default: true
-    t.index ["email"], name: "index_hunters_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
   end
 
   create_table "notaries", force: :cascade do |t|
