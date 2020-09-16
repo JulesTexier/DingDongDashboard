@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_142351) do
+ActiveRecord::Schema.define(version: 2020_09_16_142857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -283,16 +283,6 @@ ActiveRecord::Schema.define(version: 2020_09_16_142351) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "group_type"
-  end
-
-  create_table "selected_areas", force: :cascade do |t|
-    t.bigint "subscriber_id"
-    t.bigint "area_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_selected_areas_on_area_id"
-    t.index ["subscriber_id", "area_id"], name: "index_selected_areas_on_subscriber_id_and_area_id", unique: true
-    t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
   end
 
   create_table "sequence_steps", force: :cascade do |t|
