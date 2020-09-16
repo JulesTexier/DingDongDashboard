@@ -16,8 +16,6 @@ RSpec.describe Research, type: :model do
         should have_many(:properties).through(:saved_properties).class_name("Property")
         should have_many(:areas).through(:research_areas).class_name("Area")
       end
-
-      #TODO - test model method 'correct_association'
     end
 
     describe "matching_property?" do
@@ -206,14 +204,6 @@ RSpec.describe Research, type: :model do
           end
         end
       end
-    end
-  end
-
-  describe "Hunter research model" do
-    it "has a valid factory" do
-      hunter = FactoryBot.create(:hunter)
-      research = FactoryBot.create(:research, hunter: hunter)
-      expect(research).to be_valid
     end
   end
 end

@@ -11,12 +11,6 @@ class PostmarkMailer < ApplicationMailer
     mail from: "fred@hellodingdong.com", to: "etienne@hellodingdong.com", postmark_template_alias: "error-broker-btn"
   end
 
-  # A garder (remanier avec la table alert)
-  def send_properties_to_hunters(hunter_search)
-    self.template_model = { hunter_firstname: hunter_search.hunter.firstname, hunter_search_name: hunter_search.research_name, hunter_search_link: ENV['BASE_URL']+ "hunters/#{hunter_search.hunter.id}/hunter_searches/#{hunter_search.id}" }
-    mail from: "etienne@hellodingdong.com", to: hunter_search.hunter.email, postmark_template_alias: "hunter-notification"
-  end
-
   def send_nurturing_email(subscriber, nurturing_email)
     self.template_model = { 
       subscriber_id: subscriber.id,

@@ -8,8 +8,6 @@ class BroadcasterWorker
       Broadcaster.new.live_broadcast
     when "good_morning"
       Broadcaster.new.good_morning
-    when "hunter_not_live"
-      Broadcaster.new.hunter_searched_not_live_processed
     else
       puts "Error in BroadcasterWorker."
     end

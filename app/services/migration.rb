@@ -50,50 +50,6 @@ class Migration
     end
   end
 
-  ### 2 ) Boucle sur tous les hunters
-
-  def hunter_migration_to_research
-    HunterSearch.all.each do |hs|
-    # Migration des critères vers un objet Research
-      unless Research.where(hunter: hs.hunter, name: hs.research_name, created_at: hs.created_at).any?
-        puts "Hunter #{hs.hunter.id} prepared to migrate."
-        research = Research.new(hunter: hs.hunter)
-        research.name = hs.research_name
-        research.min_floor = hs.min_floor
-        research.has_elevator = hs.has_elevator
-        research.min_elevator_floor = hs.min_elevator_floor
-        research.min_surface = hs.min_surface
-        research.min_rooms_number = hs.min_rooms_number
-        research.max_price = hs.max_price
-        research.min_price = hs.min_price
-        research.max_sqm_price = hs.max_sqm_price
-        research.is_active = hs.is_active
-        research.balcony = hs.balcony
-        research.terrace = hs.terrace
-        research.garden = hs.garden
-        research.new_construction = hs.new_construction
-        research.last_floor = hs.last_floor
-        research.home_type = hs.home_type
-        research.apartment_type = hs.apartment_type
-        research.created_at = hs.created_at
-        research.agglomeration = "Paris" ##because all our hunters are in Paris, which is convenient AF
-
-        research.save
-        puts "Research #{research.id} saved."
-      # Migration des selected_areas vers des research_area
-        hs.hunter_search_areas.each do |hsa|
-          ResearchArea.create(research: research, area: hsa.area)
-        end
-      
-      # Migration des favoris vers des saved_properties
-        hs.selections.each do |fav|
-          SavedProperty.create(research: research, property: fav.property)
-        end
-        puts "Hunter #{hs.hunter.id} successfully migrated."
-      end
-    end 
-  end
-
   def agglomeration_migration
     agglo_file = YAML.load_file("db/data/agglomeration.yml")
     agglo_file.each do |agglo_data|

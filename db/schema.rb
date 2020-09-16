@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_094545) do
+ActiveRecord::Schema.define(version: 2020_09_16_160554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -131,67 +131,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "subscriber_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["property_id"], name: "index_favorites_on_property_id"
-    t.index ["subscriber_id", "property_id"], name: "index_favorites_on_subscriber_id_and_property_id", unique: true
-    t.index ["subscriber_id"], name: "index_favorites_on_subscriber_id"
-  end
-
-  create_table "hunter_search_areas", force: :cascade do |t|
-    t.bigint "hunter_search_id"
-    t.bigint "area_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_hunter_search_areas_on_area_id"
-    t.index ["hunter_search_id"], name: "index_hunter_search_areas_on_hunter_search_id"
-  end
-
-  create_table "hunter_searches", force: :cascade do |t|
-    t.string "research_name"
-    t.text "areas", default: [], array: true
-    t.integer "min_floor", default: 0
-    t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
-    t.integer "min_surface"
-    t.integer "min_rooms_number"
-    t.integer "max_price"
-    t.bigint "hunter_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "min_price"
-    t.integer "max_sqm_price"
-    t.boolean "is_active", default: true
-    t.boolean "balcony", default: false
-    t.boolean "terrace", default: false
-    t.boolean "garden", default: false
-    t.boolean "new_construction", default: false
-    t.boolean "last_floor", default: false
-    t.boolean "home_type", default: true
-    t.boolean "apartment_type", default: true
-    t.index ["hunter_id"], name: "index_hunter_searches_on_hunter_id"
-  end
-
-  create_table "hunters", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "company"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.boolean "live_broadcast", default: true
-    t.index ["email"], name: "index_hunters_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_hunters_on_reset_password_token", unique: true
-  end
-
   create_table "notaries", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -297,11 +236,9 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.boolean "last_floor", default: false
     t.boolean "home_type", default: true
     t.boolean "apartment_type", default: true
-    t.bigint "hunter_id"
     t.bigint "subscriber_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["hunter_id"], name: "index_researches_on_hunter_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
 
@@ -327,25 +264,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "group_type"
-  end
-
-  create_table "selected_areas", force: :cascade do |t|
-    t.bigint "subscriber_id"
-    t.bigint "area_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_selected_areas_on_area_id"
-    t.index ["subscriber_id", "area_id"], name: "index_selected_areas_on_subscriber_id_and_area_id", unique: true
-    t.index ["subscriber_id"], name: "index_selected_areas_on_subscriber_id"
-  end
-
-  create_table "selections", force: :cascade do |t|
-    t.bigint "hunter_search_id"
-    t.bigint "property_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hunter_search_id"], name: "index_selections_on_hunter_search_id"
-    t.index ["property_id"], name: "index_selections_on_property_id"
   end
 
   create_table "sequence_steps", force: :cascade do |t|
@@ -410,25 +328,10 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
     t.boolean "is_active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "max_price"
-    t.integer "min_surface"
-    t.integer "min_rooms_number"
-    t.integer "min_floor", default: 0
-    t.integer "min_elevator_floor"
     t.bigint "broker_id"
     t.string "trello_id_card"
-    t.string "project_type"
-    t.boolean "has_messenger"
     t.boolean "is_blocked"
-    t.boolean "balcony", default: false
     t.boolean "terrace", default: false
-    t.boolean "garden", default: false
-    t.boolean "new_construction", default: false
-    t.boolean "last_floor", default: false
-    t.integer "min_price", default: 0
-    t.integer "max_sqm_price"
-    t.boolean "home_type", default: true
-    t.boolean "apartment_type", default: true
     t.string "status"
     t.boolean "messenger_flux"
     t.boolean "email_flux"
@@ -451,12 +354,8 @@ ActiveRecord::Schema.define(version: 2020_09_15_094545) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "departments"
-  add_foreign_key "favorites", "properties"
-  add_foreign_key "favorites", "subscribers"
   add_foreign_key "properties", "areas"
   add_foreign_key "property_links", "properties"
-  add_foreign_key "selections", "hunter_searches"
-  add_foreign_key "selections", "properties"
   add_foreign_key "sequence_steps", "sequences"
   add_foreign_key "subscriber_sequences", "sequences"
   add_foreign_key "subscriber_sequences", "subscribers"

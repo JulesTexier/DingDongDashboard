@@ -5,10 +5,7 @@ class Subscriber < ApplicationRecord
   after_create :send_confirmation_email
 
   ## REVOIR LES VALIDATEURS
-
-  has_many :selected_areas
-  has_many :areas, through: :selected_areas
-
+  
   has_one :research
 
   has_many :subscriber_sequences
@@ -16,10 +13,6 @@ class Subscriber < ApplicationRecord
 
   has_many :subscriber_statuses
   has_many :statuses, through: :subscriber_statuses
-
-  ## A SUPPRIMER APRES LE SEED
-  has_many :favorites
-  has_many :fav_properties, through: :favorites, source: :property
 
   ## Professional association
   belongs_to :notary, optional: true

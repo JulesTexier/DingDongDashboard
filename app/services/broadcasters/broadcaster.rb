@@ -14,7 +14,6 @@ class Broadcaster
     update_processed_properties(properties)
     live_messenger_broadcaster(properties)
     live_email_broadcaster(properties)
-    live_email_broadcaster_hunter(properties)
   end
 
   def live_messenger_broadcaster(properties)
@@ -41,18 +40,6 @@ class Broadcaster
     end
   end
 
-  def live_email_broadcaster_hunter(properties)
-    hunter_researches = Research.active_hunters_live_broadcasted
-    hunter_researches.each do |hunter_research|
-      hunter_research_props = []
-      hunter_research_area = hunter_research.areas.ids
-      properties.each do |prop|
-        hunter_research_props.push(prop) if hunter_research.matching_property?(prop.attributes, hunter_research_area)
-      end
-      HunterMailer.notification_email(hunter_research.id, hunter_research_props).deliver_now if !hunter_research_props.empty?
-    end
-  end
-
   def live_email_broadcaster(properties)
     researches = Research.active_subs_research_email
     researches.each do |research|
@@ -62,19 +49,6 @@ class Broadcaster
         research_props.push(prop) if research.matching_property?(prop.attributes, research_area)
       end
       SubscriberMailer.property_mailer(research.subscriber, research_props).deliver_now if !research_props.empty?
-    end
-  end
-
-  def hunter_searched_not_live_processed
-    # // Load properties scraped in the last hour 
-    properties = Property.where('CREATED_AT > ? ', Time.now - 1.hour).pluck(*ATTRS).map { |p| ATTRS.zip(p).to_h }
-    hunter_researches = Research.active_hunters_not_live_broadcasted
-    hunter_researches.each do |hunter_research| 
-      hunter_search_props = []
-      properties.each do |prop|
-        hunter_search_props.push(prop) if hunter_research.matching_property?(prop.attributes, hunter_research.areas.ids)
-      end
-      HunterMailer.notification_email(hunter_research.id, hunter_search_props).deliver_now if !hunter_search_props.empty?
     end
   end
 
