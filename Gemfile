@@ -22,6 +22,9 @@ gem "redis"
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#ActiveRecord Bulk Insert made easy
+gem 'activerecord-import'
+
 gem "devise"
 
 gem "rubocop"
@@ -63,6 +66,7 @@ gem "stripe"
 gem "rspec-rails", "~> 4.0.0.rc1"
 
 gem "dotenv"
+
 
 # Sidekiq
 gem "sidekiq", "~> 4.1", ">= 4.1.2"
