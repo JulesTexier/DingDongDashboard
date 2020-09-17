@@ -198,8 +198,12 @@ class Subscriber < ApplicationRecord
   def professional_attribution
     self.notary = Notary.first if self.notary.nil?
     self.contractor = Contractor.first if self.contractor.nil?
-    self.broker = Broker.last if self.broker.nil?
+    self.broker = get_accurate_broker if self.broker.nil?
     self.save
+  end
+
+  def get_accurate_broker
+    Broker.get_accurate_by_agglomeration(Agglomeration.find_by(name:self.research.agglomeration).id)
   end
 
   ############################
@@ -247,6 +251,7 @@ class Subscriber < ApplicationRecord
       self.update(broker: Broker.get_current(shift_type))
     end
   end
+
 end
 
 
