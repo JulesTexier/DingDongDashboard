@@ -13,10 +13,10 @@ class Group::ScraperCentury < Scraper
       fetch_main_page(args).each do |item|
         begin
           hashed_property = {}
-          hashed_property[:link] = "https://www.century21.fr" + access_xml_link(item, "div.zone-text-loupe a", "href")[0].to_s
-          hashed_property[:surface] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
-          hashed_property[:area] = perform_district_regex(access_xml_text(item, "div.zone-text-loupe > a > h3"), args.zone)
-          hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4.detail_vignette"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
+          hashed_property[:link] = "https://www.century21.fr" + access_xml_link(item, "a.tw-block", "href")[0].to_s
+          hashed_property[:surface] = regex_gen(access_xml_text(item, "h4.tw-text-c21-grey-medium"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
+          hashed_property[:area] = perform_district_regex(access_xml_text(item, "h3.tw-leading-none"), args.zone)
+          hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "h4.tw-text-c21-grey-medium"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "div.price"), '(\d)(.*)(€)').to_int_scrp
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
