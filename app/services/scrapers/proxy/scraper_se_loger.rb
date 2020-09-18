@@ -18,6 +18,7 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property[:price] = item["pricing"]["price"].to_int_scrp
             hashed_property[:images] = item["photos"].map { |img| img.gsub("/400/visuels", "/800/visuels") }
             hashed_property[:area] = perform_district_regex(item["zipCode"], args.zone)
+            hashed_property[:area] = perform_district_regex(item["cityLabel"], args.zone) if hashed_property[:area] == "N/C" && args.zone != "Paris (75)"
             hashed_property[:link] = item["classifiedURL"]
             hashed_property[:is_new_construction] = item["classifiedURL"].include?("bellesdemeures") || item["classifiedURL"].include?("selogerneuf")
             item["tags"].each do |infos|
