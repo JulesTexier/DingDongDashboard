@@ -15,6 +15,7 @@ class Hub::ScraperFigaro < Scraper
           hashed_property = {}
           link = access_xml_link(item, "a.js-link-ei", "href")[0].to_s
           hashed_property[:link] = link.to_s.strip.empty? ? access_xml_link(item, "a.js-link-plf", "href")[0].to_s : "https://immobilier.lefigaro.fr" + link
+          hashed_property[:link] = access_xml_link(item, "a.js-link-ei9", "href")[0].to_s if hashed_property[:link] == ""
           hashed_property[:surface] = regex_gen(access_xml_text(item, "h2"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:area] = perform_district_regex(access_xml_text(item, "h2 > a > span").tr("\n\t", ""), args.zone)
           hashed_property[:flat_type] = get_type_flat(access_xml_link(item, "a.js-link-ei", "title")[0]) unless access_xml_link(item, "a.js-link-ei", "title")[0].nil?
@@ -28,6 +29,9 @@ class Hub::ScraperFigaro < Scraper
               hashed_property[:description] = access_xml_text(html, "p#js-description").specific_trim_scrp("\n").strip
               hashed_property[:agency_name] = access_xml_text(html, "span.societe.js-societe").tr("\n\t", "")
               hashed_property[:images] = access_xml_link(html, "#js-picture-main", "src")
+            elsif hashed_property[:link].include?("https://www.explorimmoneuf.com/")
+              hashed_property[:images] = access_xml_link(html, "img.img-player-in-page", "src")
+              hashed_property[:description] = access_xml_text(html, "div.container-description-text").specific_trim_scrp("\n").strip
             else
               hashed_property[:bedrooms_number] = regex_gen(access_xml_array_to_text(html, "ul.unstyled.flex").specific_trim_scrp("\n\r\t"), '(\d+)(.?)(chambre(s?))').to_int_scrp
               hashed_property[:description] = access_xml_text(html, "p.description.js-description").specific_trim_scrp("\n").strip
