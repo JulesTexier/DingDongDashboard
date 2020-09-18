@@ -52,7 +52,7 @@ class GrowthEngine
   end
 
   def get_adequate_sequence(subscriber)
-    if subscriber.is_client? && subscriber.is_active
+    if subscriber.status != "new_lead" ? && subscriber.is_active
       ## If the sub is a client and is active
       ## we execute a regular sequence
       marketing_type = "regular"

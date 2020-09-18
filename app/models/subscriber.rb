@@ -28,28 +28,7 @@ class Subscriber < ApplicationRecord
   # 1 - Business methods
   ########################
 
-  def is_client?
-    is_client = false
-    statuses_scoped = ["form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"]
-
-    # 1 • On regarde s'il y a un SubscriberStatus (nouveaux users)
-    subscriber_statuses = SubscriberStatus.where(subscriber: self)
-    if !subscriber_statuses.empty? 
-      subscriber_statuses.each do |ss|
-        if statuses_scoped.include?(ss.status.name)
-          is_client = true 
-        end
-      end
-    else 
-      # 2 • Sinon on regarde directement l'atribut status (old users)
-      if statuses_scoped.include?(self.status)
-        is_client = true
-      end
-    end
-    return is_client
-  end
-
-  def has_interacted(last_interaction, day_range)
+   def has_interacted(last_interaction, day_range)
     response = false
     parsed_last_interaction = Time.parse(last_interaction)
     if Time.now < parsed_last_interaction + day_range.days
