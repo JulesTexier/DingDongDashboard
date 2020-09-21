@@ -37,6 +37,30 @@
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
+  - zone: Toulouse (31)
+    url: https://www.superimmo.com/achat/midi-pyrenees/haute-garonne/toulouse-31?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://www.superimmo.com/achat/pays-de-la-loire/loire-atlantique/nantes-44?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://www.superimmo.com/achat/bretagne/ille-et-vilaine/rennes-35?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://www.superimmo.com/achat/poitou-charentes/charente-maritime/la-rochelle-17000
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
 - source: BienIci
   params:
   - zone: Paris (75)
@@ -71,6 +95,30 @@
     group_type: Hub
   - zone: Seine-Saint-Denis (93)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-87002%22%2C%22-87922%22%2C%22-87628%22%2C%22-67685%22%2C%22-67826%22%2C%22-130544%22%2C%22-129550%22%2C%22-129423%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Toulouse (31)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-35738%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-59874%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-54517%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-117858%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -113,6 +161,30 @@
     main_page_cls: div.container-item
     is_active: true
     group_type: Hub
+  - zone: Toulouse (31)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=toulouse&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=nantes&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Rennes%20(35)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=La%20Rochelle%20(17)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
 - source: Propr. Figaro
   params:
   - zone: Paris (75)
@@ -147,6 +219,30 @@
     group_type: Hub
   - zone: Seine-Saint-Denis (93)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?localisation=48.9232019,2.3519649,48.9004381,2.3137491,FR,Saint-Ouen&localisation=48.952109,2.3981399,48.901482,2.333227,FR,Saint-Denis&localisation=48.924462,2.411483,48.9011579,2.365601,FR,Aubervilliers&localisation=48.918039,2.4277121,48.883039,2.3893131,FR,Pantin&localisation=48.8896438,2.4119279,48.878443,2.398923,FR,Le%20Pr%C3%A9-Saint-Gervais&localisation=48.8909731,2.430578,48.8731381,2.4107939,FR,Les%20Lilas&localisation=48.879016,2.4371299,48.855171,2.413412,FR,Bagnolet&localisation=48.878749,2.482805,48.8487431,2.415296,FR,Montreuil&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Toulouse (31)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-haute+garonne-midi+pyrenees-france/?ville=toulouse&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-loire+atlantique-pays+de+loire-france/?ville=nantes&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-ille+et+vilaine-bretagne-france/?ville=rennes&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-charente+maritime-poitou+charentes-france/?ville=la+rochelle&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: true
@@ -189,6 +285,30 @@
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
+  - zone: Toulouse (31)
+    url: https://www.logic-immo.com/vente-immobilier-toulouse-tous-codes-postaux,393_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://www.logic-immo.com/vente-immobilier-nantes-tous-codes-postaux,240_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://www.logic-immo.com/vente-immobilier-rennes-tous-codes-postaux,294_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://www.logic-immo.com/vente-immobilier-la-rochelle-17000,15386_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
 - source: PAP
   params:
   - zone: Paris (75)
@@ -223,6 +343,30 @@
     group_type: Hub
   - zone: Seine-Saint-Denis (93)
     url: https://www.pap.fr/annonce/vente-appartement-maison-bagnolet-93170-g43303g43308g43313g43321g43324g43335g43339g43705-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+  - zone: Toulouse (31)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-toulouse-31-g43612-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+  - zone: Nantes (44)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-nantes-44-g43619-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+  - zone: Rennes (35)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-rennes-35-g43618-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+  - zone: La Rochelle (17)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-la-rochelle-17000-g12753-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: true
@@ -273,6 +417,30 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Toulouse (31)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=31555&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nantes (44)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=44109&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Rennes (35)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=35238&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: La Rochelle (17)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=17300&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Orpi
   params:
   - zone: Paris (75)
@@ -311,6 +479,30 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Toulouse (31)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=toulouse&locations%5B0%5D%5Blabel%5D=Toulouse&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nantes (44)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=nantes&locations%5B0%5D%5Blabel%5D=Nantes&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Rennes (35)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=rennes&locations%5B0%5D%5Blabel%5D=Rennes&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: La Rochelle (17)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=larochelle&locations%5B0%5D%5Blabel%5D=Larochelle&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Laforet
   params:
   - zone: Paris (75)
@@ -320,7 +512,7 @@
     is_active: true
     group_type: Group
   - zone: Lyon (69)
-    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=69123
+    url: https://www.laforet.com/api/immo/properties?&cities=69123&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -349,40 +541,88 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Toulouse (31)
+    url: https://www.laforet.com/api/immo/properties?&cities=31555&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nantes (44)
+    url: https://www.laforet.com/api/immo/properties?&cities=44109&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Rennes (35)
+    url: https://www.laforet.com/api/immo/properties?&cities=35238&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: La Rochelle (17)
+    url: https://www.laforet.com/api/immo/properties?&cities=17300&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Century21
   params:
   - zone: Paris (75)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-paris/s-0-/st-0-/b-0-/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
   - zone: Lyon (69)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-lyon/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-lyon/s-0-/st-0-/b-0-/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
   - zone: Yvelines (78)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-maisons+laffitte-mareil+marly-chambourcy-sartrouville-l+etang+la+ville-houilles-montesson-marly+le+roi-fourqueux-chatou-le+vesinet-croissy+sur+seine-carrieres+sur+seine/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-maisons+laffitte-mareil+marly-chambourcy-sartrouville-l+etang+la+ville-houilles-montesson-marly+le+roi-fourqueux-chatou-le+vesinet-croissy+sur+seine-carrieres+sur+seine/cpv-78100_st+germain+en+laye/s-0-/st-0-/b-0-/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
   - zone: Hauts-de-Seine (92)
-    url: https://www.century21.fr/annonces/achat/d-92_hauts_de_seine/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat/d-92_hauts_de_seine/s-0-/st-0-/b-0-/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
   - zone: Val-de-Marne (94)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-fontenay+sous+bois-arcueil-gentilly-st+mande-le+kremlin+bicetre-joinville+le+pont-ivry+sur+seine-vincennes-nogent+sur+marne/cpv-94410_st+maurice-94220_charenton+le+pont/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-fontenay+sous+bois-arcueil-gentilly-st+mande-le+kremlin+bicetre-joinville+le+pont-ivry+sur+seine-vincennes-nogent+sur+marne/cpv-94410_st+maurice-94220_charenton+le+pont/s-0-/st-0-/b-0-/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
   - zone: Seint-Saint-Denis (93)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-pantin-bagnolet-aubervilliers/cpv-93200_st+denis-93400_st+ouen-93310_le+pre+st+gervais-93100_montreuil/s-0-/st-0-/b-0-/tri-date-desc/page-1/
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-pantin-bagnolet-aubervilliers/cpv-93200_st+denis-93400_st+ouen-93310_le+pre+st+gervais-93100_montreuil/s-0-/st-0-/b-0-/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group  
+  - zone: Toulouse (31)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-toulouse/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Nantes (44)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-nantes/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Rennes (35)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-rennes/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: La Rochelle (17)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/cpv-17000_la+rochelle/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
@@ -433,6 +673,30 @@
     group_type: Group
   - zone: Seine-Saint-Denis (93)
     url: https://fr.foncia.com/achat/saint-ouen-93400--saint-denis-93--aubervilliers-93300--pantin-93500--le-pre-saint-gervais-93310--les-lilas-93260--bagnolet-93170--montreuil-93100/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Toulouse (31)
+    url: https://fr.foncia.com/achat/toulouse-31/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Nantes (44)
+    url: https://fr.foncia.com/achat/nantes-44/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Rennes (35)
+    url: https://fr.foncia.com/achat/rennes-35/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: La Rochelle (17)
+    url: https://fr.foncia.com/achat/la-rochelle-17000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
@@ -528,6 +792,42 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+    - zone: Toulouse (31)
+      url: https://www.meilleursagents.com/annonces/achat/toulouse-31000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Nantes (44)
+      url: https://www.meilleursagents.com/annonces/achat/nantes-44000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Rennes (35)
+      url: https://www.meilleursagents.com/annonces/achat/rennes-35000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: La Rochelle (17)
+      url: https://www.meilleursagents.com/annonces/achat/larochelle-17000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
 - source: SeLoger
   params:
     - zone: Paris (75)
@@ -577,6 +877,42 @@
       group_type: Proxy
     - zone: Seine-Saint-Denis (93)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:930070}|{ci:930066}|{ci:930001}|{ci:930055}|{ci:930061}|{ci:930045}|{ci:930006}|{ci:930048}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Toulouse (31)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:310555}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Nantes (44)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:440109}]]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Rennes (35)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:350238}&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: La Rochelle (17)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:170300}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
       main_page_cls: script
       scraper_type: Proxy
       waiting_cls: nil
