@@ -32,7 +32,7 @@
   zone: 
     - Nantes (44)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/nantes.jpg
-  is_active: false
+  is_active: true
 - agglomeration: Montpellier
   zone: 
     - Montpellier (34)
@@ -42,7 +42,7 @@
   zone: 
     - Toulouse (31)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/toulouse.jpg
-  is_active: false
+  is_active: true
 - agglomeration: Strasbourg
   zone: 
     - Strasbourg (13)
@@ -57,9 +57,9 @@
   zone: 
     - Rennes (35)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/rennes.jpg
-  is_active: false
+  is_active: true
 - agglomeration: La Rochelle
   zone: 
     - La Rochelle (17)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/la_rochelle.jpg
-  is_active: false
+  is_active: true
