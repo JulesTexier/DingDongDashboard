@@ -8,6 +8,7 @@ FactoryBot.define do
     trello_lead_list_id { "trello_lead_list_id" }
     trello_board_id { "trello_board_id" }
     trello_username { "username" }
+    agglomeration { FactoryBot.create(:agglomeration, name:"Paris") }
 
     factory :subscriber_aurelien do 
       trello_username {'aurelienguichard1'}
