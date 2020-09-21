@@ -448,3 +448,23 @@
         - "Lyon 9"
         - "Lyon 9e"
         - "Lyon 09"
+- zone: Toulouse (31)
+  datas:
+    - name: "Toulouse"
+      terms:
+        - "31000"
+- zone: Nantes (44)
+  datas:
+    - name: "Nantes"
+      terms:
+        - "44000"
+- zone: Rennes (35)
+  datas:
+    - name: "Rennes"
+      terms:
+        - "35000"
+- zone: La Rochelle (17)
+  datas:
+    - name: "La Rochelle"
+      terms:
+        - "17000"
