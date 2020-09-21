@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_160554) do
+ActiveRecord::Schema.define(version: 2020_09_17_153719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2020_09_16_160554) do
     t.string "profile_picture", default: "https://hellodingdong.com/ressources/broker_pp_default.jpg"
     t.string "description"
     t.string "alias_email"
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_brokers_on_agglomeration_id"
   end
 
   create_table "contractors", force: :cascade do |t|

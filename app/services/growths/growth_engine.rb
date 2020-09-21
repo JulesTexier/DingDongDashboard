@@ -37,12 +37,12 @@ class GrowthEngine
   end
 
   def get_subscriber(email_address)
-    if Subscriber.where(email: email_address).where.not(status: "duplicates").last.nil?
+    if Subscriber.where(email: email_address).last.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
       sub.save(validate: false)
       sub
     else 
-      Subscriber.where(email: email_address).where.not(status: "duplicates").last
+      Subscriber.where(email: email_address).last
     end
   end
 
@@ -52,7 +52,7 @@ class GrowthEngine
   end
 
   def get_adequate_sequence(subscriber)
-    if subscriber.is_client? && subscriber.is_active
+    if subscriber.status != "new_lead" && subscriber.is_active
       ## If the sub is a client and is active
       ## we execute a regular sequence
       marketing_type = "regular"

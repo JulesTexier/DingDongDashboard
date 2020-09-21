@@ -40,16 +40,25 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def create
-    if @subscriber_research_wizard.subscriber.save(context: :onboarding)
-      @subscriber_research_wizard.subscriber.broker = Broker.find(session[:broker_id], is_broker_affiliated: true) unless session[:broker_id].nil?
-      @subscriber_research_wizard.subscriber_research.subscriber_id = @subscriber_research_wizard.subscriber.id
+    subscriber_lead = Subscriber.find_by(email: @subscriber_research_wizard.subscriber.email, status:"new_lead")
+    if subscriber_lead.nil?
+      save_subscriber = @subscriber_research_wizard.subscriber.save(context: :onboarding)
+      subscriber =  @subscriber_research_wizard.subscriber
+    else
+      save_subscriber =  subscriber_lead.update_attributes(firstname:  @subscriber_research_wizard.subscriber.firstname, lastname:  @subscriber_research_wizard.subscriber.lastname, phone:  @subscriber_research_wizard.subscriber.phone, messenger_flux:  @subscriber_research_wizard.subscriber.messenger_flux, email_flux:  @subscriber_research_wizard.subscriber.email_flux, status:"")
+      subscriber = subscriber_lead
+    end
+    # save_subscriber = subscriber_lead.nil? ? @subscriber_research_wizard.subscriber.save(context: :onboarding) : subscriber_lead.update_attributes(firstname:  @subscriber_research_wizard.subscriber.firstname, lastname:  @subscriber_research_wizard.subscriber.lastname, phone:  @subscriber_research_wizard.subscriber.phone, messenger_flux:  @subscriber_research_wizard.subscriber.messenger_flux, email_flux:  @subscriber_research_wizard.subscriber.email_flux, status:"")
+    if save_subscriber
+      subscriber.update(broker:Broker.find(session[:broker_id]), is_broker_affiliated: true) unless session[:broker_id].nil?
+      @subscriber_research_wizard.subscriber_research.subscriber_id = subscriber.id
       if @subscriber_research_wizard.subscriber_research.save
-        @subscriber_research_wizard.subscriber.handle_onboarding
+        subscriber.handle_onboarding
         @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
         session[:subscriber_research_attributes] = nil
         session[:subscriber_attributes] = nil
         session[:areas] = nil
-        redirect_to subscriber_professionals_path(@subscriber_research_wizard.subscriber.id), success: 'Votre alerte a été correctement créée!'
+        redirect_to subscriber_professionals_path(subscriber.id), success: 'Votre alerte a été correctement créée!'
       else
         flash[:danger] = "Une erreur s'est produite, veuillez réessayer."
         redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })

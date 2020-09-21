@@ -9,6 +9,8 @@ class Broker < ApplicationRecord
   has_many :permanences # a voir
   has_many :shifts, through: :permanences, source: :broker_shift #a voir
 
+  belongs_to :agglomeration, optional: true
+
 
   # A REFACTO
   def send_email_notification(user)
@@ -84,13 +86,18 @@ class Broker < ApplicationRecord
   def get_subscribers_data_weekly_update
     subs = self.subscribers.where.not(research_id: nil).pluck(:id, :firstname, :lastname, :created_at, :is_active, :email, :phone, :research_id)
     subs.each do |sub|
-      byebug
       sub.push("#{sub[1]}  #{sub[2]}")
       saved_properties = SavedProperty.where(research_id_id: sub[7])
       sub.push(saved_properties.count)
       sub.push(saved_properties.where('created_at > ? ', Time.now - 7.days).count)
     end
-    byebug
+  end
+
+  def self.get_accurate_by_agglomeration(agglomeration_id)
+    brokers = Broker.where(agglomeration_id: agglomeration_id)
+    offset = rand(brokers.count)
+    rand_broker = brokers.offset(offset).first
+    return rand_broker
   end
 
 end

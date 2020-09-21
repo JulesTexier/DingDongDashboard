@@ -19,37 +19,16 @@ class Subscriber < ApplicationRecord
   belongs_to :contractor, optional: true
   belongs_to :broker, optional: true
 
-  validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}, on: :onboarding
+  validates :phone, format: { with: /\A(0|\+[1-9]{2})[1-7]{1}[0-9]{8}\z/, message: "Format non valide du numéro de téléphone"}, on: [:onboarding, :growth_onboarding]
   validates :facebook_id, uniqueness: true, on: :facebook_creation
-  validates_uniqueness_of :phone, message: "Ce numéro est déjà enregistré dans notre base", on: :onboarding
+  validates_uniqueness_of :phone, message: "Ce numéro est déjà enregistré dans notre base", on: [:onboarding, :growth_onboarding]
   validates_uniqueness_of :email, message: "Cette adresse email est déjà enregistrée dans notre base", on: :onboarding
 
   ########################
   # 1 - Business methods
   ########################
 
-  def is_client?
-    is_client = false
-    statuses_scoped = ["form_filled", "chatbot_invite_sent", "onboarding_started", "onboarded"]
-
-    # 1 • On regarde s'il y a un SubscriberStatus (nouveaux users)
-    subscriber_statuses = SubscriberStatus.where(subscriber: self)
-    if !subscriber_statuses.empty? 
-      subscriber_statuses.each do |ss|
-        if statuses_scoped.include?(ss.status.name)
-          is_client = true 
-        end
-      end
-    else 
-      # 2 • Sinon on regarde directement l'atribut status (old users)
-      if statuses_scoped.include?(self.status)
-        is_client = true
-      end
-    end
-    return is_client
-  end
-
-  def has_interacted(last_interaction, day_range)
+   def has_interacted(last_interaction, day_range)
     response = false
     parsed_last_interaction = Time.parse(last_interaction)
     if Time.now < parsed_last_interaction + day_range.days
@@ -198,8 +177,12 @@ class Subscriber < ApplicationRecord
   def professional_attribution
     self.notary = Notary.first if self.notary.nil?
     self.contractor = Contractor.first if self.contractor.nil?
-    self.broker = Broker.last if self.broker.nil?
+    self.broker = get_accurate_broker if self.broker.nil?
     self.save
+  end
+
+  def get_accurate_broker
+    Broker.get_accurate_by_agglomeration(Agglomeration.find_by(name:self.research.agglomeration).id)
   end
 
   ############################
@@ -247,6 +230,7 @@ class Subscriber < ApplicationRecord
       self.update(broker: Broker.get_current(shift_type))
     end
   end
+
 end
 
 
