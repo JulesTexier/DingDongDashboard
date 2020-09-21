@@ -1,8 +1,8 @@
-:concurrency: 12
+:concurrency: 8
 staging:
-  :concurrency: 12
+  :concurrency: 8
 production:
-  :concurrency: 12
+  :concurrency: 8
 :queues:
   - ["broadcaster", 6]
   - ["scraper", 4]
