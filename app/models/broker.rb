@@ -9,6 +9,8 @@ class Broker < ApplicationRecord
   has_many :permanences # a voir
   has_many :shifts, through: :permanences, source: :broker_shift #a voir
 
+  belongs_to :agglomeration
+
 
   # A REFACTO
   def send_email_notification(user)
