@@ -15,6 +15,7 @@ class Group::ScraperLaforet < Scraper
           hashed_property = {}
           hashed_property[:link] = "https://www.laforet.com/agence-immobiliere/paris11bastille/acheter/paris/" + item["slug"]
           hashed_property[:area] = perform_district_regex(item["address"]["postcode"], args.zone)
+          hashed_property[:area] = perform_district_regex(item["address"]["city"], args.zone) if hashed_property[:area] == 'N/C' && args.zone != "Paris (75)"
           hashed_property[:surface] = item["surface"].to_i
           hashed_property[:rooms_number] = item["rooms"]
           hashed_property[:price] = item["price"].to_i
