@@ -91,7 +91,7 @@ brokers_yaml.each do |broker|
     puts "Inserting #{broker["firstname"]}"
     b = Broker.create(broker.except("agglomeration"))
   end
-  b.update(agglomeration: Agglomeration.find_by(name: broker["agglomeration"])) unless broker["agglomeration"].nil?
+  # b.update(agglomeration: Agglomeration.find_by(name: broker["agglomeration"])) unless broker["agglomeration"].nil?
 end
 
 Notary.create(firstname: "Pierre-Alexis", lastname: "Leray") if Notary.all.empty?
