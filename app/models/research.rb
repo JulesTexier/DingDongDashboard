@@ -11,7 +11,7 @@ class Research < ApplicationRecord
   ## CONSTANT FOR ATTRIBUTES ##
   #############################
 
-  ATTRS = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
+  ATTRS = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
 
   def last_matching_properties(limit = 100, max_scope = 500)
     properties = Property
@@ -92,7 +92,8 @@ class Research < ApplicationRecord
     matching_property_elevator_floor?(args["floor"], args["has_elevator"]) &&
     matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
     matching_property_last_floor?(args["is_last_floor"]) &&
-    matching_property_new_construction?(args["is_new_construction"])
+    matching_property_new_construction?(args["is_new_construction"]) && 
+    matching_property_flat_type?(args["flat_type"])
   end
 
   def update_research_areas(areas_ids)
@@ -234,9 +235,9 @@ class Research < ApplicationRecord
   def matching_exterior?(terrace, garden, balcony)
     if self.terrace || self.balcony || self.garden #At least one exterior criteria
       if (self.terrace && matching_property_terrace?(terrace)) || (self.balcony && matching_property_balcony?(balcony)) || (self.garden && matching_property_garden?(garden))
-        return true 
+        return true
       else
-        return false 
+        return false
       end
     else # Else; no testing => returning true
       return true
@@ -265,5 +266,15 @@ class Research < ApplicationRecord
 
   def matching_property_new_construction?(is_new_construction)
     !self.new_construction && is_new_construction ? false : true
+  end
+
+  def matching_property_flat_type?(flat_type)
+    if flat_type == "Maison" && self.home_type 
+      true
+    elsif flat_type == "Appartement" && self.apartment_type
+      true
+    elsif flat_type == "N/C"
+      self.home_type && !self.apartment_type ? false : true
+    end
   end
 end
