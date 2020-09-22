@@ -21,14 +21,14 @@ RSpec.describe Research, type: :model do
     describe "matching_property?" do
       before :each do
         sub = FactoryBot.create(:subscriber)
-        @research = FactoryBot.create(:research, subscriber: sub, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000)
+        @research = FactoryBot.create(:research, subscriber: sub, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000, apartment_type: true, home_type: true)
         @research.areas << Area.find_by(name: "Paris 10ème")
-     end
+      end
 
       describe "case research MATCH properties values" do
         before :each do
-          prop = FactoryBot.create(:property, price: @research.min_price, surface: @research.min_surface, area: @research.areas.first, rooms_number: @research.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
+          prop = FactoryBot.create(:property, price: @research.min_price, surface: @research.min_surface, area: @research.areas.first, rooms_number: @research.min_rooms_number, floor: nil, has_elevator: nil, flat_type: "N/C")
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
@@ -73,7 +73,7 @@ RSpec.describe Research, type: :model do
       describe "Property NOT matchs" do
         before :each do
           prop = FactoryBot.create(:property, price: @research.min_price, surface: @research.min_surface, area: @research.areas.first, rooms_number: @research.min_rooms_number, floor: nil, has_elevator: nil)
-          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link)
+          attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
 
@@ -82,6 +82,43 @@ RSpec.describe Research, type: :model do
             @property.first["surface"] = @research.min_surface - 1
             @property.each do |prop|
               expect(@research.matching_property?(prop, @research.areas.ids)).to eq(false)
+            end
+          end
+        end
+
+
+        context "Flat_type is not ok" do
+          it "should NOT match user and property because of flat_type !" do
+            @property.first["flat_type"] = "Maison"
+            @research.home_type = false
+            @property.each do |prop|
+              expect(@research.matching_property?(prop, @research.areas.ids)).to eq(false)
+            end
+          end
+
+          it "should NOT match user and property because of flat_type !" do
+            @property.first["flat_type"] = "Appartement"
+            @research.apartment_type = false
+            @property.each do |prop|
+              expect(@research.matching_property?(prop, @research.areas.ids)).to eq(false)
+            end
+          end
+
+          it "should NOT match user and property because of flat_type !" do
+            @property.first["flat_type"] = "N/C"
+            @research.apartment_type = false
+            @research.home_type = true
+            @property.each do |prop|
+              expect(@research.matching_property?(prop, @research.areas.ids)).to eq(false)
+            end
+          end
+
+          it "should match user and property because of flat_type !" do
+            @property.first["flat_type"] = "N/C"
+            @research.apartment_type = true
+            @research.home_type = false
+            @property.each do |prop|
+              expect(@research.matching_property?(prop, @research.areas.ids)).to eq(true)
             end
           end
         end
@@ -172,6 +209,7 @@ RSpec.describe Research, type: :model do
               expect(@research.matching_property?(prop, @research.areas.ids)).to eq(false)
             end
           end
+          
           it "should match user and property because of garden !" do
             @property.first["has_balcony"] = false
             @property.first["has_garden"] = true
