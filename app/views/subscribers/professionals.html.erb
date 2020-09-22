@@ -18,30 +18,33 @@
 
             <div class="">
                 <div class="row mt-5">
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <%= image_tag @subscriber.broker.avatar, width: 250, alt: "Courtier Ding Dong", class:"testimonial-picture" %>
-                    <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.broker.firstname %>, courtier</h5>
-                        <div><%= @subscriber.broker.description %></div>
-                    </div>                  
-                    
-                </div>
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                    <%= image_tag @subscriber.contractor.avatar, width: 250, alt:"Entrepreneurs travaux Ding Dong", class:"testimonial-picture" %>
-                    <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.contractor.firstname %>, entrepreneur</h5>
-                        <div><%= @subscriber.contractor.description %></div>
-                    </div>   
-                    
-                </div>
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-                    <%= image_tag @subscriber.notary.avatar, width: 250, alt:"Notaire Ding Dong", class:"testimonial-picture" %>
-                    <div class="comment_style" target="_blank">
-                        <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">Notaire de <%= @subscriber.research.agglomeration%></h5>
-                        <div><%= @subscriber.notary.description %></div>
-                    </div>   
-                    
-                </div>
+                    <% unless @subscriber.broker.nil?%>
+                        <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
+                            <%= image_tag @subscriber.broker.avatar, width: 250, alt: "Courtier Ding Dong", class:"testimonial-picture" %>
+                            <div class="comment_style" target="_blank">
+                                <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.broker.firstname %>, courtier</h5>
+                                <div><%= @subscriber.broker.description %></div>
+                            </div>                  
+                        </div>
+                    <%end%>
+                    <% unless @subscriber.contractor.nil?%>
+                    <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
+                        <%= image_tag @subscriber.contractor.avatar, width: 250, alt:"Entrepreneurs travaux Ding Dong", class:"testimonial-picture" %>
+                        <div class="comment_style" target="_blank">
+                            <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.contractor.firstname %>, entrepreneur</h5>
+                            <div><%= @subscriber.contractor.description %></div>
+                        </div>   
+                    </div>
+                    <%end%>
+                    <% unless @subscriber.notary.nil?%>
+                        <div class="col-12 col-md-4 d-flex flex-column align-items-center">
+                            <%= image_tag @subscriber.notary.avatar, width: 250, alt:"Notaire Ding Dong", class:"testimonial-picture" %>
+                            <div class="comment_style" target="_blank">
+                                <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">Notaire de <%= @subscriber.research.agglomeration%></h5>
+                                <div><%= @subscriber.notary.description %></div>
+                            </div>   
+                        </div>
+                    <%end%>
                 </div>
                 <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-rose">
                     <div class="d-flex justify-content-center mt-2 mb-2">
