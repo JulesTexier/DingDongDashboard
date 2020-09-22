@@ -100,6 +100,25 @@ class String
     return str_array.join(" ")
   end
 
+  def home_type_str_scrp
+    strings_arr = self.split
+    regex_flat = '(appartement|studio|loft|duplex|triplex)'
+    regex_home = '(maison)'
+    flat_occurrence = 0
+    home_occurence = 0
+    strings_arr.each do |string|
+      flat_occurrence += 1 if string.match?(/#{regex_flat}/i)
+      home_occurence += 1 if string.match?(/#{regex_home}/i)
+    end
+    if flat_occurrence > home_occurence
+      "Appartement"
+    elsif home_occurence == flat_occurrence
+      "N/C"
+    else
+      "Maison"
+    end
+  end
+
   def floors_str_scrp
     regex_floors = '((\d+(er|(e|è|é)me|e|°)|premier)(.)((e|é|è)tage|et dernier etage)|rez-de-chauss(e|è|é)e|rez de chauss(e|è|é)e|rdc)'
     has_floor = self.match(/#{regex_floors}/i)

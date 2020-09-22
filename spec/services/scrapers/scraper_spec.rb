@@ -402,7 +402,7 @@ RSpec.describe Scraper, type: :service do
 
     context "perform enrichment regexes" do
       before :each do 
-        @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com" }
+        @prop = { area: "Fourqueux", surface: 23, price: 400000, rooms_number: 1, link: "https://google.com", flat_type: "N/C" }
         
       end
       it "shoud, given the description, give us specific infos" do
@@ -416,6 +416,7 @@ RSpec.describe Scraper, type: :service do
         expect(enriched_infos[:is_last_floor]).to eq(true)
         expect(enriched_infos[:floor]).to eq(3)
         expect(enriched_infos[:subway_infos]).to eq([])
+        expect(enriched_infos[:flat_type]).to eq("Appartement")
       end
 
       it "shoud, given the description, give us specific infos" do
@@ -430,6 +431,7 @@ RSpec.describe Scraper, type: :service do
         expect(enriched_infos[:is_last_floor]).to eq(true)
         expect(enriched_infos[:floor]).to eq(3)
         expect(enriched_infos[:subway_infos]).to eq([{"line"=>["3"], "name"=>"Wagram"}])
+        expect(enriched_infos[:flat_type]).to eq("Appartement")
       end
 
       it "shoud, given the description, give us specific infos" do
@@ -443,6 +445,25 @@ RSpec.describe Scraper, type: :service do
         expect(enriched_infos[:is_last_floor]).to eq(false)
         expect(enriched_infos[:floor]).to eq(3)
         expect(enriched_infos[:subway_infos]).to eq([])
+        expect(enriched_infos[:flat_type]).to eq("Appartement")
+      end
+
+      it "shoud, given the description, give us flat type infos" do
+        @prop[:description] = "Appartement à côté d'une maison, cet appartement est un bel appartement"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos[:flat_type]).to eq("Appartement")
+      end
+
+      it "shoud, given the description, give us flat type infos of Maison because maison is three times in the desc and appartement only two" do
+        @prop[:description] = "Maison à côté d'appartement, cette maison est une belle maison, ce n'est pas un appartement"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos[:flat_type]).to eq("Maison")
+      end
+
+      it "shoud, given the description, give us nc flat type" do
+        @prop[:description] = "Belle demeure avec aucune info dans la description c'est super dommage"
+        enriched_infos = @s.perform_enrichment_regex(@prop)
+        expect(enriched_infos[:flat_type]).to eq("N/C")
       end
     end
 
