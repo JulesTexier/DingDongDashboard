@@ -309,6 +309,7 @@ class Scraper
     enriched_infos[:has_terrace] = prop[:description].terrace_str_scrp unless prop.key?(:has_terrace)
     enriched_infos[:has_balcony] = prop[:description].balcony_str_scrp unless prop.key?(:has_balcony)
     enriched_infos[:is_last_floor] = prop[:description].last_floor_str_scrp unless prop.key?(:is_last_floor)
+    enriched_infos[:flat_type] = prop[:description].home_type_str_scrp if prop[:flat_type] == "N/C" || prop[:flat_type].nil?
     enriched_infos
   end
 
