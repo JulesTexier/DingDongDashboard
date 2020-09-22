@@ -269,10 +269,10 @@ class Research < ApplicationRecord
   end
 
   def matching_property_flat_type?(flat_type)
-    if flat_type == "Maison" && self.home_type 
-      true
-    elsif flat_type == "Appartement" && self.apartment_type
-      true
+    if flat_type == "Maison"
+      self.home_type
+    elsif flat_type == "Appartement"
+      self.apartment_type
     elsif flat_type == "N/C"
       self.home_type && !self.apartment_type ? false : true
     end
