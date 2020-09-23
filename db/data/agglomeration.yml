@@ -63,3 +63,13 @@
     - La Rochelle (17)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/la_rochelle.jpg
   is_active: true
+- agglomeration: Saint-Etienne
+  zone: 
+    - Saint-Etienne (42)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
+  is_active: false
+- agglomeration: Le Havre
+  zone: 
+    - Le Havre (76)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
+  is_active: true
