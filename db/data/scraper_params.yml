@@ -2256,7 +2256,7 @@
 - source: Thibault Chanel Immobilier
   params:
     - zone: Paris (75)
-      url: https://www.thibaultchanel.com/search-property-result/?location=&category=&bedrooms=&bathrooms=&min_price=0&max_price=10000000&min_area=0&max_area=1000
+      url: https://www.thibaultchanel.com/recherche/?keyword=&location=paris&area=&type=&bedrooms=&min-area=&max-area=&min-price=1+000%E2%82%AC&max-price=5+000+000%E2%82%AC
       main_page_cls: article
       scraper_type: Static
       waiting_cls: nil
