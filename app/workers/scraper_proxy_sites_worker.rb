@@ -11,8 +11,10 @@ class ScraperProxySitesWorker
   end
 
   def self.scrap
+    workers = Sidekiq::Workers.new
+    tasks = workers.map {|_process_id, _thread_id, work| work["payload"]["args"] }
     scrapers.each do |scraper|
-      perform_async(scraper.class.name)
+      perform_async(scraper.class.name) unless tasks.flatten.include?(scraper.class.name)
     end
   end
 
