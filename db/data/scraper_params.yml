@@ -56,7 +56,7 @@
     is_active: true
     group_type: Hub
   - zone: La Rochelle (17)
-    url: https://www.superimmo.com/achat/poitou-charentes/charente-maritime/la-rochelle-17000
+    url: https://www.superimmo.com/achat/poitou-charentes/charente-maritime/la-rochelle-17000?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
     is_active: true
