@@ -326,7 +326,7 @@
     is_active: true
     group_type: Hub
   - zone: Lille (59)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-gironde-aquitaine-france/?ville=bordeaux&tri=2
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-nord-nord+pas+de+calais-france/?ville=lille&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: true
@@ -592,7 +592,7 @@
     is_active: true
     group_type: Group
   - zone: Lille (59)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]= 59350&sort=date_desc&limit=15
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=59350&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -758,25 +758,25 @@
     is_active: true
     group_type: Group
   - zone: Bordeaux (33)
-    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=33063
+    url: https://www.laforet.com/api/immo/properties?&cities=33063&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
   - zone: Lille (59)
-    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=59350
+    url: https://www.laforet.com/api/immo/properties?&cities=59350&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
   - zone: Le Havre (76)
-    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=76351
+    url: https://www.laforet.com/api/immo/properties?&cities=76351&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
   - zone: Saint-Etienne (42)
-    url: https://www.laforet.com/acheter/rechercher?filter%5Bcities%5D=42218
+    url: https://www.laforet.com/api/immo/properties?&cities=42218&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
