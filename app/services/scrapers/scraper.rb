@@ -10,7 +10,6 @@ class Scraper
       prop.merge!(enriched_infos)
       prop[:area] = Area.where(name: prop[:area]).first
       prop = insert_property(prop)
-      prop_historisation(prop, __method__, prop.id)
     else
       # for test purpose, if we don't want ton insert this shitty property,
       ## then we remove it from the final array of our dedicated scraper
@@ -348,7 +347,6 @@ class Scraper
         if filtered_prop.length > 2 ## we verify that theres at least 3 arguements
           does_prop_exists?(prop, time) ? false : true ## if it doesnt exist, we go to the show
         else ## not enought args, so fuck off we dont go to the show
-          prop_historisation(prop, __method__)
           false
         end
       end
@@ -371,14 +369,12 @@ class Scraper
       ).where('created_at >= ?', time.days.ago).pluck(:id)
     end
     response = parent_prop_id.any?
-    prop_historisation(prop, __method__, parent_prop_id[0]) if response
     response
   end
 
   def is_link_in_db?(prop)
     parent_prop_id = Property.where(link: prop[:link].strip).pluck(:id)
     response = parent_prop_id.any?
-    prop_historisation(prop, __method__, parent_prop_id[0]) if response
     response
   end
 
@@ -395,7 +391,6 @@ class Scraper
     else
       response = true ## not enough informations, we should further check
     end
-    prop_historisation(prop, __method__) if response
     response
   end
 
@@ -416,7 +411,6 @@ class Scraper
 
       properties.each do |property|
         response = desc_comparator(property[1], hashed_property[:description])
-        prop_historisation(hashed_property, __method__, property[0]) if response
         break if response
       end
     end
@@ -426,7 +420,6 @@ class Scraper
   ## We check if its not a Viagier / Under Offer / Parking Lot / A ferme Vosgienne
   def is_it_unwanted_prop?(prop)
     response = prop[:description].remove_acc_scrp.match(/(appartement(s?)|bien(s?)|residence(s?))(.?)(deja vendu|sous compromis|service(s?))|(ehpad|viager)|(sous offre actuellement)|(local commercial)/i).is_a?(MatchData)
-    prop_historisation(prop, __method__) if response
     response
   end
 

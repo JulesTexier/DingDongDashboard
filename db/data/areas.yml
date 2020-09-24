@@ -468,3 +468,24 @@
     - name: "La Rochelle"
       terms:
         - "17000"
+- zone: Lille (59)
+  datas:
+    - name: "Lille"
+      terms:
+        - "59000"
+        - "Vieu-lille"
+- zone: Bordeaux (33)
+  datas:
+    - name: "Bordeaux"
+      terms:
+        - "33000"
+- zone: Saint-Etienne (42)
+  datas:
+    - name: "Saint-Etienne"
+      terms:
+        - "42000"
+- zone: Le Havre (76)
+  datas:
+    - name: "Le Havre"
+      terms:
+        - "76000"
