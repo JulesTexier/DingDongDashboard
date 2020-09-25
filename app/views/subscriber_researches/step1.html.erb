@@ -1,86 +1,79 @@
-<div class="container mb-100">
+<div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
 
-    <div class="row mt-3"> 
-        <div class="col d-flex justify-content-center"> 
-            <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+    <div class="container">
+
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+            </div>
         </div>
-    </div>
 
+        <div class="row">
+            <div class="col-12 d-flex">
+                <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
+                <%= link_to "📍 Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4 text-center mb-1' %>
+                <div class="badge-off col-12 col-lg-4 text-center mb-1">⚙️ Critères</div>
+                <div class="badge-off col-12 col-lg-4 text-center mb-1">💌 Validation</div>
+                </ul>
+            </div>
+        </div>
 
-    <div class= "row mt-3">
-    <div class="col-12 d-flex">
-        <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4 text-center mb-1' %>
-        <div class="badge-off col-12 col-lg-4 text-center mb-1">⚙️Critères</div>
-        <div class="badge-off col-12 col-lg-4 text-center mb-1">💌Validation</div>
-        </ul>
-    </div>
-    </div>
+        <div class="bg-white-pros box-centered">
+            <div class="container margin-negative-50">
 
-
-    <div class="row">
-        <div class="col-12">
-            <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
-            <p class="mt-4 mb-3 grey">📍 Dans quelle agglomération cherchez-vous un logement ? *</p>
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-                <%= hidden_field_tag :current_step, 'step1' %>
-                    <div class="">
-                        <div class="card-group">
-                            <% @agglomerations_infos.each do |agglo| %>
-                                <div class="col-12 col-md-3 mb-4">
-                                    <div class="card card_hover [<%= agglo.name %>, <%= agglo.is_active %>, <%= agglo.image_url %>]" onClick="checkedAgglomeration(className)" style="cursor: pointer;">
-                                        <img 
-                                        class="card-img-top" 
-                                        src="<%= agglo.image_url %>" 
-                                        alt="agglomération">
-                                        <div class="card-body" style="display: none;">
-                                            <%= f.radio_button :agglomeration, 
-                                                agglo.name,
-                                                required: true
-                                            %>
-                                            <span class="form-check-label mb-2 ml-2 box_hover" >
-                                                <%= agglo.name %>
-                                            </span>
-                                        </div>
-                                    </div>
+
+                    <div class="row mb-5 mt-5">
+                        <div class="col-12 col-lg-6 mb-5">
+                            <div class="mb-4 mt-5">
+                                <div class="col-12">
+                                    <h5 class="mb-3">
+                                        <div> Dans quelle agglomération cherchez-vous ?</div>
+                                    </h5> 
                                 </div>
-                            <% end %>
-                        </div>
-                        <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                            <div class="d-flex justify-content-center mt-2 mb-2">
-                                <%= submit_tag "Etape suivante", class: "btn btn-outline-light"%>
                             </div>
-                        </nav>
+                            <div class="raw d-flex flex-wrap col-12">
+                                <div class="form-group col-12 p-0 mb-0">
+                                    <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
+                                        <option value="Ile de France"></option>
+                                        <option value="Toulouse"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 d-flex justify-content-center mb-5"> 
+                            <img src="<%= asset_path('france-map.svg') %>" height="300px;">
+                        </div>
                     </div>
-                <% end %>
+
+                    <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
+                        <div class="d-flex justify-content-center mt-2 mb-2">
+                            <%= submit_tag "Etape suivante", class: "btn-outline-navbar"%>
+                        </div>
+                    </nav>
+
+                <%end%>
+
+            </div>
         </div>
     </div>
-
 </div>
 
+
 <script>
-
-    function checkedAgglomeration(className) {
-        let card = document.getElementsByClassName(className)[0]
-        let checkbox = card.children[1].children[0]
-        let allCards = document.getElementsByClassName("card")
-
-        if(className.includes("true")){ 
-            checkbox.checked = true;
-            for(i=0; i < allCards.length; i++){
-                allCards[i].style.border = "none"
-                card.style.border = "solid 2px #2458FC"
-            }
-        }
-        else{
-          alert("Hey hey, patience on ouvre bientôt ! 🎉")
-        }
-    }
-
-
 $(document).ready(function(){
-    $('input:checkbox').click(function() {
-        $('input:checkbox').not(this).prop('checked', false);
-    });
-});
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount:100,
+        searchResultLimit:100,
+        renderChoiceLimit:100
+        });
+    });    
+function clearSelected(){
+    var elements = document.getElementById("choices-multiple-remove-button").options;
+     "<% session[:areas] = nil %>"
+    for(var i = 0; i < elements.length; i++){
+      elements[i].selected = false;
+    }
+  }
 </script>
