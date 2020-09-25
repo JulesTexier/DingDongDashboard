@@ -2,7 +2,7 @@
 staging:
   :concurrency: 2
 production:
-  :concurrency: <%= ENV.fetch("SIDEKIQ_PROCESSES") { 2 } %>
+  :concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 2 } %>
 :queues:
   - ["broadcaster", 6]
   - ["high_level_scraper", 4]
