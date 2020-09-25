@@ -25,8 +25,9 @@ class Research < ApplicationRecord
     .pluck(*ATTRS)
     .map { |p| ATTRS.zip(p).to_h }
     matched_props_ids = []
+    areas_ids = self.areas.ids
     properties.each do |property|
-      matched_props_ids.push(property["id"]) if matching_property?(property, self.areas.ids)
+      matched_props_ids.push(property["id"]) if matching_property?(property, areas_ids)
       break if matched_props_ids.length == limit
     end
     Property.where(id: matched_props_ids).order(id: :desc)
@@ -42,8 +43,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
       break if props_to_send.length == 10
     end
     props_to_send
@@ -56,8 +58,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
     end
     props_to_send
   end
@@ -71,8 +74,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
       break if props_to_send.length == max_number.to_i
     end
     props_to_send
