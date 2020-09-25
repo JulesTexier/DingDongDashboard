@@ -5,6 +5,7 @@ production:
   :concurrency: 12
 :queues:
   - ["broadcaster", 6]
-  - ["scraper", 4]
+  - ["high_level_scraper", 4]
+  - ["low_level_scraper", 4]
   - ["mailers", 2]
   - ["low", 1]
