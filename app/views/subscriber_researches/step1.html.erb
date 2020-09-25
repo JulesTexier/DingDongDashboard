@@ -22,7 +22,7 @@
             <div class="container margin-negative-50">
 
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-
+                  <%= hidden_field_tag :current_step, 'step1' %>
                     <div class="row mb-5 mt-5">
                         <div class="col-12 col-lg-6 mb-5">
                             <div class="mb-4 mt-5">
@@ -34,10 +34,7 @@
                             </div>
                             <div class="raw d-flex flex-wrap col-12">
                                 <div class="form-group col-12 p-0 mb-0">
-                                    <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
-                                        <option value="Ile de France"></option>
-                                        <option value="Toulouse"></option>
-                                    </select>
+                                  <%= f.input_field :agglomeration, :collection => @agglomerations_infos.map{|o| [o.name, {disabled: !o.is_active}]},  class: "form-control", id: "choices-multiple-remove-button", label: false %>
                                 </div>
                             </div>
                         </div>
