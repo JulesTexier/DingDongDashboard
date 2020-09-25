@@ -598,7 +598,7 @@ RSpec.describe Scraper, type: :service do
     end
 
     it "should, given the source and is mail alert, give the correct group type" do
-      params = @s.fetch_init_params("Connexion Immobilier", is_mail_alert = true)
+      params = @s.fetch_init_params("Connexion Immobilier", nil, is_mail_alert = true)
       expect(params.first.group_type).to eq("Email")
     end
 
