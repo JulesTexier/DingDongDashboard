@@ -1,7 +1,7 @@
 class BanSites::ScraperGuyHoquet < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
-  def initialize
+  def initialize(sp_id = nil)
     @url = "https://www.guy-hoquet.com/biens/result#1&p=1&t=3&f10=1&f20=75_c2&f30=appartement,maison"
     @source = "Guy Hoquet"
     @main_page_cls = "div.resultat-item"

@@ -1,9 +1,9 @@
 class Hub::ScraperFigaro < Scraper
   attr_accessor :source, :params, :properties
 
-  def initialize
+  def initialize(sp_id = nil)
     @source = "Figaro"
-    @params = fetch_init_params(@source)
+    @params = fetch_init_params(@source, sp_id)
     @properties = []
   end
 
