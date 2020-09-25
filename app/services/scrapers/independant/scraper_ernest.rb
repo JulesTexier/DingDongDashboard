@@ -1,9 +1,9 @@
 class Independant::ScraperErnest < Scraper
   attr_accessor :properties, :source, :params
 
-  def initialize
+  def initialize(sp_id = nil)
     @source = "Ernest et associés"
-    @params = fetch_init_params(@source)
+    @params = fetch_init_params(@source, sp_id)
     @properties = []
   end
 

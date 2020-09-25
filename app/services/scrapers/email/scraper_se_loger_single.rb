@@ -4,7 +4,7 @@ class Email::ScraperSeLogerSingle < Scraper
   def initialize(html_content)
     @html_content = html_content
     @source = "SeLoger"
-    @params = fetch_init_params(@source, is_mail_alert = true)
+    @params = fetch_init_params(@source, nil, is_mail_alert = true)
     @properties = []
   end
 
