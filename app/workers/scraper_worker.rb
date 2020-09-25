@@ -15,8 +15,8 @@ class ScraperWorker
     scrapers(scraper_module).each do |scraper|
       scraper.params.each do |param|
         selected_queue = param.high_priority ? "high_level_scraper" : "low_level_scraper"
-        byebug
-        Sidekiq::Client.push({'class' => self, 'queue' => selected_queue, 'args' => [scraper.class.name, param.id]}) unless tasks.flatten.include?(scraper.class.name)
+        args = [scraper.class.name, param.id]
+        Sidekiq::Client.push({'class' => self, 'queue' => selected_queue, 'args' => args}) unless tasks.include?(args)
       end
     end
   end
