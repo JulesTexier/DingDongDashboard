@@ -5,27 +5,27 @@ namespace :scraper do
 
   task :hub do
     puts "Launching Hub Worker"
-    ScraperHubSitesWorker.scrap
+    ScraperWorker.scrap(Hub)
   end
 
   task :group do
     puts "Launching Group Worker "
-    ScraperGroupSitesWorker.scrap
+    ScraperWorker.scrap(Group)
   end
 
   task :premium do
     puts "Launching Premium Worker"
-    ScraperPremiumSitesWorker.scrap
+    ScraperWorker.scrap(Premium)
   end
 
   task :proxy do
     puts "Launching Premium Worker"
-    ScraperProxySitesWorker.scrap
+    ScraperWorker.scrap(Proxy)
   end
 
   task :independant do
     puts "Launching Independant Worker"
-    ScraperIndependantSitesWorker.scrap
+    ScraperWorker.scrap(Independant)
   end
 
   task :alert do
