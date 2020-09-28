@@ -32,11 +32,10 @@ class SubscriberResearchesController < ApplicationController
   end
   
   def step3
-    if session[:areas].empty?
+    if session[:areas].nil?
       flash.now[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
-    # @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
   def create
@@ -136,7 +135,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_research_wizard_params
-    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type)
+    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
   end
 
   def subscriber_wizard_params
