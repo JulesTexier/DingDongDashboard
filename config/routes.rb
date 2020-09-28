@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       resources :brokers, only: [:show]
       resources :notaries, only: [:show]
       resources :contractors, only: [:show]
+      resources :subscriber_notes, only: [:create]
       resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
