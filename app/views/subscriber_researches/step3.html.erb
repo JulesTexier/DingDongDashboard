@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="bg-white-pros">
+        <div class="bg-white-steps">
             <div class="container">
                 <div class="col-12 mb-120 mt-5">
 
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <p class="mt-4 mb-6 grey">📱Téléphone *</p>
-                                    <div class="input-group mb-3" style="margin-bottom:4.5rem">
+                                    <div class="input-group margin-bottom-navbar">
                                         <%= f.input_field :subscriber_phone, class: "form-control writing-box", placeholder: "Ex : 0624345653", required: true %>
                                     </div>
                                     <% if @subscriber_research_wizard.subscriber.errors[:phone].any? %>

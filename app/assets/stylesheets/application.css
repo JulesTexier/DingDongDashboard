@@ -16,12 +16,26 @@
 
 
  @media (max-width: 992px) {
-  .bg-white-pros {
+  .bg-white-steps {
     top: 280px !important;
   }
   .box-centered {
     display: block !important;
   }
+}
+
+.bg-white-steps-final-step {
+  position: absolute;
+  top: 300px !important;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: white;
+}
+
+
+.margin-bottom-navbar{
+  margin-bottom: 7rem;
 }
 
 .mb-120 {
@@ -88,7 +102,7 @@
   left: 0px;
  }
 
- .bg-white-pros{
+ .bg-white-steps{
   position: absolute;
   top: 210px;
   right: 0px;
