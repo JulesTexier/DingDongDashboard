@@ -1,0 +1,13 @@
+<p>Etienne,</p>
+<p> <%= @subscriber.get_fullname %> vient d'arrêter son alerte email.<p>
+<br>
+<p>Si tu veux le contacter : </p>
+<ul>
+  <li>Téléphone:  <%= @subscriber.phone %></li>
+  <li>Email:  <%= @subscriber.email %></li>
+</ul>
+
+<br><br>
+<p>
+  <%= @subscriber.trello_summary%>
+</p>
