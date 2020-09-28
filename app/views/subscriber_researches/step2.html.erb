@@ -101,7 +101,7 @@
                                             <%= f.number_field :min_floor, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
                                         </div>
                                         <div class="form-check form-check-inline mb-3">
-                                        <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id:"last_floor", value:"true" %> 
+                                        <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id: "last_floor", value: "true" %> 
                                         <label class="form-check-label grey" for="last_floor">Uniquement dernier étage</label>
                                         </div>
                                     </div>
@@ -116,35 +116,35 @@
                                     <p class="mt-4 grey">🏗️ Neuf</p>
                                     <div class="form-check form-check-inline margin-bottom-navbar">
                                         <%= f.check_box :new_construction, id: "new_construction", class: "form-check-input" %> 
-                                        <%= f.label "Recevoir les constuctions neuves", for:"new_construction", class: "form-check-label grey" %> 
+                                        <%= f.label "Recevoir les constuctions neuves", for: "new_construction", class: "form-check-label grey" %> 
                                     </div>
                                 
+                                    <p class="grey"> Souhaitez-vous une maison et/ou un appartement</p>
+                                    <div class="form-check form-check-inline">
+                                      <%= f.input_field :apartment_type, as: :boolean, class: "form-check-input" %> 
+                                      <%= f.label "Appartement", class: "form-check-label" %> 
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <%= f.input_field :home_type, as: :boolean, class: "form-check-input" %> 
+                                      <%= f.label "Maison", class: "form-check-label" %> 
+                                    </div>
 
-                                    <% if false %>
-                                        <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
-                                        <div class="form-check form-check-inline">
-                                            <%= f.check_box :balcony, class: "form-check-input", type:"checkbox",  id:"balcony" %> 
-                                            <label class="form-check-label" for="balcony">Balcon</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <%= f.check_box :terrace, class: "form-check-input", type:"checkbox",  id:"terrace" %> 
-                                            <label class="form-check-label" for="terrace">Terrasse</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
-                                            <label class="form-check-label" for="garden">Jardin</label>
-                                        </div>
+                                <% if false %>
+                                    <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :balcony, class: "form-check-input", type:"checkbox",  id:"balcony" %> 
+                                        <label class="form-check-label" for="balcony">Balcon</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :terrace, class: "form-check-input", type:"checkbox",  id:"terrace" %> 
+                                        <label class="form-check-label" for="terrace">Terrasse</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
+                                        <label class="form-check-label" for="garden">Jardin</label>
+                                    </div>
+                                <% end %>
 
-                                        <p class="mt-4 mb-6 grey"> Souhaitez-vous une maison et/ou un appartement</p>
-                                        <div class="form-check form-check-inline">
-                                        <%= f.check_box :apartment_type, class: "form-check-input" %> 
-                                        <%= f.label "Appartement", class: "form-check-label" %> 
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <%= f.check_box :home_type, class: "form-check-input" %> 
-                                        <%= f.label "Maison", class: "form-check-label" %> 
-                                        </div>
-                                    <% end %>
                                 </div>
                         
                     </div>
@@ -179,4 +179,5 @@ function clearSelected(){
       elements[i].selected = false;
     }
   }
+
 </script>
