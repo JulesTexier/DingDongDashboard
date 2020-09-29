@@ -108,4 +108,12 @@ Rails.application.routes.draw do
       get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
     end
   end
+
+  #############
+  # 6 - Broker Dashboard
+  #############
+  get "/courtier/dashboard/:id/" => "broker_pages#index"
+
+
+
 end
