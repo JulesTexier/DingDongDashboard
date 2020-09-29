@@ -45,7 +45,7 @@
   is_active: false
 - agglomeration: Strasbourg
   zone: 
-    - Strasbourg (13)
+    - Strasbourg (67)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/strasbourg.jpg
   is_active: false
 - agglomeration: Lille
@@ -71,6 +71,11 @@
 - agglomeration: Le Havre
   zone: 
     - Le Havre (76)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
+  is_active: false
+- agglomeration: Aix-en-Provence
+  zone: 
+    - Aix-en-Provence (13)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
   is_active: false
   
