@@ -106,13 +106,24 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><%= subscriber.get_fullname%> (détails)</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ...
+            <h5>Coordonnées</h5>
+            <ul>
+              <li><b>email :</b> <%= subscriber.email %></li>
+              <li><b>téléphone :</b> <%= subscriber.phone %></li>
+            </ul>
+            <h5>Recherche</h5>
+            <h5>Historique</h5>
+            <ul>
+              <% SubscriberNote.where(subscriber: subscriber).each do |note| %>
+              <li>[<%= note.created_at.strftime("%d-%m-%y") %>] <%= note.content %></li>
+              <% end %>
+            </ul>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
