@@ -119,6 +119,7 @@
               <li><b>téléphone :</b> <%= subscriber.phone %></li>
             </ul>
             <h5>Recherche</h5>
+            <%= render 'subscriber_research', research: subscriber.research %>
             <h5>Historique</h5>
             <ul>
               <% SubscriberNote.where(subscriber: subscriber).each do |note| %>

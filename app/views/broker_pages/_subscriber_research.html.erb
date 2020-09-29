@@ -1,0 +1,8 @@
+<ul>
+  <li>Prix max : <%=research.max_price%> € </li>
+  <li>Surface min : <%=research.min_surface%> m2 </li>
+  <li>Prix min : <%=research.min_price%> € </li>
+  <li>Nb pièces min : <%=research.min_rooms_number%> </li>
+  <li>Secteur: <%=research.get_areas_list%> </li>
+  <li>Type de logement: <%=research.home_type ? "Maison, " : ""%> <%=research.apartment_type ? "Appartement" : ""%> </li>
+</ul>
