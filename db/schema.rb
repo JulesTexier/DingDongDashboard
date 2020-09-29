@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_084121) do
   create_table "subscriber_notes", force: :cascade do |t|
     t.text "content"
     t.bigint "subscriber_id"
+    t.datetime "created_at", null: false
     t.index ["subscriber_id"], name: "index_subscriber_notes_on_subscriber_id"
   end
 
