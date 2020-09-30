@@ -365,6 +365,11 @@
     - name: Montreuil
       terms:
         - "93100"
+- zone: Val d'Oise (95)
+  datas: 
+    - name: Pontoise
+      terms: 
+        - "95300"
 - zone: Lyon (69)
   datas:
     - name: "Lyon 1er"
@@ -648,3 +653,38 @@
     - name: "Strasbourg"
       terms:
         - "67000"
+- zone: Brest (29)
+  datas:
+    - name: "Brest"
+      terms:
+        - "29200"
+- zone: Saint-Brieuc (22)
+  datas:
+    - name: Saint-Brieuc
+      terms:
+        - "22000"
+- zone: Nîmes (22)
+  datas:
+    - name: Nîmes
+      terms:
+        - "30000"
+- zone: Sens (89)
+  datas:
+    - name: Sens
+      terms:
+        - "89100"
+- zone: Annecy (74)
+  datas:
+    - name: Annecy
+      terms:
+        - "74000"
+- zone: Bourg-en-Bresse (01)
+  datas:
+    - name: Bourg-en-Bresse
+      terms:
+        - "01000"
+- zone: Reims (51)
+  datas:
+    - name: Reims
+      terms:
+        - "51100"
