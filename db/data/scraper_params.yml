@@ -825,30 +825,35 @@
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Marseille (13)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=13055&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Aix-en-Provence (13)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=13001&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Montpellier (34)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=34172&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Strasbourg (67)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=67482&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
 - source: Orpi
   params:
   - zone: Paris (75)
@@ -941,30 +946,35 @@
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Marseille (13)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=marseille&locations%5B0%5D%5Blabel%5D=marseille&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Aix-en-Provence (13)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=aix-en-provence&locations%5B0%5D%5Blabel%5D=aix-en-provence&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Montpellier (34)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=montpellier&locations%5B0%5D%5Blabel%5D=montpellier&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Strasbourg (67)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=strasbourg&locations%5B0%5D%5Blabel%5D=strasbourg&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
 - source: Laforet
   params:
   - zone: Paris (75)
@@ -1057,30 +1067,35 @@
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Marseille (13)
     url: https://www.laforet.com/api/immo/properties?&cities=13055&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Aix-en-Provence (13)
     url: https://www.laforet.com/api/immo/properties?&cities=13001&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Montpellier (34)
     url: https://www.laforet.com/api/immo/properties?&cities=34172&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Strasbourg (67)
     url: https://www.laforet.com/api/immo/properties?&cities=67482&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
     group_type: Group
+    high_priority: false
 - source: Century21
   params:
   - zone: Paris (75)
@@ -1173,24 +1188,28 @@
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Marseille (13)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-marseille/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Montpellier (34)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-montpellier/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Strasbourg (67)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-strasbourg/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
+    high_priority: false
 - source: ERA France
   params:
   - zone: Paris (75)
@@ -1295,18 +1314,21 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Marseille (13)
     url: https://fr.foncia.com/achat/marseille-13/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+    high_priority: false
   - zone: Strasbourg (67)
     url: https://fr.foncia.com/achat/strasbourg-67/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+    high_priority: false
 - source: Saint-Ferdinand
   params:
     - zone: Paris (75)
@@ -1479,6 +1501,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Marseille (13)
       url: https://www.meilleursagents.com/annonces/achat/marseille-13000/
       main_page_cls: div.listing-item.search-listing-result__item
@@ -1488,6 +1511,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Aix-en-Provence (13)
       url: https://www.meilleursagents.com/annonces/achat/aix-en-provence-13100/
       main_page_cls: div.listing-item.search-listing-result__item
@@ -1497,6 +1521,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Montpellier (34)
       url: https://www.meilleursagents.com/annonces/achat/montpellier-34000/
       main_page_cls: div.listing-item.search-listing-result__item
@@ -1506,6 +1531,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Strasbourg (67)
       url: https://www.meilleursagents.com/annonces/achat/strasbourg-67000/
       main_page_cls: div.listing-item.search-listing-result__item
@@ -1515,6 +1541,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
 - source: SeLoger
   params:
     - zone: Paris (75)
@@ -1652,6 +1679,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Marseille (13)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130055}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
       main_page_cls: script
@@ -1661,6 +1689,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Aix-en-Provence (13)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130001}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
       main_page_cls: script
@@ -1670,6 +1699,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Montpellier (34)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:340172}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
       main_page_cls: script
@@ -1679,6 +1709,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
     - zone: Strasbourg (67)
       url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:670482}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
       main_page_cls: script
@@ -1688,6 +1719,7 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+      high_priority: false
 - source: SeLoger
   params:
     - zone: Paris (75)
