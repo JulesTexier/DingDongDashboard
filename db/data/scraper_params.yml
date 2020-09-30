@@ -1301,18 +1301,6 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
-  - zone: Aix-en-Provence (13)
-    url: https://fr.foncia.com/achat/aix-en-provence-13/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: true
-    group_type: Group
-  - zone: Montpellier (34)
-    url: https://fr.foncia.com/achat/montpellier-34/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: true
-    group_type: Group
   - zone: Strasbourg (67)
     url: https://fr.foncia.com/achat/strasbourg-67/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
