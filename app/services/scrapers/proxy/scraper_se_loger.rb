@@ -11,7 +11,9 @@ class Proxy::ScraperSeLoger < Scraper
     i = 0
     self.params.each do |args|
       xml = access_xml_raw(fetch_static_page_proxy_auth(args.url), args.main_page_cls)
-      extract_json(xml)["cards"]["list"].each do |item|
+      json = extract_json(xml)
+      next if json.nil?
+      json["cards"]["list"].each do |item|
         begin
           if item["cardType"] == "classified" && item.keys[0] == "id"
             next if item["contact"]["contactName"].downcase == "les particuliers ont la parole"
