@@ -1,7 +1,7 @@
 class Proxy::ScraperSeLoger < Scraper
   attr_accessor :properties, :source, :params
 
-  def initialize(sp_id = nil)
+  def initialize(sp_id = [])
     @source = "SeLoger"
     @params = fetch_init_params(@source, sp_id)
     @properties = []
