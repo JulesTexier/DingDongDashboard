@@ -32,11 +32,10 @@ class SubscriberResearchesController < ApplicationController
   end
   
   def step3
-    if session[:areas].empty?
+    if session[:areas].nil?
       flash.now[:danger] = "Veuillez sélectionner une zone de recherche."
       redirect_to step2_subscriber_researches_path
     end
-    # @average_results = @subscriber_research_wizard.subscriber_research.average_results_estimation(15)
   end
 
   def create
@@ -57,8 +56,9 @@ class SubscriberResearchesController < ApplicationController
         @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
         session[:subscriber_research_attributes] = nil
         session[:subscriber_attributes] = nil
-        session[:areas] = nil
-        redirect_to subscriber_professionals_path(subscriber.id), success: 'Votre alerte a été correctement créée!'
+        session[:areas] = nil 
+        next_path = subscriber.email_flux && !subscriber.messenger_flux ? "#{ENV['BASE_URL']}subscribers/#{subscriber.id}/validez-votre-email" : "https://m.me/#{ENV['BOT_LINK']}?ref=id--#{subscriber.id}"
+        redirect_to next_path, success: 'Votre alerte a été correctement créée!'
       else
         flash[:danger] = "Une erreur s'est produite, veuillez réessayer."
         redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
@@ -136,7 +136,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_research_wizard_params
-    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type)
+    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
   end
 
   def subscriber_wizard_params
