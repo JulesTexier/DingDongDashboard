@@ -1,7 +1,7 @@
 class Proxy::ScraperParuVendu < Scraper
   attr_accessor :properties, :source, :params
 
-  def initialize(sp_id = [])
+  def initialize(sp_id = nil)
     @source = "ParuVendu"
     @params = fetch_init_params(@source, sp_id)
     @properties = []

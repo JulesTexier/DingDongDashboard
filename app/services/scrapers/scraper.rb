@@ -498,8 +498,8 @@ class Scraper
   ## PARAMS METHODS FOR CITY OPENING ##
   #####################################
 
-  def fetch_init_params(source, scraper_params_ids = [], is_mail_alert = false)
-    parameters = if scraper_params_ids.empty?
+  def fetch_init_params(source, scraper_params_ids = nil, is_mail_alert = false)
+    parameters = if scraper_params_ids.nil?
       ScraperParameter.where(source: source)
     else
       ScraperParameter.where(id: scraper_params_ids, source: source)
