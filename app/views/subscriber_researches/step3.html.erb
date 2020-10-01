@@ -11,9 +11,9 @@
         <div class="row">
             <div class="col-12 d-flex">
                 <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
-                    <%= link_to "📍 Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-                    <%= link_to "⚙️ Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-                    <%= link_to "💌 Validation", step3_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-active"><%= link_to "💌 Validation", step3_subscriber_researches_path, style:'color:#fff' %></div></div>
                 </ul>
             </div>
         </div>
