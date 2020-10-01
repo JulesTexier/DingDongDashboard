@@ -19,8 +19,8 @@ namespace :scraper do
   end
 
   task :proxy do
-    puts "Launching Premium Worker"
-    ScraperWorker.scrap(Proxy)
+    puts "Launching Proxy Worker"
+    ScraperProxyWorker.scrap
   end
 
   task :independant do

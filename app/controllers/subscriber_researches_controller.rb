@@ -101,6 +101,8 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: false)
+        SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a arrêté son alerte.")
+        AdminMailer.subscriber_email_stop(@subscriber.id).deliver_now
         @confirmation = true
       end
     rescue ActiveRecord::RecordNotFound
@@ -113,6 +115,8 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: true)
+        SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a reactivé son alerte.")
+        AdminMailer.subscriber_email_reactivation(@subscriber.id).deliver_now
         @confirmation = true
       end
     rescue ActiveRecord::RecordNotFound

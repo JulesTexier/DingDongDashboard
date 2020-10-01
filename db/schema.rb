@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_101512) do
+ActiveRecord::Schema.define(version: 2020_09_28_084121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -304,6 +304,13 @@ ActiveRecord::Schema.define(version: 2020_09_25_101512) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subscriber_notes", force: :cascade do |t|
+    t.text "content"
+    t.bigint "subscriber_id"
+    t.datetime "created_at", null: false
+    t.index ["subscriber_id"], name: "index_subscriber_notes_on_subscriber_id"
+  end
+
   create_table "subscriber_sequences", force: :cascade do |t|
     t.bigint "sequence_id", null: false
     t.bigint "subscriber_id", null: false
@@ -343,6 +350,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_101512) do
     t.bigint "contractor_id"
     t.bigint "notary_id"
     t.boolean "is_broker_affiliated", default: false
+    t.boolean "hot_lead", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"
@@ -360,6 +368,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_101512) do
   add_foreign_key "properties", "areas"
   add_foreign_key "property_links", "properties"
   add_foreign_key "sequence_steps", "sequences"
+  add_foreign_key "subscriber_notes", "subscribers"
   add_foreign_key "subscriber_sequences", "sequences"
   add_foreign_key "subscriber_sequences", "subscribers"
 end
