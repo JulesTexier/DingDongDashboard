@@ -668,6 +668,7 @@
     - name: Nîmes
       terms:
         - "30000"
+        - Nimes
 - zone: Sens (89)
   datas:
     - name: Sens
