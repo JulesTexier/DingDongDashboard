@@ -85,6 +85,97 @@
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
+  - zone: Nice (06)
+    url: https://www.superimmo.com/achat/provence-alpes-cote-d-azur/alpes-maritimes/nice-06?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.superimmo.com/achat/provence-alpes-cote-d-azur/bouches-du-rhone/marseille-13?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.superimmo.com/achat/provence-alpes-cote-d-azur/bouches-du-rhone/aix-en-provence-13?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.superimmo.com/achat/languedoc-roussillon/herault/montpellier-34?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.superimmo.com/achat/alsace/bas-rhin/strasbourg-67?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.superimmo.com/achat/bretagne/finistere/brest-29200?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Saint-Brieuc (22)
+    url: https://www.superimmo.com/achat/bretagne/cotes-d-armor/saint-brieuc-22000?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://www.superimmo.com/achat/ile-de-france/val-d-oise/pontoise-95?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://www.superimmo.com/achat/languedoc-roussillon/gard/nimes-30?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://www.superimmo.com/achat/bourgogne/yonne/sens-89100?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Annecy (74)
+    url: https://www.superimmo.com/achat/rhone-alpes/haute-savoie/annecy-74000?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.superimmo.com/achat/rhone-alpes/ain/bourg-en-bresse-01000?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://www.superimmo.com/achat/champagne-ardenne/marne/reims-51100?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: BienIci
   params:
   - zone: Paris (75)
@@ -171,6 +262,97 @@
     http_type: get_json
     is_active: true
     group_type: Hub
+  - zone: Nice (06)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-170100%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-76469%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-70279%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-28722%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-71033%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-1076124%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Saint-Brieuc (22)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-301829%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-120958%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-378685%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-946433%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Annecy (74)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-6791758%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-140253%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-36458%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: Figaro
   params:
   - zone: Paris (75)
@@ -257,6 +439,97 @@
     main_page_cls: div.container-item
     is_active: true
     group_type: Hub
+  - zone: Nice (06)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Nice%20(06)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Marseille%20(13)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Aix-en-Provence%20(13)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Montpellier%20(34)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Strasbourg%20(67)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Brest (29)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Brest%20(29)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Saint-Brieuc (22)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Saint-Brieuc%20(22)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Pontoise%20(95)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Nimes%20(30)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Sens%20(89)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Annecy (74)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Annecy%20(74)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Bourg-en-Bresse (01)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Bourg-en-Bresse%20(01)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Reims%20(51)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: Propr. Figaro
   params:
   - zone: Paris (75)
@@ -343,6 +616,97 @@
     main_page_cls: div.item-container-inline
     is_active: true
     group_type: Hub
+  - zone: Nice (06)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-alpes+maritimes-provence+alpes+cote+d+azur-france/?ville=nice&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-bouches+du+rhone-provence+alpes+cote+d+azur-france/?ville=marseille&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-bouches+du+rhone-provence+alpes+cote+d+azur-france/?ville=aix+provence&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-herault-languedoc+roussillon-france/?ville=montpellier&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-bas+rhin-alsace-france/?ville=strasbourg&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Brest (29)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-finistere-bretagne-france/?ville=brest&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Saint-Brieuc (22)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-cotes+d+armor-bretagne-france/?ville=st+brieuc&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-val+d+oise-ile+de+france-france/?ville=pontoise&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-gard-languedoc+roussillon-france/?ville=nimes&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-yonne-bourgogne-france/?ville=sens&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Annecy (74)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-haute+savoie-rhone+alpes-france/?ville=annecy&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Bourg-en-Bresse (01)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-ain-rhone+alpes-france/?ville=bourg+bresse&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-marne-champagne+ardenne-france/?ville=reims&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: LogicImmo
   params:
   - zone: Paris (75)
@@ -429,6 +793,97 @@
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
+  - zone: Nice (06)
+    url: https://www.logic-immo.com/vente-immobilier-nice-tous-codes-postaux,244_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.logic-immo.com/vente-immobilier-marseille-tous-codes-postaux,421_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.logic-immo.com/vente-immobilier-aix-en-provence-tous-codes-postaux,5_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.logic-immo.com/vente-immobilier-montpellier-tous-codes-postaux,232_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.logic-immo.com/vente-immobilier-strasbourg-tous-codes-postaux,382_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.logic-immo.com/vente-immobilier-brest-29200,4746_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Saint-Brieuc (22)
+    url: https://www.logic-immo.com/vente-immobilier-saint-brieuc-22000,27225_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://www.logic-immo.com/vente-immobilier-pontoise-tous-codes-postaux,279_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://www.logic-immo.com/vente-immobilier-nimes-tous-codes-postaux,247_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://www.logic-immo.com/vente-immobilier-sens-89100,31606_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Annecy (74)
+    url: https://www.logic-immo.com/vente-immobilier-annecy-74000,836_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.logic-immo.com/vente-immobilier-bourg-en-bresse-01000,4354_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://www.logic-immo.com/vente-immobilier-reims-51100,25660_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: PAP
   params:
   - zone: Paris (75)
@@ -515,14 +970,69 @@
     main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
-- source: Vanneau
-  params: 
-  - zone: Paris (75)
-    url: https://www.vaneau.fr/fr/vaneau-search/search?field_ad_type[eq][]=buying&field_bedrooms_number[eq][]=0&field_bedrooms_number[eq][]=1&field_bedrooms_number[eq][]=2&field_bedrooms_number[eq][]=3&field_bedrooms_number[eq][]=4&field_bedrooms_number[eq][]=5&field_bedrooms_number[eq][]=6&field_furniture[eq][]=ALL&field_price[lte]=25000000&field_property_type[eq][]=5&field_property_type[eq][]=8&field_surface[lte]=0&field_swimming_pool[eq][]=ALL&limit=20&location[eq][]=area_55&mode=list&offset=0&offset_additional=0&search_page_id=260
-    scraper_type: HTTPRequest
+  - zone: Nice (06)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-nice-06-g8979-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
     is_active: true
-    http_type: get_json
     group_type: Hub
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-marseille-13-g12024-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-aix-en-provence-13-g11424-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-montpellier-34-g43621-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-strasbourg-67-g43623-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Val d'Oise (95)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-pontoise-95-g43636-a-partir-du-studio-2
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Nîmes (30)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-nimes-30-g43630-a-partir-du-studio-2
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Sens (89)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-sens-89100-g42602-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Reims (51)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-reims-51100-g26363-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: Stephane Plaza
   params:
   - zone: Paris (75)
@@ -605,6 +1115,77 @@
     group_type: Group
   - zone: Saint-Etienne (42)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=42218&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nice (06)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=6088&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=13055&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=13001&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=34172&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=67482&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=29019&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Val d'Oise (95)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=95500&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nîmes (30)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=30189&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Sens (89)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=89387&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Annecy (74)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=74010&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Reims (51)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=51454&sort=date_desc&limit=15
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -695,6 +1276,77 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Nice (06)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=nice&locations%5B0%5D%5Blabel%5D=nice&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=marseille&locations%5B0%5D%5Blabel%5D=marseille&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=aix-en-provence&locations%5B0%5D%5Blabel%5D=aix-en-provence&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=montpellier&locations%5B0%5D%5Blabel%5D=montpellier&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=strasbourg&locations%5B0%5D%5Blabel%5D=strasbourg&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=brest&locations%5B0%5D%5Blabel%5D=brest&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Val d'Oise (95)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=pontoise&locations%5B0%5D%5Blabel%5D=pontoise&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nîmes (30)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=nimes&locations%5B0%5D%5Blabel%5D=nimes&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Annecy (74)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=annecy&locations%5B0%5D%5Blabel%5D=annecy&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=bourg-en-bresse&locations%5B0%5D%5Blabel%5D=bourg-en-bresse&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Reims (51)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=reims&locations%5B0%5D%5Blabel%5D=reims&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Laforet
   params:
   - zone: Paris (75)
@@ -777,6 +1429,65 @@
     group_type: Group
   - zone: Saint-Etienne (42)
     url: https://www.laforet.com/api/immo/properties?&cities=42218&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Nice (06)
+    url: https://www.laforet.com/api/immo/properties?&cities=06088&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.laforet.com/api/immo/properties?&cities=13055&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.laforet.com/api/immo/properties?&cities=13001&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.laforet.com/api/immo/properties?&cities=34172&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.laforet.com/api/immo/properties?&cities=67482&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.laforet.com/api/immo/properties?&cities=29019&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Saint-Brieuc (22)
+    url: https://www.laforet.com/api/immo/properties?&cities=22278&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Annecy (74)
+    url: https://www.laforet.com/api/immo/properties?&cities=74010&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.laforet.com/api/immo/properties?&cities=01053&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -867,16 +1578,68 @@
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
-- source: ERA France
-  params:
-  - zone: Paris (75)
-    url: https://www.erafrance.com/catalog/advanced_search_result_carto.php?action=update_search&ville=75&map_polygone=&latlngsearch=2.3318341000%2C48.8357218000&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_28_tmp=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30min=&C_30_MAX=&C_30_tmp=&C_65_modal=75&check_C_28=Vente&C_33_search=EGAL&C_33_type=NUMBER&C_33_MIN=&C_33=&C_38_search=EGAL&C_38_type=NUMBER&C_38_MIN=&C_38=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30min=&30max=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_47_search=SUPERIEUR&C_47_type=NUMBER&C_46_search=SUPERIEUR&C_46_type=NUMBER&C_41_search=EGAL&C_41_type=NUMBER&C_50_search=SUPERIEUR&C_50_type=NUMBER&C_110_search=EGAL&C_110_type=NUMBER&C_1737_search=EGAL&C_1737_type=NUMBER&C_49_search=SUPERIEUR&C_49_type=NUMBER&C_48_search=SUPERIEUR&C_48_type=NUMBER&keywords=
-    scraper_type: HTTPRequest
-    main_page_cls: div.bien
-    http_type: post
-    http_request:
-      - {} 
-      - jquery_aa_afunc=call&remote_function=get_products_search_ajax_perso&params%5B0%5D%5Baction%5D=update_search&params%5B0%5D%5Bmap_polygone%5D=2.6151395347251336%2C48.88486332629924%2F2.6151395347251336%2C48.66539593292907%2F2.009383468675534%2C48.66539593292907%2F2.009383468675534%2C48.88486332629924&params%5B0%5D%5Bpage%5D=1&params%5B0%5D%5Bsort%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5Bsort_liste%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5BC_28_search%5D=EGAL&params%5B0%5D%5BC_28_type%5D=UNIQUE&params%5B0%5D%5BC_28%5D=Vente&params%5B0%5D%5Bkeywords%5D=&params%5B0%5D%5Bcfamille_id_search%5D=EGAL&params%5B0%5D%5Bcfamille_id_type%5D=TEXT&params%5B0%5D%5Bcfamille_id%5D=1%2C2&params%5B0%5D%5BC_65_search%5D=CONTIENT&params%5B0%5D%5BC_65_type%5D=TEXT&params%5B0%5D%5BC_65%5D=75&params%5B0%5D%5BC_30_search%5D=COMPRIS&params%5B0%5D%5BC_30_type%5D=NUMBER&params%5B0%5D%5BC_30_MIN%5D=&params%5B0%5D%5BC_30_MAX%5D=&params%5B0%5D%5BC_47_search%5D=SUPERIEUR&params%5B0%5D%5BC_47_type%5D=NUMBER&params%5B0%5D%5BC_47%5D=&params%5B0%5D%5BC_46_search%5D=SUPERIEUR&params%5B0%5D%5BC_46_type%5D=NUMBER&params%5B0%5D%5BC_46%5D=&params%5B0%5D%5BC_41_search%5D=SUPERIEUR&params%5B0%5D%5BC_41_type%5D=NUMBER&params%5B0%5D%5BC_41%5D=&params%5B0%5D%5BC_50_search%5D=SUPERIEUR&params%5B0%5D%5BC_50_type%5D=NUMBER&params%5B0%5D%5BC_50%5D=&params%5B0%5D%5BC_110_search%5D=EGAL&params%5B0%5D%5BC_110_type%5D=FLAG&params%5B0%5D%5BC_110%5D=&params%5B0%5D%5BC_1737_search%5D=EGAL&params%5B0%5D%5BC_1737_type%5D=FLAG&params%5B0%5D%5BC_1737%5D=&params%5B0%5D%5BC_49_search%5D=SUPERIEUR&params%5B0%5D%5BC_49_type%5D=NUMBER&params%5B0%5D%5BC_49%5D=&params%5B0%5D%5BC_48_search%5D=SUPERIEUR&params%5B0%5D%5BC_48_type%5D=NUMBER&params%5B0%5D%5BC_48%5D=&params%5B0%5D%5BC_34_search%5D=COMPRIS&params%5B0%5D%5BC_34_type%5D=NUMBER&params%5B0%5D%5BC_34_MIN%5D=&params%5B0%5D%5BC_34_MAX%5D=&params%5B0%5D%5BC_33_search%5D=COMPRIS&params%5B0%5D%5BC_33_type%5D=NUMBER&params%5B0%5D%5BC_33_MIN%5D=&params%5B%5D=pagination&params%5B%5D=400&params%5B%5D=map_carto&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=false&params%5B%5D=images%2Fmarker_2017.png
+  - zone: Nice (06)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-nice/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-marseille/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-montpellier/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-strasbourg/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-brest/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Val d'Oise (95)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-pontoise/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Nîmes (30)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-nimes/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Sens (89)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-sens/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Annecy (74)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-annecy/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Reims (51)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-reims/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
 - source: Foncia
@@ -965,32 +1728,69 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
-- source: Saint-Ferdinand
-  params:
-    - zone: Paris (75)
-      url: http://www.agencessaintferdinand.com/acheter/
-      scraper_type: HTTPRequest
-      main_page_cls: div.property_listing
-      is_active: true
-      group_type: Group
-      http_request:
-        - {}
-        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
-      http_type: post
-- source: LeBonCoin
-  params:
-    - zone: Paris (75)
-      url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
-      main_page_cls: body
-      scraper_type: Captcha
-      is_active: true
-      group_type: Premium
-    - zone: Lyon (69)
-      url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
-      main_page_cls: body
-      scraper_type: Captcha
-      is_active: true
-      group_type: Premium
+  - zone: Nice (06)
+    url: https://fr.foncia.com/achat/nice-06/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://fr.foncia.com/achat/marseille-13/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://fr.foncia.com/achat/strasbourg-67/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+    high_priority: false
+  - zone: Brest (29)
+    url: https://fr.foncia.com/achat/brest-29200/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Saint-Brieuc (22)
+    url: https://fr.foncia.com/achat/saint-brieuc-22000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Val d'Oise (95)
+    url: https://fr.foncia.com/achat/pontoise-95/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Nîmes (30)
+    url: https://fr.foncia.com/achat/nimes-30/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Annecy (74)
+    url: https://fr.foncia.com/achat/annecy-74000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Bourg-en-Bresse (01)
+    url: https://fr.foncia.com/achat/bourg-en-bresse-01000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Reims (51)
+    url: https://fr.foncia.com/achat/reims-51100/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
 - source: MeilleursAgents
   params:
     - zone: Paris (75)
@@ -1128,6 +1928,128 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+    - zone: Nice (06)
+      url: https://www.meilleursagents.com/annonces/achat/nice-06000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Marseille (13)
+      url: https://www.meilleursagents.com/annonces/achat/marseille-13000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Aix-en-Provence (13)
+      url: https://www.meilleursagents.com/annonces/achat/aix-en-provence-13100/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Montpellier (34)
+      url: https://www.meilleursagents.com/annonces/achat/montpellier-34000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Strasbourg (67)
+      url: https://www.meilleursagents.com/annonces/achat/strasbourg-67000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Brest (29)
+      url: https://www.meilleursagents.com/annonces/achat/brest-29200/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Saint-Brieuc (22)
+      url: https://www.meilleursagents.com/annonces/achat/saint-brieuc-22000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Val d'Oise (95)
+      url: https://www.meilleursagents.com/annonces/achat/pontoise-95300/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Nîmes (30)
+      url: https://www.meilleursagents.com/annonces/achat/nimes-30000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Sens (89)
+      url: https://www.meilleursagents.com/annonces/achat/sens-89100/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Annecy (74)
+      url: https://www.meilleursagents.com/annonces/achat/annecy-74000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Bourg-en-Bresse (01)
+      url: https://www.meilleursagents.com/annonces/achat/bourg-en-bresse-01000/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Reims (51)
+      url: https://www.meilleursagents.com/annonces/achat/reims-51100/
+      main_page_cls: div.listing-item.search-listing-result__item
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
 - source: SeLoger
   params:
     - zone: Paris (75)
@@ -1256,12 +2178,180 @@
       page_nbr:  1
       is_active: true
       group_type: Proxy
+    - zone: Nice (06)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:60088}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Marseille (13)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130055}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Aix-en-Provence (13)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130001}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Montpellier (34)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:340172}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Strasbourg (67)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:670482}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+      high_priority: false
+    - zone: Brest (29)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:290019}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Saint-Brieuc (22)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:220278}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Val d'Oise (95)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:950500}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Nîmes (30)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:300189}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Sens (89)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:890387}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Annecy (74)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:740010}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Bourg-en-Bresse (01)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:10053}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
+    - zone: Reims (51)
+      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:510454}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+      main_page_cls: script
+      scraper_type: Proxy
+      waiting_cls: nil
+      multi_page: false
+      page_nbr:  1
+      is_active: true
+      group_type: Proxy
 - source: SeLoger
   params:
     - zone: Paris (75)
       is_active: true
       main_page_cls: li.property.initial
       group_type: Email
+- source: LeBonCoin
+  params:
+    - zone: Paris (75)
+      url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+      main_page_cls: body
+      scraper_type: Captcha
+      is_active: true
+      group_type: Premium
+    - zone: Lyon (69)
+      url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+      main_page_cls: body
+      scraper_type: Captcha
+      is_active: true
+      group_type: Premium
+- source: ERA France
+  params:
+  - zone: Paris (75)
+    url: https://www.erafrance.com/catalog/advanced_search_result_carto.php?action=update_search&ville=75&map_polygone=&latlngsearch=2.3318341000%2C48.8357218000&cfamille_id_search=CONTIENT&cfamille_id_type=TEXT&cfamille_id=1%2C2&cfamille_id_tmp=1&cfamille_id_tmp=2&C_28_search=EGAL&C_28_type=UNIQUE&C_28=Vente&C_28_tmp=Vente&C_65_search=CONTIENT&C_65_type=TEXT&C_65=75&C_65_temp=75&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&30min=&C_30_MAX=&C_30_tmp=&C_65_modal=75&check_C_28=Vente&C_33_search=EGAL&C_33_type=NUMBER&C_33_MIN=&C_33=&C_38_search=EGAL&C_38_type=NUMBER&C_38_MIN=&C_38=&C_30_search=COMPRIS&C_30_type=NUMBER&C_30_MIN=&C_30_MAX=&30min=&30max=&C_34_search=COMPRIS&C_34_type=NUMBER&C_34_MIN=&C_34_MAX=&C_47_search=SUPERIEUR&C_47_type=NUMBER&C_46_search=SUPERIEUR&C_46_type=NUMBER&C_41_search=EGAL&C_41_type=NUMBER&C_50_search=SUPERIEUR&C_50_type=NUMBER&C_110_search=EGAL&C_110_type=NUMBER&C_1737_search=EGAL&C_1737_type=NUMBER&C_49_search=SUPERIEUR&C_49_type=NUMBER&C_48_search=SUPERIEUR&C_48_type=NUMBER&keywords=
+    scraper_type: HTTPRequest
+    main_page_cls: div.bien
+    http_type: post
+    http_request:
+      - {} 
+      - jquery_aa_afunc=call&remote_function=get_products_search_ajax_perso&params%5B0%5D%5Baction%5D=update_search&params%5B0%5D%5Bmap_polygone%5D=2.6151395347251336%2C48.88486332629924%2F2.6151395347251336%2C48.66539593292907%2F2.009383468675534%2C48.66539593292907%2F2.009383468675534%2C48.88486332629924&params%5B0%5D%5Bpage%5D=1&params%5B0%5D%5Bsort%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5Bsort_liste%5D=PRODUCT_LIST_DATEd&params%5B0%5D%5BC_28_search%5D=EGAL&params%5B0%5D%5BC_28_type%5D=UNIQUE&params%5B0%5D%5BC_28%5D=Vente&params%5B0%5D%5Bkeywords%5D=&params%5B0%5D%5Bcfamille_id_search%5D=EGAL&params%5B0%5D%5Bcfamille_id_type%5D=TEXT&params%5B0%5D%5Bcfamille_id%5D=1%2C2&params%5B0%5D%5BC_65_search%5D=CONTIENT&params%5B0%5D%5BC_65_type%5D=TEXT&params%5B0%5D%5BC_65%5D=75&params%5B0%5D%5BC_30_search%5D=COMPRIS&params%5B0%5D%5BC_30_type%5D=NUMBER&params%5B0%5D%5BC_30_MIN%5D=&params%5B0%5D%5BC_30_MAX%5D=&params%5B0%5D%5BC_47_search%5D=SUPERIEUR&params%5B0%5D%5BC_47_type%5D=NUMBER&params%5B0%5D%5BC_47%5D=&params%5B0%5D%5BC_46_search%5D=SUPERIEUR&params%5B0%5D%5BC_46_type%5D=NUMBER&params%5B0%5D%5BC_46%5D=&params%5B0%5D%5BC_41_search%5D=SUPERIEUR&params%5B0%5D%5BC_41_type%5D=NUMBER&params%5B0%5D%5BC_41%5D=&params%5B0%5D%5BC_50_search%5D=SUPERIEUR&params%5B0%5D%5BC_50_type%5D=NUMBER&params%5B0%5D%5BC_50%5D=&params%5B0%5D%5BC_110_search%5D=EGAL&params%5B0%5D%5BC_110_type%5D=FLAG&params%5B0%5D%5BC_110%5D=&params%5B0%5D%5BC_1737_search%5D=EGAL&params%5B0%5D%5BC_1737_type%5D=FLAG&params%5B0%5D%5BC_1737%5D=&params%5B0%5D%5BC_49_search%5D=SUPERIEUR&params%5B0%5D%5BC_49_type%5D=NUMBER&params%5B0%5D%5BC_49%5D=&params%5B0%5D%5BC_48_search%5D=SUPERIEUR&params%5B0%5D%5BC_48_type%5D=NUMBER&params%5B0%5D%5BC_48%5D=&params%5B0%5D%5BC_34_search%5D=COMPRIS&params%5B0%5D%5BC_34_type%5D=NUMBER&params%5B0%5D%5BC_34_MIN%5D=&params%5B0%5D%5BC_34_MAX%5D=&params%5B0%5D%5BC_33_search%5D=COMPRIS&params%5B0%5D%5BC_33_type%5D=NUMBER&params%5B0%5D%5BC_33_MIN%5D=&params%5B%5D=pagination&params%5B%5D=400&params%5B%5D=map_carto&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=&params%5B%5D=images%2Fmarker_2017.png&params%5B%5D=false&params%5B%5D=images%2Fmarker_2017.png
+    is_active: true
+    group_type: Group
+- source: Saint-Ferdinand
+  params:
+    - zone: Paris (75)
+      url: http://www.agencessaintferdinand.com/acheter/
+      scraper_type: HTTPRequest
+      main_page_cls: div.property_listing
+      is_active: true
+      group_type: Group
+      http_request:
+        - {}
+        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+      http_type: post
+- source: Vanneau
+  params: 
+  - zone: Paris (75)
+    url: https://www.vaneau.fr/fr/vaneau-search/search?field_ad_type[eq][]=buying&field_bedrooms_number[eq][]=0&field_bedrooms_number[eq][]=1&field_bedrooms_number[eq][]=2&field_bedrooms_number[eq][]=3&field_bedrooms_number[eq][]=4&field_bedrooms_number[eq][]=5&field_bedrooms_number[eq][]=6&field_furniture[eq][]=ALL&field_price[lte]=25000000&field_property_type[eq][]=5&field_property_type[eq][]=8&field_surface[lte]=0&field_swimming_pool[eq][]=ALL&limit=20&location[eq][]=area_55&mode=list&offset=0&offset_additional=0&search_page_id=260
+    scraper_type: HTTPRequest
+    is_active: true
+    http_type: get_json
+    group_type: Hub
 - source: Arthurimmo
   params:
     - zone: Paris (75)

@@ -18,6 +18,7 @@ scraper_params.each do |param|
     s.http_request = data["http_request"]
     s.group_type = data["group_type"]
     s.zone = data["zone"]
+    s.high_priority = data["high_priority"] unless data["high_priority"].nil?
     if Rails.env.test?
       s.is_active = s.zone == "Paris (75)" ? data["is_active"] : false ## we don't want to run tests for every new city
     else

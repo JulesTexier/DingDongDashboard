@@ -1,11 +1,12 @@
 ---
-- agglomeration: Paris
+- agglomeration: Ile-de-France
   zone: 
     - Paris (75)
     - Hauts-de-Seine (92)
     - Val-de-Marne (94)
     - Yvelines (78)
     - Seine-Saint-Denis (93)
+    - Val d'Oise (95)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
   is_active: true
 - agglomeration: Lyon
@@ -45,7 +46,7 @@
   is_active: false
 - agglomeration: Strasbourg
   zone: 
-    - Strasbourg (13)
+    - Strasbourg (67)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/strasbourg.jpg
   is_active: false
 - agglomeration: Lille
@@ -73,4 +74,43 @@
     - Le Havre (76)
   image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
   is_active: false
-  
+- agglomeration: Aix-en-Provence
+  zone: 
+    - Aix-en-Provence (13)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/saint-etienne.jpg
+  is_active: false
+- agglomeration: Brest
+  zone: 
+    - Brest (29)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Saint-Brieuc
+  zone: 
+    - Saint-Brieuc (22)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Nîmes
+  zone: 
+    - Nîmes (30)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Sens
+  zone: 
+    - Sens (89)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Annecy
+  zone: 
+    - Annecy (74)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Bourg-en-Bresse
+  zone: 
+    - Bourg-en-Bresse (01)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false
+- agglomeration: Reims
+  zone: 
+    - Reims (51)
+  image_url: https://ding-dong.s3.us-west-002.backblazeb2.com/agglomeration/paris.jpg
+  is_active: false

@@ -101,6 +101,8 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: false)
+        SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a arrêté son alerte.")
+        AdminMailer.subscriber_email_stop(@subscriber.id).deliver_now
         @confirmation = true
       end
     rescue ActiveRecord::RecordNotFound
@@ -113,6 +115,8 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: true)
+        SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a reactivé son alerte.")
+        AdminMailer.subscriber_email_reactivation(@subscriber.id).deliver_now
         @confirmation = true
       end
     rescue ActiveRecord::RecordNotFound
@@ -144,7 +148,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def research_params
-    params.require(:research).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type)
+    params.require(:research).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
   end
 
   class InvalidStep < StandardError; end

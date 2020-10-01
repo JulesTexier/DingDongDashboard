@@ -1,5 +1,4 @@
 <div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
-
     <div class="container">
 
         <div class="row"> 
@@ -24,24 +23,27 @@
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
                     <div class="section">
 
-                                <%= hidden_field_tag :current_step, 'step2' %>
-                            
+                              <%= hidden_field_tag :current_step, 'step2' %>
+
+                              <% if @master_areas.length > 3 %>
                                 <h5 class="mt-4 mb-3">Les critères indispensables pour commencer</h6> 
                                 <p class="mt-4 mb-3 grey">📍 Votre zone de recherche * </p>
-                                <% if false %> <small><div onClick="clearSelected();">❌ Réinitialiser ma zone de recherche</div></small> <% end %>
                                 <div cxlass="raw d-flex flex-wrap">
-                                <div class="form-group col-12 p-0 mb-0">
-                                    <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
-                                    <% @master_areas.each do |item| %>
-                                        <% if item[0].include?("department") %>
-                                        <option value="<%= item[0] %>" <%= item[2] %>> <%= "#{item[1]}" %></option>
-                                        <% else %>
-                                        <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
-                                        <% end %>
-                                    <% end %>
-                                    </select>
+                                  <div class="form-group col-12 p-0 mb-0">
+                                      <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
+                                      <% @master_areas.each do |item| %>
+                                          <% if item[0].include?("department") %>
+                                          <option value="<%= item[0] %>" <%= item[2] %>> <%= "#{item[1]}" %></option>
+                                          <% else %>
+                                          <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
+                                          <% end %>
+                                      <% end %>
+                                      </select>
+                                  </div>
                                 </div>
-                                </div>
+                              <% else %>
+                                <%= hidden_field_tag 'areas[]', @master_areas.first[0] %>
+                              <% end %>
 
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-lg-4">

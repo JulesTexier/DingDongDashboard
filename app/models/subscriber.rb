@@ -13,6 +13,8 @@ class Subscriber < ApplicationRecord
 
   has_many :subscriber_statuses
   has_many :statuses, through: :subscriber_statuses
+  
+  has_many :subscriber_notes
 
   ## Professional association
   belongs_to :notary, optional: true
