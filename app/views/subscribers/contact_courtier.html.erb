@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h1 class="display-4">Votre financement</h1>
+  <p class="lead">Ding Dong est là pour vous conseiller sur votre finanement.</p>
+  <hr class="my-4">
+  <p>Nous sommes disponibles pour répondre à toutes les questions que vous pouvez vous poser.</p>
+  <p>N'hesitez pas à nous contacter en complétant le formulaire ci-dessous.</p>
+
+</div>
+
+
+<div class="container">
+  <%= form_tag("/subscribers/#{@subscriber.id}/financement-submit", method: "post") do %>
+     <div class="form-group">
+      <%= label_tag 'question_category', 'Catégorie'%>
+      <%= select_tag 'question_category', options_for_select(@question_categories, "1"), id:'question_category', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'question_content', 'Votre question'%>
+      <%= text_area_tag 'question_content', params[:question_content], class: 'form-control', autofocus: true %>
+    </div>
+    <%= submit_tag "Envoyer", class:"btn btn-primary" %>
+  <% end %>
+
+</div>
+
+
+
