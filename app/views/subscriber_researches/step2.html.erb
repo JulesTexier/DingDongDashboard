@@ -11,9 +11,9 @@
         <div class="row">
             <div class="col-12 d-flex">
                 <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
-                    <%= link_to "📍 Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-                    <%= link_to "⚙️ Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-                    <div class="badge-off col-12 col-lg-4  text-center mb-1">💌 Validation</div>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color: #2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-active"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off">💌 Validation</div></div>
                 </ul>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="container">
 
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-                    <div class="col-12 mb-120 mt-5">
+                    <div class="section">
 
                                 <%= hidden_field_tag :current_step, 'step2' %>
                             
@@ -96,38 +96,46 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="grey mt-4">🏢 / 🏠 Type de logement </p>
+                                        <div class="form-check form-check-inline flex-row">
+                                            <%= f.input_field :apartment_type, id: "apartment_type", as: :boolean, class: "form-check-input", onClick: "handleFloorInfo()" %> 
+                                            <%= f.label "Appartement", for: "apartment_type", class: "form-check-label grey" %> 
+                                        </div>
+                                        <div class="form-check form-check-inline ">
+                                            <%= f.input_field :home_type, id: "home_type", as: :boolean, class: "form-check-input" %> 
+                                            <%= f.label "Maison", for: "home_type", class: "form-check-label grey" %> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="floor-parameters">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <p class="mt-4 mb-3 grey">🎢 Étage minimum</p>
                                         <div class="input-group mb-3">
-                                            <%= f.number_field :min_floor, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
+                                            <%= f.number_field :min_floor, id:"min_floor", as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
                                         </div>
                                         <div class="form-check form-check-inline mb-3">
-                                        <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id: "last_floor", value: "true" %> 
+                                        <%= f.check_box :last_floor, id:"is_last_floor", class: "form-check-input", type:"checkbox",  id: "last_floor", value: "true" %> 
                                         <label class="form-check-label grey" for="last_floor">Uniquement dernier étage</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <p class="mt-4 mb-6 grey">🚠 A partir de quel étage faut-il un ascenseur</p>
                                         <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                                            <%= f.number_field :min_elevator_floor, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
+                                            <%= f.number_field :min_elevator_floor, id:"min_elevator_floor", as: :numeric, class: "form-control writing-box", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="">
-                                    <p class="mt-4 grey">🏗️ Neuf</p>
-                                    <div class="form-check form-check-inline margin-bottom-navbar">
-                                        <%= f.check_box :new_construction, id: "new_construction", class: "form-check-input" %> 
-                                        <%= f.label "Recevoir les constuctions neuves", for: "new_construction", class: "form-check-label grey" %> 
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 grey">🏗️ Neuf</p>
+                                        <div class="form-check form-check-inline margin-bottom-navbar">
+                                            <%= f.check_box :new_construction, id: "new_construction", as: :boolean, class: "form-check-input" %> 
+                                            <%= f.label "Recevoir les constuctions neuves", for: "new_construction", class: "form-check-label grey" %> 
+                                        </div>
                                     </div>
+                                </div>
+                        </div>
                                 
-                                    <p class="grey"> Souhaitez-vous une maison et/ou un appartement</p>
-                                    <div class="form-check form-check-inline">
-                                      <%= f.input_field :apartment_type, as: :boolean, class: "form-check-input" %> 
-                                      <%= f.label "Appartement", class: "form-check-label" %> 
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                      <%= f.input_field :home_type, as: :boolean, class: "form-check-input" %> 
-                                      <%= f.label "Maison", class: "form-check-label" %> 
-                                    </div>
 
                                 <% if false %>
                                     <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
@@ -143,11 +151,9 @@
                                         <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
                                         <label class="form-check-label" for="garden">Jardin</label>
                                     </div>
-                                <% end %>
+                        <% end %>
 
-                                </div>
                         
-                    </div>
                 
                     <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
                         <div class="d-flex justify-content-center mt-2 mb-2">
@@ -177,6 +183,26 @@ function clearSelected(){
      "<% session[:areas] = nil %>"
     for(var i = 0; i < elements.length; i++){
       elements[i].selected = false;
+    }
+  }
+
+  function enableFloorParameters(){
+      document.getElementById('min_floor').disabled = false
+      document.getElementById('min_elevator_floor').disabled = false
+      document.getElementById('last_floor').disabled = false
+  }
+
+   function disableFloorParameters(){
+      document.getElementById('min_floor').disabled = true
+      document.getElementById('min_elevator_floor').disabled = true
+      document.getElementById('last_floor').disabled = true
+  }
+
+  function handleFloorInfo(){
+    if (document.getElementById('apartment_type').checked) {
+         enableFloorParameters();
+    } else {
+        disableFloorParameters();
     }
   }
 

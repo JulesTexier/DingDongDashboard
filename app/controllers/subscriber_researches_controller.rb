@@ -56,8 +56,9 @@ class SubscriberResearchesController < ApplicationController
         @subscriber_research_wizard.subscriber_research.update_research_areas(session[:areas])
         session[:subscriber_research_attributes] = nil
         session[:subscriber_attributes] = nil
-        session[:areas] = nil
-        redirect_to subscriber_professionals_path(subscriber.id), success: 'Votre alerte a été correctement créée!'
+        session[:areas] = nil 
+        next_path = subscriber.email_flux && !subscriber.messenger_flux ? "#{ENV['BASE_URL']}subscribers/#{subscriber.id}/validez-votre-email" : "https://m.me/#{ENV['BOT_LINK']}?ref=id--#{subscriber.id}"
+        redirect_to next_path, success: 'Votre alerte a été correctement créée!'
       else
         flash[:danger] = "Une erreur s'est produite, veuillez réessayer."
         redirect_to({ action: Wizard::SubscriberResearch::STEPS.second })
