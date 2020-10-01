@@ -114,19 +114,19 @@
                                 </div>
                                 <div class="">
                                     <p class="mt-4 grey">🏗️ Neuf</p>
-                                    <div class="form-check form-check-inline margin-bottom-navbar">
-                                        <%= f.check_box :new_construction, id: "new_construction", class: "form-check-input" %> 
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :new_construction, id: "new_construction", as: :boolean, class: "form-check-input" %> 
                                         <%= f.label "Recevoir les constuctions neuves", for: "new_construction", class: "form-check-label grey" %> 
                                     </div>
                                 
-                                    <p class="grey"> Souhaitez-vous une maison et/ou un appartement</p>
+                                    <p class="grey mt-4"> Souhaitez-vous une maison et/ou un appartement</p>
                                     <div class="form-check form-check-inline">
-                                      <%= f.input_field :apartment_type, as: :boolean, class: "form-check-input" %> 
-                                      <%= f.label "Appartement", class: "form-check-label" %> 
+                                      <%= f.input_field :apartment_type, id: "apartment_type", as: :boolean, class: "form-check-input" %> 
+                                      <%= f.label "Appartement", for: "apartment_type", class: "form-check-label grey" %> 
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                      <%= f.input_field :home_type, as: :boolean, class: "form-check-input" %> 
-                                      <%= f.label "Maison", class: "form-check-label" %> 
+                                    <div class="form-check form-check-inline margin-bottom-navbar">
+                                      <%= f.input_field :home_type, id: "home_type", as: :boolean, class: "form-check-input" %> 
+                                      <%= f.label "Maison", for: "home_type", class: "form-check-label grey" %> 
                                     </div>
 
                                 <% if false %>
