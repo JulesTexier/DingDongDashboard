@@ -1756,7 +1756,7 @@
     is_active: true
     group_type: Group
   - zone: Saint-Brieuc (22)
-    url: https://fr.foncia.com/achat/saint-brieuc-22/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    url: https://fr.foncia.com/achat/saint-brieuc-22000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
@@ -1768,7 +1768,7 @@
     is_active: true
     group_type: Group
   - zone: Nîmes (30)
-    url: https://fr.foncia.com/achat/montpellier-34/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    url: https://fr.foncia.com/achat/nimes-30/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: true
