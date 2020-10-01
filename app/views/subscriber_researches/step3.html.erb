@@ -25,7 +25,7 @@
                     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
                         <%= hidden_field_tag :current_step, 'step3' %>
 
-                        <%= f.input :subscriber_messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
+                        <%= f.input :subscriber_messenger_flux, :as => :hidden, :input_html => { :value => "false" } %>
                         <%= f.input :subscriber_email_flux, :as => :hidden, :input_html => { :value => "false" } %>
 
                             <div class="row justify-content-center">
@@ -45,11 +45,11 @@
                                     <p class="mt-4 mb-3 grey">🛎️ Souhaitez-vous recevoir les annonces par mail ou messenger ?</p>
                                     <div class="row">
                                     <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
-                                        <div class="btn medium-btn medium-active col-12" id="messenger" onCLick="selectMessenger()">
+                                        <div class="btn medium-btn  col-12" id="messenger" onCLick="selectMessenger()">
                                             <?xml version="1.0"?>
                                             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30">
                                             <g>
-                                                <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path medium-active-logo" style="fill:#2458FC" data-old_color="#2196f3"/>
+                                                <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path" style="fill:#2458FC" data-old_color="#2196f3"/>
                                             </g> 
                                             </svg>
                                             <span class="ml-2">Messenger</span>
@@ -117,7 +117,7 @@
 
                             <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
                                 <div class="d-flex justify-content-center mt-2 mb-2">
-                                    <%= submit_tag "Valider mon alerte", class: "btn-outline-navbar"%>
+                                    <%= submit_tag "Valider mon alerte", class: "btn-outline-navbar", onClick: "checkMediumSelection()"%>
                                 </div>
                             </nav>
 
@@ -149,6 +149,15 @@
     document.getElementById("messenger").classList.remove("medium-active");
     document.getElementById("messenger-logo").classList.remove("medium-active-logo");   
     document.getElementById("email-logo").classList.add("medium-active-logo");   
+  }
+
+  function checkMediumSelection(){
+      event.preventDefault()
+      if( document.getElementById('subscriber_wizard_subscriber_email_flux').value == "false" &&  document.getElementById('subscriber_wizard_subscriber_messenger_flux').value == "false" ) {
+          alert("Vous devez selectionner un médium pour recevoir vos annonces ! ")
+      } else {
+          document.getElementById('new_subscriber_wizard').submit();
+      }
   }
 
 </script>
