@@ -663,7 +663,7 @@
     - name: Saint-Brieuc
       terms:
         - "22000"
-- zone: Nîmes (22)
+- zone: Nîmes (30)
   datas:
     - name: Nîmes
       terms:
