@@ -4,6 +4,7 @@ class BrokerPagesController < ApplicationController
   
   def index
     @broker = Broker.find(params[:id])
-    @subscribers = Subscriber.where(broker: @broker).where('created_at >  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC')
+    @delay_broker = 7
+    @subscribers = Subscriber.where(broker: @broker).where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC')
   end
 end

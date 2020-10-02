@@ -116,7 +116,7 @@ Rails.application.routes.draw do
   #############
   # 6 - Broker Dashboard
   #############
-  get "/courtier/dashboard/:id/" => "broker_pages#index"
+  get "/courtier/:id/dashboard" => "broker_pages#index"
 
 
 
