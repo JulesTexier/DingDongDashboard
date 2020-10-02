@@ -53,6 +53,7 @@ class SubscribersController < ApplicationController
     @subscriber = Subscriber.find(params[:subscriber_id])
     @question_categories = ["Evaluer ma capacité d'emprunt", "Informations sur les taux", "Parler à un courtier", "Point sur ma situation" ,"Autre"]
     SubscriberNote.create(subscriber: @subscriber, content: "S'est rendu sur la page 'mon financement'")
+    AdminMailer.subscriber_funding_question(@subscriber.id).deliver_now
   end
 
   def contact_courtier_submit
@@ -60,7 +61,6 @@ class SubscribersController < ApplicationController
     question_category = params["question_category"]
     question_content = params["question_content"]
     SubscriberNote.create(subscriber: subscriber, content: "A posé la question suivante: '#{question_content}'")
-    AdminMailer.subscriber_funding_question(subscriber.id, question_category, question_content).deliver_now
     redirect_to subscriber_mon_financement_confirmation_path
   end
 

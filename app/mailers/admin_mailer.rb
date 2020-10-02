@@ -10,11 +10,9 @@ class AdminMailer < ApplicationMailer
     mail(to: "etienne@hellodingdong.com", subject: "[ALERTE REACTIVEE] - #{@subscriber.firstname} vient de réactiver son alerte email")
   end
 
-  def subscriber_funding_question(subscriber_id, question_category, question_content)
+  def subscriber_funding_question(subscriber_id)
     @subscriber = Subscriber.find(subscriber_id)
-    @question_category = question_category
-    @question_content = question_content
-    mail(to: "etienne@hellodingdong.com", subject: "[FINANCEMENT] - Question à propos de : #{question_category}")
+    mail(to: "etienne@hellodingdong.com", subject: "[FINANCEMENT] - #{@subscriber.get_fullname} est interessé par le financement")
   end
 
 end

@@ -5,17 +5,13 @@
 <h2>Détails</h2>
 
 <ul>
-  <li>Subscriber : <%= @subscriber.get_fullname %>, id: <%= @subscriber.id%>, agglomeration: <%= @subscriber.research.agglomeration%> </li>
+  <li><%= @subscriber.get_fullname %></li>
+  <li>id: <%= @subscriber.id%></li>
+  <li>agglomeration: <%= @subscriber.research.agglomeration%> </li>
   <% unless @subscriber.broker.nil?%>
-    <li>Courtier du subscriber : <%= "#{@subscriber.broker.firstname} #{@subscriber.broker.lastname}" %>, id: <%= @subscriber.broker.id%> </li>
+    <li>courtier:  <%= "#{@subscriber.broker.firstname} #{@subscriber.broker.lastname}" %>, id: <%= @subscriber.broker.id%> </li>
   <% end %>
 </ul>
 
-<h2>Question</h2>
-
-<ul>
-  <li>Catégorie : <%= @question_category %> </li>
-  <li>Contenu : 
-    <br><%= @question_content%> 
-  </li>
-</ul>
+<br>
+ > <%=link_to 'Voir dans le panel admin', "#{ENV['BASE_URL']}admin/subscriber/#{@subscriber.id}"%>
