@@ -32,7 +32,7 @@ class EmailParser
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
     surface_regex = '(\d+)(.?)(\d+)(.?)(m)'
-    ad_infos = Hash.new
+    ad_infos = {}
     html = Nokogiri::HTML.parse(self.json_content["HtmlBody"])
     html.css("tr > td > table.full").each do |data|
       data.text.each_line do |line|

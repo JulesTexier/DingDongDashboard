@@ -8,23 +8,25 @@ class GrowthEngine
   end
 
   def perform_email_webhook(json_content)
-    handle_email(json_content)
-    handle_lead_email(@lead_email) unless Sequence.where(sender_email: @sender_email, source: @source).empty?
+    email_data = handle_email(json_content)
+    handle_lead_email(email_data) unless Sequence.where(sender_email: email_data[:sender_email], source: email_data[:source]).empty?
   end
 
   private
 
   def handle_email(json_content)
     e = EmailParser.new(json_content)
-    @source = e.get_value("FromName")
-    @sender_email = e.get_value("To")
-    @lead_email = e.get_reply_to_email
-    @property_data = e.ad_data_parser_se_loger
+    d = { 
+          source: e.get_value("FromName"),
+          sender_email: e.get_value("To"),
+          sub_email: e.get_reply_to_email,
+          property_data: e.ad_data_parser_se_loger
+        }
   end
 
-  def handle_lead_email(email)
+  def handle_lead_email(email_data)
     # 1 • Handle Subscriber (get or create)
-    subscriber = get_subscriber(email)
+    subscriber = get_subscriber(email_data[:sub_email], email_data[:property_data])
     # 2 • Handle Sequence to execute
     # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
     if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
@@ -32,7 +34,7 @@ class GrowthEngine
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
       create_subscriber_to_sequence(subscriber, sequence)
-      sequence.execute_sequence(subscriber, @property_data)
+      sequence.execute_sequence(subscriber, email_data[:property_data])
     end
   end
 
@@ -40,6 +42,7 @@ class GrowthEngine
     sub = Subscriber.where(email: email_address).last
     if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
+      # Research.create()
       sub.save(validate: false)
     end
     sub
