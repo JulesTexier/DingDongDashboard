@@ -10,10 +10,10 @@
 
         <div class="row">
             <div class="col-12 d-flex">
-                <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-active"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#fff' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off" >⚙️ Critères</div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off">💌 Validation</div></div>
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off" >⚙️ Critères</div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">💌 Validation</div></div>
                 </ul>
             </div>
         </div>
@@ -23,31 +23,37 @@
 
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
                   <%= hidden_field_tag :current_step, 'step1' %>
-                    <div class="row mb-5 mt-5">
-                        <div class="col-12 col-lg-6 mb-5">
-                            <div class="mb-4 mt-5 mt-lg-0">
-                                <div class="col-12">
-                                    <h5 class="mb-3">
-                                        <div> Dans quelle agglomération cherchez-vous ?</div>
-                                    </h5> 
+                    <div class="container">
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12 col-lg-4 mb-5 p-0">
+                                <div class="mb-4 mt-5 mt-lg-0">
+                                    <div class="">
+                                        <h5 class="mb-3">
+                                            <div> Dans quelle agglomération cherchez-vous ?</div>
+                                        </h5> 
+                                    </div>
+                                </div>
+                                <div class="raw d-flex flex-wrap">
+                                    <div class="form-group col-12 p-0 mb-0">
+                                    <%= f.input_field :agglomeration, :collection => @agglomerations_infos.map{|o| [o.name, {disabled: !o.is_active}]},  class: "form-control writing-box", id: "choices-multiple-remove-button", label: false %>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="raw d-flex flex-wrap col-12">
-                                <div class="form-group col-12 p-0 mb-0">
-                                  <%= f.input_field :agglomeration, :collection => @agglomerations_infos.map{|o| [o.name, {disabled: !o.is_active}]},  class: "form-control", id: "choices-multiple-remove-button", label: false %>
-                                </div>
+                            <div class="col-12 col-lg-8 d-flex justify-content-center margin-bottom-navbar"> 
+                                <img src="<%= asset_path('france-map.svg') %>" height="300px;">
                             </div>
-                        </div>
-                        <div class="col-12 col-lg-6 d-flex justify-content-center margin-bottom-navbar"> 
-                            <img src="<%= asset_path('france-map.svg') %>" height="300px;">
                         </div>
                     </div>
 
-                    <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                        <div class="d-flex justify-content-center mt-2 mb-2">
-                            <%= submit_tag "Etape suivante", class: "btn-outline-navbar"%>
-                        </div>
-                    </nav>
+                        <nav class="navbar navbar-light fixed-bottom bg-blue">
+                            <div class="container justify-content-center p-0">
+                                <div class="row w-100 justify-content-center">
+                                    <div class="col-12 col-md-6 col-lg-4 p-0">
+                                        <%= f.submit "Etape suivante", class: "btn-outline-navbar w-100"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>  
 
                 <%end%>
 

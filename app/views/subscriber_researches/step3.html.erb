@@ -29,17 +29,17 @@
 
         <div class="row">
             <div class="col-12 d-flex">
-                <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#2458FC' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#2458FC' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-active"><%= link_to "💌 Validation", step3_subscriber_researches_path, style:'color:#fff' %></div></div>
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "💌 Validation", step3_subscriber_researches_path, style:'color:#fff' %></div></div>
                 </ul>
             </div>
         </div>
 
         <div class="bg-white-steps">
             <div class="container">
-                <div class="col-12 mb-120 mt-5">
+                <div class="mb-120 mt-5">
 
                     <%= simple_form_for @subscriber_research_wizard, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
                         <%= hidden_field_tag :current_step, 'step3' %>
@@ -49,7 +49,7 @@
 
                             <div class="row justify-content-center">
                                 <div class="col-12 col-lg-8">
-                                    <h5 class="mb-2">Les dernières infos pour valider votre compte</h5>
+                                    <h5 class="mb-2">Les dernières infos pour valider votre alerte</h5>
                                 </div>
                             </div> 
 
@@ -117,9 +117,9 @@
                                     </div>
                                     <% end %>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="col-12 col-md-6 col-lg-4 margin-bottom-navbar">
                                     <p class="mt-4 mb-6 grey">📱Téléphone *</p>
-                                    <div class="input-group margin-bottom-navbar">
+                                    <div class="input-group mb-3">
                                         <%= f.input_field :subscriber_phone, class: "form-control writing-box", placeholder: "Ex : 0624345653", required: true %>
                                     </div>
                                     <% if @subscriber_research_wizard.subscriber.errors[:phone].any? %>
@@ -131,12 +131,13 @@
                                     <% end %>
                                 </div>
                             </div>
-
-
-
-                            <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-                                <div class="d-flex justify-content-center mt-2 mb-2">
-                                    <%= submit_tag "Valider mon alerte", class: "btn-outline-navbar", onClick: "checkMediumSelection()"%>
+                            <nav class="navbar navbar-light fixed-bottom bg-blue">
+                                <div class="container justify-content-center p-0">
+                                    <div class="row w-100 justify-content-center">
+                                        <div class="col-12 col-md-6 col-lg-4 p-0">
+                                            <%= submit_tag "Valider mon alerte", class: "btn-outline-navbar w-100", onClick: "checkMediumSelection()"%>
+                                        </div>
+                                    </div>
                                 </div>
                             </nav>
 
