@@ -15,11 +15,11 @@ class GrowthEngine
   private
 
   def handle_email(json_content)
-    email_parser = EmailParser.new(json_content)
-    @source = email_parser.get_value("FromName")
-    @sender_email = email_parser.get_value("To")
-    @lead_email = email_parser.get_reply_to_email
-    @property_data = email_parser.ad_data_parser_se_loger
+    e = EmailParser.new(json_content)
+    @source = e.get_value("FromName")
+    @sender_email = e.get_value("To")
+    @lead_email = e.get_reply_to_email
+    @property_data = e.ad_data_parser_se_loger
   end
 
   def handle_lead_email(email)
@@ -37,13 +37,12 @@ class GrowthEngine
   end
 
   def get_subscriber(email_address)
-    if Subscriber.where(email: email_address).last.nil?
+    sub = Subscriber.where(email: email_address).last
+    if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
       sub.save(validate: false)
-      sub
-    else 
-      Subscriber.where(email: email_address).last
     end
+    sub
   end
 
   ## If the subscriber has not a sequence, we declare it out of timeframe
