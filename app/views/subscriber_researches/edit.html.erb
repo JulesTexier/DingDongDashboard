@@ -111,6 +111,16 @@
                 <%= f.check_box :new_construction, id: "new_construction", class: "form-check-input", checked: @research.new_construction %> 
                 <%= f.label "Recevoir les constuctions neuves", for:"new_construction", class: "form-check-label grey" %> 
             </div>
+            
+            <p class="mt-4 mb-6 grey"> Souhaitez-vous une maison et/ou un appartement</p>
+            <div class="form-check form-check-inline">
+            <%= f.check_box :apartment_type, class: "form-check-input" %> 
+            <%= f.label "Appartement", class: "form-check-label" %> 
+            </div>
+            <div class="form-check form-check-inline">
+            <%= f.check_box :home_type, class: "form-check-input" %> 
+            <%= f.label "Maison", class: "form-check-label" %> 
+            </div>
 
             <% if false %>
             <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
@@ -127,15 +137,6 @@
                 <label class="form-check-label" for="garden">Jardin</label>
             </div>
 
-            <p class="mt-4 mb-6 grey"> Souhaitez-vous une maison et/ou un appartement</p>
-            <div class="form-check form-check-inline">
-            <%= f.check_box :apartment_type, class: "form-check-input" %> 
-            <%= f.label "Appartement", class: "form-check-label" %> 
-            </div>
-            <div class="form-check form-check-inline">
-            <%= f.check_box :home_type, class: "form-check-input" %> 
-            <%= f.label "Maison", class: "form-check-label" %> 
-            </div>
             <% end %>
         </p>
         <% end %>

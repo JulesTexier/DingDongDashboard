@@ -105,7 +105,7 @@ class Research < ApplicationRecord
     modified_array = []
     areas_ids.each do |area_id|
       modified_array.push(Department.find(area_id.gsub("department ", "").to_i).areas.pluck(:id)) if area_id.include?("department")
-      modified_array.push(Area.where(id: area_id.gsub("area ", "").to_i).pluck(:id)) if area_id.include?("area")
+      modified_array.push(area_id.gsub("area ", "").to_i) if area_id.include?("area")
     end
     cleaned_area_array = modified_array.flatten
     cleaned_area_array.map! {|id| id.to_i }
