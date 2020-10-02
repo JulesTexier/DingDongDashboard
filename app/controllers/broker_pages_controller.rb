@@ -1,11 +1,14 @@
 class BrokerPagesController < ApplicationController
 
   HIDE_DAY_COUNT = 7 #Number of days a lead is hide to his broker
+  DELAY_BROKER = 7
   
   def index
     @broker = Broker.find(params[:id])
-    @delay_broker = 7
+    
     @subscribers = Subscriber.where(broker: @broker).where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC')
+    @subscribers_week = @subscribers.select{|x| x.created_at >  Time.now - (7 + DELAY_BROKER).days }
+    @subscribers_month = @subscribers.select{|x| x.created_at >  Time.now - (30 + DELAY_BROKER).days }
   end
 
   def checked_by_broker
