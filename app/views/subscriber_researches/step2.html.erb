@@ -9,10 +9,10 @@
 
         <div class="row">
             <div class="col-12 d-flex">
-                <ul class="breadcrumb justify-content-center w-100 pt-0" style="background: none">
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color: #2458FC' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-active"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#fff' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1"><div class="badge-off">💌 Validation</div></div>
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color: #2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">💌 Validation</div></div>
                 </ul>
             </div>
         </div>
@@ -26,7 +26,7 @@
                               <%= hidden_field_tag :current_step, 'step2' %>
 
                               <% if @master_areas.length > 3 %>
-                                <h5 class="mt-4 mb-3">Les critères indispensables pour commencer</h6> 
+                                <h5 class="mt-5 mb-3">Les critères indispensables pour commencer</h5> 
                                 <p class="mt-4 mb-3 grey">📍 Votre zone de recherche * </p>
                                 <div cxlass="raw d-flex flex-wrap">
                                   <div class="form-group col-12 p-0 mb-0">
@@ -42,6 +42,7 @@
                                   </div>
                                 </div>
                               <% else %>
+                                <h5 class="mt-5">Les critères indispensables pour commencer</h5> 
                                 <%= hidden_field_tag 'areas[]', @master_areas.first[0] %>
                               <% end %>
 
@@ -155,15 +156,19 @@
                                     </div>
                         <% end %>
 
-                        
+                        <nav class="navbar navbar-light fixed-bottom bg-blue">
+                            <div class="container justify-content-center p-0">
+                                <div class="row w-100 justify-content-center">
+                                    <div class="col-12 col-md-6 col-lg-4 p-0">
+                                        <%= f.submit "Etape suivante", class: "btn-outline-navbar w-100"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>  
                 
-                    <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
-                        <div class="d-flex justify-content-center mt-2 mb-2">
-                            <%= f.submit "Etape suivante",
-                                class: "btn-outline-navbar"%>
-                        </div>
-                    </nav>  
+
                 <% end %>
+            
 
             </div>
         </div>
