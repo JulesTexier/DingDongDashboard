@@ -1,58 +1,53 @@
-<div class="container">
+<div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
 
+    <div class="container">
 
-    <div class="row mt-3"> 
-        <div class="col d-flex justify-content-center"> 
-            <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+            </div>
         </div>
-    </div>
 
-
-    <div class="row mt-4 mb-4">
-        <div class="col-12">
-            <h3 class="mb-3 grey_dark">
-                <div class='text-center' style="font-family: 'Nunito'">Votre alerte est maintenant validée 👌 </div>
-            </h3> 
-            <h5>
-                <div class="mt-4 text-center"> 👨‍💻 Vous venez de recevoir les 5 derniers biens correspondant à votre recherche 👨‍💻 </div>
-            </h5> 
+        <div class="row">
+            <div class="col-12 d-flex">
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">📍 Agglomération</div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off" >⚙️ Critères</div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active">💌 Validation</div></div>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="row mt-3 justify-content-center mt-5" style="margin-bottom:80px"> 
-        <div class="col-12 col-lg-6 d-flex"> 
-            <div class="d-flex justify-content-center" style="width:100%;height:0;padding-bottom:56%;position:relative;">
-                <div style="width:100%;height:0;padding-bottom:56%;position:relative;">
-                    <iframe src="https://giphy.com/embed/g9582DNuQppxC" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                </div>
+
+        <div class="bg-white-steps box-centered">
+            <div class="container">
+                    
+                        <div class="row mt-5 mb-4">
+                            <div class="col-12">
+                                <h3 class="mb-3 grey_dark">
+                                    <div class='text-center' style="font-family: 'Nunito'">Votre alerte est maintenant validée 👌 </div>
+                                </h3> 
+                                <h5>
+                                    <div class="mt-4 text-center grey_dark"> 👨‍💻 Vous venez de recevoir les 5 derniers biens correspondant à votre recherche 👨‍💻 </div>
+                                </h5> 
+                            </div>
+                        </div>
+                        <div class="row mt-3 justify-content-center mt-5" style="margin-bottom:80px"> 
+                            <div class="col-12 col-lg-6 d-flex"> 
+                                <div class="d-flex justify-content-center" >
+                                    <video autoplay="autoplay" loop="loop" muted="muted" width="100%">
+
+                                        <source src="<%= asset_path('email_confirmed.mov') %>"
+                                                type="video/mp4">
+
+                                        Sorry, your browser doesn't support embedded videos.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+            
             </div>
         </div>
     </div>
-
 </div>
 
-<footer class="bg-dark text-white">
-    <div class="separator-top">
-        <div class="container py-5">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-md-5 text-center text-md-left pl-2">
-
-            <div>
-                <small>793 337 643 RCS Paris</small>
-            </div>
-            <div>
-                <small>Carte de Transaction : CPI75012017000018988</small>
-            </div>
-            <div>
-                <small>Police d’assurance professionnelle : 41319158</small>
-            </div>
-            <div>
-                <small>2020 © Ding Dong. Tous droits réservés.</small>
-            </div>
-            </div>
-            <div class="col-md-2 text-center mt-4">
-                <img class="logo-sm" src="https://hellodingdong.com/assets/images/logo-ding-dong-white.png" alt="Logo">
-            </div>
-        </div>
-        </div>
-    </div>
-</footer>
