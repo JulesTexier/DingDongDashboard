@@ -1,36 +1,59 @@
+<div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
 
+    <div class="container">
 
-<div class="container mt-3">
-
-  <div class="row">
-    <div class="col-12">
-      <div class="alert alert-success" role="alert">
-        Nous avons bien noté votre demande.
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row mt-4">
-    <div class="col-12">
-      <h2>Vous souhaitez nous en dire plus ? </h2>
-      <p class="lead"><% unless @subscriber.broker.nil? %> <%= @subscriber.broker.firstname %>, notre expert en financement est là pour vous accompagner <% end %></p>
-    </div>
-    <div class="col-12">
-      <%= form_tag("/subscribers/#{@subscriber.id}/financement-submit", method: "post") do %>
-        <div class="form-group">
-          <%= label_tag 'question_category', 'Catégorie'%>
-          <%= select_tag 'question_category', options_for_select(@question_categories, "1"), id:'question_category', class: 'form-control' %>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-success" role="alert">
+                    Nous avons bien noté votre demande.
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <%= label_tag 'question_content', 'Votre question'%>
-          <%= text_area_tag 'question_content', params[:question_content], class: 'form-control', autofocus: true %>
+
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+            </div>
         </div>
-        <%= submit_tag "Envoyer", class:"btn btn-primary" %>
-      <% end %>
+
+
+
+        <div class="bg-white-steps" style="top: 210px !important">
+            <div class="container">
+
+                <div class="row mt-5">
+                        <div class="col-12">
+                        <h5>Vous souhaitez nous en dire plus ? </h5>
+                        <p class="lead"><% unless @subscriber.broker.nil? %> <%= @subscriber.broker.firstname %>, notre expert en financement est là pour vous accompagner <% end %></p>
+                        </div>
+                        <div class="col-12">
+                        <%= form_tag("/subscribers/#{@subscriber.id}/financement-submit", method: "post") do %>
+                            <div class="form-group grey ">
+                            <%= label_tag 'question_category', 'Catégorie'%>
+                            <%= select_tag 'question_category', options_for_select(@question_categories, "1"), id:'question_category', class: 'form-control writing-box' %>
+                            </div>
+                            <div class="form-group grey">
+                            <%= label_tag 'question_content', 'Votre question'%>
+                            <%= text_area_tag 'question_content', params[:question_content], class: 'form-control writing-box', autofocus: true %>
+                            </div>
+                            <nav class="navbar navbar-light fixed-bottom bg-blue">
+                                <div class="container justify-content-center p-0">
+                                    <div class="row w-100 justify-content-center">
+                                        <div class="col-12 col-md-6 col-lg-4 p-0">
+                                            <%= submit_tag "Envoyer", class:"btn-outline-navbar w-100" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>  
+                        <% end %>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-
