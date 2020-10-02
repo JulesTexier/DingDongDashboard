@@ -52,8 +52,8 @@ class SubscribersController < ApplicationController
   def contact_courtier
     @subscriber = Subscriber.find(params[:subscriber_id])
     @question_categories = ["Evaluer ma capacité d'emprunt", "Informations sur les taux", "Parler à un courtier", "Point sur ma situation" ,"Autre"]
-    SubscriberNote.create(subscriber: @subscriber, content: "S'est rendu sur la page 'mon financement'")
-    AdminMailer.subscriber_funding_question(@subscriber.id).deliver_now
+    # SubscriberNote.create(subscriber: @subscriber, content: "S'est rendu sur la page 'mon financement'")
+    # AdminMailer.subscriber_funding_question(@subscriber.id).deliver_now
   end
 
   def contact_courtier_submit
