@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_084121) do
+ActiveRecord::Schema.define(version: 2020_10_02_093217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -351,6 +351,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_084121) do
     t.bigint "notary_id"
     t.boolean "is_broker_affiliated", default: false
     t.boolean "hot_lead", default: false
+    t.boolean "checked_by_broker", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"

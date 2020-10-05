@@ -1,0 +1,17 @@
+<p>Hello Etienne,</p>
+<p>Quelqu'un se pose des questions sur son financement !!</p>
+
+
+<h2>Détails</h2>
+
+<ul>
+  <li><%= @subscriber.get_fullname %></li>
+  <li>id: <%= @subscriber.id%></li>
+  <li>agglomeration: <%= @subscriber.research.agglomeration%> </li>
+  <% unless @subscriber.broker.nil?%>
+    <li>courtier:  <%= "#{@subscriber.broker.firstname} #{@subscriber.broker.lastname}" %>, id: <%= @subscriber.broker.id%> </li>
+  <% end %>
+</ul>
+
+<br>
+ > <%=link_to 'Voir dans le panel admin', "#{ENV['BASE_URL']}admin/subscriber/#{@subscriber.id}"%>

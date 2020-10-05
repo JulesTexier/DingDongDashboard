@@ -35,7 +35,10 @@ Rails.application.routes.draw do
     patch '/research/update' => 'subscriber_researches#update'
     get '/research/stop' => 'subscriber_researches#stop'
     get '/research/activate' => 'subscriber_researches#activate'
-  end
+    get '/mon-financement' => 'subscribers#contact_courtier'
+    post '/financement-submit' => 'subscribers#contact_courtier_submit'
+    get '/mon-financement-confirmation' => 'subscribers#contact_courtier_submitted'
+  end 
   
   
   resources :properties, only: [:show]
@@ -112,7 +115,9 @@ Rails.application.routes.draw do
   #############
   # 6 - Broker Dashboard
   #############
-  get "/courtier/dashboard/:id/" => "broker_pages#index"
+  get "/courtier/:id/dashboard" => "broker_pages#index"
+  post "/broker/checked" => "broker_pages#checked_by_broker"
+
 
 
 
