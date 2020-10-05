@@ -56,7 +56,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">€</span>
                                             </div>
-                                            <%= f.number_field :max_price, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
+                                            <%= f.input_field :max_price, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 500000", min: "10000", max: "10000000" %>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
@@ -65,13 +65,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">m2</span>
                                             </div>
-                                            <%= f.number_field :min_surface, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
+                                            <%= f.input_field :min_surface, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 30", min: "8", max: "400" %>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <p class="mt-4 mb-3 grey">🏡 Nb. de pièces min *</p>
                                         <div class="input-group mb-3">
-                                            <%= f.number_field :min_rooms_number, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
+                                            <%= f.input_field :min_rooms_number, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1", min: "1", max: "6" %>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                             <div class="container justify-content-center p-0">
                                 <div class="row w-100 justify-content-center">
                                     <div class="col-12 col-md-6 col-lg-4 p-0">
-                                        <%= f.submit "Etape suivante", class: "btn-outline-navbar w-100", onClick: "emptyAreas()" %>
+                                        <%= f.submit "Etape suivante", id: "testbutton", class: "btn-outline-navbar w-100", onClick: "emptyAttributes()" %>
                                     </div>
                                 </div>
                             </div>
@@ -217,20 +217,27 @@ function clearSelected(){
   }
 
 
-  function emptyAreas(){
+  function emptyAttributes(){
+    var max_price = document.getElementById('subscriber_research_wizard_max_price').value
+    var min_surface = document.getElementById('subscriber_research_wizard_min_surface').value
+    var rooms_number = document.getElementById('subscriber_research_wizard_min_rooms_number').value
       event.preventDefault()
       if (document.getElementById("choices-multiple-remove-button") && (document.getElementById("choices-multiple-remove-button").value == "" )) {
-          $('#alertModal').find('#modalTitle').text("Zone de recherche");
-          $('#alertModal').find('.modal-body p').text("Veuillez selectionner une zone de recherche !");
-          $('#alertModal').modal('show');
+        $('#alertModal').find('#modalTitle').text("Zone de recherche");
+        $('#alertModal').find('.modal-body p').text("Veuillez selectionner une zone de recherche !");
+        $('#alertModal').modal('show');
       } else if ((document.getElementById("apartment_type").checked == false) && (document.getElementById("home_type").checked == false)) {
-          $('#alertModal').find('#modalTitle').text("Appartement et/ou maison ?");
-          $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un type de bien à recevoir !");
-          $('#alertModal').modal('show');
-      }
-      else {
+        $('#alertModal').find('#modalTitle').text("Appartement et/ou maison ?");
+        $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un type de bien à recevoir !");
+        $('#alertModal').modal('show');
+      } else if ((max_price == "") || (min_surface == "") || (rooms_number == "")) {
+        $('#alertModal').find('#modalTitle').text("Critères requis");
+        $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un Budget max, une surface minimum et le nombre de pièces souhaité!");
+        $('#alertModal').modal('show');
+      } else {
         document.getElementById('new_subscriber_research_wizard').submit();
       }
-  }
+
+     }
 
 </script>
