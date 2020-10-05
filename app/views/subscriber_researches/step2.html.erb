@@ -1,23 +1,7 @@
 <div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
-  <!-- Modal -->
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Zone de recherche</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-outline-navbar" data-dismiss="modal">J'ai compris !</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <%= render 'layouts/modal_alert' %>
+
     <div class="container">
 
         <div class="row"> 
@@ -236,9 +220,15 @@ function clearSelected(){
   function emptyAreas(){
       event.preventDefault()
       if (document.getElementById("choices-multiple-remove-button") && (document.getElementById("choices-multiple-remove-button").value == "" )) {
+          $('#alertModal').find('#modalTitle').text("Zone de recherche");
           $('#alertModal').find('.modal-body p').text("Veuillez selectionner une zone de recherche !");
           $('#alertModal').modal('show');
-      } else {
+      } else if ((document.getElementById("apartment_type").checked == false) && (document.getElementById("home_type").checked == false)) {
+          $('#alertModal').find('#modalTitle').text("Appartement et/ou maison ?");
+          $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un type de bien à recevoir !");
+          $('#alertModal').modal('show');
+      }
+      else {
         document.getElementById('new_subscriber_research_wizard').submit();
       }
   }
