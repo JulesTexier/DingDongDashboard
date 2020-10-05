@@ -1,23 +1,6 @@
 <div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
-  <!-- Modal -->
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Messenger ou E-mail ?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-outline-navbar" data-dismiss="modal">J'ai compris !</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+  <%= render 'layouts/modal_alert' %>
 
     <div class="container">
 
@@ -174,6 +157,7 @@
   function checkMediumSelection(){
       event.preventDefault()
       if( document.getElementById('subscriber_wizard_subscriber_email_flux').value == "false" &&  document.getElementById('subscriber_wizard_subscriber_messenger_flux').value == "false" ) {
+              $('#alertModal').find('#modalTitle').text("Messenger ou E-mail ?");
               $('#alertModal').find('.modal-body p').text("Pour pouvoir recevoir des annonces, vous devez choisir entre Messenger et l'Email.");
               $('#alertModal').modal('show');
       } else {
