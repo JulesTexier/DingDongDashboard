@@ -17,20 +17,21 @@
           <h5 class="card-title">7 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_week.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_week.select{|x| x.hot_lead && !x.is_broker_affiliated }.count %> <br> <span class="badge badge-danger">Hot</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.hot_lead && !x.is_broker_affiliated }.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
             <div class="col-4"> <%= @subscribers_week.select{|x| !x.hot_lead && !x.is_broker_affiliated }.count %>  <br> <span class="badge badge-light">Froid</span> </div>
             <div class="col-4"> <%= @subscribers_week.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-12">
       <div class="card" >
         <div class="card-body">
           <h5 class="card-title">30 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_month.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_month.select{|x| x.hot_lead && !x.is_broker_affiliated}.count %> <br> <span class="badge badge-danger">Hot</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.hot_lead && !x.is_broker_affiliated}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
             <div class="col-4"> <%= @subscribers_month.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
             <div class="col-4"> <%= @subscribers_month.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
           </div>
@@ -43,7 +44,7 @@
           <h5 class="card-title">Total</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers.select{|x| x.hot_lead}.count %> <br> <span class="badge badge-danger">Hot</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.hot_lead}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
             <div class="col-4"> <%= @subscribers.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
             <div class="col-4"> <%= @subscribers.select{|x| x.is_broker_affiliated}.count %> <br>  <span class="badge badge-info">Client</span> </div>
           </div>
@@ -55,7 +56,7 @@
   <div class="row mt-3 d-flex flex-column">
     <h5>Légende</h5>
     <ul style="list-style:none">
-      <li><span class="badge badge-danger">Hot</span> : Utilisateur qui a demandé à être mis en relation avec son courtier</li>
+      <li><span class="badge badge-danger">Chaud</span> : Utilisateur qui a demandé à être mis en relation avec son courtier</li>
       <li><span class="badge badge-light">Froid</span> : Utilisateur qui n'a pas (encore) demandé à être mis en relation avec son courtier</li>
       <li><span class="badge badge-info">Client</span> : Votre client, à qui vous avez donné accès à l'alerte Ding Dong</li>
     </ul>
@@ -83,7 +84,7 @@
         </th>
           <td scope="row">
             <% if subscriber.hot_lead  %>
-              <span class="badge badge-danger">Hot</span>
+              <span class="badge badge-danger">Chaud</span>
             <%elsif subscriber.is_broker_affiliated%>
               <span class="badge badge-info">Client</span>
             <%else%>
