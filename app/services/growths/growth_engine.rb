@@ -38,11 +38,11 @@ class GrowthEngine
     end
   end
 
-  def get_subscriber(email_address)
+  def get_subscriber(email_address, prop_data)
     sub = Subscriber.where(email: email_address).last
     if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
-      # Research.create()
+      create_sub_research(sub, prop_data)
       sub.save(validate: false)
     end
     sub
@@ -67,5 +67,19 @@ class GrowthEngine
 
   def create_subscriber_to_sequence(subscriber, sequence)
     SubscriberSequence.create(subscriber: subscriber, sequence: sequence)
+  end
+
+  def create_sub_research(sub, prop_data)
+    max_price = prop_data[:price] + prop_data[:price] * 10 / 100
+    min_price = prop_data[:price] - prop_data[:price] * 10 / 100
+    min_surface = prop_data[:surface] - prop_data[:surface] * 10 / 100
+    Research.create(
+      agglomeration: prop_data[:agglomeration], 
+      max_price: max_price,
+      min_price: min_price,
+      min_surface: min_surface,
+      min_rooms_number: prop_data[:rooms_number],
+      subscriber: sub
+      )
   end
 end
