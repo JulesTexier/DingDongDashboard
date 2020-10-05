@@ -1,6 +1,6 @@
 class Research < ApplicationRecord
   belongs_to :subscriber
-
+  belongs_to :agglomeration
   has_many :research_areas
   has_many :areas, through: :research_areas
 
