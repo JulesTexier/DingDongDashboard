@@ -5,7 +5,8 @@ RSpec.describe Research, type: :model do
     context "valid research and associations" do
       before :each do 
         sub = FactoryBot.create(:subscriber)
-        @research = FactoryBot.create(:research, subscriber: sub)
+        agglomeration = FactoryBot.create(:agglomeration)
+        @research = FactoryBot.create(:research, subscriber: sub, agglomeration_id: agglomeration.id)
       end
 
       it "has a valid factory" do
@@ -21,7 +22,8 @@ RSpec.describe Research, type: :model do
     describe "matching_property?" do
       before :each do
         sub = FactoryBot.create(:subscriber)
-        @research = FactoryBot.create(:research, subscriber: sub, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000, apartment_type: true, home_type: true)
+        agglomeration = FactoryBot.create(:agglomeration)
+        @research = FactoryBot.create(:research, subscriber: sub, min_price: 300000, max_price: 1000000, min_surface: 40, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, max_sqm_price: 10000, apartment_type: true, home_type: true, agglomeration_id: agglomeration.id)
         @research.areas << Area.find_by(name: "Paris 10ème")
       end
 

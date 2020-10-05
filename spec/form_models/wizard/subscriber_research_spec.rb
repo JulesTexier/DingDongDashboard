@@ -23,7 +23,7 @@ end
 RSpec.describe Wizard::SubscriberResearch::Step1, type: :model do
   subject { Wizard::SubscriberResearch::Step1.new({ min_floor: 2, max_price: 1000000 }, 
   {firstname: "Maxime", lastname: "Le Segretain", email: "mlesegret@gmail.com", phone: "0689716569"}) }
-  it { is_expected.to validate_presence_of(:agglomeration) }
+  it { is_expected.to validate_presence_of(:agglomeration_id) }
 end
 
 RSpec.describe Wizard::SubscriberResearch::Step2, type: :model do
