@@ -216,6 +216,11 @@ function clearSelected(){
     }
   }
 
+  function displayModal(title, message) { 
+        $('#alertModal').find('#modalTitle').text(title);
+        $('#alertModal').find('.modal-body p').text(message);
+        $('#alertModal').modal('show');
+  }
 
   function emptyAttributes(){
     var max_price = document.getElementById('subscriber_research_wizard_max_price').value
@@ -223,21 +228,14 @@ function clearSelected(){
     var rooms_number = document.getElementById('subscriber_research_wizard_min_rooms_number').value
       event.preventDefault()
       if (document.getElementById("choices-multiple-remove-button") && (document.getElementById("choices-multiple-remove-button").value == "" )) {
-        $('#alertModal').find('#modalTitle').text("Zone de recherche");
-        $('#alertModal').find('.modal-body p').text("Veuillez selectionner une zone de recherche !");
-        $('#alertModal').modal('show');
+        displayModal("Zone de recherche", "Veuillez selectionner une zone de recherche !")
       } else if ((document.getElementById("apartment_type").checked == false) && (document.getElementById("home_type").checked == false)) {
-        $('#alertModal').find('#modalTitle').text("Appartement et/ou maison ?");
-        $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un type de bien à recevoir !");
-        $('#alertModal').modal('show');
+        displayModal("Appartement et/ou maison ?", "Veuillez selectionner au moins un type de bien à recevoir !")
       } else if ((max_price == "") || (min_surface == "") || (rooms_number == "")) {
-        $('#alertModal').find('#modalTitle').text("Critères requis");
-        $('#alertModal').find('.modal-body p').text("Veuillez selectionner au moins un Budget max, une surface minimum et le nombre de pièces souhaité!");
-        $('#alertModal').modal('show');
+        displayModal("Critères requis", "Veuillez sélectionner au moins un budget max, une surface minimum et le nombre de pièces souhaité !")
       } else {
         document.getElementById('new_subscriber_research_wizard').submit();
       }
-
      }
 
 </script>
