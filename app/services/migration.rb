@@ -4,6 +4,13 @@ class Migration
   #######################################################################
 
   def agglomeration_migration
-    subs = Subscriber.includes(:research).where(researches: { agglomeration_id: nil} )
+    researches = Research.where(agglomeration_id: nil)
+    researches.each do |research|
+      agglomeration = research.areas.first.department.agglomeration unless research.areas.empty?
+      unless agglomeration.nil?
+        research.update(agglomeration_id: agglomeration.id)
+        puts "Research #{research.id.to_s} updated"
+      end
+    end
   end
 end
