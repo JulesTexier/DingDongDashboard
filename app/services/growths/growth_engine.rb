@@ -16,33 +16,30 @@ class GrowthEngine
 
   def handle_email(json_content)
     e = EmailParser.new(json_content)
-    d = {
-          source: e.get_value("FromName"),
-          sender_email: e.get_value("To"),
-          sub_email: e.get_reply_to_email,
-          property_data: e.ad_data_parser_se_loger
-        }
+    @source = e.get_value("FromName")
+    @sender_email = e.get_value("To")
+    @lead_email = e.get_reply_to_email
+    @property_data = e.ad_data_parser_se_loger
   end
 
   def handle_lead_email(email_data)
     # 1 • Handle Subscriber (get or create)
-    subscriber = get_subscriber(email_data[:sub_email], email_data[:property_data])
+    subscriber = get_subscriber(email_data)
     # 2 • Handle Sequence to execute
     # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
     if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
       # Determination de la déquence à lancer !
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
-      create_subscriber_to_sequence(subscriber, sequence, email_data[:agglomeration_id])
-      sequence.execute_sequence(subscriber, email_data[:property_data])
+      create_subscriber_to_sequence(subscriber, sequence, @property_data[:agglomeration_id])
+      sequence.execute_sequence(subscriber, @property_data)
     end
   end
 
-  def get_subscriber(email_address, prop_data)
+  def get_subscriber(email_address)
     sub = Subscriber.where(email: email_address).last
     if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
-      create_sub_research(sub, prop_data)
       sub.save(validate: false)
     end
     sub
