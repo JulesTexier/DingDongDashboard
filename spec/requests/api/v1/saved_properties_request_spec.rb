@@ -6,7 +6,7 @@ RSpec.describe "Api::V1::SavedProperties", type: :request do
   describe "POST /create" do
     it "returns http success" do
       agglomeration = FactoryBot.create(:agglomeration)
-      research = FactoryBot.create(:subscriber_research, agglomeration: agglomeration, agglomeration: agglomeration)
+      research = FactoryBot.create(:subscriber_research, agglomeration: agglomeration)
       property = FactoryBot.create(:property)
       post "/api/v1/saved_properties", params: { property_id: property.id, research_id: research.id } , headers: headers
       expect(response).to have_http_status(:success)
