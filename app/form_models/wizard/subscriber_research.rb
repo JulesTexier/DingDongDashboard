@@ -16,7 +16,7 @@ module Wizard
     end
 
     class Step1 < Base
-      validates :agglomeration, presence: true
+      validates :agglomeration_id, presence: true
     end
     
     class Step2 < Step1

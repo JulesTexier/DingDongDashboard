@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :research do
     factory :subscriber_research do
-      agglomeration { "Paris" }
       max_price { 300000 }
       min_price { 100000 }
       last_floor { false }
