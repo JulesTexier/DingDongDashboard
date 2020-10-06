@@ -8,42 +8,41 @@ class GrowthEngine
   end
 
   def perform_email_webhook(json_content)
-    handle_email(json_content)
-    handle_lead_email(@lead_email) unless Sequence.where(sender_email: @sender_email, source: @source).empty?
+    email_data = handle_email(json_content)
+    handle_lead_email(email_data) unless Sequence.where(sender_email: email_data[:sender_email], source: email_data[:source]).empty?
   end
 
   private
 
   def handle_email(json_content)
-    email_parser = EmailParser.new(json_content)
-    @source = email_parser.get_value("FromName")
-    @sender_email = email_parser.get_value("To")
-    @lead_email = email_parser.get_reply_to_email
-    @property_data = email_parser.ad_data_parser_se_loger
+    e = EmailParser.new(json_content)
+    @source = e.get_value("FromName")
+    @sender_email = e.get_value("To")
+    @lead_email = e.get_reply_to_email
+    @property_data = e.ad_data_parser_se_loger
   end
 
-  def handle_lead_email(email)
+  def handle_lead_email(email_data)
     # 1 • Handle Subscriber (get or create)
-    subscriber = get_subscriber(email)
+    subscriber = get_subscriber(email_data)
     # 2 • Handle Sequence to execute
     # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
     if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
       # Determination de la déquence à lancer !
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
-      create_subscriber_to_sequence(subscriber, sequence)
+      create_subscriber_to_sequence(subscriber, sequence, @property_data[:agglomeration_id])
       sequence.execute_sequence(subscriber, @property_data)
     end
   end
 
   def get_subscriber(email_address)
-    if Subscriber.where(email: email_address).last.nil?
+    sub = Subscriber.where(email: email_address).last
+    if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead")
       sub.save(validate: false)
-      sub
-    else 
-      Subscriber.where(email: email_address).last
     end
+    sub
   end
 
   ## If the subscriber has not a sequence, we declare it out of timeframe
@@ -63,7 +62,8 @@ class GrowthEngine
     Sequence.get_adequate_sequence(marketing_type, @source, @sender_email)
   end
 
-  def create_subscriber_to_sequence(subscriber, sequence)
-    SubscriberSequence.create(subscriber: subscriber, sequence: sequence)
+  def create_subscriber_to_sequence(subscriber, sequence, agglomeration_id)
+    ## even if agglomeration_id is nil, the subs_sequence can be created
+    SubscriberSequence.create(subscriber: subscriber, sequence: sequence, agglomeration_id: agglomeration_id)
   end
 end
