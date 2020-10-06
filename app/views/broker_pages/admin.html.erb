@@ -14,10 +14,10 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nom</th>
-          <th scope="col">Courtiers</th>
           <th scope="col">Leads depuis le <%= Date.today.at_beginning_of_month.strftime("%d/%m/%Y") %></th>
           <th scope="col">Leads total</th>
           <th scope="col">Météo</th>
+          <th scope="col">Météo Courtiers</th>
         </tr>
       </thead>
       <tbody>
@@ -37,11 +37,6 @@
             <th scope="row"><%= agglo.id %></th>
             <td><%= agglo.name %></td>
             <td>
-              <%= @brokers.select{ |b| b.agglomeration_id == agglo.id }.each do |b| %>
-                <%= link_to "#{b.get_fullname}", root_path %>
-              <% end %>
-            </td>
-            <td>
               <% @brokers.select{ |b| b.agglomeration_id == agglo.id }.each{ |b| subscribers_all_month.push(b.subscribers.where('created_at > ? ', Date.today.at_beginning_of_month  )) } %> <%= subscribers_all_month.flatten.count %>
               <br>
               <span class="badge badge-light"> <% subscribers_all_month.flatten.each{ |s| subscribers_hot_month.push(s) if (s.hot_lead && !s.is_broker_affiliated ) } %> <%= subscribers_hot_month.count %> 🔥</span>
@@ -58,36 +53,31 @@
               <span class="badge badge-light"> <% subscribers_all.flatten.each{ |s| subscribers_client.push(s) if s.is_broker_affiliated } %> <%= subscribers_client.count %> 💼</span>
             </td>
             <td>
-              <% if Time.now.strftime("%d").to_i*0.66 > (subscribers_all_month.flatten.count - subscribers_client_month.count)%>
+              <% if Time.now.strftime("%d").to_i*0.66*@brokers.select{ |b| b.agglomeration_id == agglo.id }.count > (subscribers_all_month.flatten.count - subscribers_client_month.count)%>
                 🟥
               <% else %>
                 🟩
               <% end %>
             </td>
-          </tr>
-        <%end%>
-      </tbody>
-    </table>
-  </section>
-
-
-  <section>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nom</th>
-          <th scope="col">Agglomération</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @brokers.each do |broker|%>
-          <tr>
-            <th scope="row"><%= broker.id %></th>
-            <td><%= broker.get_fullname %></td>
-            <td><%= broker.agglomeration.name unless broker.agglomeration.nil? %></td>
-            <td>@mdo</td>
+            <td>
+              <ul style="list-style:none">
+              <% @brokers.select{ |b| b.agglomeration_id == agglo.id }.each do |b| %>
+                <li>
+                  <% broker_subs = [] %>
+                  <% broker_subs_client = [] %>
+                  <% subscribers_all_month.flatten.each{|s| broker_subs.push(s) if (s.broker == b && !s.is_broker_affiliated) } %>
+                  <% if Time.now.strftime("%d").to_i*0.66 > broker_subs.count %>
+                    🟥
+                  <% elsif  broker_subs.count >= 20 %>
+                    ✅
+                  <% else  %>
+                    🟩
+                  <% end %>
+                  <%= link_to "#{b.get_fullname} (#{broker_subs.count})", "/courtier/#{b.id}/dashboard" %>
+                </li>
+              <% end %>
+              </ul>
+            </td>
           </tr>
         <%end%>
       </tbody>
