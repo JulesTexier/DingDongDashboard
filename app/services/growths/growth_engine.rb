@@ -16,7 +16,7 @@ class GrowthEngine
 
   def handle_email(json_content)
     e = EmailParser.new(json_content)
-    d = { 
+    d = {
           source: e.get_value("FromName"),
           sender_email: e.get_value("To"),
           sub_email: e.get_reply_to_email,
@@ -33,7 +33,7 @@ class GrowthEngine
       # Determination de la déquence à lancer !
       ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
       sequence = get_adequate_sequence(subscriber)
-      create_subscriber_to_sequence(subscriber, sequence)
+      create_subscriber_to_sequence(subscriber, sequence, email_data[:agglomeration_id])
       sequence.execute_sequence(subscriber, email_data[:property_data])
     end
   end
@@ -65,21 +65,8 @@ class GrowthEngine
     Sequence.get_adequate_sequence(marketing_type, @source, @sender_email)
   end
 
-  def create_subscriber_to_sequence(subscriber, sequence)
-    SubscriberSequence.create(subscriber: subscriber, sequence: sequence)
-  end
-
-  def create_sub_research(sub, prop_data)
-    max_price = prop_data[:price] + prop_data[:price] * 10 / 100
-    min_price = prop_data[:price] - prop_data[:price] * 10 / 100
-    min_surface = prop_data[:surface] - prop_data[:surface] * 10 / 100
-    Research.create(
-      agglomeration: prop_data[:agglomeration], 
-      max_price: max_price,
-      min_price: min_price,
-      min_surface: min_surface,
-      min_rooms_number: prop_data[:rooms_number],
-      subscriber: sub
-      )
+  def create_subscriber_to_sequence(subscriber, sequence, agglomeration_id)
+    ## even if agglomeration_id is nil, the subs_sequence can be created
+    SubscriberSequence.create(subscriber: subscriber, sequence: sequence, agglomeration_id: agglomeration_id)
   end
 end
