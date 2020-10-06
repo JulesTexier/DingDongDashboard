@@ -28,16 +28,26 @@ class EmailParser
     self.json_content[value]
   end
 
+  def get_agglomeration_id(str)
+    district_datas = YAML.load_file("./db/data/areas.yml")
+    area_str = str.split("Appartement")[0]
+    area_str = str.split("Maison")[0] if area_str.empty?
+    area = Area.where('name LIKE ?', "%" + area_str.downcase.capitalize + "%")
+    area.empty? ? nil : area.first.department.agglomeration.id
+  end
+
   def ad_data_parser_se_loger
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
     surface_regex = '(\d+)(.?)(\d+)(.?)(m)'
+    
     ad_infos = {}
     html = Nokogiri::HTML.parse(self.json_content["HtmlBody"])
     html.css("tr > td > table.full").each do |data|
       data.text.each_line do |line|
+        ad_infos[:agglomeration_id] = get_agglomeration_id("Lyon 2èmeAppartement") if line.include?("Appartement") || line.include?("Maison")
         ad_infos[:rooms_number] = line.match(/#{rooms_regex}/i).to_s.to_int_scrp if line.match?(/#{rooms_regex}/i)
-        ad_infos[:price] = line.match(/#{price_regex}/i).to_s.to_int_scrp if line.match?(/#{price_regex}/i)
+        ad_infos[:price] = line.to_int_scrp if line.match?(/#{price_regex}/i)
         ad_infos[:surface] = line.match(/#{surface_regex}/i).to_s.to_float_to_int_scrp if line.match?(/#{surface_regex}/i)
         ad_infos[:ref] = line.gsub("Ref. de l'annonce", "").tr(": \r\n", "") if line.include?("Ref. de l'annonce")
       end
