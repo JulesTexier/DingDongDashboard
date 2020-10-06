@@ -84,11 +84,7 @@ namespace :broker do
 end
 
 namespace :migration do 
-  desc "Tasks to migrate datas for major release"
-  task :subscriber_migration do 
-    Migration.new.subscriber_migration_to_research
-  end
-
+  desc "Tasks to migrate datas for major releases"
   task :agglomeration_migration do 
     Migration.new.agglomeration_migration
   end

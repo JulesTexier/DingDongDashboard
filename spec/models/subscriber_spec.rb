@@ -34,11 +34,12 @@ RSpec.describe Subscriber, type: :model do
   describe "professionnal attribution" do 
     before(:each) do 
       broker = FactoryBot.create(:broker, email: 'etienne@hellodingdong.com')
-      broker.update(agglomeration: Agglomeration.find_by(name: "Ile-de-France"))
+      agglomeration = FactoryBot.create(:agglomeration)
+      broker.update(agglomeration: agglomeration)
       FactoryBot.create(:notary)
       FactoryBot.create(:contractor)
       @subscriber = FactoryBot.create(:subscriber, broker: nil, contractor: nil, notary: nil)
-      FactoryBot.create(:subscriber_research, subscriber: @subscriber)
+      FactoryBot.create(:subscriber_research, subscriber: @subscriber, agglomeration: agglomeration)
       @subscriber.send(:professional_attribution)
     end
     it "should associate a broker" do 

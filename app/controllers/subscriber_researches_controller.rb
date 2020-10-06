@@ -28,7 +28,7 @@ class SubscriberResearchesController < ApplicationController
 
   def step2
     session[:areas] = [] if session[:areas].nil?
-    @master_areas = Area.selected_area_onboarding(@subscriber_research_wizard.agglomeration, session[:areas])
+    @master_areas = Area.selected_area_onboarding(@subscriber_research_wizard.agglomeration_id, session[:areas])
   end
   
   def step3
@@ -39,17 +39,17 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def create
-    subscriber_lead = Subscriber.find_by(email: @subscriber_research_wizard.subscriber.email, status:"new_lead")
+    subscriber_lead = Subscriber.find_by(email: @subscriber_research_wizard.subscriber.email, status: "new_lead")
     if subscriber_lead.nil?
       save_subscriber = @subscriber_research_wizard.subscriber.save(context: :onboarding)
       subscriber =  @subscriber_research_wizard.subscriber
     else
-      save_subscriber =  subscriber_lead.update_attributes(firstname:  @subscriber_research_wizard.subscriber.firstname, lastname:  @subscriber_research_wizard.subscriber.lastname, phone:  @subscriber_research_wizard.subscriber.phone, messenger_flux:  @subscriber_research_wizard.subscriber.messenger_flux, email_flux:  @subscriber_research_wizard.subscriber.email_flux, status:"")
+      save_subscriber =  subscriber_lead.update_attributes(firstname: @subscriber_research_wizard.subscriber.firstname, lastname: @subscriber_research_wizard.subscriber.lastname, phone: @subscriber_research_wizard.subscriber.phone, messenger_flux: @subscriber_research_wizard.subscriber.messenger_flux, email_flux: @subscriber_research_wizard.subscriber.email_flux, status: "")
       subscriber = subscriber_lead
     end
     # save_subscriber = subscriber_lead.nil? ? @subscriber_research_wizard.subscriber.save(context: :onboarding) : subscriber_lead.update_attributes(firstname:  @subscriber_research_wizard.subscriber.firstname, lastname:  @subscriber_research_wizard.subscriber.lastname, phone:  @subscriber_research_wizard.subscriber.phone, messenger_flux:  @subscriber_research_wizard.subscriber.messenger_flux, email_flux:  @subscriber_research_wizard.subscriber.email_flux, status:"")
     if save_subscriber
-      subscriber.update(broker:Broker.find(session[:broker_id]), is_broker_affiliated: true) unless session[:broker_id].nil?
+      subscriber.update(broker: Broker.find(session[:broker_id]), is_broker_affiliated: true) unless session[:broker_id].nil?
       @subscriber_research_wizard.subscriber_research.subscriber_id = subscriber.id
       if @subscriber_research_wizard.subscriber_research.save
         subscriber.handle_onboarding
@@ -73,7 +73,7 @@ class SubscriberResearchesController < ApplicationController
     @subscriber = Subscriber.find(params[:subscriber_id])
     @research = @subscriber.research
     subscriber_areas_id = @research.areas.pluck(:id)
-    @master_areas = Area.selected_area_edit(@research.agglomeration, subscriber_areas_id)
+    @master_areas = Area.selected_area_edit(@research.agglomeration_id, subscriber_areas_id)
   end
 
   def update
@@ -140,7 +140,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def subscriber_research_wizard_params
-    params.require(:subscriber_research_wizard).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
+    params.require(:subscriber_research_wizard).permit(:min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type, :agglomeration_id)
   end
 
   def subscriber_wizard_params
@@ -148,7 +148,7 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def research_params
-    params.require(:research).permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
+    params.require(:research).permit(:min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type, :agglomeration_id)
   end
 
   class InvalidStep < StandardError; end
