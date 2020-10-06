@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="raw d-flex flex-wrap">
                                     <div class="form-group col-12 p-0 mb-0">
-                                    <%= f.input_field :agglomeration, :collection => @agglomerations_infos.map{|o| [o.name, {disabled: !o.is_active}]},  class: "form-control writing-box", id: "choices-multiple-remove-button", label: false %>
+                                      <%= f.input_field :agglomeration_id, :collection => @agglomerations_infos.map{|o| [o.name, o.id, {disabled: !o.is_active}]},  class: "form-control", id: "choices-multiple-remove-button", label: false %>
                                     </div>
                                 </div>
                             </div>

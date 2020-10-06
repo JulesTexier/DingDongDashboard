@@ -22,9 +22,9 @@ class Area < ApplicationRecord
       collection
     end
 
-    def self.selected_area_onboarding(agglomeration, area_params)
+    def self.selected_area_onboarding(agglomeration_id, area_params)
       all_selected_areas = []
-      departments = Agglomeration.find_by(name: agglomeration).departments
+      departments = Agglomeration.find(agglomeration_id).departments
       departments.each do |department|
         a = []
         a.push("department " + department.id.to_s)
@@ -43,8 +43,8 @@ class Area < ApplicationRecord
       all_selected_areas
     end
 
-    def self.selected_area_edit(agglomeration, research_area = nil)
-      departments = Agglomeration.find_by(name: agglomeration).departments
+    def self.selected_area_edit(agglomeration_id, research_area = nil)
+      departments = Agglomeration.find(agglomeration_id).departments
       areas = []
       departments.each do |department|
         selected_departments = []

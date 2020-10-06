@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_02_093217) do
+ActiveRecord::Schema.define(version: 2020_10_06_132419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -221,7 +221,6 @@ ActiveRecord::Schema.define(version: 2020_10_02_093217) do
 
   create_table "researches", force: :cascade do |t|
     t.string "name"
-    t.string "agglomeration"
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
     t.integer "min_elevator_floor", default: 0
@@ -241,6 +240,9 @@ ActiveRecord::Schema.define(version: 2020_10_02_093217) do
     t.bigint "subscriber_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "soon_deleted_agglomeration"
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_researches_on_agglomeration_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
 

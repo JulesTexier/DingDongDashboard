@@ -5,7 +5,8 @@ RSpec.describe NurturingMailerJob, type: :job do
     before :all do
       ActiveJob::Base.queue_adapter = :test
       @subscriber = FactoryBot.create(:subscriber)
-      FactoryBot.create(:subscriber_research, subscriber: @subscriber)
+      agglomeration = FactoryBot.create(:agglomeration)
+      FactoryBot.create(:subscriber_research, subscriber: @subscriber, agglomeration: agglomeration)
       @nurturing_email = FactoryBot.create(:nurturing_mailer, time_frame: 0, template: "template_1")
     end
 
