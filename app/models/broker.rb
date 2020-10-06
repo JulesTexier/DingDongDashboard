@@ -11,6 +11,9 @@ class Broker < ApplicationRecord
 
   belongs_to :agglomeration, optional: true
 
+  def get_fullname
+    return "#{self.firstname} #{self.lastname}"
+  end
 
   # A REFACTO
   def send_email_notification(user)
