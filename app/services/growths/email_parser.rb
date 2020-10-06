@@ -29,7 +29,6 @@ class EmailParser
   end
 
   def get_agglomeration_id(str)
-    district_datas = YAML.load_file("./db/data/areas.yml")
     area_str = str.split("Appartement")[0]
     area_str = str.split("Maison")[0] if area_str.empty?
     area = Area.where('name LIKE ?', "%" + area_str.downcase.capitalize + "%")
@@ -45,7 +44,7 @@ class EmailParser
     html = Nokogiri::HTML.parse(self.json_content["HtmlBody"])
     html.css("tr > td > table.full").each do |data|
       data.text.each_line do |line|
-        ad_infos[:agglomeration_id] = get_agglomeration_id("Lyon 2èmeAppartement") if line.include?("Appartement") || line.include?("Maison")
+        ad_infos[:agglomeration_id] = get_agglomeration_id(line) if line.include?("Appartement") || line.include?("Maison")
         ad_infos[:rooms_number] = line.match(/#{rooms_regex}/i).to_s.to_int_scrp if line.match?(/#{rooms_regex}/i)
         ad_infos[:price] = line.to_int_scrp if line.match?(/#{price_regex}/i)
         ad_infos[:surface] = line.match(/#{surface_regex}/i).to_s.to_float_to_int_scrp if line.match?(/#{surface_regex}/i)
