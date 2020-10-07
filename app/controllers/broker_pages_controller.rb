@@ -15,4 +15,10 @@ class BrokerPagesController < ApplicationController
     subscriber = Subscriber.find(params['checked_by_broker'])
     subscriber.update(checked_by_broker: !subscriber.checked_by_broker )
   end
+
+  def admin
+    @brokers = Broker.all.order(:agglomeration_id)
+    @agglomerations = Agglomeration.all
+    @broker_offset = 7
+  end
 end
