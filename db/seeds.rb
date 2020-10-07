@@ -50,7 +50,6 @@ agglo_file.each do |agglo_data|
   if agglo.blank?
     a = Agglomeration.new
     a.name = agglo_data["agglomeration"]
-    a.image_url = agglo_data["image_url"]
     a.is_active = agglo_data["is_active"]
     a.save
     agglo_data["zone"].each do |department|
