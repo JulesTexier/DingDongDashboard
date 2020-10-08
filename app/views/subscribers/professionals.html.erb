@@ -1,73 +1,57 @@
-<div class="container">
+<div class="section bg-primary-pros">
 
-    <div class="row mt-3"> 
-        <div class="col d-flex justify-content-center"> 
-            <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
-        </div>
-    </div>
+    <div class="container">
 
-
-    <div class="row mt-4 mb-4">
-        <div class="col-12">
-            <h3 class="mb-3 grey_dark text-center">
-                <div style="font-family: 'Nunito'"> Félicitations 🎉 Vos critères sont enregistrés !</div>
-            </h3> 
-            <h5>
-                <div class="mt-4 text-center"> ️⬇️ Découvrez dès maintenant vos 3 experts dédiés </div>
-            </h5> 
-
-            <div class="">
-                <div class="row mt-5">
-                    <% unless @subscriber.broker.nil?%>
-                        <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                            <%= image_tag @subscriber.broker.avatar, width: 250, alt: "Courtier Ding Dong", class:"testimonial-picture" %>
-                            <div class="comment_style" target="_blank">
-                                <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/money_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.broker.firstname %>, courtier</h5>
-                                <div><%= @subscriber.broker.description %></div>
-                            </div>                  
-                        </div>
-                    <%end%>
-                    <% unless @subscriber.contractor.nil?%>
-                    <div class="col-12 col-md-4 d-flex flex-column align-items-center  mb-5">
-                        <%= image_tag @subscriber.contractor.avatar, width: 250, alt:"Entrepreneurs travaux Ding Dong", class:"testimonial-picture" %>
-                        <div class="comment_style" target="_blank">
-                            <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/tools_logo.png" class="mb-1 mr-2" style="height:30px"><%= @subscriber.contractor.firstname %>, entrepreneur</h5>
-                            <div><%= @subscriber.contractor.description %></div>
-                        </div>   
-                    </div>
-                    <%end%>
-                    <% unless @subscriber.notary.nil?%>
-                        <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-                            <%= image_tag @subscriber.notary.avatar, width: 250, alt:"Notaire Ding Dong", class:"testimonial-picture" %>
-                            <div class="comment_style" target="_blank">
-                                <h5 style="font-family: 'Nunito'; font-weight: 700; color: #2458FC;"><img src="https://hellodingdong.com/assets/images/contract_logo.png" class="mb-1 mr-2" style="height:30px">Notaire de <%= @subscriber.research.agglomeration%></h5>
-                                <div><%= @subscriber.notary.description %></div>
-                            </div>   
-                        </div>
-                    <%end%>
-                </div>
-                <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-rose">
-                    <div class="d-flex justify-content-center mt-2 mb-2">
-                        <%# <div class="btn btn-outline-light"> Démarrer mon alerte 🚀</div> %>
-                        <% if @subscriber.email_flux %>
-                          <%= link_to "Démarrer mon alerte 🚀", subscriber_email_validation_path, class: 'btn btn-outline-light' %>
-                        <% elsif @subscriber.messenger_flux %>
-                          <%= link_to "Démarrer mon alerte 🚀", "https://m.me/#{ENV['BOT_LINK']}?ref=id--" + @subscriber.id.to_s, class: 'btn btn-outline-light' %>
-                        <% end %>
-                    </div>
-                </nav>
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
             </div>
         </div>
-    </div>
 
-    <div class="row mb-5">
-        <div class="col mb-5">
-            <div class="mt-1 mb-5">
-                <h5>
-                    <div class="text-center"> ️👨‍💼 "Faites appel à nous, nous sommes là pour vous accompagner !" </div>
+        <div class="mt-4" style="color:white">
+            <div class="col-12">
+                <h5 class="mb-3 text-center">
+                    <div style="font-family: 'Nunito'"> Félicitations 🎉</div>
+                    <div class="mt-2" style="font-family: 'Nunito'"> Vos critères sont enregistrés !</div>
+
                 </h5> 
             </div>
         </div>
+
+        <div class="bg-white-steps"  style="background: white; top: 300px !important;">
+        </div>
+
+        <div class="bg-white-steps-final-step" style="background: no-repeat center url('<%= asset_path('background-pros.svg') %>')">
+        </div>
+
+        <div class="mt-5 mb-5">
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('down-arrow.svg') %>">
+            </div>
+        </div>
+
+        <div class="mb-5" style="color: #2E60FF; font-family: 'Nunito'; ">
+            <div class="col-12">
+                <h5 class="mb-3 text-center">
+                    <div> Découvrez tout de suite </div>
+                    <div class="mt-2">les dernières annonces 🏡</div>
+                </h5> 
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="col-12">
+                <div class="d-flex justify-content-center mt-2 mb-2" style="font-family: 'Nunito'; font-size: 1.25rem">
+                    <%# <div class="btn btn-outline-light"> Démarrer mon alerte 🚀</div> %>
+                    <% if @subscriber.email_flux %>
+                    <%= link_to "Démarrer mon alerte", subscriber_email_validation_path, class: 'btn-pros' %>
+                    <% elsif @subscriber.messenger_flux %>
+                    <%= link_to "Démarrer mon alerte", "https://m.me/#{ENV['BOT_LINK']}?ref=id--" + @subscriber.id.to_s, class: 'btn-pros' %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

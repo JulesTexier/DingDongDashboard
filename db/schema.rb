@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_153719) do
+ActiveRecord::Schema.define(version: 2020_10_06_150804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -221,7 +221,6 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
 
   create_table "researches", force: :cascade do |t|
     t.string "name"
-    t.string "agglomeration"
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
     t.integer "min_elevator_floor", default: 0
@@ -241,6 +240,9 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
     t.bigint "subscriber_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "soon_deleted_agglomeration"
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_researches_on_agglomeration_id"
     t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
   end
 
@@ -266,6 +268,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "group_type"
+    t.boolean "high_priority", default: true
   end
 
   create_table "sequence_steps", force: :cascade do |t|
@@ -303,11 +306,20 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subscriber_notes", force: :cascade do |t|
+    t.text "content"
+    t.bigint "subscriber_id"
+    t.datetime "created_at", null: false
+    t.index ["subscriber_id"], name: "index_subscriber_notes_on_subscriber_id"
+  end
+
   create_table "subscriber_sequences", force: :cascade do |t|
     t.bigint "sequence_id", null: false
     t.bigint "subscriber_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_subscriber_sequences_on_agglomeration_id"
     t.index ["sequence_id"], name: "index_subscriber_sequences_on_sequence_id"
     t.index ["subscriber_id"], name: "index_subscriber_sequences_on_subscriber_id"
   end
@@ -342,6 +354,8 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
     t.bigint "contractor_id"
     t.bigint "notary_id"
     t.boolean "is_broker_affiliated", default: false
+    t.boolean "hot_lead", default: false
+    t.boolean "checked_by_broker", default: false
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"
@@ -359,6 +373,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_153719) do
   add_foreign_key "properties", "areas"
   add_foreign_key "property_links", "properties"
   add_foreign_key "sequence_steps", "sequences"
+  add_foreign_key "subscriber_notes", "subscribers"
   add_foreign_key "subscriber_sequences", "sequences"
   add_foreign_key "subscriber_sequences", "subscribers"
 end

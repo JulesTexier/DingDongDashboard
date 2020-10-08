@@ -1,9 +1,9 @@
 class Proxy::ScraperSeLoger < Scraper
   attr_accessor :properties, :source, :params
 
-  def initialize
+  def initialize(sp_id = nil)
     @source = "SeLoger"
-    @params = fetch_init_params(@source)
+    @params = fetch_init_params(@source, sp_id)
     @properties = []
   end
 
@@ -11,9 +11,12 @@ class Proxy::ScraperSeLoger < Scraper
     i = 0
     self.params.each do |args|
       xml = access_xml_raw(fetch_static_page_proxy_auth(args.url), args.main_page_cls)
-      extract_json(xml)["cards"]["list"].each do |item|
+      json = extract_json(xml)
+      next if json.nil?
+      json["cards"]["list"].each do |item|
         begin
           if item["cardType"] == "classified" && item.keys[0] == "id"
+            next if item["contact"]["contactName"].downcase == "les particuliers ont la parole"
             hashed_property = {}
             hashed_property[:price] = item["pricing"]["price"].to_int_scrp
             hashed_property[:images] = item["photos"].map { |img| img.gsub("/400/visuels", "/800/visuels") }
@@ -35,8 +38,8 @@ class Proxy::ScraperSeLoger < Scraper
             hashed_property[:contact_number] = item["contact"]["phoneNumber"].sl_phone_number_scrp
             hashed_property[:source] = @source
             hashed_property[:provider] = "Agence"
-            description = item["description"]
-            if go_to_prop?(hashed_property, 7) && hashed_property[:agency_name] != "Merci Max"
+            hashed_property[:description] = item["description"]
+            if go_to_prop?(hashed_property, 7)
               html = fetch_static_page_proxy_auth(hashed_property[:link])
               unless html.nil? #sometimes, the proxy request will fail, but we don't want to lose datas from the json
                 if access_xml_text(html, 'a.headerLogo > span').include?("Belles Demeures")
@@ -46,7 +49,7 @@ class Proxy::ScraperSeLoger < Scraper
                   show_description = access_xml_text(html, 'section#showcase-description > div:nth-child(2) > div').strip
                   exterior_infos = access_xml_text(html, 'section#showcase-description > div:nth-child(3) > div')
                 end
-                hashed_property[:description] = show_description.length > description.length ? show_description : description
+                hashed_property[:description] = show_description if show_description.length > hashed_property[:description].length
                 hashed_property[:has_elevator] = true if exterior_infos.match?(/ascenseur/i)
                 hashed_property[:has_balcony] = true if exterior_infos.match?(/balcon/i)
                 hashed_property[:has_terrace] = true if exterior_infos.match?(/terrasse/i)

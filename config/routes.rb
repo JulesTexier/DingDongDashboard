@@ -35,7 +35,10 @@ Rails.application.routes.draw do
     patch '/research/update' => 'subscriber_researches#update'
     get '/research/stop' => 'subscriber_researches#stop'
     get '/research/activate' => 'subscriber_researches#activate'
-  end
+    get '/mon-financement' => 'subscribers#contact_courtier'
+    post '/financement-submit' => 'subscribers#contact_courtier_submit'
+    get '/mon-financement-confirmation' => 'subscribers#contact_courtier_submitted'
+  end 
   
   
   resources :properties, only: [:show]
@@ -61,6 +64,7 @@ Rails.application.routes.draw do
   get "/dashboard/price" => "static_pages#property_price"
   get "/dashboard/source" => "static_pages#sources"
   get "/dashboard/duplicates" => "static_pages#duplicates"
+  get "/dashboard/courtiers" => "broker_pages#admin"
 
   #############
   # 5 - API
@@ -82,6 +86,7 @@ Rails.application.routes.draw do
       resources :brokers, only: [:show]
       resources :notaries, only: [:show]
       resources :contractors, only: [:show]
+      resources :subscriber_notes, only: [:create]
       resources :saved_properties, only: [:create, :destroy]
 
       # Manychat 
@@ -107,4 +112,14 @@ Rails.application.routes.draw do
       get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
     end
   end
+
+  #############
+  # 6 - Broker Dashboard
+  #############
+  get "/courtier/:id/dashboard" => "broker_pages#index"
+  post "/broker/checked" => "broker_pages#checked_by_broker"
+
+
+
+
 end

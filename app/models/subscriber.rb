@@ -2,8 +2,6 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
 
-  after_create :send_confirmation_email
-
   ## REVOIR LES VALIDATEURS
   
   has_one :research
@@ -13,6 +11,8 @@ class Subscriber < ApplicationRecord
 
   has_many :subscriber_statuses
   has_many :statuses, through: :subscriber_statuses
+  
+  has_many :subscriber_notes
 
   ## Professional association
   belongs_to :notary, optional: true
@@ -44,6 +44,7 @@ class Subscriber < ApplicationRecord
 
   def handle_onboarding
     professional_attribution
+    send_confirmation_email
     add_subscriber_to_etienne_trello
   end
 
@@ -166,45 +167,46 @@ class Subscriber < ApplicationRecord
     self.is_active = true
     self.execute_nurturing_mailer
   end
-
+  
+  
   private
-
+  
   ############################
   # Professional Attribution #
   ############################
-
-
+  
+  
   def professional_attribution
     self.notary = Notary.first if self.notary.nil?
     self.contractor = Contractor.first if self.contractor.nil?
     self.broker = get_accurate_broker if self.broker.nil?
     self.save
   end
-
+  
   def get_accurate_broker
-    Broker.get_accurate_by_agglomeration(Agglomeration.find_by(name:self.research.agglomeration).id)
+    Broker.get_accurate_by_agglomeration(self.research.agglomeration.id)
   end
-
+  
   ############################
   # Etienne Trello follow up 
   ############################
-
+  
   def add_subscriber_to_etienne_trello
     Trello.new.add_lead_on_etienne_trello(self)
   end
-
-
+  
+  
   ###########################
   # Email confirmation methods
   ###########################
-
-
+  
+  
   def set_confirmation_token
     if self.confirm_token.blank?
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
   end
-
+  
   def send_confirmation_email
     if self.email_flux
       set_confirmation_token
@@ -212,9 +214,9 @@ class Subscriber < ApplicationRecord
       SubscriberMailer.registration_confirmation(self).deliver_now
     end
   end
-
-
-# A voir ...
+  
+  
+  # A voir ...
   def notify_broker_if_max_price_is_changed
     if !previous_changes["max_price"].nil? && !self.broker.nil? && !self.trello_id_card.nil?
       old_price = previous_changes["max_price"][0]
@@ -222,7 +224,7 @@ class Subscriber < ApplicationRecord
       self.notify_broker_trello("Prix d'achat max modifié. Changé de #{old_price} € à #{new_price} €")
     end
   end
-
+  
   # A vérifier mais useless normalement
   def attribute_adequate_broker(form_type = "regular")
     if self.broker.nil?

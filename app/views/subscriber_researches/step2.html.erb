@@ -1,162 +1,181 @@
-<div class="container mb-100">
+<div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
 
-    <div class="row mt-3"> 
-        <div class="col d-flex justify-content-center"> 
-            <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
+    <%= render 'layouts/modal_alert' %>
+
+    <div class="container">
+
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex">
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color: #2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">💌 Validation</div></div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-white-steps">
+            <div class="container">
+
+                <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
+                    <div class="section">
+
+                              <%= hidden_field_tag :current_step, 'step2' %>
+
+                              <% if @master_areas.length > 3 %>
+                                <h5 class="mt-5 mb-3">Les critères indispensables pour commencer</h5> 
+                                <p class="mt-4 mb-3 grey">📍 Votre zone de recherche * </p>
+                                <div cxlass="raw d-flex flex-wrap">
+                                  <div class="form-group col-12 p-0 mb-0">
+                                      <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
+                                      <% @master_areas.each do |item| %>
+                                          <% if item[0].include?("department") %>
+                                          <option value="<%= item[0] %>" <%= item[2] %>> <%= "#{item[1]}" %></option>
+                                          <% else %>
+                                          <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
+                                          <% end %>
+                                      <% end %>
+                                      </select>
+                                  </div>
+                                </div>
+                              <% else %>
+                                <h5 class="mt-5">Les critères indispensables pour commencer</h5> 
+                                <%= hidden_field_tag 'areas[]', @master_areas.first[0] %>
+                              <% end %>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey">💰 Budget max *</p>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">€</span>
+                                            </div>
+                                            <%= f.input_field :max_price, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 500000", min: "10000", max: "10000000" %>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey">↔️ Surface min *</p>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">m2</span>
+                                            </div>
+                                            <%= f.input_field :min_surface, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 30", min: "8", max: "400" %>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey">🏡 Nb. de pièces min *</p>
+                                        <div class="input-group mb-3">
+                                            <%= f.input_field :min_rooms_number, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1", min: "1", max: "6" %>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h5 class="mb-2 mt-5">Les critères optionnels pour affiner sa recherche</h6> 
+
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey"> 💰↘️ Budget min</p>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">€</span>
+                                            </div>
+                                            <%= f.number_field :min_price, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 0", :required => false %>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey">💰↔️ Prix maximum au m2</p>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text input-group-text_style writing-box" id="basic-addon1">€ / m2</span>
+                                            </div>
+                                            <%= f.number_field :max_sqm_price, as: :numeric, class: "form-control writing-box", placeholder: "Ex : 12 000", :required => false %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="grey mt-4">🏢 / 🏠 Type de logement </p>
+                                        <div class="form-check form-check-inline flex-row">
+                                            <%= f.input_field :apartment_type, id: "apartment_type", as: :boolean, class: "form-check-input", onClick: "handleFloorInfo()" %> 
+                                            <%= f.label "Appartement", for: "apartment_type", class: "form-check-label grey" %> 
+                                        </div>
+                                        <div class="form-check form-check-inline ">
+                                            <%= f.input_field :home_type, id: "home_type", as: :boolean, class: "form-check-input" %> 
+                                            <%= f.label "Maison", for: "home_type", class: "form-check-label grey" %> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="floor-parameters">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-3 grey">🎢 Étage minimum</p>
+                                        <div class="input-group mb-3">
+                                            <%= f.number_field :min_floor, id:"min_floor", as: :numeric, class: "form-control writing-box", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
+                                        </div>
+                                        <div class="form-check form-check-inline mb-3">
+                                        <%= f.check_box :last_floor, id:"is_last_floor", class: "form-check-input", type:"checkbox",  id: "last_floor", value: "true" %> 
+                                        <label class="form-check-label grey" for="last_floor">Uniquement dernier étage</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 mb-6 grey">🚠 A partir de quel étage faut-il un ascenseur</p>
+                                        <div class="input-group mb-3" style="margin-bottom:4.5rem">
+                                            <%= f.number_field :min_elevator_floor, id:"min_elevator_floor", as: :numeric, class: "form-control writing-box", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <p class="mt-4 grey">🏗️ Neuf</p>
+                                        <div class="form-check form-check-inline margin-bottom-navbar">
+                                            <%= f.check_box :new_construction, id: "new_construction", as: :boolean, class: "form-check-input" %> 
+                                            <%= f.label "Recevoir les constuctions neuves", for: "new_construction", class: "form-check-label grey" %> 
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                                
+
+                                <% if false %>
+                                    <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :balcony, class: "form-check-input", type:"checkbox",  id:"balcony" %> 
+                                        <label class="form-check-label" for="balcony">Balcon</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :terrace, class: "form-check-input", type:"checkbox",  id:"terrace" %> 
+                                        <label class="form-check-label" for="terrace">Terrasse</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
+                                        <label class="form-check-label" for="garden">Jardin</label>
+                                    </div>
+                        <% end %>
+
+                        <nav class="navbar navbar-light fixed-bottom bg-blue">
+                            <div class="container justify-content-center p-0">
+                                <div class="row w-100 justify-content-center">
+                                    <div class="col-12 col-md-6 col-lg-4 p-0">
+                                        <%= f.submit "Etape suivante", id: "testbutton", class: "btn-outline-navbar w-100", onClick: "emptyAttributes()" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>  
+                
+
+                <% end %>
+            
+
+            </div>
         </div>
     </div>
-
-
-    <div class= "row mt-3">
-    <div class="col-12 d-flex">
-        <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-        <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-        <div class="badge-off col-12 col-lg-4  text-center mb-1">💌Validation</div>
-        </ul>
-    </div>
-    </div>
-
-
-
-
-    <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
-
-        <%= hidden_field_tag :current_step, 'step2' %>
-
-        
-            <h5 class="mt-4 mb-3 grey_dark">Les critères indispensables pour commencer</h6> 
-            <p class="mt-4 mb-3 grey">📍 Votre zone de recherche * </p>
-            <% if false %> <small><div onClick="clearSelected();">❌ Réinitialiser ma zone de recherche</div></small> <% end %>
-            <div cxlass="raw d-flex flex-wrap">
-              <div class="form-group col-12 p-0 mb-0">
-                <select multiple class="form-control" id="choices-multiple-remove-button" name="areas[]">
-                  <% @master_areas.each do |item| %>
-                    <% if item[0].include?("department") %>
-                      <option value="<%= item[0] %>" <%= item[2] %>> <%= "#{item[1]}" %></option>
-                    <% else %>
-                      <option value="<%= item[0] %>" <%= item[3] %>> <%= "#{item[1]} (#{item[2]})" %></option>
-                    <% end %>
-                  <% end %>
-                </select>
-              </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey">💰 Budget max *</p>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text input-group-text_style" id="basic-addon1">€</span>
-                        </div>
-                        <%= f.number_field :max_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 500000", min: "10000", max: "10000000", :required => true %>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey">↔️ Surface min *</p>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text input-group-text_style" id="basic-addon1">m2</span>
-                        </div>
-                        <%= f.number_field :min_surface, as: :numeric, class: "form-control input_style", placeholder: "Ex : 30", min: "8", max: "400", :required => true %>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey">🏡 Nb. de pièces min *</p>
-                    <div class="input-group mb-3">
-                        <%= f.number_field :min_rooms_number, as: :numeric, class: "form-control input_style", placeholder: "Ex : 1", min: "1", max: "6", :required => true %>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <h5 class="mb-2 mt-4 grey_dark">Les critères optionnels pour affiner sa recherche</h6> 
-
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey"> 💰↘️ Budget min</p>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text input-group-text_style" id="basic-addon1">€</span>
-                        </div>
-                        <%= f.number_field :min_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 0", :required => false %>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey">💰↔️ Prix maximum au m2</p>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text input-group-text_style" id="basic-addon1">€ / m2</span>
-                        </div>
-                        <%= f.number_field :max_sqm_price, as: :numeric, class: "form-control input_style", placeholder: "Ex : 12 000", :required => false %>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-3 grey">🎢 Étage minimum</p>
-                    <div class="input-group mb-3">
-                        <%= f.number_field :min_floor, as: :numeric, class: "form-control input_style", placeholder: "Ex : 1 (pas de rez-de-chaussée)", min: "0", max: "8" %>
-                    </div>
-                    <div class="form-check form-check-inline mb-3">
-                    <%= f.check_box :last_floor, class: "form-check-input", type:"checkbox",  id:"last_floor", value:"true" %> 
-                    <label class="form-check-label grey" for="last_floor">Uniquement dernier étage</label>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="mt-4 mb-6 grey">🚠A partir de quel étage faut-il un ascenseur</p>
-                    <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                        <%= f.number_field :min_elevator_floor, as: :numeric, class: "form-control input_style", placeholder: "Ex : 3 (ascenseur à partir du 3ème étage)", min: "0", max: "8" %>
-                    </div>
-                </div>
-            </div>
-        
-            <p class="mt-4 mb-6 grey">🏗️ Neuf</p>
-                <div class="form-check form-check-inline">
-                    <%= f.check_box :new_construction, id: "new_construction", class: "form-check-input" %> 
-                    <%= f.label "Recevoir les constuctions neuves", for:"new_construction", class: "form-check-label grey" %> 
-                </div>
-
-                <% if false %>
-                    <p class="mt-4 mb-3" style="color: #0470C1; font-weight:400"> 🌻 Exterieur </p>
-                    <div class="form-check form-check-inline">
-                        <%= f.check_box :balcony, class: "form-check-input", type:"checkbox",  id:"balcony" %> 
-                        <label class="form-check-label" for="balcony">Balcon</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <%= f.check_box :terrace, class: "form-check-input", type:"checkbox",  id:"terrace" %> 
-                        <label class="form-check-label" for="terrace">Terrasse</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <%= f.check_box :garden, class: "form-check-input", type:"checkbox",  id:"garden" %> 
-                        <label class="form-check-label" for="garden">Jardin</label>
-                    </div>
-
-                    <p class="mt-4 mb-6 grey"> Souhaitez-vous une maison et/ou un appartement</p>
-                    <div class="form-check form-check-inline">
-                    <%= f.check_box :apartment_type, class: "form-check-input" %> 
-                    <%= f.label "Appartement", class: "form-check-label" %> 
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <%= f.check_box :home_type, class: "form-check-input" %> 
-                    <%= f.label "Maison", class: "form-check-label" %> 
-                    </div>
-                <% end %>
-
-
-            </p>
-        
-
-        <nav class="navbar navbar-light fixed-bottom bg-blue d-flex justify-content-center">
-            <div class="d-flex justify-content-center mt-2 mb-2">
-                <%= f.submit "Etape suivante",
-                    class: "btn btn-outline-light"%>
-            </div>
-        </nav>  
-    <% end %>
-
-
 </div>
 
 
@@ -176,4 +195,47 @@ function clearSelected(){
       elements[i].selected = false;
     }
   }
+
+  function enableFloorParameters(){
+      document.getElementById('min_floor').disabled = false
+      document.getElementById('min_elevator_floor').disabled = false
+      document.getElementById('last_floor').disabled = false
+  }
+
+   function disableFloorParameters(){
+      document.getElementById('min_floor').disabled = true
+      document.getElementById('min_elevator_floor').disabled = true
+      document.getElementById('last_floor').disabled = true
+  }
+
+  function handleFloorInfo(){
+    if (document.getElementById('apartment_type').checked) {
+         enableFloorParameters();
+    } else {
+        disableFloorParameters();
+    }
+  }
+
+  function displayModal(title, message) { 
+        $('#alertModal').find('#modalTitle').text(title);
+        $('#alertModal').find('.modal-body p').text(message);
+        $('#alertModal').modal('show');
+  }
+
+  function emptyAttributes(){
+    var max_price = document.getElementById('subscriber_research_wizard_max_price').value
+    var min_surface = document.getElementById('subscriber_research_wizard_min_surface').value
+    var rooms_number = document.getElementById('subscriber_research_wizard_min_rooms_number').value
+      event.preventDefault()
+      if (document.getElementById("choices-multiple-remove-button") && (document.getElementById("choices-multiple-remove-button").value == "" )) {
+        displayModal("Zone de recherche", "Veuillez selectionner une zone de recherche !")
+      } else if ((document.getElementById("apartment_type").checked == false) && (document.getElementById("home_type").checked == false)) {
+        displayModal("Appartement et/ou maison ?", "Veuillez selectionner au moins un type de bien à recevoir !")
+      } else if ((max_price == "") || (min_surface == "") || (rooms_number == "")) {
+        displayModal("Critères requis", "Veuillez sélectionner au moins un budget max, une surface minimum et le nombre de pièces souhaité !")
+      } else {
+        document.getElementById('new_subscriber_research_wizard').submit();
+      }
+     }
+
 </script>

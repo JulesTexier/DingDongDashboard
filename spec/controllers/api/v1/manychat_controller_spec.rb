@@ -41,7 +41,8 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
   describe "Manychat send methods" do
     before :all do
       @sub = FactoryBot.create(:subscriber_fred)
-      @sub_research = FactoryBot.create(:subscriber_research, subscriber: @sub, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4)
+      agglomeration = FactoryBot.create(:agglomeration)
+      @sub_research = FactoryBot.create(:subscriber_research, subscriber: @sub, max_price: 500000, min_surface: 20, min_rooms_number: 1, min_floor: 2, min_elevator_floor: 4, agglomeration: agglomeration)
       @sub_research.areas << Area.find_by(name: "Paris 10ème")
       date = Date.today
       date = Time.parse(date.to_time.in_time_zone("Europe/Paris").beginning_of_day.to_s)
@@ -63,8 +64,9 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
           expect(JSON.parse(response.body)["message"]).to eq("Subscriber not found")
         end
         it 'should return Manychat error "subscriber not found"' do
+          agglomeration = FactoryBot.create(:agglomeration)
           sub = FactoryBot.create(:subscriber_dummy_fb_id)
-          FactoryBot.create(:subscriber_research, subscriber: sub)
+          FactoryBot.create(:subscriber_research, subscriber: sub, agglomeration: agglomeration)
           request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
           post :send_props_morning, params: { subscriber_id: sub.id }
           expect(response).to have_http_status(406)
@@ -82,8 +84,9 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
             expect(response.body).to eq("HTTP Token: Access denied.\n")
           end
           it 'should return Manychat error "subscriber not found"' do
+            agglomeration = FactoryBot.create(:agglomeration)
             sub = FactoryBot.create(:subscriber_dummy_fb_id)
-            FactoryBot.create(:subscriber_research, subscriber: sub)
+            FactoryBot.create(:subscriber_research, subscriber: sub, agglomeration: agglomeration)
             request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
             post :send_props_morning, params: { subscriber_id: sub.id }
             expect(response).to have_http_status(406)

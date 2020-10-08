@@ -1,6 +1,6 @@
 class Research < ApplicationRecord
   belongs_to :subscriber
-
+  belongs_to :agglomeration
   has_many :research_areas
   has_many :areas, through: :research_areas
 
@@ -25,8 +25,9 @@ class Research < ApplicationRecord
     .pluck(*ATTRS)
     .map { |p| ATTRS.zip(p).to_h }
     matched_props_ids = []
+    areas_ids = self.areas.ids
     properties.each do |property|
-      matched_props_ids.push(property["id"]) if matching_property?(property, self.areas.ids)
+      matched_props_ids.push(property["id"]) if matching_property?(property, areas_ids)
       break if matched_props_ids.length == limit
     end
     Property.where(id: matched_props_ids).order(id: :desc)
@@ -42,8 +43,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
       break if props_to_send.length == 10
     end
     props_to_send
@@ -56,8 +58,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
     end
     props_to_send
   end
@@ -71,8 +74,9 @@ class Research < ApplicationRecord
       .pluck(*ATTRS)
       .map { |p| ATTRS.zip(p).to_h }
     props_to_send = []
+    areas_ids = self.areas.ids
     props.each do |prop|
-      props_to_send.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
+      props_to_send.push(prop["id"]) if self.matching_property?(prop, areas_ids)
       break if props_to_send.length == max_number.to_i
     end
     props_to_send
@@ -101,7 +105,7 @@ class Research < ApplicationRecord
     modified_array = []
     areas_ids.each do |area_id|
       modified_array.push(Department.find(area_id.gsub("department ", "").to_i).areas.pluck(:id)) if area_id.include?("department")
-      modified_array.push(Area.where(id: area_id.gsub("area ", "").to_i).pluck(:id)) if area_id.include?("area")
+      modified_array.push(area_id.gsub("area ", "").to_i) if area_id.include?("area")
     end
     cleaned_area_array = modified_array.flatten
     cleaned_area_array.map! {|id| id.to_i }

@@ -4,6 +4,7 @@ RSpec.describe GrowthEngine, type: :service do
   describe "testing all logic in growth_engin" do
     before(:all) do
       @json_email = File.read("./fixtures/growth_email_type.json")
+      FactoryBot.create(:agglomeration, name: "Ile-de-France")
       @ge = GrowthEngine.new
     end
 
@@ -139,7 +140,7 @@ RSpec.describe GrowthEngine, type: :service do
       end
 
       ## C'est un client actif de Ding Dong donc on lui envoie une séquence régulière quoiqu'il
-      it "is an activer client so we return a regular sequence" do
+      it "is an active client so we return a regular sequence" do
         @ge.send(:handle_lead_email, @client_subscriber.email)
         expect(SubscriberSequence.all.count).to eq(1)
         expect(SubscriberSequence.last.sequence).to eq(@sequence_regular)

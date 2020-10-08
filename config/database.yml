@@ -19,18 +19,25 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
 
 development:
   <<: *default
-  # database: giant_cat_development
+  database: giant_cat_development
   host: balarama.db.elephantsql.com
   port: 5432
   database: lmrkkowi
   username: lmrkkowi
   password: tJ2lcdKX25oJziD5WKRGAsLXmYIsLqB8
+
+  # host: 	fizzy-nectarine.db.elephantsql.com
+  # port: 5432
+  # database: ylsomioj
+  # username: ylsomioj
+  # password: FCI8U436JUymznZcS3KDBOXAgtT680kD
+
 
 
   # The specified database role being used to connect to postgres.
@@ -95,11 +102,9 @@ test:
 #
 production:
   <<: *default
-  # database: giant_cat_production
-  # username: giant_cat
-  # password: <%= ENV['GIANT_CAT_DATABASE_PASSWORD'] %>
-  host: kandula.db.elephantsql.com
+  host: 	fizzy-nectarine.db.elephantsql.com
   port: 5432
-  database: glnjufeb
-  username: glnjufeb
-  password: T69nyTegc_mQvWJ-KKXv9plNQzAZidb3
+  database: ylsomioj
+  username: ylsomioj
+  password: FCI8U436JUymznZcS3KDBOXAgtT680kD
+

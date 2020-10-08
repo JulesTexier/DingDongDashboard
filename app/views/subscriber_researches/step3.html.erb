@@ -1,121 +1,136 @@
-<div class="container mb-100">
+<div class="section bg-primary-pros" style="color: #2E60FF; font-family: 'Nunito'; font-size: 1rem;">
 
-  <div class="row mt-3"> 
-      <div class="col d-flex justify-content-center"> 
-          <img src="https://hellodingdong.com/assets/images/logo-ding-dong-full.png" class="mb-1 mr-2" style="height:30px">
-      </div>
-  </div>
+  <%= render 'layouts/modal_alert' %>
 
-  <div class= "row mt-3">
-    <div class="col-12 d-flex">
-      <ul class="breadcrumb justify-content-center w-100" style="background: #f7fafc">
-        <%= link_to "📍Agglomération", step1_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-        <%= link_to "⚙️Critères", step2_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-        <%= link_to "💌Validation", step3_subscriber_researches_path, class:'badge-active col-12 col-lg-4  text-center mb-1' %>
-      </ul>
+    <div class="container">
+
+        <div class="row"> 
+            <div class="col d-flex justify-content-center"> 
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex">
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off"><%= link_to "⚙️ Critères", step2_subscriber_researches_path, style:'color:#2458FC' %></div></div>
+                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "💌 Validation", step3_subscriber_researches_path, style:'color:#fff' %></div></div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-white-steps">
+            <div class="container">
+                <div class="mb-120 mt-5">
+
+                    <%= simple_form_for @subscriber_research_wizard, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
+                        <%= hidden_field_tag :current_step, 'step3' %>
+
+                        <%= f.input :subscriber_messenger_flux, :as => :hidden, :input_html => { :value => "false" } %>
+                        <%= f.input :subscriber_email_flux, :as => :hidden, :input_html => { :value => "false" } %>
+
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-8">
+                                    <h5 class="mb-2">Les dernières infos pour valider votre alerte</h5>
+                                </div>
+                            </div> 
+
+
+                            <% if false %>
+                            <%= render 'indicator', average_results: @average_results%>
+                            <% end %>
+
+
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-8">
+                                    <p class="mt-4 mb-3 grey">🛎️ Souhaitez-vous recevoir les annonces par mail ou messenger ?</p>
+                                    <div class="row">
+                                    <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
+                                        <div class="btn medium-btn  col-12" id="messenger" onCLick="selectMessenger()">
+                                            <?xml version="1.0"?>
+                                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30">
+                                            <g>
+                                                <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path" style="fill:#2458FC" data-old_color="#2196f3"/>
+                                            </g> 
+                                            </svg>
+                                            <span class="ml-2">Messenger</span>
+                                        </div>
+                                    </div>
+                                    <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
+                                        <div class="btn medium-btn col-12" id="email" onCLick="selectEmail()">
+                                        <?xml version="1.0"?>
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="30" height="30">
+                                            <g>
+                                            <path d="M467,81H45c-24.853,0-45,20.147-45,45v260c0,24.853,20.147,45,45,45h422c24.853,0,45-20.147,45-45V126    C512,101.147,491.853,81,467,81z M430.992,338.391c-6.306,5.365-15.776,4.605-21.144-1.708L323.272,234.89l-59.839,34.139    c-4.607,2.628-10.26,2.627-14.865,0l-59.839-34.139l-86.577,101.792c-5.364,6.308-14.833,7.077-21.144,1.708    c-6.311-5.367-7.075-14.833-1.708-21.144l82.913-97.484l-73.645-42.016c-7.196-4.104-9.701-13.266-5.597-20.461    c4.106-7.197,13.266-9.701,20.462-5.597c6.103,3.481,145.685,83.114,152.567,87.041c6.874-3.922,146.448-83.55,152.567-87.041    c7.193-4.105,16.356-1.6,20.462,5.597c4.104,7.195,1.6,16.356-5.597,20.461l-73.645,42.016l82.913,97.484    C438.067,323.558,437.303,333.023,430.992,338.391z" id="email-logo" data-original="#000000" class="active-path" data-old_color="#000000" style="fill:#2458FC"/>
+                                            </g>
+                                        </svg>
+                                        <span class="ml-2">Email</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <p class="mt-4 mb-3 grey">👉 Prénom *</p>
+                                    <div class="input-group mb-3">
+                                        <%= f.input_field :subscriber_firstname, class: "form-control writing-box", placeholder: "Ex : Nicolas", required: true %>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <p class="mt-4 mb-6 grey">👉 Nom *</p>
+                                    <div class="input-group mb-3" style="margin-bottom:4.5rem">
+                                        <%= f.input_field :subscriber_lastname, class: "form-control writing-box", placeholder: "Ex : Dupont", required: true %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <p class="mt-4 mb-3 grey">💌 Email *</p>
+                                    <div class="input-group mb-3">
+                                        <%= f.input_field :subscriber_email, class: "form-control writing-box", placeholder: "Ex : nicolas.dupont@gmail.com", required: true %>
+                                    </div>
+                                    <% if @subscriber_research_wizard.subscriber.errors[:email].any? %>
+                                    <div class="input-group mb-3">
+                                        <small class="text-danger">
+                                        <%= @subscriber_research_wizard.subscriber.errors.messages[:email].join(" ") %>
+                                        </small>      
+                                    </div>
+                                    <% end %>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 margin-bottom-navbar">
+                                    <p class="mt-4 mb-6 grey">📱Téléphone *</p>
+                                    <div class="input-group mb-3">
+                                        <%= f.input_field :subscriber_phone, class: "form-control writing-box", placeholder: "Ex : 0624345653", required: true %>
+                                    </div>
+                                    <% if @subscriber_research_wizard.subscriber.errors[:phone].any? %>
+                                    <div class="input-group mb-3">
+                                        <small class="text-danger">
+                                        <%= @subscriber_research_wizard.subscriber.errors.messages[:phone].join(" ") %>
+                                        </small>      
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <nav class="navbar navbar-light fixed-bottom bg-blue">
+                                <div class="container justify-content-center p-0">
+                                    <div class="row w-100 justify-content-center">
+                                        <div class="col-12 col-md-6 col-lg-4 p-0">
+                                            <%= submit_tag "Valider mon alerte", class: "btn-outline-navbar w-100", onClick: "checkMediumSelection()"%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+
+                    <% end %>
+
+                
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-
-
-
-  <%= simple_form_for @subscriber_research_wizard, as: :subscriber_wizard, url: validate_step_subscriber_researches_path do |f| %>
-    <%= hidden_field_tag :current_step, 'step3' %>
-
-    <%= f.input :subscriber_messenger_flux, :as => :hidden, :input_html => { :value => "true" } %>
-    <%= f.input :subscriber_email_flux, :as => :hidden, :input_html => { :value => "false" } %>
-
-
-        <h5 class="mb-2 mt-4 grey_dark text-center">Les dernières infos pour valider votre compte</h6> 
-
-        <% if false %>
-        <%= render 'indicator', average_results: @average_results%>
-        <% end %>
-
-
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <p class="mt-4 mb-3 grey">🛎️ Souhaitez-vous recevoir les annonces par mail ou messenger ?</p>
-                <div class="row">
-                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
-                    <div class="btn medium-btn medium-active col-12" id="messenger" onCLick="selectMessenger()">
-                        <?xml version="1.0"?>
-                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30">
-                          <g>
-                            <path d="m0 11.111c0 3.496 1.744 6.615 4.471 8.652v4.237l4.086-2.242c1.09.301 2.245.465 3.442.465 6.627 0 12-4.974 12-11.111.001-6.137-5.372-11.112-11.999-11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055-3.258-5.963 3.259z" fill="white" id="messenger-logo" data-original="white" class="active-path medium-active-logo" style="fill:#2458FC" data-old_color="#2196f3"/>
-                          </g> 
-                        </svg>
-                        <span class="ml-2">Messenger</span>
-                    </div>
-                  </div>
-                  <div class='col-12 col-md-6 d-flex justify-content-center mb-1'>
-                    <div class="btn medium-btn col-12" id="email" onCLick="selectEmail()">
-                      <?xml version="1.0"?>
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="30" height="30">
-                        <g>
-                          <path d="M467,81H45c-24.853,0-45,20.147-45,45v260c0,24.853,20.147,45,45,45h422c24.853,0,45-20.147,45-45V126    C512,101.147,491.853,81,467,81z M430.992,338.391c-6.306,5.365-15.776,4.605-21.144-1.708L323.272,234.89l-59.839,34.139    c-4.607,2.628-10.26,2.627-14.865,0l-59.839-34.139l-86.577,101.792c-5.364,6.308-14.833,7.077-21.144,1.708    c-6.311-5.367-7.075-14.833-1.708-21.144l82.913-97.484l-73.645-42.016c-7.196-4.104-9.701-13.266-5.597-20.461    c4.106-7.197,13.266-9.701,20.462-5.597c6.103,3.481,145.685,83.114,152.567,87.041c6.874-3.922,146.448-83.55,152.567-87.041    c7.193-4.105,16.356-1.6,20.462,5.597c4.104,7.195,1.6,16.356-5.597,20.461l-73.645,42.016l82.913,97.484    C438.067,323.558,437.303,333.023,430.992,338.391z" id="email-logo" data-original="#000000" class="active-path" data-old_color="#000000" style="fill:#2458FC"/>
-                        </g>
-                      </svg>
-                      <span class="ml-2">Email</span>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-3 grey">👉 Prénom *</p>
-                <div class="input-group mb-3">
-                    <%= f.input_field :subscriber_firstname, class: "form-control input_style", placeholder: "Ex : Nicolas", required: true %>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-6 grey">👉 Nom *</p>
-                <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                    <%= f.input_field :subscriber_lastname, class: "form-control input_style", placeholder: "Ex : Dupont", required: true %>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-3 grey">💌 Email *</p>
-                <div class="input-group mb-3">
-                    <%= f.input_field :subscriber_email, class: "form-control input_style", placeholder: "Ex : nicolas.dupont@gmail.com", required: true %>
-                </div>
-                <% if @subscriber_research_wizard.subscriber.errors[:email].any? %>
-                  <div class="input-group mb-3">
-                    <small class="text-danger">
-                      <%= @subscriber_research_wizard.subscriber.errors.messages[:email].join(" ") %>
-                    </small>      
-                  </div>
-                <% end %>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <p class="mt-4 mb-6 grey">📱Téléphone *</p>
-                <div class="input-group mb-3" style="margin-bottom:4.5rem">
-                    <%= f.input_field :subscriber_phone, class: "form-control input_style", placeholder: "Ex : 0624345653", required: true %>
-                </div>
-                <% if @subscriber_research_wizard.subscriber.errors[:phone].any? %>
-                  <div class="input-group mb-3">
-                    <small class="text-danger">
-                      <%= @subscriber_research_wizard.subscriber.errors.messages[:phone].join(" ") %>
-                    </small>      
-                  </div>
-                <% end %>
-            </div>
-        </div>
-
-
-
-        <nav class="navbar navbar-light fixed-bottom d-flex justify-content-center bg-blue">
-            <div class="d-flex justify-content-center mt-2 mb-2">
-                <%= submit_tag "Valider mon alerte", class: "btn btn-outline-light"%>
-            </div>
-        </nav>
-
-  <% end %>
-  
 </div>
 
 
@@ -137,6 +152,17 @@
     document.getElementById("messenger").classList.remove("medium-active");
     document.getElementById("messenger-logo").classList.remove("medium-active-logo");   
     document.getElementById("email-logo").classList.add("medium-active-logo");   
+  }
+
+  function checkMediumSelection(){
+      event.preventDefault()
+      if( document.getElementById('subscriber_wizard_subscriber_email_flux').value == "false" &&  document.getElementById('subscriber_wizard_subscriber_messenger_flux').value == "false" ) {
+              $('#alertModal').find('#modalTitle').text("Messenger ou E-mail ?");
+              $('#alertModal').find('.modal-body p').text("Pour pouvoir recevoir des annonces, vous devez choisir entre Messenger et l'Email.");
+              $('#alertModal').modal('show');
+      } else {
+          document.getElementById('new_subscriber_wizard').submit();
+      }
   }
 
 </script>

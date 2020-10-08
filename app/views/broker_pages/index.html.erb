@@ -1,0 +1,148 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Tableau de suivi</h1>
+    <p class="lead"><%= @broker.firstname%>, bienvenue sur ta page de suivi de vos contacts.</p>
+    <br>
+    <p>Votre lien à partager à vos clients: <br>
+      <span style="font-style:italic"><%= "#{ENV['BASE_URL']}inscription/courtier/#{@broker.id}" %></span>
+    </p>
+  </div>
+</div>
+
+<div class= "container">
+  <div class="row mt-5">
+    <div class="col-lg-4 col-12">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">7 derniers jours</h5>
+          <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_week.count%></span></p>
+          <div class= "row">
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.hot_lead && !x.is_broker_affiliated }.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| !x.hot_lead && !x.is_broker_affiliated }.count %>  <br> <span class="badge badge-light">Froid</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-12">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">30 derniers jours</h5>
+          <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_month.count%></span></p>
+          <div class= "row">
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.hot_lead && !x.is_broker_affiliated}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total</h5>
+          <p class="card-text"><span style="font-size: 2rem"><%= @subscribers.count%></span></p>
+          <div class= "row">
+            <div class="col-4"> <%= @subscribers.select{|x| x.hot_lead}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.is_broker_affiliated}.count %> <br>  <span class="badge badge-info">Client</span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 d-flex flex-column">
+    <h5>Légende</h5>
+    <ul style="list-style:none">
+      <li><span class="badge badge-danger">Chaud</span> : Utilisateur qui a demandé à être mis en relation avec son courtier</li>
+      <li><span class="badge badge-light">Froid</span> : Utilisateur qui n'a pas (encore) demandé à être mis en relation avec son courtier</li>
+      <li><span class="badge badge-info">Client</span> : Votre client, à qui vous avez donné accès à l'alerte Ding Dong</li>
+    </ul>
+  </div>
+
+  <div class="row mt-5">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Traité ?</th>
+          <th scope="col">Status</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Inscription</th>
+          <th scope="col">Actif ?</th>
+          <th scope="col">Plus</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @subscribers.each do |subscriber| %>
+        <tr>
+        <th class="d-flex justify-content-center">
+        <div class="form-check">
+          <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber), remote: :true, method: :post } %>
+        </div>
+        </th>
+          <td scope="row">
+            <% if subscriber.hot_lead  %>
+              <span class="badge badge-danger">Chaud</span>
+            <%elsif subscriber.is_broker_affiliated%>
+              <span class="badge badge-info">Client</span>
+            <%else%>
+              <span class="badge badge-light">Froid</span>
+            <%end%>
+          </td>
+          <td><%= subscriber.get_fullname%></td>
+          <td><%= subscriber.created_at.strftime("%d/%m/%Y")%></td>
+          <td>
+          <% if subscriber.is_active %>
+              <span class="badge badge-pill badge-success">Oui</span>
+            <%else%>
+              <span class="badge badge-light">Non</span>
+            <%end%>
+          </td>
+          <td>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#subscriber-<%= subscriber.id%>">
+            Voir plus
+          </button>
+          </td>
+        </tr>
+        <tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% @subscribers.each do |subscriber| %>
+    <!-- Subscriber Modal -->
+    <div class="modal fade" id="subscriber-<%= subscriber.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><%= subscriber.get_fullname%> (détails)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5>Coordonnées</h5>
+            <ul>
+              <li><b>email :</b> <%= subscriber.email %></li>
+              <li><b>téléphone :</b> <%= subscriber.phone %></li>
+            </ul>
+            <h5>Recherche</h5>
+            <%= render 'subscriber_research', research: subscriber.research %>
+            <h5>Historique</h5>
+            <ul>
+              <% SubscriberNote.where(subscriber: subscriber).each do |note| %>
+              <li>[<%= note.created_at.strftime("%d-%m-%y") %>] <%= note.content %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

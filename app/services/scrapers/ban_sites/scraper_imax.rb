@@ -1,7 +1,7 @@
 class BanSites::ScraperImax < Scraper
   attr_accessor :url, :properties, :source, :main_page_cls, :scraper_type, :waiting_cls, :multi_page, :page_nbr, :wait, :click_args
 
-  def initialize
+  def initialize(sp_id = nil)
     @url = "https://www.imax.fr/recherche,basic.htm?tri=d_px&idtt=2#ci=750109,750109,750116,750116,750117,750117,750118,750118&idqfix=1&idtt=2&idtypebien=1,2&lang=fr&pres=prestige&pxmax=Max&pxmin=Min&surf_terrainmax=Max&surf_terrainmin=Min"
     @source = "Imax"
     @main_page_cls = "div.recherche-annonces-vente"
