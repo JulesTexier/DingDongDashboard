@@ -176,6 +176,41 @@
     is_active: true
     group_type: Hub
     high_priority: false
+  - zone: Mulhouse (68)
+    url: https://www.superimmo.com/achat/alsace/haut-rhin/mulhouse-68?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://www.superimmo.com/achat/auvergne/puy-de-dome/clermont-ferrand-63?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.superimmo.com/achat/rhone-alpes/isere/grenoble-38?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://www.superimmo.com/achat/pays-de-la-loire/maine-et-loire/angers-49?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://www.superimmo.com/achat/languedoc-roussillon/pyrenees-orientales/perpignan-66?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: BienIci
   params:
   - zone: Paris (75)
@@ -348,6 +383,41 @@
     high_priority: false
   - zone: Reims (51)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-36458%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Mulhouse (68)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-38246%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-110866%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80348%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-178351%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-18000%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -530,6 +600,41 @@
     is_active: true
     group_type: Hub
     high_priority: false
+  - zone: Mulhouse (68)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Mulhouse%20(68)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Clermont-Ferrand%20(63)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Grenoble%20(38)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Angers%20(49)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Perpignan%20(66)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: Propr. Figaro
   params:
   - zone: Paris (75)
@@ -702,6 +807,41 @@
     high_priority: false
   - zone: Reims (51)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-marne-champagne+ardenne-france/?ville=reims&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Mulhouse (68)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-haut+rhin-alsace-france/?ville=mulhouse&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-puy+de+dome-auvergne-france/?ville=clermont+ferrand&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-isere-rhone+alpes-france/?ville=grenoble&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=angers&tri=2
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-pyrenees+orientales-languedoc+roussillon-france/?ville=perpignan&tri=2
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: true
@@ -884,6 +1024,41 @@
     is_active: true
     group_type: Hub
     high_priority: false
+  - zone: Mulhouse (68)
+    url: https://www.logic-immo.com/vente-immobilier-mulhouse-tous-codes-postaux,237_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://www.logic-immo.com/vente-immobilier-clermont-ferrand-tous-codes-postaux,91_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.logic-immo.com/vente-immobilier-grenoble-tous-codes-postaux,144_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://www.logic-immo.com/vente-immobilier-angers-tous-codes-postaux,18_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://www.logic-immo.com/vente-immobilier-perpignan-tous-codes-postaux,268_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: true
+    group_type: Hub
+    high_priority: false
 - source: PAP
   params:
   - zone: Paris (75)
@@ -1028,6 +1203,41 @@
     high_priority: false
   - zone: Reims (51)
     url: https://www.pap.fr/annonce/vente-appartement-maison-reims-51100-g26363-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Mulhouse (68) 
+    url: https://www.pap.fr/annonce/vente-appartement-maison-mulhouse-68-g43628-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Clermont-Ferrand (63)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-clermont-ferrand-63-g43600-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-grenoble-38-g43606-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Angers (49)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-angers-49-g43584-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: true
+    group_type: Hub
+    high_priority: false
+  - zone: Perpignan (66)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-perpignan-66-g43633-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: true
@@ -1190,6 +1400,30 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Mulhouse (68)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=68224&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=38185&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Angers (49)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49007&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Perpignan (66)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=66136&sort=date_desc&limit=15
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Orpi
   params:
   - zone: Paris (75)
@@ -1347,6 +1581,36 @@
     http_type: get_json
     is_active: true
     group_type: Group
+  - zone: Mulhouse (68)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=mulhouse&locations%5B0%5D%5Blabel%5D=mulhouse&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Clermont-Ferrand (63)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=clermont-ferrand&locations%5B0%5D%5Blabel%5D=clermont-ferrand&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=grenoble&locations%5B0%5D%5Blabel%5D=grenoble&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Angers (49)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=angers&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Perpignan (66)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=perpignan&locations%5B0%5D%5Blabel%5D=perpignan&sort=date-down&layoutType=list
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
 - source: Laforet
   params:
   - zone: Paris (75)
@@ -1488,6 +1752,30 @@
     group_type: Group
   - zone: Bourg-en-Bresse (01)
     url: https://www.laforet.com/api/immo/properties?&cities=01053&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Clermont-Ferrand (63)
+    url: https://www.laforet.com/api/immo/properties?&cities=63113&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.laforet.com/api/immo/properties?&cities=38185&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Angers (49)
+    url: https://www.laforet.com/api/immo/properties?&cities=49007&transaction=buy&perPage=25
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: true
+    group_type: Group
+  - zone: Perpignan (66)
+    url: https://www.laforet.com/api/immo/properties?&cities=66136&transaction=buy&perPage=25
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: true
@@ -1642,6 +1930,24 @@
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
+  - zone: Clermont-Ferrand (63)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-clermont+ferrand/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-grenoble/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
+  - zone: Perpignan (66)
+    url: https://www.century21.fr/annonces/achat-maison-appartement/v-perpignan/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: true
+    group_type: Group
 - source: Foncia
   params:
   - zone: Paris (75)
@@ -1791,535 +2097,637 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
+  - zone: Mulhouse (68)
+    url: https://fr.foncia.com/achat/mulhouse-68/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
+  - zone: Grenoble (38)
+    url: https://fr.foncia.com/achat/grenoble-38/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: true
+    group_type: Group
 - source: MeilleursAgents
   params:
-    - zone: Paris (75)
-      url: https://www.meilleursagents.com/annonces/achat/paris-75000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Lyon (69)
-      url: https://www.meilleursagents.com/annonces/achat/lyon-69000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Yvelines (78)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=34100%2C34224%2C34237%2C34261%2C34056%2C34146%2C34151%2C34153%2C34087%2C34076&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Yvelines (78)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=34060%2C34176%2C34125%2C34052&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Hauts-de-Seine (92)
-      url: https://www.meilleursagents.com/annonces/achat/hauts-de-seine-92/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Seine-Saint-Denis (93)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38497%2C38499%2C38513%2C38516%2C38521%2C38524%2C38528%2C38530&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Val-de-Marne (94)
-      url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38540%2C38546%2C38551%2C38553%2C38555%2C38557%2C38562%2C38574%2C38584%2C38571&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Toulouse (31)
-      url: https://www.meilleursagents.com/annonces/achat/toulouse-31000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nantes (44)
-      url: https://www.meilleursagents.com/annonces/achat/nantes-44000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Rennes (35)
-      url: https://www.meilleursagents.com/annonces/achat/rennes-35000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: La Rochelle (17)
-      url: https://www.meilleursagents.com/annonces/achat/larochelle-17000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Bordeaux (33)
-      url: https://www.meilleursagents.com/annonces/achat/bordeaux-33000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Lille (59)
-      url: https://www.meilleursagents.com/annonces/achat/lille-59000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Le Havre (76)
-      url: https://www.meilleursagents.com/annonces/achat/le-havre-76600/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Saint-Etienne (42)
-      url: https://www.meilleursagents.com/annonces/achat/saint-etienne-42000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nice (06)
-      url: https://www.meilleursagents.com/annonces/achat/nice-06000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Marseille (13)
-      url: https://www.meilleursagents.com/annonces/achat/marseille-13000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Aix-en-Provence (13)
-      url: https://www.meilleursagents.com/annonces/achat/aix-en-provence-13100/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Montpellier (34)
-      url: https://www.meilleursagents.com/annonces/achat/montpellier-34000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Strasbourg (67)
-      url: https://www.meilleursagents.com/annonces/achat/strasbourg-67000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Brest (29)
-      url: https://www.meilleursagents.com/annonces/achat/brest-29200/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Saint-Brieuc (22)
-      url: https://www.meilleursagents.com/annonces/achat/saint-brieuc-22000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Val d'Oise (95)
-      url: https://www.meilleursagents.com/annonces/achat/pontoise-95300/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nîmes (30)
-      url: https://www.meilleursagents.com/annonces/achat/nimes-30000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Sens (89)
-      url: https://www.meilleursagents.com/annonces/achat/sens-89100/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Annecy (74)
-      url: https://www.meilleursagents.com/annonces/achat/annecy-74000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Bourg-en-Bresse (01)
-      url: https://www.meilleursagents.com/annonces/achat/bourg-en-bresse-01000/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Reims (51)
-      url: https://www.meilleursagents.com/annonces/achat/reims-51100/
-      main_page_cls: div.listing-item.search-listing-result__item
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
+  - zone: Paris (75)
+    url: https://www.meilleursagents.com/annonces/achat/paris-75000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Lyon (69)
+    url: https://www.meilleursagents.com/annonces/achat/lyon-69000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Yvelines (78)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=34100%2C34224%2C34237%2C34261%2C34056%2C34146%2C34151%2C34153%2C34087%2C34076&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Yvelines (78)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=34060%2C34176%2C34125%2C34052&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Hauts-de-Seine (92)
+    url: https://www.meilleursagents.com/annonces/achat/hauts-de-seine-92/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Seine-Saint-Denis (93)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38497%2C38499%2C38513%2C38516%2C38521%2C38524%2C38528%2C38530&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Val-de-Marne (94)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=38540%2C38546%2C38551%2C38553%2C38555%2C38557%2C38562%2C38574%2C38584%2C38571&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Toulouse (31)
+    url: https://www.meilleursagents.com/annonces/achat/toulouse-31000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nantes (44)
+    url: https://www.meilleursagents.com/annonces/achat/nantes-44000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Rennes (35)
+    url: https://www.meilleursagents.com/annonces/achat/rennes-35000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: La Rochelle (17)
+    url: https://www.meilleursagents.com/annonces/achat/larochelle-17000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Bordeaux (33)
+    url: https://www.meilleursagents.com/annonces/achat/bordeaux-33000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Lille (59)
+    url: https://www.meilleursagents.com/annonces/achat/lille-59000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Le Havre (76)
+    url: https://www.meilleursagents.com/annonces/achat/le-havre-76600/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Saint-Etienne (42)
+    url: https://www.meilleursagents.com/annonces/achat/saint-etienne-42000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nice (06)
+    url: https://www.meilleursagents.com/annonces/achat/nice-06000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.meilleursagents.com/annonces/achat/marseille-13000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.meilleursagents.com/annonces/achat/aix-en-provence-13100/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.meilleursagents.com/annonces/achat/montpellier-34000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.meilleursagents.com/annonces/achat/strasbourg-67000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.meilleursagents.com/annonces/achat/brest-29200/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Saint-Brieuc (22)
+    url: https://www.meilleursagents.com/annonces/achat/saint-brieuc-22000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Val d'Oise (95)
+    url: https://www.meilleursagents.com/annonces/achat/pontoise-95300/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nîmes (30)
+    url: https://www.meilleursagents.com/annonces/achat/nimes-30000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Sens (89)
+    url: https://www.meilleursagents.com/annonces/achat/sens-89100/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Annecy (74)
+    url: https://www.meilleursagents.com/annonces/achat/annecy-74000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.meilleursagents.com/annonces/achat/bourg-en-bresse-01000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Reims (51)
+    url: https://www.meilleursagents.com/annonces/achat/reims-51100/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Mulhouse (68)
+    url: https://www.meilleursagents.com/annonces/achat/mulhouse-68100/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Clermont-Ferrand (63)
+    url: https://www.meilleursagents.com/annonces/achat/clermont-ferrand-63000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/grenoble-38000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Angers (49)
+    url: https://www.meilleursagents.com/annonces/achat/angers-49000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Perpignan (66)
+    url: https://www.meilleursagents.com/annonces/achat/perpignan-66000/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
 - source: SeLoger
   params:
-    - zone: Paris (75)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Paris (75)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&LISTING-LISTpg=2
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Lyon (69)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:690123}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Hauts-de-Seine (92)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:92}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Val-de-Marne (94)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:940067}|{ci:940080}|{ci:940033}|{ci:940052}|{ci:940042}|{ci:940069}|{ci:940018}|{ci:940041}|{ci:940043}|{ci:940037}|{ci:940003}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Seine-Saint-Denis (93)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:930070}|{ci:930066}|{ci:930001}|{ci:930055}|{ci:930061}|{ci:930045}|{ci:930006}|{ci:930048}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Toulouse (31)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:310555}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nantes (44)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:440109}]]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Rennes (35)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:350238}&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: La Rochelle (17)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:170300}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Bordeaux (33)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:330063}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Lille (59)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:590350}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Le Havre (76)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:760351}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Saint-Etienne (42)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:420218}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nice (06)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:60088}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Marseille (13)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130055}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Aix-en-Provence (13)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130001}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Montpellier (34)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:340172}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Strasbourg (67)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:670482}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-      high_priority: false
-    - zone: Brest (29)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:290019}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Saint-Brieuc (22)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:220278}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Val d'Oise (95)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:950500}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Nîmes (30)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:300189}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Sens (89)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:890387}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Annecy (74)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:740010}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Bourg-en-Bresse (01)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:10053}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Reims (51)
-      url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:510454}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-      main_page_cls: script
-      scraper_type: Proxy
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
+  - zone: Paris (75)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Paris (75)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:75}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&LISTING-LISTpg=2
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Lyon (69)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:690123}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Hauts-de-Seine (92)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{cp:92}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Val-de-Marne (94)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:940067}|{ci:940080}|{ci:940033}|{ci:940052}|{ci:940042}|{ci:940069}|{ci:940018}|{ci:940041}|{ci:940043}|{ci:940037}|{ci:940003}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Seine-Saint-Denis (93)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:930070}|{ci:930066}|{ci:930001}|{ci:930055}|{ci:930061}|{ci:930045}|{ci:930006}|{ci:930048}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Toulouse (31)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:310555}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nantes (44)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:440109}]]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Rennes (35)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:350238}&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: La Rochelle (17)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:170300}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Bordeaux (33)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:330063}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Lille (59)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:590350}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Le Havre (76)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:760351}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Saint-Etienne (42)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:420218}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nice (06)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:60088}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Marseille (13)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130055}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Aix-en-Provence (13)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:130001}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Montpellier (34)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:340172}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Strasbourg (67)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:670482}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+    high_priority: false
+  - zone: Brest (29)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:290019}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Saint-Brieuc (22)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:220278}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Val d'Oise (95)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:950500}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Nîmes (30)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:300189}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Sens (89)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:890387}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Annecy (74)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:740010}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Bourg-en-Bresse (01)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:10053}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Reims (51)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:510454}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Mulhouse (68)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:680224}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Clermont-Ferrand (63)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:630113}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Grenoble (38)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:380185}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Angers (49)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:490007}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Perpignan (66)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:660136}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
 - source: SeLoger
   params:
-    - zone: Paris (75)
-      is_active: true
-      main_page_cls: li.property.initial
-      group_type: Email
+  - zone: Paris (75)
+    is_active: true
+    main_page_cls: li.property.initial
+    group_type: Email
 - source: LeBonCoin
   params:
-    - zone: Paris (75)
-      url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
-      main_page_cls: body
-      scraper_type: Captcha
-      is_active: true
-      group_type: Premium
-    - zone: Lyon (69)
-      url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
-      main_page_cls: body
-      scraper_type: Captcha
-      is_active: true
-      group_type: Premium
+  - zone: Paris (75)
+    url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Lyon (69)
+    url: https://www.leboncoin.fr/recherche/?category=9&locations=Lyon__45.76071825414269_4.836251707178035_7600&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
 - source: ERA France
   params:
   - zone: Paris (75)
@@ -2334,16 +2742,16 @@
     group_type: Group
 - source: Saint-Ferdinand
   params:
-    - zone: Paris (75)
-      url: http://www.agencessaintferdinand.com/acheter/
-      scraper_type: HTTPRequest
-      main_page_cls: div.property_listing
-      is_active: true
-      group_type: Group
-      http_request:
-        - {}
-        - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
-      http_type: post
+  - zone: Paris (75)
+    url: http://www.agencessaintferdinand.com/acheter/
+    scraper_type: HTTPRequest
+    main_page_cls: div.property_listing
+    is_active: true
+    group_type: Group
+    http_request:
+      - {}
+      - 'action=ajax_filter_listings&action_values=vente&category_values=All+Types&city=all&area=All+Areas&order=3&newpage=1&page_id=5393'
+    http_type: post
 - source: Vanneau
   params: 
   - zone: Paris (75)
@@ -2354,73 +2762,73 @@
     group_type: Hub
 - source: Arthurimmo
   params:
-    - zone: Paris (75)
-      url: https://www.arthurimmo.com/recherche,incl_recherche_prestige_ajax.htm?idpays=250&ci=750056&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&tri=d_dt_crea%2Cd_dt_crea&idtypebien=1%2C2&tri=d_dt_crea&_=1587115724817
-      main_page_cls: div.recherche-annonces-vente
-      scraper_type: Static
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Group
+  - zone: Paris (75)
+    url: https://www.arthurimmo.com/recherche,incl_recherche_prestige_ajax.htm?idpays=250&ci=750056&surfacemin=Min&surfacemax=Max&surf_terrainmin=Min&surf_terrainmax=Max&idqfix=1&idtt=2&pres=prestige&lang=fr&tri=d_dt_crea%2Cd_dt_crea&idtypebien=1%2C2&tri=d_dt_crea&_=1587115724817
+    main_page_cls: div.recherche-annonces-vente
+    scraper_type: Static
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Group
 - source: ParuVendu
   params:
-    - zone: Paris (75)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Yvelines (78)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=,78251,78551,78586,78650,78133,78358,78367,78372,78224,78190,78146,78418,78311,78124
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Hauts-de-Seine (92)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=92&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Val-de-Marne (94)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=94003,94037,94043,94041,94018,94069,94042,94052,94033,94080,94067
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
-    - zone: Seine-Saint-Denis (93)
-      url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=93070,93066,93001,93055,93061,93045,93006,93048
-      main_page_cls: "#bloc_liste > div.ergov3-annonce"
-      scraper_type: Proxy
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Proxy
+  - zone: Paris (75)
+    url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter
+    main_page_cls: "#bloc_liste > div.ergov3-annonce"
+    scraper_type: Proxy
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Yvelines (78)
+    url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=,78251,78551,78586,78650,78133,78358,78367,78372,78224,78190,78146,78418,78311,78124
+    main_page_cls: "#bloc_liste > div.ergov3-annonce"
+    scraper_type: Proxy
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Hauts-de-Seine (92)
+    url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=92&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=
+    main_page_cls: "#bloc_liste > div.ergov3-annonce"
+    scraper_type: Proxy
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Val-de-Marne (94)
+    url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=94003,94037,94043,94041,94018,94069,94042,94052,94033,94080,94067
+    main_page_cls: "#bloc_liste > div.ergov3-annonce"
+    scraper_type: Proxy
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
+  - zone: Seine-Saint-Denis (93)
+    url: https://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?nbp=0&tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&at=1&nbp0=99&pa=FR&lo=75&ddlTri=dateMiseAJour&ddlOrd=desc&ddlFiltres=nofilter&codeINSEE=93070,93066,93001,93055,93061,93045,93006,93048
+    main_page_cls: "#bloc_liste > div.ergov3-annonce"
+    scraper_type: Proxy
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Proxy
 - source: Connexion Immobilier
   params:
-    - zone: Paris (75)
-      url: https://www.connexion-immobilier.com/achat-vente-immobilier-acheter-paris/resultats-annonces-achat
-      main_page_cls: div.prdlst
-      scraper_type: Static
-      waiting_cls: nil
-      multi_page: false
-      page_nbr:  1
-      is_active: true
-      group_type: Group
+  - zone: Paris (75)
+    url: https://www.connexion-immobilier.com/achat-vente-immobilier-acheter-paris/resultats-annonces-achat
+    main_page_cls: div.prdlst
+    scraper_type: Static
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: true
+    group_type: Group
 - source: Connexion Immobilier
   params:
-    - zone: Paris (75)
-      is_active: true
-      group_type: Email
+  - zone: Paris (75)
+    is_active: true
+    group_type: Email
 - source: Barnes International
   params:
     - zone: Paris (75)
