@@ -60,8 +60,8 @@ class Api::V1::ResearchesController < ActionController::API
     private
 
     def research_params
-        params.permit(:agglomeration, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type, :subscriber_id)
-      end
+        params.permit(:agglomeration_id, :min_floor, :has_elevator, :min_elevator_floor, :min_surface, :min_rooms_number, :max_price, :min_price, :max_sqm_price, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :appartement_type, :subscriber_id)
+    end
 
     def authentificate
         authenticate_or_request_with_http_token do |token, options|
