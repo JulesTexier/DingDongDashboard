@@ -94,7 +94,7 @@ class Api::V1::SubscribersController < ActionController::API
     private
 
     def subscriber_params
-        params.permit(:firstname, :lastname, :email, :phone, :facebook_id, :is_active, :max_price, :min_surface, :trello_id_card, :broker_id)
+        params.permit(:firstname, :lastname, :email, :phone, :facebook_id, :is_active, :max_price, :min_surface, :trello_id_card, :broker_id, :hot_lead, :status)
     end
 
     def authentificate
