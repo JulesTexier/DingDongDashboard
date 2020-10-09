@@ -64,6 +64,11 @@ namespace :broadcast do
     puts "Launching Good Morning Broadcast"
     BroadcasterWorker.perform_async('good_morning')
   end
+
+  task :good_morning_mailer do
+    puts "Launching Good Morning Broadcast"
+    BroadcasterWorker.perform_async('good_morning_mailer')
+  end
 end
 
 namespace :test do
