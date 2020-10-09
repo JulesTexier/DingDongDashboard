@@ -98,8 +98,12 @@ class Broker < ApplicationRecord
 
   def self.get_accurate_by_agglomeration(agglomeration_id)
     brokers = Broker.where(agglomeration_id: agglomeration_id)
-    offset = rand(brokers.count)
-    rand_broker = brokers.offset(offset).first
+    broker_hash = {}
+    brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
+    return Broker.find(broker_hash.sort.first[0])
+
+    # offset = rand(brokers.count)
+    # rand_broker = brokers.offset(offset).first
     return rand_broker
   end
 
