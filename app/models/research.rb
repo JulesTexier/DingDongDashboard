@@ -83,21 +83,26 @@ class Research < ApplicationRecord
   end
 
   ################################
-  ## PUBLIC MATCHING ALGORYTHMS ##
+  ## PUBLIC MATCHING ALGORITHMS ##
   ################################
 
   def matching_property?(args, areas)
-    matching_property_rooms_number?(args["rooms_number"]) &&
+    is_matching = matching_property_rooms_number?(args["rooms_number"]) &&
     matching_property_surface?(args["surface"]) &&
     matching_property_price?(args["price"]) &&
-    matching_property_floor?(args["floor"]) &&
     matching_property_area?(args["area_id"], areas) &&
     matching_max_sqm_price?(args["price"], args["surface"]) &&
-    matching_property_elevator_floor?(args["floor"], args["has_elevator"]) &&
     matching_exterior?(args["has_terrace"], args["has_garden"], args["has_balcony"]) &&
-    matching_property_last_floor?(args["is_last_floor"]) &&
     matching_property_new_construction?(args["is_new_construction"]) && 
     matching_property_flat_type?(args["flat_type"])
+
+    if is_matching && ["Appartement", "N/C"].include?(args["flat_type"])
+      is_matching = matching_property_elevator_floor?(args["floor"], args["has_elevator"]) &&
+      matching_property_floor?(args["floor"]) &&
+      matching_property_last_floor?(args["is_last_floor"])
+    end
+    
+    return is_matching
   end
 
   def update_research_areas(areas_ids)
