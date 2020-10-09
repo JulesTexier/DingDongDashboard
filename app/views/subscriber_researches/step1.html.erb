@@ -4,29 +4,36 @@
 
         <div class="row"> 
             <div class="col d-flex justify-content-center"> 
-                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;">
+                <img src="<%= asset_path('logo_blanc.svg') %>" height="120px;" class="marginTopHeader">
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 d-flex">
+        <div class="row marginTopSteps">
+            <div class="col-12 display-flex mobileHide">
                 <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "📍 Agglomération", step1_subscriber_researches_path, style:'color:#fff' %></div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off" >⚙️ Critères</div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">💌 Validation</div></div>
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "1. Agglomération", step1_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-off" >2. Critères</div></div>
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-off">3. Compte</div></div>
+                </ul>
+            </div>
+            <div class="col-12 display-flex mobileShow">
+                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-active"><%= link_to "1. Agglo.", step1_subscriber_researches_path, style:'color:#fff' %></div></div>
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-off" >2. Crit.</div></div>
+                    <div class="col-4 text-center mb-1 p-0"><div class="badge-off">3. Compte</div></div>
                 </ul>
             </div>
         </div>
 
-        <div class="bg-white-steps box-centered">
-            <div class="container margin-negative-50">
+        <div class="bg-white-steps">
+            <div class="container">
 
                 <%= simple_form_for @subscriber_research_wizard, as: :subscriber_research_wizard, url: validate_step_subscriber_researches_path do |f| %>
                   <%= hidden_field_tag :current_step, 'step1' %>
                     <div class="container">
                         <div class="row mb-5 mt-5">
-                            <div class="col-12 col-lg-4 mb-5 p-0">
-                                <div class="mb-4 mt-5 mt-lg-0">
+                            <div class="col-12 col-lg-6 mb-5 p-0">
+                                <div class="mb-4 mt-lg-0">
                                     <div class="">
                                         <h5 class="mb-3">
                                             <div> Dans quelle agglomération cherchez-vous ?</div>
@@ -35,21 +42,21 @@
                                 </div>
                                 <div class="raw d-flex flex-wrap">
                                     <div class="form-group col-12 p-0 mb-0">
-                                      <%= f.input_field :agglomeration_id, :collection => @agglomerations_infos.map{|o| [o.name, o.id, {disabled: !o.is_active}]},  class: "form-control", id: "choices-multiple-remove-button", label: false %>
+                                      <%= f.input_field :agglomeration_id, :collection => @agglomerations_infos.map{|o| [o.name, o.id, {disabled: !o.is_active}]},  class: "form-control", id: "choices-multiple-remove-button", label: false%>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-8 d-flex justify-content-center margin-bottom-navbar"> 
+                            <div class="col-12 col-lg-6 display-flex justify-content-center margin-bottom-navbar mobileHide"> 
                                 <img src="<%= asset_path('france-map.svg') %>" height="300px;">
                             </div>
                         </div>
                     </div>
 
-                        <nav class="navbar navbar-light fixed-bottom bg-blue">
+                        <nav class="navbar navbar-light fixed-bottom navbarBlueLight">
                             <div class="container justify-content-center p-0">
                                 <div class="row w-100 justify-content-center">
                                     <div class="col-12 col-md-6 col-lg-4 p-0">
-                                        <%= f.submit "Etape suivante", class: "btn-outline-navbar w-100"%>
+                                        <%= f.submit "Etape suivante", class: "btn-outline-navbar w-75-mobile"%>
                                     </div>
                                 </div>
                             </div>
