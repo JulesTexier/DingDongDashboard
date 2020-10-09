@@ -72,7 +72,7 @@ class Broadcaster
         body[:is_active] = true
         body[:message] = "reactivation"
         @manychat_client.send_dynamic_button_message(sub_research.subscriber, btn_caption, webhook, "post", text, body)
-        SubscriberNote.create(subscriber: sub_research.subscriber, content: "Alerte désactivée, utilisateur inactif depuis 6 jours")
+        # SubscriberNote.create(subscriber: sub_research.subscriber, content: "Alerte désactivée, utilisateur inactif depuis 6 jours")
       else
         puts "No warning Good Morning Message for #{sub_research.subscriber[:facebook_id]}."
       end
