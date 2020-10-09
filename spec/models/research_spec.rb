@@ -69,11 +69,22 @@ RSpec.describe Research, type: :model do
             end
           end
         end
+
+        context "floor is not ok but flat_type is 'Maison'" do
+          it "should  match user and property despite floor because of flat_type !" do
+            @property.first["floor"] = @research.min_floor - 1
+            @research.home_type = true
+            @property.first["flat_type"] = "Maison"
+            @property.each do |prop|
+              expect(@research.matching_property?(prop, @research.areas.ids)).to eq(true)
+            end
+          end
+        end
       end
 
       describe "Property NOT matchs" do
         before :each do
-          prop = FactoryBot.create(:property, price: @research.min_price, surface: @research.min_surface, area: @research.areas.first, rooms_number: @research.min_rooms_number, floor: nil, has_elevator: nil)
+          prop = FactoryBot.create(:property, price: @research.min_price, surface: @research.min_surface, area: @research.areas.first, rooms_number: @research.min_rooms_number, floor: nil, has_elevator: nil, flat_type:"Appartement")
           attrs = %w(id rooms_number surface price floor area_id has_elevator has_terrace has_garden has_balcony is_new_construction is_last_floor images link flat_type)
           @property = Property.where(id: prop.id).pluck(*attrs).map { |p| attrs.zip(p).to_h }
         end
