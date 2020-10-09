@@ -6,6 +6,7 @@
 
 <ul>
   <li><%= @subscriber.get_fullname %></li>
+  <li><%= @subscriber.email %></li>
   <li>id: <%= @subscriber.id%></li>
   <li>agglomeration: <%= @subscriber.research.agglomeration%> </li>
   <% unless @subscriber.broker.nil?%>
