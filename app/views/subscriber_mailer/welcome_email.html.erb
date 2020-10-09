@@ -120,7 +120,7 @@
 
 <%= render 'header' %>
 
-<%= render '5_recent_properties_title' %>
+<%= render '5_recent_properties_title', properties_number: @properties.count %>
 
 <%= render 'property', properties: @properties %>
 
