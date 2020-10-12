@@ -26,7 +26,7 @@ class Api::V1::ManychatController < ApplicationController
       subscriber = Subscriber.find(params[:subscriber_id])
       if subscriber.update(subscriber_params.except(:subscriber_id, :message))
         if subscriber_params[:message] == "reactivation"
-          SubscriberNote.create(subscriber: subscriber, content: "Alerte réactivée après inactivité")
+          # SubscriberNote.create(subscriber: subscriber, content: "Alerte réactivée après inactivité")
           if subscriber.broker.nil?
             render json: send_flow_sequence(subscriber, "content20200511081309_374734")
           else

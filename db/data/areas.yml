@@ -488,6 +488,8 @@
   datas:
     - name: "Saint-Etienne"
       terms:
+        - "Saint-Étienne"
+        - "42100"
         - "42000"
 - zone: Le Havre (76)
   datas:
