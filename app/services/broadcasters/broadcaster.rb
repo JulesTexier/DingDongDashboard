@@ -79,6 +79,14 @@ class Broadcaster
     end
   end
 
+  def good_morning_mailer
+     researches = Research.active_subs_research_email
+     researches.each do |sub_research|
+      research_props = Property.find(sub_research.morning_properties) ##because morning_properties return array of ids
+      SubscriberMailer.good_morning_mailer(sub_research.subscriber, research_props).deliver_now unless research_props.empty?
+     end
+  end
+
 
   private
 
