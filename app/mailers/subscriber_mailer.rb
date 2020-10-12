@@ -8,7 +8,7 @@ class SubscriberMailer < ApplicationMailer
 
   def stop_confirmation(subscriber)
     @subscriber = subscriber
-    mail(to: "#{subscriber.firstname} <#{subscriber.email}>", subject: "DING DONG - Confirmation la suspension de votre alerte")
+    mail(to: "#{subscriber.firstname} <#{subscriber.email}>", subject: "DING DONG - Confirmation de la suspension de votre alerte")
   end
 
 
