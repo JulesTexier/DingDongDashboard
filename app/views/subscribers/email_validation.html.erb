@@ -8,44 +8,31 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 d-flex">
-                <ul class="breadcrumb justify-content-center w-100 p-0" style="background: none">
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off">📍 Agglomération</div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-off" >⚙️ Critères</div></div>
-                    <div class="col-12 col-lg-4 text-center mb-1 p-0"><div class="badge-active">💌 Validation</div></div>
-                </ul>
-            </div>
-        </div>
+        <div class="bg-white-steps">
+            <div class="container">   
+                <div class="row mt-5 mb-4">
+                    <div class="col-12">
+                        <h3 class="mb-3 grey_dark">
+                            <div class='text-center' style="font-family: 'Nunito'">On vient de vous envoyer un mail 👌 </div>
+                        </h3> 
+                        <h5>
+                            <div class="mt-4 text-center grey_dark"> 👨‍💻 Merci de vérifier vos derniers mails reçus (spams compris) pour terminer l'inscription 👨‍💻 </div>
+                        </h5> 
+                    </div>
+                </div>
+                <div class="row mt-3 justify-content-center mt-5" style="margin-bottom:80px"> 
+                    <div class="col-12 col-lg-6 d-flex"> 
+                        <div class="d-flex justify-content-center" >
+                            <video autoplay="autoplay" loop="loop" muted="muted" width="100%">
 
-        <div class="bg-white-steps box-centered">
-            <div class="container">
-                    
-                        <div class="row mt-5 mb-4">
-                            <div class="col-12">
-                                <h3 class="mb-3 grey_dark">
-                                    <div class='text-center' style="font-family: 'Nunito'">On vient de vous envoyer un mail 👌 </div>
-                                </h3> 
-                                <h5>
-                                    <div class="mt-4 text-center grey_dark"> 👨‍💻 Merci de vérifier vos derniers mails reçus (spams compris) pour terminer l'inscription 👨‍💻 </div>
-                                </h5> 
-                            </div>
+                                <source src="<%= asset_path('validation_email.mov') %>"
+                                        type="video/mp4">
+
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>
                         </div>
-                        <div class="row mt-3 justify-content-center mt-5" style="margin-bottom:80px"> 
-                            <div class="col-12 col-lg-6 d-flex"> 
-                                <div class="d-flex justify-content-center" >
-                                    <video autoplay="autoplay" loop="loop" muted="muted" width="100%">
-
-                                        <source src="<%= asset_path('validation_email.mov') %>"
-                                                type="video/mp4">
-
-                                        Sorry, your browser doesn't support embedded videos.
-                                    </video>
-                                </div>
-                            </div>
-                        </div>
-
-            
+                    </div>
+                </div>
             </div>
         </div>
     </div>
