@@ -18,7 +18,8 @@ class Proxy::ScraperMeilleursAgents < Scraper
           hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "div.listing-characteristic.margin-bottom"))
           hashed_property[:surface] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '(\d+(,?)(\d*))(.)(m)').to_float_to_int_scrp
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.listing-characteristic.margin-bottom"), '\d(.)*(pi(è|e)ce(s?))').to_float_to_int_scrp
-          hashed_property[:rooms_number] = 1 if hashed_property[:flat_type] == "Studio"
+          hashed_property[:rooms_number] = 1 if access_xml_text(item, "div.listing-characteristic.margin-bottom").downcase.include?("studio")
+          next if hashed_property[:rooms_number] == 0
           hashed_property[:price] = access_xml_text(item, "div.listing-price.margin-bottom").to_int_scrp
           hashed_property[:has_elevator] = nil
           hashed_property[:floor] = nil
