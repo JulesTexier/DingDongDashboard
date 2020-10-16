@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Tableau de suivi</h1>
-    <p class="lead"><%= @broker.firstname%>, bienvenue sur ta page de suivi de vos contacts.</p>
+    <p class="lead">Bonjour <%= @broker.firstname%>, bienvenue sur la page de suivi de vos contacts.</p>
     <br>
     <p>Votre lien à partager à vos clients: <br>
       <span style="font-style:italic"><%= "#{ENV['BASE_URL']}inscription/courtier/#{@broker.id}" %></span>
