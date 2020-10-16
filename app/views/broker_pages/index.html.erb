@@ -91,7 +91,7 @@
               <span class="badge badge-light">Froid</span>
             <%end%>
           </td>
-          <td><%= subscriber.id.to_s + " " + subscriber.get_fullname%></td>
+          <td><%= subscriber.get_fullname%></td>
           <td><%= subscriber.created_at.strftime("%d/%m/%Y")%></td>
           <td>
           <% unless subscriber.has_stopped? %>
