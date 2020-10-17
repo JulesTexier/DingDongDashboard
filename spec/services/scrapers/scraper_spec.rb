@@ -61,8 +61,8 @@ RSpec.describe Scraper, type: :service do
       end
 
       it "should return true if the €/m2 is under 1000" do
-        expect(@s.is_prop_fake?({ price: 20000, surface: 21, area: "Fourqueux" })).to eq(true)
-        expect(@s.is_prop_fake?({ price: 2000000, surface: 2100, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 20000, surface: 44, area: "Fourqueux" })).to eq(true)
+        expect(@s.is_prop_fake?({ price: 2000000, surface: 4100, area: "Fourqueux" })).to eq(true)
       end
       it "should return false if the €/m2 is over 1000, so the test pass" do
         expect(@s.is_prop_fake?({ price: 20000, surface: 18, area: "Fourqueux" })).to eq(false)
