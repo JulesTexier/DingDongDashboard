@@ -1,10 +1,11 @@
 class BrokerPagesController < ApplicationController
+  before_action :authenticate_admin
 
   HIDE_DAY_COUNT = 7 #Number of days a lead is hide to his broker
   DELAY_BROKER = 7
   
   def index
-    @broker = Broker.find(params[:id])
+    @broker = current_broker
     
     black_listed = []
     # scoped_ids = SubscriberNote.where(content:"L'utilisateur a arrêté son alerte.").map{|s| s.subscriber_id}.each do |s|
@@ -26,4 +27,10 @@ class BrokerPagesController < ApplicationController
     @agglomerations = Agglomeration.all
     @broker_offset = 7
   end
+
+  private
+  def authenticate_admin
+    redirect_to new_broker_session_path unless broker_signed_in?
+  end
+
 end
