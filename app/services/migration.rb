@@ -23,5 +23,34 @@ class Migration
     end
   end
 
+  def remove_subscriber(subscriber_ids)
+    subscriber_ids.each do |sub_id|
+
+      sub = Subscriber.find(sub_id)
+      unless sub.nil?
+        # Get infos 
+        research = sub.research
+        
+        #Remove saved_properties
+        SavedProperty.where(research_id: research.id).destroy_all
+
+        #Remove research_areas
+        ResearchArea.where(research_id: research.id).destroy_all
+
+        #Remove Subscriber Research
+        research.destroy
+
+        #Remove SubscriberNotes
+        SubscriberNote.where(subscriber_id: sub_id).destroy_all
+        
+        #Remove Subscriber
+        sub.destroy
+
+        puts "Subscriber #{sub_id} has been removed, all attached objects also"
+
+      end
+    end
+  end
+
 
 end
