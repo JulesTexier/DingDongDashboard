@@ -2,6 +2,9 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
+  devise_for :brokers
+
+
   #############
   # 1 - Admin
   #############
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
   authenticate :admin do
     mount Sidekiq::Web => "/sidekiq"
   end
-
+  
   # Token confirmation email 
   get '/:token/confirm_email/', :to => "subscribers#confirm_email", as: 'confirm_email'
   
@@ -65,13 +68,13 @@ Rails.application.routes.draw do
   get "/dashboard/source" => "static_pages#sources"
   get "/dashboard/duplicates" => "static_pages#duplicates"
   get "/dashboard/courtiers" => "broker_pages#admin"
-
+  
   #############
   # 5 - API
   #############
   namespace "api" do
     namespace "v1" do
-
+      
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
       post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
@@ -79,7 +82,7 @@ Rails.application.routes.draw do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
         get "/handle-onboarding" => "subscribers#handle_onboarding"
       end
-
+      
       # Other models
       resources :researches, only: [:show, :update, :index, :destroy, :create]
       resources :properties, only: [:show, :index]
@@ -88,7 +91,7 @@ Rails.application.routes.draw do
       resources :contractors, only: [:show]
       resources :subscriber_notes, only: [:create]
       resources :saved_properties, only: [:create, :destroy]
-
+      
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
       get "/manychat/s/:subscriber_id/send/props/morning" => "manychat#send_props_morning" 
@@ -101,25 +104,23 @@ Rails.application.routes.draw do
       
       # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder
-
+      
       # Webhooks 
       post "webhooks/postmark/inbound" => "webhooks#handle_postmark_inbound"
       post "webhooks/postmark/growth-new-contact" => "webhooks#handle_postmark_new_contact"
-
+      
       #data
       get "data/subscribers" => "data#get_subscribers"
       get "data/subscribers/active" => "data#get_active_subscribers"
       get "data/subscribers/facebook" => "data#get_facebook_id_subscribers"
     end
   end
-
+  
   #############
   # 6 - Broker Dashboard
   #############
-  get "/courtier/:id/dashboard" => "broker_pages#index"
+  
+  get "/courtier/dashboard" => "broker_pages#index", :as => :broker_root
   post "/broker/checked" => "broker_pages#checked_by_broker"
-
-
-
 
 end
