@@ -3,6 +3,7 @@
     <h1 class="display-4">Tableau de suivi</h1>
     <p class="lead">Bonjour <%= @broker.firstname%>, bienvenue sur la page de suivi de vos contacts.</p>
     <br>
+    <p><%= link_to 'Se deconnecter', destroy_broker_session_path, :method => :delete %><p>
     <p>Votre lien à partager à vos clients: <br>
       <span style="font-style:italic"><%= "#{ENV['BASE_URL']}inscription/courtier/#{@broker.id}" %></span>
     </p>
