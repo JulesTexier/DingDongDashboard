@@ -1,13 +1,14 @@
 FactoryBot.define do
   factory :broker do
-    firstname { "Firstname" }
-    lastname { "Lastname" }
+    firstname { (0...50).map { ('a'..'z').to_a[rand(26)] }.join }
+    lastname { (0...50).map { ('a'..'z').to_a[rand(26)] }.join }
     email { "#{firstname}.#{lastname}@email.com".downcase }
     phone { "0680088008" }
     trello_id { "trello_id" }
     trello_lead_list_id { "trello_lead_list_id" }
     trello_board_id { "trello_board_id" }
     trello_username { "username" }
+    password { 'dingdong' }
 
     factory :subscriber_aurelien do 
       trello_username {'aurelienguichard1'}
