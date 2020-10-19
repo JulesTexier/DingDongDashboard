@@ -65,7 +65,7 @@ class Broadcaster
         btn_caption = "🚀 Recevoir !"
         @manychat_client.send_dynamic_button_message(sub_research.subscriber, btn_caption, webhook, "get", text, body = {})
       elsif border
-        text = "🔔 Votre alerte est en pause ! 🔔\u000A Nous stoppons les messages automatiques au bout d'une semaine sans action de votre part 😊🙏\u000AContinuez à recevoir les annonces simplement en cliquant ici"
+        text = "🔔 Votre alerte est en pause ! 🔔\u000A Nous stoppons les messages automatiques au bout de 24h sans action de votre part 😊🙏\u000AContinuez à recevoir les annonces simplement en cliquant ici"
         webhook = ENV["BASE_URL"] + "api/v1/manychat/s/#{sub_research.subscriber.id}/update"
         btn_caption = "🚀 Continuer !"
         body = {}
