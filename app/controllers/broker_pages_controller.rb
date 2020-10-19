@@ -19,12 +19,6 @@ class BrokerPagesController < ApplicationController
     subscriber.update(checked_by_broker: !subscriber.checked_by_broker )
   end
 
-  def admin
-    @brokers = Broker.all.includes(:subscribers).order(:agglomeration_id)
-    @agglomerations = Agglomeration.all
-    @broker_offset = 7
-  end
-
   private
   def authenticate_admin
     redirect_to new_broker_session_path unless broker_signed_in?
