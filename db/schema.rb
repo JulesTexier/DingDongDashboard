@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_150804) do
+ActiveRecord::Schema.define(version: 2020_10_17_124145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_150804) do
   create_table "brokers", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "phone"
     t.string "agency"
     t.string "trello_id"
@@ -114,7 +114,13 @@ ActiveRecord::Schema.define(version: 2020_10_06_150804) do
     t.string "description"
     t.string "alias_email"
     t.bigint "agglomeration_id"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["agglomeration_id"], name: "index_brokers_on_agglomeration_id"
+    t.index ["email"], name: "index_brokers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
   end
 
   create_table "contractors", force: :cascade do |t|
@@ -356,6 +362,8 @@ ActiveRecord::Schema.define(version: 2020_10_06_150804) do
     t.boolean "is_broker_affiliated", default: false
     t.boolean "hot_lead", default: false
     t.boolean "checked_by_broker", default: false
+    t.boolean "has_stopped", default: false
+    t.datetime "has_stopped_at"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"

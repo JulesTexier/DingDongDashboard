@@ -101,6 +101,7 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: false)
+        @subscriber.update(has_stopped: true, has_stopped_at: Time.now)
         SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a arrêté son alerte.")
         AdminMailer.subscriber_email_stop(@subscriber.id).deliver_now
         @confirmation = true
@@ -115,6 +116,7 @@ class SubscriberResearchesController < ApplicationController
       @confirmation = false
       @subscriber = Subscriber.find(params[:subscriber_id])
       if @subscriber.update(is_active: true)
+        @subscriber.update(has_stopped: false, has_stopped_at: nil)
         SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a reactivé son alerte.")
         AdminMailer.subscriber_email_reactivation(@subscriber.id).deliver_now
         @confirmation = true

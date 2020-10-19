@@ -1,12 +1,15 @@
 class BrokerPagesController < ApplicationController
+  before_action :authenticate_admin
 
   HIDE_DAY_COUNT = 7 #Number of days a lead is hide to his broker
   DELAY_BROKER = 7
   
   def index
-    @broker = Broker.find(params[:id])
+    @broker = current_broker
     
-    @subscribers = Subscriber.where(broker: @broker).where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC')
+    black_listed = []
+    # @subscribers = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC').select{|s| (!s.has_stopped? || s.has_stopped? && (s.stopped_date - s.created_at) > 7.days) }
+    @subscribers = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC').select{|s| (!s.has_stopped || s.has_stopped && (s.has_stopped_at - s.created_at) > 7.days) }
     @subscribers_week = @subscribers.select{|x| x.created_at >  Time.now - (7 + DELAY_BROKER).days }
     @subscribers_month = @subscribers.select{|x| x.created_at >  Time.now - (30 + DELAY_BROKER).days }
   end
@@ -21,4 +24,10 @@ class BrokerPagesController < ApplicationController
     @agglomerations = Agglomeration.all
     @broker_offset = 7
   end
+
+  private
+  def authenticate_admin
+    redirect_to new_broker_session_path unless broker_signed_in?
+  end
+
 end

@@ -4,8 +4,31 @@
     <br>
   </div>
 </div>
+<% if false %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card">
+        <h5 class="card-header">Stats mois en cours</h5>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      
+    </div>
+    <div class="col-lg-4">
+      
+    </div>
+  </div>
+</div>
+<%end%>
 
-<div class= "container">
+
+<div class= "container mt-5">
 
   <section>
     <h2>Synthèse par agglomerations</h2>
@@ -53,6 +76,8 @@
               <span class="badge badge-light"> <% subscribers_all.flatten.each{ |s| subscribers_client.push(s) if s.is_broker_affiliated } %> <%= subscribers_client.count %> 💼</span>
             </td>
             <td>
+              <% agency_broker_hash = {} if false%>
+              <% nv_agencies = @brokers.select{ |b| b.agglomeration_id == agglo.id }.map{ |b| b.agency}.uniq if false %>
               <% if Time.now.strftime("%d").to_i*0.66*@brokers.select{ |b| b.agglomeration_id == agglo.id }.count > (subscribers_all_month.flatten.count - subscribers_client_month.count)%>
                 🟥
               <% else %>

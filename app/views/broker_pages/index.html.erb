@@ -1,8 +1,9 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Tableau de suivi</h1>
-    <p class="lead"><%= @broker.firstname%>, bienvenue sur ta page de suivi de vos contacts.</p>
+    <p class="lead">Bonjour <%= @broker.firstname%>, bienvenue sur la page de suivi de vos contacts.</p>
     <br>
+    <p><%= link_to 'Se deconnecter', destroy_broker_session_path, :method => :delete %><p>
     <p>Votre lien à partager à vos clients: <br>
       <span style="font-style:italic"><%= "#{ENV['BASE_URL']}inscription/courtier/#{@broker.id}" %></span>
     </p>
@@ -71,7 +72,7 @@
           <th scope="col">Nom</th>
           <th scope="col">Inscription</th>
           <th scope="col">Actif ?</th>
-          <th scope="col">Plus</th>
+          <th scope="col">Plus d'infos</th>
         </tr>
       </thead>
       <tbody>
@@ -94,7 +95,7 @@
           <td><%= subscriber.get_fullname%></td>
           <td><%= subscriber.created_at.strftime("%d/%m/%Y")%></td>
           <td>
-          <% if subscriber.is_active %>
+          <% unless subscriber.has_stopped? %>
               <span class="badge badge-pill badge-success">Oui</span>
             <%else%>
               <span class="badge badge-light">Non</span>
@@ -132,11 +133,16 @@
             <h5>Recherche</h5>
             <%= render 'subscriber_research', research: subscriber.research %>
             <h5>Historique</h5>
-            <ul>
-              <% SubscriberNote.where(subscriber: subscriber).each do |note| %>
-              <li>[<%= note.created_at.strftime("%d-%m-%y") %>] <%= note.content %></li>
-              <% end %>
-            </ul>
+            <% notes = subscriber.subscriber_notes %>
+            <% if notes.empty? %>
+              <p style="font-style:italic">Pas d'historique disponible </p>
+            <% else %>
+              <ul>
+                <% notes.each do |note| %>
+                <li>[<%= note.created_at.strftime("%d-%m-%y") %>] <%= note.content %></li>
+                <% end %>
+              </ul>
+            <% end %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

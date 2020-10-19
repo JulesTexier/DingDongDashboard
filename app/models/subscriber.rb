@@ -48,6 +48,15 @@ class Subscriber < ApplicationRecord
     add_subscriber_to_etienne_trello
   end
 
+  def stopped_date
+    if self.has_stopped?
+      return self.subscriber_notes.last.created_at
+    else
+      return nil
+    end
+    
+  end
+
   
 
   ##########################
