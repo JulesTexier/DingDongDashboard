@@ -70,7 +70,6 @@
           <th scope="col">Traité ?</th>
           <th scope="col">Status</th>
           <th scope="col">Nom</th>
-          <th scope="col">Inscription</th>
           <th scope="col">Actif ?</th>
           <th scope="col">Plus d'infos</th>
         </tr>
@@ -93,7 +92,6 @@
             <%end%>
           </td>
           <td><%= subscriber.get_fullname%></td>
-          <td><%= subscriber.created_at.strftime("%d/%m/%Y")%></td>
           <td>
           <% unless subscriber.has_stopped? %>
               <span class="badge badge-pill badge-success">Oui</span>
