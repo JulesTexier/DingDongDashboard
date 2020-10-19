@@ -52,5 +52,23 @@ class Migration
     end
   end
 
+  def broker_repartition(agglomeration_id)
+    broker_scope = Broker.where(agglomeration_id: agglomeration_id ).map{|b|[b.subscribers.count, b.id]}.sort_by{|i| i.first}.reverse.map{|e| e.last}
+    subscriber_scope = Subscriber.where(id: Research.where(agglomeration_id: agglomeration_id ).map{|r| r.subscriber.id}).where(is_broker_affiliated: false, hot_lead:false)
+
+    average = (subscriber_scope.count / broker_scope.count).to_f.to_i
+
+    i = 0
+    broker_scope.each do |b_id|
+    b_subs = Broker.find(b_id).subscribers.where(is_broker_affiliated: false, hot_lead:false)
+      if b_subs.count > average 
+        offset = b_subs.count - average 
+        b_subs.last(offset).each{|s| s.update(broker_id: broker_scope[i+1] )}
+      end
+      i += 1
+      break if i + 2 > broker_scope.count
+    end
+  end
+
 
 end
