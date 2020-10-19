@@ -176,6 +176,12 @@ class StaticPagesController < ApplicationController
     @duplicated_props_last_week = Property.where("created_at BETWEEN ? AND ?", DateTime.now.beginning_of_day - 14.days, DateTime.now.beginning_of_day - 7.days).select(:price, :rooms_number, :surface).group(:price, :rooms_number, :surface).having("count(*) > 1")
   end
 
+  def admin
+    @brokers = Broker.all.includes(:subscribers).order(:agglomeration_id)
+    @agglomerations = Agglomeration.all
+    @broker_offset = 7
+  end
+
   private
   def authenticate_admin
     redirect_to new_admin_session_path unless admin_signed_in?

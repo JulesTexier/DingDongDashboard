@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   get "/dashboard/price" => "static_pages#property_price"
   get "/dashboard/source" => "static_pages#sources"
   get "/dashboard/duplicates" => "static_pages#duplicates"
-  get "/dashboard/courtiers" => "broker_pages#admin"
+  get "/dashboard/courtiers" => "static_pages#admin"
   
   #############
   # 5 - API
