@@ -79,7 +79,7 @@
         <tr>
         <th class="d-flex justify-content-center">
         <div class="form-check">
-          <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber), remote: :true, method: :post } %>
+          <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } %>
         </div>
         </th>
           <td scope="row">

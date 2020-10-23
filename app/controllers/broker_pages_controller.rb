@@ -15,7 +15,7 @@ class BrokerPagesController < ApplicationController
   end
 
   def checked_by_broker
-    subscriber = Subscriber.find(params['checked_by_broker'])
+    subscriber = Subscriber.find(params['format'])
     subscriber.update(checked_by_broker: !subscriber.checked_by_broker )
   end
 
