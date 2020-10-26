@@ -15,6 +15,15 @@ class EmailParser
     email.uniq.one? ? email.uniq.join : email.uniq
   end
 
+  def get_phone_number
+    phone_regex = 'tel:[0-9]{10}'
+    phone = []
+    self.json_content["HtmlBody"].split.each do |str|
+      phone.push(str.match(/#{phone_regex}/i).to_s.gsub('tel:','')) if str.match?(/#{phone_regex}/i)
+    end
+    phone.uniq.one? ? phone.uniq.join : phone.uniq
+  end
+
   def get_email_from_value(json_value)
     email_regex = '[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}'
     res = { email: [] }
