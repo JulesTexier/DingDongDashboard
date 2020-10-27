@@ -23,7 +23,7 @@ class GrowthEngine
     @property_data = e.ad_data_parser_se_loger
   end
 
-  def handle_lead_email(email, phone_number)
+  def handle_lead_email(email, phone_number="")
     # 1 • Handle Subscriber (get or create)
     subscriber = get_subscriber(email, phone_number)
     # 2 • Handle Sequence to execute
@@ -37,7 +37,7 @@ class GrowthEngine
     end
   end
 
-  def get_subscriber(email_address, phone_number)
+  def get_subscriber(email_address, phone_number="")
     sub = Subscriber.where(email: email_address).last
     if sub.nil?
       sub = Subscriber.new(email: email_address, status: "new_lead", phone: phone_number)
