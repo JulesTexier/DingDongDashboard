@@ -91,6 +91,9 @@ Rails.application.routes.draw do
       resources :contractors, only: [:show]
       resources :subscriber_notes, only: [:create]
       resources :saved_properties, only: [:create, :destroy]
+
+      # Nuxt 
+      get "/nuxt/brokers/:id/leads" => "brokers#get_dashboard_leads"
       
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
