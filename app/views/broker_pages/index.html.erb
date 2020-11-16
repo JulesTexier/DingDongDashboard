@@ -128,8 +128,10 @@
               <li><b>email :</b> <%= subscriber.email %></li>
               <li><b>téléphone :</b> <%= subscriber.phone %></li>
             </ul>
-            <h5>Recherche</h5>
-            <%= render 'subscriber_research', research: subscriber.research %>
+            <% unless subscriber.research.nil? %>
+              <h5>Recherche</h5>
+              <%= render 'subscriber_research', research: subscriber.research %>
+            <% end %>
             <h5>Historique</h5>
             <% notes = subscriber.subscriber_notes %>
             <% if notes.empty? %>
