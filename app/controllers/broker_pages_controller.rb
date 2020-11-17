@@ -6,7 +6,6 @@ class BrokerPagesController < ApplicationController
   
   def index
     @broker = current_broker
-    
     black_listed = []
     # @subscribers = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC').select{|s| (!s.has_stopped? || s.has_stopped? && (s.stopped_date - s.created_at) > 7.days) }
     @subscribers = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC').select{|s| (!s.has_stopped || s.has_stopped && (s.has_stopped_at - s.created_at) > 7.days) }

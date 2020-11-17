@@ -18,9 +18,9 @@
           <h5 class="card-title">7 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_week.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_week.select{|x| x.hot_lead && !x.is_broker_affiliated }.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers_week.select{|x| !x.hot_lead && !x.is_broker_affiliated }.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers_week.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Interessé" }.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
@@ -32,9 +32,9 @@
           <h5 class="card-title">30 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_month.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_month.select{|x| x.hot_lead && !x.is_broker_affiliated}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers_month.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers_month.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Interessé" }.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
@@ -45,22 +45,13 @@
           <h5 class="card-title">Total</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers.select{|x| x.hot_lead}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers.select{|x| x.is_broker_affiliated}.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Interessé"}.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row mt-3 d-flex flex-column">
-    <h5>Légende</h5>
-    <ul style="list-style:none">
-      <li><span class="badge badge-danger">Chaud</span> : Utilisateur qui a demandé à être mis en relation avec son courtier</li>
-      <li><span class="badge badge-light">Froid</span> : Utilisateur qui n'a pas (encore) demandé à être mis en relation avec son courtier</li>
-      <li><span class="badge badge-info">Client</span> : Votre client, à qui vous avez donné accès à l'alerte Ding Dong</li>
-    </ul>
   </div>
 
   <div class="row mt-5">
@@ -83,7 +74,7 @@
             <th class="d-flex justify-content-center">
             <div class="form-check">
               <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } if false %>
-                <%= image_submit_tag("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDY4LjI5MyA0NjguMjkzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NjguMjkzIDQ2OC4yOTM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIHN0eWxlPSJmaWxsOiMyRDkyQkE7IiBkPSJNNDMzLjk1MSw0NjguMjkzSDM0LjM0MWMtMTAuMzQ1LDAtMTguNzMyLTguMzg2LTE4LjczMi0xOC43MzJWMTguNzMyQzE1LjYxLDguMzg2LDIzLjk5NiwwLDM0LjM0MSwwDQoJaDM0NS44MmMyOC4zMjIsMjguMzIyLDQ0LjIsNDQuMiw3Mi41MjIsNzIuNTIydjM3Ny4wMzlDNDUyLjY4Myw0NTkuOTA2LDQ0NC4yOTYsNDY4LjI5Myw0MzMuOTUxLDQ2OC4yOTN6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojRTBFNUU4OyIgZD0iTTMyMi42NDgsMTc3LjUxOEgxMTguMTkxYy0xMC4zNDUsMC0xOC43MzItOC4zODYtMTguNzMyLTE4LjczMlYwaDI0MS45MnYxNTguNzg3DQoJQzM0MS4zOCwxNjkuMTMyLDMzMi45OTQsMTc3LjUxOCwzMjIuNjQ4LDE3Ny41MTh6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojNjQ3OTg5OyIgZD0iTTI4MS43ODIsMTUxLjE5OGgtNDMuNzA3Yy0zLjQ0OCwwLTYuMjQ0LTIuNzk2LTYuMjQ0LTYuMjQ0VjMyLjU2NGMwLTMuNDQ4LDIuNzk2LTYuMjQ0LDYuMjQ0LTYuMjQ0DQoJaDQzLjcwN2MzLjQ0OCwwLDYuMjQ0LDIuNzk1LDYuMjQ0LDYuMjQ0djExMi4zOUMyODguMDI2LDE0OC40MDMsMjg1LjIzLDE1MS4xOTgsMjgxLjc4MiwxNTEuMTk4eiIvPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzNCNTY2QTsiIGQ9Ik04NS41MjcsNDQzLjQyNkg0MS44MnYtMzcuNDYzYzAtMy40NDgsMi43OTUtNi4yNDQsNi4yNDQtNi4yNDRoMzEuMjINCgkJYzMuNDQ4LDAsNi4yNDQsMi43OTUsNi4yNDQsNi4yNDRWNDQzLjQyNnoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojM0I1NjZBOyIgZD0iTTQyNi40NzMsNDQzLjQyNmgtNDMuNzA3di0zNy40NjNjMC0zLjQ0OCwyLjc5Ni02LjI0NCw2LjI0NC02LjI0NGgzMS4yMg0KCQljMy40NDgsMCw2LjI0NCwyLjc5NSw2LjI0NCw2LjI0NFY0NDMuNDI2eiIvPg0KPC9nPg0KPGc+DQoJPHJlY3QgeD0iNDEuODIyIiB5PSI0MzMuMzA4IiBzdHlsZT0iZmlsbDojRDRENURCOyIgd2lkdGg9IjQzLjcwNyIgaGVpZ2h0PSIxMC4xMTUiLz4NCgk8cmVjdCB4PSIzODIuNzY0IiB5PSI0MzMuMzA4IiBzdHlsZT0iZmlsbDojRDRENURCOyIgd2lkdGg9IjQzLjcwNyIgaGVpZ2h0PSIxMC4xMTUiLz4NCjwvZz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNFQkVGRjI7IiBkPSJNMzU5LjAwOSwzMDIuMDc2djE2Ni4yMTJIMTA5LjMxNVYzMDIuMDc2YzAtMTAuMzY2LDguMzY3LTE4LjczMiwxOC43MzItMTguNzMyaDIxMi4yMw0KCUMzNTAuNTgsMjgzLjM0NCwzNTkuMDA5LDI5MS43MSwzNTkuMDA5LDMwMi4wNzZ6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojNEVCRDlFOyIgZD0iTTM1OS4wMDksMzAyLjA3NnYyNS44NDlIMTA5LjMxNXYtMjUuODQ5YzAtMTAuMzY2LDguMzY3LTE4LjczMiwxOC43MzItMTguNzMyaDIxMi4yMw0KCUMzNTAuNTgsMjgzLjM0NCwzNTkuMDA5LDI5MS43MSwzNTkuMDA5LDMwMi4wNzZ6Ii8+DQo8Zz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRDRENURCOyIgZD0iTTMzNC4wNjUsMzU0Ljg4MUgxMzQuMjU5Yy0zLjQ1MSwwLTYuMjQ0LDIuNzk2LTYuMjQ0LDYuMjQ0YzAsMy40NDgsMi43OTMsNi4yNDQsNi4yNDQsNi4yNDQNCgkJaDE5OS44MDZjMy40NTEsMCw2LjI0NC0yLjc5Niw2LjI0NC02LjI0NEMzNDAuMzA5LDM1Ny42NzYsMzM3LjUxNiwzNTQuODgxLDMzNC4wNjUsMzU0Ljg4MXoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRDRENURCOyIgZD0iTTMzNC4wNjUsMzkxLjEyM0gxMzQuMjU5Yy0zLjQ1MSwwLTYuMjQ0LDIuNzk2LTYuMjQ0LDYuMjQ0YzAsMy40NDgsMi43OTMsNi4yNDQsNi4yNDQsNi4yNDQNCgkJaDE5OS44MDZjMy40NTEsMCw2LjI0NC0yLjc5Niw2LjI0NC02LjI0NEMzNDAuMzA5LDM5My45MTksMzM3LjUxNiwzOTEuMTIzLDMzNC4wNjUsMzkxLjEyM3oiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRDRENURCOyIgZD0iTTMzNC4wNjUsNDI3LjM2NUgxMzQuMjU5Yy0zLjQ1MSwwLTYuMjQ0LDIuNzk2LTYuMjQ0LDYuMjQ0YzAsMy40NDgsMi43OTMsNi4yNDQsNi4yNDQsNi4yNDQNCgkJaDE5OS44MDZjMy40NTEsMCw2LjI0NC0yLjc5Niw2LjI0NC02LjI0NEMzNDAuMzA5LDQzMC4xNjEsMzM3LjUxNiw0MjcuMzY1LDMzNC4wNjUsNDI3LjM2NXoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" , border: 0, width: 30) %>
+                <%= image_submit_tag("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDQ2OS4zMzMgNDY5LjMzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDY5LjMzMyA0NjkuMzMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8Zz4NCgkJPGc+DQoJCQk8cGF0aCBkPSJNNDY2LjIwOCw4OC40NThMMzgwLjg3NSwzLjEyNWMtMi0yLTQuNzA4LTMuMTI1LTcuNTQyLTMuMTI1SDQyLjY2N0MxOS4xNDYsMCwwLDE5LjEzNSwwLDQyLjY2N3YzODQNCgkJCQljMCwyMy41MzEsMTkuMTQ2LDQyLjY2Nyw0Mi42NjcsNDIuNjY3aDM4NGMyMy41MjEsMCw0Mi42NjctMTkuMTM1LDQyLjY2Ny00Mi42NjdWOTYNCgkJCQlDNDY5LjMzMyw5My4xNjcsNDY4LjIwOCw5MC40NTgsNDY2LjIwOCw4OC40NTh6IE0xMDYuNjY3LDIxLjMzM2gyMzQuNjY3djEyOGMwLDExLjc2LTkuNTYzLDIxLjMzMy0yMS4zMzMsMjEuMzMzSDEyOA0KCQkJCWMtMTEuNzcxLDAtMjEuMzMzLTkuNTczLTIxLjMzMy0yMS4zMzNWMjEuMzMzeiBNMzg0LDQ0OEg4NS4zMzNWMjU2SDM4NFY0NDh6IE00NDgsNDI2LjY2N2MwLDExLjc2LTkuNTYzLDIxLjMzMy0yMS4zMzMsMjEuMzMzDQoJCQkJaC0yMS4zMzNWMjQ1LjMzM2MwLTUuODk2LTQuNzcxLTEwLjY2Ny0xMC42NjctMTAuNjY3aC0zMjBjLTUuODk2LDAtMTAuNjY3LDQuNzcxLTEwLjY2NywxMC42NjdWNDQ4SDQyLjY2Nw0KCQkJCWMtMTEuNzcxLDAtMjEuMzMzLTkuNTczLTIxLjMzMy0yMS4zMzN2LTM4NGMwLTExLjc2LDkuNTYzLTIxLjMzMywyMS4zMzMtMjEuMzMzaDQyLjY2N3YxMjhDODUuMzMzLDE3Mi44NjUsMTA0LjQ3OSwxOTIsMTI4LDE5Mg0KCQkJCWgxOTJjMjMuNTIxLDAsNDIuNjY3LTE5LjEzNSw0Mi42NjctNDIuNjY3di0xMjhoNi4yNUw0NDgsMTAwLjQxN1Y0MjYuNjY3eiIvPg0KCQkJPHBhdGggZD0iTTI2Ni42NjcsMTQ5LjMzM2g0Mi42NjdjNS44OTYsMCwxMC42NjctNC43NzEsMTAuNjY3LTEwLjY2N1Y1My4zMzNjMC01Ljg5Ni00Ljc3MS0xMC42NjctMTAuNjY3LTEwLjY2N2gtNDIuNjY3DQoJCQkJYy01Ljg5NiwwLTEwLjY2Nyw0Ljc3MS0xMC42NjcsMTAuNjY3djg1LjMzM0MyNTYsMTQ0LjU2MiwyNjAuNzcxLDE0OS4zMzMsMjY2LjY2NywxNDkuMzMzeiBNMjc3LjMzMyw2NGgyMS4zMzN2NjRoLTIxLjMzM1Y2NHoiDQoJCQkJLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" , border: 0, width: 30) %>
             </div>
             </th>
             <td scope="row">
