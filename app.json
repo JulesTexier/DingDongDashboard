@@ -38,7 +38,8 @@
         "ROTATING_PROXY_API":"doaB65LrNunVGsCQmW8c7SpZKtgy9Hzk",
         "USERNAME_ROT_PROXY":"586c13e3d304b3840415fc2d02ef3827",
         "PASSWORD_ROT_PROXY":"c888107fc74280f11bb81971c008df45",
-        "PROXY_PORT":"9500"
+        "PROXY_PORT":"9500",
+        "DEATH_WINDOW_IN_DAY":"7"
       },
       "addons": ["heroku-postgresql:in-dyno", "heroku-redis:in-dyno"],
       "scripts":
