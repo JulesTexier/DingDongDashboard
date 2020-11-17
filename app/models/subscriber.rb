@@ -100,7 +100,7 @@ class Subscriber < ApplicationRecord
   end
 
   def get_fullname
-    return "#{self.firstname} #{self.lastname}"
+    return "#{self.firstname.capitalize() } #{self.lastname.capitalize() }"
   end
 
   def get_areas_list
