@@ -67,8 +67,9 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Traité ?</th>
+          <th scope="col">Sauvegarder</th>
           <th scope="col">Status</th>
+          <th scope="col">Commentaire</th>
           <th scope="col">Nom</th>
           <th scope="col">Actif ?</th>
           <th scope="col">Plus d'infos</th>
@@ -77,33 +78,34 @@
       <tbody>
       <% @subscribers.each do |subscriber| %>
         <tr>
-        <th class="d-flex justify-content-center">
-        <div class="form-check">
-          <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } %>
-        </div>
-        </th>
-          <td scope="row">
-            <% if subscriber.hot_lead  %>
-              <span class="badge badge-danger">Chaud</span>
-            <%elsif subscriber.is_broker_affiliated%>
-              <span class="badge badge-info">Client</span>
-            <%else%>
-              <span class="badge badge-light">Froid</span>
-            <%end%>
-          </td>
-          <td><%= subscriber.get_fullname%></td>
-          <td>
-          <% unless subscriber.has_stopped? %>
-              <span class="badge badge-pill badge-success">Oui</span>
-            <%else%>
-              <span class="badge badge-light">Non</span>
-            <%end%>
-          </td>
-          <td>
-            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#subscriber-<%= subscriber.id%>">
-            Voir plus
-          </button>
-          </td>
+          <%= form_tag(broker_checked_path(subscriber.id), remote: true) do %>
+          <%=hidden_field_tag 'subscriber_id', subscriber.id %>
+            <th class="d-flex justify-content-center">
+            <div class="form-check">
+              <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } if false %>
+                <%= image_submit_tag("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ5NnB0IiB2aWV3Qm94PSIwIDAgNDk2IDQ5NiIgd2lkdGg9IjQ5NnB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im04IDQxNiA3MiA3MmgxNnYtMTc2aDMwNHYxNzZoODh2LTQ4MGgtNDgwem03Mi0zNDRjMC0xNy42NzE4NzUgMTQuMzI4MTI1LTMyIDMyLTMyaDI3MmMxNy42NzE4NzUgMCAzMiAxNC4zMjgxMjUgMzIgMzJ2MTYwYzAgMTcuNjcxODc1LTE0LjMyODEyNSAzMi0zMiAzMmgtMjcyYy0xNy42NzE4NzUgMC0zMi0xNC4zMjgxMjUtMzItMzJ6bTAgMCIgZmlsbD0iIzU3YTRmZiIvPjxwYXRoIGQ9Im0zMjAgMzQ0aDQ4djExMmgtNDh6bTAgMCIgZmlsbD0iIzU3YTRmZiIvPjxnIGZpbGw9IiMwMDRmYWMiPjxwYXRoIGQ9Im00ODggMGgtNDgwYy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4djQwOGMwIDIuMTIxMDk0Ljg0Mzc1IDQuMTU2MjUgMi4zNDM3NSA1LjY1NjI1bDcyIDcyYzEuNSAxLjUgMy41MzUxNTYgMi4zNDM3NSA1LjY1NjI1IDIuMzQzNzVoNDA4YzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTQ4MGMwLTQuNDE3OTY5LTMuNTgyMDMxLTgtOC04em0tMzg0IDQ4MHYtMTYwaDI4OHYxNjB6bTM3NiAwaC03MnYtMTY4YzAtNC40MTc5NjktMy41ODIwMzEtOC04LThoLTMwNGMtNC40MTc5NjkgMC04IDMuNTgyMDMxLTggOHYxNjhoLTQuNjg3NWwtNjcuMzEyNS02Ny4zMTI1di0zOTYuNjg3NWg0NjR6bTAgMCIvPjxwYXRoIGQ9Im0xMTIgMjcyaDI3MmMyMi4wODIwMzEtLjAyNzM0NCAzOS45NzI2NTYtMTcuOTE3OTY5IDQwLTQwdi0xNjBjLS4wMjczNDQtMjIuMDgyMDMxLTE3LjkxNzk2OS0zOS45NzI2NTYtNDAtNDBoLTI3MmMtMjIuMDgyMDMxLjAyNzM0NC0zOS45NzI2NTYgMTcuOTE3OTY5LTQwIDQwdjE2MGMuMDI3MzQ0IDIyLjA4MjAzMSAxNy45MTc5NjkgMzkuOTcyNjU2IDQwIDQwem0tMjQtMjAwYzAtMTMuMjUzOTA2IDEwLjc0NjA5NC0yNCAyNC0yNGgyNzJjMTMuMjUzOTA2IDAgMjQgMTAuNzQ2MDk0IDI0IDI0djE2MGMwIDEzLjI1MzkwNi0xMC43NDYwOTQgMjQtMjQgMjRoLTI3MmMtMTMuMjUzOTA2IDAtMjQtMTAuNzQ2MDk0LTI0LTI0em0wIDAiLz48cGF0aCBkPSJtMzY4IDMzNmgtNDhjLTQuNDE3OTY5IDAtOCAzLjU4MjAzMS04IDh2MTEyYzAgNC40MTc5NjkgMy41ODIwMzEgOCA4IDhoNDhjNC40MTc5NjkgMCA4LTMuNTgyMDMxIDgtOHYtMTEyYzAtNC40MTc5NjktMy41ODIwMzEtOC04LTh6bS04IDExMmgtMzJ2LTk2aDMyem0wIDAiLz48cGF0aCBkPSJtMTM2IDk2aDIyNGM0LjQxNzk2OSAwIDgtMy41ODIwMzEgOC04cy0zLjU4MjAzMS04LTgtOGgtMjI0Yy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4czMuNTgyMDMxIDggOCA4em0wIDAiLz48cGF0aCBkPSJtMTM2IDEyOGgyMjRjNC40MTc5NjkgMCA4LTMuNTgyMDMxIDgtOHMtMy41ODIwMzEtOC04LThoLTIyNGMtNC40MTc5NjkgMC04IDMuNTgyMDMxLTggOHMzLjU4MjAzMSA4IDggOHptMCAwIi8+PHBhdGggZD0ibTEzNiAxNjBoMjI0YzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LThzLTMuNTgyMDMxLTgtOC04aC0yMjRjLTQuNDE3OTY5IDAtOCAzLjU4MjAzMS04IDhzMy41ODIwMzEgOCA4IDh6bTAgMCIvPjxwYXRoIGQ9Im0xMzYgMTkyaDExMmM0LjQxNzk2OSAwIDgtMy41ODIwMzEgOC04cy0zLjU4MjAzMS04LTgtOGgtMTEyYy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4czMuNTgyMDMxIDggOCA4em0wIDAiLz48L2c+PC9zdmc+", border: 0, width: 20) %>
+            </div>
+            </th>
+            <td scope="row">
+              <%= select_tag "broker_status", options_for_select(@broker_status, subscriber.broker_status) %>
+            </td>
+            <td scope="row">
+              <%= text_area_tag 'broker_comment', subscriber.broker_comment,  cols: 25 %>
+            </td>
+            <td><%= subscriber.get_fullname%></td>
+            <td>
+            <% unless subscriber.has_stopped? %>
+                <span class="badge badge-pill badge-success">Oui</span>
+              <%else%>
+                <span class="badge badge-light">Non</span>
+              <%end%>
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#subscriber-<%= subscriber.id%>">
+              Voir plus
+            </button>
+            </td>
+          <% end %>
         </tr>
         <tr>
         <% end %>
