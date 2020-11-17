@@ -1,5 +1,5 @@
 class GrowthEngine
-  attr_reader :source, :sender_email, :lead_email, :lead_phone, :property_data
+  attr_reader :source, :sender_email, :lead_email, :lead_phone, :property_data, :reference
   attr_accessor :first_time_frame, :second_time_frame
 
   def initialize(first_time_frame = 42, second_time_frame = 1008)
@@ -9,6 +9,7 @@ class GrowthEngine
 
   def perform_email_webhook(json_content)
     handle_email(json_content)
+    byebug
     handle_lead_email(@lead_email, @lead_phone) unless Sequence.where(sender_email: @sender_email, source: @source).empty?
   end
 
@@ -21,6 +22,7 @@ class GrowthEngine
     @lead_email = e.get_reply_to_email
     @lead_phone = e.get_phone_number
     @property_data = e.ad_data_parser_se_loger
+    @reference = e.get_reference
   end
 
   def handle_lead_email(email, phone_number="")
