@@ -93,7 +93,8 @@ Rails.application.routes.draw do
       resources :saved_properties, only: [:create, :destroy]
 
       # Nuxt 
-      get "/nuxt/brokers/:id/leads" => "brokers#get_dashboard_leads"
+      get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
+      put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
       
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
