@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_124145) do
+ActiveRecord::Schema.define(version: 2020_11_20_102743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_124145) do
     t.string "name"
     t.string "image_url"
     t.boolean "is_active", default: false
+    t.string "ref_code"
   end
 
   create_table "areas", force: :cascade do |t|
@@ -364,6 +365,8 @@ ActiveRecord::Schema.define(version: 2020_10_17_124145) do
     t.boolean "checked_by_broker", default: false
     t.boolean "has_stopped", default: false
     t.datetime "has_stopped_at"
+    t.string "broker_status", default: "Non traité"
+    t.text "broker_comment", default: ""
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"

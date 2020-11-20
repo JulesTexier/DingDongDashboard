@@ -18,9 +18,9 @@
           <h5 class="card-title">7 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_week.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_week.select{|x| x.hot_lead && !x.is_broker_affiliated }.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers_week.select{|x| !x.hot_lead && !x.is_broker_affiliated }.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers_week.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Interessé" }.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_week.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
@@ -32,9 +32,9 @@
           <h5 class="card-title">30 derniers jours</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers_month.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers_month.select{|x| x.hot_lead && !x.is_broker_affiliated}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers_month.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers_month.select{|x| x.is_broker_affiliated }.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Interessé" }.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers_month.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
@@ -45,30 +45,22 @@
           <h5 class="card-title">Total</h5>
           <p class="card-text"><span style="font-size: 2rem"><%= @subscribers.count%></span></p>
           <div class= "row">
-            <div class="col-4"> <%= @subscribers.select{|x| x.hot_lead}.count %> <br> <span class="badge badge-danger">Chaud</span> </div>
-            <div class="col-4"> <%= @subscribers.select{|x| !x.hot_lead && !x.is_broker_affiliated}.count %>  <br> <span class="badge badge-light">Froid</span> </div>
-            <div class="col-4"> <%= @subscribers.select{|x| x.is_broker_affiliated}.count %> <br>  <span class="badge badge-info">Client</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Interessé"}.count %> <br> <span class="badge badge-danger">Interessé</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Pas interessé"}.count %>  <br> <span class="badge badge-info">Pas interessé</span> </div>
+            <div class="col-4"> <%= @subscribers.select{|x| x.broker_status == "Non traité" }.count %> <br>  <span class="badge badge-light">Non traité</span> </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row mt-3 d-flex flex-column">
-    <h5>Légende</h5>
-    <ul style="list-style:none">
-      <li><span class="badge badge-danger">Chaud</span> : Utilisateur qui a demandé à être mis en relation avec son courtier</li>
-      <li><span class="badge badge-light">Froid</span> : Utilisateur qui n'a pas (encore) demandé à être mis en relation avec son courtier</li>
-      <li><span class="badge badge-info">Client</span> : Votre client, à qui vous avez donné accès à l'alerte Ding Dong</li>
-    </ul>
-  </div>
-
   <div class="row mt-5">
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Traité ?</th>
+          <th scope="col">Sauvegarder</th>
           <th scope="col">Status</th>
+          <th scope="col">Commentaire</th>
           <th scope="col">Nom</th>
           <th scope="col">Actif ?</th>
           <th scope="col">Plus d'infos</th>
@@ -77,33 +69,34 @@
       <tbody>
       <% @subscribers.each do |subscriber| %>
         <tr>
-        <th class="d-flex justify-content-center">
-        <div class="form-check">
-          <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } %>
-        </div>
-        </th>
-          <td scope="row">
-            <% if subscriber.hot_lead  %>
-              <span class="badge badge-danger">Chaud</span>
-            <%elsif subscriber.is_broker_affiliated%>
-              <span class="badge badge-info">Client</span>
-            <%else%>
-              <span class="badge badge-light">Froid</span>
-            <%end%>
-          </td>
-          <td><%= subscriber.get_fullname%></td>
-          <td>
-          <% unless subscriber.has_stopped? %>
-              <span class="badge badge-pill badge-success">Oui</span>
-            <%else%>
-              <span class="badge badge-light">Non</span>
-            <%end%>
-          </td>
-          <td>
-            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#subscriber-<%= subscriber.id%>">
-            Voir plus
-          </button>
-          </td>
+          <%= form_tag(broker_checked_path, method: :post, remote: true) do %>
+          <%=hidden_field_tag 'subscriber_id', subscriber.id %>
+            <th class="d-flex justify-content-center">
+            <div class="form-check">
+              <%= check_box_tag 'checked_by_broker', subscriber.id, subscriber.checked_by_broker,  class:"form-check-input", data: { url: broker_checked_path(subscriber.id),  remote: :true, method: :post } if false %>
+                <%= image_submit_tag("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDQ2OS4zMzMgNDY5LjMzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDY5LjMzMyA0NjkuMzMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8Zz4NCgkJPGc+DQoJCQk8cGF0aCBkPSJNNDY2LjIwOCw4OC40NThMMzgwLjg3NSwzLjEyNWMtMi0yLTQuNzA4LTMuMTI1LTcuNTQyLTMuMTI1SDQyLjY2N0MxOS4xNDYsMCwwLDE5LjEzNSwwLDQyLjY2N3YzODQNCgkJCQljMCwyMy41MzEsMTkuMTQ2LDQyLjY2Nyw0Mi42NjcsNDIuNjY3aDM4NGMyMy41MjEsMCw0Mi42NjctMTkuMTM1LDQyLjY2Ny00Mi42NjdWOTYNCgkJCQlDNDY5LjMzMyw5My4xNjcsNDY4LjIwOCw5MC40NTgsNDY2LjIwOCw4OC40NTh6IE0xMDYuNjY3LDIxLjMzM2gyMzQuNjY3djEyOGMwLDExLjc2LTkuNTYzLDIxLjMzMy0yMS4zMzMsMjEuMzMzSDEyOA0KCQkJCWMtMTEuNzcxLDAtMjEuMzMzLTkuNTczLTIxLjMzMy0yMS4zMzNWMjEuMzMzeiBNMzg0LDQ0OEg4NS4zMzNWMjU2SDM4NFY0NDh6IE00NDgsNDI2LjY2N2MwLDExLjc2LTkuNTYzLDIxLjMzMy0yMS4zMzMsMjEuMzMzDQoJCQkJaC0yMS4zMzNWMjQ1LjMzM2MwLTUuODk2LTQuNzcxLTEwLjY2Ny0xMC42NjctMTAuNjY3aC0zMjBjLTUuODk2LDAtMTAuNjY3LDQuNzcxLTEwLjY2NywxMC42NjdWNDQ4SDQyLjY2Nw0KCQkJCWMtMTEuNzcxLDAtMjEuMzMzLTkuNTczLTIxLjMzMy0yMS4zMzN2LTM4NGMwLTExLjc2LDkuNTYzLTIxLjMzMywyMS4zMzMtMjEuMzMzaDQyLjY2N3YxMjhDODUuMzMzLDE3Mi44NjUsMTA0LjQ3OSwxOTIsMTI4LDE5Mg0KCQkJCWgxOTJjMjMuNTIxLDAsNDIuNjY3LTE5LjEzNSw0Mi42NjctNDIuNjY3di0xMjhoNi4yNUw0NDgsMTAwLjQxN1Y0MjYuNjY3eiIvPg0KCQkJPHBhdGggZD0iTTI2Ni42NjcsMTQ5LjMzM2g0Mi42NjdjNS44OTYsMCwxMC42NjctNC43NzEsMTAuNjY3LTEwLjY2N1Y1My4zMzNjMC01Ljg5Ni00Ljc3MS0xMC42NjctMTAuNjY3LTEwLjY2N2gtNDIuNjY3DQoJCQkJYy01Ljg5NiwwLTEwLjY2Nyw0Ljc3MS0xMC42NjcsMTAuNjY3djg1LjMzM0MyNTYsMTQ0LjU2MiwyNjAuNzcxLDE0OS4zMzMsMjY2LjY2NywxNDkuMzMzeiBNMjc3LjMzMyw2NGgyMS4zMzN2NjRoLTIxLjMzM1Y2NHoiDQoJCQkJLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" , border: 0, width: 30) %>
+            </div>
+            </th>
+            <td scope="row">
+              <%= select_tag "broker_status", options_for_select(@broker_status, subscriber.broker_status) %>
+            </td>
+            <td scope="row">
+              <%= text_area_tag 'broker_comment', subscriber.broker_comment,  cols: 25 %>
+            </td>
+            <td><%= subscriber.get_fullname%></td>
+            <td>
+            <% unless subscriber.has_stopped? %>
+                <span class="badge badge-pill badge-success">Oui</span>
+              <%else%>
+                <span class="badge badge-light">Non</span>
+              <%end%>
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#subscriber-<%= subscriber.id%>">
+              Voir plus
+            </button>
+            </td>
+          <% end %>
         </tr>
         <tr>
         <% end %>

@@ -51,11 +51,13 @@ agglo_file.each do |agglo_data|
     a = Agglomeration.new
     a.name = agglo_data["agglomeration"]
     a.is_active = agglo_data["is_active"]
+    a.ref_code = agglo_data["ref_code"]
     a.save
     agglo_data["zone"].each do |department|
       Department.create(name: department, agglomeration: a) unless Department.where(name: department).any?
     end
   else
+    agglo.update(ref_code: agglo_data["ref_code"])
     agglo_data["zone"].each do |department|
       Department.create(name: department, agglomeration: agglo) unless Department.where(name: department).any?
     end
