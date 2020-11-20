@@ -6,6 +6,14 @@ class EmailParser
     @json_content = JSON.parse(json_response)
   end
 
+  def get_name 
+    name_regex = '3e4649\\">(.)*<\/span>&nbsp'
+    name = self.json_content["HtmlBody"].match(/#{name_regex}/i).to_s if self.json_content["HtmlBody"].match?(/#{name_regex}/i)
+    clean_name = name.nil? ? "" : name.gsub(/[^[:print:]]/, "").gsub('</span>&nbsp', "")
+    clean_name[0..7]=''
+    return clean_name
+  end
+
   def get_reply_to_email
     email_regex = '[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}'
     email = []
@@ -49,6 +57,7 @@ class EmailParser
     ref = self.json_content["TextBody"].match(/#{ref_regex}/i).to_s if self.json_content["TextBody"].match?(/#{ref_regex}/i)
     clean_ref = ref.nil? ? "" : ref.gsub("Ref. de l'annonce  : ", "")
   end
+
   def ad_data_parser_se_loger
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
@@ -74,4 +83,5 @@ class EmailParser
       ad_data_parser_se_loger[:ref]
     end
   end
+  
 end
