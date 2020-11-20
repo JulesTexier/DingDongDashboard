@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_172624) do
+ActiveRecord::Schema.define(version: 2020_11_20_102743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_172624) do
     t.string "name"
     t.string "image_url"
     t.boolean "is_active", default: false
+    t.string "ref_code"
   end
 
   create_table "areas", force: :cascade do |t|
