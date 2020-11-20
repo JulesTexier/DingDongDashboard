@@ -4,7 +4,8 @@ RSpec.describe GrowthEngine, type: :service do
   describe "testing all logic in growth_engin" do
     before(:all) do
       @json_email = File.read("./fixtures/growth_email_type.json")
-      FactoryBot.create(:agglomeration, name: "Ile-de-France")
+      FactoryBot.create(:agglomeration, name: "Ile-de-France", ref_code: "PA", id: 1)
+      FactoryBot.create(:broker, agglomeration_id: 1)
       @ge = GrowthEngine.new
     end
 
@@ -15,6 +16,7 @@ RSpec.describe GrowthEngine, type: :service do
         expect(@ge.source).to be_a(String)
         expect(@ge.sender_email).to eq("lagencedu17@gmail.com")
         expect(@ge.sender_email).to be_a(String)
+        expect(@ge.lead_fullname).to eq("Marikaz Marikaz")
       end
     end
 
@@ -22,11 +24,11 @@ RSpec.describe GrowthEngine, type: :service do
       it "should get the customer" do
         @ge.send(:handle_email, @json_email)
         @user = FactoryBot.create(:subscriber, email: "mlesegret@gmail.com", status: "new_lead")
-        expect(@ge.send(:get_subscriber, @ge.lead_email)).to eq(@user)
+        expect(@ge.send(:get_subscriber, @ge.lead_email, 1)).to eq(@user)
       end
 
       it "should create a customer if its not in db" do
-        expect(@ge.send(:get_subscriber, "new_customer@customer.com")).to eq(Subscriber.where(email: "new_customer@customer.com", status: "new_lead").last)
+        expect(@ge.send(:get_subscriber, "new_customer@customer.com", 1)).to eq(Subscriber.where(email: "new_customer@customer.com", status: "new_lead").last)
       end
     end
 

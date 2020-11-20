@@ -24,16 +24,14 @@ class GrowthEngine
     @lead_fullname = e.get_name
   end
 
-  def handle_lead_email(email, phone_number="", fullname)
+  def handle_lead_email(email, phone_number="", fullname ="")
     agglomeration = Agglomeration.get_agglomeration_from_seloger_ref(@property_data[:ref])
     unless agglomeration.nil?
       # 1 • Handle Subscriber (get or create)
-      subscriber = get_subscriber(email, phone_number, fullname, agglomeration.id)
-      byebug
+      subscriber = get_subscriber(email, agglomeration.id, phone_number, fullname)
       # 2 • Handle Sequence to execute
       # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
-      if !is_sequence_created_in_timefram
-        e?(subscriber, @first_time_frame)
+      if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
         # Determination de la déquence à lancer !
         ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
         sequence = get_adequate_sequence(subscriber)
@@ -43,7 +41,7 @@ class GrowthEngine
     end
   end
 
-  def get_subscriber(email_address, phone_number="", fullname, agglomeration_id)
+  def get_subscriber(email_address,agglomeration_id, phone_number="", fullname="")
     if fullname.split(" ").count == 2 
       firstname = fullname.split(" ")[0]
       lastname = fullname.split(" ")[1] 
@@ -51,7 +49,7 @@ class GrowthEngine
       firstname = fullname
       lastname= ""
     end
-    
+
     sub = Subscriber.where(email: email_address).last
     if sub.nil?
       sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
