@@ -4,8 +4,8 @@ RSpec.describe GrowthEngine, type: :service do
   describe "testing all logic in growth_engin" do
     before(:all) do
       @json_email = File.read("./fixtures/growth_email_type.json")
-      FactoryBot.create(:agglomeration, name: "Ile-de-France", ref_code: "PA", id: 1)
-      FactoryBot.create(:broker, agglomeration_id: 1)
+      @agglomeration = FactoryBot.create(:agglomeration, name: "Ile-de-France", ref_code: "PA", id: 1)
+      FactoryBot.create(:broker, agglomeration_id: @agglomeration.id)
       @ge = GrowthEngine.new
     end
 
