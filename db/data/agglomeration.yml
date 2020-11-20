@@ -8,107 +8,134 @@
     - Seine-Saint-Denis (93)
     - Val d'Oise (95)
   is_active: true
+  ref_code: PA
 - agglomeration: Lyon
   zone: 
     - Lyon (69)
   is_active: true
+  ref_code: LY
 - agglomeration: Bordeaux
   zone: 
     - Bordeaux (33)
   is_active: false
+  ref_code: BO
 - agglomeration: Marseille
   zone: 
     - Marseille (13)
   is_active: false
+  ref_code: MA
 - agglomeration: Nice
   zone: 
     - Nice (06)
   is_active: false
+  ref_code: NI
 - agglomeration: Nantes
   zone: 
     - Nantes (44)
   is_active: false
+  ref_code: NA
 - agglomeration: Montpellier
   zone: 
     - Montpellier (34)
   is_active: false
+  ref_code: MP
 - agglomeration: Toulouse
   zone: 
     - Toulouse (31)
   is_active: false
+  ref_code: TO
 - agglomeration: Strasbourg
   zone: 
     - Strasbourg (67)
   is_active: false
+  ref_code: SG
 - agglomeration: Lille
   zone: 
     - Lille (59)
   is_active: false
+  ref_code: LI
 - agglomeration: Rennes
   zone: 
     - Rennes (35)
   is_active: false
+  ref_code: RE
 - agglomeration: La Rochelle
   zone: 
     - La Rochelle (17)
   is_active: false
+  ref_code: LR
 - agglomeration: Saint-Etienne
   zone: 
     - Saint-Etienne (42)
   is_active: false
+  ref_code: SE
 - agglomeration: Le Havre
   zone: 
     - Le Havre (76)
   is_active: false
+  ref_code: LH
 - agglomeration: Aix-en-Provence
   zone: 
     - Aix-en-Provence (13)
   is_active: false
+  ref_code: AX
 - agglomeration: Brest
   zone: 
     - Brest (29)
   is_active: false
+  ref_code: BR
 - agglomeration: Saint-Brieuc
   zone: 
     - Saint-Brieuc (22)
   is_active: false
+  ref_code: SB
 - agglomeration: Nîmes
   zone: 
     - Nîmes (30)
   is_active: false
+  ref_code: NM
 - agglomeration: Sens
   zone: 
     - Sens (89)
   is_active: false
+  ref_code: SS
 - agglomeration: Annecy
   zone: 
     - Annecy (74)
   is_active: false
+  ref_code: AY
 - agglomeration: Bourg-en-Bresse
   zone: 
     - Bourg-en-Bresse (01)
   is_active: false
+  ref_code: BB
 - agglomeration: Reims
   zone: 
     - Reims (51)
   is_active: false
+  ref_code: RM
 - agglomeration: Mulhouse
   zone: 
     - Mulhouse (68)
   is_active: false
+  ref_code: MU
 - agglomeration: Clermont-Ferrand
   zone: 
     - Clermont-Ferrand (63)
   is_active: false
+  ref_code: CF
 - agglomeration: Grenoble
   zone: 
     - Grenoble (38)
   is_active: false
+  ref_code: GR
 - agglomeration: Angers
   zone: 
     - Angers (49)
   is_active: false
+  ref_code: AG
 - agglomeration: Perpignan
   zone: 
     - Perpignan (66)
   is_active: false
+  ref_code: PG
