@@ -47,9 +47,8 @@ class EmailParser
   def get_reference
     ref_regex = "Ref. de l'annonce  : [A-Z]{2}[0-9]{4}[A-Z]{2}"
     ref = self.json_content["TextBody"].match(/#{ref_regex}/i).to_s if self.json_content["TextBody"].match?(/#{ref_regex}/i)
-    ref = ref.gsub("Ref. de l'annonce  : ", "")
+    clean_ref = ref.nil? ? "" : ref.gsub("Ref. de l'annonce  : ", "")
   end
-
   def ad_data_parser_se_loger
     rooms_regex = '(\d+)(.?)(pi(è|e)ce(s?))'
     price_regex = '(\d+)(.?)(€)'
