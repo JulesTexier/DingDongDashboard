@@ -57,7 +57,7 @@ agglo_file.each do |agglo_data|
       Department.create(name: department, agglomeration: a) unless Department.where(name: department).any?
     end
   else
-    Agglomeration.update(ref_code: agglo_data["ref_code"]) if agglo.ref_code.nil?
+    agglo.update(ref_code: agglo_data["ref_code"])
     agglo_data["zone"].each do |department|
       Department.create(name: department, agglomeration: agglo) unless Department.where(name: department).any?
     end
