@@ -21,8 +21,8 @@ gem "jbuilder", "~> 2.7"
 gem "redis"
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-#JWT token management
-gem 'jwt'
+#JWT token management in sessions
+gem "jwt_sessions"
 
 #ActiveRecord Bulk Insert made easy
 gem 'activerecord-import'

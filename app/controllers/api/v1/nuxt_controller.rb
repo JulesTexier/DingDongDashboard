@@ -8,6 +8,37 @@ class Api::V1::NuxtController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :authentificate
 
+  # def encode_token(payload)
+  #   JWT.encode(payload, 's3cr3t')
+  # end
+
+  # def auth_header
+  #   # { Authorization: 'Bearer <token>' }
+  #   request.headers['Authorization']
+  # end
+
+  # def decoded_token
+  #   if auth_header
+  #     token = auth_header.split(' ')[1]
+  #     # header: { 'Authorization': 'Bearer <token>' }
+  #     begin
+  #       JWT.decode(token, 's3cr3t', true, algorithm: 'HS256')
+  #     rescue JWT::DecodeError
+  #       nil
+  #     end
+  #   end
+  # end
+
+  # def logged_in_user
+  #   if decoded_token
+  #     user_id = decoded_token[0]['user_id']
+  #     @user = User.find_by(id: user_id)
+  #   end
+  # end
+
+  # def logged_in?
+  #   !!logged_in_user
+  # end
 
   def get_dashboard_leads
     @broker = Broker.find(params[:id])
@@ -36,8 +67,8 @@ class Api::V1::NuxtController < ApplicationController
 
   def auth_login
     broker = Broker.find_by(email: params["email"])
-    # if !broker.nil? && BCrypt::Password.new(broker.encrypted_password) == params["password"]
-    if broker && broker.authenticate(params["password"])
+    if !broker.nil? && BCrypt::Password.new(broker.encrypted_password) == params["password"]
+    # if broker && broker.authenticate(params["password"])
       # render json: {status: 'SUCCESS', message: "Broker logged in"}, status: 200
       render json: {token: "toner"}, status: 200
     else 
@@ -47,7 +78,7 @@ class Api::V1::NuxtController < ApplicationController
 
   def auth_user
     byebug
-    render json: Broker.last.as_json, status: 200
+    render json: @broker, status: 200
   end
 
   private
