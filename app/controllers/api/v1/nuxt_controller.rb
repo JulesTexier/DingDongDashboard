@@ -12,15 +12,15 @@ class Api::V1::NuxtController < ApplicationController
   def get_dashboard_leads
     @broker = Broker.find(params[:id])
     if !@broker.nil?
-      dd_subs_all = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).where(status: nil)
+      dd_subs_all = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day)
       dd_subs = dd_subs_all.order('created_at DESC').select{|s| (!s.has_stopped || s.has_stopped && (s.has_stopped_at - s.created_at) > 7.days) }.as_json.each{|s| s[:contact_type] = "Ding Dong"}
       dd_subs_out = dd_subs_all.order('created_at DESC').select{|s| (s.has_stopped && (s.has_stopped_at - s.created_at) <= 7.days) }.as_json.each{|s| s[:contact_type] = "Se Loger"}
       sl_subs = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).where(status:"new_lead").order('created_at DESC').as_json.each{|s| s[:contact_type] = "Se Loger"}
       data = dd_subs + sl_subs + dd_subs_out
 
-      render json: {status: 'SUCCESS', message: "Here is the list of leads for broker #{@broker.id} ", data: data}, status: 200
+      render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{@broker.id} ", data: data}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Broker not found'}, status: 404
+      render json: {status: 'ERROR', message: 'Broker not found'}, status: 400
     end
   end
 
@@ -30,8 +30,24 @@ class Api::V1::NuxtController < ApplicationController
       @subscriber.update(subscriber_params)
       render json: {status: 'SUCCESS', message: "Subscriber updated", data: @subscriber.as_json}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 500
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 400
     end
+  end
+
+  def auth_login
+    broker = Broker.find_by(email: params["email"])
+    # if !broker.nil? && BCrypt::Password.new(broker.encrypted_password) == params["password"]
+    if broker && broker.authenticate(params["password"])
+      # render json: {status: 'SUCCESS', message: "Broker logged in"}, status: 200
+      render json: {token: "toner"}, status: 200
+    else 
+      render json: {status: 'ERROR', message: 'Broker not authorized'}, status: 400
+    end
+  end
+
+  def auth_user
+    byebug
+    render json: Broker.last.as_json, status: 200
   end
 
   private
