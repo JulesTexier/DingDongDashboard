@@ -26,6 +26,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'activerecord-import'
 
 gem "devise"
+gem 'devise-jwt', '~> 0.1.0'
+gem 'dry-configurable', '0.9.0'
 
 gem "rubocop"
 
