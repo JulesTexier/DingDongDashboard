@@ -15,6 +15,7 @@ class Broker < ApplicationRecord
   has_many :shifts, through: :permanences, source: :broker_shift #a voir
 
   belongs_to :agglomeration, optional: true
+  belongs_to :broker_agency, optional: true
 
   def get_fullname
     return "#{self.firstname} #{self.lastname}"
