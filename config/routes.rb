@@ -2,7 +2,13 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
-  devise_for :brokers
+  devise_for :brokers, controllers: {sessions: 'sessions'}
+  devise_scope :broker do
+    get 'brokers/current', to: 'sessions#show'
+  end
+
+  post '/sessions', to: "sessions#create"
+
 
 
   #############
