@@ -1,0 +1,2 @@
+class BrokerAgency < ApplicationRecord
+end
