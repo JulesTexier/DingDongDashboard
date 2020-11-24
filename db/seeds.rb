@@ -99,3 +99,11 @@ end
 Notary.create(firstname: "Pierre-Alexis", lastname: "Leray") if Notary.all.empty?
 
 Contractor.create(firstname: "Matthieu") if Contractor.all.empty?
+
+broker_agencies = Broker.all.map{|i| i.agency}.uniq.each do |agency_name|
+  BrokerAgency.create(name: agency_name, agglomeration_id: Broker.where(agency: agency_name).first.agglomeration.id) if BrokerAgency.find_by(name: agency_name).nil?
+end
+
+Broker.where.not(agglomeration_id: nil).each do |broker|
+  broker.update(broker_agency_id: BrokerAgency.find_by(name: broker.agency).id) if broker.agency.nil?
+end
