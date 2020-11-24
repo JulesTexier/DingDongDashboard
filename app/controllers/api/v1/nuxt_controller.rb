@@ -2,12 +2,11 @@ require 'dotenv/load'
 
 class Api::V1::NuxtController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
-  
+
   TOKEN = ENV['BEARER_TOKEN']
   HIDE_DAY_COUNT = 7
   protect_from_forgery with: :null_session
-  before_action :authentificate
-
+  before_action :authenticate
 
   def get_dashboard_leads
     @broker = Broker.find(params[:id])
@@ -20,7 +19,7 @@ class Api::V1::NuxtController < ApplicationController
 
       render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{@broker.id} ", data: data}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Broker not found'}, status: 404
+      render json: {status: 'ERROR', message: 'Broker not found'}, status: 400
     end
   end
 
@@ -30,12 +29,12 @@ class Api::V1::NuxtController < ApplicationController
       @subscriber.update(subscriber_params)
       render json: {status: 'SUCCESS', message: "Subscriber updated", data: @subscriber.as_json}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 500
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 400
     end
   end
 
   private
-  def authentificate
+  def authenticate
       authenticate_or_request_with_http_token do |token, options|
           ActiveSupport::SecurityUtils.secure_compare(token, TOKEN)
       end

@@ -1,0 +1,60 @@
+<div class="vh-100 d-flex align-items-center">
+  <div class="card col-6 offset-3 vh-50">
+    <div class="card-body">
+        <div class="text-center row justify-content-center mt-5">
+          <%= simple_form_for(resource, class: "form-signin col-4", as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="row d-flex flex-row justify-content-center align-item-center">
+                  <img class="mb-5" src="https://www.hellodingdong.com/assets/images/logo-ding-dong-full.png" alt="" height="40">
+                </div> 
+                <h2 class="h3 mb-3 font-weight-normal text-danger">ESPACE D'ADMINISTRATION</h2>
+                
+                <div class="row">
+                  <div class="col-lg-6 offset-lg-0 col-10 offset-1 mb-4">
+                    <div class="field">
+                      <%= f.input :email,
+                          class:"sr-only",
+                          required: false,
+                          autofocus: true,
+                          label:'Admin email',
+                          input_html: { autocomplete: "email" } %>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 offset-lg-0 col-10 offset-1 ">
+                    <div class="field">
+                      <%= f.input :password,
+                        class:"sr-only",
+                        required: false,
+                        label:'Admin mot de passe',
+                        input_html: { autocomplete: "current-password" } %>
+                    </div>
+                  </div>
+                </div>
+              
+              <% if false %>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3 col-8 offset-2">
+                    <% if devise_mapping.rememberable? %>
+                    <div class="form-check">
+                        <%= f.check_box :remember_me, class:"form-check-input" %>
+                        <%= f.label :remember_me, 'Se souvenir de moi', class:"m-0" %>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="row">
+                  <div class="col-lg-6 offset-lg-3 col-8 offset-2 ">
+                    <div class="actions mt-3">
+                      <%= f.submit "Se connecter", class:"btn btn-lg btn-danger btn-block", style: "color: white; border:none" %>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="mt-5 mb-3 text-muted small">Copyright © <%= Time.now.year %> Ding Dong. Tous droits reservés.</p>
+          <% end %>
+        </div>  
+    </div>
+  </div>
+</div>
+

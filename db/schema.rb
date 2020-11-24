@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_102743) do
+ActiveRecord::Schema.define(version: 2020_11_24_095923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -138,6 +138,12 @@ ActiveRecord::Schema.define(version: 2020_11_20_102743) do
     t.string "name"
     t.bigint "agglomeration_id"
     t.index ["agglomeration_id"], name: "index_departments_on_agglomeration_id"
+  end
+
+  create_table "jwt_blacklists", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.index ["jti"], name: "index_jwt_blacklists_on_jti"
   end
 
   create_table "notaries", force: :cascade do |t|
