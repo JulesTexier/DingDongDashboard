@@ -2,15 +2,7 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
-  devise_for :brokers, controllers: {sessions: 'sessions'}
-  devise_scope :broker do
-    get 'brokers/current', to: 'sessions#show'
-  end
-
-  post '/sessions', to: "sessions#create"
-
-
-
+ 
   #############
   # 1 - Admin
   #############
@@ -136,4 +128,12 @@ Rails.application.routes.draw do
   get "/courtier/dashboard" => "broker_pages#index", :as => :broker_root
   post "/broker/checked" => "broker_pages#checked_by_broker"
 
+   # Broker Authentificatgion 
+   devise_for :brokers, controllers: {sessions: 'sessions'}
+   devise_scope :broker do
+     get 'brokers/current', to: 'sessions#show'
+   end
+ 
+   post '/sessions', to: "sessions#create"
+ 
 end
