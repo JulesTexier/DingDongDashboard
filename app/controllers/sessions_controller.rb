@@ -1,5 +1,6 @@
 class SessionsController < Devise::SessionsController
   protect_from_forgery with: :null_session
+  before_action :set_default_response_format
 
   def create
     self.resource = warden.authenticate!(auth_options)
@@ -14,7 +15,6 @@ class SessionsController < Devise::SessionsController
       render json:  {user: current_broker }, status: 200
     else
       render json: {status: 'ERROR', message: 'Broker not found'}, status: 406
-      
     end
   end
 
@@ -23,4 +23,9 @@ class SessionsController < Devise::SessionsController
   def current_token
     request.env['warden-jwt_auth.token']
   end
+
+  def set_default_response_format
+    request.format = :json
+  end
+
 end
