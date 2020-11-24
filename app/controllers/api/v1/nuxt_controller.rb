@@ -33,20 +33,6 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
-  def auth_login
-    broker = Broker.find_by(email: params["email"])
-    if !broker.nil? && BCrypt::Password.new(broker.encrypted_password) == params["password"]
-      render json: {token: broker.id}, status: 200
-    else 
-      render json: {status: 'ERROR', message: 'Broker not authorized'}, status: 400
-    end
-  end
-
-  def auth_user
-    @broker = Broker.find(params["broker"])
-    render json: @broker, status: 200
-  end
-
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
