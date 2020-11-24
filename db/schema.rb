@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_161858) do
+ActiveRecord::Schema.define(version: 2020_11_24_095923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -119,9 +119,6 @@ ActiveRecord::Schema.define(version: 2020_11_24_161858) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.boolean "is_active", default: true
-    t.integer "min_monthly_contact", default: 0
-    t.integer "max_monthly_contact", default: 100
     t.index ["agglomeration_id"], name: "index_brokers_on_agglomeration_id"
     t.index ["email"], name: "index_brokers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
