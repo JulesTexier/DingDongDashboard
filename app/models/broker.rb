@@ -21,10 +21,22 @@ class Broker < ApplicationRecord
     return "#{self.firstname} #{self.lastname}"
   end
 
-  # A REFACTO
-  def send_email_notification(user)
-    PostmarkMailer.send_new_lead_notification_to_broker(user).deliver_now if !self.email.nil?
+  # This method is perfomred every morning at 9 by scheduler 
+  def self.notify_daily_leads
+    BrokerAgency.where.not(status: "free").each do |broker_agency|
+      broker_agency.brokers.each do |broker|
+        new_leads_count = broker.subscribers.where(broker_status: "Non traité").where('created_at > ?', Time.now - 8.days).where('created_at < ?', Time.now - 7.days).count
+        if new_leads_count > 0
+          BrokerMailer.send_morning_new_leads_notification(broker.id, new_leads_count).deliver_now
+        end
+      end
+    end
   end
+
+  # A REFACTO
+  # def send_email_notification(user)
+  #   PostmarkMailer.send_new_lead_notification_to_broker(user).deliver_now if !self.email.nil?
+  # end
 
   # REFACTO : A VOIR SI ON GARDE ... 
   def self.send_good_morning_message_leads
