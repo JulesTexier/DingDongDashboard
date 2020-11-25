@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_165954) do
+ActiveRecord::Schema.define(version: 2020_11_25_072218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_165954) do
     t.string "status", default: "test"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "current_period_provided_leads", default: 0
     t.index ["agglomeration_id"], name: "index_broker_agencies_on_agglomeration_id"
   end
 
@@ -229,182 +230,3 @@ ActiveRecord::Schema.define(version: 2020_11_24_165954) do
     t.index ["property_id"], name: "index_property_links_on_property_id"
   end
 
-  create_table "referrals", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "phone"
-    t.string "email"
-    t.string "referral_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "research_areas", force: :cascade do |t|
-    t.bigint "area_id"
-    t.bigint "research_id"
-    t.index ["area_id"], name: "index_research_areas_on_area_id"
-    t.index ["research_id"], name: "index_research_areas_on_research_id"
-  end
-
-  create_table "researches", force: :cascade do |t|
-    t.string "name"
-    t.integer "min_floor", default: 0
-    t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
-    t.integer "min_surface"
-    t.integer "min_rooms_number"
-    t.integer "max_price"
-    t.integer "min_price"
-    t.integer "max_sqm_price"
-    t.boolean "is_active", default: true
-    t.boolean "balcony", default: false
-    t.boolean "terrace", default: false
-    t.boolean "garden", default: false
-    t.boolean "new_construction", default: false
-    t.boolean "last_floor", default: false
-    t.boolean "home_type", default: true
-    t.boolean "apartment_type", default: true
-    t.bigint "subscriber_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "soon_deleted_agglomeration"
-    t.bigint "agglomeration_id"
-    t.index ["agglomeration_id"], name: "index_researches_on_agglomeration_id"
-    t.index ["subscriber_id"], name: "index_researches_on_subscriber_id"
-  end
-
-  create_table "saved_properties", force: :cascade do |t|
-    t.bigint "research_id"
-    t.bigint "property_id"
-    t.index ["property_id"], name: "index_saved_properties_on_property_id"
-    t.index ["research_id"], name: "index_saved_properties_on_research_id"
-  end
-
-  create_table "scraper_parameters", force: :cascade do |t|
-    t.string "url"
-    t.string "source"
-    t.string "main_page_cls"
-    t.string "scraper_type", default: "Static"
-    t.string "waiting_cls"
-    t.boolean "multi_page", default: false
-    t.integer "page_nbr", default: 1
-    t.string "http_type"
-    t.text "http_request", default: [], array: true
-    t.boolean "is_active", default: true
-    t.string "zone"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "group_type"
-    t.boolean "high_priority", default: true
-  end
-
-  create_table "sequence_steps", force: :cascade do |t|
-    t.integer "step"
-    t.string "name"
-    t.text "description"
-    t.string "step_type"
-    t.integer "time_frame"
-    t.bigint "sequence_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "content"
-    t.string "subject"
-    t.index ["sequence_id"], name: "index_sequence_steps_on_sequence_id"
-  end
-
-  create_table "sequences", force: :cascade do |t|
-    t.string "name"
-    t.string "sender_email"
-    t.string "sender_name"
-    t.string "source"
-    t.boolean "is_active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "description"
-    t.string "marketing_type"
-    t.string "marketing_link"
-  end
-
-  create_table "statuses", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "status_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "subscriber_notes", force: :cascade do |t|
-    t.text "content"
-    t.bigint "subscriber_id"
-    t.datetime "created_at", null: false
-    t.index ["subscriber_id"], name: "index_subscriber_notes_on_subscriber_id"
-  end
-
-  create_table "subscriber_sequences", force: :cascade do |t|
-    t.bigint "sequence_id", null: false
-    t.bigint "subscriber_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "agglomeration_id"
-    t.index ["agglomeration_id"], name: "index_subscriber_sequences_on_agglomeration_id"
-    t.index ["sequence_id"], name: "index_subscriber_sequences_on_sequence_id"
-    t.index ["subscriber_id"], name: "index_subscriber_sequences_on_subscriber_id"
-  end
-
-  create_table "subscriber_statuses", force: :cascade do |t|
-    t.bigint "status_id"
-    t.bigint "subscriber_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["status_id"], name: "index_subscriber_statuses_on_status_id"
-    t.index ["subscriber_id"], name: "index_subscriber_statuses_on_subscriber_id"
-  end
-
-  create_table "subscribers", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "facebook_id"
-    t.boolean "is_active", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "broker_id"
-    t.string "trello_id_card"
-    t.boolean "is_blocked"
-    t.boolean "terrace", default: false
-    t.string "status"
-    t.boolean "messenger_flux"
-    t.boolean "email_flux"
-    t.boolean "email_confirmed", default: false
-    t.string "confirm_token"
-    t.bigint "contractor_id"
-    t.bigint "notary_id"
-    t.boolean "is_broker_affiliated", default: false
-    t.boolean "hot_lead", default: false
-    t.boolean "checked_by_broker", default: false
-    t.boolean "has_stopped", default: false
-    t.datetime "has_stopped_at"
-    t.string "broker_status", default: "Non traité"
-    t.text "broker_comment", default: ""
-    t.index ["broker_id"], name: "index_subscribers_on_broker_id"
-    t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
-    t.index ["notary_id"], name: "index_subscribers_on_notary_id"
-  end
-
-  create_table "subways", force: :cascade do |t|
-    t.string "name"
-    t.string "line", default: "{}"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "areas", "departments"
-  add_foreign_key "properties", "areas"
-  add_foreign_key "property_links", "properties"
-  add_foreign_key "sequence_steps", "sequences"
-  add_foreign_key "subscriber_notes", "subscribers"
-  add_foreign_key "subscriber_sequences", "sequences"
-  add_foreign_key "subscriber_sequences", "subscribers"
-end
