@@ -136,6 +136,8 @@ class Broker < ApplicationRecord
     # Get broker from BA with le fewer nb of leads since start of the month
     broker_hash = {}
     selected_agency.brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
+    # Uodate agency counters
+    selected_agency.update(current_period_leads_left: selected_agency.current_period_leads_left - 1, current_period_provided_leads: selected_agency.current_period_provided_leads + 1)
     return Broker.find(broker_hash.sort.first[0])
   end
 
