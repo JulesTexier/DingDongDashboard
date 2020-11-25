@@ -114,15 +114,29 @@ class Broker < ApplicationRecord
     end
   end
 
+  # November 2020 : Up to date with business logic 
   def self.get_accurate_by_agglomeration(agglomeration_id)
-    brokers = Broker.where(agglomeration_id: agglomeration_id)
-    broker_hash = {}
-    brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
-    return Broker.find(broker_hash.sort.first[0])
 
-    # offset = rand(brokers.count)
-    # rand_broker = brokers.offset(offset).first
-    return rand_broker
+    # Select BA from agglomeration 
+    broker_agency_scope = BrokerAgency.selectable_agencies.where(agglomeration_id: agglomeration_id)
+
+    # Calculate each BA progress in current period 
+    broker_agency_progress = broker_agency_scope.map{ |ba| [ba.id, (ba.current_period_provided_leads/ba.current_period_leads_left.to_f)]}
+    
+    # Sort by progress (min to max)
+    puts sorted_broker_agency_progress = broker_agency_progress.sort { |x,y| x[1] <=> y[1] }
+
+    # Ensure to select an agency with brokers 
+    selected_agency = BrokerAgency.find(sorted_broker_agency_progress[0][0])
+      i = 0
+      while BrokerAgency.find(sorted_broker_agency_progress[i][0]).brokers.count == 0 
+        selected_agency = BrokerAgency.find(sorted_broker_agency_progress[i+1][0])
+        i += 1
+      end
+    # Get broker from BA with le fewer nb of leads since start of the month
+    broker_hash = {}
+    selected_agency.brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
+    return Broker.find(broker_hash.sort.first[0])
   end
 
 end
