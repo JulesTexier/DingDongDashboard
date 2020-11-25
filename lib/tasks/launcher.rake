@@ -84,7 +84,7 @@ end
 namespace :broker do
   desc "Tasks related to brokers"
   task :good_morning_message do
-    Broker.send_good_morning_message_leads
+    Broker.notify_daily_leads
   end
 end
 
