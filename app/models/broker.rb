@@ -15,15 +15,28 @@ class Broker < ApplicationRecord
   has_many :shifts, through: :permanences, source: :broker_shift #a voir
 
   belongs_to :agglomeration, optional: true
+  belongs_to :broker_agency, optional: true
 
   def get_fullname
     return "#{self.firstname} #{self.lastname}"
   end
 
-  # A REFACTO
-  def send_email_notification(user)
-    PostmarkMailer.send_new_lead_notification_to_broker(user).deliver_now if !self.email.nil?
+  # This method is perfomred every morning at 9 by scheduler 
+  def self.notify_daily_leads
+    BrokerAgency.where.not(status: "free").each do |broker_agency|
+      broker_agency.brokers.each do |broker|
+        new_leads_count = broker.subscribers.where(broker_status: "Non traité").where('created_at > ?', Time.now - 8.days).where('created_at < ?', Time.now - 7.days).count
+        if new_leads_count > 0
+          BrokerMailer.send_morning_new_leads_notification(broker.id, new_leads_count).deliver_now
+        end
+      end
+    end
   end
+
+  # A REFACTO
+  # def send_email_notification(user)
+  #   PostmarkMailer.send_new_lead_notification_to_broker(user).deliver_now if !self.email.nil?
+  # end
 
   # REFACTO : A VOIR SI ON GARDE ... 
   def self.send_good_morning_message_leads
@@ -101,15 +114,31 @@ class Broker < ApplicationRecord
     end
   end
 
+  # November 2020 : Up to date with business logic 
   def self.get_accurate_by_agglomeration(agglomeration_id)
-    brokers = Broker.where(agglomeration_id: agglomeration_id)
-    broker_hash = {}
-    brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
-    return Broker.find(broker_hash.sort.first[0])
 
-    # offset = rand(brokers.count)
-    # rand_broker = brokers.offset(offset).first
-    return rand_broker
+    # Select BA from agglomeration 
+    broker_agency_scope = BrokerAgency.selectable_agencies.where(agglomeration_id: agglomeration_id)
+
+    # Calculate each BA progress in current period 
+    broker_agency_progress = broker_agency_scope.map{ |ba| [ba.id, (ba.current_period_provided_leads/ba.current_period_leads_left.to_f)]}
+    
+    # Sort by progress (min to max)
+    sorted_broker_agency_progress = broker_agency_progress.sort { |x,y| x[1] <=> y[1] }
+
+    # Ensure to select an agency with brokers 
+    selected_agency = BrokerAgency.find(sorted_broker_agency_progress[0][0])
+      i = 0
+      while BrokerAgency.find(sorted_broker_agency_progress[i][0]).brokers.count == 0 
+        selected_agency = BrokerAgency.find(sorted_broker_agency_progress[i+1][0])
+        i += 1
+      end
+    # Get broker from BA with le fewer nb of leads since start of the month
+    broker_hash = {}
+    selected_agency.brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
+    # Uodate agency counters
+    selected_agency.update(current_period_leads_left: selected_agency.current_period_leads_left - 1, current_period_provided_leads: selected_agency.current_period_provided_leads + 1)
+    return Broker.find(broker_hash.sort.first[0])
   end
 
 end
