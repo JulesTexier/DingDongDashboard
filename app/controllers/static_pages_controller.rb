@@ -177,7 +177,7 @@ class StaticPagesController < ApplicationController
   end
 
   def admin
-    @brokers = Broker.all.includes(:subscribers).order(:agglomeration_id)
+    @broker_agencies = BrokerAgency.all
     @agglomerations = Agglomeration.all
     @broker_offset = 7
   end
