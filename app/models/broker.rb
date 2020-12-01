@@ -124,7 +124,7 @@ class Broker < ApplicationRecord
     broker_agency_progress = broker_agency_scope.map{ |ba| [ba.id, (ba.current_period_provided_leads/ba.current_period_leads_left.to_f)]}
     
     # Sort by progress (min to max)
-    puts sorted_broker_agency_progress = broker_agency_progress.sort { |x,y| x[1] <=> y[1] }
+    sorted_broker_agency_progress = broker_agency_progress.sort { |x,y| x[1] <=> y[1] }
 
     # Ensure to select an agency with brokers 
     selected_agency = BrokerAgency.find(sorted_broker_agency_progress[0][0])
