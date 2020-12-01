@@ -176,10 +176,12 @@ class StaticPagesController < ApplicationController
     @duplicated_props_last_week = Property.where("created_at BETWEEN ? AND ?", DateTime.now.beginning_of_day - 14.days, DateTime.now.beginning_of_day - 7.days).select(:price, :rooms_number, :surface).group(:price, :rooms_number, :surface).having("count(*) > 1")
   end
 
-  def admin
+  def general_broker_dashboard
     @broker_agencies = BrokerAgency.all
-    @agglomerations = Agglomeration.all
-    @broker_offset = 7
+  end
+
+  def broker_agency_dashboard
+    @broker_agency = params[:broker_id]
   end
 
   private

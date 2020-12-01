@@ -19,6 +19,7 @@
           <th scope="col">Lead max</th>
           <th scope="col">Progression</th>
           <th scope="col">Factu en cours</th>
+          <th scope="col">Plus</th>
         </tr>
       </thead>
 
@@ -27,7 +28,7 @@
         <% @broker_agencies.each do |broker_agency| %>
           <tr>
             <td>
-              <%= broker_agency.name%>
+              <%= broker_agency.name%> <span class="badge badge-primary"><%= broker_agency.agglomeration.name %></span>
             </td>
             <td>
               <%= broker_agency.current_period_provided_leads%>
@@ -37,13 +38,17 @@
             </td>
             <td>
             <% progress =  (broker_agency.current_period_provided_leads.to_f / broker_agency.max_period_leads.to_f)*100%>
-            <% color = progress >= 100 ? "bg-success" : "bg-danger" %>
+            <% month_progress =  (Time.now.wday.to_f / 30)*100%>
+            <% color = progress >= month_progress ? "bg-success" : "bg-danger" %>
               <div class="progress">
                 <div class="progress-bar  <%= color%>" role="progressbar" style="width: <%= progress%>%;" aria-valuenow="<%= progress%>" aria-valuemin="0" aria-valuemax="100"><%= progress%>%</div>
               </div>
             </td>
             <td>
               <%= broker_agency.current_period_provided_leads*broker_agency.default_pricing_lead %> €<span style="font-size:0.8em"> / <%= broker_agency.max_period_leads*broker_agency.default_pricing_lead %> €</span>
+            </td>
+            <td>
+              <%= link_to "Voir plus", "/dashboard/courtiers/#{broker_agency.id}"%>
             </td>
 
           </tr>
