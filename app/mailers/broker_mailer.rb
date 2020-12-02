@@ -44,4 +44,11 @@ class BrokerMailer < ApplicationMailer
     end
     mail(from: "etienne@hellodingdong.com", to: "f.bonnand@gmail.com", subject: "DING DONG - Synthèse de la semaine")
   end
+
+  def send_morning_new_leads_notification(broker_id, nb_new_leads)
+    @broker = Broker.find(broker_id)
+    @nb_new_leads = nb_new_leads
+    subject = nb_new_leads < 2 ? "[DING DONG] Nouveau contact" :  "[DING DONG] Nouveaux contacts"
+    mail(from: "etienne@hellodingdong.com", to: @broker.email, subject: subject) if @broker
+  end
 end

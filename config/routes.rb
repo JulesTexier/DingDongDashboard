@@ -2,9 +2,7 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
-  devise_for :brokers
-
-
+ 
   #############
   # 1 - Admin
   #############
@@ -67,7 +65,8 @@ Rails.application.routes.draw do
   get "/dashboard/price" => "static_pages#property_price"
   get "/dashboard/source" => "static_pages#sources"
   get "/dashboard/duplicates" => "static_pages#duplicates"
-  get "/dashboard/courtiers" => "static_pages#admin"
+  get "/dashboard/courtiers" => "static_pages#general_broker_dashboard"
+  get "/dashboard/courtiers/:broker_id" => "static_pages#broker_agency_dashboard"
   
   #############
   # 5 - API
@@ -95,6 +94,9 @@ Rails.application.routes.draw do
       # Nuxt 
       get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
       put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
+      post "nuxt/auth/login" => "nuxt#auth_login"
+      post "nuxt/auth/logout" => "nuxt#auth_logout"
+      get "nuxt/auth/user" => "nuxt#auth_user"
       
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
@@ -127,4 +129,12 @@ Rails.application.routes.draw do
   get "/courtier/dashboard" => "broker_pages#index", :as => :broker_root
   post "/broker/checked" => "broker_pages#checked_by_broker"
 
+   # Broker Authentificatgion 
+   devise_for :brokers, controllers: {sessions: 'sessions'}
+   devise_scope :broker do
+     get 'brokers/current', to: 'sessions#show'
+   end
+ 
+   post '/sessions', to: "sessions#create"
+ 
 end
