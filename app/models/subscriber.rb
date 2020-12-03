@@ -57,6 +57,10 @@ class Subscriber < ApplicationRecord
     
   end
 
+  def is_real_ding_dong_user?
+    return  self.status ==  "new_lead" || (!self.has_stopped.nil? && !self.has_stopped_at.nil? && (self.has_stopped_at - self.created_at) > 7.days) ? false : true
+  end
+
   
 
   ##########################
