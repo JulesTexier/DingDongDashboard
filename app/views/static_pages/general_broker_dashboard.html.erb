@@ -6,22 +6,47 @@
 </div>
 
 
-<div class= "container mt-5">
+<div class= "container-fluid mt-5">
 
   <section>
-    <h2>Synthèse par agence</h2>
+    <h2 class="mb-2">Synthèse par agence</h2>
 
     <% ["premium", "test", "free"].each do |plan_name|%>
       <h3><%= plan_name.capitalize%></h3>
+
+      <% if plan_name == "premium"%>
+        <div class = "row">
+          <div class = "col-6 col-lg-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Agences abonnées</h5>
+                <p class="card-text"><%= @broker_agencies.select{|ba| ba.status == plan_name}.count %> agences </p>
+              </div>
+            </div>
+          </div>
+          <div class = "col-6 col-lg-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Revenu estimé</h5>
+                <p class="card-text"><%= @broker_agencies.select{|ba| ba.status == plan_name}.map{|ba| ba.current_period_provided_leads * ba.default_pricing_lead}.inject(0){|sum,x| sum + x } %> € </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+
       <table class="table my-4">
         <thead>
           <tr>
             <th scope="col">Nom</th>
+            <th scope="col">Agglomeration</th>
             <th scope="col">Lead période</th>
             <th scope="col">Lead max</th>
             <th scope="col">Progression</th>
             <th scope="col">Factu en cours</th>
             <th scope="col">Plus</th>
+            <th scope="col">Admin</th>
           </tr>
         </thead>
 
@@ -30,7 +55,10 @@
           <% @broker_agencies.select{|ba| ba.status == plan_name}.each do |broker_agency| %>
             <tr>
               <td>
-                <%= broker_agency.name%> <span class="badge badge-primary"><%= broker_agency.agglomeration.name %></span>
+                <%= broker_agency.name%> 
+              </td>
+              <td>
+                <span class="badge badge-primary"><%= broker_agency.agglomeration.name %></span>
               </td>
               <td>
                 <%= broker_agency.current_period_provided_leads%>
@@ -39,18 +67,22 @@
                 <%= broker_agency.max_period_leads%>
               </td>
               <td>
-              <% progress =  (broker_agency.current_period_provided_leads.to_f / broker_agency.max_period_leads.to_f)*100%>
-              <% month_progress =  (Time.now.wday.to_f / 30)*100%>
+              <% progress =  (broker_agency.current_period_provided_leads.to_f / broker_agency.max_period_leads.to_f)*100.round(2)%>
+              <% month_progress =  (Time.now.wday.to_f / 30)*100.round(2)%>
               <% color = progress >= month_progress ? "bg-success" : "bg-danger" %>
                 <div class="progress">
-                  <div class="progress-bar  <%= color%>" role="progressbar" style="width: <%= progress%>%;" aria-valuenow="<%= progress%>" aria-valuemin="0" aria-valuemax="100"><%= progress%>%</div>
+                  <div class="progress-bar  <%= color%>" role="progressbar" style="width: <%= progress%>%;" aria-valuenow="<%= progress%>" aria-valuemin="0" aria-valuemax="100"><%= progress.round(2)%>%</div>
                 </div>
               </td>
               <td>
+                <%= progress >= 100 ? "✅" : "" %>
                 <%= broker_agency.current_period_provided_leads*broker_agency.default_pricing_lead %> €<span style="font-size:0.8em"> / <%= broker_agency.max_period_leads*broker_agency.default_pricing_lead %> €</span>
               </td>
               <td>
-                <%= link_to "Voir plus", "/dashboard/courtiers/#{broker_agency.id}"%>
+                <%= link_to "➕", "/dashboard/courtiers/#{broker_agency.id}", target: "_blank", style:"font-size: 1.2em"%>
+              </td>
+              <td>
+                <%= link_to "🔧", "/admin/broker_agency/#{broker_agency.id}", target: "_blank", style:"font-size: 1.2em"%>
               </td>
 
             </tr>
