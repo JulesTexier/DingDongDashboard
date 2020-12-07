@@ -97,6 +97,8 @@ Rails.application.routes.draw do
       post "nuxt/auth/login" => "nuxt#auth_login"
       post "nuxt/auth/logout" => "nuxt#auth_logout"
       get "nuxt/auth/user" => "nuxt#auth_user"
+      get "nuxt/subscribers/:subscriber_id" => "nuxt#get_subscriber"
+      get "nuxt/brokers/:broker_id" => "nuxt#get_broker"
       
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
