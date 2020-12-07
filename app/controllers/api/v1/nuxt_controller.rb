@@ -8,6 +8,24 @@ class Api::V1::NuxtController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :authenticate
 
+  def get_subscriber
+    begin
+      subscriber = Subscriber.find(params[:subscriber_id])
+      render json: {status: 'SUCCESS', message: "Subscriber found successfully", data: subscriber}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
+    end
+  end
+
+  def get_broker
+    begin
+      broker = Broker.find(params[:broker_id])
+      render json: {status: 'SUCCESS', message: "Broker found successfully", data: broker}, status: 200
+    rescue ActiveRecord::RecordNotFound => e  
+      render json: {status: 'ERROR', message: 'Broker not found'}, status: 422
+    end
+  end
+
   def get_dashboard_leads
     @broker = Broker.find(params[:id])
     if !@broker.nil?
@@ -26,7 +44,7 @@ class Api::V1::NuxtController < ApplicationController
 
       render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{@broker.id} ", data: data}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Broker not found'}, status: 400
+      render json: {status: 'ERROR', message: 'Broker not found'}, status: 422
     end
   end
 
@@ -36,7 +54,7 @@ class Api::V1::NuxtController < ApplicationController
       @subscriber.update(subscriber_params)
       render json: {status: 'SUCCESS', message: "Subscriber updated", data: @subscriber.as_json}, status: 200
     else
-      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 400
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
     end
   end
 
