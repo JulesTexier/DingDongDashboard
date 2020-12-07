@@ -66,6 +66,6 @@ class Api::V1::NuxtController < ApplicationController
   end
 
   def subscriber_params
-    params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment )
+    params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead)
   end
 end
