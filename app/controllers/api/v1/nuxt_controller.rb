@@ -27,22 +27,11 @@ class Api::V1::NuxtController < ApplicationController
   end
 
   def get_dashboard_leads
-    @broker = Broker.find(params[:id])
-    if !@broker.nil?
-      # All subscribers in DB created before HIDE_DAY_COUNT period
-      scoped_subscribers = @broker.subscribers.where('created_at <  ?', Time.now - HIDE_DAY_COUNT.day).order('created_at DESC')
-      # Subscribers that use DD alert 
-      dd_subs_all = scoped_subscribers.where.not(status: "new_lead")
-      dd_subs = dd_subs_all.select{|s| (!s.has_stopped || s.has_stopped && (s.has_stopped_at - s.created_at) > 7.days) }.as_json.each{|s| s[:contact_type] = "Ding Dong"}
-      # Reflag as ghost contact( bad DD xp )
-      dd_subs_out = dd_subs_all.select{|s| (s.has_stopped && (s.has_stopped_at - s.created_at) <= 7.days) }.as_json.each{|s| s[:contact_type] = "Se Loger"}
-      
-      # Ghost contacts
-      sl_subs = scoped_subscribers.where(status:"new_lead").as_json.each{|s| s[:contact_type] = "Se Loger"}
-      
-      data = dd_subs + sl_subs + dd_subs_out
-
-      render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{@broker.id} ", data: data}, status: 200
+    broker = Broker.find(params[:id])
+    if !broker.nil?
+      scoped_subscribers = broker.get_available_leads
+      data = scoped_subscribers.map{ |s| s.is_real_ding_dong_user? ? s.as_json.merge!(contact_type: "Ding Dong") : s.as_json.merge!(contact_type: "Se Loger")  }
+      render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{broker.id} ", data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Broker not found'}, status: 422
     end
