@@ -233,7 +233,8 @@
   </head>
   <body>
     <%= render 'header' %>
-    <%= render 'new_leads_body', nb_new_leads: @nb_new_leads, broker:@broker %>
+    <%= render 'new_leads_body', nb_new_leads: @nb_new_leads if @nb_new_leads > 0 %>
+    <%= render 'hot_leads_to_call_body', hot_leads_to_call: @hot_leads_to_call if @hot_leads_to_call.count > 0 %>
     <%= render 'footer' %>
   </body>
 </html>

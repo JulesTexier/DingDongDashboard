@@ -36,8 +36,9 @@ class Broker < ApplicationRecord
     BrokerAgency.selectable_agencies.each do |broker_agency|
       broker_agency.brokers.each do |broker|
         new_leads_count = broker.subscribers.where(broker_status: "Non traité").where('created_at > ?', Time.now - 8.days).where('created_at < ?', Time.now - 7.days).count
-        if new_leads_count > 0
-          BrokerMailer.send_morning_new_leads_notification(broker.id, new_leads_count).deliver_now
+        hot_leads_to_call = broker.subscribers.where('broker_meeting > ? AND broker_meeting < ?', Date.today.beginning_of_day, Date.today.end_of_day).map{|s| s.id}
+        if new_leads_count > 0 || hot_leads_to_call.count > 0
+          BrokerMailer.send_morning_new_leads_notification(broker.id, new_leads_count, hot_leads_to_call).deliver_now
         end
       end
     end
