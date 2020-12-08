@@ -1,3 +1,5 @@
+require 'csv'
+
 class Migration
   #######################################################################
   # Script de migration de la liaison de l'objet agglo sur la recherche #
@@ -50,6 +52,15 @@ class Migration
 
       end
     end
+  end
+
+  def import_sl_contacts(agglo_name)
+    contacts = CSV.parse(File.read("import/#{input_csv_name}.csv"), {:col_sep => ";"})
+    agglomeration = Agglomeration.find_by(name: agglo_name)
+    contacts.each do |contact|
+      Subscriber.find_by(email: contact[])
+    end
+    byebug
   end
 
   def broker_repartition(agglomeration_id, since_date)
