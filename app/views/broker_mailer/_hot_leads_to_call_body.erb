@@ -41,7 +41,7 @@
 
 <ul style="font-size: 16px;">
   <% @hot_leads_to_call.each do |lead| %>
-    <li><%= lead.broker_meeting.strftime("%H:%M") %> : <%=  lead.get_fullname %> (<%= lead.phone %>)</li>
+    <li><%= lead.broker_meeting.in_time_zone("Europe/Paris").strftime("%H:%M") %> : <%=  lead.get_fullname %> (<%= lead.phone %>)</li>
   <% end %>
 </ul>
 </ul></p>
