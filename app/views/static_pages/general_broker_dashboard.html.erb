@@ -42,6 +42,9 @@
             <th scope="col">Nom</th>
             <th scope="col">Agglomeration</th>
             <th scope="col">Lead période</th>
+            <th scope="col"><span class="badge badge-success">DD</span></th>
+            <th scope="col"><span class="badge badge-danger">SL</span></th>
+            <th scope="col"><span class="badge badge-light">< 7j</span></th>
             <th scope="col">Lead max</th>
             <th scope="col">Progression</th>
             <th scope="col">Factu en cours</th>
@@ -62,6 +65,16 @@
               </td>
               <td>
                 <%= broker_agency.current_period_provided_leads%>
+              </td>
+              <td>
+                <% nb_dd_users = broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| s.is_real_ding_dong_user?}.count  %> 
+                <%= nb_dd_users  %> ( <%= (nb_dd_users.to_f / broker_agency.current_period_provided_leads.to_f*100).round if broker_agency.current_period_provided_leads!= 0 %> %)
+              </td>
+              <td>
+                <%= broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| !s.is_real_ding_dong_user?}.count  %> 
+              </td>
+              <td>
+                <%= broker_agency.get_subscribers.select{|s| s.created_at > Time.now - 7.days}.count  %> 
               </td>
               <td>
                 <%= broker_agency.max_period_leads%>
