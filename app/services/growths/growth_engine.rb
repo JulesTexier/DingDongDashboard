@@ -45,6 +45,7 @@ class GrowthEngine
   end
 
   def get_subscriber(email_address,agglomeration_id, phone_number="", fullname="")
+    email_address.downcase!
     if fullname.split(" ").count == 2 
       firstname = fullname.split(" ")[0]
       lastname = fullname.split(" ")[1] 
@@ -53,12 +54,16 @@ class GrowthEngine
       lastname= ""
     end
 
-    sub = Subscriber.where(email: email_address).last
-    if sub.nil? && phone_number != ""
+    sub = Subscriber.find_by(email: email_address)
+    if sub.nil? && is_valid_phone_number?(phone_number)
       sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
       sub.save(validate: false)
     end
     sub
+  end
+
+  def is_valid_phone_number?(phone_number)
+    ["","0600000000", "0606060606", "0612345678", "000000000000"].include?(phone_number) ? false : true
   end
 
   ## If the subscriber has not a sequence, we declare it out of timeframe
