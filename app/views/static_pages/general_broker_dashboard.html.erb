@@ -67,8 +67,8 @@
                 <%= broker_agency.current_period_provided_leads%>
               </td>
               <td>
-                <% nb_dd_users = broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| s.is_real_ding_dong_user?}.count  %> 
-                <%= nb_dd_users  %> ( <%= (nb_dd_users.to_f / broker_agency.current_period_provided_leads.to_f*100).round if broker_agency.current_period_provided_leads!= 0 %> %)
+                <% nb_dd_users = broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| s.is_real_ding_dong_user?}  %> 
+                <%= nb_dd_users.count  %> ( <%= (nb_dd_users.count.to_f / broker_agency.current_period_provided_leads.to_f*100).round if broker_agency.current_period_provided_leads!= 0 %> %) <span class="badge badge-light"> 🔥 <%= nb_dd_users.select{|s| s.hot_lead}.count %></span>
               </td>
               <td>
                 <%= broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| !s.is_real_ding_dong_user?}.count  %> 
