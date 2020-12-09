@@ -29,14 +29,17 @@ class GrowthEngine
     unless agglomeration.nil?
       # 1 • Handle Subscriber (get or create)
       subscriber = get_subscriber(email, agglomeration.id, phone_number, fullname)
-      # 2 • Handle Sequence to execute
-      # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
-      if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
-        # Determination de la déquence à lancer !
-        ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
-        sequence = get_adequate_sequence(subscriber)
-        create_subscriber_to_sequence(subscriber, sequence, agglomeration.id)
-        sequence.execute_sequence(subscriber, @property_data)
+      
+      unless subscriber.nil?
+        # 2 • Handle Sequence to execute
+        # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
+        if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
+          # Determination de la déquence à lancer !
+          ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
+          sequence = get_adequate_sequence(subscriber)
+          create_subscriber_to_sequence(subscriber, sequence, agglomeration.id)
+          sequence.execute_sequence(subscriber, @property_data)
+        end
       end
     end
   end
@@ -51,7 +54,7 @@ class GrowthEngine
     end
 
     sub = Subscriber.where(email: email_address).last
-    if sub.nil?
+    if sub.nil? && phone_number != ""
       sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
       sub.save(validate: false)
     end
