@@ -9,7 +9,7 @@ class GrowthEngine
 
   def perform_email_webhook(json_content)
     handle_email(json_content)
-    handle_lead_email(@lead_email, @lead_phone, @lead_fullname) unless Sequence.where(sender_email: @sender_email, source: @source).empty?
+    handle_lead_email(@lead_email, @lead_phone, @lead_fullname) unless Sequence.where(sender_email: @sender_email, source: @source).empty? && @sender_email != "lafonciere1972@gmail.com"
   end
 
   private
