@@ -9,7 +9,7 @@ class GrowthEngine
 
   def perform_email_webhook(json_content)
     handle_email(json_content)
-    handle_lead_email(@lead_email, @lead_phone, @lead_fullname) unless Sequence.where(sender_email: @sender_email, source: @source).empty?
+    handle_lead_email(@lead_email, @lead_phone, @lead_fullname) unless Sequence.where(sender_email: @sender_email, source: @source).empty? && @sender_email != "lafonciere1972@gmail.com"
   end
 
   private
@@ -29,19 +29,23 @@ class GrowthEngine
     unless agglomeration.nil?
       # 1 • Handle Subscriber (get or create)
       subscriber = get_subscriber(email, agglomeration.id, phone_number, fullname)
-      # 2 • Handle Sequence to execute
-      # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
-      if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
-        # Determination de la déquence à lancer !
-        ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
-        sequence = get_adequate_sequence(subscriber)
-        create_subscriber_to_sequence(subscriber, sequence, agglomeration.id)
-        sequence.execute_sequence(subscriber, @property_data)
+      
+      unless subscriber.nil?
+        # 2 • Handle Sequence to execute
+        # Est ce qu'on a envoyé une séquence il y a moins de 48h ?
+        if !is_sequence_created_in_timeframe?(subscriber, @first_time_frame)
+          # Determination de la déquence à lancer !
+          ## No sequence has been created in a determined timeframe, therefore we can execute a sequence
+          sequence = get_adequate_sequence(subscriber)
+          create_subscriber_to_sequence(subscriber, sequence, agglomeration.id)
+          sequence.execute_sequence(subscriber, @property_data)
+        end
       end
     end
   end
 
   def get_subscriber(email_address,agglomeration_id, phone_number="", fullname="")
+    email_address.downcase!
     if fullname.split(" ").count == 2 
       firstname = fullname.split(" ")[0]
       lastname = fullname.split(" ")[1] 
@@ -50,12 +54,16 @@ class GrowthEngine
       lastname= ""
     end
 
-    sub = Subscriber.where(email: email_address).last
-    if sub.nil?
+    sub = Subscriber.find_by(email: email_address)
+    if sub.nil? && is_valid_phone_number?(phone_number)
       sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
       sub.save(validate: false)
     end
     sub
+  end
+
+  def is_valid_phone_number?(phone_number)
+    ["","0600000000", "0606060606", "0612345678", "000000000000"].include?(phone_number) ? false : true
   end
 
   ## If the subscriber has not a sequence, we declare it out of timeframe
