@@ -1,0 +1,62 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Statut des agglomerations</h1>
+    <br>
+  </div>
+</div>
+
+
+<div class= "container-fluid mt-5">
+
+  <section>
+
+     <table class="table my-4 table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Agglomeration</th>
+            <th scope="col">Onboarding</th>
+            <th scope="col">Courtage (nb agences)</th>
+            <th scope="col">Annonces</th>
+            <th scope="col">Scrapers (date last scraped property)</th>
+            <th scope="col">All good</th>
+        </thead>
+
+        <tbody>
+
+          <% @agglomerations.each do |agglomeration| %>
+            <tr>
+              <td>
+                <%= agglomeration.name%>
+              </td>
+              <td>
+                <%= onboarding = agglomeration.is_opened? ? "✅" : "❌" %>
+              </td>
+              <td>
+                 <%= brokers = BrokerAgency.selectable_agencies.where(agglomeration: agglomeration).map{|ba| ba.brokers}.flatten.count > 0  ? "✅ (#{BrokerAgency.selectable_agencies.where(agglomeration: agglomeration).count})" : "❌" %>
+              </td>
+              <td>
+                 <%= ads = !agglomeration.ref_code.nil? && BrokerAgency.selectable_agencies.where(agglomeration: agglomeration).map{|ba| ba.brokers}.flatten.count > 0  ? "✅ (Ref : #{agglomeration.ref_code}XXX)" : "❌" %>
+              </td>
+              <td>
+                <%= scrapers = agglomeration.is_scraped? ? "✅ (#{Property.where(area_id:  Area.where(department_id: agglomeration.departments.map{|d| d.id })).last.created_at.strftime("%d/%m") })" : "❌" %>
+              </td>
+              <td>
+                <%= onboarding == "❌" || + brokers == "❌" || ads == "❌" || scrapers == "❌" ? "❌" : "✅"  %>
+              </td>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+  </section>
+  <section class="mt-3">
+    <h2>Glossaire : </h2>
+    <ul>
+      <li>Onboarding : La ville est proposée à l'utilisateur sujr le formulaire d'inscription</li>
+      <li>Courtier : il existe au moins 1 agence de courtage en phase de  prod ou de test avec au moins un courtier configuré dans l'une de ces agences</li>
+      <li>Annonces : L'agglomeration a un ref_code configuré pour les annonces et au moins un courtier est dispo sur l'agglo</li>
+      <li>Scraper : Les scrapers tournent dans l'agglo</li>
+    </ul>  
+  </section>
+</div>
