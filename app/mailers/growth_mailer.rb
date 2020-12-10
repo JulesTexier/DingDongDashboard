@@ -8,7 +8,7 @@ class GrowthMailer < ApplicationMailer
     @sender_name = sequence_step.sequence.sender_name
     @content = sequence_step.content
     @property_data = "Ref : #{property_data[:ref]} (#{property_data[:price]} € - #{property_data[:surface]} m2)"
-    mail(from: "etienne@hellodingdong.com", to: subscriber.email, subject: sequence_step.subject)
+    mail(from: sequence_step.sequence.sender_email, to: subscriber.email, subject: sequence_step.subject)
     mail.delivery_method.settings = { api_token: "bb96b996-cf88-487a-bdb2-44be28e2c411" }
     
     # mail.delivery_method.settings = {
