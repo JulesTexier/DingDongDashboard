@@ -180,6 +180,10 @@ class StaticPagesController < ApplicationController
     @broker_agencies = BrokerAgency.all
   end
 
+  def agglomerations_dashboard
+    @agglomerations = Agglomeration.all
+  end
+
   def broker_agency_dashboard
     @broker_agency = params[:broker_id]
   end

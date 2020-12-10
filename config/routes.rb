@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get "/dashboard/duplicates" => "static_pages#duplicates"
   get "/dashboard/courtiers" => "static_pages#general_broker_dashboard"
   get "/dashboard/courtiers/:broker_id" => "static_pages#broker_agency_dashboard"
+  get "/dashboard/agglomerations/" => "static_pages#agglomerations_dashboard"
   
   #############
   # 5 - API
