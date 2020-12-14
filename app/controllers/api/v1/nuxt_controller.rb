@@ -17,6 +17,30 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def get_research
+    begin
+      research = Research.find(params[:research_id])
+      research_augmented = research.as_json 
+      research_augmented[:areas] = research.areas
+      render json: {status: 'SUCCESS', message: "Research found successfully", data: research_augmented}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Research not found'}, status: 422
+    end
+  end 
+
+  def is_subscriber_exists?
+    begin
+      if params[:phone].nil? && params[:email].nil?
+        render json: {status: 'ERROR', message: 'Email or phone required'}, status: 422
+      else 
+        subscribers = Subscriber.where(params.except(:id, :nuxt).permit(:phone, :email))
+        render json: {status: 'SUCCESS', message: "#{subscribers.count} Subscriber#{"s" if subscribers.count > 1 } found", data: subscribers}, status: 200
+      end
+    rescue ActiveRecord::RecordNotFound => e 
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
+    end
+  end
+
   def get_broker
     begin
       broker = Broker.find(params[:broker_id])
@@ -47,6 +71,39 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def get_available_areas
+    @areas = Area.opened
+    @areas_augmented = @areas.as_json
+    @areas_augmented.each_with_index do |area, index| 
+      area[:agglomeration] = @areas[index].department.agglomeration.name
+      area[:department] = Department.find(area["department_id"]).name
+    end
+    render json: {status: 'SUCCESS', message: "Opened areas", data: @areas_augmented}, status: 200
+  end
+
+  def handle_onboarding
+    begin
+      subscriber = Subscriber.create(onboarding_subscriber_params)
+
+      research = Research.new(onboarding_research_params)
+      research.subscriber = subscriber
+      research.agglomeration = Area.find(params["areas"].first).department.agglomeration
+      research.save
+
+      params["areas"].each{|area_id| ResearchArea.create(research: research, area_id: area_id) }
+
+      subscriber.handle_onboarding
+
+      returned_subscriber = subscriber.as_json
+      returned_subscriber[:messenger_link] = subscriber.messenger_link
+      returned_subscriber[:research] = subscriber.research
+      returned_subscriber[:areas] = subscriber.research.areas
+      render json: {status: 'SUCCESS', message: "Subscriber successfully created", data: returned_subscriber}, status: 200
+    rescue 
+      render json: {status: 'ERROR', message: 'An error occurred'}, status: 422
+    end
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
@@ -56,5 +113,13 @@ class Api::V1::NuxtController < ApplicationController
 
   def subscriber_params
     params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+  end
+
+  def onboarding_subscriber_params
+    params["subscriber"].permit(:firstname, :lastname, :email, :phone, :email_flux, :messenger_flux)
+  end
+
+  def onboarding_research_params
+    params["research"].permit(:max_price, :min_price, :min_floor, :min_elevator_floor, :has_elevator, :min_surface, :min_rooms_number, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
   end
 end

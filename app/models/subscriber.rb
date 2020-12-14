@@ -82,6 +82,10 @@ class Subscriber < ApplicationRecord
   # 2 - Core methods
   ########################
 
+  def messenger_link
+    self.messenger_flux ? "https://m.me/#{ENV['BOT_LINK']}?ref=id--#{self.id}" : nil
+  end
+
   # TRELLO METHODS
   
   def trello_summary
