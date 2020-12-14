@@ -81,6 +81,29 @@ class Api::V1::NuxtController < ApplicationController
     render json: {status: 'SUCCESS', message: "Opened areas", data: @areas_augmented}, status: 200
   end
 
+  def handle_onboarding
+    begin
+      subscriber = Subscriber.create(onboarding_subscriber_params)
+
+      research = Research.new(onboarding_research_params)
+      research.subscriber = subscriber
+      research.agglomeration = Area.find(params["areas"].first).department.agglomeration
+      research.save
+
+      params["areas"].each{|area_id| ResearchArea.create(research: research, area_id: area_id) }
+
+      subscriber.handle_onboarding
+
+      returned_subscriber = subscriber.as_json
+      returned_subscriber[:messenger_link] = subscriber.messenger_link
+      returned_subscriber[:research] = subscriber.research
+      returned_subscriber[:areas] = subscriber.research.areas
+      render json: {status: 'SUCCESS', message: "Subscriber successfully created", data: returned_subscriber}, status: 200
+    rescue 
+      render json: {status: 'ERROR', message: 'An error occured'}, status: 422
+    end
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
@@ -90,5 +113,13 @@ class Api::V1::NuxtController < ApplicationController
 
   def subscriber_params
     params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+  end
+
+  def onboarding_subscriber_params
+    params["subscriber"].permit(:firstname, :lastname, :email, :phone, :email_flux, :messenger_flux)
+  end
+
+  def onboarding_research_params
+    params["research"].permit(:max_price, :min_price, :min_floor, :min_elevator_floor, :has_elevator, :min_surface, :min_rooms_number, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
   end
 end
