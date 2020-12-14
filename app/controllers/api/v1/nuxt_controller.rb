@@ -20,7 +20,9 @@ class Api::V1::NuxtController < ApplicationController
   def get_research
     begin
       research = Research.find(params[:research_id])
-      render json: {status: 'SUCCESS', message: "Research found successfully", data: research}, status: 200
+      research_augmented = research.as_json 
+      research_augmented[:areas] = research.areas
+      render json: {status: 'SUCCESS', message: "Research found successfully", data: research_augmented}, status: 200
     rescue ActiveRecord::RecordNotFound => e
       render json: {status: 'ERROR', message: 'Research not found'}, status: 422
     end
