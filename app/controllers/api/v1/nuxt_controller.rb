@@ -17,6 +17,15 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def get_research
+    begin
+      research = Research.find(params[:research_id])
+      render json: {status: 'SUCCESS', message: "Research found successfully", data: research}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Research not found'}, status: 422
+    end
+  end 
+
   def get_broker
     begin
       broker = Broker.find(params[:broker_id])
