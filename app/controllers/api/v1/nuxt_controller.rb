@@ -28,6 +28,19 @@ class Api::V1::NuxtController < ApplicationController
     end
   end 
 
+  def is_subscriber_exists?
+    begin
+      if params[:phone].nil? && params[:email].nil?
+        render json: {status: 'ERROR', message: 'Email or phone required'}, status: 422
+      else 
+        subscribers = Subscriber.where(params.except(:id, :nuxt).permit(:phone, :email))
+        render json: {status: 'SUCCESS', message: "#{subscribers.count} Subscriber#{"s" if subscribers.count > 1 } found", data: subscribers}, status: 200
+      end
+    rescue ActiveRecord::RecordNotFound => e 
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
+    end
+  end
+
   def get_broker
     begin
       broker = Broker.find(params[:broker_id])
