@@ -47,6 +47,16 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def get_available_areas
+    @areas = Area.opened
+    @areas_augmented = @areas.as_json
+    @areas_augmented.each_with_index do |area, index| 
+      area[:agglomeration] = @areas[index].department.agglomeration.name
+      area[:department] = Department.find(area["department_id"]).name
+    end
+    render json: {status: 'SUCCESS', message: "Opened areas", data: @areas_augmented}, status: 200
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
