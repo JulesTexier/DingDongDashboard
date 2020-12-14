@@ -7,10 +7,6 @@ class Area < ApplicationRecord
 
     belongs_to :department
 
-    def self.get_active
-        Area.where(zone: ["Paris", "Première Couronne"])
-    end
-
     def self.get_agglo_infos
       collection = []
       i = 0
@@ -22,6 +18,10 @@ class Area < ApplicationRecord
       collection
     end
 
+    def self.opened
+      Area.where(department_id: Agglomeration.opened.map{|agg| agg.departments.map{|d| d.id}}.flatten)
+    end
+    
     def self.selected_area_onboarding(agglomeration_id, area_params)
       all_selected_areas = []
       departments = Agglomeration.find(agglomeration_id).departments
