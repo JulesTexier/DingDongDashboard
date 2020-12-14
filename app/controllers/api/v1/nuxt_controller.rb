@@ -11,7 +11,9 @@ class Api::V1::NuxtController < ApplicationController
   def get_subscriber
     begin
       subscriber = Subscriber.find(params[:subscriber_id])
-      render json: {status: 'SUCCESS', message: "Subscriber found successfully", data: subscriber}, status: 200
+      returned_subscriber = subscriber.as_json
+      returned_subscriber[:research] = subscriber.research
+      render json: {status: 'SUCCESS', message: "Subscriber found successfully", data: returned_subscriber}, status: 200
     rescue ActiveRecord::RecordNotFound => e
       render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
     end
