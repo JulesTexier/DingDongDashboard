@@ -100,7 +100,7 @@ class Api::V1::NuxtController < ApplicationController
       returned_subscriber[:areas] = subscriber.research.areas
       render json: {status: 'SUCCESS', message: "Subscriber successfully created", data: returned_subscriber}, status: 200
     rescue 
-      render json: {status: 'ERROR', message: 'An error occured'}, status: 422
+      render json: {status: 'ERROR', message: 'An error occurred'}, status: 422
     end
   end
 
