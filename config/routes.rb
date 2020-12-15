@@ -101,6 +101,8 @@ Rails.application.routes.draw do
       get "/nuxt/subscribers/:subscriber_id" => "nuxt#get_subscriber"
       get "/nuxt/brokers/:broker_id" => "nuxt#get_broker"
 
+      post 'nuxt/funding/:subscriber_id/notify-broker' => 'nuxt#new_meeting_notify_broker'
+
       get "/nuxt/areas" => "nuxt#get_available_areas"
       post "/nuxt/onboarding" => "nuxt#handle_onboarding"
       get "/nuxt/researches/:research_id" => "nuxt#get_research"
