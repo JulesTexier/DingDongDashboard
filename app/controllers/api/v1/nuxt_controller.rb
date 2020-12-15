@@ -106,6 +106,16 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def new_meeting_notify_broker
+    begin
+      subscriber = Subscriber.find(params[:subscriber_id])
+      BrokerJob.set(wait: 10.minutes).perform_later(subscriber.id)
+      render json: {status: 'SUCCESS', message: "Notification sent to broker", data: ""}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422      
+    end
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
