@@ -6,7 +6,7 @@
   <body>
       <% @content.split.each do |word| %>
         <% if word.include?("[[tracking_link]]") %>
-          <a href="<%= @tracking_link %>">hellodingdong.com</a>
+          <a href="https://hellodingdong.com">hellodingdong.com</a>
         <% elsif word.include?("[[line_break]]") %>
           <br><br>
         <% elsif word.include?("[[property_data]]") %>

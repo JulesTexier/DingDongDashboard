@@ -4,7 +4,7 @@ class GrowthMailer < ApplicationMailer
 
   def send_growth_email_gmail(sequence_step, subscriber, property_data)
     marketing_link = !sequence_step.sequence.marketing_link.nil? ? sequence_step.sequence.marketing_link : "https://hellodingdong.com"
-    @tracking_link = marketing_link + "?ss=" + sequence_step.id.to_s + "&id=" + subscriber.id.to_s
+    # @tracking_link = marketing_link + "?ss=" + sequence_step.id.to_s + "&id=" + subscriber.id.to_s
     @sender_name = sequence_step.sequence.sender_name
     @content = sequence_step.content
     @property_data = "Ref : #{property_data[:ref]} (#{property_data[:price]} € - #{property_data[:surface]} m2)"
