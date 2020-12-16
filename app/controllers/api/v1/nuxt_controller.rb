@@ -116,6 +116,18 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def verify_email_subscriber
+    begin
+      subscriber = Subscriber.find_by_confirm_token(params[:token])
+      subscriber.validate_email
+      subscriber.save(validate: false)
+      SubscriberMailer.welcome_email(subscriber).deliver_now
+      render json: {status: 'SUCCESS', message: "Email verified", data: ""}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422      
+    end
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|

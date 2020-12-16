@@ -107,6 +107,7 @@ Rails.application.routes.draw do
       post "/nuxt/onboarding" => "nuxt#handle_onboarding"
       get "/nuxt/researches/:research_id" => "nuxt#get_research"
       get "/nuxt/find/subscribers" => "nuxt#is_subscriber_exists?"
+      get "/nuxt/subscribers/verify/:subscriber_token" => "nuxt#verify_email_subscriber"
 
       
       # Manychat 
