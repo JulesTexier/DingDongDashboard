@@ -11,7 +11,7 @@ class BrokerAgency < ApplicationRecord
   end
 
   def self.selectable_agencies
-    BrokerAgency.where('current_period_leads_left > ? ', 0).where(status: ["test", "premium"])
+    BrokerAgency.where('current_period_leads_left > ? ', 0).where(status: ["test", "premium"]).where.not(name: "Ding Dong Courtage")
   end
 
   def self.create_default
