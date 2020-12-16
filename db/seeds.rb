@@ -110,3 +110,8 @@ Contractor.create(firstname: "Matthieu") if Contractor.all.empty?
 #   puts  puts "####" + broker.id.to_s
 #   broker.update(broker_agency_id: BrokerAgency.find_by(name: broker.agency).id) unless broker.agency.nil?
 # end
+
+#Default Ding Dong Broker Agency
+if BrokerAgency.find_by(name: "Ding Dong Courtage").nil?
+  BrokerAgency.create_default
+end

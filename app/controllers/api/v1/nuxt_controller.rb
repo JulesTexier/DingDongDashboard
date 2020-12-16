@@ -35,7 +35,7 @@ class Api::V1::NuxtController < ApplicationController
       if params[:phone].nil? && params[:email].nil?
         render json: {status: 'ERROR', message: 'Email or phone required'}, status: 422
       else 
-        subscribers = Subscriber.where(params.except(:id, :nuxt).permit(:phone, :email))
+        subscribers = Subscriber.ding_dong_users.where(params.except(:id, :nuxt).permit(:phone, :email))
         render json: {status: 'SUCCESS', message: "#{subscribers.count} Subscriber#{"s" if subscribers.count > 1 } found", data: subscribers}, status: 200
       end
     rescue ActiveRecord::RecordNotFound => e 

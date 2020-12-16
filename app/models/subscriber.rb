@@ -57,8 +57,12 @@ class Subscriber < ApplicationRecord
     
   end
 
+  def is_ding_dong_user?
+    return  self.status != "new_lead" 
+  end
+
   def is_real_ding_dong_user?
-    return  self.status ==  "new_lead" || (!self.has_stopped.nil? && !self.has_stopped_at.nil? && (self.has_stopped_at - self.created_at) > 7.days) ? false : true
+    return  self.status == "new_lead" || (!self.has_stopped.nil? && !self.has_stopped_at.nil? && (self.has_stopped_at - self.created_at) > 7.days) ? false : true
   end
 
   
@@ -176,6 +180,10 @@ class Subscriber < ApplicationRecord
 
   def self.facebook_id(facebook_id)
     self.where(facebook_id: facebook_id)
+  end
+
+  def self.ding_dong_users
+    self.where.not(status:"new_lead")
   end
   
   def validate_email
