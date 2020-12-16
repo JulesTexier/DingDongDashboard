@@ -117,13 +117,13 @@ class Api::V1::NuxtController < ApplicationController
   end
 
   def verify_email_subscriber
-    begin
-      subscriber = Subscriber.find_by_confirm_token(params[:token])
+    subscriber = Subscriber.find_by(confirm_token: params[:subscriber_token])
+    unless subscriber.nil?
       subscriber.validate_email
-      subscriber.save(validate: false)
+      subscriber.save(validate: true)
       SubscriberMailer.welcome_email(subscriber).deliver_now
       render json: {status: 'SUCCESS', message: "Email verified", data: ""}, status: 200
-    rescue ActiveRecord::RecordNotFound => e
+    else
       render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422      
     end
   end

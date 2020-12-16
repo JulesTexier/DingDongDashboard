@@ -26,7 +26,7 @@ class SubscribersController < ApplicationController
     subscriber = Subscriber.find_by_confirm_token(params[:token])
     if subscriber
       subscriber.validate_email
-      subscriber.save(validate: false)
+      subscriber.save(validate: true)
       SubscriberMailer.welcome_email(subscriber).deliver_now
       redirect_to subscriber_email_confirmed_path(subscriber)
     else
