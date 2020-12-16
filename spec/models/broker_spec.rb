@@ -3,88 +3,71 @@ require 'rails_helper'
 RSpec.describe Broker, type: :model do
   describe Subscriber do
     describe "model" do
+      describe Broker, '#get_accurate_by_agglomeration' do
+        it 'returns accurate broker' do
+          
+          #setup
+          @default_agglomeration = FactoryBot.create(:agglomeration, name: "Default Agglo")
+          @agglomeration_paris = FactoryBot.create(:agglomeration, name: "Paris")
+          @agglomeration_lyon = FactoryBot.create(:agglomeration, name: "Lyon")
+          @agglomeration_bdx = FactoryBot.create(:agglomeration, name: "Bordeaux")
+          @agglomeration_mrs = FactoryBot.create(:agglomeration, name: "Marseille")
+          @broker_agency_paris_1 = FactoryBot.create(:broker_agency, agglomeration: @agglomeration_paris, max_period_leads: 50, current_period_provided_leads: 20)
+          @broker_agency_paris_2 = FactoryBot.create(:broker_agency, agglomeration: @agglomeration_paris, max_period_leads: 100, current_period_provided_leads: 20)
+          @broker_agency_lyon = FactoryBot.create(:broker_agency, agglomeration: @agglomeration_lyon, max_period_leads: 100, current_period_provided_leads: 99)
+          @broker_agency_bordeaux_test = FactoryBot.create(:broker_agency, agglomeration: @agglomeration_bdx, status: "free")
+          @broker_agency_mrs = FactoryBot.create(:broker_agency, agglomeration: @agglomeration_mrs, max_period_leads: 100, current_period_provided_leads: 100)
+          @broker_paris_1a = FactoryBot.create(:broker, broker_agency: @broker_agency_paris_1)
+          @broker_paris_2a = FactoryBot.create(:broker, broker_agency: @broker_agency_paris_1)
+          @broker_paris_2b = FactoryBot.create(:broker, broker_agency: @broker_agency_paris_2)
+          @broker_lyon = FactoryBot.create(:broker, broker_agency: @broker_agency_lyon)
+          @subscriber = FactoryBot.create(:subscriber, broker: @broker_paris_2a)
 
-      before :each do
-        @am_shift_regular = FactoryBot.create(:broker_shift_morning, day: 1, shift_type: "regular")
-        @pm_shift_regular = FactoryBot.create(:broker_shift_afternoon, day: 1, shift_type: "regular")
-        @am_shift_subscription = FactoryBot.create(:broker_shift_morning, day: 1, shift_type: "subscription")
-        @pm_shift_subscription = FactoryBot.create(:broker_shift_afternoon, day: 1, shift_type: "subscription")
-        @broker_am = FactoryBot.create(:broker)
-        @broker_pm = FactoryBot.create(:broker)
+          BrokerAgency.create_default
+          @default_broker_agency = BrokerAgency.last
+          @default_broker = Broker.last
+          
+          # check integrity
+          result = Broker.get_accurate_by_agglomeration(@agglomeration_paris.id)
+          expect(result).to be_a Broker
 
-      end
+          # check agglomeration
+          expect(result.broker_agency.agglomeration).to eq @agglomeration_paris
       
-      context "returned adequate Broker shift (in opening hours)" do
-        it "should return Regular broker" do
-          time = Time.parse("2020-06-01 16:39:20 +0200 ") #lundi, 16h
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_pm)
-            expect(Broker.get_current).not_to eq(@broker_am)
-          end
-        end
+          # check broker_agency (not broker agency in free status)
+          result = Broker.get_accurate_by_agglomeration(@agglomeration_lyon.id)
+          expect(result.broker_agency).to eq @broker_agency_lyon
 
-        it "should return Subscription broker" do
-          time = Time.parse("2020-06-01 16:39:20 +0200 ") #lundi, 16h
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_subscription
-            @broker_pm.shifts << @pm_shift_subscription
-            expect(Broker.get_current("subscription")).to eq(@broker_pm)
-            expect(Broker.get_current("subscription")).not_to eq(@broker_am)
-          end
-        end
-      end
+          #check broker
+          expect(result).to eq @broker_lyon
 
-      context "returned adequate Broker shift (out of opening hours)" do
-        it "should return tomorrow next BrokerShift" do
-          time = Time.parse("2020-05-31 22:39:20 +0200") #dimanche, 22h
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_am)
-            expect(Broker.get_current).not_to eq(@broker_pm)
-          end
-        end
-        it "should return today next BrokerShift" do
-          time = Time.parse("2020-06-01 02:39:20 +0200") #lundi, 2h du matin
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_am)
-            expect(Broker.get_current).not_to eq(@broker_pm)
-          end
-        end
-        it "should return monday next BrokerShift on Friday evening" do
-          time = Time.parse("2020-05-29 22:39:20 +0200") #vendredi, 22h 
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_am)
-            expect(Broker.get_current).not_to eq(@broker_pm)
-          end
-        end
-        it "should return monday next BrokerShift on Saturday" do
-          time = Time.parse("2020-05-30 12:39:20 +0200") #Samedi en journée
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_am)
-            expect(Broker.get_current).not_to eq(@broker_pm)
-          end
-        end
-        it "should return monday next BrokerShift on Sunday" do
-          time = Time.parse("2020-05-31 12:39:20 +0200") #Dimanche en journée
-          Timecop.freeze(time) do 
-            @broker_am.shifts << @am_shift_regular
-            @broker_pm.shifts << @pm_shift_regular
-            expect(Broker.get_current).to eq(@broker_am)
-            expect(Broker.get_current).not_to eq(@broker_pm)
-          end
-        end
-      end
+          # check if it takes good broker agency according to lead repartition
+          result = Broker.get_accurate_by_agglomeration(@agglomeration_paris.id)
+          expect(result.broker_agency).to eq @broker_agency_paris_2
+
+          # check if it takes good broker according to lead repartition
+          expect(result).to eq @broker_paris_2b
+          
+          # case there is no such agglomeration (=> no Broker Agency hence)
+          result = Broker.get_accurate_by_agglomeration(2000)
+          # expect(result).not_to be_a Broker
+          expect(result).to eq @default_broker
+
+          # check free
+          result = Broker.get_accurate_by_agglomeration(@agglomeration_bdx.id)
+          # expect(result).not_to be_a Broker
+          expect(result).to eq @default_broker
+          
+          # check full
+          # Not implemented, even a full BA will be charged
+
+          # case there is no broker in agency
+          result = Broker.get_accurate_by_agglomeration(@agglomeration_mrs)
+          # expect(result).not_to be_a Broker
+          expect(result).to eq @default_broker
       
-
+        end
+      end
     end
   end
 end
