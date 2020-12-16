@@ -17,7 +17,7 @@ class BrokerMailer < ApplicationMailer
     @broker = @subscriber.broker
 
     unless @subscriber.nil? || @broker.nil? 
-      subject = "[DING DONG] Un contact souhaite discuter de son financement !"
+      subject = "DING DONG : Nouveau lead chaud - #{@subscriber.get_fullname}"
       mail(from: "etienne@hellodingdong.com", to: @broker.email, bcc: "etienne@hellodingdong.com", subject: subject)
     end
   end
