@@ -3220,7 +3220,7 @@
       waiting_cls: nil
       multi_page: false
       page_nbr:  1
-      is_active: true
+      is_active: false
       group_type: Independant
 - source: District Immo
   params:
