@@ -143,12 +143,14 @@ class Research < ApplicationRecord
       .order(id: :desc)
       .limit(1000)
       .pluck(*ATTRS).map { |p| ATTRS.zip(p).to_h }
+    puts props.count.to_s + "properties found ##############"
     matching_props = []
     props.each do |prop|
       matching_props.push(prop["id"]) if self.matching_property?(prop, self.areas.ids)
     end
-    average = matching_props.count/nb_days
-    return [(average*0.8).round, (average*1.2).round]
+    matching_props.count
+    # puts average = matching_props.count/nb_days
+    # return [(average*0.8).round, (average*1.2).round]
   end
 
   ###########################
