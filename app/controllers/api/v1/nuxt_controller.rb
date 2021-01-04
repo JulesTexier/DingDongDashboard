@@ -141,7 +141,7 @@ class Api::V1::NuxtController < ApplicationController
   end
 
   def onboarding_subscriber_params
-    params["subscriber"].permit(:firstname, :lastname, :email, :phone, :email_flux, :messenger_flux)
+    params["subscriber"].permit(:firstname, :lastname, :email, :phone, :email_flux, :messenger_flux, :password)
   end
 
   def onboarding_research_params
