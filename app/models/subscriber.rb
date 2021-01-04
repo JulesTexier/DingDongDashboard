@@ -46,7 +46,6 @@ class Subscriber < ApplicationRecord
   def handle_onboarding
     professional_attribution
     send_confirmation_email
-    add_subscriber_to_etienne_trello
   end
 
   def stopped_date
