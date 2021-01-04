@@ -82,6 +82,9 @@ gem "simple_form"
 
 gem 'sprockets', '3.7.2'
 
+# Authentification for Nuxt API 
+gem 'api_guard'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
