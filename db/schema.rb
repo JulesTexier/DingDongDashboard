@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_075021) do
+ActiveRecord::Schema.define(version: 2021_01_04_093404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -389,6 +389,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_075021) do
     t.string "broker_status", default: "Non traité"
     t.text "broker_comment", default: ""
     t.datetime "broker_meeting"
+    t.string "password_digest"
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"

@@ -1,8 +1,7 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  
- 
+
   #############
   # 1 - Admin
   #############
@@ -71,10 +70,19 @@ Rails.application.routes.draw do
   
   #############
   # 5 - API
-  #############
+  #############  
+  api_guard_scope 'subscribers' do
+    post 'api/v1/subscribers/sign_up' => 'api_guard/registration#create'
+    post 'api/v1/subscribers/sign_in' => 'subscribers/authentication#create'
+    delete 'api/v1/subscribers/sign_out' => 'api_guard/registration#destroy'
+  end
+
   namespace "api" do
     namespace "v1" do
       
+      # Dashboard Subscriber
+      get '/subscribers/current' => "subscribers_dashboard#current" 
+
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
       post "/subscribers/fb/:facebook_id" => "subscribers#create_from_facebook_id"
@@ -82,6 +90,8 @@ Rails.application.routes.draw do
         get "/get/props/last/:x/days" => "subscribers#props_x_days"
         get "/handle-onboarding" => "subscribers#handle_onboarding"
       end
+      
+      # Subscribers dashboard
       
       # Other models
       resources :researches, only: [:show, :update, :index, :destroy, :create]

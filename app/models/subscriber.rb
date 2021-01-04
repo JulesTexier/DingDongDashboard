@@ -1,6 +1,7 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
+  has_secure_password
 
   ## REVOIR LES VALIDATEURS
   
