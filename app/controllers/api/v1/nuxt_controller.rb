@@ -2,6 +2,7 @@ require 'dotenv/load'
 
 class Api::V1::NuxtController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  protect_from_forgery with: :null_session
 
   TOKEN = ENV['BEARER_TOKEN']
   HIDE_DAY_COUNT = 7
