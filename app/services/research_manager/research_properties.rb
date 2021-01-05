@@ -1,6 +1,6 @@
 class ResearchManager::ResearchProperties < ApplicationService
 
-  def initialize(research_id, nb_days = 7)
+  def initialize(research_id, nb_days = 120)
     @research = Research.find(research_id)
     @nb_days = nb_days
   end
