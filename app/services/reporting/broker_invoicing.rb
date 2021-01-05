@@ -8,7 +8,7 @@ class Reporting::BrokerInvoicing
       csv << ["Agence", "Status","Leads période", "Leads DD ", "Leads SL"]
     end
 
-    BrokerAgency.selectable_agencies.each do |ba|
+    BrokerAgency.where(status: ["test", "premium"]).where.not(name: "Ding Dong Courtage").each do |ba|
       item = []
       item.push(ba.name)
       item.push(ba.status)
