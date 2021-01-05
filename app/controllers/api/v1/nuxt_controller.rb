@@ -38,7 +38,7 @@ class Api::V1::NuxtController < ApplicationController
         render json: {status: 'ERROR', message: 'Email or phone required'}, status: 422
       else 
         subscribers = Subscriber.ding_dong_users.where(params.except(:id, :nuxt).permit(:phone, :email))
-        render json: {status: 'SUCCESS', message: "#{subscribers.count} Subscriber#{"s" if subscribers.count > 1 } found", data: subscribers}, status: 200
+        render json: {status: 'SUCCESS', message: "#{subscribers.count} Subscriber#{"s" unless subscribers.empty? } found", data: subscribers}, status: 200
       end
     rescue ActiveRecord::RecordNotFound => e 
       render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
@@ -132,7 +132,7 @@ class Api::V1::NuxtController < ApplicationController
 
   def get_estimation
     begin
-      nb_properties = ResearchIndicator.new.get_estimation(params[:research_hash].as_json, params[:areas], params[:nb_days])
+      nb_properties = ResearchManager::ResearchIndicator.call(params[:research_hash].as_json, params[:areas], params[:nb_days])
       render json: {status: 'SUCCESS', message: "an estimation has been calculated", data: {nb_days: params[:nb_days], nb_properties: nb_properties }}, status: 200
     rescue ActiveRecord::RecordNotFound => e
       render json: {status: 'ERROR', message: 'Something went wrong'}, status: 422      
