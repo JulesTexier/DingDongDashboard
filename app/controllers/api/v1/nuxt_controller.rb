@@ -130,6 +130,15 @@ class Api::V1::NuxtController < ApplicationController
     end
   end
 
+  def get_estimation
+    begin
+      nb_properties = ResearchIndicator.new.get_estimation(params[:research_hash].as_json, params[:areas], params[:nb_days])
+      render json: {status: 'SUCCESS', message: "an estimation has been calculated", data: {nb_days: params[:nb_days], nb_properties: nb_properties }}, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Something went wrong'}, status: 422      
+    end
+  end
+
   private
   def authenticate
       authenticate_or_request_with_http_token do |token, options|
