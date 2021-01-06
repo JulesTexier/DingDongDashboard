@@ -24,8 +24,8 @@ class Api::V1::SubscribersDashboardController < ActionController::API
 
     def update
         begin 
-            current_subscriber.update(subscriber_params)
-            current_subscriber.research.update(research_params)
+            current_subscriber.update(subscriber_params) unless params[:subscriber].nil?
+            current_subscriber.research.update(research_params) unless params[:research].nil?
             if !params[:areas].nil? && !params[:areas].empty?
                 current_subscriber.research.research_areas.each{ |ra| ra.destroy}
                 current_subscriber.research.areas << Area.where(id: params[:areas])
