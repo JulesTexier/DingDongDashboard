@@ -25,7 +25,12 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     def update
         begin 
             current_subscriber.update(subscriber_params)
-            render json: {status: 'SUCCESS', message: "Subscriber has been updated", data: current_subscriber}, status: 200
+            current_subscriber.research.update(research_params)
+            if !params[:areas].nil? && !params[:areas].empty?
+                current_subscriber.research.research_areas.each{ |ra| ra.destroy}
+                current_subscriber.research.areas << Area.where(id: params[:areas])
+            end
+            render json: {status: 'SUCCESS', message: "Subscriber has been updated", data: {subscriber: current_subscriber, research: current_subscriber.research, areas: current_subscriber.research.areas } }, status: 200
         rescue 
             render json: {status: 'ERROR', message: 'Subscriber could no be updated'}, status: 422     
         end
@@ -34,8 +39,13 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     private
 
     def subscriber_params
-        params.require(:subscribers_dashboard).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
-      end
+        params.require(:subscribers_dashboard).require(:subscriber).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+    end  
+    
+    def research_params
+        params.require(:subscribers_dashboard).require(:research).permit(:max_price, :min_price, :min_floor, :min_elevator_floor, :has_elevator, :min_surface, :min_rooms_number, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
+    end
+
     
 
 end

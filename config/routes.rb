@@ -83,7 +83,7 @@ Rails.application.routes.draw do
       # Dashboard Subscriber
       get '/subscribers/current' => "subscribers_dashboard#current" 
       get '/subscribers/properties' => "subscribers_dashboard#research_properties" 
-      put '/subscribers/update' => 'subscribers_dashboard#update#destroy'
+      put '/subscribers/update' => 'subscribers_dashboard#update'
 
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
