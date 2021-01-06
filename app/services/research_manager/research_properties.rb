@@ -7,6 +7,7 @@ class ResearchManager::ResearchProperties < ApplicationService
 
   def call
    props = Property
+      .includes(:area)
       .where('created_at > ? ', Time.now - @nb_days.days)
       .where(area: @research.areas.pluck(:id))
       .where('price <= ? AND surface >= ? AND rooms_number >= ?', @research.max_price, @research.min_surface, @research.min_rooms_number)

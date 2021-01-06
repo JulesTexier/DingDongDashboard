@@ -15,7 +15,8 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     def research_properties
         begin 
             properties = ResearchManager::ResearchProperties.call(current_subscriber.research.id, 120)
-            render json: {status: 'SUCCESS', message: "Matching properties", data: properties}, status: 200
+            data = properties.map{|p| {property: p, area: p.area}}
+            render json: {status: 'SUCCESS', message: "Matching properties", data: data}, status: 200
         rescue 
             render json: {status: 'ERROR', message: 'Subscriber\'s research not found'}, status: 422     
         end
