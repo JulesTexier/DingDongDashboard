@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_093404) do
+ActiveRecord::Schema.define(version: 2021_01_05_103312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -251,7 +251,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_093404) do
     t.string "name"
     t.integer "min_floor", default: 0
     t.boolean "has_elevator"
-    t.integer "min_elevator_floor", default: 0
+    t.integer "min_elevator_floor"
     t.integer "min_surface"
     t.integer "min_rooms_number"
     t.integer "max_price"

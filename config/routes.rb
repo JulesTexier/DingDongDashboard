@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       
       # Dashboard Subscriber
       get '/subscribers/current' => "subscribers_dashboard#current" 
+      get '/subscribers/properties' => "subscribers_dashboard#research_properties" 
 
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
@@ -115,6 +116,8 @@ Rails.application.routes.draw do
       get "/nuxt/researches/:research_id" => "nuxt#get_research"
       get "/nuxt/find/subscribers" => "nuxt#is_subscriber_exists?"
       get "/nuxt/subscribers/verify/:subscriber_token" => "nuxt#verify_email_subscriber"
+      
+      post "/nuxt/indicator/" => "nuxt#get_estimation"
 
       
       # Manychat 
