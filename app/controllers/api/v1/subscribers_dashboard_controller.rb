@@ -22,6 +22,20 @@ class Api::V1::SubscribersDashboardController < ActionController::API
         end
     end
 
+    def update
+        begin 
+            current_subscriber.update(subscriber_params)
+            render json: {status: 'SUCCESS', message: "Subscriber has been updated", data: current_subscriber}, status: 200
+        rescue 
+            render json: {status: 'ERROR', message: 'Subscriber could no be updated'}, status: 422     
+        end
+    end
+
     private
+
+    def subscriber_params
+        params.require(:subscribers_dashboard).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+      end
+    
 
 end

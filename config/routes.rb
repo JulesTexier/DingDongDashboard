@@ -76,13 +76,14 @@ Rails.application.routes.draw do
     post 'api/v1/subscribers/sign_in' => 'subscribers/authentication#create'
     delete 'api/v1/subscribers/sign_out' => 'api_guard/authentication#destroy'
   end
-
+  
   namespace "api" do
     namespace "v1" do
       
       # Dashboard Subscriber
       get '/subscribers/current' => "subscribers_dashboard#current" 
       get '/subscribers/properties' => "subscribers_dashboard#research_properties" 
+      put '/subscribers/update' => 'subscribers_dashboard#update#destroy'
 
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
