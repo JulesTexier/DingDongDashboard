@@ -70,8 +70,7 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
           request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
           post :send_props_morning, params: { subscriber_id: sub.id }
           expect(response).to have_http_status(406)
-          expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
-          expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
+          expect(JSON.parse(response.body)["data"]["message"]).to eq("Wrong token")
         end
       end
     end
@@ -90,8 +89,7 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
             request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
             post :send_props_morning, params: { subscriber_id: sub.id }
             expect(response).to have_http_status(406)
-            expect(JSON.parse(response.body)["data"]["message"]).to eq("Validation error")
-            expect(JSON.parse(response.body)["data"]["details"]["messages"][0]["message"]).to eq("Subscriber does not exist")
+            expect(JSON.parse(response.body)["data"]["message"]).to eq("Wrong token")
           end
         end
       end

@@ -8,6 +8,7 @@ FactoryBot.define do
     broker { FactoryBot.create(:broker) }
     notary { FactoryBot.create(:notary) }
     contractor { FactoryBot.create(:contractor) }
+    password { "secret_password" }
 
     factory :subscriber_fred do
       facebook_id { "3558864844155233" }
