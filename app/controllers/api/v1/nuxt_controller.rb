@@ -11,7 +11,7 @@ class Api::V1::NuxtController < ApplicationController
 
   def get_subscriber
     begin
-      subscriber = Subscriber.find(params[:subscriber_id])
+      subscriber = Subscriber.includes(research: [:areas]).find(params[:subscriber_id])
       returned_subscriber = subscriber.as_json
       returned_subscriber[:research] = subscriber.research
       returned_subscriber[:areas] = subscriber.research.areas
@@ -23,7 +23,7 @@ class Api::V1::NuxtController < ApplicationController
 
   def get_research
     begin
-      research = Research.find(params[:research_id])
+      research = Research.includes(:areas).find(params[:research_id])
       research_augmented = research.as_json 
       research_augmented[:areas] = research.areas
       render json: {status: 'SUCCESS', message: "Research found successfully", data: research_augmented}, status: 200
@@ -88,7 +88,6 @@ class Api::V1::NuxtController < ApplicationController
   def handle_onboarding
     begin
       subscriber = Subscriber.create(onboarding_subscriber_params)
-
       research = Research.new(onboarding_research_params)
       research.subscriber = subscriber
       research.agglomeration = Area.find(params["areas"].first).department.agglomeration

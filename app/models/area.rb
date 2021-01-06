@@ -19,7 +19,7 @@ class Area < ApplicationRecord
     end
 
     def self.opened
-      Area.where(department_id: Agglomeration.opened.map{|agg| agg.departments.map{|d| d.id}}.flatten)
+      Area.includes(department: [:agglomeration]).where(department_id: Agglomeration.opened.map{|agg| agg.departments.map{|d| d.id}}.flatten)
     end
     
     def self.selected_area_onboarding(agglomeration_id, area_params)
