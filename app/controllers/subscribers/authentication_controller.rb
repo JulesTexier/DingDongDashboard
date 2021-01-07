@@ -6,7 +6,7 @@ module Subscribers
     def create
       if resource.authenticate(params[:password])
         create_token_and_set_header(resource, resource_name)
-        render json: {message: I18n.t('api_guard.authentication.signed_in'), token: response.header["Access-Token"] }, status: 200
+        render json: {message: I18n.t('api_guard.authentication.signed_in'), token: response.header["Access-Token"], messenger_link: resource.messenger_link }, status: 200
       else
         render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials'))
       end
