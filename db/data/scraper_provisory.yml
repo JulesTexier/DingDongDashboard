@@ -1,373 +1,466 @@
 ---
 - source: SuperImmo
   params:
+  - zone: Hauts-de-Seine (92)
+    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/courbevoie-92400?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
+  - zone: Hauts-de-Seine (92)
+    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/levallois-perret-92300?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
   # - zone: Mulhouse (68)
   #   url: https://www.superimmo.com/achat/alsace/haut-rhin/mulhouse-68?sort=created_at
   #   scraper_type: Static
   #   main_page_cls: section > div.media-body
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.superimmo.com/achat/auvergne/puy-de-dome/clermont-ferrand-63?sort=created_at
   #   scraper_type: Static
   #   main_page_cls: section > div.media-body
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://www.superimmo.com/achat/rhone-alpes/isere/grenoble-38?sort=created_at
   #   scraper_type: Static
   #   main_page_cls: section > div.media-body
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://www.superimmo.com/achat/pays-de-la-loire/maine-et-loire/angers-49?sort=created_at
   #   scraper_type: Static
   #   main_page_cls: section > div.media-body
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://www.superimmo.com/achat/languedoc-roussillon/pyrenees-orientales/perpignan-66?sort=created_at
   #   scraper_type: Static
   #   main_page_cls: section > div.media-body
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: BienIci
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-38246%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-91768%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
+  - zone: Hauts-de-Seine (92)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-86985%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-110866%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80348%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-178351%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-18000%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: Figaro
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Mulhouse%20(68)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-courbevoie+92400.html?sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-levallois+perret+92300.html?sort=5
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: false
+    group_type: Hub
+    high_priority: false
   # - zone: Clermont-Ferrand (63)
   #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Clermont-Ferrand%20(63)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
   #   scraper_type: Static
   #   main_page_cls: div.container-item
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Grenoble%20(38)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
   #   scraper_type: Static
   #   main_page_cls: div.container-item
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Angers%20(49)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
   #   scraper_type: Static
   #   main_page_cls: div.container-item
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Perpignan%20(66)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
   #   scraper_type: Static
   #   main_page_cls: div.container-item
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: Propr. Figaro
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-haut+rhin-alsace-france/?ville=mulhouse&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=courbevoie
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=levallois+perret
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: false
+    group_type: Hub
+    high_priority: false
   # - zone: Clermont-Ferrand (63)
   #   url: https://proprietes.lefigaro.fr/annonces/immobilier-puy+de+dome-auvergne-france/?ville=clermont+ferrand&tri=2
   #   scraper_type: Static
   #   main_page_cls: div.item-container-inline
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://proprietes.lefigaro.fr/annonces/immobilier-isere-rhone+alpes-france/?ville=grenoble&tri=2
   #   scraper_type: Static
   #   main_page_cls: div.item-container-inline
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=angers&tri=2
   #   scraper_type: Static
   #   main_page_cls: div.item-container-inline
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://proprietes.lefigaro.fr/annonces/immobilier-pyrenees+orientales-languedoc+roussillon-france/?ville=perpignan&tri=2
   #   scraper_type: Static
   #   main_page_cls: div.item-container-inline
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: LogicImmo
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.logic-immo.com/vente-immobilier-mulhouse-tous-codes-postaux,237_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://www.logic-immo.com/vente-immobilier-courbevoie-92400,8445_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Hauts-de-Seine (92)
+    url: https://www.logic-immo.com/vente-immobilier-levallois-perret-92300,17928_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.logic-immo.com/vente-immobilier-clermont-ferrand-tous-codes-postaux,91_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
   #   scraper_type: Static
   #   main_page_cls: div.offer-block
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://www.logic-immo.com/vente-immobilier-grenoble-tous-codes-postaux,144_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
   #   scraper_type: Static
   #   main_page_cls: div.offer-block
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://www.logic-immo.com/vente-immobilier-angers-tous-codes-postaux,18_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
   #   scraper_type: Static
   #   main_page_cls: div.offer-block
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://www.logic-immo.com/vente-immobilier-perpignan-tous-codes-postaux,268_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
   #   scraper_type: Static
   #   main_page_cls: div.offer-block
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: PAP
   params:
-  # - zone: Mulhouse (68) 
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-mulhouse-68-g43628-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Hauts-de-Seine (93)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-courbevoie-92400-g43294-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Hauts-de-Seine (93)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-levallois-perret-92300-g43289-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: false
+    group_type: Hub
+    high_priority: false
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.pap.fr/annonce/vente-appartement-maison-clermont-ferrand-63-g43600-a-partir-du-studio
   #   scraper_type: Static
   #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Grenoble (38)
   #   url: https://www.pap.fr/annonce/vente-appartement-maison-grenoble-38-g43606-a-partir-du-studio
   #   scraper_type: Static
   #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Angers (49)
   #   url: https://www.pap.fr/annonce/vente-appartement-maison-angers-49-g43584-a-partir-du-studio
   #   scraper_type: Static
   #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
   # - zone: Perpignan (66)
   #   url: https://www.pap.fr/annonce/vente-appartement-maison-perpignan-66-g43633-a-partir-du-studio
   #   scraper_type: Static
   #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
+  #   is_active: false
   #   group_type: Hub
   #   high_priority: false
 - source: Stephane Plaza
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=68224&sort=date_desc&limit=15
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92026&sort=date_desc
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92044&sort=date_desc
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
   # - zone: Grenoble (38)
   #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=63113&sort=date_desc&limit=15
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Angers (49)
   #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49007&sort=date_desc&limit=15
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Perpignan (66)
   #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=66136&sort=date_desc&limit=15
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
 - source: Orpi
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=mulhouse&locations%5B0%5D%5Blabel%5D=mulhouse&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+  - zone: Hauts-de-Seine (68)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=courbevoie&locations%5B0%5D%5Blabel%5D=Courbevoie+(92400)&sort=date-down&layoutType=mixte
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Hauts-de-Seine (68)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=levallois-perret&locations%5B0%5D%5Blabel%5D=Levallois-Perret+(92300)&sort=date-down&layoutType=mixte
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=clermont-ferrand&locations%5B0%5D%5Blabel%5D=clermont-ferrand&sort=date-down&layoutType=list
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Grenoble (38)
   #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=grenoble&locations%5B0%5D%5Blabel%5D=grenoble&sort=date-down&layoutType=list
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Angers (49)
   #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=angers&sort=date-down&layoutType=list
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Perpignan (66)
   #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=perpignan&locations%5B0%5D%5Blabel%5D=perpignan&sort=date-down&layoutType=list
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
 - source: Laforet
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=68224&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+
+  - zone: Hauts-de-Seine (93)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19614315%2C19611512%2C19592701%2C19497021%2C19493762%2C19430850%2C19235470%2C17976462&cities=92026&transaction=buy
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19580279%2C19513348%2C19492470%2C19421034%2C19316374%2C19304645%2C18160912%2C18065866%2C17999518%2C17549440%2C17429736%2C4495204&cities=92044&transaction=buy
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.laforet.com/api/immo/properties?&cities=63113&transaction=buy&perPage=25
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Grenoble (38)
   #   url: https://www.laforet.com/api/immo/properties?&cities=38185&transaction=buy&perPage=25
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Angers (49)
   #   url: https://www.laforet.com/api/immo/properties?&cities=49007&transaction=buy&perPage=25
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Perpignan (66)
   #   url: https://www.laforet.com/api/immo/properties?&cities=66136&transaction=buy&perPage=25
   #   scraper_type: HTTPRequest
   #   http_type: get_json
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
 - source: Century21
   params:
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-clermont+ferrand/tri-date-desc/
-  #   scraper_type: Static
-  #   main_page_cls: div.contentAnnonce
-  #   is_active: true
-  #   group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-courbevoie/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: false
+    group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-levallois+perret/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: false
+    group_type: Group
   # - zone: Grenoble (38)
   #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-grenoble/tri-date-desc/
   #   scraper_type: Static
   #   main_page_cls: div.contentAnnonce
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Perpignan (66)
   #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-perpignan/tri-date-desc/
   #   scraper_type: Static
   #   main_page_cls: div.contentAnnonce
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
 - source: Foncia
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://fr.foncia.com/achat/mulhouse-68/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-  #   scraper_type: Static
-  #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
-  #   group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://fr.foncia.com/achat/courbevoie-92400/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: false
+    group_type: Group
+  - zone: Hauts-de-Seine (93)
+    url: https://fr.foncia.com/achat/levallois-perret-92300/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: false
+    group_type: Group
   # - zone: Clermont-Ferrand (63)
   #   url: https://fr.foncia.com/achat/mulhouse-68/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
   #   scraper_type: Static
   #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Grenoble (38)
   #   url: https://fr.foncia.com/achat/clermont-ferrand-63/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
   #   scraper_type: Static
   #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
   # - zone: Perpignan (66)
   #   url: https://fr.foncia.com/achat/perpignan-66/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
   #   scraper_type: Static
   #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
+  #   is_active: false
   #   group_type: Group
 - source: MeilleursAgents
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.meilleursagents.com/annonces/achat/mulhouse-68100/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
+  - zone: Hauts-de-Seine (93)
+    url: https://www.meilleursagents.com/annonces/achat/courbevoie-92400/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Hauts-de-Seine (93)
+    url: https://www.meilleursagents.com/annonces/achat/levallois-perret-92300/
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.meilleursagents.com/annonces/achat/clermont-ferrand-63000/
   #   main_page_cls: div.listing-item.search-listing-result__item
@@ -375,7 +468,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Grenoble (38)
   #   url: https://www.meilleursagents.com/annonces/achat/grenoble-38000/
@@ -384,7 +477,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Angers (49)
   #   url: https://www.meilleursagents.com/annonces/achat/angers-49000/
@@ -393,7 +486,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Perpignan (66)
   #   url: https://www.meilleursagents.com/annonces/achat/perpignan-66000/
@@ -402,19 +495,28 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
 - source: SeLoger
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:680224}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
+  - zone: Hauts-de-Seine (93)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920026]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Hauts-de-Seine (93)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920044]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
   # - zone: Clermont-Ferrand (63)
   #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:630113}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
   #   main_page_cls: script
@@ -422,7 +524,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Grenoble (38)
   #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:380185}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
@@ -431,7 +533,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Angers (49)
   #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:490007}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
@@ -440,7 +542,7 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
   # - zone: Perpignan (66)
   #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:660136}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
@@ -449,5 +551,5 @@
   #   waiting_cls: nil
   #   multi_page: false
   #   page_nbr:  1
-  #   is_active: true
+  #   is_active: false
   #   group_type: Proxy
