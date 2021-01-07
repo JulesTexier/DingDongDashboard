@@ -7,6 +7,7 @@ class Api::V1::SubscribersDashboardController < ActionController::API
 
     def current 
         returned_subscriber = current_subscriber.as_json
+        returned_subscriber[:messenger_link] = current_subscriber.messenger_link
         returned_subscriber[:research] = current_subscriber.research
         returned_subscriber[:areas] = current_subscriber.research.areas
         render json: {user: returned_subscriber}, status: 200
