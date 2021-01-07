@@ -87,7 +87,14 @@ class Api::V1::NuxtController < ApplicationController
 
   def handle_onboarding
     begin
-      subscriber = Subscriber.create(onboarding_subscriber_params)
+      t = Subscriber.arel_table
+      subscriber = Subscriber.where(status:"new_lead").where(t[:email].eq(onboarding_subscriber_params[:email]).or(t[:phone].matches(onboarding_subscriber_params[:phone]))).last
+      if subscriber.nil?
+        subscriber = Subscriber.create(onboarding_subscriber_params)
+      else 
+        subscriber.update(onboarding_subscriber_params)
+        subscriber.update(status: "form_filled")
+      end 
       research = Research.new(onboarding_research_params)
       research.subscriber = subscriber
       research.agglomeration = Area.find(params["areas"].first).department.agglomeration
