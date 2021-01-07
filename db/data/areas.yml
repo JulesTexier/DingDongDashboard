@@ -478,7 +478,7 @@
     - name: "Lille"
       terms:
         - "59000"
-        - "Vieu-lille"
+        - "Vieux-lille"
 - zone: Bordeaux (33)
   datas:
     - name: "Bordeaux"
@@ -715,6 +715,202 @@
       terms:
         - "49000"
         - "49100"
+    - name: Avrillé
+      terms:
+      - "49240"
+    - name: Beaucouzé
+      terms:
+      - "49070"
+    - name: Béhuard
+      terms:
+      - "49170"
+    - name: Bouchemaine
+      terms:
+      - "49080"
+    - name: Briollay
+      terms:
+      - "49125"
+    - name: Cantenay-Épinard
+      terms:
+      - "49640"
+      - "Cantenay Épinard"
+    - name: Écouflant
+      terms:
+      - "49000"
+    - name: Écuillé
+      terms:
+      - "49460"
+    - name: Feneu
+      terms:
+      - "49460"
+    - name: Loire-Authion
+      terms:
+      - "49140"
+      - "49250"
+      - "49630"
+      - "49800"
+      - "Loire Authion"
+    - name: Longuenée-en-Anjou
+      terms:
+      - "49770"
+      - "49220"
+    - name: Montreuil-Juigné
+      terms:
+      - "49640"
+      - "Montreuil Juigné"
+    - name: Mûrs-Erigné
+      terms:
+      - "49610"
+      - "Mûrs Erigné"
+    - name: Le Plessis-Grammoire
+      terms:
+      - "49124"
+      - "Le Plessis Grammoire"
+      - "Le-Plessis-Grammoire"
+    - name: Les Ponts-de-Cé
+      terms:
+      - "49130"
+      - "Les Ponts de Cé"
+      - "Les-Ponts-de-Cé"
+    - name: Rives-du-Loir-en-Anjou
+      terms:
+      - "49140"
+      - "Rives du Loir en Anjou"
+    - name: Saint-Barthélemy-d'Anjou
+      terms:
+      - "49124"
+      - "Saint Barthélemy d'Anjou"
+      - "St Barthélemy d'Anjou"
+      - "St-Barthélemy-d'Anjou"
+    - name: Saint-Clément-de-la-Place
+      terms:
+      - "49370"
+      - "Saint Clément de la Place"
+      - "St Clément de la Place"
+      - "St-Clément-de-la-Place"
+    - name: Sainte-Gemmes-sur-Loire
+      terms:
+      - "49130"
+      - "Sainte Gemmes sur Loire"
+      - "Ste-Gemmes-sur-Loire"
+      - "Ste Gemmes sur Loire"
+    - name: Saint-Lambert-la-Potherie
+      terms:
+      - "49070"
+      - "Saint Lambert la Potherie"
+      - "St Lambert la Potherie"
+      - "St-Lambert-la-Potherie"
+    - name: Saint-Léger-de-Linières
+      terms:
+      - "49170"
+      - "49070"
+      - "St-Léger-de-Linières"
+      - "St Léger de Linières"
+      - "Saintt Léger de Linières"
+    - name: Saint-Martin-du-Fouilloux
+      terms:
+      - "49170"
+      - "Saint Martin du Fouilloux"
+      - "St Martin du Fouilloux"
+      - "St-Martin-du-Fouilloux"
+    - name: Sarrigné
+      terms:
+      - "49800"
+    - name: Savennières
+      terms:
+      - "49170"
+    - name: Soulaines-sur-Aubance
+      terms:
+      - "49610"
+      - "Soulaines sur Aubance"
+    - name: Soulaire-et-Bourg
+      terms:
+      - "49460"
+      - "Soulaire et Bourg"
+    - name: Trélazé
+      terms:
+      - "49800"
+    - name: Verrières-en-Anjou
+      terms:
+      - "49353"
+      - "Verrières en Anjou"
+
+- zone: Limoges Métropole (87)
+  datas:
+    - name: Limoges
+      terms:
+        - "87000"
+    - name: Aureil
+      terms:
+        - "87220"
+    - name: Boisseuil
+      terms:
+        - "87220"
+    - name: Bonnac-la-Côte
+      terms:
+        - "87270"
+        - "Bonnac la Côte"
+    - name: Chaptelat
+      terms:
+        - "87270"
+    - name: Condat-sur-Vienne
+      terms:
+        - "87920"
+        - "Condat sur Vienne"
+    - name: Couzeix
+      terms:
+        - "87270"
+    - name: Eyjeaux
+      terms:
+        - "87220"
+    - name: Feytiat
+      terms:
+        - "87220"
+    - name: Isle
+      terms:
+        - "87170"
+    - name: Le palais-sur-Vienne
+      terms:
+        - "87410"
+        - "Le-palais-sur-Vienne"
+        - "Le palais sur Vienne"
+    - name: Le Vigen
+      terms:
+        - "87110"
+        - "Le-Vigen"
+    - name: Panazol
+      terms:
+        - "87350"
+    - name: Peyrilhac
+      terms:
+        - "87510"
+    - name: Rilhac-Rancon
+      terms:
+        - "87570"
+        - "Rilhac Rancon"
+    - name: Saint-Gence
+      terms:
+        - "87510"
+        - "Saint Gence"
+        - "St-Gence"
+        - "St Gence"
+    - name: Saint-Just-le-Martel
+      terms:
+        - "87590"
+        - "Saint Just le Martel"
+        - "St Just le Martel"
+        - "St-Just-le-Martel"
+    - name: Solignac
+      terms:
+        - "87110"
+    - name: Verneuil-sur-Vienne
+      terms:
+        - "87430"
+        - "Verneuil sur Vienne"
+    - name: Veyrac
+      terms:
+        - "87520"
+
 - zone: Perpignan (66)
   datas:
     - name: Perpignan
