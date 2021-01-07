@@ -219,24 +219,24 @@
       terms:
         - "78420"
 - zone: Hauts-de-Seine (92)
-  datas: 
+  datas:
     - name: Suresnes
       terms:
         - "92150"
     - name: Puteaux
-      terms: 
+      terms:
         - "92800"
     - name: Neuilly-Sur-Seine
-      terms: 
+      terms:
         - "92200"
     - name: Saint-Cloud
-      terms: 
+      terms:
         - "92210"
     - name: Levallois-Perret
-      terms: 
+      terms:
         - "92300"
     - name: Clichy
-      terms: 
+      terms:
         - "92110"
     - name: Montrouge
       terms:
@@ -917,3 +917,90 @@
       terms:
         - "66000"
         - "66100"
+
+- zone: Rouen Métropole (76)
+  datas:
+    - name: Rouen
+      terms:
+        - "76000"
+    - name: Sotteville-lès-Rouen
+      terms:
+        - "76300"
+    - name: Saint-Étienne-du-Rouvray
+      terms:
+        - "76800"
+    - name: Le Grand-Quevilly
+      terms:
+        - "76120"
+    - name: Le Petit-Quevilly
+      terms:
+        - "76140"
+    - name: Mont-Saint-Aignan
+      terms:
+        - "76130"
+    - name: Elbeuf
+      terms:
+        - "76500"
+    - name: Bois-Guillaume
+      terms:
+        - "76230"
+    - name: Canteleu
+      terms:
+        - "76380"
+    - name: Oissel
+      terms:
+        - "76350"
+    - name: Maromme
+      terms:
+        - "76150"
+    - name: Déville-lès-Rouen
+      terms:
+        - "76250"
+    - name: Caudebec-lès-Elbeuf
+      terms:
+        - "76320"
+    - name: Darnétal
+      terms:
+        - "76160"
+    - name: Grand-Couronne
+      terms:
+        - "76530"
+    - name: Petit-Couronne
+      terms:
+        - "76650"
+    - name: Bihorel
+      terms:
+        - "76420"
+    - name: Saint-Pierre-lès-Elbeuf
+      terms:
+        - "76320"
+    - name: Saint-Aubin-lès-Elbeuf
+      terms:
+        - "76410"
+    - name: Le Mesnil-Esnard
+      terms:
+        - "76240"
+    - name: Notre-Dame-de-Bondeville
+      terms:
+        - "76960"
+    - name: Bonsecours
+      terms:
+        - "76240"
+    - name: Malaunay
+      terms:
+        - "76770"
+    - name: Franqueville-Saint-Pierre
+      terms:
+        - "76520"
+    - name: Cléon
+      terms:
+        - "76410"
+    - name: Le Trait
+      terms:
+        - "76580"
+    - name: Duclair
+      terms:
+        - "76480"
+    - name: Le Houlme
+      terms:
+        - "76770"
