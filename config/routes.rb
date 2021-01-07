@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   # 5 - API
   #############  
   api_guard_scope 'subscribers' do
-    post 'api/v1/subscribers/sign_up' => 'api_guard/registration#create'
+    post 'api/v1/subscribers/sign_up' => 'subscribers/registration#create'
     post 'api/v1/subscribers/sign_in' => 'subscribers/authentication#create'
     delete 'api/v1/subscribers/sign_out' => 'api_guard/authentication#destroy'
   end
