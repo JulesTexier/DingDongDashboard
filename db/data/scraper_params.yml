@@ -1,7 +1,7 @@
 ---
 - source: SuperImmo
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.superimmo.com/achat/panazol-87350,isle-87170,couzeix-87270,le-palais-sur-vienne-87410,feytiat-87220,condat-sur-vienne-87920,rilhac-rancon-87570,verneuil-sur-vienne-87430,saint-just-le-martel-87590,boisseuil-87220,veyrac-87520,saint-gence-87510,chaptelat-87270,le-vigen-87110,bonnac-la-cote-87270,solignac-87110,eyjeaux-87220,peyrilhac-87510,aureil-87220,limoges-87?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
@@ -439,7 +439,7 @@
     high_priority: false
 - source: Figaro
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&mode=&location=Limoges%20%2887%29,Panazol%20%2887%29,Couzeix%20%2887%29,Isle%20%2887%29,Feytiat%20%2887%29,Le%20Palais-sur-Vienne%20%2887%29,Condat-sur-Vienne%20%2887%29,Verneuil-sur-Vienne%20%2887%29,Rilhac-Rancon%20%2887%29,Boisseuil%20%2887%29,Saint-Just-le-Martel%20%2887%29,Le%20Vigen%20%2887%29,Saint-Gence%20%2887%29,Chaptelat%20%2887%29,Veyrac%20%2887%29,Solignac%20%2887%29,Eyjeaux%20%2887%29,Peyrilhac%20%2887%29,Aureil%20%2887%29&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft&type=appartement&type=atelier&type=chambre&type=chambre%20d%20hote&type=duplex&type=loft&type=chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&type=chalet&type=chateau&type=ferme&type=gite&type=hotel&type=hotel%20particulier&type=maison&type=manoir&type=moulin&type=peniche&type=propriete&type=villa&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&priceMin=100%20000&priceMax=5%20000%20000&areaMin=8&areaMax=500&roomMin=0&bedroomMin=0&_furnished=on&_furnished=on&_oldness=on&_mode=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_handicapAccessible=on
     scraper_type: Static
     main_page_cls: div.container-item
@@ -884,7 +884,7 @@
     is_active: false
     group_type: Hub
     high_priority: false
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=17347_2,27827_2,6655_2,34604_2,3993_2,32006_2,10723_2,23971_2,1681_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
@@ -1103,7 +1103,7 @@
     high_priority: false
 - source: PAP
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.pap.fr/annonce/vente-appartement-maison-isle-87170-g41809g41812g41826g41843g41846g41847g41852g41857g41858g41914g41939g41956g41965g41966g41967g41969g41971g41996g43620-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
@@ -1481,7 +1481,7 @@
     group_type: Group
 - source: Orpi
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=limoges&locations%5B0%5D%5Blabel%5D=Limoges+(87000)+-+Ville&locations%5B1%5D%5Bvalue%5D=panazol&locations%5B1%5D%5Blabel%5D=Panazol+(87350)+-+Ville&locations%5B2%5D%5Bvalue%5D=couzeix&locations%5B2%5D%5Blabel%5D=Couzeix+(87270)+-+Ville&locations%5B3%5D%5Bvalue%5D=isle&locations%5B3%5D%5Blabel%5D=Isle+(87170)+-+Ville&locations%5B4%5D%5Bvalue%5D=feytiat&locations%5B4%5D%5Blabel%5D=Feytiat+(87220)+-+Ville&locations%5B5%5D%5Bvalue%5D=le-palais-sur-vienne&locations%5B5%5D%5Blabel%5D=Le+Palais-sur-Vienne+(87410)+-+Ville&locations%5B6%5D%5Bvalue%5D=condat-sur-vienne&locations%5B6%5D%5Blabel%5D=Condat-sur-Vienne+(87920)+-+Ville&locations%5B7%5D%5Bvalue%5D=verneuil-sur-vienne&locations%5B7%5D%5Blabel%5D=Verneuil-sur-Vienne+(87430)+-+Ville&locations%5B8%5D%5Bvalue%5D=rilhac-rancon&locations%5B8%5D%5Blabel%5D=Rilhac-Rancon+(87570)+-+Ville&locations%5B9%5D%5Bvalue%5D=boisseuil&locations%5B9%5D%5Blabel%5D=Boisseuil+(87220)+-+Ville&locations%5B10%5D%5Bvalue%5D=saint-just-le-martel&locations%5B10%5D%5Blabel%5D=Saint-Just-le-Martel+(87590)+-+Ville&locations%5B11%5D%5Bvalue%5D=le-vigen&locations%5B11%5D%5Blabel%5D=Le+Vigen+(87110)+-+Ville&locations%5B12%5D%5Bvalue%5D=saint-gence&locations%5B12%5D%5Blabel%5D=Saint-Gence+(87510)+-+Ville&locations%5B13%5D%5Bvalue%5D=chaptelat&locations%5B13%5D%5Blabel%5D=Chaptelat+(87270)+-+Ville&locations%5B14%5D%5Bvalue%5D=veyrac&locations%5B14%5D%5Blabel%5D=Veyrac+(87520)+-+Ville&locations%5B15%5D%5Bvalue%5D=bonnac-la-cote&locations%5B15%5D%5Blabel%5D=Bonnac-la-C%C3%B4te+(87270)+-+Ville&locations%5B16%5D%5Bvalue%5D=solignac&locations%5B16%5D%5Blabel%5D=Solignac+(87110)+-+Ville&locations%5B17%5D%5Bvalue%5D=eyjeaux&locations%5B17%5D%5Blabel%5D=Eyjeaux+(87220)+-+Ville&locations%5B18%5D%5Bvalue%5D=peyrilhac&locations%5B18%5D%5Blabel%5D=Peyrilhac+(87510)+-+Ville&locations%5B19%5D%5Bvalue%5D=aureil&locations%5B19%5D%5Blabel%5D=Aureil+(87220)+-+Ville&sort=date-down&layoutType=mixte
     scraper_type: HTTPRequest
     http_type: get_json
@@ -1849,7 +1849,7 @@
     group_type: Group
 - source: Century21
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.century21.fr/annonces/achat/v-le+palais+sur+vienne-couzeix-isle-panazol/tri-date-desc/#/annonces/achat/v-eyjeaux-rilhac+rancon-le+palais+sur+vienne-chaptelat-aureil-veyrac-solignac-couzeix-isle-peyrilhac-boisseuil-verneuil+sur+vienne-condat+sur+vienne-bonnac+la+cote-st+just+le+martel-le+vigen-st+gence-feytiat-panazol-limoges/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
@@ -2199,7 +2199,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-    - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=37077%2C37126%2C37064%2C37123%2C36941%2C37113%2C36984%2C37039%2C36927&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
@@ -2512,7 +2512,7 @@
     group_type: Proxy
 - source: SeLoger
   params:
-   - zone: Limoges Métropole (87)
+  - zone: Limoges Métropole (87)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[870085]},{%22inseeCodes%22:[870114]},{%22inseeCodes%22:[870050]},{%22inseeCodes%22:[870075]},{%22inseeCodes%22:[870065]},{%22inseeCodes%22:[870113]},{%22inseeCodes%22:[870048]},{%22inseeCodes%22:[870201]},{%22inseeCodes%22:[870125]},{%22inseeCodes%22:[870019]},{%22inseeCodes%22:[870156]},{%22inseeCodes%22:[870205]},{%22inseeCodes%22:[870143]},{%22inseeCodes%22:[870038]},{%22inseeCodes%22:[870202]},{%22inseeCodes%22:[870020]},{%22inseeCodes%22:[870192]},{%22inseeCodes%22:[870063]},{%22inseeCodes%22:[870118]},{%22inseeCodes%22:[870005]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
