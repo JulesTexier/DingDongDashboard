@@ -496,6 +496,61 @@
     - name: "Le Havre"
       terms:
         - "76000"
+    - name: "Cauville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Épouville"
+      terms:
+        - "76133"
+    - name: "Fontaine-la-Mallet"
+      terms:
+        - "76290"
+    - name: "Fontenay"
+      terms:
+        - "76290"
+    - name: "Gainneville"
+      terms:
+        - "76700"
+    - name: "Gronfreville-l'Orcher"
+      terms:
+        - "76700"
+    - name: "Harfleur"
+      terms:
+        - "76700"
+    - name: "Manéglise"
+      terms:
+        - "76133"
+    - name: "Mannevillette"
+      terms:
+        - "76290"
+    - name: "Montivilliers"
+      terms:
+        - "76290"
+    - name: "Notre-Dame-du-Bec"
+      terms:
+        - "76133"
+    - name: "Octeville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Rogerville"
+      terms:
+        - "76700"
+    - name: "Rolleville"
+      terms:
+        - "76133"
+    - name: "Sainte-Adresse"
+      terms:
+        - "76310"
+        - "Sainte Adresse"
+        - "Ste-Adresse"
+        - "Ste Adresse"
+    - name: "Saint-Martin-du-Manoir"
+      terms:
+        - "76290"
+        - "Saint Martin du Manoir"
+        - "St-Martin-du-Manoir"
+        - "St Martin du Manoir"
+
 - zone: Nice (06)
   datas:
     - name: "Nice"
