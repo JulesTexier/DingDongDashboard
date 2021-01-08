@@ -929,6 +929,9 @@
     - name: Saint-Étienne-du-Rouvray
       terms:
         - "76800"
+        - "Saint Étienne du Rouvray"
+        - "St-Étienne-du-Rouvray"
+        - "St Étienne du Rouvray"
     - name: Le Grand-Quevilly
       terms:
         - "76120"
@@ -974,9 +977,15 @@
     - name: Saint-Pierre-lès-Elbeuf
       terms:
         - "76320"
+        - "Saint Pierre lès Elbeuf"
+        - "St-Pierre-lès-Elbeuf"
+        - "St-Pierre-lès-Elbeuf"
     - name: Saint-Aubin-lès-Elbeuf
       terms:
         - "76410"
+        - "Saint Aubin lès Elbeuf"
+        - "St Aubin lès Elbeuf"
+        - "St-Aubin-lès-Elbeuf"
     - name: Le Mesnil-Esnard
       terms:
         - "76240"
@@ -992,6 +1001,9 @@
     - name: Franqueville-Saint-Pierre
       terms:
         - "76520"
+        - "Franqueville Saint Pierre"
+        - "Franqueville St Pierre"
+        - "Franqueville-St-Pierre"
     - name: Cléon
       terms:
         - "76410"
