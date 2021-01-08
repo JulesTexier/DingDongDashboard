@@ -17,6 +17,15 @@
     group_type: Hub
     high_priority: false
 
+    - zone: Hauts-de-Seine (92)
+    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/levallois-perret-92300?sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
+
   # - zone: Mulhouse (68)
   #   url: https://www.superimmo.com/achat/alsace/haut-rhin/mulhouse-68?sort=created_at
   #   scraper_type: Static
@@ -232,14 +241,14 @@
   #   high_priority: false
 - source: PAP
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.pap.fr/annonce/vente-appartement-maison-courbevoie-92400-g43294-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.pap.fr/annonce/vente-appartement-maison-levallois-perret-92300-g43289-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
@@ -276,13 +285,13 @@
   #   high_priority: false
 - source: Stephane Plaza
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92026&sort=date_desc
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92044&sort=date_desc
     scraper_type: HTTPRequest
     http_type: get_json
@@ -347,13 +356,13 @@
 - source: Laforet
   params:
 
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19614315%2C19611512%2C19592701%2C19497021%2C19493762%2C19430850%2C19235470%2C17976462&cities=92026&transaction=buy
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19580279%2C19513348%2C19492470%2C19421034%2C19316374%2C19304645%2C18160912%2C18065866%2C17999518%2C17549440%2C17429736%2C4495204&cities=92044&transaction=buy
     scraper_type: HTTPRequest
     http_type: get_json
@@ -385,13 +394,13 @@
   #   group_type: Group
 - source: Century21
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-courbevoie/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-levallois+perret/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
@@ -411,13 +420,13 @@
   #   group_type: Group
 - source: Foncia
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://fr.foncia.com/achat/courbevoie-92400/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://fr.foncia.com/achat/levallois-perret-92300/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
@@ -443,7 +452,7 @@
   #   group_type: Group
 - source: MeilleursAgents
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.meilleursagents.com/annonces/achat/courbevoie-92400/
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
@@ -452,7 +461,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.meilleursagents.com/annonces/achat/levallois-perret-92300/
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
@@ -499,7 +508,7 @@
   #   group_type: Proxy
 - source: SeLoger
   params:
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920026]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
@@ -508,7 +517,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Hauts-de-Seine (93)
+  - zone: Hauts-de-Seine (92)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920044]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
