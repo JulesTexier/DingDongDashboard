@@ -40,7 +40,7 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     private
 
     def subscriber_params
-        params.require(:subscribers_dashboard).require(:subscriber).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+        params.require(:subscribers_dashboard).require(:subscriber).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting, :is_active)
     end  
     
     def research_params
