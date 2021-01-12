@@ -193,6 +193,13 @@ class Subscriber < ApplicationRecord
     self.is_active = true
     self.execute_nurturing_mailer
   end
+
+  # Authenticate
+
+  def self.get_by_auth_token(token)
+    s = Subscriber.find_by(auth_token: token)
+    s.nil? ? false : s 
+  end
   
   
   private
