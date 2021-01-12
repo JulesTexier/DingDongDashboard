@@ -107,7 +107,7 @@ Rails.application.routes.draw do
       # Nuxt 
       get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
       put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
-      get "/nuxt/subscribers/:subscriber_token" => "nuxt#get_subscriber"
+      get "/nuxt/subscribers/:auth_token" => "nuxt#get_subscriber"
       get "/nuxt/brokers/:broker_id" => "nuxt#get_broker"
 
       post 'nuxt/funding/:subscriber_id/notify-broker' => 'nuxt#new_meeting_notify_broker'

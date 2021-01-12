@@ -10,13 +10,13 @@ class Api::V1::NuxtController < ApplicationController
   before_action :authenticate
 
   def get_subscriber
-    begin
-      subscriber = Subscriber.includes(research: [:areas]).find_by(auth_token: params[:subscriber_token])
+    subscriber = Subscriber.ding_dong_users.includes(research: [:areas]).find_by(auth_token_params)
+    unless subscriber.nil?
       returned_subscriber = subscriber.as_json
       returned_subscriber[:research] = subscriber.research
       returned_subscriber[:areas] = subscriber.research.areas
       render json: {status: 'SUCCESS', message: "Subscriber found successfully", data: returned_subscriber}, status: 200
-    rescue ActiveRecord::RecordNotFound => e
+    else 
       render json: {status: 'ERROR', message: 'Subscriber not found'}, status: 422
     end
   end
@@ -91,9 +91,10 @@ class Api::V1::NuxtController < ApplicationController
       subscriber = Subscriber.where(status:"new_lead").where(t[:email].eq(onboarding_subscriber_params[:email]).or(t[:phone].matches(onboarding_subscriber_params[:phone]))).last
       if subscriber.nil?
         subscriber = Subscriber.create(onboarding_subscriber_params)
+        subscriber.update(status: "form_filled_outbound")
       else 
         subscriber.update(onboarding_subscriber_params)
-        subscriber.update(status: "form_filled")
+        subscriber.update(status: "form_filled_inbound")
       end 
       research = Research.new(onboarding_research_params)
       research.subscriber = subscriber
@@ -162,5 +163,9 @@ class Api::V1::NuxtController < ApplicationController
 
   def onboarding_research_params
     params["research"].permit(:max_price, :min_price, :min_floor, :min_elevator_floor, :has_elevator, :min_surface, :min_rooms_number, :max_sqm_price, :is_active, :balcony, :terrace, :garden, :new_construction, :last_floor, :home_type, :apartment_type)
+  end
+
+  def auth_token_params
+    params.except(:nuxt).permit(:auth_token)
   end
 end
