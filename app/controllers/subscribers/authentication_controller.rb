@@ -21,7 +21,7 @@ module Subscribers
 
     def find_resource
       self.resource = resource_class.find_by(email: params[:email].downcase.strip) if params[:email].present?
-      render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials')) unless resource && params[:auth_token].nil?
+      render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials')) unless resource
     end
   end
 end
