@@ -91,10 +91,10 @@ class Api::V1::NuxtController < ApplicationController
       subscriber = Subscriber.where(status:"new_lead").where(t[:email].eq(onboarding_subscriber_params[:email]).or(t[:phone].matches(onboarding_subscriber_params[:phone]))).last
       if subscriber.nil?
         subscriber = Subscriber.create(onboarding_subscriber_params)
-        subscriber.update(status: "form_filled_outbound")
+        subscriber.update(status: "form_filled_inbound")
       else 
         subscriber.update(onboarding_subscriber_params)
-        subscriber.update(status: "form_filled_inbound")
+        subscriber.update(status: "form_filled")
       end 
       research = Research.new(onboarding_research_params)
       research.subscriber = subscriber
