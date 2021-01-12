@@ -1,7 +1,8 @@
 require "dotenv/load"
 
 class Subscriber < ApplicationRecord
-  has_secure_password
+  has_secure_password(validations: false)
+  has_secure_token :auth_token
 
   ## REVOIR LES VALIDATEURS
   
