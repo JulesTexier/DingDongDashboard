@@ -11,7 +11,7 @@ class Api::V1::NuxtController < ApplicationController
 
   def get_subscriber
     begin
-      subscriber = Subscriber.includes(research: [:areas]).find(params[:subscriber_id])
+      subscriber = Subscriber.includes(research: [:areas]).find_by(auth_token: params[:subscriber_token])
       returned_subscriber = subscriber.as_json
       returned_subscriber[:research] = subscriber.research
       returned_subscriber[:areas] = subscriber.research.areas
