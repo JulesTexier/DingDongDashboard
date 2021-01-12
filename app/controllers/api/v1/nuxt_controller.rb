@@ -58,7 +58,7 @@ class Api::V1::NuxtController < ApplicationController
     broker = Broker.find(params[:id])
     if !broker.nil?
       scoped_subscribers = broker.get_available_leads
-      data = scoped_subscribers.map{ |s| s.is_real_ding_dong_user? ? s.as_json.merge!(contact_type: "Ding Dong") : s.as_json.merge!(contact_type: "Se Loger")  }
+      data = scoped_subscribers.map{ |s| s.is_real_ding_dong_user? ? s.as_json.merge!(contact_type: "Ding Dong", research: s.research, areas: s.research.areas) : s.as_json.merge!(contact_type: "Se Loger")  }
       render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{broker.id} ", data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Broker not found'}, status: 422
