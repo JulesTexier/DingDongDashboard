@@ -115,3 +115,6 @@ Contractor.create(firstname: "Matthieu") if Contractor.all.empty?
 if BrokerAgency.find_by(name: "Ding Dong Courtage").nil?
   BrokerAgency.create_default
 end
+
+## Default auth_token to subscriber
+Subscriber.where(auth_token: nil).each { |subscriber| subscriber.regenerate_auth_token }
