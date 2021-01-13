@@ -122,7 +122,7 @@ class Api::V1::ManychatController < ApplicationController
       response = send_favorites(subscriber)
       render json: response[:json_response], status: response[:status]
     rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
+      render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 422
     end
   end
 

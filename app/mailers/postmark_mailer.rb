@@ -35,6 +35,6 @@ class PostmarkMailer < ApplicationMailer
       contractor_phone: subscriber.contractor.phone,
       contractor_avatar: ENV["BASE_URL"] + rails_blob_url(subscriber.contractor.avatar, only_path: true)
     }
-    mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
+    mail from: "annonces@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
 end

@@ -1,5 +1,5 @@
 class SubscriberMailer < ApplicationMailer
-  default :from => "etienne@hellodingdong.com"
+  default :from => "annonces@hellodingdong.com"
 
   def registration_confirmation(subscriber)
     @subscriber = subscriber
@@ -16,9 +16,9 @@ class SubscriberMailer < ApplicationMailer
     @properties = properties
     @subscriber = subscriber
     subject = if @properties.length > 1
-      "DING DONG - Plusieurs biens sont sortis à #{@properties.first.created_at.to_s(:time)} le #{@properties.first.created_at.strftime("%d/%m/%Y")}"
+      "🔔 Plusieurs biens sont sortis à #{@properties.first.created_at.in_time_zone('Europe/Paris').to_s(:time)} le #{@properties.first.created_at.strftime("%d/%m/%Y")}"
     else
-      "DING DONG - Un bien à #{properties.first.price}€ pour #{properties.first.surface}m2 est sorti"
+      "🔔 Un bien à #{properties.first.price}€ pour #{properties.first.surface}m2 est sorti"
     end
     mail(to: "#{subscriber.firstname} <#{subscriber.email}>", subject: subject)
   end
