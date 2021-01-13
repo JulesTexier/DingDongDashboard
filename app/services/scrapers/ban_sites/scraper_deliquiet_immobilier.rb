@@ -1,4 +1,4 @@
-class Independant::ScraperDeliquietImmobilier < Scraper
+class BanSites::ScraperDeliquietImmobilier < Scraper
   attr_accessor :properties, :source, :params
 
   def initialize(sp_id = nil)
