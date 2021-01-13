@@ -458,6 +458,78 @@
     - name: "Toulouse"
       terms:
         - "31000"
+    - name: "Colomiers"
+      terms:
+        - "31770"
+    - name: "Tournefeuille"
+      terms:
+        - "31170"
+    - name: "Blagnac"
+      terms:
+        - "31700"
+    - name: "Cugnaux"
+      terms:
+        - "31270"
+    - name: "Balma"
+      terms:
+        - "31130"
+    - name: "Saint-Orens-de-Gameville"
+      terms:
+        - "31650"
+        - "Saint Orens de Gameville"
+        - "St Orens de Gameville"
+        - "St-Orens-de-Gameville"
+    - name: "L'Union"
+      terms:
+        - "31240"
+    - name: "Saint-Jean"
+      terms:
+        - "31240"
+        - "Saint Jean"
+        - "St Jean"
+        - "St-Jean"
+    - name: "Castelginest"
+      terms:
+        - "31780"
+    - name: "Villeneuve-Tolosane"
+      terms:
+        - "31270"
+    - name: "Launaguet"
+      terms:
+        - "31140"
+    - name: "Aucamville"
+      terms:
+        - "31140"
+    - name: "Pibrac"
+      terms:
+        - "31820"
+    - name: "Aussonne"
+      terms:
+        - "31840"
+    - name: "Cornebarrieu"
+      terms:
+        - "31700"
+    - name: "Beauzelle"
+      terms:
+        - "31700"
+    - name: "Saint-Alban"
+      terms:
+        - "31140"
+        - "St Alban"
+        - "St-Alban"
+        - "Saint Alban"
+    - name: "Saint-Jory"
+      terms:
+        - "31790"
+        - "Saint Jory"
+        - "St Jory"
+        - "St-Jory"
+    - name: "Bruguières"
+      terms:
+        - "31150"
+    - name: "Quint-Fonsegrives"
+      terms:
+        - "31130"
 - zone: Nantes (44)
   datas:
     - name: "Nantes"
