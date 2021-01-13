@@ -103,7 +103,7 @@ RSpec.describe Api::V1::ManychatController, type: :controller do
         it "should respond 404 status id subscriber is not found" do
           request.headers.merge!({ 'Authorization': "Bearer " + ENV["BEARER_TOKEN"] })
           post :send_props_favorites, params: { subscriber_id: 9999 }
-          expect(response).to have_http_status(406)
+          expect(response).to have_http_status(422)
           expect(JSON.parse(response.body)["message"]).to eq("Subscriber not found")
         end
       end
