@@ -554,6 +554,83 @@
     - name: "Bordeaux"
       terms:
         - "33000"
+    - name: "Mérignac"
+      terms:
+        - ""
+    - name: "Pessac"
+      terms:
+        - ""
+    - name: "Talence"
+      terms:
+        - ""
+    - name: "Villenave-D'Ornon"
+      terms:
+        - ""
+    - name: "Saint-Médard-en-Jalles"
+      terms:
+        - "Saint Médard en Jalles"
+        - "St-Médard-en-Jalles"
+        - "St Médard en Jalles"
+    - name: "Bègles"
+      terms:
+        - ""
+    - name: "Gradignan"
+      terms:
+        - ""
+    - name: "Cenon"
+      terms:
+        - ""
+    - name: "Eysines"
+      terms:
+        - ""
+    - name: "Le Bouscat"
+      terms:
+        - ""
+    - name: "Lormont"
+      terms:
+        - ""
+    - name: "Bruges"
+      terms:
+        - ""
+    - name: "Floirac"
+      terms:
+        - ""
+    - name: "Ambarès-et-Lagrave"
+      terms:
+        - ""
+    - name: "Blanquefort"
+      terms:
+        - ""
+    - name: "Le Haillain"
+      terms:
+        - ""
+    - name: "Le Taillan-Médoc"
+      terms:
+        - ""
+    - name: "Parempuyre"
+      terms:
+        - ""
+    - name: "Artigues-près-Bordeaux"
+      terms:
+        - ""
+    - name: "Cardon-Blanc"
+      terms:
+        - ""
+    - name: "Martignas-sur-Jalle"
+      terms:
+        - ""
+    - name: "Saint-Aubin-de-Médoc"
+      terms:
+        - "St-Aubin-de-Médoc"
+        - "Saint Aubin de Médoc"
+        - "St Aubin de Médoc"
+    - name: "Bassens"
+      terms:
+        - ""
+    - name: "Bouliac"
+      terms:
+        - ""
+
 - zone: Saint-Etienne (42)
   datas:
     - name: "Saint-Etienne"
