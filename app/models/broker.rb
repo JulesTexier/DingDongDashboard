@@ -59,7 +59,7 @@ class Broker < ApplicationRecord
           selected_agency.brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
           # Uodate agency counters
           selected_agency.update(current_period_leads_left: selected_agency.current_period_leads_left - 1, current_period_provided_leads: selected_agency.current_period_provided_leads + 1)
-          return Broker.find(broker_hash.sort.first[0])
+          return Broker.find(broker_hash.sort_by{|id, leads| leads}.first[0])
         else
           puts "Error, there is no available Broker for any Broker Agency in agglomeration_id #{agglomeration_id}"
           Broker.return_default_broker
