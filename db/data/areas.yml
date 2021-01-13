@@ -556,80 +556,79 @@
         - "33000"
     - name: "Mérignac"
       terms:
-        - ""
+        - "33700"
     - name: "Pessac"
       terms:
-        - ""
+        - "33600"
     - name: "Talence"
       terms:
-        - ""
+        - "33400"
     - name: "Villenave-D'Ornon"
       terms:
-        - ""
+        - "33140"
     - name: "Saint-Médard-en-Jalles"
       terms:
         - "Saint Médard en Jalles"
         - "St-Médard-en-Jalles"
         - "St Médard en Jalles"
+        - "33160"
     - name: "Bègles"
       terms:
-        - ""
+        - "33130"
     - name: "Gradignan"
       terms:
-        - ""
+        - "33170"
     - name: "Cenon"
       terms:
-        - ""
+        - "33150"
     - name: "Eysines"
       terms:
-        - ""
+        - "33320"
     - name: "Le Bouscat"
       terms:
-        - ""
+        - "33110"
     - name: "Lormont"
       terms:
-        - ""
+        - "33310"
     - name: "Bruges"
       terms:
-        - ""
+        - "33520"
     - name: "Floirac"
       terms:
-        - ""
+        - "33270"
     - name: "Ambarès-et-Lagrave"
       terms:
-        - ""
+        - "33440"
     - name: "Blanquefort"
       terms:
-        - ""
+        - "33290"
     - name: "Le Haillain"
       terms:
-        - ""
+        - "33185"
     - name: "Le Taillan-Médoc"
       terms:
-        - ""
+        - "33320"
     - name: "Parempuyre"
       terms:
-        - ""
+        - "33290"
     - name: "Artigues-près-Bordeaux"
       terms:
-        - ""
+        - "33370"
     - name: "Cardon-Blanc"
       terms:
-        - ""
+        - "33560"
     - name: "Martignas-sur-Jalle"
       terms:
-        - ""
+        - "33127"
     - name: "Saint-Aubin-de-Médoc"
       terms:
         - "St-Aubin-de-Médoc"
         - "Saint Aubin de Médoc"
         - "St Aubin de Médoc"
+        - "33160"
     - name: "Bassens"
       terms:
-        - ""
-    - name: "Bouliac"
-      terms:
-        - ""
+        - "33530"
 
 - zone: Saint-Etienne (42)
   datas:
