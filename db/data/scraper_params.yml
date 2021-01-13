@@ -1282,8 +1282,15 @@
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Le Havre (93)
-    url: 
+  - zone: Le Havre (76)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=10223_2,11318_2,11395_2,11974_2,12569_2,13315_2,19241_2,19263_2,21439_2,22749_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Le Havre (76)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=22920_2,26118_2,26156_2,30481_2,29135_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
     is_active: false
@@ -1522,7 +1529,7 @@
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.pap.fr/annonce/vente-appartement-maison-epouville-76133-g37819g37841g37849g37851g37928g37947g37957g37977g38046g38414g38416g38419g38454g38522g38533g42429-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
@@ -1741,7 +1748,7 @@
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=76167&location[]=76238&location[]=76270&location[]=76275&location[]=76296&location[]=76305&location[]=76341&location[]=76404&location[]=76409&location[]=76447&location[]=76477&location[]=76481&location[]=76533&location[]=76534&location[]=76552&location[]=76616&sort=date_desc
     scraper_type: HTTPRequest
     http_type: get_json
@@ -1964,8 +1971,8 @@
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Le Havre (93)
-    url: 
+  - zone: Le Havre (76)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=cauville-sur-mer&locations%5B0%5D%5Blabel%5D=Cauville-sur-Mer+(76930)&locations%5B1%5D%5Bvalue%5D=epouville&locations%5B1%5D%5Blabel%5D=%C3%89pouville+(76133)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine-la-mallet&locations%5B2%5D%5Blabel%5D=Fontaine-la-Mallet+(76290)+-+Ville&locations%5B3%5D%5Bvalue%5D=fontenay&locations%5B3%5D%5Blabel%5D=Fontenay+(76290)+-+Ville&locations%5B4%5D%5Bvalue%5D=gainneville&locations%5B4%5D%5Blabel%5D=Gainneville+(76700)+-+Ville&locations%5B5%5D%5Bvalue%5D=gonfreville-l-orcher&locations%5B5%5D%5Blabel%5D=Gonfreville-l%27Orcher+(76700)&locations%5B6%5D%5Bvalue%5D=harfleur&locations%5B6%5D%5Blabel%5D=Harfleur+(76700)+-+Ville&locations%5B7%5D%5Bvalue%5D=maneglise&locations%5B7%5D%5Blabel%5D=Man%C3%A9glise+(76133)+-+Ville&locations%5B8%5D%5Bvalue%5D=mannevillette&locations%5B8%5D%5Blabel%5D=Mannevillette+(76290)+-+Ville&locations%5B9%5D%5Bvalue%5D=montivilliers&locations%5B9%5D%5Blabel%5D=Montivilliers+(76290)+-+Ville&locations%5B10%5D%5Bvalue%5D=notre-dame-du-bec&locations%5B10%5D%5Blabel%5D=Notre-Dame-du-Bec+(76133)+-+Ville&locations%5B11%5D%5Bvalue%5D=octeville-sur-mer&locations%5B11%5D%5Blabel%5D=Octeville-sur-Mer+(76930)+-+Ville&locations%5B12%5D%5Bvalue%5D=rogerville&locations%5B12%5D%5Blabel%5D=Rogerville+(76700)+-+Ville&locations%5B13%5D%5Bvalue%5D=rolleville&locations%5B13%5D%5Blabel%5D=Rolleville+(76133)+-+Ville&locations%5B14%5D%5Bvalue%5D=sainte-adresse&locations%5B14%5D%5Blabel%5D=Sainte-Adresse+(76310)+-+Ville&locations%5B15%5D%5Bvalue%5D=saint-martin-du-manoir&locations%5B15%5D%5Blabel%5D=Saint-Martin-du-Manoir+(76290)+-+Ville&minSurface=&minPrice=&maxPrice=&sort=date-down&layoutType=mixte&page=1
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
@@ -2169,7 +2176,7 @@
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=&cities=76167%2C76238%2C76270%2C76275%2C76296%2C76305%2C76341%2C76404%2C76409%2C76447%2C76477%2C76481%2C76533%2C76534%2C76552%2C76616&transaction=buy
     scraper_type: HTTPRequest
     http_type: get_json
@@ -2195,7 +2202,7 @@
     main_page_cls: div.contentAnnonce
     is_active: false
     group_type: Group
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.century21.fr/annonces/achat-maison-appartement/v-rolleville-maneglise-fontaine+la+mallet-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-gonfreville+l+orcher-epouville/cpv-76290_fontenay/tri-date-desc/#/annonces/achat-maison-appartement/v-epouville-maneglise-gonfreville+l+orcher-ste+adresse-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-fontaine+la+mallet-rolleville-st+martin+du+manoir/cpv-76290_fontenay/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
@@ -2405,7 +2412,7 @@
     main_page_cls: div.TeaserOffer-content
     is_active: false
     group_type: Group
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://fr.foncia.com/achat/cauville-sur-mer-76930--epouville-76133--fontaine-la-mallet-76290--fontenay-27510--gainneville-76700--gonfreville-l-orcher-76700--harfleur-76700--maneglise-76133--mannevillette-76290--montivilliers-76290--notre-dame-du-bec-76133--octeville-sur-mer-76930--rogerville-76700--rolleville-76133--sainte-adresse-76310--saint-martin-du-manoir-76290
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
@@ -2979,7 +2986,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=32866%2C32937%2C32968%2C32973%2C32994%2C33003%2C33039%2C33102%2C33107%2C33145&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
@@ -2988,7 +2995,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33175%2C33179%2C33231%2C33232%2C33250%2C33313&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
@@ -3337,7 +3344,7 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Le Havre (93)
+  - zone: Le Havre (76)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[760167]},{%22inseeCodes%22:[760238]},{%22inseeCodes%22:[760270]},{%22inseeCodes%22:[760275]},{%22inseeCodes%22:[760296]},{%22inseeCodes%22:[760305]},{%22inseeCodes%22:[760341]},{%22inseeCodes%22:[760404]},{%22inseeCodes%22:[760409]},{%22inseeCodes%22:[760447]},{%22inseeCodes%22:[760477]},{%22inseeCodes%22:[760481]},{%22inseeCodes%22:[760533]},{%22inseeCodes%22:[760534]},{%22inseeCodes%22:[760552]},{%22inseeCodes%22:[760616]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
