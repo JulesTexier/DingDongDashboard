@@ -4,15 +4,7 @@ module Subscribers
 
     def create
       resource = Subscriber.where(email: sign_up_params[:email]).last
-      
-      if resource.nil? 
-        resource = init_resource(sign_up_params)
-      else
-        alt_sub = init_resource(sign_up_params)
-        resource.password = alt_sub.password
-        resource.password_confirmation = alt_sub.password_confirmation
-      end 
-
+      resource.nil? ? resource = init_resource(sign_up_params) : resource.password_digest = init_resource(sign_up_params).password_digest
       if resource.save
         create_token_and_set_header(resource, resource_name)
         render_success(message: I18n.t('api_guard.registration.signed_up'))
