@@ -3,7 +3,7 @@ module Subscribers
     # before_action :authenticate_resource, only: [:destroy]
 
     def create
-      resource = Subscriber.where(email: sign_up_params[:email]).last
+      resource = Subscriber.where(email: params[:email].downcase.strip).last
       resource.nil? ? resource = init_resource(sign_up_params) : resource.password_digest = init_resource(sign_up_params).password_digest
       if resource.save
         create_token_and_set_header(resource, resource_name)
