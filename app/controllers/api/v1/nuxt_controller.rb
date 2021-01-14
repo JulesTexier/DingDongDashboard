@@ -58,7 +58,8 @@ class Api::V1::NuxtController < ApplicationController
     broker = Broker.find(params[:id])
     if !broker.nil?
       scoped_subscribers = broker.get_available_leads
-      data = scoped_subscribers.map{ |s| s.is_real_ding_dong_user? ? s.as_json.merge!(contact_type: "Ding Dong", research: s.research, areas: s.research.areas) : s.as_json.merge!(contact_type: "Se Loger")  }
+      brokers_in_agency = broker.broker_agency.nil? ? broker : broker.broker_agency.brokers
+      data = scoped_subscribers.map{ |s| s.is_real_ding_dong_user? ? s.as_json.merge!(contact_type: "Ding Dong", research: s.research, areas: s.research.areas, brokers: brokers_in_agency) : s.as_json.merge!(contact_type: "Se Loger")  }
       render json: {status: 'SUCCESS', message: "Here is the list of the #{data.count} leads for broker #{broker.id} ", data: data}, status: 200
     else
       render json: {status: 'ERROR', message: 'Broker not found'}, status: 422
@@ -154,7 +155,7 @@ class Api::V1::NuxtController < ApplicationController
   end
 
   def subscriber_params
-    params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_comment, :hot_lead, :broker_meeting)
+    params.except(:id, :nuxt).permit(:firstname, :lastname, :email, :phone, :facebook_id, :broker_status, :broker_id, :broker_comment, :hot_lead, :broker_meeting)
   end
 
   def onboarding_subscriber_params
