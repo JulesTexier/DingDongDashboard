@@ -126,6 +126,25 @@ class Api::V1::ManychatController < ApplicationController
     end
   end
 
+  def loan_simulation
+    begin 
+      subscriber = Subscriber.find(params[:subscriber_id])
+      simulation_attributes = {}
+      simulation_attributes[:montant] = params[:loan_amount]
+      simulation_attributes[:situation_marritale] = params[:loan_family_situation]
+      simulation_attributes[:situation_professionelle] = params[:loan_job_situation]
+      simulation_attributes[:revenus_mensuels] = params[:loan_revenue]
+      simulation_attributes[:charges_mensuelles] = params[:loan_charges]
+      simulation_attributes[:montant_prets] = params[:loan_charges_amount]
+      
+      BrokerManager::LoanManager::HandleLoanSimulation.call(subscriber.id, simulation_attributes)
+
+      render json: {status: 'SUCCESS', message: "Email sent with success", data: {subscriber_note: subscriber.subscriber_notes.last} }, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Research not found'}, status: 422
+    end
+  end
+
   private
 
   def handle_sending(subscriber, props_ids, template = nil)

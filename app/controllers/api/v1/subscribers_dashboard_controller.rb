@@ -42,7 +42,7 @@ class Api::V1::SubscribersDashboardController < ActionController::API
         simulation_attributes[:montant] = params[:loan_amount]
         simulation_attributes[:situation_marritale] = params[:loan_family_situation]
         simulation_attributes[:situation_professionelle] = params[:loan_job_situation]
-        simulation_attributes[:revenus_mensuels] = params[:loas_revenue]
+        simulation_attributes[:revenus_mensuels] = params[:loan_revenue]
         simulation_attributes[:charges_mensuelles] = params[:loan_charges]
         simulation_attributes[:montant_prets] = params[:loan_charges_amount]
         
