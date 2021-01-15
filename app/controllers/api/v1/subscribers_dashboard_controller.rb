@@ -38,7 +38,18 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     end
 
     def loan_simulation
+        simulation_attributes = {}
+        simulation_attributes[:montant] = params[:loan_amount]
+        simulation_attributes[:situation_marritale] = params[:loan_family_situation]
+        simulation_attributes[:situation_professionelle] = params[:loan_job_situation]
+        simulation_attributes[:revenus_mensuels] = params[:loas_revenue]
+        simulation_attributes[:charges_mensuelles] = params[:loan_charges]
+        simulation_attributes[:montant_prets] = params[:loan_charges_amount]
         
+        BrokerManager::LoanManager::CreateSubscriberNote.call(current_subscriber.id, simulation_attributes)
+        BrokerMailer.new_hot_lead(current_subscriber.id, simulation_attributes).deliver_now
+
+        render json: {status: 'SUCCESS', message: "Email sent with success", data: {subscriber_note: current_subscriber.subscriber_notes.last} }, status: 200
     end
 
     private
