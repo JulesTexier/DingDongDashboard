@@ -40,10 +40,10 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     def loan_simulation
         simulation_attributes = []
         simulation_attributes.push({name: "loan_amount", value: params[:loan_amount], label: "Montant du prêt", unit: "€"})
-        simulation_attributes.push({name: "loan_job_situation", value: params[:loan_family_situation], label: "Situation conjugale", unit: ""})
+        simulation_attributes.push({name: "loan_job_situation", value: params[:loan_family_situation], label: "Emprunte", unit: ""})
         simulation_attributes.push({name: "loan_job_situation", value: params[:loan_job_situation], label: "Situation professionnelle", unit: ""})
         simulation_attributes.push({name: "loan_revenue", value: params[:loan_revenue], label: "Revenu mensuel", unit: "€"})
-        simulation_attributes.push({name: "loan_charges", value: params[:loan_charges], label: "Charges mensuelles", unit: "€"})
+        simulation_attributes.push({name: "loan_charges", value: params[:loan_charges], label: "Charges mensuelles", unit: ""})
         simulation_attributes.push({name: "loan_charges_amount", value: params[:loan_charges_amount], label: "Montant mensuel autres prêts", unit: "€"})
 
         BrokerManager::LoanManager::HandleLoanSimulation.call(current_subscriber.id, simulation_attributes)
