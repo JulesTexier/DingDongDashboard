@@ -131,7 +131,7 @@ Rails.application.routes.draw do
       post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" 
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" 
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" 
-      
+      post "/manychat/s/:subscriber_id/loan/simulation" => "manychat#loan_simulation" 
       
       # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder
