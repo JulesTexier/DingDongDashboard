@@ -44,8 +44,8 @@
   <li>email : <%= @subscriber.email%></li>
   <li>Budget max : <%= @subscriber.research.max_price%> €</li>
   <li>Surface min : <%= @subscriber.research.min_surface%> m2</li>
-  <% @simulation_attributes.each do |k, v| %>
-  <li><%=  "#{k} : #{v} " %> </li>
+  <% @simulation_attributes.each do |item| %>
+  <li><%=  "#{item[:label]} : #{item[:value]} #{item[:unit]}" %> </li>
   <% end %>
 </ul>
 </p>
