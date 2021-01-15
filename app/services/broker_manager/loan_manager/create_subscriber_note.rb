@@ -6,7 +6,7 @@ class BrokerManager::LoanManager::CreateSubscriberNote < ApplicationService
   end
 
   def call
-    content = "SIMULATION DE FINANCEMENT :&#10 - " + @notes_attributes.each{|k, v| "#{k} : #{v} :&#10"}.flatten.join(" :&#10 ").to_s
+    content = "SIMULATION DE FINANCEMENT :&#10 - " + @notes_attributes.map{|item| "#{item[:label]} : #{item[:value]} #{item[:unit]}"}.join(" :&#10 ").to_s
     SubscriberNote.create(subscriber: @subscriber, content: content)
   end
 

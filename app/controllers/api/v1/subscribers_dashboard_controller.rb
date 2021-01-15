@@ -38,14 +38,14 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     end
 
     def loan_simulation
-        simulation_attributes = {}
-        simulation_attributes[:montant] = params[:loan_amount]
-        simulation_attributes[:situation_marritale] = params[:loan_family_situation]
-        simulation_attributes[:situation_professionelle] = params[:loan_job_situation]
-        simulation_attributes[:revenus_mensuels] = params[:loan_revenue]
-        simulation_attributes[:charges_mensuelles] = params[:loan_charges]
-        simulation_attributes[:montant_prets] = params[:loan_charges_amount]
-        
+        simulation_attributes = []
+        simulation_attributes.push({name: "loan_amount", value: params[:loan_amount], label: "Montant du prêt", unit: "€"})
+        simulation_attributes.push({name: "loan_job_situation", value: params[:loan_family_situation], label: "Situation conjugale", unit: ""})
+        simulation_attributes.push({name: "loan_job_situation", value: params[:loan_job_situation], label: "Situation professionnelle", unit: ""})
+        simulation_attributes.push({name: "loan_revenue", value: params[:loan_revenue], label: "Revenu mensuel", unit: "€"})
+        simulation_attributes.push({name: "loan_charges", value: params[:loan_charges], label: "Charges mensuelles", unit: "€"})
+        simulation_attributes.push({name: "loan_charges_amount", value: params[:loan_charges_amount], label: "Montant mensuel autres prêts", unit: "€"})
+
         BrokerManager::LoanManager::HandleLoanSimulation.call(current_subscriber.id, simulation_attributes)
 
         render json: {status: 'SUCCESS', message: "Email sent with success", data: {subscriber_note: current_subscriber.subscriber_notes.last} }, status: 200
