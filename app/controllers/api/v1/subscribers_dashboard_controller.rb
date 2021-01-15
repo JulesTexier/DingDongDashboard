@@ -37,6 +37,10 @@ class Api::V1::SubscribersDashboardController < ActionController::API
         end
     end
 
+    def loan_simulation
+        
+    end
+
     private
 
     def subscriber_params
