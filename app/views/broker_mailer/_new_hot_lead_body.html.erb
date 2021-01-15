@@ -37,21 +37,18 @@
  Un nouvel utilisateur vient de faire une demande pour être accompagné dans son financement :
 </span></p>
 <p style="line-height: 1.2; word-break: break-word; font-size: 16px; mso-line-height-alt: 19px; margin: 0;">
+<br>
+<h2><%= @subscriber.get_fullname%></h2>
 <ul style="font-size: 16px;">
-  <li><%= @subscriber.get_fullname%></li>
-  <li><%= @subscriber.email%></li>
-  <li><%= @subscriber.phone%></li>
+  <li>téléphone = <%= @subscriber.phone%></li>
+  <li>email : <%= @subscriber.email%></li>
   <li>Budget max : <%= @subscriber.research.max_price%> €</li>
   <li>Surface min : <%= @subscriber.research.min_surface%> m2</li>
+  <% @simulation_attributes.each do |k, v| %>
+  <li><%=  "#{k} : #{v} " %> </li>
+  <% end %>
 </ul>
 </p>
-<br>
-<p style="line-height: 1.2; word-break: break-word; font-size: 16px; mso-line-height-alt: 19px; margin: 0;">
-<span style="font-size: 16px;">
- Vous pouvez le contacter dès maintenant.
- <br>
- Si vous n'obtenez pas de réponse, il a déclaré être disponible <%= @subscriber.broker_meeting.in_time_zone("Europe/Paris").strftime("le %d/%m à %H:%M")  %>
-</span></p>
 <br>
 <br>
 <span style="font-size: 16px;">

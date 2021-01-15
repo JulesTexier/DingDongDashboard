@@ -12,16 +12,17 @@ class BrokerMailer < ApplicationMailer
       end
     end
   end
-  def new_hot_lead(subscriber_id)
+
+  def new_hot_lead(subscriber_id, simulation_attributes)
     @subscriber = Subscriber.find(subscriber_id)
     @broker = @subscriber.broker
+    @simulation_attributes = simulation_attributes
 
     unless @subscriber.nil? || @broker.nil? 
       subject = "DING DONG : Nouveau lead chaud - #{@subscriber.get_fullname}"
       mail(from: "etienne@hellodingdong.com", to: @broker.email, bcc: "etienne@hellodingdong.com", subject: subject)
     end
   end
-
 
   def weekly_update(broker_id)
     @subscribers = Subscriber.where(broker: broker_id)
