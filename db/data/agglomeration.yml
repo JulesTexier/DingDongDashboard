@@ -139,3 +139,8 @@
     - Perpignan (66)
   is_active: false
   ref_code: PG
+- agglomeration: Rouen
+  zone: 
+    - Rouen Métropole (76)
+  is_active: false
+  ref_code: RN
