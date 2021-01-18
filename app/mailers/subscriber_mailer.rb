@@ -15,6 +15,7 @@ class SubscriberMailer < ApplicationMailer
   def property_mailer(subscriber, properties)
     @properties = properties
     @subscriber = subscriber
+    @links = {profile: "#{ENV["NUXT_URL"]}/subscribers/#{@subscriber.auth_token}/account/profile/edit", ads: "#{ENV["NUXT_URL"]}/subscribers/#{@subscriber.auth_token}/ads" , criterias: "#{ENV["NUXT_URL"]}/subscribers/#{@subscriber.auth_token}/account/criterias/edit"}
     subject = if @properties.length > 1
       "🔔 Plusieurs biens sont sortis à #{@properties.first.created_at.in_time_zone('Europe/Paris').to_s(:time)} le #{@properties.first.created_at.strftime("%d/%m/%Y")}"
     else
