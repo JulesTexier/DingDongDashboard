@@ -24,7 +24,7 @@ class Broker < ApplicationRecord
   end
 
   def get_available_leads(offset = BROKER_LEADS_OFFSET)
-    self.subscribers.includes(:subscriber_notes, research: [:areas]).where('created_at <  ?', Time.now - BROKER_LEADS_OFFSET.day).order('created_at DESC') + self.subscribers.where('created_at >= ?', Time.now - BROKER_LEADS_OFFSET.day).where(hot_lead: true).order('created_at DESC')
+    self.subscribers.where(hot_lead: true).where('created_at >= ?', Time.now - BROKER_LEADS_OFFSET.day).order('created_at DESC') + self.subscribers.includes(:subscriber_notes, research: [:areas]).where('created_at <  ?', Time.now - BROKER_LEADS_OFFSET.day).order('created_at DESC') 
   end
 
   # This method is perfomred every morning at 9 by scheduler 
