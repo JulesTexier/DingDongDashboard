@@ -4,6 +4,8 @@ class Subscriber < ApplicationRecord
   has_secure_password
   has_secure_token :auth_token
 
+  before_save { email.downcase! }
+
   ## REVOIR LES VALIDATEURS
   
   has_one :research
@@ -263,6 +265,9 @@ class Subscriber < ApplicationRecord
       shift_type = form_type == "subscription" ? "subscription" : "regular"
       self.update(broker: Broker.get_current(shift_type))
     end
+  end
+  def downcase_email
+    self.email.downcase!
   end
 
 end
