@@ -16,6 +16,7 @@ class PostmarkMailer < ApplicationMailer
       subscriber_id: subscriber.id,
       subscriber_firstname: subscriber.firstname,
       subscriber_lastname: subscriber.lastname,
+      subscriber_auth_token: subscriber.auth_token,
       broker_id: subscriber.broker.id,
       broker_firstname: subscriber.broker.firstname,
       broker_lastname: subscriber.broker.lastname,
