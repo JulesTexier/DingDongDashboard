@@ -56,8 +56,8 @@ class GrowthEngine
 
     sub = Subscriber.find_by(email: email_address)
     if sub.nil? && is_valid_phone_number?(phone_number)
-      sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
-      sub.save(validate: false)
+      sub = Subscriber.new(firstname: firstname, lastname: lastname, email: email_address, status: "new_lead", password:"dingdong", phone: phone_number, broker: Broker.get_accurate_by_agglomeration(agglomeration_id))
+      sub.save
     end
     sub
   end

@@ -122,7 +122,26 @@ class Api::V1::ManychatController < ApplicationController
       response = send_favorites(subscriber)
       render json: response[:json_response], status: response[:status]
     rescue ActiveRecord::RecordNotFound
-      render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 404
+      render json: { status: "ERROR", message: "Subscriber not found", data: nil }, status: 422
+    end
+  end
+
+  def loan_simulation
+    begin 
+      subscriber = Subscriber.find(params[:subscriber_id])
+      simulation_attributes = []
+      simulation_attributes.push({name: "loan_amount", value: params[:loan_amount], label: "Montant du prêt", unit: "€"})
+      simulation_attributes.push({name: "loan_job_situation", value: params[:loan_family_situation], label: "Situation conjugale", unit: ""})
+      simulation_attributes.push({name: "loan_job_situation", value: params[:loan_job_situation], label: "Situation professionnelle", unit: ""})
+      simulation_attributes.push({name: "loan_revenue", value: params[:loan_revenue], label: "Revenus annuels", unit: "€"})
+      simulation_attributes.push({name: "loan_charges", value: params[:loan_charges], label: "Charges mensuelles", unit: ""})
+      simulation_attributes.push({name: "loan_charges_amount", value: params[:loan_charges_amount], label: "Montant mensuel autres prêts", unit: "€"})
+      
+      BrokerManager::LoanManager::HandleLoanSimulation.call(subscriber.id, simulation_attributes)
+
+      render json: {status: 'SUCCESS', message: "Email sent with success", data: {subscriber_note: subscriber.subscriber_notes.last} }, status: 200
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {status: 'ERROR', message: 'Research not found'}, status: 422
     end
   end
 

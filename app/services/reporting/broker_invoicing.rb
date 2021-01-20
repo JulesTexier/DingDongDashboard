@@ -22,4 +22,19 @@ class Reporting::BrokerInvoicing
       end
     end
   end
+
+  def monthly_reset
+    BrokerAgency.where(status: ["premium", "test"]).each do |ba|
+
+      current_period_provided_leads = ba.get_subscribers(Date.today.at_beginning_of_month, Date.today.at_end_of_month).count
+      current_period_leads_left = ba.max_period_leads - current_period_provided_leads
+
+      ba.update(
+        current_period_leads_left: current_period_leads_left,
+        current_period_provided_leads: current_period_provided_leads
+      )
+
+    end
+  end
+
 end

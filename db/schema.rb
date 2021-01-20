@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_103312) do
+ActiveRecord::Schema.define(version: 2021_01_12_102309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -390,6 +390,8 @@ ActiveRecord::Schema.define(version: 2021_01_05_103312) do
     t.text "broker_comment", default: ""
     t.datetime "broker_meeting"
     t.string "password_digest"
+    t.string "auth_token"
+    t.index ["auth_token"], name: "index_subscribers_on_auth_token", unique: true
     t.index ["broker_id"], name: "index_subscribers_on_broker_id"
     t.index ["contractor_id"], name: "index_subscribers_on_contractor_id"
     t.index ["notary_id"], name: "index_subscribers_on_notary_id"

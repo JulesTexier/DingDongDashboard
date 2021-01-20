@@ -70,10 +70,11 @@ class SubscriberResearchesController < ApplicationController
   end
 
   def edit 
-    @subscriber = Subscriber.find(params[:subscriber_id])
-    @research = @subscriber.research
-    subscriber_areas_id = @research.areas.pluck(:id)
-    @master_areas = Area.selected_area_edit(@research.agglomeration_id, subscriber_areas_id)
+    # @subscriber = Subscriber.find(params[:subscriber_id])
+    # @research = @subscriber.research
+    # subscriber_areas_id = @research.areas.pluck(:id)
+    # @master_areas = Area.selected_area_edit(@research.agglomeration_id, subscriber_areas_id)
+    redirect_to "#{ENV['NUXT_URL']}/subscribers/account/criterias/edit"
   end
 
   def update
@@ -97,18 +98,19 @@ class SubscriberResearchesController < ApplicationController
 
 
   def stop
-    begin
-      @confirmation = false
-      @subscriber = Subscriber.find(params[:subscriber_id])
-      if @subscriber.update(is_active: false)
-        @subscriber.update(has_stopped: true, has_stopped_at: Time.now)
-        SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a arrêté son alerte.")
-        AdminMailer.subscriber_email_stop(@subscriber.id).deliver_now
-        @confirmation = true
-      end
-    rescue ActiveRecord::RecordNotFound
-      redirect_to root_path
-    end
+    # begin
+    #   @confirmation = false
+    #   @subscriber = Subscriber.find(params[:subscriber_id])
+    #   if @subscriber.update(is_active: false)
+    #     @subscriber.update(has_stopped: true, has_stopped_at: Time.now)
+    #     SubscriberNote.create(subscriber: @subscriber, content:"L'utilisateur a arrêté son alerte.")
+    #     AdminMailer.subscriber_email_stop(@subscriber.id).deliver_now
+    #     @confirmation = true
+    #   end
+    # rescue ActiveRecord::RecordNotFound
+    #   redirect_to root_path
+    # end
+    redirect_to "#{ENV['NUXT_URL']}/subscribers/account/profile/edit"
   end
 
   def activate 

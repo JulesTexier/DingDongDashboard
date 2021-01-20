@@ -40,5 +40,8 @@
     "get",
     "ref",
     "seloger"
-  ]
+  ],
+  "files.associations": {
+    "*.erb": "erb"
+  }
 }
