@@ -458,11 +458,153 @@
     - name: "Toulouse"
       terms:
         - "31000"
+    - name: "Colomiers"
+      terms:
+        - "31770"
+    - name: "Tournefeuille"
+      terms:
+        - "31170"
+    - name: "Blagnac"
+      terms:
+        - "31700"
+    - name: "Cugnaux"
+      terms:
+        - "31270"
+    - name: "Balma"
+      terms:
+        - "31130"
+    - name: "Saint-Orens-de-Gameville"
+      terms:
+        - "31650"
+        - "Saint Orens de Gameville"
+        - "St Orens de Gameville"
+        - "St-Orens-de-Gameville"
+    - name: "L'Union"
+      terms:
+        - "31240"
+    - name: "Saint-Jean"
+      terms:
+        - "31240"
+        - "Saint Jean"
+        - "St Jean"
+        - "St-Jean"
+    - name: "Castelginest"
+      terms:
+        - "31780"
+    - name: "Villeneuve-Tolosane"
+      terms:
+        - "31270"
+    - name: "Launaguet"
+      terms:
+        - "31140"
+    - name: "Aucamville"
+      terms:
+        - "31140"
+    - name: "Pibrac"
+      terms:
+        - "31820"
+    - name: "Aussonne"
+      terms:
+        - "31840"
+    - name: "Cornebarrieu"
+      terms:
+        - "31700"
+    - name: "Beauzelle"
+      terms:
+        - "31700"
+    - name: "Saint-Alban"
+      terms:
+        - "31140"
+        - "St Alban"
+        - "St-Alban"
+        - "Saint Alban"
+    - name: "Saint-Jory"
+      terms:
+        - "31790"
+        - "Saint Jory"
+        - "St Jory"
+        - "St-Jory"
+    - name: "Bruguières"
+      terms:
+        - "31150"
+    - name: "Quint-Fonsegrives"
+      terms:
+        - "31130"
 - zone: Nantes (44)
   datas:
     - name: "Nantes"
       terms:
         - "44000"
+    - name: "Saint-Herblain"
+      terms:
+        - "44800"
+        - "Saint Herblain"
+        - "St Herblain"
+        - "St-Herblain"
+    - name: "Rezé"
+      terms:
+        - "44400"
+    - name: "Saint-Sébastien-sur-Loire"
+      terms:
+        - "44230"
+        - "Saint Sébastien sur Loire"
+        - "St-Sébastien-sur-Loire"
+        - "St Sébastien sur Loire"
+    - name: "Orvault"
+      terms:
+        - "44700"
+    - name: "Vertou"
+      terms:
+        - "44120"
+    - name: "Couëron"
+      terms:
+        - "44220"
+    - name: "Carquefou"
+      terms:
+        - "44470"
+    - name: "Bouguenais"
+      terms:
+        - "44340"
+    - name: "La Chapelle-sur-Erdre"
+      terms:
+        - "44240"
+    - name: "Sainte-Luce-sur-Loire"
+      terms:
+        - "44980"
+        - "Sainte Luce sur Loire"
+        - "Ste Luce sur Loire"
+        - "Ste-Luce-sur-Loire"
+    - name: "Thouaré-sur-Loire"
+      terms:
+        - "44470"
+    - name: "Basse-Goulaine"
+      terms:
+        - "44115"
+    - name: "Les Sorinières"
+      terms:
+        - "44840"
+    - name: "Sautron"
+      terms:
+        - "44880"
+    - name: "Bouaye"
+      terms:
+        - "44830"
+    - name: "La Montagne"
+      terms:
+        - "44620"
+    - name: "Saint-Jean-de-Boiseau"
+      terms:
+        - "44640"
+        - "Saint Jean de Boiseau"
+        - "St Jean de Boiseau"
+        - "St-Jean-de-Boiseau"
+    - name: "Le Pellerin"
+      terms:
+        - "44640"
+    - name: "Indre"
+      terms:
+        - "44610"
+        - "44620"
 - zone: Rennes (35)
   datas:
     - name: "Rennes"
@@ -484,6 +626,82 @@
     - name: "Bordeaux"
       terms:
         - "33000"
+    - name: "Mérignac"
+      terms:
+        - "33700"
+    - name: "Pessac"
+      terms:
+        - "33600"
+    - name: "Talence"
+      terms:
+        - "33400"
+    - name: "Villenave-D'Ornon"
+      terms:
+        - "33140"
+    - name: "Saint-Médard-en-Jalles"
+      terms:
+        - "Saint Médard en Jalles"
+        - "St-Médard-en-Jalles"
+        - "St Médard en Jalles"
+        - "33160"
+    - name: "Bègles"
+      terms:
+        - "33130"
+    - name: "Gradignan"
+      terms:
+        - "33170"
+    - name: "Cenon"
+      terms:
+        - "33150"
+    - name: "Eysines"
+      terms:
+        - "33320"
+    - name: "Le Bouscat"
+      terms:
+        - "33110"
+    - name: "Lormont"
+      terms:
+        - "33310"
+    - name: "Bruges"
+      terms:
+        - "33520"
+    - name: "Floirac"
+      terms:
+        - "33270"
+    - name: "Ambarès-et-Lagrave"
+      terms:
+        - "33440"
+    - name: "Blanquefort"
+      terms:
+        - "33290"
+    - name: "Le Haillain"
+      terms:
+        - "33185"
+    - name: "Le Taillan-Médoc"
+      terms:
+        - "33320"
+    - name: "Parempuyre"
+      terms:
+        - "33290"
+    - name: "Artigues-près-Bordeaux"
+      terms:
+        - "33370"
+    - name: "Cardon-Blanc"
+      terms:
+        - "33560"
+    - name: "Martignas-sur-Jalle"
+      terms:
+        - "33127"
+    - name: "Saint-Aubin-de-Médoc"
+      terms:
+        - "St-Aubin-de-Médoc"
+        - "Saint Aubin de Médoc"
+        - "St Aubin de Médoc"
+        - "33160"
+    - name: "Bassens"
+      terms:
+        - "33530"
+
 - zone: Saint-Etienne (42)
   datas:
     - name: "Saint-Etienne"
@@ -496,6 +714,61 @@
     - name: "Le Havre"
       terms:
         - "76000"
+    - name: "Cauville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Épouville"
+      terms:
+        - "76133"
+    - name: "Fontaine-la-Mallet"
+      terms:
+        - "76290"
+    - name: "Fontenay"
+      terms:
+        - "76290"
+    - name: "Gainneville"
+      terms:
+        - "76700"
+    - name: "Gronfreville-l'Orcher"
+      terms:
+        - "76700"
+    - name: "Harfleur"
+      terms:
+        - "76700"
+    - name: "Manéglise"
+      terms:
+        - "76133"
+    - name: "Mannevillette"
+      terms:
+        - "76290"
+    - name: "Montivilliers"
+      terms:
+        - "76290"
+    - name: "Notre-Dame-du-Bec"
+      terms:
+        - "76133"
+    - name: "Octeville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Rogerville"
+      terms:
+        - "76700"
+    - name: "Rolleville"
+      terms:
+        - "76133"
+    - name: "Sainte-Adresse"
+      terms:
+        - "76310"
+        - "Sainte Adresse"
+        - "Ste-Adresse"
+        - "Ste Adresse"
+    - name: "Saint-Martin-du-Manoir"
+      terms:
+        - "76290"
+        - "Saint Martin du Manoir"
+        - "St-Martin-du-Manoir"
+        - "St Martin du Manoir"
+
 - zone: Nice (06)
   datas:
     - name: "Nice"
