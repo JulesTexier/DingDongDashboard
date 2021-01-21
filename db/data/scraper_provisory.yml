@@ -20,7 +20,7 @@
 - source: BienIci
   params:
   # - zone: Vannes Métropole (56)
-  #   url: 
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-192306%22%2C%22-149249%22%2C%22-192841%22%2C%22-959447%22%2C%22-5812104%22%2C%22-149259%22%2C%22-148333%22%2C%22-149253%22%2C%22-140444%22%2C%22-149742%22%2C%22-150567%22%2C%22-149809%22%2C%22-148818%22%2C%22-146627%22%2C%22-148808%22%2C%22-149810%22%2C%22-149785%22%2C%22-148332%22%2C%22-148807%22%2C%22-148802%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
   #   scraper_type: HTTPRequest
   #   http_type: get_json
   #   is_active: false
@@ -44,6 +44,13 @@
     is_active: false
     group_type: Hub
     high_priority: false
+  # - zone: Vannes Métropole (56)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-saint+ave+56890.html?sort=5&location=sene%2B56860,sarzeau%2B56370,theix%2B56450,ploeren%2B56880,elven%2B56250,plescop%2B56890,grand%2Bchamp%2B56390,arradon%2B56610,surzur%2B56450,baden%2B56870,saint%2Bnolff%2B56250,sulniac%2B56250,monterblanc%2B56250,plougoumelen%2B56400,trefflean%2B56250,meucon%2B56890,colpo%2B56390
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
 
 - source: Propr. Figaro
   params:
@@ -54,6 +61,13 @@
     is_active: false
     group_type: Hub
     high_priority: false
+  # - zone: Vannes Métropole (56)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?inter=1&localisation=47.7330861,-2.693514,47.668357,-2.7928989,FR,Saint-Av%C3%A9&localisation=47.56656,-2.662947,47.484049,-2.8536039,FR,Sarzeau&localisation=47.671363,-2.582051,47.589309,-2.7122879,FR,Theix-Noyalo&localisation=47.684819,-2.7949959,47.6321411,-2.8838701,FR,Ploeren&localisation=47.7742279,-2.521685,47.6897899,-2.6692281,FR,Elven&localisation=47.7199291,-2.7767511,47.674266,-2.8857529,FR,Plescop&localisation=47.81736,-2.7900808,47.706628,-2.91166,FR,Grand-Champ&localisation=47.656643,-2.778119,47.609601,-2.8699691,FR,Arradon&localisation=47.6132021,-2.557828,47.526424,-2.6913729,FR,Surzur&localisation=47.642655,-2.8561311,47.569162,-2.951036,FR,Baden&localisation=47.7448311,-2.6158801,47.6682919,-2.7200919,FR,Saint-Nolff&localisation=47.6918311,-2.495464,47.615806,-2.6121881,FR,Sulniac&localisation=47.765204,-2.6640419,47.703819,-2.742752,FR,Monterblanc&localisation=47.652622,-2.914158,47.622749,-2.961884,FR,Bono&localisation=47.687877,-2.855104,47.6297999,-2.9310361,FR,Plougoumelen&localisation=47.7007199,-2.5720651,47.6533431,-2.6807101,FR,Treffl%C3%A9an&localisation=47.737635,-2.754091,47.7106471,-2.792004,FR,Meucon&localisation=47.8431971,-2.7644319,47.7905891,-2.8570781,FR,Colpo&tri=2&mrasn=668993.829398&xtref=proprietes.lefigaro.fr
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
 
 - source: LogicImmo
   params:
