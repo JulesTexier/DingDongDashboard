@@ -144,3 +144,8 @@
     - Vannes Métropole (56)
   is_active: false
   ref_code: VS
+- agglomeration: Rouen
+  zone: 
+    - Rouen Métropole (76)
+  is_active: false
+  ref_code: RN
