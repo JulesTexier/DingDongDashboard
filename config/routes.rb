@@ -76,6 +76,11 @@ Rails.application.routes.draw do
     post 'api/v1/subscribers/sign_in' => 'subscribers/authentication#create'
     delete 'api/v1/subscribers/sign_out' => 'api_guard/authentication#destroy'
   end
+
+  api_guard_scope 'brokers' do
+    post 'api/v1/brokers/sign_in' => 'subscribers/authentication#create'
+    delete 'api/v1/brokers/sign_out' => 'api_guard/authentication#destroy'
+  end
   
   namespace "api" do
     namespace "v1" do
@@ -85,7 +90,10 @@ Rails.application.routes.draw do
       get '/subscribers/properties' => "subscribers_dashboard#research_properties" 
       put '/subscribers/update' => 'subscribers_dashboard#update'
       post "/subscribers/loan/simulation" => "subscribers_dashboard#loan_simulation"
-
+      
+      # Dashboard Courtier
+      get '/brokers/current' => "brokers_dashboard#current" 
+      put "/nuxt/subscribers/:subscriber_id" => "brokers_dashboard#update_subscriber"
 
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
@@ -95,7 +103,6 @@ Rails.application.routes.draw do
         get "/handle-onboarding" => "subscribers#handle_onboarding"
       end
       
-      # Subscribers dashboard
       
       # Other models
       resources :researches, only: [:show, :update, :index, :destroy, :create]
@@ -107,21 +114,27 @@ Rails.application.routes.draw do
       resources :saved_properties, only: [:create, :destroy]
 
       # Nuxt 
-      get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
-      put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
+
+      ## Broker Dashboards
+      # get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
+      # put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
+      
+
+      # Auth token  
       get "/nuxt/subscribers/:auth_token" => "nuxt#get_subscriber"
-      get "/nuxt/brokers/:broker_id" => "nuxt#get_broker"
+      
+      # Poubelle 
+      get "/nuxt/brokers/:broker_id" => "nuxt#get_broker" #a priori plus utilisée
+      post 'nuxt/funding/:subscriber_id/notify-broker' => 'nuxt#new_meeting_notify_broker' #plus utilisée
+      get "/nuxt/researches/:research_id" => "nuxt#get_research"  #a priori plus utilisée
 
-      post 'nuxt/funding/:subscriber_id/notify-broker' => 'nuxt#new_meeting_notify_broker'
-
+      # Onboarding users 
       get "/nuxt/areas" => "nuxt#get_available_areas"
       post "/nuxt/onboarding" => "nuxt#handle_onboarding"
-      get "/nuxt/researches/:research_id" => "nuxt#get_research"
       get "/nuxt/find/subscribers" => "nuxt#is_subscriber_exists?"
       get "/nuxt/subscribers/verify/:subscriber_token" => "nuxt#verify_email_subscriber"
-      
       post "/nuxt/indicator/" => "nuxt#get_estimation"
-
+      
       
       # Manychat 
       post "/manychat/s/:subscriber_id/update" => "manychat#update_subscriber"
