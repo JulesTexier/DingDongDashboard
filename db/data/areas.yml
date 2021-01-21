@@ -982,6 +982,72 @@
       terms:
         - "38000"
         - "38100"
+    - name: Saint-Martin-d'Hères
+      terms:
+        - "Saint Martin d'Hères"
+        - "St-Martin-d'Hères"
+        - "St Martin d'Hères"
+        - "38400"
+    - name: Échirolles
+      terms:
+        - "38130"
+    - name: Fontaine
+      terms:
+        - "38600"
+    - name: Meylan
+      terms:
+        - "38240"
+    - name: Saint-Égrève
+      terms:
+        - "38120"
+        - "St Égrève"
+        - "Saint Égrève"
+        - "St-Égrève"
+    - name: Seyssinet-Pariset
+      terms:
+        - "38170"
+    - name: Sassenage
+      terms:
+        - "38360"
+    - name: Le Pont-de-Claix
+      terms:
+        - "38800"
+    - name: Eybens
+      terms:
+        - "38320"
+    - name: Vif
+      terms:
+        - "38450"
+    - name: Varces-Allières-et-Risset
+      terms:
+        - "38760"
+    - name: Claix
+      terms:
+        - "38640"
+    - name: Seyssins
+      terms:
+        - "38180"
+    - name: Vizille
+      terms:
+        - "38220"
+    - name: Gières
+      terms:
+        - "38610"
+    - name: Domène
+      terms:
+        - "38420"
+    - name: La Tronche
+      terms:
+        - "38700"
+    - name: Saint-Martin-le-Vinoux
+      terms:
+        - "Saint Martin le Vinoux"
+        - "St-Martin-le-Vinoux"
+        - "St Martin le Vinoux"
+        - "38950"
+    - name: Corenc
+      terms:
+        - "38700"
 - zone: Angers (49)
   datas:
     - name: Angers
@@ -1289,8 +1355,9 @@
     - name: Le Houlme
       terms:
         - "76770"
-  - zone: Vannes Métropole (56)
-    datas:
+
+- zone: Vannes Métropole (56)
+  datas:
     - name: Vannes
       terms:
         - "56000"
@@ -1360,4 +1427,9 @@
       terms:
         - "56390"
 
+# - zone: Vannes Métropole (56)
+#   datas:
+#     - name: Vannes
+#       terms:
+#         - "56000"
 
