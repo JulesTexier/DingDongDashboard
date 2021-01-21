@@ -1159,13 +1159,13 @@
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
-  # - zone: Bordeaux (33)
-  #   url:
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: false
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Bordeaux (33)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=20226_2,23895_2,32468_2,35094_2,29309_2,2863_2,12716_2,6060_2,10736_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
   - zone: Lille (59)
     url: https://www.logic-immo.com/vente-immobilier-lille-tous-codes-postaux,193_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
