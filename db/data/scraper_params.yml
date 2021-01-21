@@ -374,7 +374,7 @@
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
-    group_type: false
+    group_type: Hub
     high_priority: false
   - zone: Lille (59)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-58404%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
@@ -511,7 +511,7 @@
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
-    group_type: false
+    group_type: Hub
     high_priority: false
   - zone: Angers Agglomération
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-179337%22%2C%22-178350%22%2C%22-357050%22%2C%22-178349%22%2C%22-167632%22%2C%22-167617%22%2C%22-167631%22%2C%22-906069%22%2C%22-167630%22%2C%22-5812044%22%2C%22-178356%22%2C%22-324957%22%2C%22-31254%22%2C%22-31255%22%2C%22-167618%22%2C%22-178355%22%2C%22-178359%22%2C%22-178357%22%2C%22-319078%22%2C%22-31253%22%2C%22-324725%22%2C%22-325723%22%2C%22-906081%22%2C%22-31262%22%2C%22-5812049%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
