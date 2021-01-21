@@ -4,8 +4,8 @@ module Subscribers
     # before_action :authenticate_resource, only: [:destroy]
 
     def create
-      if resource.authenticate(params[:password])
-        create_token_and_set_header(resource, resource_name)
+      if subscriber = resource ?  resource.authenticate(params[:password]) : Subscriber.get_by_auth_token(params[:auth_token])
+        create_token_and_set_header(subscriber, resource_name)
         render json: {message: I18n.t('api_guard.authentication.signed_in'), token: response.header["Access-Token"] }, status: 200
       else
         render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials'))
@@ -17,11 +17,11 @@ module Subscribers
     #   render_success(message: I18n.t('api_guard.authentication.signed_out'))
     # end
 
-    # private
+    private
 
-    # def find_resource
-    #   self.resource = resource_class.find_by(email: params[:email].downcase.strip) if params[:email].present?
-    #   render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials')) unless resource
-    # end
+    def find_resource
+      self.resource = resource_class.where(email: params[:email].downcase.strip).last if params[:email].present?
+      render_error(422, message: I18n.t('api_guard.authentication.invalid_login_credentials')) unless (resource || !resource && params[:auth_token].present?)
+    end
   end
 end

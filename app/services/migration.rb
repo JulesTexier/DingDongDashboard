@@ -5,6 +5,10 @@ class Migration
   # Script de migration de la liaison de l'objet agglo sur la recherche #
   #######################################################################
 
+  def load_properties
+    JSON.parse(File.read('dump_bdd_props_test.json')).each{|p| Property.create(p)}
+  end
+
   def agglomeration_migration
     researches = Research.where(agglomeration_id: nil)
     researches.each do |research|
@@ -26,32 +30,31 @@ class Migration
   end
 
   def remove_subscriber(subscriber_ids)
-    subscriber_ids.each do |sub_id|
 
-      sub = Subscriber.find(sub_id)
-      unless sub.nil?
-        # Get infos 
-        research = sub.research
-        
-        #Remove saved_properties
-        SavedProperty.where(research_id: research.id).destroy_all
+    Subscriber.where(id: subscriber_ids).each do |subscriber|
 
-        #Remove research_areas
-        ResearchArea.where(research_id: research.id).destroy_all
+      #Remove saved_properties
+      SavedProperty.where(research_id: subscriber.research.id).destroy_all unless subscriber.research.nil?
 
-        #Remove Subscriber Research
-        research.destroy
+      #Remove research_areas
+      ResearchArea.where(research_id: subscriber.research.id).destroy_all unless subscriber.research.nil?
 
-        #Remove SubscriberNotes
-        SubscriberNote.where(subscriber_id: sub_id).destroy_all
-        
-        #Remove Subscriber
-        sub.destroy
+      #Remove Subscriber Research
+      subscriber.research.destroy unless subscriber.research.nil?
+      
+      #Remove Subscriber Sequences
+      SubscriberSequence.where(subscriber: subscriber).destroy_all
 
-        puts "Subscriber #{sub_id} has been removed, all attached objects also"
+      #Remove SubscriberNotes
+      SubscriberNote.where(subscriber: subscriber).destroy_all
+      
+      #Remove Subscriber
+      subscriber.destroy
 
-      end
+      puts "Subscriber #{subscriber.id} has been removed, all attached objects also"
+      
     end
+
   end
 
   def import_sl_contacts(agglo_name)

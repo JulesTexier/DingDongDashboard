@@ -2,6 +2,9 @@ require "dotenv/load"
 
 class Subscriber < ApplicationRecord
   has_secure_password
+  has_secure_token :auth_token
+
+  before_save { email.downcase! }
 
   ## REVOIR LES VALIDATEURS
   
@@ -192,6 +195,12 @@ class Subscriber < ApplicationRecord
     self.is_active = true
     self.execute_nurturing_mailer
   end
+
+  # Authenticate with auth_token
+  def self.get_by_auth_token(token)
+    s = Subscriber.find_by(auth_token: token)
+    s.nil? ? false : s 
+  end
   
   
   private
@@ -228,7 +237,7 @@ class Subscriber < ApplicationRecord
   
   def set_confirmation_token
     if self.confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+      self.confirm_token = SecureRandom.hex.to_s
     end
   end
   
@@ -256,6 +265,9 @@ class Subscriber < ApplicationRecord
       shift_type = form_type == "subscription" ? "subscription" : "regular"
       self.update(broker: Broker.get_current(shift_type))
     end
+  end
+  def downcase_email
+    self.email.downcase!
   end
 
 end

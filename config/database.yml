@@ -26,12 +26,21 @@ default: &default
 development:
   <<: *default
   database: giant_cat_development
+
   host: balarama.db.elephantsql.com
   port: 5432
   database: lmrkkowi
   username: lmrkkowi
   password: tJ2lcdKX25oJziD5WKRGAsLXmYIsLqB8
 
+  #staging
+  # host: 		kandula.db.elephantsql.com
+  # port: 5432
+  # database: wtbduoav
+  # username: wtbduoav
+  # password: YR0u-_xiNBfSW-laGYyH-rbrLeBxj9vF
+
+  #prod
   # host: 	fizzy-nectarine.db.elephantsql.com
   # port: 5432
   # database: ylsomioj

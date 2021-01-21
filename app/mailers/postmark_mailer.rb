@@ -16,6 +16,7 @@ class PostmarkMailer < ApplicationMailer
       subscriber_id: subscriber.id,
       subscriber_firstname: subscriber.firstname,
       subscriber_lastname: subscriber.lastname,
+      subscriber_auth_token: subscriber.auth_token,
       broker_id: subscriber.broker.id,
       broker_firstname: subscriber.broker.firstname,
       broker_lastname: subscriber.broker.lastname,
@@ -35,6 +36,6 @@ class PostmarkMailer < ApplicationMailer
       contractor_phone: subscriber.contractor.phone,
       contractor_avatar: ENV["BASE_URL"] + rails_blob_url(subscriber.contractor.avatar, only_path: true)
     }
-    mail from: "etienne@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
+    mail from: "annonces@hellodingdong.com", to: subscriber.email, postmark_template_alias: nurturing_email.template
   end
 end

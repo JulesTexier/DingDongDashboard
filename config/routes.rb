@@ -72,17 +72,20 @@ Rails.application.routes.draw do
   # 5 - API
   #############  
   api_guard_scope 'subscribers' do
-    post 'api/v1/subscribers/sign_up' => 'api_guard/registration#create'
+    post 'api/v1/subscribers/sign_up' => 'subscribers/registration#create'
     post 'api/v1/subscribers/sign_in' => 'subscribers/authentication#create'
-    delete 'api/v1/subscribers/sign_out' => 'api_guard/registration#destroy'
+    delete 'api/v1/subscribers/sign_out' => 'api_guard/authentication#destroy'
   end
-
+  
   namespace "api" do
     namespace "v1" do
       
       # Dashboard Subscriber
       get '/subscribers/current' => "subscribers_dashboard#current" 
       get '/subscribers/properties' => "subscribers_dashboard#research_properties" 
+      put '/subscribers/update' => 'subscribers_dashboard#update'
+      post "/subscribers/loan/simulation" => "subscribers_dashboard#loan_simulation"
+
 
       # Subscribers
       get "/subscribers/fb/:facebook_id" => "subscribers#show_facebook_id"
@@ -106,7 +109,7 @@ Rails.application.routes.draw do
       # Nuxt 
       get "/nuxt/brokers/:id/leads" => "nuxt#get_dashboard_leads"
       put "/nuxt/subscribers/:id" => "nuxt#update_subscriber"
-      get "/nuxt/subscribers/:subscriber_id" => "nuxt#get_subscriber"
+      get "/nuxt/subscribers/:auth_token" => "nuxt#get_subscriber"
       get "/nuxt/brokers/:broker_id" => "nuxt#get_broker"
 
       post 'nuxt/funding/:subscriber_id/notify-broker' => 'nuxt#new_meeting_notify_broker'
@@ -128,7 +131,7 @@ Rails.application.routes.draw do
       post "/manychat/s/:subscriber_id/add_status" => "manychat#create_subscriber_status" 
       get "/manychat/s/:subscriber_id/send/props/:property_id/details" => "manychat#send_prop_details" 
       get "/manychat/s/:subscriber_id/send/props/last/:x/days" => "manychat#send_props_x_days" 
-      
+      post "/manychat/s/:subscriber_id/loan/simulation" => "manychat#loan_simulation" 
       
       # Trello
       post "/trello/add_action" => "trello#add_action_to_broker" #a garder

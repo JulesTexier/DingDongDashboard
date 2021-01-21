@@ -292,28 +292,35 @@ class Manychat
     end
     qr = [{
       "type": "flow",
-      "caption": "🏠 5 annonces",
+      "caption": "🏠 5 biens",
       "target": ENV["QR_ADS"],
+    },
+    {
+      "type": "flow",
+      "caption": "🔍 Critères",
+      "target": ENV["QR_CRITERIA"],
+    },
+    {
+      "type": "flow",
+      "caption": "👨‍💼 Mes pros",
+      "target": ENV["QR_PROS"],
+    },
+    {
+      "type": "flow",
+      "caption": "❤️ Favoris",
+      "target": ENV["QR_FAVORITES"],
+    },
+    {
+      "type": "flow",
+      "caption": "🔑 Outils",
+      "target": ENV["QR_TOOLS"],
     },
     {
       "type": "flow",
       "caption": "💬 Ding Dong",
       "target": ENV["QR_DING_DONG"],
     },
-      {
-      "type": "flow",
-      "caption": "👨‍💼 Mes pros",
-      "target": ENV["QR_PROS"],
-    }, {
-      "type": "flow",
-      "caption": "🔑 Outils",
-      "target": ENV["QR_TOOLS"],
-    }, {
-      "type": "flow",
-      "caption": "📖 Guide",
-      "target": ENV["QR_GUIDELINES"],
-    },
-          {
+    {
       "type": "flow",
       "caption": "⛔ Stop",
       "target": ENV["QR_STOP"],
