@@ -139,3 +139,8 @@
     - Perpignan (66)
   is_active: false
   ref_code: PG
+- agglomeration: Vannes
+  zone: 
+    - Vannes Métropole (56)
+  is_active: false
+  ref_code: VS
