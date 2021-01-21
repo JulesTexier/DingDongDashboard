@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_102309) do
+ActiveRecord::Schema.define(version: 2021_01_21_145121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2021_01_12_102309) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.bigint "broker_agency_id"
+    t.string "password_digest", default: "$2a$12$De7bbVU.wYt16yE5EciYB.ZF8zvUFXWgduxGuFKYiEiwkWMwpEvqi"
     t.index ["agglomeration_id"], name: "index_brokers_on_agglomeration_id"
     t.index ["broker_agency_id"], name: "index_brokers_on_broker_agency_id"
     t.index ["email"], name: "index_brokers_on_email", unique: true
