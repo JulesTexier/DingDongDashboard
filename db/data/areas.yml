@@ -1289,3 +1289,75 @@
     - name: Le Houlme
       terms:
         - "76770"
+  - zone: Vannes Métropole (56)
+    datas:
+    - name: Vannes
+      terms:
+        - "56000"
+        - "56860"
+    - name: Saint-Avé
+      terms:
+        - "Saint Avé"
+        - "St-Avé"
+        - "St Avé"
+        - "56890"
+    - name: Séné
+      terms:
+        - "56860"
+    - name: Sarzeau
+      terms:
+        - "56370"
+    - name: Theix-Noyalo
+      terms:
+        - "56450"
+    - name: Ploeren
+      terms:
+        - "56880"
+    - name: Elven
+      terms:
+        - "56250"
+    - name: Plescop
+      terms:
+        - "56890"
+    - name: Grand-Champ
+      terms:
+        - "56390"
+    - name: Arradon
+      terms:
+        - "56610"
+    - name: Surzur
+      terms:
+        - "56450"
+    - name: Baden
+      terms:
+        - "56870"
+    - name: Saint-Nolff
+      terms:
+        - "Saint Nolff"
+        - "St-Nolff"
+        - "St Nolff"
+        - "56250"
+    - name: Sulniac
+      terms:
+        - "56250"
+    - name: Monterblanc
+      terms:
+        - "56250"
+    - name: Bono
+      terms:
+        - "56400"
+        - "Le Bono"
+    - name: Plougoumelen
+      terms:
+        - "56400"
+    - name: Treffléan
+      terms:
+        - "56250"
+    - name: Meucon
+      terms:
+        - "56890"
+    - name: Colpo
+      terms:
+        - "56390"
+
+
