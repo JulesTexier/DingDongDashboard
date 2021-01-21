@@ -1,8 +1,16 @@
 ---
 - source: SuperImmo
   params:
-  - zone: Bordeaux (33)
-    url: https://www.superimmo.com/achat/merignac-33700,pessac-33600,talence-33400,saint-medard-en-jalles-33160,villenave-d-ornon-33140,begles-33130,le-bouscat-33110,gradignan-33170,lormont-33310,cenon-33150,eysines-33320,floirac-33270,blanquefort-33290,bruges-33520,ambares-et-lagrave-33440,le-haillan-33185,le-taillan-medoc-33320,parempuyre-33290,carbon-blanc-33560,artigues-pres-bordeaux-33370?sort=created_at
+  # - zone: Vannes Métropole (56)
+  #   url: https://www.superimmo.com/achat/vannes-56000,saint-ave-56890,sene-56860,sarzeau-56370,ploeren-56880,arradon-56610,grand-champ-56390,elven-56250,plescop-56890,baden-56870,saint-nolff-56250,surzur-56450,sulniac-56250,monterblanc-56250,plougoumelen-56400,meucon-56890,colpo-56390,trefflean-56250,bono-56400,theix-noyalo-56450?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+
+  - zone: Grenoble (38)
+    url: https://www.superimmo.com/achat/saint-martin-d-heres-38400,echirolles-38130,fontaine-38600,meylan-38240,saint-egreve-38120,seyssinet-pariset-38170,le-pont-de-claix-38800,sassenage-38360,eybens-38320,vif-38450,vizille-38220,claix-38640,seyssins-38180,la-tronche-38700,domene-38420,gieres-38610,saint-martin-le-vinoux-38950,varces-allieres-et-risset-38760,corenc-38700?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
     is_active: false
@@ -11,8 +19,16 @@
 
 - source: BienIci
   params:
-  - zone: Bordeaux (33)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-105275%22%2C%22-105281%22%2C%22-105267%22%2C%22-105273%22%2C%22-110581%22%2C%22-105278%22%2C%22-105268%22%2C%22-88808%22%2C%22-105280%22%2C%22-105283%22%2C%22-88807%22%2C%22-105271%22%2C%22-88809%22%2C%22-88611%22%2C%22-105277%22%2C%22-105276%22%2C%22-105266%22%2C%22-103230%22%2C%22-88619%22%2C%22-88609%22%2C%22-105279%22%2C%22-105269%22%2C%22-88614%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  # - zone: Vannes Métropole (56)
+  #   url: 
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: false
+  #   high_priority: false
+
+  - zone: Grenoble (38)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80349%22%2C%22-105162%22%2C%22-90862%22%2C%22-80379%22%2C%22-85944%22%2C%22-191039%22%2C%22-90412%22%2C%22-105152%22%2C%22-102786%22%2C%22-226965%22%2C%22-226903%22%2C%22-226348%22%2C%22-192318%22%2C%22-105086%22%2C%22-81678%22%2C%22-87608%22%2C%22-80347%22%2C%22-85939%22%2C%22-2547643%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
@@ -21,8 +37,8 @@
 
 - source: Figaro
   params:
-  - zone: Bordeaux (33)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-merignac+33700.html?sort=5&location=pessac%2B33600,talence%2B33400,villenave%2Bd%2Bornon%2B33140,saint%2Bmedard%2Ben%2Bjalles%2B33160,begles%2B33130,gradignan%2B33170,cenon%2B33150,eysines%2B33320,le%2Bbouscat%2B33110,lormont%2B33310,bruges%2B33520,floirac%2B33270,ambares%2Bet%2Blagrave%2B33440,blanquefort%2B33290,le%2Bhaillan%2B33185,le%2Btaillan%2Bmedoc%2B33320,parempuyre%2B33290,artigues%2Bpres%2Bbordeaux%2B33370,carbon%2Bblanc%2B33560,martignas%2Bsur%2Bjalle%2B33127,saint%2Baubin%2Bde%2Bmedoc%2B33160,bassens%2B33530
+  - zone: Grenoble (38)
+    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-saint+martin+d+heres+38400.html?sort=5&location=echirolles%2B38130,fontaine%2B38600,meylan%2B38240,saint%2Begreve%2B38120,seyssinet%2Bpariset%2B38170,sassenage%2B38360,le%2Bpont%2Bde%2Bclaix%2B38800,eybens%2B38320,vif%2B38450,varces%2Ballieres%2Bet%2Brisset%2B38760,claix%2B38640,seyssins%2B38180,vizille%2B38220,gieres%2B38610,domene%2B38420,la%2Btronche%2B38700,saint%2Bmartin%2Ble%2Bvinoux%2B38950,corenc%2B38700
     scraper_type: Static
     main_page_cls: div.container-item
     is_active: false
@@ -31,8 +47,8 @@
 
 - source: Propr. Figaro
   params:
-  - zone: Bordeaux (33)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-gironde-aquitaine-france/?ville=merignac&ville=14031&ville=14223&ville=14245&ville=14168&ville=13711&ville=13867&ville=13795&ville=13836&ville=13925&ville=13964&ville=13747&ville=13842&ville=13677&ville=13260&ville=13928&ville=13937&ville=14026&ville=13687&ville=13769&ville=13988&ville=14104&ville=13704&tri=2
+  - zone: Grenoble (38)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?inter=1&localisation=45.197351,5.7862391,45.15914,5.7428,FR,Saint-Martin-d%27H%C3%A8res&localisation=45.1604371,5.7407139,45.127847,5.6875808,FR,%C3%89chirolles&localisation=45.2059161,5.701777,45.1820179,5.650817,FR,Fontaine&localisation=45.241608,5.8204779,45.186939,5.752474,FR,Meylan&localisation=45.2494499,5.710257,45.213603,5.6552869,FR,Saint-Egr%C3%A8ve&localisation=45.1907319,5.7015459,45.153409,5.6387341,FR,Seyssinet-Pariset&localisation=45.233809,5.6878131,45.1943911,5.6203138,FR,Sassenage&localisation=45.142985,5.715184,45.103044,5.6881271,FR,Le%20Pont-de-Claix&localisation=45.16573,5.7656121,45.1372209,5.730791,FR,Eybens&localisation=45.081248,5.7133859,45.004679,5.629002,FR,Vif&localisation=45.111527,5.7253101,45.065391,5.6143381,FR,Varces-Alli%C3%A8res-et-Risset&localisation=45.147492,5.7007969,45.08905,5.61805,FR,Claix&localisation=45.172631,5.701232,45.1432806,5.638092,FR,Seyssins&localisation=45.097412,5.807798,45.0482199,5.754538,FR,Vizille&localisation=45.2063989,5.81304,45.15914,5.766477,FR,Gi%C3%A8res&localisation=45.219851,5.860001,45.19085,5.813499,FR,Dom%C3%A8ne&localisation=45.234629,5.7630229,45.1887928,5.725682,FR,La%20Tronche&localisation=45.2385029,5.740213,45.198309,5.680562,FR,Saint-Martin-le-Vinoux&localisation=45.246698,5.776255,45.2061931,5.7439289,FR,Corenc&tri=2&mrasn=668993.829398&xtref=proprietes.lefigaro.fr
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: false
@@ -41,6 +57,13 @@
 
 - source: LogicImmo
   params:
+  - zone: Grenoble (38)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=29118_2,9937_2,11297_2,20408_2,27602_2,31839_2,31118_2,17136_2,10709_2,34785_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
   # - zone: Bordeaux (33)
   #   url:
   #   scraper_type: Static
@@ -51,8 +74,8 @@
 
 - source: PAP
   params:
-  - zone: Bordeaux (33)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-blanquefort-32270-g19484g19822g19835g19842g19852g19853g19881g19889g19910g19932g19969g19991g19998g20002g20045g20122g20129g20131g20224g20280-a-partir-du-studio
+  - zone: Grenoble (38)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-echirolles-38130-g21629g21667g21668g21676g21732g21771g21789g21817g21857g21900g21915g21993g21998g21999g22047g22057g22079g22088g22126-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: false
@@ -61,8 +84,8 @@
 
 - source: Stephane Plaza
   params:
-  - zone: Bordeaux (33)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=33281&location[]=33318&location[]=33522&location[]=33550&location[]=33449&location[]=33039&location[]=33192&location[]=33119&location[]=33162&location[]=33069&location[]=33249&location[]=33075&location[]=33167&location[]=33003&location[]=32056&location[]=33200&location[]=33519&location[]=33312&location[]=33013&location[]=33096&location[]=33273&location[]=33376&location[]=33032&sort=date_desc
+  - zone: Grenoble (38)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=38421&location[]=38151&location[]=38169&location[]=38229&location[]=38382&location[]=38485&location[]=38474&location[]=38317&location[]=38158&location[]=38545&location[]=38524&location[]=38111&location[]=38486&location[]=38562&location[]=38179&location[]=38150&location[]=38516&location[]=38423&location[]=38126&sort=date_desc
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
@@ -70,8 +93,8 @@
 
 - source: Orpi
   params:
-  - zone: Bordeaux (33)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=merignac&locations%5B0%5D%5Blabel%5D=M%C3%A9rignac+(33700)&locations%5B1%5D%5Bvalue%5D=pessac&locations%5B1%5D%5Blabel%5D=Pessac+(33600)&locations%5B2%5D%5Bvalue%5D=talence&locations%5B2%5D%5Blabel%5D=Talence+(33400)&locations%5B3%5D%5Bvalue%5D=villenave&locations%5B3%5D%5Blabel%5D=Villenave+(40110)&locations%5B4%5D%5Bvalue%5D=saint-medard-en-jalles&locations%5B4%5D%5Blabel%5D=Saint-M%C3%A9dard-en-Jalles+(33160)&locations%5B5%5D%5Bvalue%5D=begles&locations%5B5%5D%5Blabel%5D=B%C3%A8gles+(33130)&locations%5B6%5D%5Bvalue%5D=gradignan&locations%5B6%5D%5Blabel%5D=Gradignan+(33170)&locations%5B7%5D%5Bvalue%5D=cenon&locations%5B7%5D%5Blabel%5D=Cenon+(33150)&locations%5B8%5D%5Bvalue%5D=eysines&locations%5B8%5D%5Blabel%5D=Eysines+(33320)&locations%5B9%5D%5Bvalue%5D=le-bouscat&locations%5B9%5D%5Blabel%5D=Le+Bouscat+(33110)&locations%5B10%5D%5Bvalue%5D=lormont&locations%5B10%5D%5Blabel%5D=Lormont+(33310)&locations%5B11%5D%5Bvalue%5D=bruges&locations%5B11%5D%5Blabel%5D=Bruges+(33520)&locations%5B12%5D%5Bvalue%5D=floirac&locations%5B12%5D%5Blabel%5D=Floirac+(33270)&locations%5B13%5D%5Bvalue%5D=ambares-et-lagrave&locations%5B13%5D%5Blabel%5D=Ambar%C3%A8s-et-Lagrave+(33440)&locations%5B14%5D%5Bvalue%5D=blanquefort&locations%5B14%5D%5Blabel%5D=Blanquefort+(33290)&locations%5B15%5D%5Bvalue%5D=le-haillan&locations%5B15%5D%5Blabel%5D=Le+Haillan+(33185)&locations%5B16%5D%5Bvalue%5D=le-taillan-medoc&locations%5B16%5D%5Blabel%5D=Le+Taillan-M%C3%A9doc+(33320)&locations%5B17%5D%5Bvalue%5D=parempuyre&locations%5B17%5D%5Blabel%5D=Parempuyre+(33290)&locations%5B18%5D%5Bvalue%5D=artigues-pres-bordeaux&locations%5B18%5D%5Blabel%5D=Artigues-pr%C3%A8s-Bordeaux+(33370)&locations%5B19%5D%5Bvalue%5D=carbon-blanc&locations%5B19%5D%5Blabel%5D=Carbon-Blanc+(33560)&locations%5B20%5D%5Bvalue%5D=martignas-sur-jalle&locations%5B20%5D%5Blabel%5D=Martignas-sur-Jalle+(33127)&locations%5B21%5D%5Bvalue%5D=saint-aubin-de-medoc&locations%5B21%5D%5Blabel%5D=Saint-Aubin-de-M%C3%A9doc+(33160)&locations%5B22%5D%5Bvalue%5D=bassens&locations%5B22%5D%5Blabel%5D=Bassens+(33530)&sort=date-down&layoutType=mixte
+  - zone: Grenoble (38)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-martin-d-heres&locations%5B0%5D%5Blabel%5D=Saint-Martin-d%27H%C3%A8res+(38400)+-+Ville&locations%5B1%5D%5Bvalue%5D=echirolles&locations%5B1%5D%5Blabel%5D=%C3%89chirolles+(38130)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine&locations%5B2%5D%5Blabel%5D=Fontaine+(38600)+-+Ville&locations%5B3%5D%5Bvalue%5D=meylan&locations%5B3%5D%5Blabel%5D=Meylan+(38240)+-+Ville&locations%5B4%5D%5Bvalue%5D=saint-egreve&locations%5B4%5D%5Blabel%5D=Saint-%C3%89gr%C3%A8ve+(38120)+-+Ville&locations%5B5%5D%5Bvalue%5D=seyssinet-pariset&locations%5B5%5D%5Blabel%5D=Seyssinet-Pariset+(38170)+-+Ville&locations%5B6%5D%5Bvalue%5D=sassenage&locations%5B6%5D%5Blabel%5D=Sassenage+(38360)+-+Ville&locations%5B7%5D%5Bvalue%5D=le-pont-de-claix&locations%5B7%5D%5Blabel%5D=Le+Pont-de-Claix+(38800)+-+Ville&locations%5B8%5D%5Bvalue%5D=eybens&locations%5B8%5D%5Blabel%5D=Eybens+(38320)+-+Ville&locations%5B9%5D%5Bvalue%5D=vif&locations%5B9%5D%5Blabel%5D=Vif+(38450)+-+Ville&locations%5B10%5D%5Bvalue%5D=varces-allieres-et-risset&locations%5B10%5D%5Blabel%5D=Varces-Alli%C3%A8res-et-Risset+(38760)+-+Ville&locations%5B11%5D%5Bvalue%5D=claix&locations%5B11%5D%5Blabel%5D=Claix+(38640)+-+Ville&locations%5B12%5D%5Bvalue%5D=seyssins&locations%5B12%5D%5Blabel%5D=Seyssins+(38180)+-+Ville&locations%5B13%5D%5Bvalue%5D=vizille&locations%5B13%5D%5Blabel%5D=Vizille+(38220)+-+Ville&locations%5B14%5D%5Bvalue%5D=gieres&locations%5B14%5D%5Blabel%5D=Gi%C3%A8res+(38610)+-+Ville&locations%5B15%5D%5Bvalue%5D=domene&locations%5B15%5D%5Blabel%5D=Dom%C3%A8ne+(38420)+-+Ville&locations%5B16%5D%5Bvalue%5D=la-tronche&locations%5B16%5D%5Blabel%5D=La+Tronche+(38700)+-+Ville&locations%5B17%5D%5Bvalue%5D=saint-martin-le-vinoux&locations%5B17%5D%5Blabel%5D=Saint-Martin-le-Vinoux+(38950)+-+Ville&locations%5B18%5D%5Bvalue%5D=corenc&locations%5B18%5D%5Blabel%5D=Corenc+(38700)+-+Ville&sort=date-down&layoutType=mixte
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
@@ -79,8 +102,8 @@
 
 - source: Laforet
   params:
-  - zone: Bordeaux (33)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19702522%2C19652374%2C19652216%2C19641153%2C19608308%2C19603890%2C19598069%2C19588673%2C19587922%2C19574848%2C19542064%2C19509837%2C19497085%2C19493598%2C19493488%2C19490003&cities=33281%2C33318%2C33522%2C33550%2C33449%2C33039%2C33192%2C33119%2C33162%2C33069%2C33249%2C33075%2C33167%2C33003%2C33056%2C33200%2C33519%2C33312%2C33013%2C33096%2C33273%2C33376%2C33032&types=house%2Capartment&transaction=buy
+  - zone: Grenoble (38)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=16&exclude=&cities=38421%2C38151%2C38169%2C38229%2C38382%2C38485%2C38474%2C38317%2C38158%2C38545%2C38524%2C38111%2C38562%2C38486%2C38150%2C38516%2C38179%2C38423%2C38126%2C38150%2C38516%2C38524%2C38545&transaction=buy&favoriz=true
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
@@ -88,8 +111,8 @@
 
 - source: Century21
   params:
-  - zone: Bordeaux (33)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-le+haillan-le+bouscat-villenave+d+ornon-bruges-pessac-le+taillan+medoc-begles-gradignan-lormont-st+medard+en+jalles-cenon-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/#/annonces/achat-maison-appartement/v-le+haillan-begles-st+aubin+de+medoc-villenave+d+ornon-bruges-pessac-parempuyre-le+taillan+medoc-carbon+blanc-le+bouscat-gradignan-martignas+sur+jalle-lormont-st+medard+en+jalles-cenon-artigues+pres+bordeaux-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-33530_bassens-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/
+  - zone: Grenoble (38)
+    url: https://www.century21.fr/annonces/achat/v-paris/#/annonces/achat/v-vizille-varces+allieres+et+risset-vif-corenc-gieres-le+pont+de+claix-st+martin+d+heres-st+egreve-sassenage-st+martin+le+vinoux-echirolles-eybens-la+tronche-seyssins-domene-seyssinet+pariset-meylan/cpv-38600_fontaine-38640_claix/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: false
@@ -97,8 +120,8 @@
 
 - source: Foncia
   params:
-  - zone: Bordeaux (33)
-    url: https://fr.foncia.com/achat/merignac-33700--pessac-33600--talence-33400--villenave-d-ornon-33140--saint-medard-en-jalles-33160--begles-33130--gradignan-33170--cenon-33150--eysines-33320--le-bouscat-33110--lormont-33310--bruges-33520--floirac-33270--ambares-et-lagrave-33440--blanquefort-32270--le-haillan-33185--le-taillan-medoc-33320--parempuyre-33290--artigues-pres-bordeaux-33370--carbon-blanc-33560--martignas-sur-jalle-33127--saint-aubin-de-medoc-33160--bassens-33530
+  - zone: Grenoble (38)
+    url: https://fr.foncia.com/achat/saint-martin-d-heres-38400--echirolles-38130--fontaine-38600--meylan-38240--saint-egreve-38120--seyssinet-pariset-38170--sassenage-38360--le-pont-de-claix-38800--eybens-38320--vif-38450--varces-allieres-et-risset-38760--claix-38640--seyssins-38180--vizille-38220--gieres-38610--domene-38420--la-tronche-38700--saint-martin-le-vinoux-38950--corenc-38700
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: false
@@ -106,8 +129,8 @@
 
 - source: MeilleursAgents
   params:
-  - zone: Bordeaux (33)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14092%2C14129%2C14328%2C14357%2C14257%2C13852%2C14004%2C13931%2C13974%2C13882&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16017%2C15759%2C15775%2C15830%2C15979%2C16076%2C16067%2C15916%2C15766%2C16133&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
     waiting_cls: nil
@@ -115,8 +138,8 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Bordeaux (33)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14061%2C13888%2C13979%2C13816%2C13869%2C14012%2C14325%2C14123%2C13826%2C13909&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16111%2C15723%2C16077%2C16150%2C15784%2C15758%2C16103%2C16019%2C15735&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
     waiting_cls: nil
@@ -127,8 +150,8 @@
 
 - source: SeLoger
   params:
-  - zone: Bordeaux (33)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[330281]},{%22inseeCodes%22:[330318]},{%22inseeCodes%22:[330522]},{%22inseeCodes%22:[330550]},{%22inseeCodes%22:[330449]},{%22inseeCodes%22:[330039]},{%22inseeCodes%22:[330192]},{%22inseeCodes%22:[330119]},{%22inseeCodes%22:[330162]},{%22inseeCodes%22:[330069]},{%22inseeCodes%22:[330249]},{%22inseeCodes%22:[330075]},{%22inseeCodes%22:[330167]},{%22inseeCodes%22:[330003]},{%22inseeCodes%22:[330056]},{%22inseeCodes%22:[330200]},{%22inseeCodes%22:[330519]},{%22inseeCodes%22:[330312]},{%22inseeCodes%22:[330013]},{%22inseeCodes%22:[330096]},{%22inseeCodes%22:[330273]},{%22inseeCodes%22:[330376]},{%22inseeCodes%22:[330032]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  - zone: Grenoble (38)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[380421]},{%22inseeCodes%22:[380151]},{%22inseeCodes%22:[380169]},{%22inseeCodes%22:[380229]},{%22inseeCodes%22:[380382]},{%22inseeCodes%22:[380485]},{%22inseeCodes%22:[380474]},{%22inseeCodes%22:[380317]},{%22inseeCodes%22:[380158]},{%22inseeCodes%22:[380545]},{%22inseeCodes%22:[380524]},{%22inseeCodes%22:[380111]},{%22inseeCodes%22:[380562]},{%22inseeCodes%22:[380179]},{%22inseeCodes%22:[380150]},{%22inseeCodes%22:[380516]},{%22inseeCodes%22:[380423]},{%22inseeCodes%22:[380126]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
     waiting_cls: nil
@@ -136,3 +159,19 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
+
+
+- source: LeBonCoin
+  params:
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Vif_38450__45.05604_5.66803_5860%2CEybens_38320__45.14742_5.75131_2309%2CLe%20Pont-de-Claix_38800__45.12441_5.69767_2186%2CSassenage_38360__45.20655_5.66288_3425%2CSeyssinet-Pariset_38170__45.18091_5.69613_5448%2CSaint-Egr%C3%A8ve_38120__45.23297_5.68084_2431%2CMeylan_38240__45.20932_5.77848_3632%2CFontaine_38600__45.19206_5.68767_2959%2CEchirolles_38130__45.14983_5.71853_2472%2CSaint-Martin-d%27H%C3%A8res_38400__45.18381_5.75445_3697&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Corenc_38700__45.20993_5.75219_4164%2CSaint-Martin-le-Vinoux_38950__45.20137_5.71679_4145%2CLa%20Tronche_38700__45.20509_5.73843_3353%2CDom%C3%A8ne_38420__45.20234_5.83813_2004%2CGi%C3%A8res_38610__45.18009_5.79096_3140%2CVizille_38220__45.07559_5.77231_3212%2CSeyssins_38180__45.16289_5.68478_3885%2CClaix_38640__45.12025_5.67258_5262%2CVarces-Alli%C3%A8res-et-Risset_38760__45.08693_5.68196_5291&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
