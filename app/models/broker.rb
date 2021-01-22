@@ -18,6 +18,9 @@ class Broker < ApplicationRecord
   belongs_to :agglomeration, optional: true
   belongs_to :broker_agency, optional: true
 
+  has_many :specific_area_brokers
+  has_many :specific_areas, through: :specific_area_brokers, source: "area"
+
   BROKER_LEADS_OFFSET = 7
 
   def get_fullname
@@ -40,6 +43,17 @@ class Broker < ApplicationRecord
       end
     end
   end
+
+  # def self.selection_exception(area_ids)
+
+
+  #   # Ouest parisien 
+  #   if areas.where(zone: "Yvelines (78)").where(id: area_ids).any? 
+  #   elsif 
+  #   end
+
+  # end
+  
 
   def self.get_accurate_by_agglomeration(agglomeration_id)
       # Select BA from agglomeration 
