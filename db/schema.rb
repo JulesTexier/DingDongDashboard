@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_145121) do
+ActiveRecord::Schema.define(version: 2021_01_22_111618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -325,6 +325,15 @@ ActiveRecord::Schema.define(version: 2021_01_21_145121) do
     t.text "description"
     t.string "marketing_type"
     t.string "marketing_link"
+  end
+
+  create_table "specific_area_broker", force: :cascade do |t|
+    t.bigint "broker_id"
+    t.bigint "area_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_specific_area_broker_on_area_id"
+    t.index ["broker_id"], name: "index_specific_area_broker_on_broker_id"
   end
 
   create_table "statuses", force: :cascade do |t|
