@@ -218,7 +218,7 @@ class Subscriber < ApplicationRecord
   end
   
   def get_accurate_broker
-    Broker.get_accurate_by_agglomeration(self.research.agglomeration.id)
+    Broker.get_accurate_by_areas(self.research.areas.pluck(:id))
   end
   
   ############################
