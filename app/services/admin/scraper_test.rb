@@ -106,9 +106,9 @@ class Admin::ScraperTest < ApplicationService
   def launch_dedicated_sc(sc)
     begin
       source_name = sc.source == "Propr. Figaro" ? "ProprietesFigaro" :  sc.source == "PAP" ? "Pap" : sc.source
-      scraper = Object.const_get("#{sc.group_type}::Scraper#{source_name}").new(sc.id)
+      scraper = Object.const_get("#{sc.group_type}::Scraper#{source_name}")
       sc.update(is_active: true)
-      scraper.launch(1)
+      scraper.new(sc.id).launch(1)
       p = Property.last
       sc.update(is_active: false)
       if p.source == sc.source && Department.find_by(name: sc.zone).areas.pluck(:id).include?(p.area.id) 
