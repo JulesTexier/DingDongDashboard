@@ -149,3 +149,15 @@
     - Rouen Métropole (76)
   is_active: false
   ref_code: RN
+
+- agglomeration: Metz
+  zone: 
+    - Metz Métropole (57)
+  is_active: false
+  ref_code: MZ
+
+- agglomeration: Lorient
+  zone: 
+    - Lorient Métropole (56)
+  is_active: false
+  ref_code: LT

@@ -1427,9 +1427,143 @@
       terms:
         - "56390"
 
-# - zone: Vannes Métropole (56)
-#   datas:
-#     - name: Vannes
-#       terms:
-#         - "56000"
+- zone: Metz Métropole (57)
+  datas:
+    - name: Vannes
+      terms:
+        - "57000"
+        - "57050"
+        - "57070"
+    - name: Montigny-lès-Metz
+      terms:
+        - "57950"
+    - name: Woippy
+      terms:
+        - "57140"
+    - name: Marly
+      terms:
+        - "57155"
+    - name: Moulins-lès-Metz
+      terms:
+        - "57160"
+    - name: Ars-sur-Moselle
+      terms:
+        - "57130"
+    - name: Le Ban-Saint-Martin
+      terms:
+        - "57050"
+        - "Le Ban St Martin"
+        - "Le Ban-St-Martin"
+        - "Le Ban Saint Martin"
+    - name: Longueville-lès-Metz
+      terms:
+        - "57050"
+    - name: Saint-Julien-lès-Metz
+      terms:
+        - "57070"
+        - "Saint Julien lès Metz"
+        - "St-Julien-lès-Metz"
+        - "St Julien lès Metz"
+    - name: Scy-Chazelles
+      terms:
+        - "57160"
+    - name: Amanvillers
+      terms:
+        - "57865"
+    - name: Augny
+      terms:
+        - "57685"
+    - name: Plappeville
+      terms:
+        - "57050"
+    - name: Saint-Privat-la-Montagne
+      terms:
+        - "57855"
+        - "Saint Privat la Montagne"
+        - "St-Privat-la-Montagne"
+        - "St Privat la Montagne"
+    - name: Châtel-Saint-Germain
+      terms:
+        - "57160"
+        - "Châtel Saint Germain"
+        - "Châtel-St-Germain"
+        - "Châtel St Germain"
+    - name: Peltre
+      terms:
+        - "57245"
+    - name: Lorry-lès-Metz
+      terms:
+        - "57050"
+    - name: Saulny
+      terms:
+        - "57140"
+    - name: Rozérieulles
+      terms:
+        - "57160"
+    - name: Laquenexy
+      terms:
+        - "57530"
+
+- zone: Lorient Métropole (56)
+  datas:
+    - name: Lorient
+      terms:
+        - "56100"
+    - name: Lanester
+      terms:
+        - "56600"
+    - name: Ploemeur
+      terms:
+        - "56270"
+    - name: Hennebont
+      terms:
+        - "56700"
+    - name: Guidel
+      terms:
+        - "56520"
+    - name: Quéven
+      terms:
+        - "56530"
+    - name: Larmor-Plage
+      terms:
+        - "56260"
+    - name: Languidic
+      terms:
+        - "56440"
+    - name: Caudan
+      terms:
+        - "56850"
+    - name: Inzinzac-Lochrist
+      terms:
+        - "56650"
+    - name: Plouay
+      terms:
+        - "56240"
+    - name: Riantec
+      terms:
+        - "56670"
+    - name: Locmiquélic
+      terms:
+        - "56570"
+    - name: Pont-Scorff
+      terms:
+        - "56620"
+    - name: Cléguer
+      terms:
+        - "56620"
+    - name: Gestel
+      terms:
+        - "56530"
+    - name: Port-Louis
+      terms:
+        - "56290"
+    - name: Bubry
+      terms:
+        - "56310"
+    - name: Groix
+      terms:
+        - "56590"
+    - name: Inguiniel
+      terms:
+        - "56240"
 
