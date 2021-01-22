@@ -7,8 +7,8 @@ class Area < ApplicationRecord
 
     belongs_to :department
 
-    has_many :specific_area_brokers
-    has_many :specific_brokers, through: :specific_area_brokers, source: "broker"
+    has_many :specific_area_broker_agencies
+    has_many :specific_broker_agencies, through: :specific_area_broker_agencies, source: "broker_agency"
 
     def self.get_agglo_infos
       collection = []

@@ -327,13 +327,13 @@ ActiveRecord::Schema.define(version: 2021_01_22_111618) do
     t.string "marketing_link"
   end
 
-  create_table "specific_area_brokers", force: :cascade do |t|
-    t.bigint "broker_id"
+  create_table "specific_area_broker_agencies", force: :cascade do |t|
+    t.bigint "broker_agency_id"
     t.bigint "area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_specific_area_brokers_on_area_id"
-    t.index ["broker_id"], name: "index_specific_area_brokers_on_broker_id"
+    t.index ["area_id"], name: "index_specific_area_broker_agencies_on_area_id"
+    t.index ["broker_agency_id"], name: "index_specific_area_broker_agencies_on_broker_agency_id"
   end
 
   create_table "statuses", force: :cascade do |t|
