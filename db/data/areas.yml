@@ -1503,3 +1503,67 @@
     - name: Laquenexy
       terms:
         - "57530"
+
+- zone: Lorient Métropole (56)
+  datas:
+    - name: Lorient
+      terms:
+        - "56100"
+    - name: Lanester
+      terms:
+        - "56600"
+    - name: Ploemeur
+      terms:
+        - "56270"
+    - name: Hennebont
+      terms:
+        - "56700"
+    - name: Guidel
+      terms:
+        - "56520"
+    - name: Quéven
+      terms:
+        - "56530"
+    - name: Larmor-Plage
+      terms:
+        - "56260"
+    - name: Languidic
+      terms:
+        - "56440"
+    - name: Caudan
+      terms:
+        - "56850"
+    - name: Inzinzac-Lochrist
+      terms:
+        - "56650"
+    - name: Plouay
+      terms:
+        - "56240"
+    - name: Riantec
+      terms:
+        - "56670"
+    - name: Locmiquélic
+      terms:
+        - "56570"
+    - name: Pont-Scorff
+      terms:
+        - "56620"
+    - name: Cléguer
+      terms:
+        - "56620"
+    - name: Gestel
+      terms:
+        - "56530"
+    - name: Port-Louis
+      terms:
+        - "56290"
+    - name: Bubry
+      terms:
+        - "56310"
+    - name: Groix
+      terms:
+        - "56590"
+    - name: Inguiniel
+      terms:
+        - "56240"
+
