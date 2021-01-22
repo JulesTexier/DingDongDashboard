@@ -219,24 +219,24 @@
       terms:
         - "78420"
 - zone: Hauts-de-Seine (92)
-  datas: 
+  datas:
     - name: Suresnes
       terms:
         - "92150"
     - name: Puteaux
-      terms: 
+      terms:
         - "92800"
     - name: Neuilly-Sur-Seine
-      terms: 
+      terms:
         - "92200"
     - name: Saint-Cloud
-      terms: 
+      terms:
         - "92210"
     - name: Levallois-Perret
-      terms: 
+      terms:
         - "92300"
     - name: Clichy
-      terms: 
+      terms:
         - "92110"
     - name: Montrouge
       terms:
@@ -458,11 +458,153 @@
     - name: "Toulouse"
       terms:
         - "31000"
+    - name: "Colomiers"
+      terms:
+        - "31770"
+    - name: "Tournefeuille"
+      terms:
+        - "31170"
+    - name: "Blagnac"
+      terms:
+        - "31700"
+    - name: "Cugnaux"
+      terms:
+        - "31270"
+    - name: "Balma"
+      terms:
+        - "31130"
+    - name: "Saint-Orens-de-Gameville"
+      terms:
+        - "31650"
+        - "Saint Orens de Gameville"
+        - "St Orens de Gameville"
+        - "St-Orens-de-Gameville"
+    - name: "L'Union"
+      terms:
+        - "31240"
+    - name: "Saint-Jean"
+      terms:
+        - "31240"
+        - "Saint Jean"
+        - "St Jean"
+        - "St-Jean"
+    - name: "Castelginest"
+      terms:
+        - "31780"
+    - name: "Villeneuve-Tolosane"
+      terms:
+        - "31270"
+    - name: "Launaguet"
+      terms:
+        - "31140"
+    - name: "Aucamville"
+      terms:
+        - "31140"
+    - name: "Pibrac"
+      terms:
+        - "31820"
+    - name: "Aussonne"
+      terms:
+        - "31840"
+    - name: "Cornebarrieu"
+      terms:
+        - "31700"
+    - name: "Beauzelle"
+      terms:
+        - "31700"
+    - name: "Saint-Alban"
+      terms:
+        - "31140"
+        - "St Alban"
+        - "St-Alban"
+        - "Saint Alban"
+    - name: "Saint-Jory"
+      terms:
+        - "31790"
+        - "Saint Jory"
+        - "St Jory"
+        - "St-Jory"
+    - name: "Bruguières"
+      terms:
+        - "31150"
+    - name: "Quint-Fonsegrives"
+      terms:
+        - "31130"
 - zone: Nantes (44)
   datas:
     - name: "Nantes"
       terms:
         - "44000"
+    - name: "Saint-Herblain"
+      terms:
+        - "44800"
+        - "Saint Herblain"
+        - "St Herblain"
+        - "St-Herblain"
+    - name: "Rezé"
+      terms:
+        - "44400"
+    - name: "Saint-Sébastien-sur-Loire"
+      terms:
+        - "44230"
+        - "Saint Sébastien sur Loire"
+        - "St-Sébastien-sur-Loire"
+        - "St Sébastien sur Loire"
+    - name: "Orvault"
+      terms:
+        - "44700"
+    - name: "Vertou"
+      terms:
+        - "44120"
+    - name: "Couëron"
+      terms:
+        - "44220"
+    - name: "Carquefou"
+      terms:
+        - "44470"
+    - name: "Bouguenais"
+      terms:
+        - "44340"
+    - name: "La Chapelle-sur-Erdre"
+      terms:
+        - "44240"
+    - name: "Sainte-Luce-sur-Loire"
+      terms:
+        - "44980"
+        - "Sainte Luce sur Loire"
+        - "Ste Luce sur Loire"
+        - "Ste-Luce-sur-Loire"
+    - name: "Thouaré-sur-Loire"
+      terms:
+        - "44470"
+    - name: "Basse-Goulaine"
+      terms:
+        - "44115"
+    - name: "Les Sorinières"
+      terms:
+        - "44840"
+    - name: "Sautron"
+      terms:
+        - "44880"
+    - name: "Bouaye"
+      terms:
+        - "44830"
+    - name: "La Montagne"
+      terms:
+        - "44620"
+    - name: "Saint-Jean-de-Boiseau"
+      terms:
+        - "44640"
+        - "Saint Jean de Boiseau"
+        - "St Jean de Boiseau"
+        - "St-Jean-de-Boiseau"
+    - name: "Le Pellerin"
+      terms:
+        - "44640"
+    - name: "Indre"
+      terms:
+        - "44610"
+        - "44620"
 - zone: Rennes (35)
   datas:
     - name: "Rennes"
@@ -484,6 +626,82 @@
     - name: "Bordeaux"
       terms:
         - "33000"
+    - name: "Mérignac"
+      terms:
+        - "33700"
+    - name: "Pessac"
+      terms:
+        - "33600"
+    - name: "Talence"
+      terms:
+        - "33400"
+    - name: "Villenave-D'Ornon"
+      terms:
+        - "33140"
+    - name: "Saint-Médard-en-Jalles"
+      terms:
+        - "Saint Médard en Jalles"
+        - "St-Médard-en-Jalles"
+        - "St Médard en Jalles"
+        - "33160"
+    - name: "Bègles"
+      terms:
+        - "33130"
+    - name: "Gradignan"
+      terms:
+        - "33170"
+    - name: "Cenon"
+      terms:
+        - "33150"
+    - name: "Eysines"
+      terms:
+        - "33320"
+    - name: "Le Bouscat"
+      terms:
+        - "33110"
+    - name: "Lormont"
+      terms:
+        - "33310"
+    - name: "Bruges"
+      terms:
+        - "33520"
+    - name: "Floirac"
+      terms:
+        - "33270"
+    - name: "Ambarès-et-Lagrave"
+      terms:
+        - "33440"
+    - name: "Blanquefort"
+      terms:
+        - "33290"
+    - name: "Le Haillain"
+      terms:
+        - "33185"
+    - name: "Le Taillan-Médoc"
+      terms:
+        - "33320"
+    - name: "Parempuyre"
+      terms:
+        - "33290"
+    - name: "Artigues-près-Bordeaux"
+      terms:
+        - "33370"
+    - name: "Cardon-Blanc"
+      terms:
+        - "33560"
+    - name: "Martignas-sur-Jalle"
+      terms:
+        - "33127"
+    - name: "Saint-Aubin-de-Médoc"
+      terms:
+        - "St-Aubin-de-Médoc"
+        - "Saint Aubin de Médoc"
+        - "St Aubin de Médoc"
+        - "33160"
+    - name: "Bassens"
+      terms:
+        - "33530"
+
 - zone: Saint-Etienne (42)
   datas:
     - name: "Saint-Etienne"
@@ -496,6 +714,61 @@
     - name: "Le Havre"
       terms:
         - "76000"
+    - name: "Cauville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Épouville"
+      terms:
+        - "76133"
+    - name: "Fontaine-la-Mallet"
+      terms:
+        - "76290"
+    - name: "Fontenay"
+      terms:
+        - "76290"
+    - name: "Gainneville"
+      terms:
+        - "76700"
+    - name: "Gronfreville-l'Orcher"
+      terms:
+        - "76700"
+    - name: "Harfleur"
+      terms:
+        - "76700"
+    - name: "Manéglise"
+      terms:
+        - "76133"
+    - name: "Mannevillette"
+      terms:
+        - "76290"
+    - name: "Montivilliers"
+      terms:
+        - "76290"
+    - name: "Notre-Dame-du-Bec"
+      terms:
+        - "76133"
+    - name: "Octeville-sur-Mer"
+      terms:
+        - "76930"
+    - name: "Rogerville"
+      terms:
+        - "76700"
+    - name: "Rolleville"
+      terms:
+        - "76133"
+    - name: "Sainte-Adresse"
+      terms:
+        - "76310"
+        - "Sainte Adresse"
+        - "Ste-Adresse"
+        - "Ste Adresse"
+    - name: "Saint-Martin-du-Manoir"
+      terms:
+        - "76290"
+        - "Saint Martin du Manoir"
+        - "St-Martin-du-Manoir"
+        - "St Martin du Manoir"
+
 - zone: Nice (06)
   datas:
     - name: "Nice"
@@ -709,6 +982,72 @@
       terms:
         - "38000"
         - "38100"
+    - name: Saint-Martin-d'Hères
+      terms:
+        - "Saint Martin d'Hères"
+        - "St-Martin-d'Hères"
+        - "St Martin d'Hères"
+        - "38400"
+    - name: Échirolles
+      terms:
+        - "38130"
+    - name: Fontaine
+      terms:
+        - "38600"
+    - name: Meylan
+      terms:
+        - "38240"
+    - name: Saint-Égrève
+      terms:
+        - "38120"
+        - "St Égrève"
+        - "Saint Égrève"
+        - "St-Égrève"
+    - name: Seyssinet-Pariset
+      terms:
+        - "38170"
+    - name: Sassenage
+      terms:
+        - "38360"
+    - name: Le Pont-de-Claix
+      terms:
+        - "38800"
+    - name: Eybens
+      terms:
+        - "38320"
+    - name: Vif
+      terms:
+        - "38450"
+    - name: Varces-Allières-et-Risset
+      terms:
+        - "38760"
+    - name: Claix
+      terms:
+        - "38640"
+    - name: Seyssins
+      terms:
+        - "38180"
+    - name: Vizille
+      terms:
+        - "38220"
+    - name: Gières
+      terms:
+        - "38610"
+    - name: Domène
+      terms:
+        - "38420"
+    - name: La Tronche
+      terms:
+        - "38700"
+    - name: Saint-Martin-le-Vinoux
+      terms:
+        - "Saint Martin le Vinoux"
+        - "St-Martin-le-Vinoux"
+        - "St Martin le Vinoux"
+        - "38950"
+    - name: Corenc
+      terms:
+        - "38700"
 - zone: Angers (49)
   datas:
     - name: Angers
@@ -917,3 +1256,314 @@
       terms:
         - "66000"
         - "66100"
+
+- zone: Rouen Métropole (76)
+  datas:
+    - name: Rouen
+      terms:
+        - "76000"
+    - name: Sotteville-lès-Rouen
+      terms:
+        - "76300"
+    - name: Saint-Étienne-du-Rouvray
+      terms:
+        - "76800"
+        - "Saint Étienne du Rouvray"
+        - "St-Étienne-du-Rouvray"
+        - "St Étienne du Rouvray"
+    - name: Le Grand-Quevilly
+      terms:
+        - "76120"
+    - name: Le Petit-Quevilly
+      terms:
+        - "76140"
+    - name: Mont-Saint-Aignan
+      terms:
+        - "76130"
+    - name: Elbeuf
+      terms:
+        - "76500"
+    - name: Bois-Guillaume
+      terms:
+        - "76230"
+    - name: Canteleu
+      terms:
+        - "76380"
+    - name: Oissel
+      terms:
+        - "76350"
+    - name: Maromme
+      terms:
+        - "76150"
+    - name: Déville-lès-Rouen
+      terms:
+        - "76250"
+    - name: Caudebec-lès-Elbeuf
+      terms:
+        - "76320"
+    - name: Darnétal
+      terms:
+        - "76160"
+    - name: Grand-Couronne
+      terms:
+        - "76530"
+    - name: Petit-Couronne
+      terms:
+        - "76650"
+    - name: Bihorel
+      terms:
+        - "76420"
+    - name: Saint-Pierre-lès-Elbeuf
+      terms:
+        - "76320"
+        - "Saint Pierre lès Elbeuf"
+        - "St-Pierre-lès-Elbeuf"
+        - "St-Pierre-lès-Elbeuf"
+    - name: Saint-Aubin-lès-Elbeuf
+      terms:
+        - "76410"
+        - "Saint Aubin lès Elbeuf"
+        - "St Aubin lès Elbeuf"
+        - "St-Aubin-lès-Elbeuf"
+    - name: Le Mesnil-Esnard
+      terms:
+        - "76240"
+    - name: Notre-Dame-de-Bondeville
+      terms:
+        - "76960"
+    - name: Bonsecours
+      terms:
+        - "76240"
+    - name: Malaunay
+      terms:
+        - "76770"
+    - name: Franqueville-Saint-Pierre
+      terms:
+        - "76520"
+        - "Franqueville Saint Pierre"
+        - "Franqueville St Pierre"
+        - "Franqueville-St-Pierre"
+    - name: Cléon
+      terms:
+        - "76410"
+    - name: Le Trait
+      terms:
+        - "76580"
+    - name: Duclair
+      terms:
+        - "76480"
+    - name: Le Houlme
+      terms:
+        - "76770"
+
+- zone: Vannes Métropole (56)
+  datas:
+    - name: Vannes
+      terms:
+        - "56000"
+        - "56860"
+    - name: Saint-Avé
+      terms:
+        - "Saint Avé"
+        - "St-Avé"
+        - "St Avé"
+        - "56890"
+    - name: Séné
+      terms:
+        - "56860"
+    - name: Sarzeau
+      terms:
+        - "56370"
+    - name: Theix-Noyalo
+      terms:
+        - "56450"
+    - name: Ploeren
+      terms:
+        - "56880"
+    - name: Elven
+      terms:
+        - "56250"
+    - name: Plescop
+      terms:
+        - "56890"
+    - name: Grand-Champ
+      terms:
+        - "56390"
+    - name: Arradon
+      terms:
+        - "56610"
+    - name: Surzur
+      terms:
+        - "56450"
+    - name: Baden
+      terms:
+        - "56870"
+    - name: Saint-Nolff
+      terms:
+        - "Saint Nolff"
+        - "St-Nolff"
+        - "St Nolff"
+        - "56250"
+    - name: Sulniac
+      terms:
+        - "56250"
+    - name: Monterblanc
+      terms:
+        - "56250"
+    - name: Bono
+      terms:
+        - "56400"
+        - "Le Bono"
+    - name: Plougoumelen
+      terms:
+        - "56400"
+    - name: Treffléan
+      terms:
+        - "56250"
+    - name: Meucon
+      terms:
+        - "56890"
+    - name: Colpo
+      terms:
+        - "56390"
+
+- zone: Metz Métropole (57)
+  datas:
+    - name: Metz
+      terms:
+        - "57000"
+        - "57050"
+        - "57070"
+    - name: Montigny-lès-Metz
+      terms:
+        - "57950"
+    - name: Woippy
+      terms:
+        - "57140"
+    - name: Marly
+      terms:
+        - "57155"
+    - name: Moulins-lès-Metz
+      terms:
+        - "57160"
+    - name: Ars-sur-Moselle
+      terms:
+        - "57130"
+    - name: Le Ban-Saint-Martin
+      terms:
+        - "57050"
+        - "Le Ban St Martin"
+        - "Le Ban-St-Martin"
+        - "Le Ban Saint Martin"
+    - name: Longueville-lès-Metz
+      terms:
+        - "57050"
+    - name: Saint-Julien-lès-Metz
+      terms:
+        - "57070"
+        - "Saint Julien lès Metz"
+        - "St-Julien-lès-Metz"
+        - "St Julien lès Metz"
+    - name: Scy-Chazelles
+      terms:
+        - "57160"
+    - name: Amanvillers
+      terms:
+        - "57865"
+    - name: Augny
+      terms:
+        - "57685"
+    - name: Plappeville
+      terms:
+        - "57050"
+    - name: Saint-Privat-la-Montagne
+      terms:
+        - "57855"
+        - "Saint Privat la Montagne"
+        - "St-Privat-la-Montagne"
+        - "St Privat la Montagne"
+    - name: Châtel-Saint-Germain
+      terms:
+        - "57160"
+        - "Châtel Saint Germain"
+        - "Châtel-St-Germain"
+        - "Châtel St Germain"
+    - name: Peltre
+      terms:
+        - "57245"
+    - name: Lorry-lès-Metz
+      terms:
+        - "57050"
+    - name: Saulny
+      terms:
+        - "57140"
+    - name: Rozérieulles
+      terms:
+        - "57160"
+    - name: Laquenexy
+      terms:
+        - "57530"
+
+- zone: Lorient Métropole (56)
+  datas:
+    - name: Lorient
+      terms:
+        - "56100"
+    - name: Lanester
+      terms:
+        - "56600"
+    - name: Ploemeur
+      terms:
+        - "56270"
+    - name: Hennebont
+      terms:
+        - "56700"
+    - name: Guidel
+      terms:
+        - "56520"
+    - name: Quéven
+      terms:
+        - "56530"
+    - name: Larmor-Plage
+      terms:
+        - "56260"
+    - name: Languidic
+      terms:
+        - "56440"
+    - name: Caudan
+      terms:
+        - "56850"
+    - name: Inzinzac-Lochrist
+      terms:
+        - "56650"
+    - name: Plouay
+      terms:
+        - "56240"
+    - name: Riantec
+      terms:
+        - "56670"
+    - name: Locmiquélic
+      terms:
+        - "56570"
+    - name: Pont-Scorff
+      terms:
+        - "56620"
+    - name: Cléguer
+      terms:
+        - "56620"
+    - name: Gestel
+      terms:
+        - "56530"
+    - name: Port-Louis
+      terms:
+        - "56290"
+    - name: Bubry
+      terms:
+        - "56310"
+    - name: Groix
+      terms:
+        - "56590"
+    - name: Inguiniel
+      terms:
+        - "56240"
+

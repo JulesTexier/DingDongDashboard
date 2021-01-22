@@ -139,3 +139,25 @@
     - Perpignan (66)
   is_active: false
   ref_code: PG
+- agglomeration: Vannes
+  zone: 
+    - Vannes Métropole (56)
+  is_active: false
+  ref_code: VS
+- agglomeration: Rouen
+  zone: 
+    - Rouen Métropole (76)
+  is_active: false
+  ref_code: RN
+
+- agglomeration: Metz
+  zone: 
+    - Metz Métropole (57)
+  is_active: false
+  ref_code: MZ
+
+- agglomeration: Lorient
+  zone: 
+    - Lorient Métropole (56)
+  is_active: false
+  ref_code: LT

@@ -19,7 +19,7 @@ class Group::ScraperFoncia < Scraper
           hashed_property[:rooms_number] = regex_gen(access_xml_text(item, "div.MiniData-row"), '(\d+)(.?)(pi(è|e)ce(s?))').to_float_to_int_scrp
           hashed_property[:price] = regex_gen(access_xml_text(item, "strong.TeaserOffer-price-num"), '(\d)(.*)( *)(€)').to_int_scrp
           hashed_property[:flat_type] = get_type_flat(access_xml_text(item, "h3.TeaserOffer-title"))
-          hashed_property[:is_new_construction] = access_xml_text(item, 'h3.TeaserOffer-title') == "Programme Neuf"
+          hashed_property[:is_new_construction] = access_xml_text(item, 'h3.TeaserOffer-title').downcase == "programme neuf"
           if go_to_prop?(hashed_property, 7)
             html = fetch_static_page(hashed_property[:link])
             hashed_property[:description] = access_xml_text(html, "div.OfferDetails > section > div > p").specific_trim_scrp("\n").strip
@@ -37,6 +37,7 @@ class Group::ScraperFoncia < Scraper
         next
       end
     end
+
     return @properties
   end
 end

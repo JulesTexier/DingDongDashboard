@@ -1,453 +1,274 @@
 ---
 - source: SuperImmo
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.superimmo.com/achat/alsace/haut-rhin/mulhouse-68?sort=created_at
-  #   scraper_type: Static
-  #   main_page_cls: section > div.media-body
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.superimmo.com/achat/auvergne/puy-de-dome/clermont-ferrand-63?sort=created_at
-  #   scraper_type: Static
-  #   main_page_cls: section > div.media-body
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://www.superimmo.com/achat/rhone-alpes/isere/grenoble-38?sort=created_at
-  #   scraper_type: Static
-  #   main_page_cls: section > div.media-body
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://www.superimmo.com/achat/pays-de-la-loire/maine-et-loire/angers-49?sort=created_at
-  #   scraper_type: Static
-  #   main_page_cls: section > div.media-body
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://www.superimmo.com/achat/languedoc-roussillon/pyrenees-orientales/perpignan-66?sort=created_at
-  #   scraper_type: Static
-  #   main_page_cls: section > div.media-body
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://www.superimmo.com/achat/vannes-56000,saint-ave-56890,sene-56860,sarzeau-56370,ploeren-56880,arradon-56610,grand-champ-56390,elven-56250,plescop-56890,baden-56870,saint-nolff-56250,surzur-56450,sulniac-56250,monterblanc-56250,plougoumelen-56400,meucon-56890,colpo-56390,trefflean-56250,bono-56400,theix-noyalo-56450?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
+  - zone: Grenoble (38)
+    url: https://www.superimmo.com/achat/saint-martin-d-heres-38400,echirolles-38130,fontaine-38600,meylan-38240,saint-egreve-38120,seyssinet-pariset-38170,le-pont-de-claix-38800,sassenage-38360,eybens-38320,vif-38450,vizille-38220,claix-38640,seyssins-38180,la-tronche-38700,domene-38420,gieres-38610,saint-martin-le-vinoux-38950,varces-allieres-et-risset-38760,corenc-38700?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: BienIci
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-38246%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-110866%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80348%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-178351%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-18000%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-192306%22%2C%22-149249%22%2C%22-192841%22%2C%22-959447%22%2C%22-5812104%22%2C%22-149259%22%2C%22-148333%22%2C%22-149253%22%2C%22-140444%22%2C%22-149742%22%2C%22-150567%22%2C%22-149809%22%2C%22-148818%22%2C%22-146627%22%2C%22-148808%22%2C%22-149810%22%2C%22-149785%22%2C%22-148332%22%2C%22-148807%22%2C%22-148802%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
+  - zone: Grenoble (38)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80349%22%2C%22-105162%22%2C%22-90862%22%2C%22-80379%22%2C%22-85944%22%2C%22-191039%22%2C%22-90412%22%2C%22-105152%22%2C%22-102786%22%2C%22-226965%22%2C%22-226903%22%2C%22-226348%22%2C%22-192318%22%2C%22-105086%22%2C%22-81678%22%2C%22-87608%22%2C%22-80347%22%2C%22-85939%22%2C%22-2547643%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: Figaro
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Mulhouse%20(68)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Clermont-Ferrand%20(63)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Grenoble%20(38)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Angers%20(49)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Perpignan%20(66)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-  #   scraper_type: Static
-  #   main_page_cls: div.container-item
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Grenoble (38)
+    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-saint+martin+d+heres+38400.html?sort=5&location=echirolles%2B38130,fontaine%2B38600,meylan%2B38240,saint%2Begreve%2B38120,seyssinet%2Bpariset%2B38170,sassenage%2B38360,le%2Bpont%2Bde%2Bclaix%2B38800,eybens%2B38320,vif%2B38450,varces%2Ballieres%2Bet%2Brisset%2B38760,claix%2B38640,seyssins%2B38180,vizille%2B38220,gieres%2B38610,domene%2B38420,la%2Btronche%2B38700,saint%2Bmartin%2Ble%2Bvinoux%2B38950,corenc%2B38700
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-saint+ave+56890.html?sort=5&location=sene%2B56860,sarzeau%2B56370,theix%2B56450,ploeren%2B56880,elven%2B56250,plescop%2B56890,grand%2Bchamp%2B56390,arradon%2B56610,surzur%2B56450,baden%2B56870,saint%2Bnolff%2B56250,sulniac%2B56250,monterblanc%2B56250,plougoumelen%2B56400,trefflean%2B56250,meucon%2B56890,colpo%2B56390
+    scraper_type: Static
+    main_page_cls: div.container-item
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: Propr. Figaro
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-haut+rhin-alsace-france/?ville=mulhouse&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-puy+de+dome-auvergne-france/?ville=clermont+ferrand&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-isere-rhone+alpes-france/?ville=grenoble&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=angers&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-pyrenees+orientales-languedoc+roussillon-france/?ville=perpignan&tri=2
-  #   scraper_type: Static
-  #   main_page_cls: div.item-container-inline
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Grenoble (38)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?inter=1&localisation=45.197351,5.7862391,45.15914,5.7428,FR,Saint-Martin-d%27H%C3%A8res&localisation=45.1604371,5.7407139,45.127847,5.6875808,FR,%C3%89chirolles&localisation=45.2059161,5.701777,45.1820179,5.650817,FR,Fontaine&localisation=45.241608,5.8204779,45.186939,5.752474,FR,Meylan&localisation=45.2494499,5.710257,45.213603,5.6552869,FR,Saint-Egr%C3%A8ve&localisation=45.1907319,5.7015459,45.153409,5.6387341,FR,Seyssinet-Pariset&localisation=45.233809,5.6878131,45.1943911,5.6203138,FR,Sassenage&localisation=45.142985,5.715184,45.103044,5.6881271,FR,Le%20Pont-de-Claix&localisation=45.16573,5.7656121,45.1372209,5.730791,FR,Eybens&localisation=45.081248,5.7133859,45.004679,5.629002,FR,Vif&localisation=45.111527,5.7253101,45.065391,5.6143381,FR,Varces-Alli%C3%A8res-et-Risset&localisation=45.147492,5.7007969,45.08905,5.61805,FR,Claix&localisation=45.172631,5.701232,45.1432806,5.638092,FR,Seyssins&localisation=45.097412,5.807798,45.0482199,5.754538,FR,Vizille&localisation=45.2063989,5.81304,45.15914,5.766477,FR,Gi%C3%A8res&localisation=45.219851,5.860001,45.19085,5.813499,FR,Dom%C3%A8ne&localisation=45.234629,5.7630229,45.1887928,5.725682,FR,La%20Tronche&localisation=45.2385029,5.740213,45.198309,5.680562,FR,Saint-Martin-le-Vinoux&localisation=45.246698,5.776255,45.2061931,5.7439289,FR,Corenc&tri=2&mrasn=668993.829398&xtref=proprietes.lefigaro.fr
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?inter=1&localisation=47.7330861,-2.693514,47.668357,-2.7928989,FR,Saint-Av%C3%A9&localisation=47.56656,-2.662947,47.484049,-2.8536039,FR,Sarzeau&localisation=47.671363,-2.582051,47.589309,-2.7122879,FR,Theix-Noyalo&localisation=47.684819,-2.7949959,47.6321411,-2.8838701,FR,Ploeren&localisation=47.7742279,-2.521685,47.6897899,-2.6692281,FR,Elven&localisation=47.7199291,-2.7767511,47.674266,-2.8857529,FR,Plescop&localisation=47.81736,-2.7900808,47.706628,-2.91166,FR,Grand-Champ&localisation=47.656643,-2.778119,47.609601,-2.8699691,FR,Arradon&localisation=47.6132021,-2.557828,47.526424,-2.6913729,FR,Surzur&localisation=47.642655,-2.8561311,47.569162,-2.951036,FR,Baden&localisation=47.7448311,-2.6158801,47.6682919,-2.7200919,FR,Saint-Nolff&localisation=47.6918311,-2.495464,47.615806,-2.6121881,FR,Sulniac&localisation=47.765204,-2.6640419,47.703819,-2.742752,FR,Monterblanc&localisation=47.652622,-2.914158,47.622749,-2.961884,FR,Bono&localisation=47.687877,-2.855104,47.6297999,-2.9310361,FR,Plougoumelen&localisation=47.7007199,-2.5720651,47.6533431,-2.6807101,FR,Treffl%C3%A9an&localisation=47.737635,-2.754091,47.7106471,-2.792004,FR,Meucon&localisation=47.8431971,-2.7644319,47.7905891,-2.8570781,FR,Colpo&tri=2&mrasn=668993.829398&xtref=proprietes.lefigaro.fr
+    scraper_type: Static
+    main_page_cls: div.item-container-inline
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: LogicImmo
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.logic-immo.com/vente-immobilier-mulhouse-tous-codes-postaux,237_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.logic-immo.com/vente-immobilier-clermont-ferrand-tous-codes-postaux,91_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://www.logic-immo.com/vente-immobilier-grenoble-tous-codes-postaux,144_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://www.logic-immo.com/vente-immobilier-angers-tous-codes-postaux,18_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://www.logic-immo.com/vente-immobilier-perpignan-tous-codes-postaux,268_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-  #   scraper_type: Static
-  #   main_page_cls: div.offer-block
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=29118_2,9937_2,11297_2,20408_2,27602_2,31839_2,31118_2,17136_2,10709_2,34785_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=33911_2,27048_2,31571_2,31113_2,32715_2,24318_2,10067_2,24274_2,12745_2,1215_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=32395_2,29458_2,32358_2,21230_2,4057_2,24368_2,33287_2,20378_2,7912_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+    scraper_type: Static
+    main_page_cls: div.offer-block
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: PAP
   params:
-  # - zone: Mulhouse (68) 
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-mulhouse-68-g43628-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-clermont-ferrand-63-g43600-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Grenoble (38)
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-grenoble-38-g43606-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Angers (49)
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-angers-49-g43584-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
-  # - zone: Perpignan (66)
-  #   url: https://www.pap.fr/annonce/vente-appartement-maison-perpignan-66-g43633-a-partir-du-studio
-  #   scraper_type: Static
-  #   main_page_cls: div.search-list-item-alt
-  #   is_active: true
-  #   group_type: Hub
-  #   high_priority: false
+  - zone: Grenoble (38)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-echirolles-38130-g21629g21667g21668g21676g21732g21771g21789g21817g21857g21900g21915g21993g21998g21999g22047g22057g22079g22088g22126-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: false
+    group_type: Hub
+    high_priority: false
+  - zone: Vannes Métropole (56)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-vannes-56000-g28674g28735g28749g28760g28761g28763g28773g28774g28798g28808g28834g28849g28850g28880g28906g28914g28917g28918g28921g28922-a-partir-du-studio
+    scraper_type: Static
+    main_page_cls: div.search-list-item-alt
+    is_active: false
+    group_type: Hub
+    high_priority: false
+
 - source: Stephane Plaza
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=68224&sort=date_desc&limit=15
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Grenoble (38)
-  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=63113&sort=date_desc&limit=15
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Angers (49)
-  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49007&sort=date_desc&limit=15
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Perpignan (66)
-  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=66136&sort=date_desc&limit=15
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=38421&location[]=38151&location[]=38169&location[]=38229&location[]=38382&location[]=38485&location[]=38474&location[]=38317&location[]=38158&location[]=38545&location[]=38524&location[]=38111&location[]=38486&location[]=38562&location[]=38179&location[]=38150&location[]=38516&location[]=38423&location[]=38126&sort=date_desc
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Vannes Métropole (56)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=56260&location[]=56206&location[]=56243&location[]=56240&location[]=56251&location[]=56164&location[]=56053&location[]=56158&location[]=56067&location[]=56003&location[]=56248&location[]=56008&location[]=56231&location[]=56247&location[]=56137&location[]=56262&location[]=56167&location[]=56255&location[]=56132&location[]=56042&sort=date_desc
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+
 - source: Orpi
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=mulhouse&locations%5B0%5D%5Blabel%5D=mulhouse&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=clermont-ferrand&locations%5B0%5D%5Blabel%5D=clermont-ferrand&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Grenoble (38)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=grenoble&locations%5B0%5D%5Blabel%5D=grenoble&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Angers (49)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=angers&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Perpignan (66)
-  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=perpignan&locations%5B0%5D%5Blabel%5D=perpignan&sort=date-down&layoutType=list
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-martin-d-heres&locations%5B0%5D%5Blabel%5D=Saint-Martin-d%27H%C3%A8res+(38400)+-+Ville&locations%5B1%5D%5Bvalue%5D=echirolles&locations%5B1%5D%5Blabel%5D=%C3%89chirolles+(38130)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine&locations%5B2%5D%5Blabel%5D=Fontaine+(38600)+-+Ville&locations%5B3%5D%5Bvalue%5D=meylan&locations%5B3%5D%5Blabel%5D=Meylan+(38240)+-+Ville&locations%5B4%5D%5Bvalue%5D=saint-egreve&locations%5B4%5D%5Blabel%5D=Saint-%C3%89gr%C3%A8ve+(38120)+-+Ville&locations%5B5%5D%5Bvalue%5D=seyssinet-pariset&locations%5B5%5D%5Blabel%5D=Seyssinet-Pariset+(38170)+-+Ville&locations%5B6%5D%5Bvalue%5D=sassenage&locations%5B6%5D%5Blabel%5D=Sassenage+(38360)+-+Ville&locations%5B7%5D%5Bvalue%5D=le-pont-de-claix&locations%5B7%5D%5Blabel%5D=Le+Pont-de-Claix+(38800)+-+Ville&locations%5B8%5D%5Bvalue%5D=eybens&locations%5B8%5D%5Blabel%5D=Eybens+(38320)+-+Ville&locations%5B9%5D%5Bvalue%5D=vif&locations%5B9%5D%5Blabel%5D=Vif+(38450)+-+Ville&locations%5B10%5D%5Bvalue%5D=varces-allieres-et-risset&locations%5B10%5D%5Blabel%5D=Varces-Alli%C3%A8res-et-Risset+(38760)+-+Ville&locations%5B11%5D%5Bvalue%5D=claix&locations%5B11%5D%5Blabel%5D=Claix+(38640)+-+Ville&locations%5B12%5D%5Bvalue%5D=seyssins&locations%5B12%5D%5Blabel%5D=Seyssins+(38180)+-+Ville&locations%5B13%5D%5Bvalue%5D=vizille&locations%5B13%5D%5Blabel%5D=Vizille+(38220)+-+Ville&locations%5B14%5D%5Bvalue%5D=gieres&locations%5B14%5D%5Blabel%5D=Gi%C3%A8res+(38610)+-+Ville&locations%5B15%5D%5Bvalue%5D=domene&locations%5B15%5D%5Blabel%5D=Dom%C3%A8ne+(38420)+-+Ville&locations%5B16%5D%5Bvalue%5D=la-tronche&locations%5B16%5D%5Blabel%5D=La+Tronche+(38700)+-+Ville&locations%5B17%5D%5Bvalue%5D=saint-martin-le-vinoux&locations%5B17%5D%5Blabel%5D=Saint-Martin-le-Vinoux+(38950)+-+Ville&locations%5B18%5D%5Bvalue%5D=corenc&locations%5B18%5D%5Blabel%5D=Corenc+(38700)+-+Ville&sort=date-down&layoutType=mixte
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Vannes Métropole (56)
+    url: https://www.orpi.com/recherche/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=vannes&locations%5B0%5D%5Blabel%5D=Vannes+(56000)+-+Ville&locations%5B1%5D%5Bvalue%5D=saint-ave&locations%5B1%5D%5Blabel%5D=Saint-Av%C3%A9+(56890)+-+Ville&locations%5B2%5D%5Bvalue%5D=sene&locations%5B2%5D%5Blabel%5D=S%C3%A9n%C3%A9+(56860)+-+Ville&locations%5B3%5D%5Bvalue%5D=sarzeau&locations%5B3%5D%5Blabel%5D=Sarzeau+(56370)+-+Ville&locations%5B4%5D%5Bvalue%5D=theix&locations%5B4%5D%5Blabel%5D=Theix+(56450)+-+Ville&locations%5B5%5D%5Bvalue%5D=ploeren&locations%5B5%5D%5Blabel%5D=Ploeren+(56880)+-+Ville&locations%5B6%5D%5Bvalue%5D=elven&locations%5B6%5D%5Blabel%5D=Elven+(56250)+-+Ville&locations%5B7%5D%5Bvalue%5D=plescop&locations%5B7%5D%5Blabel%5D=Plescop+(56890)+-+Ville&locations%5B8%5D%5Bvalue%5D=grand-champ&locations%5B8%5D%5Blabel%5D=Grand-Champ+(56390)+-+Ville&locations%5B9%5D%5Bvalue%5D=arradon&locations%5B9%5D%5Blabel%5D=Arradon+(56610)+-+Ville&locations%5B10%5D%5Bvalue%5D=surzur&locations%5B10%5D%5Blabel%5D=Surzur+(56450)+-+Ville&locations%5B11%5D%5Bvalue%5D=baden&locations%5B11%5D%5Blabel%5D=Baden+(56870)+-+Ville&locations%5B12%5D%5Bvalue%5D=saint-nolff&locations%5B12%5D%5Blabel%5D=Saint-Nolff+(56250)+-+Ville&locations%5B13%5D%5Bvalue%5D=sulniac&locations%5B13%5D%5Blabel%5D=Sulniac+(56250)+-+Ville&locations%5B14%5D%5Bvalue%5D=monterblanc&locations%5B14%5D%5Blabel%5D=Monterblanc+(56250)+-+Ville&locations%5B15%5D%5Bvalue%5D=bono&locations%5B15%5D%5Blabel%5D=Bono+(56400)+-+Ville&locations%5B16%5D%5Bvalue%5D=plougoumelen&locations%5B16%5D%5Blabel%5D=Plougoumelen+(56400)+-+Ville&locations%5B17%5D%5Bvalue%5D=trefflean&locations%5B17%5D%5Blabel%5D=Treffl%C3%A9an+(56250)+-+Ville&locations%5B18%5D%5Bvalue%5D=meucon&locations%5B18%5D%5Blabel%5D=Meucon+(56890)+-+Ville&locations%5B19%5D%5Bvalue%5D=colpo&locations%5B19%5D%5Blabel%5D=Colpo+(56390)+-+Ville&sort=date-down&layoutType=mixte
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+
 - source: Laforet
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=68224&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=63113&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Grenoble (38)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=38185&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Angers (49)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=49007&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Perpignan (66)
-  #   url: https://www.laforet.com/api/immo/properties?&cities=66136&transaction=buy&perPage=25
-  #   scraper_type: HTTPRequest
-  #   http_type: get_json
-  #   is_active: true
-  #   group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=16&exclude=&cities=38421%2C38151%2C38169%2C38229%2C38382%2C38485%2C38474%2C38317%2C38158%2C38545%2C38524%2C38111%2C38562%2C38486%2C38150%2C38516%2C38179%2C38423%2C38126%2C38150%2C38516%2C38524%2C38545&transaction=buy&favoriz=true
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+  - zone: Vannes Métropole (56)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=16&exclude=&cities=56260%2C56206%2C56243%2C56240%2C56251%2C56164%2C56053%2C56158%2C56003%2C56067%2C56008%2C56248%2C56231%2C56247%2C56137%2C56167%2C56262%2C56255%2C56132%2C56042%2C56042%2C56053%2C56067%2C56137%2C56167%2C56255%2C56262&types=apartment%2Chouse&transaction=buy&favoriz=true
+    scraper_type: HTTPRequest
+    http_type: get_json
+    is_active: false
+    group_type: Group
+
 - source: Century21
   params:
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-clermont+ferrand/tri-date-desc/
-  #   scraper_type: Static
-  #   main_page_cls: div.contentAnnonce
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Grenoble (38)
-  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-grenoble/tri-date-desc/
-  #   scraper_type: Static
-  #   main_page_cls: div.contentAnnonce
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Perpignan (66)
-  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-perpignan/tri-date-desc/
-  #   scraper_type: Static
-  #   main_page_cls: div.contentAnnonce
-  #   is_active: true
-  #   group_type: Group
+  - zone: Grenoble (38)
+    url: https://www.century21.fr/annonces/achat/v-paris/#/annonces/achat/v-vizille-varces+allieres+et+risset-vif-corenc-gieres-le+pont+de+claix-st+martin+d+heres-st+egreve-sassenage-st+martin+le+vinoux-echirolles-eybens-la+tronche-seyssins-domene-seyssinet+pariset-meylan/cpv-38600_fontaine-38640_claix/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: false
+    group_type: Group
+  - zone: Vannes Métropole (56)
+    url: https://www.century21.fr/annonces/achat/v-vizille-varces+allieres+et+risset-vif-corenc-gieres-le+pont+de+claix-st+martin+d+heres-st+egreve-sassenage-st+martin+le+vinoux-echirolles-eybens-la+tronche-seyssins-domene-seyssinet+pariset-meylan/cpv-38600_fontaine-38640_claix/tri-date-desc/#/annonces/achat/v-st+nolff-elven-ploeren-plescop-trefflean-monterblanc-vannes-meucon-sarzeau-arradon-sene-theix+noyalo-surzur-colpo-plougoumelen-baden-sulniac-grand+champ-st+ave/tri-date-desc/
+    scraper_type: Static
+    main_page_cls: div.contentAnnonce
+    is_active: false
+    group_type: Group
+
 - source: Foncia
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://fr.foncia.com/achat/mulhouse-68/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-  #   scraper_type: Static
-  #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://fr.foncia.com/achat/mulhouse-68/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-  #   scraper_type: Static
-  #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Grenoble (38)
-  #   url: https://fr.foncia.com/achat/clermont-ferrand-63/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-  #   scraper_type: Static
-  #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
-  #   group_type: Group
-  # - zone: Perpignan (66)
-  #   url: https://fr.foncia.com/achat/perpignan-66/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-  #   scraper_type: Static
-  #   main_page_cls: div.TeaserOffer-content
-  #   is_active: true
-  #   group_type: Group
+  - zone: Grenoble (38)
+    url: https://fr.foncia.com/achat/saint-martin-d-heres-38400--echirolles-38130--fontaine-38600--meylan-38240--saint-egreve-38120--seyssinet-pariset-38170--sassenage-38360--le-pont-de-claix-38800--eybens-38320--vif-38450--varces-allieres-et-risset-38760--claix-38640--seyssins-38180--vizille-38220--gieres-38610--domene-38420--la-tronche-38700--saint-martin-le-vinoux-38950--corenc-38700
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: false
+    group_type: Group
+  - zone: Vannes Métropole (56)
+    url: https://fr.foncia.com/achat/vannes-56000--saint-ave-56890--sene-56860--sarzeau-56370--theix-56450--ploeren-56880--elven-56250--plescop-56890--grand-champ-56390--arradon-56610--surzur-56450--baden-56870--saint-nolff-56250--sulniac-56250--monterblanc-56250--bono-56400--plougoumelen-56400--trefflean-56250--meucon-56890--colpo-56390
+    scraper_type: Static
+    main_page_cls: div.TeaserOffer-content
+    is_active: false
+    group_type: Group
+
 - source: MeilleursAgents
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.meilleursagents.com/annonces/achat/mulhouse-68100/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.meilleursagents.com/annonces/achat/clermont-ferrand-63000/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Grenoble (38)
-  #   url: https://www.meilleursagents.com/annonces/achat/grenoble-38000/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Angers (49)
-  #   url: https://www.meilleursagents.com/annonces/achat/angers-49000/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Perpignan (66)
-  #   url: https://www.meilleursagents.com/annonces/achat/perpignan-66000/
-  #   main_page_cls: div.listing-item.search-listing-result__item
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16017%2C15759%2C15775%2C15830%2C15979%2C16076%2C16067%2C15916%2C15766%2C16133&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16111%2C15723%2C16077%2C16150%2C15784%2C15758%2C16103%2C16019%2C15735&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Vannes Métropole (56)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=23442%2C23388%2C23425%2C23422%2C2080778157%2C23346%2C23236%2C23340%2C23250%2C23186&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Vannes Métropole (56)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=23442%2C23388%2C23425%2C23422%2C2080778157%2C23346%2C23236%2C23340%2C23250%2C23186&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+    main_page_cls: div.listing-item.search-listing-result__item
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+
 - source: SeLoger
   params:
-  # - zone: Mulhouse (68)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:680224}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Clermont-Ferrand (63)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:630113}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Grenoble (38)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:380185}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Angers (49)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:490007}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
-  # - zone: Perpignan (66)
-  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:660136}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-  #   main_page_cls: script
-  #   scraper_type: Proxy
-  #   waiting_cls: nil
-  #   multi_page: false
-  #   page_nbr:  1
-  #   is_active: true
-  #   group_type: Proxy
+  - zone: Grenoble (38)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[380421]},{%22inseeCodes%22:[380151]},{%22inseeCodes%22:[380169]},{%22inseeCodes%22:[380229]},{%22inseeCodes%22:[380382]},{%22inseeCodes%22:[380485]},{%22inseeCodes%22:[380474]},{%22inseeCodes%22:[380317]},{%22inseeCodes%22:[380158]},{%22inseeCodes%22:[380545]},{%22inseeCodes%22:[380524]},{%22inseeCodes%22:[380111]},{%22inseeCodes%22:[380562]},{%22inseeCodes%22:[380179]},{%22inseeCodes%22:[380150]},{%22inseeCodes%22:[380516]},{%22inseeCodes%22:[380423]},{%22inseeCodes%22:[380126]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+  - zone: Vannes Métropole (56)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[560260]},{%22inseeCodes%22:[560206]},{%22inseeCodes%22:[560243]},{%22inseeCodes%22:[560240]},{%22inseeCodes%22:[560251]},{%22inseeCodes%22:[560164]},{%22inseeCodes%22:[660065]},{%22inseeCodes%22:[560158]},{%22inseeCodes%22:[560067]},{%22inseeCodes%22:[560003]},{%22inseeCodes%22:[560248]},{%22inseeCodes%22:[560008]},{%22inseeCodes%22:[560231]},{%22inseeCodes%22:[560247]},{%22inseeCodes%22:[560137]},{%22inseeCodes%22:[560262]},{%22inseeCodes%22:[560167]},{%22inseeCodes%22:[560255]},{%22inseeCodes%22:[560132]},{%22inseeCodes%22:[560042]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+    main_page_cls: script
+    scraper_type: Proxy
+    waiting_cls: nil
+    multi_page: false
+    page_nbr:  1
+    is_active: false
+    group_type: Proxy
+
+
+- source: LeBonCoin
+  params:
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Vif_38450__45.05604_5.66803_5860%2CEybens_38320__45.14742_5.75131_2309%2CLe%20Pont-de-Claix_38800__45.12441_5.69767_2186%2CSassenage_38360__45.20655_5.66288_3425%2CSeyssinet-Pariset_38170__45.18091_5.69613_5448%2CSaint-Egr%C3%A8ve_38120__45.23297_5.68084_2431%2CMeylan_38240__45.20932_5.77848_3632%2CFontaine_38600__45.19206_5.68767_2959%2CEchirolles_38130__45.14983_5.71853_2472%2CSaint-Martin-d%27H%C3%A8res_38400__45.18381_5.75445_3697&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Corenc_38700__45.20993_5.75219_4164%2CSaint-Martin-le-Vinoux_38950__45.20137_5.71679_4145%2CLa%20Tronche_38700__45.20509_5.73843_3353%2CDom%C3%A8ne_38420__45.20234_5.83813_2004%2CGi%C3%A8res_38610__45.18009_5.79096_3140%2CVizille_38220__45.07559_5.77231_3212%2CSeyssins_38180__45.16289_5.68478_3885%2CClaix_38640__45.12025_5.67258_5262%2CVarces-Alli%C3%A8res-et-Risset_38760__45.08693_5.68196_5291&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Vannes Métropole (56)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Vannes_56000__47.65834_-2.75985_6023%2CArradon_56610__47.62028_-2.82522_4155%2CGrandchamp_52600__47.72336_5.4509_2278%2CPlescop_56890__47.6986_-2.80454_6257%2CElven_56250__47.72892_-2.59332_6507%2CPloeren_56880__47.65862_-2.85745_4784%2CTheix_56450__47.62922_-2.65014_5333%2CSarzeau_56370__47.5266_-2.77055_8693%2CS%C3%A9n%C3%A9_56860__47.62039_-2.73614_4161%2CSaint-Av%C3%A9_56890__47.69034_-2.73646_4782&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Vannes Métropole (56)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Colpo_56390__47.81901_-2.80576_3909%2CMeucon_56890__47.71722_-2.76503_2476%2CTreffl%C3%A9an_56250__47.6827_-2.61444_5122%2CPlougoumelen_56400__47.65438_-2.91615_5680%2CBono_56400__47.63781_-2.95153_2951%2CMonterblanc_56250__47.74378_-2.67908_5184%2CSulniac_56250__47.67812_-2.56875_6997%2CSaint-Nolff_56250__47.70607_-2.65354_5873%2CBaden_56870__47.6195_-2.91914_6841%2CSurzur_56450__47.5793_-2.62924_5978&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
