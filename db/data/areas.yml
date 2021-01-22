@@ -1429,7 +1429,7 @@
 
 - zone: Metz Métropole (57)
   datas:
-    - name: Vannes
+    - name: Metz
       terms:
         - "57000"
         - "57050"
