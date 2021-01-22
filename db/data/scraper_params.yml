@@ -1,34 +1,34 @@
 ---
 - source: SuperImmo
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/courbevoie-92400?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/levallois-perret-92300?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://www.superimmo.com/achat/sotteville-les-rouen-76300,saint-etienne-du-rouvray-76800,le-grand-quevilly-76120,le-petit-quevilly-76140,mont-saint-aignan-76130,elbeuf-76500,canteleu-76380,maromme-76150,bois-guillaume-76230,oissel-76350,deville-les-rouen-76250,caudebec-les-elbeuf-76320,grand-couronne-76530,darnetal-76160,bihorel-76420,petit-couronne-76650,saint-pierre-les-elbeuf-76320,saint-aubin-les-elbeuf-76410,le-mesnil-esnard-76240,rouen-76?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://www.superimmo.com/achat/notre-dame-de-bondeville-76960,bonsecours-76240,cleon-76410,malaunay-76770,le-trait-76580,franqueville-saint-pierre-76520,le-houlme-76770,duclair-76480?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/courbevoie-92400?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.superimmo.com/achat/ile-de-france/hauts-de-seine/levallois-perret-92300?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.superimmo.com/achat/sotteville-les-rouen-76300,saint-etienne-du-rouvray-76800,le-grand-quevilly-76120,le-petit-quevilly-76140,mont-saint-aignan-76130,elbeuf-76500,canteleu-76380,maromme-76150,bois-guillaume-76230,oissel-76350,deville-les-rouen-76250,caudebec-les-elbeuf-76320,grand-couronne-76530,darnetal-76160,bihorel-76420,petit-couronne-76650,saint-pierre-les-elbeuf-76320,saint-aubin-les-elbeuf-76410,le-mesnil-esnard-76240,rouen-76?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.superimmo.com/achat/notre-dame-de-bondeville-76960,bonsecours-76240,cleon-76410,malaunay-76770,le-trait-76580,franqueville-saint-pierre-76520,le-houlme-76770,duclair-76480?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://www.superimmo.com/achat/panazol-87350,isle-87170,couzeix-87270,le-palais-sur-vienne-87410,feytiat-87220,condat-sur-vienne-87920,rilhac-rancon-87570,verneuil-sur-vienne-87430,saint-just-le-martel-87590,boisseuil-87220,veyrac-87520,saint-gence-87510,chaptelat-87270,le-vigen-87110,bonnac-la-cote-87270,solignac-87110,eyjeaux-87220,peyrilhac-87510,aureil-87220,limoges-87?sort=created_at
     scraper_type: Static
@@ -96,19 +96,26 @@
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
+  - zone: Grenoble (38)
+    url: https://www.superimmo.com/achat/saint-martin-d-heres-38400,echirolles-38130,fontaine-38600,meylan-38240,saint-egreve-38120,seyssinet-pariset-38170,le-pont-de-claix-38800,sassenage-38360,eybens-38320,vif-38450,vizille-38220,claix-38640,seyssins-38180,la-tronche-38700,domene-38420,gieres-38610,saint-martin-le-vinoux-38950,varces-allieres-et-risset-38760,corenc-38700?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+    scraper_type: Static
+    main_page_cls: section > div.media-body
+    is_active: false
+    group_type: Hub
+    high_priority: false
   - zone: Bordeaux (33)
     url: https://www.superimmo.com/achat/aquitaine/gironde/bordeaux-33?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://www.superimmo.com/achat/merignac-33700,pessac-33600,talence-33400,saint-medard-en-jalles-33160,villenave-d-ornon-33140,begles-33130,le-bouscat-33110,gradignan-33170,lormont-33310,cenon-33150,eysines-33320,floirac-33270,blanquefort-33290,bruges-33520,ambares-et-lagrave-33440,le-haillan-33185,le-taillan-medoc-33320,parempuyre-33290,carbon-blanc-33560,artigues-pres-bordeaux-33370?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://www.superimmo.com/achat/merignac-33700,pessac-33600,talence-33400,saint-medard-en-jalles-33160,villenave-d-ornon-33140,begles-33130,le-bouscat-33110,gradignan-33170,lormont-33310,cenon-33150,eysines-33320,floirac-33270,blanquefort-33290,bruges-33520,ambares-et-lagrave-33440,le-haillan-33185,le-taillan-medoc-33320,parempuyre-33290,carbon-blanc-33560,artigues-pres-bordeaux-33370?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://www.superimmo.com/achat/aquitaine/gironde/lille-59?sort=created_at
     scraper_type: Static
@@ -239,34 +246,35 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://www.superimmo.com/achat/pays-de-la-loire/maine-et-loire/angers-49?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.superimmo.com/achat/avrille-49240,les-ponts-de-ce-49130,saint-barthelemy-d-anjou-49124,montreuil-juigne-49460,bouchemaine-49080,beaucouze-49070,murs-erigne-49610,ecouflant-49000,sainte-gemmes-sur-loire-49130,le-plessis-grammoire-49124,briollay-49125,saint-lambert-la-potherie-49070,cantenay-epinard-49460,feneu-49460,saint-clement-de-la-place-49370,ecuille-49460,behuard-49170,longuenee-en-anjou-49,loire-authion-49,rives-du-loir-en-anjou-49140?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.superimmo.com/achat/trelaze-49800,savennieres-49170,saint-martin-du-fouilloux-49170,soulaines-sur-aubance-49610,soulaire-et-bourg-49460,sarrigne-49800,verrieres-en-anjou-49,saint-leger-de-linieres-49070?sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://www.superimmo.com/achat/montivilliers-76290,gonfreville-l-orcher-76700,harfleur-76700,sainte-adresse-76310,octeville-sur-mer-76930,epouville-76133,gainneville-76700,fontaine-la-mallet-76290,saint-martin-du-manoir-76290,rogerville-76700,cauville-sur-mer-76930,maneglise-76133,fontenay-76290,rolleville-76133,mannevillette-76290,notre-dame-du-bec-76133?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
-    scraper_type: Static
-    main_page_cls: section > div.media-body
-    is_active: false
-    group_type: Hub
-    high_priority: false- zone: Perpignan (66)
+  # - zone: Angers (49)
+  #   url: https://www.superimmo.com/achat/pays-de-la-loire/maine-et-loire/angers-49?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.superimmo.com/achat/avrille-49240,les-ponts-de-ce-49130,saint-barthelemy-d-anjou-49124,montreuil-juigne-49460,bouchemaine-49080,beaucouze-49070,murs-erigne-49610,ecouflant-49000,sainte-gemmes-sur-loire-49130,le-plessis-grammoire-49124,briollay-49125,saint-lambert-la-potherie-49070,cantenay-epinard-49460,feneu-49460,saint-clement-de-la-place-49370,ecuille-49460,behuard-49170,longuenee-en-anjou-49,loire-authion-49,rives-du-loir-en-anjou-49140?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.superimmo.com/achat/trelaze-49800,savennieres-49170,saint-martin-du-fouilloux-49170,soulaines-sur-aubance-49610,soulaire-et-bourg-49460,sarrigne-49800,verrieres-en-anjou-49,saint-leger-de-linieres-49070?sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://www.superimmo.com/achat/montivilliers-76290,gonfreville-l-orcher-76700,harfleur-76700,sainte-adresse-76310,octeville-sur-mer-76930,epouville-76133,gainneville-76700,fontaine-la-mallet-76290,saint-martin-du-manoir-76290,rogerville-76700,cauville-sur-mer-76930,maneglise-76133,fontenay-76290,rolleville-76133,mannevillette-76290,notre-dame-du-bec-76133?option%5B%5D=old_build&option%5B%5D=new_build&sort=created_at
+  #   scraper_type: Static
+  #   main_page_cls: section > div.media-body
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  - zone: Perpignan (66)
     url: https://www.superimmo.com/achat/languedoc-roussillon/pyrenees-orientales/perpignan-66?sort=created_at
     scraper_type: Static
     main_page_cls: section > div.media-body
@@ -275,27 +283,34 @@
     high_priority: false
 - source: BienIci
   params:
-  - zone: Rouen Métropole (76)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-75628%22%2C%22-93029%22%2C%22-102144%22%2C%22-102145%22%2C%22-93030%22%2C%22-102870%22%2C%22-133927%22%2C%22-2923822%22%2C%22-102268%22%2C%22-104117%22%2C%22-102875%22%2C%22-102867%22%2C%22-135879%22%2C%22-136392%22%2C%22-103786%22%2C%22-102533%22%2C%22-2739991%22%2C%22-135889%22%2C%22-132462%22%2C%22-132397%22%2C%22-113532%22%2C%22-113994%22%2C%22-113624%22%2C%22-114762%22%2C%22-114849%22%2C%22-104697%22%2C%22-104664%22%2C%22-113598%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  - zone: Grenoble (38)
+    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-80349%22%2C%22-105162%22%2C%22-90862%22%2C%22-80379%22%2C%22-85944%22%2C%22-191039%22%2C%22-90412%22%2C%22-105152%22%2C%22-102786%22%2C%22-226965%22%2C%22-226903%22%2C%22-226348%22%2C%22-192318%22%2C%22-105086%22%2C%22-81678%22%2C%22-87608%22%2C%22-80347%22%2C%22-85939%22%2C%22-2547643%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-91768%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-86985%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-75628%22%2C%22-93029%22%2C%22-102144%22%2C%22-102145%22%2C%22-93030%22%2C%22-102870%22%2C%22-133927%22%2C%22-2923822%22%2C%22-102268%22%2C%22-104117%22%2C%22-102875%22%2C%22-102867%22%2C%22-135879%22%2C%22-136392%22%2C%22-103786%22%2C%22-102533%22%2C%22-2739991%22%2C%22-135889%22%2C%22-132462%22%2C%22-132397%22%2C%22-113532%22%2C%22-113994%22%2C%22-113624%22%2C%22-114762%22%2C%22-114849%22%2C%22-104697%22%2C%22-104664%22%2C%22-113598%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-91768%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-86985%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-114172%22%2C%22-117244%22%2C%22-114168%22%2C%22-114175%22%2C%22-115189%22%2C%22-116018%22%2C%22-114174%22%2C%22-114170%22%2C%22-116464%22%2C%22-114775%22%2C%22-116650%22%2C%22-116023%22%2C%22-116618%22%2C%22-114976%22%2C%22-117289%22%2C%22-114800%22%2C%22-117246%22%2C%22-115186%22%2C%22-116451%22%2C%22-114758%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
     scraper_type: HTTPRequest
@@ -369,13 +384,13 @@
     http_type: get_json
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-105275%22%2C%22-105281%22%2C%22-105267%22%2C%22-105273%22%2C%22-110581%22%2C%22-105278%22%2C%22-105268%22%2C%22-88808%22%2C%22-105280%22%2C%22-105283%22%2C%22-88807%22%2C%22-105271%22%2C%22-88809%22%2C%22-88611%22%2C%22-105277%22%2C%22-105276%22%2C%22-105266%22%2C%22-103230%22%2C%22-88619%22%2C%22-88609%22%2C%22-105279%22%2C%22-105269%22%2C%22-88614%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-105275%22%2C%22-105281%22%2C%22-105267%22%2C%22-105273%22%2C%22-110581%22%2C%22-105278%22%2C%22-105268%22%2C%22-88808%22%2C%22-105280%22%2C%22-105283%22%2C%22-88807%22%2C%22-105271%22%2C%22-88809%22%2C%22-88611%22%2C%22-105277%22%2C%22-105276%22%2C%22-105266%22%2C%22-103230%22%2C%22-88619%22%2C%22-88609%22%2C%22-105279%22%2C%22-105269%22%2C%22-88614%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-58404%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
@@ -506,27 +521,27 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-178351%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-179337%22%2C%22-178350%22%2C%22-357050%22%2C%22-178349%22%2C%22-167632%22%2C%22-167617%22%2C%22-167631%22%2C%22-906069%22%2C%22-167630%22%2C%22-5812044%22%2C%22-178356%22%2C%22-324957%22%2C%22-31254%22%2C%22-31255%22%2C%22-167618%22%2C%22-178355%22%2C%22-178359%22%2C%22-178357%22%2C%22-319078%22%2C%22-31253%22%2C%22-324725%22%2C%22-325723%22%2C%22-906081%22%2C%22-31262%22%2C%22-5812049%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-157574%22%2C%22-142858%22%2C%22-108849%22%2C%22-157583%22%2C%22-110009%22%2C%22-411190%22%2C%22-109655%22%2C%22-142865%22%2C%22-157576%22%2C%22-109657%22%2C%22-190271%22%2C%22-108843%22%2C%22-106314%22%2C%22-144725%22%2C%22-104498%22%2C%22-110008%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Angers (49)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-178351%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-179337%22%2C%22-178350%22%2C%22-357050%22%2C%22-178349%22%2C%22-167632%22%2C%22-167617%22%2C%22-167631%22%2C%22-906069%22%2C%22-167630%22%2C%22-5812044%22%2C%22-178356%22%2C%22-324957%22%2C%22-31254%22%2C%22-31255%22%2C%22-167618%22%2C%22-178355%22%2C%22-178359%22%2C%22-178357%22%2C%22-319078%22%2C%22-31253%22%2C%22-324725%22%2C%22-325723%22%2C%22-906081%22%2C%22-31262%22%2C%22-5812049%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-157574%22%2C%22-142858%22%2C%22-108849%22%2C%22-157583%22%2C%22-110009%22%2C%22-411190%22%2C%22-109655%22%2C%22-142865%22%2C%22-157576%22%2C%22-109657%22%2C%22-190271%22%2C%22-108843%22%2C%22-106314%22%2C%22-144725%22%2C%22-104498%22%2C%22-110008%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Perpignan (66)
     url: https://www.bienici.com/realEstateAds.json?filters=%7B%22size%22%3A24%2C%22from%22%3A0%2C%22filterType%22%3A%22buy%22%2C%22propertyType%22%3A%5B%22house%22%2C%22flat%22%5D%2C%22page%22%3A1%2C%22resultsPerPage%22%3A24%2C%22maxAuthorizedResults%22%3A2400%2C%22sortBy%22%3A%22publicationDate%22%2C%22sortOrder%22%3A%22desc%22%2C%22onTheMarket%22%3A%5Btrue%5D%2C%22mapMode%22%3A%22enabled%22%2C%22showAllModels%22%3Afalse%2C%22zoneIdsByTypes%22%3A%7B%22zoneIds%22%3A%5B%22-18000%22%5D%7D%7D&extensionType=extendedIfNoResult&leadingCount=2&access_token=kuH8Fjq1Fh8eWrGHPlchygabn0H5JxKGPdH%2FlL45KA8%3D%3A5da5ee5104a380014e1e0747&id=5da5ee5104a380014e1e0747
     scraper_type: HTTPRequest
@@ -536,27 +551,34 @@
     high_priority: false
 - source: Figaro
   params:
-  - zone: Rouen Métropole (76)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-maison-rouen+76000.html?types=chateau,hotel%2Bparticulier,manoir,propriete,villa,appartement,chambre,duplex&sort=5&location=sotteville%2Bles%2Brouen%2B76300,saint%2Betienne%2Bdu%2Brouvray%2B76800,le%2Bgrand%2Bquevilly%2B76120,le%2Bpetit%2Bquevilly%2B76140,mont%2Bsaint%2Baignan%2B76130,elbeuf%2B76500,bois%2Bguillaume%2B76230,canteleu%2B76380,oissel%2B76350,maromme%2B76150,deville%2Bles%2Brouen%2B76250,caudebec%2Bles%2Belbeuf%2B76320,darnetal%2B76160,grand%2Bcouronne%2B76530,petit%2Bcouronne%2B76650,bihorel%2B76420,saint%2Bpierre%2Bles%2Belbeuf%2B76320,saint%2Baubin%2Bles%2Belbeuf%2B76410,le%2Bmesnil%2Besnard%2B76240,notre%2Bdame%2Bde%2Bbondeville%2B76960,bonsecours%2B76240,malaunay%2B76770,franqueville%2Bsaint%2Bpierre%2B76520,cleon%2B76410,le%2Btrait%2B76580,duclair%2B76480,le%2Bhoulme%2B76770
+  - zone: Grenoble (38)
+    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&mode=&location=Saint-martin-d%27heres%20%2838%29,Echirolles%20%2838%29,Fontaine%20%2838%29,Meylan%20%2838%29,Saint-egreve%20%2838%29,Seyssinet-Pariset%20%2838%29,Sassenage%20%2838%29,Le%20Pont-de-Claix%20%2838%29,Eybens%20%2838%29,Vif%20%2838%29,Claix%20%2838%29,Seyssins%20%2838%29,Vizille%20%2838%29,Domene%20%2838%29,La%20Tronche%20%2838%29,Saint-Martin-le-Vinoux%20%2838%29&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft&type=appartement&type=atelier&type=chambre&type=chambre%20d%20hote&type=duplex&type=loft&type=chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&type=chalet&type=chateau&type=ferme&type=gite&type=hotel&type=hotel%20particulier&type=maison&type=manoir&type=moulin&type=peniche&type=propriete&type=villa&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&priceMin=100%20000&priceMax=5%20000%20000&areaMin=8&areaMax=500&roomMin=0&bedroomMin=0&_furnished=on&_furnished=on&_oldness=on&_mode=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_handicapAccessible=on
     scraper_type: Static
     main_page_cls: div.container-item
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-courbevoie+92400.html?sort=5
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-levallois+perret+92300.html?sort=5
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  #- zone: Rouen Métropole (76)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-maison-rouen+76000.html?types=chateau,hotel%2Bparticulier,manoir,propriete,villa,appartement,chambre,duplex&sort=5&location=sotteville%2Bles%2Brouen%2B76300,saint%2Betienne%2Bdu%2Brouvray%2B76800,le%2Bgrand%2Bquevilly%2B76120,le%2Bpetit%2Bquevilly%2B76140,mont%2Bsaint%2Baignan%2B76130,elbeuf%2B76500,bois%2Bguillaume%2B76230,canteleu%2B76380,oissel%2B76350,maromme%2B76150,deville%2Bles%2Brouen%2B76250,caudebec%2Bles%2Belbeuf%2B76320,darnetal%2B76160,grand%2Bcouronne%2B76530,petit%2Bcouronne%2B76650,bihorel%2B76420,saint%2Bpierre%2Bles%2Belbeuf%2B76320,saint%2Baubin%2Bles%2Belbeuf%2B76410,le%2Bmesnil%2Besnard%2B76240,notre%2Bdame%2Bde%2Bbondeville%2B76960,bonsecours%2B76240,malaunay%2B76770,franqueville%2Bsaint%2Bpierre%2B76520,cleon%2B76410,le%2Btrait%2B76580,duclair%2B76480,le%2Bhoulme%2B76770
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-courbevoie+92400.html?sort=5
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-levallois+perret+92300.html?sort=5
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&mode=&location=Limoges%20%2887%29,Panazol%20%2887%29,Couzeix%20%2887%29,Isle%20%2887%29,Feytiat%20%2887%29,Le%20Palais-sur-Vienne%20%2887%29,Condat-sur-Vienne%20%2887%29,Verneuil-sur-Vienne%20%2887%29,Rilhac-Rancon%20%2887%29,Boisseuil%20%2887%29,Saint-Just-le-Martel%20%2887%29,Le%20Vigen%20%2887%29,Saint-Gence%20%2887%29,Chaptelat%20%2887%29,Veyrac%20%2887%29,Solignac%20%2887%29,Eyjeaux%20%2887%29,Peyrilhac%20%2887%29,Aureil%20%2887%29&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft&type=appartement&type=atelier&type=chambre&type=chambre%20d%20hote&type=duplex&type=loft&type=chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&type=chalet&type=chateau&type=ferme&type=gite&type=hotel&type=hotel%20particulier&type=maison&type=manoir&type=moulin&type=peniche&type=propriete&type=villa&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&priceMin=100%20000&priceMax=5%20000%20000&areaMin=8&areaMax=500&roomMin=0&bedroomMin=0&_furnished=on&_furnished=on&_oldness=on&_mode=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_option=on&_handicapAccessible=on
     scraper_type: Static
@@ -630,13 +652,13 @@
     main_page_cls: div.container-item
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-merignac+33700.html?sort=5&location=pessac%2B33600,talence%2B33400,villenave%2Bd%2Bornon%2B33140,saint%2Bmedard%2Ben%2Bjalles%2B33160,begles%2B33130,gradignan%2B33170,cenon%2B33150,eysines%2B33320,le%2Bbouscat%2B33110,lormont%2B33310,bruges%2B33520,floirac%2B33270,ambares%2Bet%2Blagrave%2B33440,blanquefort%2B33290,le%2Bhaillan%2B33185,le%2Btaillan%2Bmedoc%2B33320,parempuyre%2B33290,artigues%2Bpres%2Bbordeaux%2B33370,carbon%2Bblanc%2B33560,martignas%2Bsur%2Bjalle%2B33127,saint%2Baubin%2Bde%2Bmedoc%2B33160,bassens%2B33530
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-bien-merignac+33700.html?sort=5&location=pessac%2B33600,talence%2B33400,villenave%2Bd%2Bornon%2B33140,saint%2Bmedard%2Ben%2Bjalles%2B33160,begles%2B33130,gradignan%2B33170,cenon%2B33150,eysines%2B33320,le%2Bbouscat%2B33110,lormont%2B33310,bruges%2B33520,floirac%2B33270,ambares%2Bet%2Blagrave%2B33440,blanquefort%2B33290,le%2Bhaillan%2B33185,le%2Btaillan%2Bmedoc%2B33320,parempuyre%2B33290,artigues%2Bpres%2Bbordeaux%2B33370,carbon%2Bblanc%2B33560,martignas%2Bsur%2Bjalle%2B33127,saint%2Baubin%2Bde%2Bmedoc%2B33160,bassens%2B33530
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Lille%20(59)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
     scraper_type: Static
@@ -767,27 +789,27 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Angers%20(49)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&mode=&location=Avrille+%2849%29%2CBeaucouze+%2849%29%2CBouchemaine+%2849%29%2CBriollay+%2849%29%2CCantenay-Epinard+%2849%29%2CEcouflant+%2849%29%2CFeneu+%2849%29%2CLe+Plessis-Grammoire+%2849%29%2CLes+ponts-de-ce+%2849%29%2CSaint-clement-de-la-place+%2849%29%2CSaint-Lambert-la-Potherie+%2849%29%2CSaint-Martin-du-Fouilloux+%2849%29%2CSoulaines-sur-Aubance+%2849%29%2CSoulaire-et-Bourg+%2849%29%2CB%E9huard+%2849%29%2CEcuill%E9+%2849%29%2CM%FBrs-Erign%E9+%2849%29%2CMontreuil-Juign%E9+%2849%29%2CSaint-Barth%E9lemy-d%27Anjou+%2849%29%2CSavenni%E8res+%2849%29%2CSarrign%E9+%2849%29&type=appartement%2Catelier%2Cchambre%2Cchambre+d+hote%2Cduplex%2Cloft&_type=on&type=appartement&_type=on&type=atelier&_type=on&type=chambre&_type=on&type=chambre+d+hote&_type=on&type=duplex&_type=on&type=loft&_type=on&type=chalet%2Cchateau%2Cferme%2Cgite%2Chotel%2Chotel+particulier%2Cmaison%2Cmanoir%2Cmoulin%2Cpeniche%2Cpropriete%2Cvilla&_type=on&type=chalet&_type=on&type=chateau&_type=on&type=ferme&_type=on&type=gite&_type=on&type=hotel&_type=on&type=hotel+particulier&_type=on&type=maison&_type=on&type=manoir&_type=on&type=moulin&_type=on&type=peniche&_type=on&type=propriete&_type=on&type=villa&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&priceMin=100+000&priceMax=5+000+000&areaMin=8&areaMax=500&roomMin=0&bedroomMin=0&_furnished=on&_furnished=on&_oldness=on&_mode=on&_option=on&_option=on&_option=on&_option=on&_handicapAccessible=on&_option=on&_option=on&_option=on&_option=on
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-maison-cauville+sur+mer+76930.html?types=appartement,chambre,duplex&sort=5&location=epouville%2B76133,fontaine%2Bla%2Bmallet%2B76290,fontenay%2B76290,gainneville%2B76700,gonfreville%2Bl%2Borcher%2B76700,harfleur%2B76700,maneglise%2B76133,mannevillette%2B76290,montivilliers%2B76290,notre%2Bdame%2Bdu%2Bbec%2B76133,octeville%2Bsur%2Bmer%2B76930,rogerville%2B76700,rolleville%2B76133,sainte%2Badresse%2B76310,saint%2Bmartin%2Bdu%2Bmanoir%2B76290
-    scraper_type: Static
-    main_page_cls: div.container-item
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Angers (49)
+  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Angers%20(49)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&mode=&location=Avrille+%2849%29%2CBeaucouze+%2849%29%2CBouchemaine+%2849%29%2CBriollay+%2849%29%2CCantenay-Epinard+%2849%29%2CEcouflant+%2849%29%2CFeneu+%2849%29%2CLe+Plessis-Grammoire+%2849%29%2CLes+ponts-de-ce+%2849%29%2CSaint-clement-de-la-place+%2849%29%2CSaint-Lambert-la-Potherie+%2849%29%2CSaint-Martin-du-Fouilloux+%2849%29%2CSoulaines-sur-Aubance+%2849%29%2CSoulaire-et-Bourg+%2849%29%2CB%E9huard+%2849%29%2CEcuill%E9+%2849%29%2CM%FBrs-Erign%E9+%2849%29%2CMontreuil-Juign%E9+%2849%29%2CSaint-Barth%E9lemy-d%27Anjou+%2849%29%2CSavenni%E8res+%2849%29%2CSarrign%E9+%2849%29&type=appartement%2Catelier%2Cchambre%2Cchambre+d+hote%2Cduplex%2Cloft&_type=on&type=appartement&_type=on&type=atelier&_type=on&type=chambre&_type=on&type=chambre+d+hote&_type=on&type=duplex&_type=on&type=loft&_type=on&type=chalet%2Cchateau%2Cferme%2Cgite%2Chotel%2Chotel+particulier%2Cmaison%2Cmanoir%2Cmoulin%2Cpeniche%2Cpropriete%2Cvilla&_type=on&type=chalet&_type=on&type=chateau&_type=on&type=ferme&_type=on&type=gite&_type=on&type=hotel&_type=on&type=hotel+particulier&_type=on&type=maison&_type=on&type=manoir&_type=on&type=moulin&_type=on&type=peniche&_type=on&type=propriete&_type=on&type=villa&_type=on&_type=on&_type=on&_type=on&_type=on&_type=on&priceMin=100+000&priceMax=5+000+000&areaMin=8&areaMax=500&roomMin=0&bedroomMin=0&_furnished=on&_furnished=on&_oldness=on&_mode=on&_option=on&_option=on&_option=on&_option=on&_handicapAccessible=on&_option=on&_option=on&_option=on&_option=on
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://immobilier.lefigaro.fr/annonces/immobilier-vente-maison-cauville+sur+mer+76930.html?types=appartement,chambre,duplex&sort=5&location=epouville%2B76133,fontaine%2Bla%2Bmallet%2B76290,fontenay%2B76290,gainneville%2B76700,gonfreville%2Bl%2Borcher%2B76700,harfleur%2B76700,maneglise%2B76133,mannevillette%2B76290,montivilliers%2B76290,notre%2Bdame%2Bdu%2Bbec%2B76133,octeville%2Bsur%2Bmer%2B76930,rogerville%2B76700,rolleville%2B76133,sainte%2Badresse%2B76310,saint%2Bmartin%2Bdu%2Bmanoir%2B76290
+  #   scraper_type: Static
+  #   main_page_cls: div.container-item
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Perpignan (66)
     url: https://immobilier.lefigaro.fr/annonces/resultat/annonces.html?transaction=vente&location=Perpignan%20(66)&priceMin=100000&priceMax=5000000&areaMin=8&areaMax=500&type=appartement,atelier,chambre,chambre%20d%20hote,duplex,loft,chalet,chateau,ferme,gite,hotel,hotel%20particulier,maison,manoir,moulin,peniche,propriete,villa&fromSearchButton=%22%22&sort=5
     scraper_type: Static
@@ -797,27 +819,34 @@
     high_priority: false
 - source: Propr. Figaro
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=courbevoie
+  - zone: Grenoble (38)
+    url: https://proprietes.lefigaro.fr/annonces/immobilier-achat-prestige-monde/?inter=1&localisation=45.197351,5.7862391,45.15914,5.7428,FR,Saint-Martin-d%27H%C3%A8res&localisation=45.1604371,5.7407139,45.127847,5.6875808,FR,%C3%89chirolles&localisation=45.2059161,5.701777,45.1820179,5.650817,FR,Fontaine&localisation=45.241608,5.8204779,45.186939,5.752474,FR,Meylan&localisation=45.2494499,5.710257,45.213603,5.6552869,FR,Saint-Egr%C3%A8ve&localisation=45.1907319,5.7015459,45.153409,5.6387341,FR,Seyssinet-Pariset&localisation=45.233809,5.6878131,45.1943911,5.6203138,FR,Sassenage&localisation=45.142985,5.715184,45.103044,5.6881271,FR,Le%20Pont-de-Claix&localisation=45.16573,5.7656121,45.1372209,5.730791,FR,Eybens&localisation=45.081248,5.7133859,45.004679,5.629002,FR,Vif&localisation=45.111527,5.7253101,45.065391,5.6143381,FR,Varces-Alli%C3%A8res-et-Risset&localisation=45.147492,5.7007969,45.08905,5.61805,FR,Claix&localisation=45.172631,5.701232,45.1432806,5.638092,FR,Seyssins&localisation=45.097412,5.807798,45.0482199,5.754538,FR,Vizille&localisation=45.2063989,5.81304,45.15914,5.766477,FR,Gi%C3%A8res&localisation=45.219851,5.860001,45.19085,5.813499,FR,Dom%C3%A8ne&localisation=45.234629,5.7630229,45.1887928,5.725682,FR,La%20Tronche&localisation=45.2385029,5.740213,45.198309,5.680562,FR,Saint-Martin-le-Vinoux&localisation=45.246698,5.776255,45.2061931,5.7439289,FR,Corenc&tri=2&mrasn=668993.829398&xtref=proprietes.lefigaro.fr
     scraper_type: Static
     main_page_cls: div.item-container-inline
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=levallois+perret
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://proprietes.lefigaro.fr/annonces/appartement-seine+maritime-haute+normandie-france/?ville=rouen&ville=33397&ville=33416&ville=33185&ville=33196&ville=33267&ville=33014&ville=32902&ville=32950&ville=33308&ville=33237&ville=33000&ville=32957&ville=32996&ville=33097&ville=33321&ville=32891&ville=33465&ville=33406&ville=33191&ville=33299&ville=32908&ville=33229&ville=33058&ville=32963&ville=33200&ville=33007&ville=33189&type_bien=8&type_bien=6&type_bien=9&type_bien=11&type_bien=22&type_bien=34&type_bien=36&type_bien=37&type_bien=38&tri=2
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=courbevoie
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-hauts+de+seine-ile+de+france-france/?ville=levallois+perret
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://proprietes.lefigaro.fr/annonces/appartement-seine+maritime-haute+normandie-france/?ville=rouen&ville=33397&ville=33416&ville=33185&ville=33196&ville=33267&ville=33014&ville=32902&ville=32950&ville=33308&ville=33237&ville=33000&ville=32957&ville=32996&ville=33097&ville=33321&ville=32891&ville=33465&ville=33406&ville=33191&ville=33299&ville=32908&ville=33229&ville=33058&ville=32963&ville=33200&ville=33007&ville=33189&type_bien=8&type_bien=6&type_bien=9&type_bien=11&type_bien=22&type_bien=34&type_bien=36&type_bien=37&type_bien=38&tri=2
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-haute+vienne-limousin-france/?ville=limoges&ville=37214&ville=37134&ville=37154&ville=37146&ville=37178&ville=37132&ville=37298&ville=37224&ville=37108&ville=37256&ville=37179&ville=37243&ville=37123&ville=37299&ville=37109&ville=37232&ville=37144&ville=37218&ville=37096&tri=2
     scraper_type: Static
@@ -891,13 +920,13 @@
     main_page_cls: div.item-container-inline
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-gironde-aquitaine-france/?ville=merignac&ville=14031&ville=14223&ville=14245&ville=14168&ville=13711&ville=13867&ville=13795&ville=13836&ville=13925&ville=13964&ville=13747&ville=13842&ville=13677&ville=13260&ville=13928&ville=13937&ville=14026&ville=13687&ville=13769&ville=13988&ville=14104&ville=13704&tri=2
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-gironde-aquitaine-france/?ville=merignac&ville=14031&ville=14223&ville=14245&ville=14168&ville=13711&ville=13867&ville=13795&ville=13836&ville=13925&ville=13964&ville=13747&ville=13842&ville=13677&ville=13260&ville=13928&ville=13937&ville=14026&ville=13687&ville=13769&ville=13988&ville=14104&ville=13704&tri=2
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-nord-nord+pas+de+calais-france/?ville=lille&tri=2
     scraper_type: Static
@@ -1028,27 +1057,27 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=angers&tri=2
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=avrille&ville=19438&ville=19446&ville=19452&ville=19463&ville=19470&ville=19532&ville=19533&ville=19539&ville=19666&ville=19674&ville=19616&ville=19628&ville=19715&ville=19719&ville=19772&ville=19739&ville=19751&ville=19697&ville=19700&ville=19709&ville=19710&ville=19782&tri=2
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://proprietes.lefigaro.fr/annonces/immobilier-seine+maritime-haute+normandie-france/?ville=epouville&ville=33052&ville=33054&ville=33073&ville=33082&ville=33115&ville=33231&ville=33236&ville=33272&ville=33297&ville=33305&ville=33357&ville=33358&ville=33491&ville=33451&tri=2
-    scraper_type: Static
-    main_page_cls: div.item-container-inline
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Angers (49)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=angers&tri=2
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-maine+et+loire-pays+de+loire-france/?ville=avrille&ville=19438&ville=19446&ville=19452&ville=19463&ville=19470&ville=19532&ville=19533&ville=19539&ville=19666&ville=19674&ville=19616&ville=19628&ville=19715&ville=19719&ville=19772&ville=19739&ville=19751&ville=19697&ville=19700&ville=19709&ville=19710&ville=19782&tri=2
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://proprietes.lefigaro.fr/annonces/immobilier-seine+maritime-haute+normandie-france/?ville=epouville&ville=33052&ville=33054&ville=33073&ville=33082&ville=33115&ville=33231&ville=33236&ville=33272&ville=33297&ville=33305&ville=33357&ville=33358&ville=33491&ville=33451&tri=2
+  #   scraper_type: Static
+  #   main_page_cls: div.item-container-inline
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Perpignan (66)
     url: https://proprietes.lefigaro.fr/annonces/immobilier-pyrenees+orientales-languedoc+roussillon-france/?ville=perpignan&tri=2
     scraper_type: Static
@@ -1058,27 +1087,34 @@
     high_priority: false
 - source: LogicImmo
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.logic-immo.com/vente-immobilier-courbevoie-92400,8445_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  - zone: Grenoble (38)
+    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=29118_2,9937_2,11297_2,20408_2,27602_2,31839_2,31118_2,17136_2,10709_2,34785_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
     main_page_cls: div.offer-block
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://www.logic-immo.com/vente-immobilier-levallois-perret-92300,17928_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=304_99,32131_2,27673_2,16829_2,17070_2,20931_2,10048_2,3867_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.logic-immo.com/vente-immobilier-courbevoie-92400,8445_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.logic-immo.com/vente-immobilier-levallois-perret-92300,17928_2/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=304_99,32131_2,27673_2,16829_2,17070_2,20931_2,10048_2,3867_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=194_99,23509_2,8671_2,13991_2,11048_2,17040_2,8020_2,25935_2,3915_2,28600_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
@@ -1159,13 +1195,13 @@
     main_page_cls: div.offer-block
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=20226_2,23895_2,32468_2,35094_2,29309_2,2863_2,12716_2,6060_2,10736_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=20226_2,23895_2,32468_2,35094_2,29309_2,2863_2,12716_2,6060_2,10736_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://www.logic-immo.com/vente-immobilier-lille-tous-codes-postaux,193_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
@@ -1296,41 +1332,41 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://www.logic-immo.com/vente-immobilier-angers-tous-codes-postaux,18_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=1957_2,2632_2,2879_2,4172_2,4905_2,5585_2,9971_2,9998_2,10946_2,21605_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=238_99,17106_2,17759_2,28618_2,29131_2,31095_2,31299_2,32193_2,32194_2,33323_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=10223_2,11318_2,11395_2,11974_2,12569_2,13315_2,19241_2,19263_2,21439_2,22749_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=22920_2,26118_2,26156_2,30481_2,29135_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
-    scraper_type: Static
-    main_page_cls: div.offer-block
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Angers (49)
+  #   url: https://www.logic-immo.com/vente-immobilier-angers-tous-codes-postaux,18_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=1957_2,2632_2,2879_2,4172_2,4905_2,5585_2,9971_2,9998_2,10946_2,21605_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=238_99,17106_2,17759_2,28618_2,29131_2,31095_2,31299_2,32193_2,32194_2,33323_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=10223_2,11318_2,11395_2,11974_2,12569_2,13315_2,19241_2,19263_2,21439_2,22749_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://www.logic-immo.com/vente-immobilier/options/grouplocalities=22920_2,26118_2,26156_2,30481_2,29135_2/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
+  #   scraper_type: Static
+  #   main_page_cls: div.offer-block
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Perpignan (66)
     url: https://www.logic-immo.com/vente-immobilier-perpignan-tous-codes-postaux,268_99/options/groupprptypesids=1,2,6,7,12,15/order=update_date_desc
     scraper_type: Static
@@ -1340,34 +1376,41 @@
     high_priority: false
 - source: PAP
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-courbevoie-92400-g43294-a-partir-du-studio
+  - zone: Grenoble (38)
+    url: https://www.pap.fr/annonce/vente-appartement-maison-echirolles-38130-g21629g21667g21668g21676g21732g21771g21789g21817g21857g21900g21915g21993g21998g21999g22047g22057g22079g22088g22126-a-partir-du-studio
     scraper_type: Static
     main_page_cls: div.search-list-item-alt
     is_active: false
     group_type: Hub
     high_priority: false
-  - zone: Hauts-de-Seine (92)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-levallois-perret-92300-g43289-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-darnetal-76160-g37814g37838g37839g37843g37848g37900g37915g37942g38003g38004g38029g38039g38044g38060g38136g38193g38207g38343g38510g43640-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Rouen Métropole (76)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-bonsecours-76240-g37903g38069g38076g38197g38220g38436g38443g38532-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-courbevoie-92400-g43294-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-levallois-perret-92300-g43289-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-darnetal-76160-g37814g37838g37839g37843g37848g37900g37915g37942g38003g38004g38029g38039g38044g38060g38136g38193g38207g38343g38510g43640-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-bonsecours-76240-g37903g38069g38076g38197g38220g38436g38443g38532-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Limoges Métropole (87)
     url: https://www.pap.fr/annonce/vente-appartement-maison-isle-87170-g41809g41812g41826g41843g41846g41847g41852g41857g41858g41914g41939g41956g41965g41966g41967g41969g41971g41996g43620-a-partir-du-studio
     scraper_type: Static
@@ -1441,13 +1484,13 @@
     main_page_cls: div.search-list-item-alt
     is_active: true
     group_type: Hub
-  - zone: Bordeaux (33)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-blanquefort-32270-g19484g19822g19835g19842g19852g19853g19881g19889g19910g19932g19969g19991g19998g20002g20045g20122g20129g20131g20224g20280-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Bordeaux (33)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-blanquefort-32270-g19484g19822g19835g19842g19852g19853g19881g19889g19910g19932g19969g19991g19998g20002g20045g20122g20129g20131g20224g20280-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Lille (59)
     url: https://www.pap.fr/annonce/vente-appartement-maison-lille-59-g43627-a-partir-du-studio
     scraper_type: Static
@@ -1550,34 +1593,34 @@
     is_active: true
     group_type: Hub
     high_priority: false
-  - zone: Angers (49)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-angers-49-g43584-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.pap.fr/annonce/vente-appartement-maison-beaucouze-49070-g25296g25297g25298g25300g25306g25310g25341g25343g25355g25361g25370g25378g25385g25484g25511g25522g25523g25543g25617g25658-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Angers Agglomération
-    url: https://www.pap.fr/annonce/vente-appartement-maison-savennieres-49170-g25355g25549g25619g25659-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
-  - zone: Le Havre (76)
-    url: https://www.pap.fr/annonce/vente-appartement-maison-epouville-76133-g37819g37841g37849g37851g37928g37947g37957g37977g38046g38414g38416g38419g38454g38522g38533g42429-a-partir-du-studio
-    scraper_type: Static
-    main_page_cls: div.search-list-item-alt
-    is_active: false
-    group_type: Hub
-    high_priority: false
+  # - zone: Angers (49)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-angers-49-g43584-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-beaucouze-49070-g25296g25297g25298g25300g25306g25310g25341g25343g25355g25361g25370g25378g25385g25484g25511g25522g25523g25543g25617g25658-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Angers Agglomération
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-savennieres-49170-g25355g25549g25619g25659-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
+  # - zone: Le Havre (76)
+  #   url: https://www.pap.fr/annonce/vente-appartement-maison-epouville-76133-g37819g37841g37849g37851g37928g37947g37957g37977g38046g38414g38416g38419g38454g38522g38533g42429-a-partir-du-studio
+  #   scraper_type: Static
+  #   main_page_cls: div.search-list-item-alt
+  #   is_active: false
+  #   group_type: Hub
+  #   high_priority: false
   - zone: Perpignan (66)
     url: https://www.pap.fr/annonce/vente-appartement-maison-perpignan-66-g43633-a-partir-du-studio
     scraper_type: Static
@@ -1587,24 +1630,30 @@
     high_priority: false
 - source: Stephane Plaza
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92026&sort=date_desc
+  - zone: Grenoble (38)
+    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=38421&location[]=38151&location[]=38169&location[]=38229&location[]=38382&location[]=38485&location[]=38474&location[]=38317&location[]=38158&location[]=38545&location[]=38524&location[]=38111&location[]=38486&location[]=38562&location[]=38179&location[]=38150&location[]=38516&location[]=38423&location[]=38126&sort=date_desc
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92044&sort=date_desc
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Rouen Métropole (76)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=76540&location[]=76681&location[]=76575&location[]=76322&location[]=76498&location[]=76451&location[]=76231&location[]=76108&location[]=76157&location[]=76484&location[]=76410&location[]=76216&location[]=76165&location[]=76212&location[]=76319&location[]=76497&location[]=76095&location[]=76640&location[]=76561&location[]=76429&location[]=76474&location[]=76103&location[]=76402&location[]=76475&location[]=76178&location[]=76709&location[]=76222&location[]=76366&sort=date_desc
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92026&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=92044&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=76540&location[]=76681&location[]=76575&location[]=76322&location[]=76498&location[]=76451&location[]=76231&location[]=76108&location[]=76157&location[]=76484&location[]=76410&location[]=76216&location[]=76165&location[]=76212&location[]=76319&location[]=76497&location[]=76095&location[]=76640&location[]=76561&location[]=76429&location[]=76474&location[]=76103&location[]=76402&location[]=76475&location[]=76178&location[]=76709&location[]=76222&location[]=76366&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Limoges Métropole (87)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=87085&location[]=87114&location[]=87050&location[]=87075&location[]=87065&location[]=87113&location[]=87048&location[]=87201&location[]=87125&location[]=87019&location[]=87156&location[]=87205&location[]=87143&location[]=87038&location[]=87202&location[]=87020&location[]=87192&location[]=87063&location[]=87005&sort=date_desc
     scraper_type: HTTPRequest
@@ -1677,12 +1726,12 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Bordeaux (33)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=33281&location[]=33318&location[]=33522&location[]=33550&location[]=33449&location[]=33039&location[]=33192&location[]=33119&location[]=33162&location[]=33069&location[]=33249&location[]=33075&location[]=33167&location[]=33003&location[]=32056&location[]=33200&location[]=33519&location[]=33312&location[]=33013&location[]=33096&location[]=33273&location[]=33376&location[]=33032&sort=date_desc
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Bordeaux (33)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&type[]=1&type[]=2&location[]=33281&location[]=33318&location[]=33522&location[]=33550&location[]=33449&location[]=33039&location[]=33192&location[]=33119&location[]=33162&location[]=33069&location[]=33249&location[]=33075&location[]=33167&location[]=33003&location[]=32056&location[]=33200&location[]=33519&location[]=33312&location[]=33013&location[]=33096&location[]=33273&location[]=33376&location[]=33032&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Lille (59)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=59350&sort=date_desc&limit=15
     scraper_type: HTTPRequest
@@ -1784,24 +1833,24 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Angers (49)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49007&sort=date_desc&limit=15
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Angers Agglomération
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49015&location[]=49020&location[]=49028&location[]=49035&location[]=49048&location[]=49055&location[]=49129&location[]=49130&location[]=49135&location[]=49214&location[]=49223&location[]=49241&location[]=49246&location[]=49267&location[]=49271&location[]=49278&location[]=49294&location[]=49289&location[]=79278&location[]=49326&location[]=49329&location[]=49338&location[]=49339&location[]=49353&sort=date_desc
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Le Havre (76)
-    url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=76167&location[]=76238&location[]=76270&location[]=76275&location[]=76296&location[]=76305&location[]=76341&location[]=76404&location[]=76409&location[]=76447&location[]=76477&location[]=76481&location[]=76533&location[]=76534&location[]=76552&location[]=76616&sort=date_desc
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Angers (49)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49007&sort=date_desc&limit=15
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Angers Agglomération
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=49015&location[]=49020&location[]=49028&location[]=49035&location[]=49048&location[]=49055&location[]=49129&location[]=49130&location[]=49135&location[]=49214&location[]=49223&location[]=49241&location[]=49246&location[]=49267&location[]=49271&location[]=49278&location[]=49294&location[]=49289&location[]=79278&location[]=49326&location[]=49329&location[]=49338&location[]=49339&location[]=49353&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Le Havre (76)
+  #   url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=76167&location[]=76238&location[]=76270&location[]=76275&location[]=76296&location[]=76305&location[]=76341&location[]=76404&location[]=76409&location[]=76447&location[]=76477&location[]=76481&location[]=76533&location[]=76534&location[]=76552&location[]=76616&sort=date_desc
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Perpignan (66)
     url: https://www.stephaneplazaimmobilier.com/search/buy?target=buy&location[]=66136&sort=date_desc&limit=15
     scraper_type: HTTPRequest
@@ -1810,24 +1859,30 @@
     group_type: Group
 - source: Orpi
   params:
-  - zone: Hauts-de-Seine (68)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=courbevoie&locations%5B0%5D%5Blabel%5D=Courbevoie+(92400)&sort=date-down&layoutType=mixte
+  - zone: Grenoble (38)
+    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=saint-martin-d-heres&locations%5B0%5D%5Blabel%5D=Saint-Martin-d%27H%C3%A8res+(38400)+-+Ville&locations%5B1%5D%5Bvalue%5D=echirolles&locations%5B1%5D%5Blabel%5D=%C3%89chirolles+(38130)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine&locations%5B2%5D%5Blabel%5D=Fontaine+(38600)+-+Ville&locations%5B3%5D%5Bvalue%5D=meylan&locations%5B3%5D%5Blabel%5D=Meylan+(38240)+-+Ville&locations%5B4%5D%5Bvalue%5D=saint-egreve&locations%5B4%5D%5Blabel%5D=Saint-%C3%89gr%C3%A8ve+(38120)+-+Ville&locations%5B5%5D%5Bvalue%5D=seyssinet-pariset&locations%5B5%5D%5Blabel%5D=Seyssinet-Pariset+(38170)+-+Ville&locations%5B6%5D%5Bvalue%5D=sassenage&locations%5B6%5D%5Blabel%5D=Sassenage+(38360)+-+Ville&locations%5B7%5D%5Bvalue%5D=le-pont-de-claix&locations%5B7%5D%5Blabel%5D=Le+Pont-de-Claix+(38800)+-+Ville&locations%5B8%5D%5Bvalue%5D=eybens&locations%5B8%5D%5Blabel%5D=Eybens+(38320)+-+Ville&locations%5B9%5D%5Bvalue%5D=vif&locations%5B9%5D%5Blabel%5D=Vif+(38450)+-+Ville&locations%5B10%5D%5Bvalue%5D=varces-allieres-et-risset&locations%5B10%5D%5Blabel%5D=Varces-Alli%C3%A8res-et-Risset+(38760)+-+Ville&locations%5B11%5D%5Bvalue%5D=claix&locations%5B11%5D%5Blabel%5D=Claix+(38640)+-+Ville&locations%5B12%5D%5Bvalue%5D=seyssins&locations%5B12%5D%5Blabel%5D=Seyssins+(38180)+-+Ville&locations%5B13%5D%5Bvalue%5D=vizille&locations%5B13%5D%5Blabel%5D=Vizille+(38220)+-+Ville&locations%5B14%5D%5Bvalue%5D=gieres&locations%5B14%5D%5Blabel%5D=Gi%C3%A8res+(38610)+-+Ville&locations%5B15%5D%5Bvalue%5D=domene&locations%5B15%5D%5Blabel%5D=Dom%C3%A8ne+(38420)+-+Ville&locations%5B16%5D%5Bvalue%5D=la-tronche&locations%5B16%5D%5Blabel%5D=La+Tronche+(38700)+-+Ville&locations%5B17%5D%5Bvalue%5D=saint-martin-le-vinoux&locations%5B17%5D%5Blabel%5D=Saint-Martin-le-Vinoux+(38950)+-+Ville&locations%5B18%5D%5Bvalue%5D=corenc&locations%5B18%5D%5Blabel%5D=Corenc+(38700)+-+Ville&sort=date-down&layoutType=mixte
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (68)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=levallois-perret&locations%5B0%5D%5Blabel%5D=Levallois-Perret+(92300)&sort=date-down&layoutType=mixte
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Hauts-de-Seine (68)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=rouen&locations%5B0%5D%5Blabel%5D=Rouen+(76000)&locations%5B1%5D%5Bvalue%5D=sotteville-les-rouen&locations%5B1%5D%5Blabel%5D=Sotteville-l%C3%A8s-Rouen+(76300)&locations%5B2%5D%5Bvalue%5D=saint-etienne-du-rouvray&locations%5B2%5D%5Blabel%5D=Saint-%C3%89tienne-du-Rouvray+(76800)&locations%5B3%5D%5Bvalue%5D=le-grand-quevilly&locations%5B3%5D%5Blabel%5D=Le+Grand-Quevilly+(76120)&locations%5B4%5D%5Bvalue%5D=le-petit-quevilly&locations%5B4%5D%5Blabel%5D=Le+Petit-Quevilly+(76140)&locations%5B5%5D%5Bvalue%5D=mont-saint-aignan&locations%5B5%5D%5Blabel%5D=Mont-Saint-Aignan+(76130)&locations%5B6%5D%5Bvalue%5D=elbeuf&locations%5B6%5D%5Blabel%5D=Elbeuf+(76500)&locations%5B7%5D%5Bvalue%5D=bois-guillaume&locations%5B7%5D%5Blabel%5D=Bois-Guillaume+(76230)&locations%5B8%5D%5Bvalue%5D=canteleu&locations%5B8%5D%5Blabel%5D=Canteleu+(76380)&locations%5B9%5D%5Bvalue%5D=oissel&locations%5B9%5D%5Blabel%5D=Oissel+(76350)&locations%5B10%5D%5Bvalue%5D=maromme&locations%5B10%5D%5Blabel%5D=Maromme+(76150)&locations%5B11%5D%5Bvalue%5D=deville-les-rouen&locations%5B11%5D%5Blabel%5D=D%C3%A9ville-l%C3%A8s-Rouen+(76250)&locations%5B12%5D%5Bvalue%5D=caudebec-les-elbeuf&locations%5B12%5D%5Blabel%5D=Caudebec-l%C3%A8s-Elbeuf+(76320)&locations%5B13%5D%5Bvalue%5D=darnetal&locations%5B13%5D%5Blabel%5D=Darn%C3%A9tal+(76160)&locations%5B14%5D%5Bvalue%5D=grand-couronne&locations%5B14%5D%5Blabel%5D=Grand-Couronne+(76530)&locations%5B15%5D%5Bvalue%5D=petit-couronne&locations%5B15%5D%5Blabel%5D=Petit-Couronne+(76650)&locations%5B16%5D%5Bvalue%5D=bihorel&locations%5B16%5D%5Blabel%5D=Bihorel+(76420)&locations%5B17%5D%5Bvalue%5D=saint-pierre-les-elbeuf&locations%5B17%5D%5Blabel%5D=Saint-Pierre-l%C3%A8s-Elbeuf+(76320)&locations%5B18%5D%5Bvalue%5D=saint-aubin-les-elbeuf&locations%5B18%5D%5Blabel%5D=Saint-Aubin-l%C3%A8s-Elbeuf+(76410)&locations%5B19%5D%5Bvalue%5D=le-mesnil-esnard&locations%5B19%5D%5Blabel%5D=Le+Mesnil-Esnard+(76240)&locations%5B20%5D%5Bvalue%5D=notre-dame-de-bondeville&locations%5B20%5D%5Blabel%5D=Notre-Dame-de-Bondeville+(76960)&locations%5B21%5D%5Bvalue%5D=bonsecours&locations%5B21%5D%5Blabel%5D=Bonsecours+(76240)&locations%5B22%5D%5Bvalue%5D=malaunay&locations%5B22%5D%5Blabel%5D=Malaunay+(76770)&locations%5B23%5D%5Bvalue%5D=franqueville-saint-pierre&locations%5B23%5D%5Blabel%5D=Franqueville-Saint-Pierre+(76520)&locations%5B24%5D%5Bvalue%5D=cleon&locations%5B24%5D%5Blabel%5D=Cl%C3%A9on+(76410)&locations%5B25%5D%5Bvalue%5D=duclair&locations%5B25%5D%5Blabel%5D=Duclair+(76480)&locations%5B26%5D%5Bvalue%5D=le-houlme&locations%5B26%5D%5Blabel%5D=Le+Houlme+(76770)&sort=date-down&layoutType=mixte
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Hauts-de-Seine (68)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=courbevoie&locations%5B0%5D%5Blabel%5D=Courbevoie+(92400)&sort=date-down&layoutType=mixte
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (68)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=levallois-perret&locations%5B0%5D%5Blabel%5D=Levallois-Perret+(92300)&sort=date-down&layoutType=mixte
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (68)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=rouen&locations%5B0%5D%5Blabel%5D=Rouen+(76000)&locations%5B1%5D%5Bvalue%5D=sotteville-les-rouen&locations%5B1%5D%5Blabel%5D=Sotteville-l%C3%A8s-Rouen+(76300)&locations%5B2%5D%5Bvalue%5D=saint-etienne-du-rouvray&locations%5B2%5D%5Blabel%5D=Saint-%C3%89tienne-du-Rouvray+(76800)&locations%5B3%5D%5Bvalue%5D=le-grand-quevilly&locations%5B3%5D%5Blabel%5D=Le+Grand-Quevilly+(76120)&locations%5B4%5D%5Bvalue%5D=le-petit-quevilly&locations%5B4%5D%5Blabel%5D=Le+Petit-Quevilly+(76140)&locations%5B5%5D%5Bvalue%5D=mont-saint-aignan&locations%5B5%5D%5Blabel%5D=Mont-Saint-Aignan+(76130)&locations%5B6%5D%5Bvalue%5D=elbeuf&locations%5B6%5D%5Blabel%5D=Elbeuf+(76500)&locations%5B7%5D%5Bvalue%5D=bois-guillaume&locations%5B7%5D%5Blabel%5D=Bois-Guillaume+(76230)&locations%5B8%5D%5Bvalue%5D=canteleu&locations%5B8%5D%5Blabel%5D=Canteleu+(76380)&locations%5B9%5D%5Bvalue%5D=oissel&locations%5B9%5D%5Blabel%5D=Oissel+(76350)&locations%5B10%5D%5Bvalue%5D=maromme&locations%5B10%5D%5Blabel%5D=Maromme+(76150)&locations%5B11%5D%5Bvalue%5D=deville-les-rouen&locations%5B11%5D%5Blabel%5D=D%C3%A9ville-l%C3%A8s-Rouen+(76250)&locations%5B12%5D%5Bvalue%5D=caudebec-les-elbeuf&locations%5B12%5D%5Blabel%5D=Caudebec-l%C3%A8s-Elbeuf+(76320)&locations%5B13%5D%5Bvalue%5D=darnetal&locations%5B13%5D%5Blabel%5D=Darn%C3%A9tal+(76160)&locations%5B14%5D%5Bvalue%5D=grand-couronne&locations%5B14%5D%5Blabel%5D=Grand-Couronne+(76530)&locations%5B15%5D%5Bvalue%5D=petit-couronne&locations%5B15%5D%5Blabel%5D=Petit-Couronne+(76650)&locations%5B16%5D%5Bvalue%5D=bihorel&locations%5B16%5D%5Blabel%5D=Bihorel+(76420)&locations%5B17%5D%5Bvalue%5D=saint-pierre-les-elbeuf&locations%5B17%5D%5Blabel%5D=Saint-Pierre-l%C3%A8s-Elbeuf+(76320)&locations%5B18%5D%5Bvalue%5D=saint-aubin-les-elbeuf&locations%5B18%5D%5Blabel%5D=Saint-Aubin-l%C3%A8s-Elbeuf+(76410)&locations%5B19%5D%5Bvalue%5D=le-mesnil-esnard&locations%5B19%5D%5Blabel%5D=Le+Mesnil-Esnard+(76240)&locations%5B20%5D%5Bvalue%5D=notre-dame-de-bondeville&locations%5B20%5D%5Blabel%5D=Notre-Dame-de-Bondeville+(76960)&locations%5B21%5D%5Bvalue%5D=bonsecours&locations%5B21%5D%5Blabel%5D=Bonsecours+(76240)&locations%5B22%5D%5Bvalue%5D=malaunay&locations%5B22%5D%5Blabel%5D=Malaunay+(76770)&locations%5B23%5D%5Bvalue%5D=franqueville-saint-pierre&locations%5B23%5D%5Blabel%5D=Franqueville-Saint-Pierre+(76520)&locations%5B24%5D%5Bvalue%5D=cleon&locations%5B24%5D%5Blabel%5D=Cl%C3%A9on+(76410)&locations%5B25%5D%5Bvalue%5D=duclair&locations%5B25%5D%5Blabel%5D=Duclair+(76480)&locations%5B26%5D%5Bvalue%5D=le-houlme&locations%5B26%5D%5Blabel%5D=Le+Houlme+(76770)&sort=date-down&layoutType=mixte
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Limoges Métropole (87)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=limoges&locations%5B0%5D%5Blabel%5D=Limoges+(87000)+-+Ville&locations%5B1%5D%5Bvalue%5D=panazol&locations%5B1%5D%5Blabel%5D=Panazol+(87350)+-+Ville&locations%5B2%5D%5Bvalue%5D=couzeix&locations%5B2%5D%5Blabel%5D=Couzeix+(87270)+-+Ville&locations%5B3%5D%5Bvalue%5D=isle&locations%5B3%5D%5Blabel%5D=Isle+(87170)+-+Ville&locations%5B4%5D%5Bvalue%5D=feytiat&locations%5B4%5D%5Blabel%5D=Feytiat+(87220)+-+Ville&locations%5B5%5D%5Bvalue%5D=le-palais-sur-vienne&locations%5B5%5D%5Blabel%5D=Le+Palais-sur-Vienne+(87410)+-+Ville&locations%5B6%5D%5Bvalue%5D=condat-sur-vienne&locations%5B6%5D%5Blabel%5D=Condat-sur-Vienne+(87920)+-+Ville&locations%5B7%5D%5Bvalue%5D=verneuil-sur-vienne&locations%5B7%5D%5Blabel%5D=Verneuil-sur-Vienne+(87430)+-+Ville&locations%5B8%5D%5Bvalue%5D=rilhac-rancon&locations%5B8%5D%5Blabel%5D=Rilhac-Rancon+(87570)+-+Ville&locations%5B9%5D%5Bvalue%5D=boisseuil&locations%5B9%5D%5Blabel%5D=Boisseuil+(87220)+-+Ville&locations%5B10%5D%5Bvalue%5D=saint-just-le-martel&locations%5B10%5D%5Blabel%5D=Saint-Just-le-Martel+(87590)+-+Ville&locations%5B11%5D%5Bvalue%5D=le-vigen&locations%5B11%5D%5Blabel%5D=Le+Vigen+(87110)+-+Ville&locations%5B12%5D%5Bvalue%5D=saint-gence&locations%5B12%5D%5Blabel%5D=Saint-Gence+(87510)+-+Ville&locations%5B13%5D%5Bvalue%5D=chaptelat&locations%5B13%5D%5Blabel%5D=Chaptelat+(87270)+-+Ville&locations%5B14%5D%5Bvalue%5D=veyrac&locations%5B14%5D%5Blabel%5D=Veyrac+(87520)+-+Ville&locations%5B15%5D%5Bvalue%5D=bonnac-la-cote&locations%5B15%5D%5Blabel%5D=Bonnac-la-C%C3%B4te+(87270)+-+Ville&locations%5B16%5D%5Bvalue%5D=solignac&locations%5B16%5D%5Blabel%5D=Solignac+(87110)+-+Ville&locations%5B17%5D%5Bvalue%5D=eyjeaux&locations%5B17%5D%5Blabel%5D=Eyjeaux+(87220)+-+Ville&locations%5B18%5D%5Bvalue%5D=peyrilhac&locations%5B18%5D%5Blabel%5D=Peyrilhac+(87510)+-+Ville&locations%5B19%5D%5Bvalue%5D=aureil&locations%5B19%5D%5Blabel%5D=Aureil+(87220)+-+Ville&sort=date-down&layoutType=mixte
     scraper_type: HTTPRequest
@@ -1900,12 +1955,12 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Bordeaux (33)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=merignac&locations%5B0%5D%5Blabel%5D=M%C3%A9rignac+(33700)&locations%5B1%5D%5Bvalue%5D=pessac&locations%5B1%5D%5Blabel%5D=Pessac+(33600)&locations%5B2%5D%5Bvalue%5D=talence&locations%5B2%5D%5Blabel%5D=Talence+(33400)&locations%5B3%5D%5Bvalue%5D=villenave&locations%5B3%5D%5Blabel%5D=Villenave+(40110)&locations%5B4%5D%5Bvalue%5D=saint-medard-en-jalles&locations%5B4%5D%5Blabel%5D=Saint-M%C3%A9dard-en-Jalles+(33160)&locations%5B5%5D%5Bvalue%5D=begles&locations%5B5%5D%5Blabel%5D=B%C3%A8gles+(33130)&locations%5B6%5D%5Bvalue%5D=gradignan&locations%5B6%5D%5Blabel%5D=Gradignan+(33170)&locations%5B7%5D%5Bvalue%5D=cenon&locations%5B7%5D%5Blabel%5D=Cenon+(33150)&locations%5B8%5D%5Bvalue%5D=eysines&locations%5B8%5D%5Blabel%5D=Eysines+(33320)&locations%5B9%5D%5Bvalue%5D=le-bouscat&locations%5B9%5D%5Blabel%5D=Le+Bouscat+(33110)&locations%5B10%5D%5Bvalue%5D=lormont&locations%5B10%5D%5Blabel%5D=Lormont+(33310)&locations%5B11%5D%5Bvalue%5D=bruges&locations%5B11%5D%5Blabel%5D=Bruges+(33520)&locations%5B12%5D%5Bvalue%5D=floirac&locations%5B12%5D%5Blabel%5D=Floirac+(33270)&locations%5B13%5D%5Bvalue%5D=ambares-et-lagrave&locations%5B13%5D%5Blabel%5D=Ambar%C3%A8s-et-Lagrave+(33440)&locations%5B14%5D%5Bvalue%5D=blanquefort&locations%5B14%5D%5Blabel%5D=Blanquefort+(33290)&locations%5B15%5D%5Bvalue%5D=le-haillan&locations%5B15%5D%5Blabel%5D=Le+Haillan+(33185)&locations%5B16%5D%5Bvalue%5D=le-taillan-medoc&locations%5B16%5D%5Blabel%5D=Le+Taillan-M%C3%A9doc+(33320)&locations%5B17%5D%5Bvalue%5D=parempuyre&locations%5B17%5D%5Blabel%5D=Parempuyre+(33290)&locations%5B18%5D%5Bvalue%5D=artigues-pres-bordeaux&locations%5B18%5D%5Blabel%5D=Artigues-pr%C3%A8s-Bordeaux+(33370)&locations%5B19%5D%5Bvalue%5D=carbon-blanc&locations%5B19%5D%5Blabel%5D=Carbon-Blanc+(33560)&locations%5B20%5D%5Bvalue%5D=martignas-sur-jalle&locations%5B20%5D%5Blabel%5D=Martignas-sur-Jalle+(33127)&locations%5B21%5D%5Bvalue%5D=saint-aubin-de-medoc&locations%5B21%5D%5Blabel%5D=Saint-Aubin-de-M%C3%A9doc+(33160)&locations%5B22%5D%5Bvalue%5D=bassens&locations%5B22%5D%5Blabel%5D=Bassens+(33530)&sort=date-down&layoutType=mixte
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Bordeaux (33)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=merignac&locations%5B0%5D%5Blabel%5D=M%C3%A9rignac+(33700)&locations%5B1%5D%5Bvalue%5D=pessac&locations%5B1%5D%5Blabel%5D=Pessac+(33600)&locations%5B2%5D%5Bvalue%5D=talence&locations%5B2%5D%5Blabel%5D=Talence+(33400)&locations%5B3%5D%5Bvalue%5D=villenave&locations%5B3%5D%5Blabel%5D=Villenave+(40110)&locations%5B4%5D%5Bvalue%5D=saint-medard-en-jalles&locations%5B4%5D%5Blabel%5D=Saint-M%C3%A9dard-en-Jalles+(33160)&locations%5B5%5D%5Bvalue%5D=begles&locations%5B5%5D%5Blabel%5D=B%C3%A8gles+(33130)&locations%5B6%5D%5Bvalue%5D=gradignan&locations%5B6%5D%5Blabel%5D=Gradignan+(33170)&locations%5B7%5D%5Bvalue%5D=cenon&locations%5B7%5D%5Blabel%5D=Cenon+(33150)&locations%5B8%5D%5Bvalue%5D=eysines&locations%5B8%5D%5Blabel%5D=Eysines+(33320)&locations%5B9%5D%5Bvalue%5D=le-bouscat&locations%5B9%5D%5Blabel%5D=Le+Bouscat+(33110)&locations%5B10%5D%5Bvalue%5D=lormont&locations%5B10%5D%5Blabel%5D=Lormont+(33310)&locations%5B11%5D%5Bvalue%5D=bruges&locations%5B11%5D%5Blabel%5D=Bruges+(33520)&locations%5B12%5D%5Bvalue%5D=floirac&locations%5B12%5D%5Blabel%5D=Floirac+(33270)&locations%5B13%5D%5Bvalue%5D=ambares-et-lagrave&locations%5B13%5D%5Blabel%5D=Ambar%C3%A8s-et-Lagrave+(33440)&locations%5B14%5D%5Bvalue%5D=blanquefort&locations%5B14%5D%5Blabel%5D=Blanquefort+(33290)&locations%5B15%5D%5Bvalue%5D=le-haillan&locations%5B15%5D%5Blabel%5D=Le+Haillan+(33185)&locations%5B16%5D%5Bvalue%5D=le-taillan-medoc&locations%5B16%5D%5Blabel%5D=Le+Taillan-M%C3%A9doc+(33320)&locations%5B17%5D%5Bvalue%5D=parempuyre&locations%5B17%5D%5Blabel%5D=Parempuyre+(33290)&locations%5B18%5D%5Bvalue%5D=artigues-pres-bordeaux&locations%5B18%5D%5Blabel%5D=Artigues-pr%C3%A8s-Bordeaux+(33370)&locations%5B19%5D%5Bvalue%5D=carbon-blanc&locations%5B19%5D%5Blabel%5D=Carbon-Blanc+(33560)&locations%5B20%5D%5Bvalue%5D=martignas-sur-jalle&locations%5B20%5D%5Blabel%5D=Martignas-sur-Jalle+(33127)&locations%5B21%5D%5Bvalue%5D=saint-aubin-de-medoc&locations%5B21%5D%5Blabel%5D=Saint-Aubin-de-M%C3%A9doc+(33160)&locations%5B22%5D%5Bvalue%5D=bassens&locations%5B22%5D%5Blabel%5D=Bassens+(33530)&sort=date-down&layoutType=mixte
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Lille (59)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=lille&locations%5B0%5D%5Blabel%5D=lille&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
@@ -2013,24 +2068,24 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Angers (49)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=angers&sort=date-down&layoutType=list
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Angers Agglomération
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=Angers+(49000)&locations%5B1%5D%5Bvalue%5D=avrille&locations%5B1%5D%5Blabel%5D=Avrill%C3%A9+(49240)&locations%5B2%5D%5Bvalue%5D=beaucouze&locations%5B2%5D%5Blabel%5D=Beaucouz%C3%A9+(49070)&locations%5B3%5D%5Bvalue%5D=behuard&locations%5B3%5D%5Blabel%5D=B%C3%A9huard+(49170)&locations%5B4%5D%5Bvalue%5D=bouchemaine&locations%5B4%5D%5Blabel%5D=Bouchemaine+(49080)&locations%5B5%5D%5Bvalue%5D=briollay&locations%5B5%5D%5Blabel%5D=Briollay+(49125)&locations%5B6%5D%5Bvalue%5D=cantenay-epinard&locations%5B6%5D%5Blabel%5D=Cantenay-%C3%89pinard+(49460)&locations%5B7%5D%5Bvalue%5D=ecouflant&locations%5B7%5D%5Blabel%5D=%C3%89couflant+(49000)&locations%5B8%5D%5Bvalue%5D=ecuille&locations%5B8%5D%5Blabel%5D=%C3%89cuill%C3%A9+(49460)&locations%5B9%5D%5Bvalue%5D=feneu&locations%5B9%5D%5Blabel%5D=Feneu+(49460)&locations%5B10%5D%5Bvalue%5D=montreuil-juigne&locations%5B10%5D%5Blabel%5D=Montreuil-Juign%C3%A9+(49460)&locations%5B11%5D%5Bvalue%5D=murs-erigne&locations%5B11%5D%5Blabel%5D=M%C3%BBrs-Erign%C3%A9+(49610)&locations%5B12%5D%5Bvalue%5D=le-plessis-grammoire&locations%5B12%5D%5Blabel%5D=Le+Plessis-Grammoire+(49124)&locations%5B13%5D%5Bvalue%5D=les-ponts-de-ce&locations%5B13%5D%5Blabel%5D=Les+Ponts-de-C%C3%A9+(49130)&locations%5B14%5D%5Bvalue%5D=saint-barthelemy-d-anjou&locations%5B14%5D%5Blabel%5D=Saint-Barth%C3%A9lemy-d%27Anjou+(49124)&locations%5B15%5D%5Bvalue%5D=saint-clement-de-la-place&locations%5B15%5D%5Blabel%5D=Saint-Cl%C3%A9ment-de-la-Place+(49370)&locations%5B16%5D%5Bvalue%5D=sainte-gemmes-sur-loire&locations%5B16%5D%5Blabel%5D=Sainte-Gemmes-sur-Loire+(49130)&locations%5B17%5D%5Bvalue%5D=saint-lambert-la-potherie&locations%5B17%5D%5Blabel%5D=Saint-Lambert-la-Potherie+(49070)&locations%5B18%5D%5Bvalue%5D=saint-jean-de-linieres&locations%5B18%5D%5Blabel%5D=Saint-Jean-de-Lini%C3%A8res+(49070)&locations%5B19%5D%5Bvalue%5D=saint-martin-du-fouilloux&locations%5B19%5D%5Blabel%5D=Saint-Martin-du-Fouilloux+(49170)&locations%5B20%5D%5Bvalue%5D=sarrigne&locations%5B20%5D%5Blabel%5D=Sarrign%C3%A9+(49800)&locations%5B21%5D%5Bvalue%5D=savennieres&locations%5B21%5D%5Blabel%5D=Savenni%C3%A8res+(49170)&locations%5B22%5D%5Bvalue%5D=soulaines-sur-aubance&locations%5B22%5D%5Blabel%5D=Soulaines-sur-Aubance+(49610)&locations%5B23%5D%5Bvalue%5D=soulaire-et-bourg&locations%5B23%5D%5Blabel%5D=Soulaire-et-Bourg+(49460)&locations%5B24%5D%5Bvalue%5D=trelaze&locations%5B24%5D%5Blabel%5D=Tr%C3%A9laz%C3%A9+(49800)&sort=date-down&layoutType=mixte
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Le Havre (76)
-    url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=cauville-sur-mer&locations%5B0%5D%5Blabel%5D=Cauville-sur-Mer+(76930)&locations%5B1%5D%5Bvalue%5D=epouville&locations%5B1%5D%5Blabel%5D=%C3%89pouville+(76133)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine-la-mallet&locations%5B2%5D%5Blabel%5D=Fontaine-la-Mallet+(76290)+-+Ville&locations%5B3%5D%5Bvalue%5D=fontenay&locations%5B3%5D%5Blabel%5D=Fontenay+(76290)+-+Ville&locations%5B4%5D%5Bvalue%5D=gainneville&locations%5B4%5D%5Blabel%5D=Gainneville+(76700)+-+Ville&locations%5B5%5D%5Bvalue%5D=gonfreville-l-orcher&locations%5B5%5D%5Blabel%5D=Gonfreville-l%27Orcher+(76700)&locations%5B6%5D%5Bvalue%5D=harfleur&locations%5B6%5D%5Blabel%5D=Harfleur+(76700)+-+Ville&locations%5B7%5D%5Bvalue%5D=maneglise&locations%5B7%5D%5Blabel%5D=Man%C3%A9glise+(76133)+-+Ville&locations%5B8%5D%5Bvalue%5D=mannevillette&locations%5B8%5D%5Blabel%5D=Mannevillette+(76290)+-+Ville&locations%5B9%5D%5Bvalue%5D=montivilliers&locations%5B9%5D%5Blabel%5D=Montivilliers+(76290)+-+Ville&locations%5B10%5D%5Bvalue%5D=notre-dame-du-bec&locations%5B10%5D%5Blabel%5D=Notre-Dame-du-Bec+(76133)+-+Ville&locations%5B11%5D%5Bvalue%5D=octeville-sur-mer&locations%5B11%5D%5Blabel%5D=Octeville-sur-Mer+(76930)+-+Ville&locations%5B12%5D%5Bvalue%5D=rogerville&locations%5B12%5D%5Blabel%5D=Rogerville+(76700)+-+Ville&locations%5B13%5D%5Bvalue%5D=rolleville&locations%5B13%5D%5Blabel%5D=Rolleville+(76133)+-+Ville&locations%5B14%5D%5Bvalue%5D=sainte-adresse&locations%5B14%5D%5Blabel%5D=Sainte-Adresse+(76310)+-+Ville&locations%5B15%5D%5Bvalue%5D=saint-martin-du-manoir&locations%5B15%5D%5Blabel%5D=Saint-Martin-du-Manoir+(76290)+-+Ville&minSurface=&minPrice=&maxPrice=&sort=date-down&layoutType=mixte&page=1
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Angers (49)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=angers&sort=date-down&layoutType=list
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Angers Agglomération
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=angers&locations%5B0%5D%5Blabel%5D=Angers+(49000)&locations%5B1%5D%5Bvalue%5D=avrille&locations%5B1%5D%5Blabel%5D=Avrill%C3%A9+(49240)&locations%5B2%5D%5Bvalue%5D=beaucouze&locations%5B2%5D%5Blabel%5D=Beaucouz%C3%A9+(49070)&locations%5B3%5D%5Bvalue%5D=behuard&locations%5B3%5D%5Blabel%5D=B%C3%A9huard+(49170)&locations%5B4%5D%5Bvalue%5D=bouchemaine&locations%5B4%5D%5Blabel%5D=Bouchemaine+(49080)&locations%5B5%5D%5Bvalue%5D=briollay&locations%5B5%5D%5Blabel%5D=Briollay+(49125)&locations%5B6%5D%5Bvalue%5D=cantenay-epinard&locations%5B6%5D%5Blabel%5D=Cantenay-%C3%89pinard+(49460)&locations%5B7%5D%5Bvalue%5D=ecouflant&locations%5B7%5D%5Blabel%5D=%C3%89couflant+(49000)&locations%5B8%5D%5Bvalue%5D=ecuille&locations%5B8%5D%5Blabel%5D=%C3%89cuill%C3%A9+(49460)&locations%5B9%5D%5Bvalue%5D=feneu&locations%5B9%5D%5Blabel%5D=Feneu+(49460)&locations%5B10%5D%5Bvalue%5D=montreuil-juigne&locations%5B10%5D%5Blabel%5D=Montreuil-Juign%C3%A9+(49460)&locations%5B11%5D%5Bvalue%5D=murs-erigne&locations%5B11%5D%5Blabel%5D=M%C3%BBrs-Erign%C3%A9+(49610)&locations%5B12%5D%5Bvalue%5D=le-plessis-grammoire&locations%5B12%5D%5Blabel%5D=Le+Plessis-Grammoire+(49124)&locations%5B13%5D%5Bvalue%5D=les-ponts-de-ce&locations%5B13%5D%5Blabel%5D=Les+Ponts-de-C%C3%A9+(49130)&locations%5B14%5D%5Bvalue%5D=saint-barthelemy-d-anjou&locations%5B14%5D%5Blabel%5D=Saint-Barth%C3%A9lemy-d%27Anjou+(49124)&locations%5B15%5D%5Bvalue%5D=saint-clement-de-la-place&locations%5B15%5D%5Blabel%5D=Saint-Cl%C3%A9ment-de-la-Place+(49370)&locations%5B16%5D%5Bvalue%5D=sainte-gemmes-sur-loire&locations%5B16%5D%5Blabel%5D=Sainte-Gemmes-sur-Loire+(49130)&locations%5B17%5D%5Bvalue%5D=saint-lambert-la-potherie&locations%5B17%5D%5Blabel%5D=Saint-Lambert-la-Potherie+(49070)&locations%5B18%5D%5Bvalue%5D=saint-jean-de-linieres&locations%5B18%5D%5Blabel%5D=Saint-Jean-de-Lini%C3%A8res+(49070)&locations%5B19%5D%5Bvalue%5D=saint-martin-du-fouilloux&locations%5B19%5D%5Blabel%5D=Saint-Martin-du-Fouilloux+(49170)&locations%5B20%5D%5Bvalue%5D=sarrigne&locations%5B20%5D%5Blabel%5D=Sarrign%C3%A9+(49800)&locations%5B21%5D%5Bvalue%5D=savennieres&locations%5B21%5D%5Blabel%5D=Savenni%C3%A8res+(49170)&locations%5B22%5D%5Bvalue%5D=soulaines-sur-aubance&locations%5B22%5D%5Blabel%5D=Soulaines-sur-Aubance+(49610)&locations%5B23%5D%5Bvalue%5D=soulaire-et-bourg&locations%5B23%5D%5Blabel%5D=Soulaire-et-Bourg+(49460)&locations%5B24%5D%5Bvalue%5D=trelaze&locations%5B24%5D%5Blabel%5D=Tr%C3%A9laz%C3%A9+(49800)&sort=date-down&layoutType=mixte
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Le Havre (76)
+  #   url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=cauville-sur-mer&locations%5B0%5D%5Blabel%5D=Cauville-sur-Mer+(76930)&locations%5B1%5D%5Bvalue%5D=epouville&locations%5B1%5D%5Blabel%5D=%C3%89pouville+(76133)+-+Ville&locations%5B2%5D%5Bvalue%5D=fontaine-la-mallet&locations%5B2%5D%5Blabel%5D=Fontaine-la-Mallet+(76290)+-+Ville&locations%5B3%5D%5Bvalue%5D=fontenay&locations%5B3%5D%5Blabel%5D=Fontenay+(76290)+-+Ville&locations%5B4%5D%5Bvalue%5D=gainneville&locations%5B4%5D%5Blabel%5D=Gainneville+(76700)+-+Ville&locations%5B5%5D%5Bvalue%5D=gonfreville-l-orcher&locations%5B5%5D%5Blabel%5D=Gonfreville-l%27Orcher+(76700)&locations%5B6%5D%5Bvalue%5D=harfleur&locations%5B6%5D%5Blabel%5D=Harfleur+(76700)+-+Ville&locations%5B7%5D%5Bvalue%5D=maneglise&locations%5B7%5D%5Blabel%5D=Man%C3%A9glise+(76133)+-+Ville&locations%5B8%5D%5Bvalue%5D=mannevillette&locations%5B8%5D%5Blabel%5D=Mannevillette+(76290)+-+Ville&locations%5B9%5D%5Bvalue%5D=montivilliers&locations%5B9%5D%5Blabel%5D=Montivilliers+(76290)+-+Ville&locations%5B10%5D%5Bvalue%5D=notre-dame-du-bec&locations%5B10%5D%5Blabel%5D=Notre-Dame-du-Bec+(76133)+-+Ville&locations%5B11%5D%5Bvalue%5D=octeville-sur-mer&locations%5B11%5D%5Blabel%5D=Octeville-sur-Mer+(76930)+-+Ville&locations%5B12%5D%5Bvalue%5D=rogerville&locations%5B12%5D%5Blabel%5D=Rogerville+(76700)+-+Ville&locations%5B13%5D%5Bvalue%5D=rolleville&locations%5B13%5D%5Blabel%5D=Rolleville+(76133)+-+Ville&locations%5B14%5D%5Bvalue%5D=sainte-adresse&locations%5B14%5D%5Blabel%5D=Sainte-Adresse+(76310)+-+Ville&locations%5B15%5D%5Bvalue%5D=saint-martin-du-manoir&locations%5B15%5D%5Blabel%5D=Saint-Martin-du-Manoir+(76290)+-+Ville&minSurface=&minPrice=&maxPrice=&sort=date-down&layoutType=mixte&page=1
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Perpignan (66)
     url: https://www.orpi.com/recherche/ajax/buy?realEstateTypes%5B%5D=maison&realEstateTypes%5B%5D=appartement&locations%5B0%5D%5Bvalue%5D=perpignan&locations%5B0%5D%5Blabel%5D=perpignan&sort=date-down&layoutType=list
     scraper_type: HTTPRequest
@@ -2039,24 +2094,30 @@
     group_type: Group
 - source: Laforet
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19614315%2C19611512%2C19592701%2C19497021%2C19493762%2C19430850%2C19235470%2C17976462&cities=92026&transaction=buy
+  - zone: Grenoble (38)
+    url: https://www.laforet.com/api/immo/properties?page=1&perPage=16&exclude=&cities=38421%2C38151%2C38169%2C38229%2C38382%2C38485%2C38474%2C38317%2C38158%2C38545%2C38524%2C38111%2C38562%2C38486%2C38150%2C38516%2C38179%2C38423%2C38126%2C38150%2C38516%2C38524%2C38545&transaction=buy&favoriz=true
     scraper_type: HTTPRequest
     http_type: get_json
     is_active: false
     group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19580279%2C19513348%2C19492470%2C19421034%2C19316374%2C19304645%2C18160912%2C18065866%2C17999518%2C17549440%2C17429736%2C4495204&cities=92044&transaction=buy
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Rouen Métropole (76)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19713217%2C19713137%2C19711270%2C19703953%2C19670246%2C19625289%2C19620102%2C19614442%2C19614407%2C19614394%2C19599329%2C19593124%2C19588994%2C19588000%2C19552838%2C19552823&cities=76540%2C76681%2C76575%2C76322%2C76498%2C76451%2C76231%2C76157%2C76108%2C76484%2C76410%2C76165%2C76216%2C76319%2C76212%2C76497%2C76095%2C76640%2C76561%2C76429%2C76474%2C76103%2C76475%2C76402%2C76178%2C76709%2C76222%2C76366%2C76103%2C76165%2C76178%2C76212%2C76216%2C76319%2C76366%2C76402%2C76410%2C76429%2C76474%2C76475%2C76484%2C76497%2C76561%2C76640&types=house%2Capartment&transaction=buy
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19614315%2C19611512%2C19592701%2C19497021%2C19493762%2C19430850%2C19235470%2C17976462&cities=92026&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19580279%2C19513348%2C19492470%2C19421034%2C19316374%2C19304645%2C18160912%2C18065866%2C17999518%2C17549440%2C17429736%2C4495204&cities=92044&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19713217%2C19713137%2C19711270%2C19703953%2C19670246%2C19625289%2C19620102%2C19614442%2C19614407%2C19614394%2C19599329%2C19593124%2C19588994%2C19588000%2C19552838%2C19552823&cities=76540%2C76681%2C76575%2C76322%2C76498%2C76451%2C76231%2C76157%2C76108%2C76484%2C76410%2C76165%2C76216%2C76319%2C76212%2C76497%2C76095%2C76640%2C76561%2C76429%2C76474%2C76103%2C76475%2C76402%2C76178%2C76709%2C76222%2C76366%2C76103%2C76165%2C76178%2C76212%2C76216%2C76319%2C76366%2C76402%2C76410%2C76429%2C76474%2C76475%2C76484%2C76497%2C76561%2C76640&types=house%2Capartment&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Limoges Métropole (87)
     url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19601338%2C19509861%2C19419700%2C19255533%2C17966091%2C17931564%2C17782776&cities=87085%2C87114%2C87050%2C87075%2C87065%2C87113%2C87048%2C87201%2C87125%2C87019%2C87156%2C87205%2C87143%2C87038%2C87202%2C87020%2C87192%2C87063%2C87118%2C87005%2C87019%2C87020%2C87048%2C87050%2C87065%2C87075%2C87113%2C87114%2C87118%2C87125%2C87143%2C87201%2C87205&transaction=buy
     scraper_type: HTTPRequest
@@ -2129,12 +2190,12 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Bordeaux (33)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19702522%2C19652374%2C19652216%2C19641153%2C19608308%2C19603890%2C19598069%2C19588673%2C19587922%2C19574848%2C19542064%2C19509837%2C19497085%2C19493598%2C19493488%2C19490003&cities=33281%2C33318%2C33522%2C33550%2C33449%2C33039%2C33192%2C33119%2C33162%2C33069%2C33249%2C33075%2C33167%2C33003%2C33056%2C33200%2C33519%2C33312%2C33013%2C33096%2C33273%2C33376%2C33032&types=house%2Capartment&transaction=buy
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Bordeaux (33)
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=19702522%2C19652374%2C19652216%2C19641153%2C19608308%2C19603890%2C19598069%2C19588673%2C19587922%2C19574848%2C19542064%2C19509837%2C19497085%2C19493598%2C19493488%2C19490003&cities=33281%2C33318%2C33522%2C33550%2C33449%2C33039%2C33192%2C33119%2C33162%2C33069%2C33249%2C33075%2C33167%2C33003%2C33056%2C33200%2C33519%2C33312%2C33013%2C33096%2C33273%2C33376%2C33032&types=house%2Capartment&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Lille (59)
     url: https://www.laforet.com/api/immo/properties?&cities=59350&transaction=buy&perPage=25
     scraper_type: HTTPRequest
@@ -2224,24 +2285,24 @@
     http_type: get_json
     is_active: true
     group_type: Group
-  - zone: Angers (49)
-    url: https://www.laforet.com/api/immo/properties?&cities=49007&transaction=buy&perPage=25
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Angers Agglomération
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=&cities=76167%2C76238%2C76270%2C76275%2C76296%2C76305%2C76341%2C76404%2C76409%2C76447%2C76477%2C76481%2C76533%2C76534%2C76552%2C76616&transaction=buy
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
-  - zone: Le Havre (76)
-    url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=&cities=76167%2C76238%2C76270%2C76275%2C76296%2C76305%2C76341%2C76404%2C76409%2C76447%2C76477%2C76481%2C76533%2C76534%2C76552%2C76616&transaction=buy
-    scraper_type: HTTPRequest
-    http_type: get_json
-    is_active: false
-    group_type: Group
+  # - zone: Angers (49)
+  #   url: https://www.laforet.com/api/immo/properties?&cities=49007&transaction=buy&perPage=25
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Angers Agglomération
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=&cities=76167%2C76238%2C76270%2C76275%2C76296%2C76305%2C76341%2C76404%2C76409%2C76447%2C76477%2C76481%2C76533%2C76534%2C76552%2C76616&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Le Havre (76)
+  #   url: https://www.laforet.com/api/immo/properties?page=1&perPage=40&exclude=&cities=76167%2C76238%2C76270%2C76275%2C76296%2C76305%2C76341%2C76404%2C76409%2C76447%2C76477%2C76481%2C76533%2C76534%2C76552%2C76616&transaction=buy
+  #   scraper_type: HTTPRequest
+  #   http_type: get_json
+  #   is_active: false
+  #   group_type: Group
   - zone: Perpignan (66)
     url: https://www.laforet.com/api/immo/properties?&cities=66136&transaction=buy&perPage=25
     scraper_type: HTTPRequest
@@ -2250,42 +2311,48 @@
     group_type: Group
 - source: Century21
   params:
-  - zone: Angers (49)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-angers/tri-date-desc/
+  - zone: Grenoble (38)
+    url: https://www.century21.fr/annonces/achat/v-vizille-varces+allieres+et+risset-vif-corenc-gieres-le+pont+de+claix-st+martin+d+heres-st+egreve-sassenage-st+martin+le+vinoux-echirolles-eybens-la+tronche-seyssins-domene-seyssinet+pariset-meylan/cpv-38600_fontaine-38640_claix/tri-date-desc/
     scraper_type: Static
     main_page_cls: div.contentAnnonce
     is_active: false
     group_type: Group
-  - zone: Angers Agglomération
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-cantenay+epinard-les+ponts+de+ce-beaucouze-ecuille-briollay-ecouflant-st+barthelemy+d+anjou-longuenee+en+anjou-bouchemaine-murs+erigne-behuard-st+clement+de+la+place-montreuil+juigne-loire+authion-le+plessis+grammoire-feneu-ste+gemmes+sur+loire-st+lambert+la+potherie/cpv-49240_avrille/tri-date-desc/#/annonces/achat-maison-appartement/v-beaucouze-murs+erigne-longuenee+en+anjou-montreuil+juigne-verrieres+en+anjou-savennieres-le+plessis+grammoire-ecuille-st+lambert+la+potherie-cantenay+epinard-soulaire+et+bourg-les+ponts+de+ce-behuard-st+clement+de+la+place-sarrigne-feneu-briollay-ecouflant-bouchemaine-soulaines+sur+aubance-trelaze-loire+authion-st+barthelemy+d+anjou-ste+gemmes+sur+loire/cpv-49170_st+martin+du+fouilloux-49240_avrille/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
-  - zone: Le Havre (76)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-rolleville-maneglise-fontaine+la+mallet-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-gonfreville+l+orcher-epouville/cpv-76290_fontenay/tri-date-desc/#/annonces/achat-maison-appartement/v-epouville-maneglise-gonfreville+l+orcher-ste+adresse-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-fontaine+la+mallet-rolleville-st+martin+du+manoir/cpv-76290_fontenay/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-courbevoie/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-levallois+perret/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
-  - zone: Rouen Métropole (76)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-les+ponts+de+ce-st+barthelemy+d+anjou-murs+erigne-st+clement+de+la+place-le+plessis+grammoire/tri-date-desc/#/annonces/achat-maison-appartement/v-st+aubin+les+elbeuf-grand+couronne-deville+les+rouen-maromme-oissel-st+pierre+les+elbeuf-franqueville+st+pierre-petit+couronne-duclair-bihorel-notre+dame+de+bondeville-bois+guillaume-canteleu-cleon-le+petit+quevilly-bonsecours-st+etienne+du+rouvray-mont+st+aignan-caudebec+les+elbeuf-le+mesnil+esnard-malaunay-le+grand+quevilly-sotteville+les+rouen-elbeuf-darnetal-le+trait-rouen-le+houlme/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
+  # - zone: Angers (49)
+  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-angers/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Angers Agglomération
+  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-cantenay+epinard-les+ponts+de+ce-beaucouze-ecuille-briollay-ecouflant-st+barthelemy+d+anjou-longuenee+en+anjou-bouchemaine-murs+erigne-behuard-st+clement+de+la+place-montreuil+juigne-loire+authion-le+plessis+grammoire-feneu-ste+gemmes+sur+loire-st+lambert+la+potherie/cpv-49240_avrille/tri-date-desc/#/annonces/achat-maison-appartement/v-beaucouze-murs+erigne-longuenee+en+anjou-montreuil+juigne-verrieres+en+anjou-savennieres-le+plessis+grammoire-ecuille-st+lambert+la+potherie-cantenay+epinard-soulaire+et+bourg-les+ponts+de+ce-behuard-st+clement+de+la+place-sarrigne-feneu-briollay-ecouflant-bouchemaine-soulaines+sur+aubance-trelaze-loire+authion-st+barthelemy+d+anjou-ste+gemmes+sur+loire/cpv-49170_st+martin+du+fouilloux-49240_avrille/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Le Havre (76)
+  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-rolleville-maneglise-fontaine+la+mallet-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-gonfreville+l+orcher-epouville/cpv-76290_fontenay/tri-date-desc/#/annonces/achat-maison-appartement/v-epouville-maneglise-gonfreville+l+orcher-ste+adresse-notre+dame+du+bec-montivilliers-rogerville-harfleur-octeville+sur+mer-mannevillette-gainneville-fontaine+la+mallet-rolleville-st+martin+du+manoir/cpv-76290_fontenay/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-courbevoie/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.century21.fr/annonces/achat/v-courbevoie/#/annonces/achat-maison-appartement/v-levallois+perret/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-les+ponts+de+ce-st+barthelemy+d+anjou-murs+erigne-st+clement+de+la+place-le+plessis+grammoire/tri-date-desc/#/annonces/achat-maison-appartement/v-st+aubin+les+elbeuf-grand+couronne-deville+les+rouen-maromme-oissel-st+pierre+les+elbeuf-franqueville+st+pierre-petit+couronne-duclair-bihorel-notre+dame+de+bondeville-bois+guillaume-canteleu-cleon-le+petit+quevilly-bonsecours-st+etienne+du+rouvray-mont+st+aignan-caudebec+les+elbeuf-le+mesnil+esnard-malaunay-le+grand+quevilly-sotteville+les+rouen-elbeuf-darnetal-le+trait-rouen-le+houlme/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
   - zone: Limoges Métropole (87)
     url: https://www.century21.fr/annonces/achat/v-le+palais+sur+vienne-couzeix-isle-panazol/tri-date-desc/#/annonces/achat/v-eyjeaux-rilhac+rancon-le+palais+sur+vienne-chaptelat-aureil-veyrac-solignac-couzeix-isle-peyrilhac-boisseuil-verneuil+sur+vienne-condat+sur+vienne-bonnac+la+cote-st+just+le+martel-le+vigen-st+gence-feytiat-panazol-limoges/tri-date-desc/
     scraper_type: Static
@@ -2358,12 +2425,12 @@
     main_page_cls: div.contentAnnonce
     is_active: true
     group_type: Group
-  - zone: Bordeaux (33)
-    url: https://www.century21.fr/annonces/achat-maison-appartement/v-le+haillan-le+bouscat-villenave+d+ornon-bruges-pessac-le+taillan+medoc-begles-gradignan-lormont-st+medard+en+jalles-cenon-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/#/annonces/achat-maison-appartement/v-le+haillan-begles-st+aubin+de+medoc-villenave+d+ornon-bruges-pessac-parempuyre-le+taillan+medoc-carbon+blanc-le+bouscat-gradignan-martignas+sur+jalle-lormont-st+medard+en+jalles-cenon-artigues+pres+bordeaux-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-33530_bassens-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/
-    scraper_type: Static
-    main_page_cls: div.contentAnnonce
-    is_active: false
-    group_type: Group
+  # - zone: Bordeaux (33)
+  #   url: https://www.century21.fr/annonces/achat-maison-appartement/v-le+haillan-le+bouscat-villenave+d+ornon-bruges-pessac-le+taillan+medoc-begles-gradignan-lormont-st+medard+en+jalles-cenon-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/#/annonces/achat-maison-appartement/v-le+haillan-begles-st+aubin+de+medoc-villenave+d+ornon-bruges-pessac-parempuyre-le+taillan+medoc-carbon+blanc-le+bouscat-gradignan-martignas+sur+jalle-lormont-st+medard+en+jalles-cenon-artigues+pres+bordeaux-eysines-talence-ambares+et+lagrave/cpv-33700_merignac-33270_floirac-33530_bassens-32270_blanquefort/s-100-/st-0-/b-0-/tri-date-desc/
+  #   scraper_type: Static
+  #   main_page_cls: div.contentAnnonce
+  #   is_active: false
+  #   group_type: Group
   - zone: Lille (59)
     url: https://www.century21.fr/annonces/achat-maison-appartement/cpv-59000_lille/tri-date-desc/
     scraper_type: Static
@@ -2466,42 +2533,48 @@
     group_type: Group
 - source: Foncia
   params:
-  - zone: Angers (49)
-    url: https://fr.foncia.com/achat/angers-49/appartement--maison/(params)/on/(tri)/prix/(ordre)/desc
+  - zone: Grenoble (38)
+    url: https://fr.foncia.com/achat/saint-martin-d-heres-38400--echirolles-38130--fontaine-38600--meylan-38240--saint-egreve-38120--seyssinet-pariset-38170--sassenage-38360--le-pont-de-claix-38800--eybens-38320--vif-38450--varces-allieres-et-risset-38760--claix-38640--seyssins-38180--vizille-38220--gieres-38610--domene-38420--la-tronche-38700--saint-martin-le-vinoux-38950--corenc-38700
     scraper_type: Static
     main_page_cls: div.TeaserOffer-content
     is_active: false
     group_type: Group
-  - zone: Angers Agglomération
-    url: https://fr.foncia.com/achat/avrille-49240--beaucouze-49070--behuard-49170--bouchemaine-49080--briollay-49125--cantenay-epinard-49460--ecouflant-49000--ecuille-49460--feneu-49460--montreuil-juigne-49460--murs-erigne-49610--le-plessis-grammoire-49124--les-ponts-de-ce-49130--saint-barthelemy-d-anjou-49124--saint-clement-de-la-place-49370--sainte-gemmes-sur-loire-49130--saint-lambert-la-potherie-49070--saint-martin-du-fouilloux-49170--sarrigne-49800--savennieres-49170--soulaines-sur-aubance-49610--trelaze-49800/appartement--maison(params)/on/(tri)/prix/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
-  - zone: Le Havre (76)
-    url: https://fr.foncia.com/achat/cauville-sur-mer-76930--epouville-76133--fontaine-la-mallet-76290--fontenay-27510--gainneville-76700--gonfreville-l-orcher-76700--harfleur-76700--maneglise-76133--mannevillette-76290--montivilliers-76290--notre-dame-du-bec-76133--octeville-sur-mer-76930--rogerville-76700--rolleville-76133--sainte-adresse-76310--saint-martin-du-manoir-76290
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://fr.foncia.com/achat/courbevoie-92400/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
-  - zone: Hauts-de-Seine (92)
-    url: https://fr.foncia.com/achat/levallois-perret-92300/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
-  - zone: Rouen Métropole (76)
-    url: https://fr.foncia.com/achat/rouen-76--sotteville-les-rouen-76300--saint-etienne-du-rouvray-76800--le-grand-quevilly-76120--le-petit-quevilly-76140--mont-saint-aignan-76130--elbeuf-76500--bois-guillaume-76230--canteleu-76380--oissel-76350--maromme-76150--deville-les-rouen-76250--caudebec-les-elbeuf-76320--darnetal-76160--grand-couronne-76530--petit-couronne-76650--bihorel-76420--saint-pierre-les-elbeuf-76320--saint-aubin-les-elbeuf-76410--le-mesnil-esnard-76240--notre-dame-de-bondeville-76960--bonsecours-76240--malaunay-76770--franqueville-saint-pierre-76520--cleon-76410--le-trait-76580--duclair-76480--le-houlme-76770/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
+  # - zone: Angers (49)
+  #   url: https://fr.foncia.com/achat/angers-49/appartement--maison/(params)/on/(tri)/prix/(ordre)/desc
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Angers Agglomération
+  #   url: https://fr.foncia.com/achat/avrille-49240--beaucouze-49070--behuard-49170--bouchemaine-49080--briollay-49125--cantenay-epinard-49460--ecouflant-49000--ecuille-49460--feneu-49460--montreuil-juigne-49460--murs-erigne-49610--le-plessis-grammoire-49124--les-ponts-de-ce-49130--saint-barthelemy-d-anjou-49124--saint-clement-de-la-place-49370--sainte-gemmes-sur-loire-49130--saint-lambert-la-potherie-49070--saint-martin-du-fouilloux-49170--sarrigne-49800--savennieres-49170--soulaines-sur-aubance-49610--trelaze-49800/appartement--maison(params)/on/(tri)/prix/(ordre)/desc
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Le Havre (76)
+  #   url: https://fr.foncia.com/achat/cauville-sur-mer-76930--epouville-76133--fontaine-la-mallet-76290--fontenay-27510--gainneville-76700--gonfreville-l-orcher-76700--harfleur-76700--maneglise-76133--mannevillette-76290--montivilliers-76290--notre-dame-du-bec-76133--octeville-sur-mer-76930--rogerville-76700--rolleville-76133--sainte-adresse-76310--saint-martin-du-manoir-76290
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://fr.foncia.com/achat/courbevoie-92400/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://fr.foncia.com/achat/levallois-perret-92300/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
+  # - zone: Rouen Métropole (76)
+  #   url: https://fr.foncia.com/achat/rouen-76--sotteville-les-rouen-76300--saint-etienne-du-rouvray-76800--le-grand-quevilly-76120--le-petit-quevilly-76140--mont-saint-aignan-76130--elbeuf-76500--bois-guillaume-76230--canteleu-76380--oissel-76350--maromme-76150--deville-les-rouen-76250--caudebec-les-elbeuf-76320--darnetal-76160--grand-couronne-76530--petit-couronne-76650--bihorel-76420--saint-pierre-les-elbeuf-76320--saint-aubin-les-elbeuf-76410--le-mesnil-esnard-76240--notre-dame-de-bondeville-76960--bonsecours-76240--malaunay-76770--franqueville-saint-pierre-76520--cleon-76410--le-trait-76580--duclair-76480--le-houlme-76770/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
   - zone: Limoges Métropole (87)
     url: https://fr.foncia.com/achat/limoges-87--panazol-87350--couzeix-87270--isle-87170--feytiat-87220--le-palais-sur-vienne-87410--condat-sur-vienne-87920--verneuil-sur-vienne-87430--rilhac-rancon-87570--boisseuil-87220--saint-just-le-martel-87590--le-vigen-87110--saint-gence-87510--chaptelat-87270--veyrac-87520--bonnac-la-cote-87270--solignac-87110--eyjeaux-87220--peyrilhac-87510--aureil-87220
     scraper_type: Static
@@ -2574,12 +2647,12 @@
     main_page_cls: div.TeaserOffer-content
     is_active: true
     group_type: Group
-  - zone: Bordeaux (33)
-    url: https://fr.foncia.com/achat/merignac-33700--pessac-33600--talence-33400--villenave-d-ornon-33140--saint-medard-en-jalles-33160--begles-33130--gradignan-33170--cenon-33150--eysines-33320--le-bouscat-33110--lormont-33310--bruges-33520--floirac-33270--ambares-et-lagrave-33440--blanquefort-32270--le-haillan-33185--le-taillan-medoc-33320--parempuyre-33290--artigues-pres-bordeaux-33370--carbon-blanc-33560--martignas-sur-jalle-33127--saint-aubin-de-medoc-33160--bassens-33530
-    scraper_type: Static
-    main_page_cls: div.TeaserOffer-content
-    is_active: false
-    group_type: Group
+  # - zone: Bordeaux (33)
+  #   url: https://fr.foncia.com/achat/merignac-33700--pessac-33600--talence-33400--villenave-d-ornon-33140--saint-medard-en-jalles-33160--begles-33130--gradignan-33170--cenon-33150--eysines-33320--le-bouscat-33110--lormont-33310--bruges-33520--floirac-33270--ambares-et-lagrave-33440--blanquefort-32270--le-haillan-33185--le-taillan-medoc-33320--parempuyre-33290--artigues-pres-bordeaux-33370--carbon-blanc-33560--martignas-sur-jalle-33127--saint-aubin-de-medoc-33160--bassens-33530
+  #   scraper_type: Static
+  #   main_page_cls: div.TeaserOffer-content
+  #   is_active: false
+  #   group_type: Group
   - zone: Lille (59)
     url: https://fr.foncia.com/achat/lille-59000/appartement--maison/(params)/on/(tri)/date/(ordre)/desc
     scraper_type: Static
@@ -2675,8 +2748,8 @@
     group_type: Group
 - source: MeilleursAgents
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.meilleursagents.com/annonces/achat/courbevoie-92400/
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16017%2C15759%2C15775%2C15830%2C15979%2C16076%2C16067%2C15916%2C15766%2C16133&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
     waiting_cls: nil
@@ -2684,8 +2757,8 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Hauts-de-Seine (92)
-    url: https://www.meilleursagents.com/annonces/achat/levallois-perret-92300/
+  - zone: Grenoble (38)
+    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=16111%2C15723%2C16077%2C16150%2C15784%2C15758%2C16103%2C16019%2C15735&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
     scraper_type: Proxy
     waiting_cls: nil
@@ -2693,33 +2766,51 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Rouen Métropole (76)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33238%2C33376%2C33273%2C33020%2C33196%2C33149%2C32930%2C32807%2C32856%2C33182&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Rouen Métropole (76)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33108%2C32915%2C32864%2C32911%2C33017%2C33195%2C32795%2C33336%2C33259%2C33127&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Rouen Métropole (76)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33172%2C32802%2C33100%2C33173%2C32877%2C33403%2C32921%2C33064&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.meilleursagents.com/annonces/achat/courbevoie-92400/
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.meilleursagents.com/annonces/achat/levallois-perret-92300/
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33238%2C33376%2C33273%2C33020%2C33196%2C33149%2C32930%2C32807%2C32856%2C33182&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33108%2C32915%2C32864%2C32911%2C33017%2C33195%2C32795%2C33336%2C33259%2C33127&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33172%2C32802%2C33100%2C33173%2C32877%2C33403%2C32921%2C33064&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Limoges Métropole (87)
     url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=37006%2C37035%2C36971%2C36996%2C36986%2C37034%2C36969%2C37122%2C37046%2C36940&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
     main_page_cls: div.listing-item.search-listing-result__item
@@ -2846,24 +2937,24 @@
     page_nbr:  1
     is_active: true
     group_type: Proxy
-  - zone: Bordeaux (33)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14092%2C14129%2C14328%2C14357%2C14257%2C13852%2C14004%2C13931%2C13974%2C13882&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Bordeaux (33)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14061%2C13888%2C13979%2C13816%2C13869%2C14012%2C14325%2C14123%2C13826%2C13909&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Bordeaux (33)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14092%2C14129%2C14328%2C14357%2C14257%2C13852%2C14004%2C13931%2C13974%2C13882&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Bordeaux (33)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=14061%2C13888%2C13979%2C13816%2C13869%2C14012%2C14325%2C14123%2C13826%2C13909&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Lille (59)
     url: https://www.meilleursagents.com/annonces/achat/lille-59000/
     main_page_cls: div.listing-item.search-listing-result__item
@@ -3040,60 +3131,60 @@
     page_nbr:  1
     is_active: true
     group_type: Proxy
-  - zone: Angers (49)
-    url: https://www.meilleursagents.com/annonces/achat/angers-49000/
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Angers Agglomération
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=19503%2C19508%2C19543%2C19516%2C19523%2C19536%2C19616%2C19617%2C19622%2C2080778107&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Angers Agglomération
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=2080778101%2C19701%2C19710%2C19728%2C19733%2C19753%2C19757%2C19764%2C19780%2C19792&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Angers Agglomération
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=19812%2C19815%2C19824%2C19825%2C19838%2C2080778108&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Le Havre (76)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=32866%2C32937%2C32968%2C32973%2C32994%2C33003%2C33039%2C33102%2C33107%2C33145&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Le Havre (76)
-    url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33175%2C33179%2C33231%2C33232%2C33250%2C33313&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
-    main_page_cls: div.listing-item.search-listing-result__item
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Angers (49)
+  #   url: https://www.meilleursagents.com/annonces/achat/angers-49000/
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Angers Agglomération
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=19503%2C19508%2C19543%2C19516%2C19523%2C19536%2C19616%2C19617%2C19622%2C2080778107&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Angers Agglomération
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=2080778101%2C19701%2C19710%2C19728%2C19733%2C19753%2C19757%2C19764%2C19780%2C19792&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Angers Agglomération
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=19812%2C19815%2C19824%2C19825%2C19838%2C2080778108&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Le Havre (76)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=32866%2C32937%2C32968%2C32973%2C32994%2C33003%2C33039%2C33102%2C33107%2C33145&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Le Havre (76)
+  #   url: https://www.meilleursagents.com/annonces/achat/search/?sort=current_price_date%3Adesc&transaction_types=TRANSACTION_TYPE.SELL&place_ids=33175%2C33179%2C33231%2C33232%2C33250%2C33313&item_types=ITEM_TYPE.APARTMENT%2CITEM_TYPE.HOUSE&min_price=&max_price=&min_area=&max_area=
+  #   main_page_cls: div.listing-item.search-listing-result__item
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Perpignan (66)
     url: https://www.meilleursagents.com/annonces/achat/perpignan-66000/
     main_page_cls: div.listing-item.search-listing-result__item
@@ -3105,8 +3196,8 @@
     group_type: Proxy
 - source: SeLoger
   params:
-  - zone: Hauts-de-Seine (92)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920026]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  - zone: Grenoble (38)
+    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[380421]},{%22inseeCodes%22:[380151]},{%22inseeCodes%22:[380169]},{%22inseeCodes%22:[380229]},{%22inseeCodes%22:[380382]},{%22inseeCodes%22:[380485]},{%22inseeCodes%22:[380474]},{%22inseeCodes%22:[380317]},{%22inseeCodes%22:[380158]},{%22inseeCodes%22:[380545]},{%22inseeCodes%22:[380524]},{%22inseeCodes%22:[380111]},{%22inseeCodes%22:[380562]},{%22inseeCodes%22:[380179]},{%22inseeCodes%22:[380150]},{%22inseeCodes%22:[380516]},{%22inseeCodes%22:[380423]},{%22inseeCodes%22:[380126]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
     scraper_type: Proxy
     waiting_cls: nil
@@ -3114,24 +3205,33 @@
     page_nbr:  1
     is_active: false
     group_type: Proxy
-  - zone: Hauts-de-Seine (92)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920044]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Rouen Métropole (76)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[760540]},{%22inseeCodes%22:[760681]},{%22inseeCodes%22:[760575]},{%22inseeCodes%22:[760322]},{%22inseeCodes%22:[760498]},{%22inseeCodes%22:[760451]},{%22inseeCodes%22:[760231]},{%22inseeCodes%22:[760108]},{%22inseeCodes%22:[760157]},{%22inseeCodes%22:[760484]},{%22inseeCodes%22:[760410]},{%22inseeCodes%22:[760216]},{%22inseeCodes%22:[760165]},{%22inseeCodes%22:[760212]},{%22inseeCodes%22:[760319]},{%22inseeCodes%22:[760497]},{%22inseeCodes%22:[760095]},{%22inseeCodes%22:[760640]},{%22inseeCodes%22:[760561]},{%22inseeCodes%22:[760429]},{%22inseeCodes%22:[760474]},{%22inseeCodes%22:[760103]},{%22inseeCodes%22:[760402]},{%22inseeCodes%22:[760475]},{%22inseeCodes%22:[760178]},{%22inseeCodes%22:[760709]},{%22inseeCodes%22:[760222]},{%22inseeCodes%22:[760366]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920026]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Hauts-de-Seine (92)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[920044]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Rouen Métropole (76)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[760540]},{%22inseeCodes%22:[760681]},{%22inseeCodes%22:[760575]},{%22inseeCodes%22:[760322]},{%22inseeCodes%22:[760498]},{%22inseeCodes%22:[760451]},{%22inseeCodes%22:[760231]},{%22inseeCodes%22:[760108]},{%22inseeCodes%22:[760157]},{%22inseeCodes%22:[760484]},{%22inseeCodes%22:[760410]},{%22inseeCodes%22:[760216]},{%22inseeCodes%22:[760165]},{%22inseeCodes%22:[760212]},{%22inseeCodes%22:[760319]},{%22inseeCodes%22:[760497]},{%22inseeCodes%22:[760095]},{%22inseeCodes%22:[760640]},{%22inseeCodes%22:[760561]},{%22inseeCodes%22:[760429]},{%22inseeCodes%22:[760474]},{%22inseeCodes%22:[760103]},{%22inseeCodes%22:[760402]},{%22inseeCodes%22:[760475]},{%22inseeCodes%22:[760178]},{%22inseeCodes%22:[760709]},{%22inseeCodes%22:[760222]},{%22inseeCodes%22:[760366]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Limoges Métropole (87)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[870085]},{%22inseeCodes%22:[870114]},{%22inseeCodes%22:[870050]},{%22inseeCodes%22:[870075]},{%22inseeCodes%22:[870065]},{%22inseeCodes%22:[870113]},{%22inseeCodes%22:[870048]},{%22inseeCodes%22:[870201]},{%22inseeCodes%22:[870125]},{%22inseeCodes%22:[870019]},{%22inseeCodes%22:[870156]},{%22inseeCodes%22:[870205]},{%22inseeCodes%22:[870143]},{%22inseeCodes%22:[870038]},{%22inseeCodes%22:[870202]},{%22inseeCodes%22:[870020]},{%22inseeCodes%22:[870192]},{%22inseeCodes%22:[870063]},{%22inseeCodes%22:[870118]},{%22inseeCodes%22:[870005]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
@@ -3240,15 +3340,15 @@
     page_nbr:  1
     is_active: true
     group_type: Proxy
-  - zone: Bordeaux (33)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[330281]},{%22inseeCodes%22:[330318]},{%22inseeCodes%22:[330522]},{%22inseeCodes%22:[330550]},{%22inseeCodes%22:[330449]},{%22inseeCodes%22:[330039]},{%22inseeCodes%22:[330192]},{%22inseeCodes%22:[330119]},{%22inseeCodes%22:[330162]},{%22inseeCodes%22:[330069]},{%22inseeCodes%22:[330249]},{%22inseeCodes%22:[330075]},{%22inseeCodes%22:[330167]},{%22inseeCodes%22:[330003]},{%22inseeCodes%22:[330056]},{%22inseeCodes%22:[330200]},{%22inseeCodes%22:[330519]},{%22inseeCodes%22:[330312]},{%22inseeCodes%22:[330013]},{%22inseeCodes%22:[330096]},{%22inseeCodes%22:[330273]},{%22inseeCodes%22:[330376]},{%22inseeCodes%22:[330032]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Bordeaux (33)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[330281]},{%22inseeCodes%22:[330318]},{%22inseeCodes%22:[330522]},{%22inseeCodes%22:[330550]},{%22inseeCodes%22:[330449]},{%22inseeCodes%22:[330039]},{%22inseeCodes%22:[330192]},{%22inseeCodes%22:[330119]},{%22inseeCodes%22:[330162]},{%22inseeCodes%22:[330069]},{%22inseeCodes%22:[330249]},{%22inseeCodes%22:[330075]},{%22inseeCodes%22:[330167]},{%22inseeCodes%22:[330003]},{%22inseeCodes%22:[330056]},{%22inseeCodes%22:[330200]},{%22inseeCodes%22:[330519]},{%22inseeCodes%22:[330312]},{%22inseeCodes%22:[330013]},{%22inseeCodes%22:[330096]},{%22inseeCodes%22:[330273]},{%22inseeCodes%22:[330376]},{%22inseeCodes%22:[330032]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Lille (59)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:590350}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
@@ -3425,33 +3525,33 @@
     page_nbr:  1
     is_active: true
     group_type: Proxy
-  - zone: Angers (49)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:490007}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Angers Agglomération
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[490015]},{%22inseeCodes%22:[490020]},{%22inseeCodes%22:[490028]},{%22inseeCodes%22:[490035]},{%22inseeCodes%22:[490048]},{%22inseeCodes%22:[490055]},{%22inseeCodes%22:[490129]},{%22inseeCodes%22:[490130]},{%22inseeCodes%22:[490135]},{%22inseeCodes%22:[490214]},{%22inseeCodes%22:[490223]},{%22inseeCodes%22:[490241]},{%22inseeCodes%22:[490246]},{%22inseeCodes%22:[490267]},{%22inseeCodes%22:[490271]},{%22inseeCodes%22:[490278]},{%22inseeCodes%22:[490294]},{%22inseeCodes%22:[490306]},{%22inseeCodes%22:[490326]},{%22inseeCodes%22:[490329]},{%22inseeCodes%22:[490338]},{%22inseeCodes%22:[490339]},{%22inseeCodes%22:[490353]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
-  - zone: Le Havre (76)
-    url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[760167]},{%22inseeCodes%22:[760238]},{%22inseeCodes%22:[760270]},{%22inseeCodes%22:[760275]},{%22inseeCodes%22:[760296]},{%22inseeCodes%22:[760305]},{%22inseeCodes%22:[760341]},{%22inseeCodes%22:[760404]},{%22inseeCodes%22:[760409]},{%22inseeCodes%22:[760447]},{%22inseeCodes%22:[760477]},{%22inseeCodes%22:[760481]},{%22inseeCodes%22:[760533]},{%22inseeCodes%22:[760534]},{%22inseeCodes%22:[760552]},{%22inseeCodes%22:[760616]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
-    main_page_cls: script
-    scraper_type: Proxy
-    waiting_cls: nil
-    multi_page: false
-    page_nbr:  1
-    is_active: false
-    group_type: Proxy
+  # - zone: Angers (49)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:490007}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Angers Agglomération
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[490015]},{%22inseeCodes%22:[490020]},{%22inseeCodes%22:[490028]},{%22inseeCodes%22:[490035]},{%22inseeCodes%22:[490048]},{%22inseeCodes%22:[490055]},{%22inseeCodes%22:[490129]},{%22inseeCodes%22:[490130]},{%22inseeCodes%22:[490135]},{%22inseeCodes%22:[490214]},{%22inseeCodes%22:[490223]},{%22inseeCodes%22:[490241]},{%22inseeCodes%22:[490246]},{%22inseeCodes%22:[490267]},{%22inseeCodes%22:[490271]},{%22inseeCodes%22:[490278]},{%22inseeCodes%22:[490294]},{%22inseeCodes%22:[490306]},{%22inseeCodes%22:[490326]},{%22inseeCodes%22:[490329]},{%22inseeCodes%22:[490338]},{%22inseeCodes%22:[490339]},{%22inseeCodes%22:[490353]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
+  # - zone: Le Havre (76)
+  #   url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{%22inseeCodes%22:[760167]},{%22inseeCodes%22:[760238]},{%22inseeCodes%22:[760270]},{%22inseeCodes%22:[760275]},{%22inseeCodes%22:[760296]},{%22inseeCodes%22:[760305]},{%22inseeCodes%22:[760341]},{%22inseeCodes%22:[760404]},{%22inseeCodes%22:[760409]},{%22inseeCodes%22:[760447]},{%22inseeCodes%22:[760477]},{%22inseeCodes%22:[760481]},{%22inseeCodes%22:[760533]},{%22inseeCodes%22:[760534]},{%22inseeCodes%22:[760552]},{%22inseeCodes%22:[760616]}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
+  #   main_page_cls: script
+  #   scraper_type: Proxy
+  #   waiting_cls: nil
+  #   multi_page: false
+  #   page_nbr:  1
+  #   is_active: false
+  #   group_type: Proxy
   - zone: Perpignan (66)
     url: https://www.seloger.com/list.htm?projects=2,5&types=1,2&natures=1,2,4&places=[{ci:660136}]&sort=d_dt_crea&enterprise=0&qsVersion=1.0&m=search_refine
     main_page_cls: script
@@ -3469,6 +3569,18 @@
     group_type: Email
 - source: LeBonCoin
   params:
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Vif_38450__45.05604_5.66803_5860%2CEybens_38320__45.14742_5.75131_2309%2CLe%20Pont-de-Claix_38800__45.12441_5.69767_2186%2CSassenage_38360__45.20655_5.66288_3425%2CSeyssinet-Pariset_38170__45.18091_5.69613_5448%2CSaint-Egr%C3%A8ve_38120__45.23297_5.68084_2431%2CMeylan_38240__45.20932_5.77848_3632%2CFontaine_38600__45.19206_5.68767_2959%2CEchirolles_38130__45.14983_5.71853_2472%2CSaint-Martin-d%27H%C3%A8res_38400__45.18381_5.75445_3697&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
+  - zone: Grenoble (38)
+    url: https://www.leboncoin.fr/recherche?category=9&locations=Corenc_38700__45.20993_5.75219_4164%2CSaint-Martin-le-Vinoux_38950__45.20137_5.71679_4145%2CLa%20Tronche_38700__45.20509_5.73843_3353%2CDom%C3%A8ne_38420__45.20234_5.83813_2004%2CGi%C3%A8res_38610__45.18009_5.79096_3140%2CVizille_38220__45.07559_5.77231_3212%2CSeyssins_38180__45.16289_5.68478_3885%2CClaix_38640__45.12025_5.67258_5262%2CVarces-Alli%C3%A8res-et-Risset_38760__45.08693_5.68196_5291&immo_sell_type=old%2Cnew&real_estate_type=1%2C2&price=50000-max
+    main_page_cls: body
+    scraper_type: Captcha
+    is_active: true
+    group_type: Premium
   - zone: Paris (75)
     url: https://www.leboncoin.fr/recherche/?category=9&locations=Paris__48.85790400439863_2.358842071208555_10000&immo_sell_type=old,new&real_estate_type=1,2&price=50000-max
     main_page_cls: body
