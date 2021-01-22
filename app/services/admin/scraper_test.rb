@@ -105,7 +105,7 @@ class Admin::ScraperTest < ApplicationService
 
   def launch_dedicated_sc(sc)
     begin
-      source_name = sc.source == "Propr. Figaro" ? "ProprietesFigaro" :  sc.source == "PAP" ? "Pap" : sc.source
+      source_name = sc.source == "Propr. Figaro" ? "ProprietesFigaro" :  sc.source == "PAP" ? "Pap" : sc.source == "Stephane Plaza" ? "StephanePlaza" : sc.source
       scraper = Object.const_get("#{sc.group_type}::Scraper#{source_name}").new(sc.id)
       sc.update(is_active: true)
       scraper.launch(1)
