@@ -86,15 +86,15 @@ broker_shifts_yaml.each do |shift|
   end
 end
 
-brokers_yaml = YAML.load_file("./db/data/brokers.yml")
-brokers_yaml.each do |broker|
-  b = Broker.find_by(trello_id: broker["trello_id"])
-  if b.nil?
-    puts "Inserting #{broker["firstname"]}"
-    b = Broker.create(broker.except("agglomeration"))
-  end
-  # b.update(agglomeration: Agglomeration.find_by(name: broker["agglomeration"])) unless broker["agglomeration"].nil?
-end
+# brokers_yaml = YAML.load_file("./db/data/brokers.yml")
+# brokers_yaml.each do |broker|
+#   b = Broker.find_by(trello_id: broker["trello_id"])
+#   if b.nil?
+#     puts "Inserting #{broker["firstname"]}"
+#     b = Broker.create(broker.except("agglomeration"))
+#   end
+#   # b.update(agglomeration: Agglomeration.find_by(name: broker["agglomeration"])) unless broker["agglomeration"].nil?
+# end
 
 Notary.create(firstname: "Pierre-Alexis", lastname: "Leray") if Notary.all.empty?
 
