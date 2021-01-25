@@ -213,7 +213,7 @@ class Subscriber < ApplicationRecord
   def professional_attribution
     self.notary = Notary.first if self.notary.nil?
     self.contractor = Contractor.first if self.contractor.nil?
-    self.broker = get_accurate_broker if self.broker.nil?
+    self.broker = get_accurate_broker if self.broker.nil? || (self.broker_status == "Non traité" && SpecificAreaBrokerAgency.where(area: self.research.areas.map{|a| a.id}).any?)
     self.save
   end
   
