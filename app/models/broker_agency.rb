@@ -14,6 +14,10 @@ class BrokerAgency < ApplicationRecord
     (self.current_period_provided_leads.to_f / self.max_period_leads.to_f).round(2)
   end
 
+  def get_available_brokers
+    self.brokers.where(accept_leads: true)
+  end
+
   def self.selectable_agencies
     BrokerAgency.where('current_period_leads_left > ? ', 0).where(status: ["test", "premium"]).where.not(name: "Ding Dong Courtage")
   end

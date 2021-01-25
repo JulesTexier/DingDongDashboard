@@ -44,7 +44,8 @@ class Broker < ApplicationRecord
 
   def self.get_accurate_by_areas(areas_id)
     ba_ids_area = SpecificAreaBrokerAgency.where(area: areas_id).pluck(:broker_agency_id) 
-    broker_agency_scope = ba_ids_area.empty? ? BrokerAgency.selectable_agencies.where(agglomeration_id: areas_id.uniq.map{|a_id| Area.find(a_id).department.agglomeration}) : BrokerAgency.selectable_agencies.where(id: ba_ids_area)
+    broker_agency_scope = BrokerAgency.selectable_agencies.where(id: ba_ids_area)
+    broker_agency_scope = BrokerAgency.selectable_agencies.where(agglomeration_id: Area.find(areas_id.first).department.agglomeration.id) if broker_agency_scope.empty?  
     Broker.get_accurate_from_broker_agency_scope(broker_agency_scope)
   end
 
@@ -61,7 +62,6 @@ class Broker < ApplicationRecord
 
   def self.get_accurate_from_broker_agency_scope(broker_agency_scope)
     # Select BA from agglomeration 
-    
     unless broker_agency_scope.empty? 
 
       # Calculate each BA progress in current period 
@@ -72,10 +72,10 @@ class Broker < ApplicationRecord
 
       # Ensure to select an agency with brokers 
       selected_agency = BrokerAgency.find(sorted_broker_agency_progress[0][0])
-      unless selected_agency.nil? || selected_agency.brokers.empty?
+      unless selected_agency.nil? || selected_agency.get_available_brokers.empty?
       # Get broker from BA with the fewer nb of leads since start of the month
         broker_hash = {}
-        selected_agency.brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
+        selected_agency.get_available_brokers.each{ |b| broker_hash[b.id] = b.subscribers.where('created_at > ?', Date.today.at_beginning_of_month).count }
         # Uodate agency counters
         selected_agency.update(current_period_leads_left: selected_agency.current_period_leads_left - 1, current_period_provided_leads: selected_agency.current_period_provided_leads + 1)
         return Broker.find(broker_hash.sort_by{|id, leads| leads}.first[0])
