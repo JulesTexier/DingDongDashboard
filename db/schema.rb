@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_164106) do
+ActiveRecord::Schema.define(version: 2021_01_25_170431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_164106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "current_period_provided_leads", default: 0
+    t.boolean "only_dd_users", default: false
     t.index ["agglomeration_id"], name: "index_broker_agencies_on_agglomeration_id"
   end
 
