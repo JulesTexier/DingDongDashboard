@@ -54,7 +54,8 @@ class Api::V1::SubscribersDashboardController < ActionController::API
     def get_property_details 
         begin
             property = Property.find(params[:ads_id])
-            ad = property.as_json
+            ad = {}
+            ad[:property] = property.as_json
             ad[:area] = property.area
             render json: {status: 'SUCCESS', message: "Property updated", data: ad.as_json}, status: 200
           rescue ActiveRecord::RecordNotFound
