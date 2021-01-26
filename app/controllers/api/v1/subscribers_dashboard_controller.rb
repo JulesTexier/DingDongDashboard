@@ -51,6 +51,18 @@ class Api::V1::SubscribersDashboardController < ActionController::API
         render json: {status: 'SUCCESS', message: "Email sent with success", data: {subscriber_note: current_subscriber.subscriber_notes.last} }, status: 200
     end
 
+    def get_property_details 
+        begin
+            property = Property.find(params[:ads_id])
+            ad = {}
+            ad[:property] = property.as_json
+            ad[:area] = property.area
+            render json: {status: 'SUCCESS', message: "Property updated", data: ad.as_json}, status: 200
+          rescue ActiveRecord::RecordNotFound
+            render json: {status: 'ERROR', message: 'Property not found'}, status: 422   
+          end
+    end
+
     private
 
     def subscriber_params

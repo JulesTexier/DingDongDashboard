@@ -40,7 +40,8 @@ RSpec.describe Subscriber, type: :model do
       FactoryBot.create(:notary)
       FactoryBot.create(:contractor)
       @subscriber = FactoryBot.create(:subscriber, broker: nil, contractor: nil, notary: nil)
-      FactoryBot.create(:subscriber_research, subscriber: @subscriber, agglomeration: agglomeration)
+      @research = FactoryBot.create(:subscriber_research, subscriber: @subscriber, agglomeration: agglomeration)
+      @research.areas << FactoryBot.create(:area, department: FactoryBot.create(:department, agglomeration: agglomeration))
       @subscriber.send(:professional_attribution)
     end
     it "should associate a broker" do 
