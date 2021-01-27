@@ -1,0 +1,73 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Pilotage des leads à redistribuer</h1>
+    <h3 class="">Ding Dong courtage</h3>
+    <br>
+  </div>
+</div>
+
+
+<div class= "container-fluid mt-5">
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Total : <%= @subscribers.count %></h5>
+        <p class="card-text">Soit un manque à gagner d'environ <%= @subscribers.count*6 %> euros</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ding Dong : <%= @subscribers.select{|s| s.is_ding_dong_user?}.count %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Se Loger : <%= @subscribers.select{|s| !s.is_ding_dong_user?}.count %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <section>
+
+
+
+      <table class="table my-4">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Ding Dong ?</th>
+            <th scope="col">Inscrit le</th>
+            <th scope="col">Agglomeration</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @subscribers.each do |subscriber| %>
+            <tr>
+              <td><%= subscriber.id %></td>
+              <td><%= subscriber.firstname %></td>
+              <td><%= subscriber.lastname %></td>
+              <td>
+                <% if subscriber.is_ding_dong_user? %>
+                  <span class="badge badge-primary">Ding Dong</span> 
+                <% else %>
+                  <span class="badge badge-warning">Se Loger</span> 
+                <% end %>
+              </td>
+              <td><%= subscriber.created_at.strftime("%d/%m/%Y") %></td>
+              <td><%= subscriber.research.agglomeration.name unless subscriber.research.nil?  %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </section>
+</div>

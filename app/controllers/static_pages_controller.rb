@@ -188,6 +188,10 @@ class StaticPagesController < ApplicationController
     @broker_agency = params[:broker_id]
   end
 
+  def handle_dd_courtage_lead
+    @subscribers = BrokerAgency.find_by(name: "Ding Dong Courtage").get_subscribers
+  end
+
   private
   def authenticate_admin
     redirect_to new_admin_session_path unless admin_signed_in?
