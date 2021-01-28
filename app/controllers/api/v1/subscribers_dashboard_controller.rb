@@ -63,6 +63,15 @@ class Api::V1::SubscribersDashboardController < ActionController::API
           end
     end
 
+    def create_subscriber_note
+        begin 
+            sn = SubscriberNote.create!(subscriber: current_subscriber, content: params[:content])
+            render json: {status: 'SUCCESS', message: "SubscriberNote created", data: sn.as_json}, status: 200
+        rescue ActiveRecord::RecordInvalid
+            render json: {status: 'ERROR', message: 'SubscriberNote not created'}, status: 422
+        end
+    end
+
     private
 
     def subscriber_params
