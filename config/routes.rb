@@ -92,6 +92,7 @@ Rails.application.routes.draw do
       put '/subscribers/update' => 'subscribers_dashboard#update'
       post "/subscribers/loan/simulation" => "subscribers_dashboard#loan_simulation"
       get "/ads/:ads_id" => "subscribers_dashboard#get_property_details"
+      post "/subscribers/note" => "subscribers_dashboard#create_subscriber_note"
       
       # Dashboard Courtier
       get '/brokers/current' => "brokers_dashboard#current" 
