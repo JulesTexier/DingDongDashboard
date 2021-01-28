@@ -178,6 +178,23 @@ class StaticPagesController < ApplicationController
 
   def general_broker_dashboard
     @broker_agencies = BrokerAgency.all
+    # params = {year: 2021, month: 01}
+    start_date = Time.parse("01/#{params[:month]}/#{params[:year]}")
+    end_date = Time.parse("#{start_date.utc.end_of_month.day}/#{params[:month]}/#{params[:year]}") + 1.day
+    @data = @broker_agencies.map do |ba|
+        ba_data = {id: ba.id, name: ba.name, agglomeration: ba.agglomeration.name, contract_type: ba.only_dd_users ? "Ding Dong" : "Tout", status: ba.status, default_pricing_lead: ba.default_pricing_lead }
+        period_subs = ba.get_subscribers(start_date, end_date)
+        ba_data[:nb_leads] = period_subs.count
+        ba_data[:nb_leads_dashboard] = period_subs.select{|s| s.created_at < Time.now - 7.days}.count
+        ba_data[:nb_leads_ding_dong] = period_subs.select{|s| s.is_ding_dong_user?}.count
+        ba_data[:nb_hot_leads] = period_subs.select{|s| s.hot_lead?}.count
+        ba_data[:nb_leads_se_loger] = period_subs.select{|s| !s.is_ding_dong_user?}.count
+        ba_data[:max_period_leads] = ba.max_period_leads
+        ba_data[:current_paid_leads] = ba.only_dd_users ? ba_data[:nb_leads_ding_dong] : ba_data[:nb_leads_se_loger]
+        ba_data[:progress] = (ba_data[:current_paid_leads].to_f / ba.max_period_leads.to_f)*100.round(2)
+        ba_data
+    end
+    @ba_by_status = ["premium","test","free"].map{|plan_name| @data.sort_by { |k| k["nb_leads"] }.select{|ba| ba[:status] == plan_name}}
   end
 
   def agglomerations_dashboard

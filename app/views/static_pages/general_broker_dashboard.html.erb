@@ -11,16 +11,16 @@
   <section>
     <h2 class="mb-2">Synthèse par agence</h2>
 
-    <% ["premium", "test", "free"].each do |plan_name|%>
-      <h3><%= plan_name.capitalize%></h3>
+    <% @ba_by_status.each do |ba_group|%>
+      <h3><%= ba_group.first[:status].capitalize%></h3>
 
-      <% if plan_name != "free"%>
+      <% if ba_group.first[:status] != "free"%>
         <div class = "row">
           <div class = "col-6 col-lg-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Agences abonnées</h5>
-                <p class="card-text"><%= @broker_agencies.select{|ba| ba.status == plan_name}.count %> agences </p>
+                <p class="card-text"><%= ba_group.count %> agences </p>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Revenu estimé</h5>
-                <p class="card-text"><%= @broker_agencies.select{|ba| ba.status == plan_name}.map{|ba| ba.current_period_provided_leads * ba.default_pricing_lead}.inject(0){|sum,x| sum + x } %> € </p>
+                <p class="card-text"><%= ba_group.map{|ba| ba[:current_paid_leads] * ba[:default_pricing_lead]}.inject(0){|sum,x| sum + x } %> € </p>
               </div>
             </div>
           </div>
@@ -41,10 +41,10 @@
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Agglomeration</th>
-            <th scope="col">Lead période</th>
+            <th scope="col">Type de contrat</th>
+            <th scope="col">Lead période (sur le dash)</th>
             <th scope="col"><span class="badge badge-success">DD</span></th>
             <th scope="col"><span class="badge badge-danger">SL</span></th>
-            <th scope="col"><span class="badge badge-light">< 7j</span></th>
             <th scope="col">Lead max</th>
             <th scope="col">Progression</th>
             <th scope="col">Factu en cours</th>
@@ -55,47 +55,49 @@
 
         <tbody>
 
-          <% @broker_agencies.select{|ba| ba.status == plan_name}.each do |broker_agency| %>
+          <% ba_group.each do |broker_agency| %>
             <tr>
               <td>
-                <%= broker_agency.name%> 
+                <%= broker_agency[:name]%> 
               </td>
               <td>
-                <span class="badge badge-primary"><%= broker_agency.agglomeration.name %></span>
+                <span class="badge badge-primary"><%= broker_agency[:agglomeration] %></span>
               </td>
               <td>
-                <%= broker_agency.current_period_provided_leads%>
+                <% if  broker_agency[:contract_type] == "Ding Dong" %>
+                  <span class="badge badge-success"><%= broker_agency[:contract_type] %></span>
+                <% else %>
+                  <span class="badge badge-warning"><%= broker_agency[:contract_type] %></span>
+                <% end %>
               </td>
               <td>
-                <% nb_dd_users = broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| s.is_real_ding_dong_user?}  %> 
-                <%= nb_dd_users.count  %> ( <%= (nb_dd_users.count.to_f / broker_agency.current_period_provided_leads.to_f*100).round if broker_agency.current_period_provided_leads!= 0 %> %) <span class="badge badge-light"> 🔥 <%= nb_dd_users.select{|s| s.hot_lead}.count %></span>
+                <%= broker_agency[:nb_leads] %> (<%= broker_agency[:nb_leads_dashboard] %> )
               </td>
               <td>
-                <%= broker_agency.get_subscribers(Date.today.at_beginning_of_month - 1.month).select{|s| !s.is_real_ding_dong_user?}.count  %> 
+                <%= broker_agency[:nb_leads_ding_dong]  %> ( <%= broker_agency[:nb_leads] > 0 ? (broker_agency[:nb_leads_ding_dong].to_f / broker_agency[:nb_leads].to_f*100).round : "-" %> %) <span class="badge badge-light"> 🔥 <%= broker_agency[:nb_hot_leads] %></span>
               </td>
               <td>
-                <%= broker_agency.get_subscribers.select{|s| s.created_at > Time.now - 7.days}.count  %> 
+                <%= broker_agency[:nb_leads_se_loger]  %> 
               </td>
               <td>
-                <%= broker_agency.max_period_leads%>
+                <%= broker_agency[:max_period_leads]%>
               </td>
               <td>
-              <% progress =  (broker_agency.current_period_provided_leads.to_f / broker_agency.max_period_leads.to_f)*100.round(2)%>
               <% month_progress =  (Time.now.wday.to_f / 30)*100.round(2)%>
-              <% color = progress >= month_progress ? "bg-success" : "bg-danger" %>
+              <% color = broker_agency[:progress] >= month_progress ? "bg-success" : "bg-danger" %>
                 <div class="progress">
-                  <div class="progress-bar  <%= color%>" role="progressbar" style="width: <%= progress%>%;" aria-valuenow="<%= progress%>" aria-valuemin="0" aria-valuemax="100"><%= progress.round(2)%>%</div>
+                  <div class="progress-bar  <%= color%>" role="progressbar" style="width: <%= broker_agency[:progress]%>%;" aria-valuenow="<%= broker_agency[:progress]%>" aria-valuemin="0" aria-valuemax="100"><%= broker_agency[:progress].round(2)%>%</div>
                 </div>
               </td>
               <td>
-                <%= progress >= 100 ? "✅" : "" %>
-                <%= broker_agency.current_period_provided_leads*broker_agency.default_pricing_lead %> €<span style="font-size:0.8em"> / <%= broker_agency.max_period_leads*broker_agency.default_pricing_lead %> €</span>
+                <%= broker_agency[:progress] >= 100 ? "✅" : "" %>
+                <%= broker_agency[:current_paid_leads]*broker_agency[:default_pricing_lead] %> €<span style="font-size:0.8em"> / <%= broker_agency[:max_period_leads]*broker_agency[:default_pricing_lead] %> €</span>
               </td>
               <td>
-                <%= link_to "➕", "/dashboard/courtiers/#{broker_agency.id}", target: "_blank", style:"font-size: 1.2em"%>
+                <%= link_to "➕", "/dashboard/courtiers/#{broker_agency[:id]}", target: "_blank", style:"font-size: 1.2em"%>
               </td>
               <td>
-                <%= link_to "🔧", "/admin/broker_agency/#{broker_agency.id}", target: "_blank", style:"font-size: 1.2em"%>
+                <%= link_to "🔧", "/admin/broker_agency/#{broker_agency[:id]}", target: "_blank", style:"font-size: 1.2em"%>
               </td>
 
             </tr>
