@@ -1,3 +1,5 @@
+![Screenshot](Screenshot.png)
+
 # Ding Dong and its amazing scraping app
 
 Ahoï fellow scraper, if you're looking at this README, it is probably because you're wondering what the heck is going out with all this ScraperFramework Thingy. 
